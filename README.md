@@ -10,6 +10,21 @@ Code Review For Link:
 No errors, 35 warnings, and 151 messages
 
 Warnings:
+-ItemsStateMachine: The field 'ItemsStateMachine.currentItem' is never used
+  -> Removed the field
+  
+-LinkItems: The field 'LinkItems.GoingForward' is never used
+  -> Removed the field
+  
+-Each Item state in States: The field '"itemStateName".currentFrame' is never used
+  -> Removed the field and initialization
+  
+-Game: The fields 'Game1.donkey', 'Game1.keyboardCurrent', 'Game1.delay' are never used
+  -> removed the fields
+  
+-KeyboardController: The fields 'KeyboardController.goingForward', 'KeyboardController.itemsCommand', and 'KeyboardController.spriteBatch' are never used
+  -> removed the fields
+  
 - LinkPlayer: Member 'damagedStartTime' is explicitly initialized to its default value
 
   -> Removed the initialization
