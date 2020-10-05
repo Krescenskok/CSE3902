@@ -25,6 +25,7 @@ Noah worked on all classes dealing with blocks
 Yuan and JT worked on all classes dealing with enemies
 Andrew merged the all the code together 
 
+Code reviews and analysis were done with FxCop Analyzers
 
 Code Review For Link:
 No errors, 35 warnings, and 151 messages
