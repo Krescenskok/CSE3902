@@ -68,6 +68,25 @@ and link.DamageStartTime from the link class, which makes it easy to quickly dec
 Also, the Methods are condensed while using an appropriate amount of white space. 
 However, it is unclear how the gameTime methods are being used and the number 1000 is used in a conditional statement without being defined. 
 
+Author of the code review: JT Thrash	
+Date of the code review: 10/05/2020
+Sprint number: 2
+Name of the .cs file being reviewed: Movement.cs
+Author of the .cs file being reviewed: Krescens Kok
+
+Specific comments on code quality: Overall good code quality. The logic for displaying the damaged Link Sprite is concise and easy to understand.
+Having abstract methods for the different types of movement makes this class easier to read and removes the more detailed implementation. 
+his does a good job of providing a broader view of what's happening at the current level of abstraction because you can only see the logic
+that takes of weapon switches in Update. One thing that could be changed is the use of an unprotected variable i that's used to iterate through the list of colors. 
+At first, it's unclear what this field does, and it's also unecessary because the index of the current color could be used instead.
+
+
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: 
+A hypothetical change could be allowing link to hold a shield and sword at the same time. This implementation would not easily support that 
+change because link only has one current weapon. In, Update there is a return statement after determining which weapon is currently held. 
+There is no support for dual-wielding.
+
+
 Author of the code review: Noah Fabec
 Date of the code review: 10/5/2020
 Sprint number: 2
