@@ -14,3 +14,23 @@ Name of the .cs file being reviewed: ItemsStateMachine.cs
 Author of the .cs file being reviewed: Andrew Sanchez
 Specific comments on code quality: Good code quality, can do other things to simplify the code and the creation of sprites.
 A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Create the actual sprites in the sprite factory, instead of creating it in the state machine. The current implementation could easily support the change because it the list would just be copied to the sprite factory class.
+
+
+
+
+Author of the code review: Ann Yan
+Date of the code review: 10/04/2020
+Sprint number: 2
+Name of the .cs file being reviewed: BlocksStateMachine.cs
+Author of the .cs file being reviewed: Noah Fabec
+Number of minutes taken to complete the review: 5
+Specific comments on what is readable and what is not: Very readable. Variable names are specific and tell its purpose. Utilizes an Enum to list all the various block states cleanly.
+
+Author of the code review: Ann Yan
+Date of the code review: 10/04/2020
+Sprint number: 2
+Name of the .cs file being reviewed: BlocksStateMachine.cs
+Author of the .cs file being reviewed: Noah Fabec
+Specific comments on code quality: Logic is sound for the sprint, but will be difficult to execute in the final game. The constructor's dictionary makes all the constructors known to the clients, but otherewise appears to have fairly loose coupling and moderately high cohesion (singluar purpose is to change the state of the blocks). 
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Could make all of the constructors in the Dictionary construction part of a factor to hide constructors from the client. Should be fairly hassle-free to implement with the current state of the program. 
+
