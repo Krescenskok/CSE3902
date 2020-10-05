@@ -57,3 +57,21 @@ The remaining warnings:
 - Member 'isStopped' is explicitly initialized to its default value 
 
   -> These initializations are all necessary for the different states that Link appears in
+
+
+
+
+Code Analysis for Items:
+0 errors, 0 warnings, 179 messages (many are repeated)
+
+Messages:
+>Private member currentFrame can be removed as the value assigned to it is never read
+Variable was left in to match with other similar classes - likely needs to be removed in future.
+
+>Make field readonly
+Many fields marked with this message need their values changed at some point in the code.
+
+>Remove unused parameter spriteBatch
+Leftover from the old functionality of ItemsCommand - will be used in a future change.
+
+
