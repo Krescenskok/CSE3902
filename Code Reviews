@@ -1,16 +1,16 @@
 Author of the code review: Krescens Kok
 Date of the code review: 10/04/2020
 Sprint number: 2
-Name of the .cs file being reviewed: EnemyNPCDisplay.cs
-Author of the .cs file being reviewed: 
-Number of minutes taken to complete the review:
-Specific comments on what is readable and what is not: 
+Name of the .cs file being reviewed: ItemStateMachine.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Number of minutes taken to complete the review: 10 minutes
+Specific comments on what is readable and what is not: This class was all readable. An enum was created to store all the item names and then added them all to a linked list. Booleans were used to identify whether the item would change going foward in the list or backwards. 
 
 
 Author of the code review: Krescens
-Date of the code review:
+Date of the code review: 10/04/2020
 Sprint number: 2
-Name of the .cs file being reviewed:
-Author of the .cs file being reviewed:
-Specific comments on code quality:
-A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change:
+Name of the .cs file being reviewed: ItemsStateMachine.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Specific comments on code quality: Good code quality, can do other things to simplify the code and the creation of sprites.
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Create the actual sprites in the sprite factory, instead of creating it in the state machine. The current implementation could easily support the change because it the list would just be copied to the sprite factory class.
