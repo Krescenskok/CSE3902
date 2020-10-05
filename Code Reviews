@@ -34,3 +34,26 @@ Author of the .cs file being reviewed: Noah Fabec
 Specific comments on code quality: Logic is sound for the sprint, but will be difficult to execute in the final game. The constructor's dictionary makes all the constructors known to the clients, but otherewise appears to have fairly loose coupling and moderately high cohesion (singluar purpose is to change the state of the blocks). 
 A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Could make all of the constructors in the Dictionary construction part of a factor to hide constructors from the client. Should be fairly hassle-free to implement with the current state of the program. 
 
+Reviewer: Andrew Sanchez
+10/5/20
+Sprint 2
+Enemies/AquamentusAndFireballs/AquamentusNormalSprite.cs
+Author: Yuan Hong
+Number of minutes taken to complete the review: 10
+The logic within the Draw method for AquamentusNormalSprite is very simple and robust.The timing with updatecounter and numUpdatePerFrame works well but it is unclear when
+updateCounter receives an initial value.
+Changing the sprite image or frame that AquamentusNormalSprite uses would have to be done within another .cs file, as this sprite receives its texture from the method calling its constructor (within aquamentus.cs) and receives the column and row of its 
+sprite from the EnemySpriteFactory object. Changes would have to be made within both of those classes if the texture and frame were to change, however in AquamentusNormalSprite no changes would necessarily be made.
+
+Andrew Sanchez
+10/4/20
+Sprint 2
+Enemies/AquamentusAndFireballs/Aquamentus.cs
+Yuan Hong
+Number of minutes taken to complete the review: 10
+The class variable naming convention is very intuitive and it is clear what each represents/does. The methods
+are also named clearly. Specifically, the TryAttack()Method makes it very clear that it will countdown
+until 0 and then reset the attack countdown timer.
+However, SpawnFireBall and Update are less clear, with it not being quite obvious how many fireballs are added when spawning fireballs
+
+
