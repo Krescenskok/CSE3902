@@ -68,3 +68,21 @@ and link.DamageStartTime from the link class, which makes it easy to quickly dec
 Also, the Methods are condensed while using an appropriate amount of white space. 
 However, it is unclear how the gameTime methods are being used and the number 1000 is used in a conditional statement without being defined. 
 
+Author of the code review: Noah Fabec
+Date of the code review: 10/5/2020
+Sprint number: 2
+Name of the .cs file being reviewed: Stalfos.cs
+Amount of Time for Review: 10 minutes
+Author of the .cs file being reviewed: JT Thrash
+Specific comments on code readability: Method and variable names are very descriptive. Without knowing too much about the character beforehand, I was easily able to tell what it was supposed to do
+just by reading the code. The comments as well help clarify things such as else statements that don't necessarily have a description. C# capitalization followed.
+
+Author of the code review: Noah Fabec
+Date of the code review: 10/5/2020
+Sprint number: 2
+Name of the .cs file being reviewed: Stalfos.cs
+Amount of Time for Review: 10 minutes
+Author of the .cs file being reviewed: JT Thrash
+Specific comments on code quality: The methods are for the most part not too complicated so it's easy to use. Uses enum for different directions to make the differections more usable as well
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Instead of using bounds to restrict the movement, a command should be made for moving objects on collision 
+since we will soon be implementing solid blocks into the game. It'll be a little difficult to do this since we would have to implement a different action on collision for each moving object.
