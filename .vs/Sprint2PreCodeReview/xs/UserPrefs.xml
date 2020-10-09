@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{141C53F7-9057-415F-A98F-B6635BE04E22}|Default">
+  <MonoDevelop.Ide.ItemProperties.Sprint2Final PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Link/LinkCommand.cs">
+    <Files>
+      <File FileName="Game1.cs" Line="38" Column="1" />
+      <File FileName="Link/LinkCommand.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Sprint2PreCodeReview" expanded="True">
+            <Node name="Sprint2Final" expanded="True">
+              <Node name="Link" expanded="True">
+                <Node name="LinkCommand.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
