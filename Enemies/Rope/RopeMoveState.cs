@@ -1,33 +1,30 @@
 ﻿using Microsoft.Xna.Framework;
+using Sprint2;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint2Final
 {
-    /// <summary>
-    /// Author: JT Thrash
-    /// </summary>
-    public class KeeseMoveState : IEnemyState
+    public class RopeMoveState : IEnemyState
     {
 
-        private Keese bat;
+        private Rope rope;
         private Vector2 location;
-
         private Vector2 moveDirection;
-       
+
 
         private List<Keese.direction> possibleDirections;
 
         private const float moveSpeed = 1;
 
-        public KeeseMoveState(Keese keese, Vector2 location)
+        public RopeMoveState(Rope rope, Vector2 location)
         {
-            bat = keese;
+            this.rope = rope;
             this.location = location;
             moveDirection = new Vector2(1, 0);
 
-            keese.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
+            rope.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
         }
 
         public void Attack()
@@ -37,16 +34,16 @@ namespace Sprint2
 
         public void ChangeDirection()
         {
-            possibleDirections = bat.GetDirections();
+            possibleDirections = rope.GetDirections();
 
             Random rand = new Random();
             List<Keese.direction> newDirection = new List<Keese.direction>();
-            
+
             Keese.direction directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
             Keese.direction directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
 
             //avoid conflicting movement input ex. moving left and right simultaneously
-            while((int)directionOne == (int)directionTwo * -1)
+            while ((int)directionOne == (int)directionTwo * -1)
             {
                 directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
                 directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
@@ -55,7 +52,7 @@ namespace Sprint2
             newDirection.Add(directionOne);
             newDirection.Add(directionTwo);
 
-            bat.UpdateDirection(newDirection);
+            rope.UpdateDirection(newDirection);
 
             moveDirection.X = CheckDirection(newDirection, Keese.direction.right, Keese.direction.left);
             moveDirection.Y = CheckDirection(newDirection, Keese.direction.up, Keese.direction.down);
@@ -94,7 +91,7 @@ namespace Sprint2
         {
             location.X += moveDirection.X * moveSpeed;
             location.Y += moveDirection.Y * moveSpeed;
-            bat.UpdateLocation(location);
+            rope.UpdateLocation(location);
         }
 
 

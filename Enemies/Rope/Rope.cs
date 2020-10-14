@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -26,9 +27,16 @@ namespace Sprint2
             state.Update();
         }
 
-        public void Draw()
+        public void UpdateLocation(Vector2 location)
         {
-            sprite.Draw()
+            this.location = location;
         }
+
+        public void Draw(SpriteBatch batch)
+        {
+
+            sprite.Draw(batch, location, 0, Color.White);
+        }
+
     }
 }
