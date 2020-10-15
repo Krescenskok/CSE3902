@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Security;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
@@ -153,5 +153,9 @@ namespace Sprint2
             gorilla.UpdateBoomerangLocation(location);
         }
 
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

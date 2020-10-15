@@ -1,99 +1,132 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint2;
+using Sprint3;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     public class RopeMoveState : IEnemyState
     {
 
-        private Rope rope;
         private Vector2 location;
+       
         private Vector2 moveDirection;
+        private Rope rope;
+
+        
 
 
-        private List<Keese.direction> possibleDirections;
+        private const int originalMoveSpeed = 1;
+        private int moveSpeed = originalMoveSpeed;
 
-        private const float moveSpeed = 1;
+        Random RandomNumber;
 
-        public RopeMoveState(Rope rope, Vector2 location)
+        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
+        List<Direction> possibleDirections;
+        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        Direction currentDirection;
+
+        
+
+        public RopeMoveState(Rope rope, Vector2 location, Game game)
         {
-            this.rope = rope;
             this.location = location;
-            moveDirection = new Vector2(1, 0);
+            this.rope = rope;
 
-            rope.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
+            this.rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite());
+
+
+            RandomNumber = new Random();
+
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            currentDirection = down;
+            moveDirection.Y = 1;
+            moveDirection.X = 0;
         }
 
         public void Attack()
         {
-            //do nothing
+            moveSpeed = originalMoveSpeed * 2;
         }
 
+        public void DontAttack()
+        {
+            moveSpeed = originalMoveSpeed;
+        }
+
+        //choose new tile on current row or column and change movedirection
         public void ChangeDirection()
         {
-            possibleDirections = rope.GetDirections();
+            
 
-            Random rand = new Random();
-            List<Keese.direction> newDirection = new List<Keese.direction>();
+            currentDirection = RandomDirection(possibleDirections);
 
-            Keese.direction directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
-            Keese.direction directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
+            moveDirection.Y = CheckDirection(currentDirection, down, up);
+            moveDirection.X = CheckDirection(currentDirection,right,left);
 
-            //avoid conflicting movement input ex. moving left and right simultaneously
-            while ((int)directionOne == (int)directionTwo * -1)
-            {
-                directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
-                directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
-            }
 
-            newDirection.Add(directionOne);
-            newDirection.Add(directionTwo);
 
-            rope.UpdateDirection(newDirection);
-
-            moveDirection.X = CheckDirection(newDirection, Keese.direction.right, Keese.direction.left);
-            moveDirection.Y = CheckDirection(newDirection, Keese.direction.up, Keese.direction.down);
-
+            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
-        public float CheckDirection(List<Keese.direction> newDir, Keese.direction pos, Keese.direction neg)
+        private Direction RandomDirection(List<Direction> directions)
         {
-            if (newDir.Contains(pos)) return 1;
-            if (newDir.Contains(neg)) return -1;
+            int rand = RandomNumber.Next(0, directions.Count);
+            return directions[rand];
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            if (collision.Left()) possibleDirections.Remove(Direction.left);
+            if (collision.Right()) possibleDirections.Remove(Direction.right);
+            if (collision.Up()) possibleDirections.Remove(Direction.up);
+            if (collision.Down()) possibleDirections.Remove(Direction.down);
+
+            Debug.WriteLine("collision from: " + collision.From());
+
+            if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
+        }
+
+
+
+        private int CheckDirection(Direction dir, Direction pos, Direction neg)
+        {
+            if (dir.Equals(pos)) return 1;
+            if (dir.Equals(neg)) return -1;
             return 0;
-        }
-
-        public void Die()
-        {
-            //change to dying state
-        }
-
-        public Vector2 GetLocation()
-        {
-            return location;
-        }
-
-        public void TakeDamage()
-        {
-            //subtract from health
-            //call Die() if health < 0
         }
 
         public void Update()
         {
-            MoveOneUnit();
+
+            if (RandomNumber.Next(0,10000) == 0) ChangeDirection();
+         
+            MoveOneUnit(); 
         }
+
 
         public void MoveOneUnit()
         {
             location.X += moveDirection.X * moveSpeed;
             location.Y += moveDirection.Y * moveSpeed;
+            
             rope.UpdateLocation(location);
         }
 
 
+        public void Die()
+        {
+            //change to dying sprite
+        }
+
+        public void TakeDamage()
+        {
+            Die();
+        }
     }
 }

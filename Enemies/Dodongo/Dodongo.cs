@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class Dodongo : IEnemyNPC
+    class Dodongo : IEnemy
     {
         IEnemyState dodongoState;
         ISprite dodongoSprite;
@@ -50,7 +50,7 @@ namespace Sprint2
             dodongoHP--;
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             dodongoSprite.Draw(spriteBatch, dodongoPos, 0, Color.White);
         }

@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
-    public interface IEnemyNPC
+    public interface IEnemy
     {
 
         void Update();
-        void Draw(SpriteBatch spriteBatch, GameTime time);
+        void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Items;
-using Sprint2.Link;
-using Sprint2;
-using Sprint2.Enemies;
-using Sprint2.Blocks;
+using Sprint3.Items;
+using Sprint3.Link;
+using Sprint3;
+using Sprint3.Enemies;
+using Sprint3.Blocks;
 
-namespace Sprint2
+namespace Sprint3
 {
 
     public class Game1 : Game
@@ -92,6 +92,7 @@ namespace Sprint2
             LinkPersistent.Update(gameTime);
             ItemPersistent.Update(gameTime);
             BlockPersistent.Update(gameTime);
+            CollisionHandler.Instance.Update();
 
 
             base.Update(gameTime);

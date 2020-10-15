@@ -1,17 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Enemies;
+using Sprint3.Enemies;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2.EnemyAndNPC.Merchant
+namespace Sprint3.EnemyAndNPC.Merchant
 {
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class Merchant : IEnemyNPC
+    class Merchant
     {
         private Vector2 MerchantePos;
         private ISprite MerchantSprite;

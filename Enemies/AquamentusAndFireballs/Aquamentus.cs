@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class Aquamentus : IEnemyNPC
+    class Aquamentus : IEnemy
     {
         public IEnemyState state;
         private ISprite sprite;
@@ -93,12 +93,12 @@ namespace Sprint2
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, aquamentusPos, 0, Color.White);
             foreach(FireBall fb in fireBallList)
             {
-                fb.Draw(spriteBatch, time);
+                fb.Draw(spriteBatch);
             }
         }
 

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class Keese : IEnemyNPC
+    public class Keese : IEnemy
     {
         private Vector2 location;
 
@@ -69,12 +69,9 @@ namespace Sprint2
             state.TakeDamage();
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
-
-
             sprite.Draw(spriteBatch, location, 0, Color.White);
-
         }
 
         public void Update()

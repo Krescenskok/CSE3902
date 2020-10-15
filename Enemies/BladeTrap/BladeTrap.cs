@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class BladeTrap : IEnemyNPC
+    public class BladeTrap : IEnemy
     {
 
         private Vector2 location;
@@ -36,7 +36,7 @@ namespace Sprint2
             this.location = location;
         }
 
-        public void Draw(SpriteBatch batch, GameTime time)
+        public void Draw(SpriteBatch batch)
         {
             sprite.Draw(batch, location, 0, Color.White);
         }
