@@ -1,18 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Enemies;
+using Sprint3.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
     /// <para>Monster that throws boomerangs</para>
     /// </summary>
-    public class Goriya : IEnemyNPC
+    public class Goriya : IEnemy
     {
 
         private Vector2 location;
@@ -97,7 +97,7 @@ namespace Sprint2
             state.TakeDamage();
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, location, 0, Color.White);
             if (throwBoomerang) boomerang.Draw(spriteBatch, boomerangLocation, 0, Color.White);

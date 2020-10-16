@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     //class which detects all collisions in game and sends appropriate messages to colliding objects
     public class CollisionHandler
@@ -36,14 +37,19 @@ namespace Sprint2Final
                     {
                         Collision collision = CalculateSide(colliders[i],colliders[j]);
                         colliders[i].HandleCollision(colliders[j], collision);
+
                        
                     }
+
+                    
                 }
             }
         }
 
         private bool ColliderOverlap(ICollider col1, ICollider col2)
         {
+            
+            
             return col1.Bounds().Intersects(col2.Bounds());
         }
 
@@ -53,41 +59,46 @@ namespace Sprint2Final
             Rectangle rect1 = col1.Bounds();
             Rectangle rect2 = col2.Bounds();
 
-            float dX = Math.Abs(rect1.X - rect2.X);
-            float dY = Math.Abs(rect1.Y - rect2.Y);
+            float b_collision = rect2.Bottom - rect1.Y;
+            float t_collision = rect1.Bottom - rect2.Y;
+            float l_collision = rect1.Right - rect2.X;
+            float r_collision = rect2.Right - rect1.X;
 
-
+            bool rightSide = l_collision < r_collision && l_collision < t_collision && l_collision < b_collision;
+            bool leftSide = r_collision < l_collision && r_collision < t_collision && r_collision < b_collision;
+            bool topSide = b_collision < t_collision && b_collision < l_collision && b_collision < r_collision;
+            bool bottomSide = t_collision < b_collision && t_collision < l_collision && t_collision < r_collision;
+            
             //determine rect2 position relative to rect1//
 
-            bool leftSide = dY < dX && rect1.X > rect2.X;
-            bool rightSide = dY < dX && rect1.X < rect2.X;
+            Rectangle overlap = Rectangle.Intersect(rect1, rect2);
+            Vector2 collisionPoint = overlap.Center.ToVector2();
 
-            bool topSide = dY > dX && rect1.Y < rect2.Y;
-            bool bottomSide = dY > dX && rect1.Y > rect2.Y;
+            if (leftSide) return LeftCollision(collisionPoint);
+            if (rightSide) return RightCollision(collisionPoint);
+            if (topSide) return TopCollision(collisionPoint);
+            if (bottomSide) return BottomCollision(collisionPoint);
 
-            if(leftSide) return LeftCollision();
-            if (rightSide) return RightCollision();
-            if (topSide) return TopCollision();
-            if (bottomSide) return BottomCollision();
+            return LeftCollision(collisionPoint);
 
-            return null;
+            //throw new NullReferenceException("collision direction could not be calculated");
         }
 
-        public static Collision LeftCollision()
+        public static Collision LeftCollision(Vector2 loc)
         {
-            return new Collision(Collision.Direction.left);
+            return new Collision(Collision.Direction.left,loc);
         }
-        public static Collision RightCollision()
+        public static Collision RightCollision(Vector2 loc)
         {
-            return new Collision(Collision.Direction.left);
+            return new Collision(Collision.Direction.right,loc);
         }
-        public static Collision TopCollision()
+        public static Collision TopCollision(Vector2 loc)
         {
-            return new Collision(Collision.Direction.left);
+            return new Collision(Collision.Direction.up, loc);
         }
-        public static Collision BottomCollision()
+        public static Collision BottomCollision(Vector2 loc)
         {
-            return new Collision(Collision.Direction.left);
+            return new Collision(Collision.Direction.down, loc);
         }
     }
 }

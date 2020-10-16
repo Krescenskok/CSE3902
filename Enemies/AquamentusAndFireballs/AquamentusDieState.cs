@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -22,6 +22,11 @@ namespace Sprint2
         }
 
         public void ChangeDirection()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
         {
             throw new NotImplementedException();
         }

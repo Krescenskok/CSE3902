@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -32,7 +32,7 @@ namespace Sprint2
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, fireBallPos, 0, Color.White);
         }

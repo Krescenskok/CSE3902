@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     public interface IEnemyState
     {
         public void TakeDamage();
         public void ChangeDirection();
+        public void MoveAwayFromCollision(Collision collision);
         public void Die();
         public void Attack();
 

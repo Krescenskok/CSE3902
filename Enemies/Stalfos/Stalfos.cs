@@ -1,18 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Enemies;
+using Sprint3.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// <author>JT Thrash</author>
     /// Class for enemy named Stalfos (the skeleton). Must be initialized in LoadContent method in main Game1 class.
     /// </summary>
-    public class Stalfos : IEnemyNPC
+    public class Stalfos : IEnemy
     {
         
         public Vector2 location { get; set; }
@@ -75,7 +75,7 @@ namespace Sprint2
             state.TakeDamage();
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {            
             sprite.Draw(spriteBatch, location, 0, Color.White);
         }
@@ -86,7 +86,7 @@ namespace Sprint2
             int yMax = (int)(location.Y + size.Y);
             int xMin = (int)location.X;
             int yMin = (int)location.Y;
-
+            
             int boundX = game.GraphicsDevice.Viewport.Width;
             int boundY = game.GraphicsDevice.Viewport.Height;
 

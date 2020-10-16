@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
     /// <para>Small gelatinous creature that moves randomly between square spaces on the map.</para>
     /// </summary>
-    public class Gel : IEnemyNPC
+    public class Gel : IEnemy
     {
 
         private Vector2 location;
@@ -52,7 +52,7 @@ namespace Sprint2
             state.Die();
         }
 
-        public void Draw(SpriteBatch batch, GameTime time)
+        public void Draw(SpriteBatch batch)
         {
             sprite.Draw(batch, location, 0, Color.White);
         }

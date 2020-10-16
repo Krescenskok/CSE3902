@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Enemies;
-using Sprint2.EnemyAndNPC.Merchant;
-using Sprint2.EnemyAndNPC.OldMan;
+using Sprint3.Enemies;
+using Sprint3.EnemyAndNPC.Merchant;
+using Sprint3.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
@@ -19,8 +19,8 @@ namespace Sprint2
 
         private static readonly EnemyNPCDisplay instance = new EnemyNPCDisplay();
 
-        List<IEnemyNPC> enemies;
-        IEnemyNPC currentEnemy;
+        List<IEnemy> enemies;
+        IEnemy currentEnemy;
 
         private bool initialState;
 
@@ -49,9 +49,9 @@ namespace Sprint2
         /// <param name="pos2">target vector for blade trap</param>
         public void Load(Game game, Vector2 pos, Vector2 pos2)
         {
-            enemies = new List<IEnemyNPC> { new Stalfos(game,pos), new Keese(game,pos),
+            enemies = new List<IEnemy> {  new Rope(game,pos), new Stalfos(game,pos), new Keese(game,pos),
                 new Goriya(game,pos), new Gel(game, pos), new BladeTrap(pos,pos2) , new WallMaster(game,pos),
-                new Aquamentus(pos), new Dodongo(pos), new Merchant(pos), new OldMan(pos,2), new Zol(game,pos)};
+                new Aquamentus(pos), new Dodongo(pos), new Zol(game,pos)};
 
             currentEnemy = enemies[0];
 
@@ -92,7 +92,7 @@ namespace Sprint2
 
         public void Draw(SpriteBatch batch, GameTime time)
         {
-            currentEnemy.Draw(batch, time);
+            currentEnemy.Draw(batch);
             
         }
 

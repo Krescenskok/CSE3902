@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -50,6 +50,11 @@ namespace Sprint2
                     dodongoMoving.SetSprite(direction);
                 }
             }
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
         }
 
         public void Die()

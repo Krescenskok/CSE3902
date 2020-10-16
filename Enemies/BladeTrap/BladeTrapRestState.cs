@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash
@@ -31,6 +31,11 @@ namespace Sprint2
         public void ChangeDirection()
         {
             //do nothing
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
         }
 
         public void Die()

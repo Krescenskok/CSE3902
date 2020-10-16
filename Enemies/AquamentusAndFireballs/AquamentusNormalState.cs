@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -62,6 +62,11 @@ namespace Sprint2
             {
                 Attack();
             }
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
         }
     }
 }

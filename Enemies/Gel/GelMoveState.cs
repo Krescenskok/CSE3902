@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     ///Moves gel either up or down to another tile and stops
@@ -146,6 +146,11 @@ namespace Sprint2
         public void TakeDamage()
         {
             Die();
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
         }
     }
 }

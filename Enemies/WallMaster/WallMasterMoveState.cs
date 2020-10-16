@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
    /// <summary>
    /// Author: JT Thrash
@@ -191,6 +191,11 @@ namespace Sprint2
             location.Y += moveDirection.Y * moveSpeed;
             gridLocation.Location = location.ToPoint();
             master.UpdateLocation(location);
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
         }
     }
 }

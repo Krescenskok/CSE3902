@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2.Enemies.Zol
+namespace Sprint3.Enemies.Zol
 {
     /// <summary>
     /// Author: JT Thrash

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace Sprint2.EnemyAndNPC.AquamentusAndFireballs
+namespace Sprint3.EnemyAndNPC.AquamentusAndFireballs
 {
     /// <summary>
     /// Author: Yuan Hong

@@ -1,16 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2.Enemies;
+using Sprint3.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2.EnemyAndNPC.OldMan
+namespace Sprint3.EnemyAndNPC.OldMan
 {
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class OldMan : IEnemyNPC
+    class OldMan
     {
 
         public INPCState State;

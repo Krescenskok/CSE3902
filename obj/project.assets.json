@@ -174,19 +174,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {}
+    "C:\\Users\\Jordan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\Sprint2Final.csproj",
-      "projectName": "Sprint2Final",
-      "projectPath": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\Sprint2Final.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\obj\\",
+      "projectUniqueName": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint3.csproj",
+      "projectName": "Sprint3",
+      "projectPath": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint3.csproj",
+      "packagesPath": "C:\\Users\\Jordan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jordan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
