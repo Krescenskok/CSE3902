@@ -22,6 +22,11 @@ namespace Sprint3
             this.location = location;
         }
 
+        public Collision()
+        {
+
+        }
+
         
 
         public bool Left() { return dir.Equals(Direction.left); }

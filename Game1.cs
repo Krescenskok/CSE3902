@@ -33,6 +33,8 @@ namespace Sprint3
         public Items.LinkItems items;
         public Blocks.LinkBlocks blocks;
 
+       
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,6 +45,8 @@ namespace Sprint3
         protected override void Initialize()
         {
             base.Initialize();
+
+        
         }
 
         protected override void LoadContent()
@@ -66,6 +70,7 @@ namespace Sprint3
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
+            
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
         }
@@ -93,7 +98,7 @@ namespace Sprint3
             ItemPersistent.Update(gameTime);
             BlockPersistent.Update(gameTime);
             CollisionHandler.Instance.Update();
-
+            
 
             base.Update(gameTime);
         }
@@ -116,6 +121,8 @@ namespace Sprint3
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+
         }
     }
 }

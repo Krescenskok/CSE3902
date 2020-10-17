@@ -53,5 +53,10 @@ namespace Sprint3
         {
             //do nothing
         }
+
+        public void HandleCollisionEnter(ICollider col, Collision collision)
+        {
+            //do nothing
+        }
     }
 }
