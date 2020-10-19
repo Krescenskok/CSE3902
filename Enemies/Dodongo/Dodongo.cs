@@ -40,9 +40,9 @@ namespace Sprint3
             dodongoPos = newPos;
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            dodongoState.TakeDamage();
+            dodongoState.TakeDamage(amount);
         }
 
         public void LostHp()
@@ -53,6 +53,16 @@ namespace Sprint3
         public void Draw(SpriteBatch spriteBatch)
         {
             dodongoSprite.Draw(spriteBatch, dodongoPos, 0, Color.White);
+        }
+
+        public void SetSprite(ISprite sprite)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Spawn()
+        {
+            throw new NotImplementedException();
         }
     }
 }

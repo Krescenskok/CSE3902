@@ -34,7 +34,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "Wall";
+            return tag == "PlayerWeapon";
         }
 
         
@@ -56,7 +56,10 @@ namespace Sprint3
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            //do nothing
+            if (col.CompareTag("enemy"))
+            {
+                col.SendMessage("TakeDamage", 5);
+            }
         }
     }
 }

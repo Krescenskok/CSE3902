@@ -87,5 +87,10 @@ namespace Sprint3
 
             
         }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

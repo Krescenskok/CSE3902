@@ -36,9 +36,9 @@ namespace Sprint3
             this.sprite = sprite;
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            state.TakeDamage(amount);
         }
 
         public void LostHP()
@@ -102,5 +102,9 @@ namespace Sprint3
             }
         }
 
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

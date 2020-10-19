@@ -9,14 +9,11 @@ namespace Sprint3
 {
     public class RopeMoveState : IEnemyState
     {
-
-        private Vector2 location;
-       
-        private Vector2 moveDirection;
         private Rope rope;
 
+        private Vector2 location;
+        private Vector2 moveDirection;
         
-
 
         private const int originalMoveSpeed = 1;
         private int moveSpeed = originalMoveSpeed;
@@ -35,7 +32,7 @@ namespace Sprint3
             this.location = location;
             this.rope = rope;
 
-            this.rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite());
+            this.rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
 
 
             RandomNumber = new Random();
@@ -70,6 +67,10 @@ namespace Sprint3
 
 
             possibleDirections = new List<Direction> { left, right, up, down };
+
+            if (currentDirection.Equals(left)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
+            if (currentDirection.Equals(right)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("right"));
+            
         }
 
         private Direction RandomDirection(List<Direction> directions)
@@ -124,9 +125,9 @@ namespace Sprint3
             //change to dying sprite
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            Die();
+            rope.SubtractHP(amount);
         }
     }
 }

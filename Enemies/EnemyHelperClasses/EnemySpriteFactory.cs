@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Enemies;
 using Sprint3.Enemies.Zol;
 using Sprint3.EnemyAndNPC.AquamentusAndFireballs;
 using Sprint3.EnemyAndNPC.Merchant;
@@ -23,23 +24,29 @@ namespace Sprint3
         private Texture2D bossTextrue;
         private Texture2D NPCTexture;
         
-        private static int[] sheetSize = { 15, 5 };
+        private static int[] sheetSize = { 15, 8 };
 
         private static Dictionary<string, Vector2> coordinateMappings = new Dictionary<string, Vector2>
         {
+            //use texture
             {"Stalfos", new Vector2( 2,12)},
-            {"RedGoriyaDown", new Vector2( 2,6)},
-            {"RedGoriyaUp", new Vector2( 2,7)},
-            {"RedGoriyaRight", new Vector2( 2,8)},
-            {"RedGoriyaLeft", new Vector2( 2,9)},
-            {"Keese", new Vector2( 0,1)},
+            {"RedGoriyaDown", new Vector2( 4,2)},
+            {"RedGoriyaUp", new Vector2( 4,3)},
+            {"RedGoriyaRight", new Vector2( 4,4)},
+            {"RedGoriyaLeft", new Vector2( 4,5)},
+            {"Keese", new Vector2( 2,0)},
             {"Gel", new Vector2( 0,6)},
             {"Boomerang", new Vector2( 2,10)},
             {"WallMaster", new Vector2( 2,13)},
-            {"Trap", new Vector2(2,14) },
-            {"Zol", new Vector2(0,1) },
+            {"WallMasterUp", new Vector2( 4,13)},
+            {"Trap", new Vector2(0,14) },
+            {"Zol", new Vector2(0,0) },
             {"Rope", new Vector2(2,11) },
+            {"RopeLeft", new Vector2(4,11) },
+            {"Spawn", new Vector2(2,14) },
+            {"EnemyDeath", new Vector2(2,6) },
             
+            //use bossTexture and NPCTexture
             {"OldMan", new Vector2(0,0) },
             {"Merchant", new Vector2(0, 2) },
             {"Flame", new Vector2(0, 1) },
@@ -59,15 +66,7 @@ namespace Sprint3
             return (int)coordinateMappings[spriteName].X;
         }
 
-        private static EnemySpriteFactory instance = new EnemySpriteFactory();
-
-        public static EnemySpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static EnemySpriteFactory Instance { get; } = new EnemySpriteFactory();
 
         public static int[] SheetSize()
         {
@@ -176,11 +175,20 @@ namespace Sprint3
             return new ZolMoveSprite(texture);
         }
 
-        public ISprite CreateRopeMoveSprite()
+        public ISprite CreateRopeMoveSprite(string dir)
         {
-            return new RopeMoveSprite(texture);
+            return new RopeMoveSprite(texture, dir);
         }
 
+        public ISprite CreateSpawnSprite()
+        {
+            return new SpawnSprite(texture);
+        }
+
+        public ISprite CreateDyingSprite()
+        {
+            return new EnemyDeathSprite(texture);
+        }
 
 
 

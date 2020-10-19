@@ -88,5 +88,10 @@ namespace Sprint3
 
             dodongoMoving.UpdatePos(dodongoPos);
         }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

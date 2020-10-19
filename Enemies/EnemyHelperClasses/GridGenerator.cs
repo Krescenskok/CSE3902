@@ -106,5 +106,16 @@ namespace Sprint3
 
             return foundLocation;
         }
+
+
+        public Vector2 GetLocation(int row, int col)
+        {
+            Vector2 result = new Vector2();
+
+            result.X = col * tileSize.X;
+            result.Y = row * tileSize.Y;
+
+            return result;
+        }
     }
 }

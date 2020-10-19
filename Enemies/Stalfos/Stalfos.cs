@@ -19,6 +19,7 @@ namespace Sprint3
 
         public IEnemyState state;
         private ISprite sprite;
+        private StalfosWalkingSprite stalfosSprite;
 
         private Vector2 size;
 
@@ -31,6 +32,11 @@ namespace Sprint3
        
 
         private int randomMovementMultiplier;
+
+        EnemyCollider collider;
+
+        private int HP = 10;
+        private int attack = 5;
 
         
         public void SetSprite(ISprite sprite)
@@ -51,13 +57,21 @@ namespace Sprint3
         {
             this.game = game;
             this.location = location;
-            state = new StalfosWalkingState(this,location);
+            state = new EnemySpawnState(this, game);
+            collider = new EnemyCollider();
 
             size = new Vector2(100, 100);
 
             currentDirection = direction.right;
 
             randomMovementMultiplier = 1;
+        }
+
+        public void Spawn()
+        {
+            state = new StalfosWalkingState(this, location);
+            stalfosSprite = (StalfosWalkingSprite)sprite;
+            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, 5);
         }
 
         public void ChangeDirection()
@@ -67,12 +81,16 @@ namespace Sprint3
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
         }
 
-        public void TakeDamage()
+        public bool SubtractHP(int amount)
         {
-            state.TakeDamage();
+            HP -= amount;
+            
+            if (HP <= 0) { Die(); }
+
+            return HP > 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -82,45 +100,10 @@ namespace Sprint3
 
         public void Update()
         {
-            int xMax = (int)(location.X + size.X);
-            int yMax = (int)(location.Y + size.Y);
-            int xMin = (int)location.X;
-            int yMin = (int)location.Y;
-            
-            int boundX = game.GraphicsDevice.Viewport.Width;
-            int boundY = game.GraphicsDevice.Viewport.Height;
-
-            bool blockedOnRight = xMax >= boundX && currentDirection == direction.right;
-            bool blockedOnLeft = xMin <= 0 && currentDirection == direction.left;
-            bool blockedAbove = yMax >= boundY && currentDirection == direction.up;
-            bool blockedBelow = yMin <= 0 && currentDirection == direction.down;
-
-
-            if (blockedAbove || blockedBelow || blockedOnLeft || blockedOnRight)
-            {
-                availableDirections = new List<direction>{ direction.left, direction.right, direction.up, direction.down};
-
-                if (blockedOnRight) availableDirections.Remove(direction.right);
-                if (blockedOnLeft) availableDirections.Remove(direction.left);
-                if (blockedAbove) availableDirections.Remove(direction.up);
-                if (blockedBelow) availableDirections.Remove(direction.down);
-
-                ChangeDirection();
-            }
-            else //move randomly
-            {
-                Random r = new Random();
-                int randNum = r.Next(0, 100 / randomMovementMultiplier);
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if(randNum == 0)
-                {
-                    ChangeDirection();
-                }
-            }
-
-
+          
             state.Update();
+            collider.Update(location.ToPoint());
+
             
         }
 
@@ -135,5 +118,6 @@ namespace Sprint3
             currentDirection = newDirection;
         }
 
+        
     }
 }

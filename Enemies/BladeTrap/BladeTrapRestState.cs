@@ -23,6 +23,11 @@ namespace Sprint3
             this.target = target;
             this.trap = trap;
         }
+
+        public BladeTrapRestState()
+        {
+        }
+
         public void Attack()
         {
             trap.state = new BladeTrapAttackState(location,target,trap);
@@ -51,6 +56,11 @@ namespace Sprint3
         public void Update()
         {
             Attack();
+        }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

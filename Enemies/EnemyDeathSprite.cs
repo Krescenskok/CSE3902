@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sprint3
 {
-    public class RopeMoveSprite : ISprite
+    public class EnemyDeathSprite : ISprite
     {
 
         private Texture2D texture;
@@ -14,15 +14,15 @@ namespace Sprint3
         private int rows = spriteSheetSize[0];
         private int columns = spriteSheetSize[1];
 
-        private int row = EnemySpriteFactory.GetRow("Rope");
-        private int startColumn = EnemySpriteFactory.GetColumn("Rope");
+        private int row = EnemySpriteFactory.GetRow("EnemyDeath");
+        private int startColumn = EnemySpriteFactory.GetColumn("EnemyDeath");
         private int currentAnimatedFrame;
-        private const int totalAnimatedFrames = 2;
+        private const int totalAnimatedFrames = 3;
 
         private int currentFrame;
         private int trueFrameCount;
 
-        private const int frameRate = 5;
+        private const int frameRate = 15;
         private const int maxFrameRate = 60;
 
         private Vector2 spriteSize;
@@ -30,7 +30,9 @@ namespace Sprint3
         private int height;
         private Point drawSize;
 
-        public RopeMoveSprite(Texture2D texture, string dir)
+        private bool done;
+
+        public EnemyDeathSprite(Texture2D texture)
         {
 
             currentAnimatedFrame = 0;
@@ -47,17 +49,12 @@ namespace Sprint3
             drawSize = new Point(width * 2, height * 2);
 
 
-            if (dir.Equals("left"))
-            {
-                row = EnemySpriteFactory.GetRow("RopeLeft");
-                startColumn = EnemySpriteFactory.GetColumn("RopeLeft");
-            }
-            
+            done = false;
         }
 
         public Rectangle GetRectangle()
         {
-           return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
+            return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
         }
 
         public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
@@ -66,7 +63,7 @@ namespace Sprint3
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
-                currentFrame = 0;
+                done = true;
             }
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
@@ -82,6 +79,11 @@ namespace Sprint3
         public void Load(Game game)
         {
             texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
+        }
+
+        public bool Done()
+        {
+            return done;
         }
     }
 }

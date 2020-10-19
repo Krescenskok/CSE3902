@@ -4,6 +4,7 @@ using Sprint2Final;
 using Sprint2Final.Enemies;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace Sprint3
 {
     public class Rope : IEnemy
     {
+        private Game game;
 
         private ISprite sprite;
         private RopeMoveSprite rp;
@@ -19,21 +21,34 @@ namespace Sprint3
        
         private EnemyCollider collider;
 
-        private const float strength = 50;
+        private const int attack = 5;
+        private int HP = 10;
+
+       
 
         public Rope(Game game, Vector2 location)
         {
             this.location = location;
-            state = new RopeMoveState(this, location,game);
-            rp = (RopeMoveSprite)sprite;
-            collider = new EnemyCollider(rp.GetRectangle(),state, strength);
+            this.game = game;
+            state = new EnemySpawnState(this,game);
 
+            collider = new EnemyCollider();
+
+        }
+
+        public void Spawn()
+        {
+            state = new RopeMoveState(this, location, game);
+            rp = (RopeMoveSprite)sprite;
+            collider = new EnemyCollider(rp.GetRectangle(), state, attack);
         }
 
         public void Update()
         {
             state.Update();
             collider.Update(location.ToPoint());
+
+           
         }
 
         public void UpdateLocation(Vector2 location)
@@ -44,6 +59,7 @@ namespace Sprint3
         public void SetSprite(ISprite sprite)
         {
             this.sprite = sprite;
+            
         }
 
         public void Draw(SpriteBatch batch)
@@ -52,6 +68,21 @@ namespace Sprint3
             sprite.Draw(batch, location, 0, Color.White);
 
             
+        }
+
+        public void SubtractHP(int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+
+            
+            
+        }
+
+
+        public void Die()
+        {
+            RoomEnemies.Instance.Destroy(this,location);
         }
 
     }

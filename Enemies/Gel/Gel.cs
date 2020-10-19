@@ -42,9 +42,9 @@ namespace Sprint3
             state.Update();
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            state.TakeDamage(amount);
         }
 
         public void Die()
@@ -57,5 +57,9 @@ namespace Sprint3
             sprite.Draw(batch, location, 0, Color.White);
         }
 
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

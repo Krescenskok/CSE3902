@@ -92,9 +92,9 @@ namespace Sprint3
             state.Die();
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            state.TakeDamage(amount);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -166,6 +166,9 @@ namespace Sprint3
             currentDirection = dir;
         }
 
-    
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

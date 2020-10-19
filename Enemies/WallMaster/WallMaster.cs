@@ -42,5 +42,10 @@ namespace Sprint3
         {
             state.Update();
         }
+
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,9 +14,17 @@ namespace Sprint3
 
         private Stalfos skeleton;
         private Vector2 location;
-        private Vector2 walkingDirection;
+        private Vector2 moveDirection;
 
-        private List<Stalfos.direction> possibleDirections;
+        
+
+        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
+        List<Direction> possibleDirections;
+        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        Direction currentDirection;
+        
+
+        Random RandomNumber;
 
         private const float moveSpeed = 2;
 
@@ -26,9 +35,12 @@ namespace Sprint3
 
             stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosWalkingSprite());
 
-            walkingDirection.X = 1;
-            walkingDirection.Y = 0;
- 
+            currentDirection = right;
+            moveDirection.X = 1;
+            moveDirection.Y = 0;
+
+            RandomNumber = new Random();
+            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
         public void Attack()
@@ -38,23 +50,47 @@ namespace Sprint3
 
         public void ChangeDirection()
         {
-            possibleDirections = skeleton.GetDirections();
-            
-            Random rand = new Random();
-            Stalfos.direction nextDirection = possibleDirections[rand.Next(0, possibleDirections.Count)];
 
-            skeleton.UpdateDirection(nextDirection);
 
-            walkingDirection.X = CheckDirection(nextDirection, Stalfos.direction.right, Stalfos.direction.left);
-            walkingDirection.Y = CheckDirection(nextDirection, Stalfos.direction.up, Stalfos.direction.down);
-            
+            currentDirection = RandomDirection(possibleDirections);
+
+            moveDirection.Y = CheckDirection(currentDirection, down, up);
+            moveDirection.X = CheckDirection(currentDirection, right, left);
+
+
+
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+
         }
 
-        public float CheckDirection(Stalfos.direction dir, Stalfos.direction pos, Stalfos.direction negative)
+        private int CheckDirection(Direction dir, Direction pos, Direction neg)
         {
-            if (dir == pos) return 1;
-            if (dir == negative) return -1;
+            if (dir.Equals(pos)) return 1;
+            if (dir.Equals(neg)) return -1;
             return 0;
+        }
+
+ 
+
+        private Direction RandomDirection(List<Direction> directions)
+        {
+            int rand = RandomNumber.Next(0, directions.Count);
+            return directions[rand];
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            if (collision.Left()) possibleDirections.Remove(Direction.left);
+            if (collision.Right()) possibleDirections.Remove(Direction.right);
+            if (collision.Up()) possibleDirections.Remove(Direction.up);
+            if (collision.Down()) possibleDirections.Remove(Direction.down);
+
+
+
+            if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }
 
         public void Die()
@@ -62,32 +98,41 @@ namespace Sprint3
             //change to dying state
         }
 
-        public Vector2 GetLocation()
-        {
-            return location;
-        }
 
-        public void TakeDamage()
-        {
-            //subtract from health
-            //call Die() if health < 0
-        }
 
         public void Update()
-        {          
+        {
+            if (RandomNumber.Next(0, 100) == 0) ChangeDirection();
             MoveOneUnit();
+
+
         }
 
         public void MoveOneUnit()
         {
-            location.X += walkingDirection.X * moveSpeed;
-            location.Y +=  walkingDirection.Y * moveSpeed;
+            location.X += moveDirection.X * moveSpeed;
+            location.Y +=  moveDirection.Y * moveSpeed;
             skeleton.UpdateLocation(location);
         }
 
-        public void MoveAwayFromCollision(Collision collision)
+        
+
+        
+
+        public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            bool stillAlive = skeleton.SubtractHP(amount);
+
+            if (stillAlive)
+            {
+                skeleton.state = new StalfosDamagedState(currentDirection.ToString(), skeleton, location);
+            }
+            
+            
+            
         }
+
+        
+       
     }
 }

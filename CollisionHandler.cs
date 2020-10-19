@@ -8,7 +8,9 @@ using System.Text;
 
 namespace Sprint3
 {
-    //class which detects all collisions in game and sends appropriate messages to colliding objects
+    /// <summary>
+    /// class which detects all collisions in game and sends appropriate messages to colliding objects
+    /// </summary>
     public class CollisionHandler
     {
         public static CollisionHandler Instance { get; } = new CollisionHandler();

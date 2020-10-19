@@ -40,5 +40,15 @@ namespace Sprint3
         {
             sprite.Draw(batch, location, 0, Color.White);
         }
+
+        public void SetSprite(ISprite sprite)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

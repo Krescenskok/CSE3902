@@ -11,9 +11,9 @@ namespace Sprint3
     {
         private Rectangle bounds;
         private IEnemyState enemy;
-        private float damageAmount;
+        private int damageAmount;
 
-        public EnemyCollider(Rectangle rect, IEnemyState enemy, float strength)
+        public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength)
         {
             bounds = rect;
 
@@ -22,6 +22,11 @@ namespace Sprint3
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this);
+        }
+
+        public EnemyCollider()
+        {
+
         }
 
         public Rectangle Bounds()
@@ -54,16 +59,18 @@ namespace Sprint3
             {
                 col.SendMessage("TakeDamage", damageAmount);
             }
-            else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall"))
+            else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
                 enemy.MoveAwayFromCollision(collision);
                 
             }
+
+            
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "TakeDamage") enemy.TakeDamage();
+            if (msg == "TakeDamage") enemy.TakeDamage((int)value);
         }
 
         public void Update(Point point)
