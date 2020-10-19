@@ -41,14 +41,23 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall"))
+            {
+                enemy.MoveAwayFromCollision(collision);
+                
+            }
+        }
+
+        public void HandleCollisionEnter(ICollider col, Collision collision)
+        {
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("TakeDamage", collision);
+                col.SendMessage("TakeDamage", damageAmount);
             }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall"))
             {
                 enemy.MoveAwayFromCollision(collision);
-                Debug.WriteLine("hit wall");
+                
             }
         }
 
