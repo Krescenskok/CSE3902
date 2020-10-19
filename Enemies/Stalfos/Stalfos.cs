@@ -14,76 +14,42 @@ namespace Sprint3
     /// </summary>
     public class Stalfos : IEnemy
     {
-        
-        public Vector2 location { get; set; }
-
         public IEnemyState state;
+
+
+        private Vector2 location;
         private ISprite sprite;
         private StalfosWalkingSprite stalfosSprite;
-
-        private Vector2 size;
-
-        private Game game;
-
-        public enum direction { left, right, up, down };
-        List<direction> availableDirections;
-        direction currentDirection;
-
-       
-
-        private int randomMovementMultiplier;
-
-        EnemyCollider collider;
+        private EnemyCollider collider;
 
         private int HP = 10;
-        private int attack = 5;
-
-        
-        public void SetSprite(ISprite sprite)
-        {
-            
-            this.sprite = sprite;
-            
-        }
-
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-        }
-
-
+        private const int attack = 5;
 
         public Stalfos(Game game, Vector2 location)
         {
-            this.game = game;
+            
             this.location = location;
             state = new EnemySpawnState(this, game);
             collider = new EnemyCollider();
 
-            size = new Vector2(100, 100);
-
-            currentDirection = direction.right;
-
-            randomMovementMultiplier = 1;
         }
 
         public void Spawn()
         {
             state = new StalfosWalkingState(this, location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, 5);
+            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, attack);
         }
 
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
 
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this, location);
         }
 
+
+        
+        /// <returns>true when stalfos HP is > 0</returns>
         public bool SubtractHP(int amount)
         {
             HP -= amount;
@@ -100,24 +66,23 @@ namespace Sprint3
 
         public void Update()
         {
-          
             state.Update();
             collider.Update(location.ToPoint());
-
-            
         }
 
-
-        public List<direction> GetDirections()
+        public void SetSprite(ISprite sprite)
         {
-            return availableDirections;
+
+            this.sprite = sprite;
+
         }
 
-        public void UpdateDirection(direction newDirection)
+        public void UpdateLocation(Vector2 location)
         {
-            currentDirection = newDirection;
+            this.location = location;
         }
 
-        
+
+
     }
 }
