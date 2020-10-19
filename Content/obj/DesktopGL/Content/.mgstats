@@ -1,6 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/BossSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/BossSpriteSheet.xnb","TextureProcessor","Texture2DContent",3172,58453,0.1594033
-"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/EnemySpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/EnemySpriteSheet.xnb","TextureProcessor","Texture2DContent",10014,324565,0.1648414
+"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/EnemySpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/EnemySpriteSheet.xnb","TextureProcessor","Texture2DContent",10014,324565,0.1810639
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/File.spritefont","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/File.xnb","FontDescriptionProcessor","SpriteFontContent",2062,21538,0.1014678
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/itemSprites.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/itemSprites.xnb","TextureProcessor","Texture2DContent",17767,44885,0.0046971
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/LinkSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/LinkSpriteSheet.xnb","TextureProcessor","Texture2DContent",30572,573525,0.0164579
