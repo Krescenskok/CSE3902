@@ -47,15 +47,15 @@ namespace Sprint2
 
         public void SetFrame(string direction)
         {
-            if (direction == "right")
+            if (direction.Equals("Right"))
             {
                 drawnFrame = 1;
             }
-            else if (direction == "left")
+            else if (direction.Equals("Left"))
             {
                 drawnFrame = 3;
             }
-            else if (direction == "down")
+            else if (direction.Equals("Down"))
             {
                 drawnFrame = 2;
             }

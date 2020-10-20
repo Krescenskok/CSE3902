@@ -26,7 +26,6 @@ namespace Sprint2
             initialY = yPos;
             this.item = item;
             state = new ArrowState(this, location, direction);
-
             SetFrame(direction);
         }
 
@@ -38,6 +37,11 @@ namespace Sprint2
         public void Update()
         {
             state.Update();
+        }
+
+        public void Collect()
+        {
+            state.Collected();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -59,7 +63,7 @@ namespace Sprint2
             {
                 drawnFrame = 2;
             }
-            else if (direction.Equals("Up"))
+            else
             {
                 drawnFrame = 0;
             }

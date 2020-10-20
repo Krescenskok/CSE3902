@@ -32,6 +32,11 @@ namespace Sprint2.Items
             state.Update();
         }
 
+        public void Expire()
+        {
+            state.Expire();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);

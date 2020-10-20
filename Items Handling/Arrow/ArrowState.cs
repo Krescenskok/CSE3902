@@ -54,13 +54,12 @@ namespace Sprint2
 
         public void Expire()
         {
-            //expires when it travels a certain distance
+            
         }
 
         public void Collected()
         {
-            //player hits it, then player takes damage
-
+           
         }
     }
 }

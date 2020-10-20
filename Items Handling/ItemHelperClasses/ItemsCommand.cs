@@ -27,8 +27,7 @@ namespace Sprint2
         public void ExecuteCommand(Game game, GameTime gameTime,  SpriteBatch spriteBatch)
         {
             if (!DoSwap)
-            {
-                
+            {                
                 Items.Draw();
                 if (GoingForward)
                 {

@@ -10,7 +10,7 @@ namespace Sprint2.Items
         private Bomb item;
         private Vector2 position;
         private int runTime;
-        private const int maxTime = 50;
+        private const int maxTime = 100;
 
         public BombState(Bomb item, Vector2 initPos)
         {
@@ -31,7 +31,6 @@ namespace Sprint2.Items
 
         public void Expire()
         {
-            //bomb explodes
             item.Exploded();
         }
 

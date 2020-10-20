@@ -13,7 +13,7 @@ namespace Sprint2.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 42;
+        private int sheetLocation = 2;
 
         public HalfHeartSprite(Texture2D texture)
         {

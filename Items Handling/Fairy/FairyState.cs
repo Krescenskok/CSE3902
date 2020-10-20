@@ -23,6 +23,7 @@ namespace Sprint2.Items
             this.item = item;
             this.initialPos = initPos;
             this.position = initPos;
+            runTime = 0;
             frame = 0;
             right = true;
             down = false;
@@ -73,9 +74,9 @@ namespace Sprint2.Items
 
             if (runTime % 5 == 0)
             {
-                frame = (frame + 1) % 2;
+                frame++;
             }
-            item.UpdateFrame(frame);
+            item.UpdateFrame(frame % 2);
 
             runTime++;
             if (runTime >= maxTime)

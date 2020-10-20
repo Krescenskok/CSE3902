@@ -28,12 +28,17 @@ namespace Sprint2.Items
         }
         public void UpdateFrame(int frame)
         {
-            this.currentFrame = frame;
+            this.drawnFrame = frame;
         }
 
         public void Update()
         {
             state.Update();
+        }
+
+        public void Expire()
+        {
+            state.Expire();
         }
 
         public void Draw(SpriteBatch spriteBatch)

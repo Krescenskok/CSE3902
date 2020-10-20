@@ -13,7 +13,6 @@ namespace Sprint2.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 0;
 
         public ExplosionSprite(Texture2D texture)
         {
@@ -26,10 +25,10 @@ namespace Sprint2.Items
             int width = (int) sheetSize.X;
             int height = (int) sheetSize.Y / 2;
 
-            int row = (int)((float)(sheetLocation + (sheetSize.X/2)*currentFrame));
-            int column = (int)((float)(sheetLocation + (sheetSize.Y/2)*currentFrame));
+            int xLoc = 0;
+            int yLoc = currentFrame * (int)(sheetSize.Y / 2);
 
-            sourceRectangle = new Rectangle(row, column, width, height);
+            sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
             destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2 * width, 2 * height);
 
 

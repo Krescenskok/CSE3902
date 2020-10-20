@@ -23,12 +23,11 @@ namespace Sprint2.Items
 
         public void Expire()
         {
-            //never expires
+
         }
 
         public void Collected()
         {
-            //player touch only
 
         }
     }

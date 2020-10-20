@@ -21,14 +21,20 @@ namespace Sprint2.Items
 
         }
 
+        public void Drink()
+        {
+            //restores Link's health
+            Expire();
+        }
+
         public void Expire()
         {
-
+            //turn into a blue potion
         }
 
         public void Collected()
         {
-
+            //add to inventory
         }
     }
 }

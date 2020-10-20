@@ -23,9 +23,9 @@ namespace Sprint2
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            int width = texture.Width / (int) sheetSize.Y;
+            int width = texture.Width / (int)sheetSize.Y;
             int drawnWidth = width;
-            if ((currentFrame+sheetLocation) == 1 || (currentFrame+sheetLocation == 3))
+            if (currentFrame % 2 != 0)
             {
                 drawnWidth *= 2;
             }
@@ -33,6 +33,10 @@ namespace Sprint2
             int height = texture.Height / (int)sheetSize.X;
             int row = (int)((float)(sheetLocation + currentFrame) / (float)(int)sheetSize.Y);
             int column = (sheetLocation + currentFrame) % (int)sheetSize.Y;
+            if (currentFrame > 0)
+            {
+                column++;
+            }
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
             destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2 * drawnWidth, 2 * height);

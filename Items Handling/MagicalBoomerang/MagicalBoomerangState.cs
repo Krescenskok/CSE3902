@@ -37,10 +37,11 @@ namespace Sprint2.Items
             bool leaving = thrown && (thrownTime < travelTime) && !comingBack;
             bool returning = thrown && (thrownTime > 0) && comingBack;
             bool midpoint = thrown && (thrownTime == travelTime) && !comingBack;
-            bool finishedThrow = thrown && (thrownTime == 0) && comingBack;
+            bool finishedThrow = thrown && (thrownTime >= 2 * travelTime) && comingBack;
 
             if (leaving)
             {
+                item.ThrowBoomerang(true);
                 if (direction.Equals("Right"))
                 {
                     position.X += speed;
@@ -81,16 +82,21 @@ namespace Sprint2.Items
                 {
                     position.Y -= speed;
                 }
+                thrownTime++;
             }
             else if (finishedThrow)
             {
                 thrown = false;
                 comingBack = false;
+                item.ThrowBoomerang(false);
                 Expire();
             }
             item.UpdateLocation(position);
 
-            frame++;
+            if (thrownTime % 5 == 0)
+            {
+                frame++;
+            }
             item.UpdateFrame(frame % 4);
         }
 

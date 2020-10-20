@@ -17,15 +17,17 @@ namespace Sprint2.Items
             this.item = item;
             this.position = initPos;
             runTime = 0;
+            frame = 0;
         }
 
         public void Update()
         {
             if (runTime % 5 == 0)
             {
-                frame = (frame + 1) % 2;
+                frame++;
             }
-            item.UpdateFrame(frame);
+            item.UpdateFrame(frame % 2);
+            runTime++;
         }
 
         public void Expire()

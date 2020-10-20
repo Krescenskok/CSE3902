@@ -30,6 +30,10 @@ namespace Sprint2.Items
         {
 
         }
+        public void Expire()
+        {
+            state.Expire();
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

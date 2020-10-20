@@ -51,6 +51,7 @@ namespace Sprint2
 
 
             SpriteFactory.Instance.LoadAllTextures(Content);
+            ItemsFactory.Instance.LoadItemsTextures(Content);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 

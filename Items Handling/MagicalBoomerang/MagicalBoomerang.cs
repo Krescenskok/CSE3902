@@ -10,9 +10,9 @@ namespace Sprint2.Items
     {
         private Vector2 location;
         private ISprite item;
-        private int currentFrame = 0;
         private int drawnFrame;
         private IItemsState state;
+        private bool throwing;
 
         public MagicalBoomerang(ISprite item, Vector2 location, string direction)
         {
@@ -20,20 +20,34 @@ namespace Sprint2.Items
             this.item = item;
             drawnFrame = 0;
             state = new MagicalBoomerangState(this, location, direction);
+            throwing = true;
         }
 
         public void UpdateLocation(Vector2 location)
         {
             this.location = location;
         }
+
         public void UpdateFrame(int frame)
         {
-            this.currentFrame = frame;
+            this.drawnFrame = frame;
+        }
+
+        public void ThrowBoomerang(bool throwing)
+        {
+            this.throwing = throwing;
         }
 
         public void Update()
         {
-            state.Update();
+            if (throwing)
+            {
+                state.Update();
+            }
+        }
+        public void Collect()
+        {
+            state.Collected();
         }
 
         public void Draw(SpriteBatch spriteBatch)

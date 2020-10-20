@@ -12,7 +12,7 @@ namespace Sprint2
         private Texture2D itemsSpriteSheet;
         private Texture2D particlesSheet;
         private Texture2D explosionSheet;
-        private Vector2 rowsAndColumns = new Vector2(9, 8);
+        private Vector2 itemSheetSize = new Vector2(9, 8);
         private Vector2 explosionDimensions = new Vector2(50, 100);
 
         private static ItemsFactory instance = new ItemsFactory();
@@ -39,7 +39,7 @@ namespace Sprint2
 
         public Vector2 GetSheetSize()
         {
-            return rowsAndColumns;
+            return itemSheetSize;
         }
 
         public Vector2 GetExplosionSheetSize()

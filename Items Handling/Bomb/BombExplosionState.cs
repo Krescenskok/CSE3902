@@ -11,7 +11,7 @@ namespace Sprint2.Items
         private Vector2 position;
         private int runTime = 0;
         private int frame = 0;
-        private const int maxTime = 50;
+        private const int maxTime = 100;
 
         public BombExplosionState(Bomb item, Vector2 initPos)
         {

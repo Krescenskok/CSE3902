@@ -11,7 +11,6 @@ namespace Sprint2.Items
     {
         private Vector2 location;
         private ISprite item;
-        private int currentFrame = 0;
         private int drawnFrame;
         private IItemsState state;
 
@@ -29,12 +28,17 @@ namespace Sprint2.Items
         }
         public void UpdateFrame(int frame)
         {
-            this.currentFrame = frame;
+            this.drawnFrame = frame;
         }
 
         public void Update()
         {
             state.Update();
+        }
+
+        public void Expire()
+        {
+            state.Expire();
         }
 
         public void Draw(SpriteBatch spriteBatch)

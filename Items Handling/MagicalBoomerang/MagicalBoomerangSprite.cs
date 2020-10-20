@@ -13,7 +13,7 @@ namespace Sprint2.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 59;
+        private int sheetLocation = 51;
 
         public MagicalBoomerangSprite(Texture2D texture)
         {
