@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Sprint3
 {
@@ -14,8 +15,9 @@ namespace Sprint3
     /// </summary>
     public class Stalfos : IEnemy
     {
-        public IEnemyState state;
 
+        XElement saveInfo;
+        public IEnemyState state;
 
         private Vector2 location;
         private ISprite sprite;
@@ -25,12 +27,14 @@ namespace Sprint3
         private int HP = 10;
         private const int attack = 5;
 
-        public Stalfos(Game game, Vector2 location)
+        public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
             this.location = location;
             state = new EnemySpawnState(this, game);
             collider = new EnemyCollider();
+
+            saveInfo = xml;
 
         }
 
@@ -45,6 +49,7 @@ namespace Sprint3
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this, location);
+            saveInfo.SetElementValue("Alive", "false");
         }
 
 

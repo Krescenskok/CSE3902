@@ -7,11 +7,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Sprint3
 {
     public class Rope : IEnemy
     {
+
+        private XElement saveInfo;
+
         private Game game;
 
         private ISprite sprite;
@@ -26,7 +31,7 @@ namespace Sprint3
 
        
 
-        public Rope(Game game, Vector2 location)
+        public Rope(Game game, Vector2 location, XElement xml)
         {
             this.location = location;
             this.game = game;
@@ -34,6 +39,9 @@ namespace Sprint3
 
             collider = new EnemyCollider();
 
+            saveInfo = xml;
+
+            
         }
 
         public void Spawn()
@@ -75,14 +83,15 @@ namespace Sprint3
             HP -= amount;
             if (HP <= 0) Die();
 
-            
-            
         }
 
 
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this,location);
+            
+            saveInfo.SetElementValue("Alive", "false");
+            
         }
 
     }

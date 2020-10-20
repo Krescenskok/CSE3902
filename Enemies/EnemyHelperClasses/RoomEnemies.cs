@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Sprint3
@@ -50,18 +51,23 @@ namespace Sprint3
 
             testObjects = new List<TestCollider>();
 
+           
+            
+            
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
                 XElement nameTag = item.Element("ObjectName");
                 XElement locTag = item.Element("Location");
+                XElement aliveTag = item.Element("Alive");
 
                 string objType = typeTag.Value;
                 string objName = nameTag.Value;
                 string objLoc = locTag.Value;
+                bool alive = aliveTag.Value.Equals("true");
 
-                if (objType.Equals("Enemy"))
+                if (objType.Equals("Enemy") && alive)
                 {
                     int row = int.Parse( objLoc.Substring(0, objLoc.IndexOf(" ")));
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
@@ -71,13 +77,13 @@ namespace Sprint3
 
                     if (objName.Equals("Rope"))
                     {
-                        enemies.Add(new Rope(game, location));
+                        enemies.Add(new Rope(game, location,item));
                        
 
                     }
                     else if (objName.Equals("Stalfos"))
                     {
-                        enemies.Add(new Stalfos(game, location));
+                        enemies.Add(new Stalfos(game, location,item));
                     }
                     //more if-else for other enemies
 

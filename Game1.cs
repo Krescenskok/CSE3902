@@ -84,7 +84,7 @@ namespace Sprint3
 
             //set up room loader
             GridGenerator.Instance.GetGrid(this, 12, 7);
-            xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
+            xml = XElement.Load("../../../JTEnemyLoadingTest.xml").Element("Asset");
             List<XElement> rooms = xml.Elements("Room").ToList();
 
             //load enemies for room 1
