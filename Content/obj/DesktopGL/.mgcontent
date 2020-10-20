@@ -4,16 +4,20 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/BossSpriteSheet.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/EnemySpriteSheet.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/File.spritefont</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/itemSprites.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/LinkSpriteSheet.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/marioOneDirection.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/NPCSpriteSheet.png</File>
-    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/zelda_tiles_focused.png</File>
+    <File>D:/Files/Github/CSE3902/Content/BossSpriteSheet.png</File>
+    <File>D:/Files/Github/CSE3902/Content/EnemySpriteSheet.png</File>
+    <File>D:/Files/Github/CSE3902/Content/explosion.png</File>
+    <File>D:/Files/Github/CSE3902/Content/File.spritefont</File>
+    <File>D:/Files/Github/CSE3902/Content/itemSprites.png</File>
+    <File>D:/Files/Github/CSE3902/Content/LinkSpriteSheet.png</File>
+    <File>D:/Files/Github/CSE3902/Content/marioOneDirection.png</File>
+    <File>D:/Files/Github/CSE3902/Content/NPCSpriteSheet.png</File>
+    <File>D:/Files/Github/CSE3902/Content/particles.png</File>
+    <File>D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

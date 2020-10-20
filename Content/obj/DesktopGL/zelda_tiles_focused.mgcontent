@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/zelda_tiles_focused.png</SourceFile>
-  <SourceTime>2020-09-30T20:34:42-04:00</SourceTime>
-  <DestFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/bin/DesktopGL/zelda_tiles_focused.xnb</DestFile>
-  <DestTime>2020-10-01T21:51:20.7323497-04:00</DestTime>
+  <SourceFile>D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png</SourceFile>
+  <SourceTime>2020-10-09T15:05:49.3510982-04:00</SourceTime>
+  <DestFile>D:/Files/Github/CSE3902/Content/bin/DesktopGL/zelda_tiles_focused.xnb</DestFile>
+  <DestTime>2020-10-19T21:28:40.3433549-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

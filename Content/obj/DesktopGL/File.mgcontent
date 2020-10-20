@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/File.spritefont</SourceFile>
-  <SourceTime>2020-09-20T12:43:24-04:00</SourceTime>
-  <DestFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/bin/DesktopGL/File.xnb</DestFile>
-  <DestTime>2020-10-01T19:27:42.9513903-04:00</DestTime>
+  <SourceFile>D:/Files/Github/CSE3902/Content/File.spritefont</SourceFile>
+  <SourceTime>2020-10-09T15:05:49.3236657-04:00</SourceTime>
+  <DestFile>D:/Files/Github/CSE3902/Content/bin/DesktopGL/File.xnb</DestFile>
+  <DestTime>2020-10-19T21:28:40.280115-04:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

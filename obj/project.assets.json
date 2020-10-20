@@ -174,19 +174,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {}
+    "C:\\Users\\yanna\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\Sprint2Final.csproj",
+      "projectUniqueName": "D:\\Files\\Github\\CSE3902\\Sprint2Final.csproj",
       "projectName": "Sprint2Final",
-      "projectPath": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\Sprint2Final.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\Documents\\Sprint2Final (4)\\Sprint2Final\\obj\\",
+      "projectPath": "D:\\Files\\Github\\CSE3902\\Sprint2Final.csproj",
+      "packagesPath": "C:\\Users\\yanna\\.nuget\\packages\\",
+      "outputPath": "D:\\Files\\Github\\CSE3902\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yanna\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -234,7 +234,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

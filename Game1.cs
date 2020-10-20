@@ -30,7 +30,7 @@ namespace Sprint2
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        public Items.LinkItems items;
+        public LinkItems items;
         public Blocks.LinkBlocks blocks;
 
         public Game1()
@@ -54,7 +54,7 @@ namespace Sprint2
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new Items.LinkItems(_spriteBatch);
+            items = new LinkItems(_spriteBatch);
             blocks = new Blocks.LinkBlocks(_spriteBatch);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));

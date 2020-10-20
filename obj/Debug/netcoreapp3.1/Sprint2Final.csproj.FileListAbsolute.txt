@@ -181,3 +181,7 @@ D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2
 /Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.dll
 /Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
 /Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+D:\Files\Github\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.csprojAssemblyReference.cache
+D:\Files\Github\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.AssemblyInfoInputs.cache
+D:\Files\Github\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.AssemblyInfo.cs
+D:\Files\Github\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.csproj.CoreCompileInputs.cache
