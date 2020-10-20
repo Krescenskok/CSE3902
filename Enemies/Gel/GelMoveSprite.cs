@@ -25,7 +25,7 @@ namespace Sprint3
         private int currentFrame;
         private int trueFrameCount;
 
-        private const int frameRate = 10;
+        private const int frameRate = 30;
         private const int maxFrameRate = 60;
 
         private Vector2 spriteSize;

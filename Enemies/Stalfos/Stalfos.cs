@@ -89,7 +89,7 @@ namespace Sprint3
 
         public EnemyCollider GetCollider()
         {
-            throw new NotImplementedException();
+            return collider;
         }
     }
 }

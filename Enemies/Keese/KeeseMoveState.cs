@@ -18,7 +18,6 @@ namespace Sprint3
 
         private Vector2 moveDirection;
 
-
         public enum Direction { left, right, up, down };
         
         Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
@@ -36,6 +35,7 @@ namespace Sprint3
 
             keese.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
 
+            possibleDirections = new List<Direction> { left, right, up, down };
             ChangeDirection();
         }
 
@@ -46,7 +46,7 @@ namespace Sprint3
 
         public void ChangeDirection()
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
+            
             currentDirection = new List<Direction>();
             
             Direction directionOne = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
@@ -62,11 +62,12 @@ namespace Sprint3
             currentDirection.Add(directionOne);
             currentDirection.Add(directionTwo);
 
-            
+           
 
             moveDirection.X = CheckDirection(currentDirection, right, left);
-            moveDirection.Y = CheckDirection(currentDirection,up, down);
+            moveDirection.Y = CheckDirection(currentDirection,down, up);
 
+            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
 
@@ -77,9 +78,7 @@ namespace Sprint3
             Direction dir = (Direction)collision.From();
             possibleDirections.Remove(dir);
 
-            
            
-
             if (!possibleDirections.Contains(currentDirection[0]) || !possibleDirections.Contains(currentDirection[1])) ChangeDirection();
             
         }
@@ -124,7 +123,7 @@ namespace Sprint3
 
         public void TakeDamage(int amount)
         {
-            //nothing
+            bat.TakeDamage(amount);
         }
     }
 }

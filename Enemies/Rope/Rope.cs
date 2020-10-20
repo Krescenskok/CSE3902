@@ -49,6 +49,7 @@ namespace Sprint3
             state = new RopeMoveState(this, location, game);
             rp = (RopeMoveSprite)sprite;
             collider = new EnemyCollider(rp.GetRectangle(), state, attack);
+           
         }
 
         public void Update()
@@ -94,5 +95,9 @@ namespace Sprint3
             
         }
 
+        public EnemyCollider GetCollider()
+        {
+            return collider;
+        }
     }
 }

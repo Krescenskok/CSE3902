@@ -23,7 +23,7 @@ namespace Sprint3
         private EnemyCollider collider;
 
         private const int ATTACK = 5;
-
+        private int HP = 10;
 
         public Keese(Game game, Vector2 location)
         {
@@ -41,6 +41,8 @@ namespace Sprint3
             state = new KeeseMoveState(this, location);
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
             collider = new EnemyCollider(kSprite.GetRectangle(), state,ATTACK);
+
+            Debug.Write(kSprite.GetRectangle().Width + ", " + kSprite.GetRectangle().Height);
         }
         public void SetSprite(ISprite sprite)
         {
@@ -51,19 +53,17 @@ namespace Sprint3
         {
             this.location = location;
         }
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
+     
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
         }
 
         public void TakeDamage(int amount)
         {
-            state.TakeDamage(amount);
+            HP -= amount;
+            if (HP <= 0) Die();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -75,10 +75,12 @@ namespace Sprint3
         {
             
             state.Update();
-
+            collider.Update(location.ToPoint());
         }
 
-
-
+        public EnemyCollider GetCollider()
+        {
+            return collider;
+        }
     }
 }

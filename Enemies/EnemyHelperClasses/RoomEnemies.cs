@@ -89,6 +89,9 @@ namespace Sprint3
                         else if (objName.Equals("Keese"))
                         {
                             enemies.Add(new Keese(game, location));
+                        }else if (objName.Equals("Gel"))
+                        {
+                            enemies.Add(new Gel(game, location));
                         }
                         //more if-else for other enemies
 
