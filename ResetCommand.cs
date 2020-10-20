@@ -42,7 +42,7 @@ namespace Sprint3
             blockReset.ExecuteCommand(game, Gametime, spriteBatch);
             itemReset.ExecuteCommand(game, Gametime, spriteBatch);
 
-            EnemyNPCDisplay.Instance.Reset();
+            
 
         }
     }

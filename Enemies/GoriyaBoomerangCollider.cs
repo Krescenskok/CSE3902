@@ -1,34 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint3.Enemies
 {
-    public class EnemyCollider : ICollider
+    public class GoriyaBoomerangCollider : ICollider
     {
+
         private Rectangle bounds;
-        private IEnemyState enemy;
+        
         private int damageAmount;
 
-        public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength)
+        GoriyaBoomerang boomerang;
+
+        public GoriyaBoomerangCollider(GoriyaBoomerang boomerang, Rectangle rect, int strength)
         {
             bounds = rect;
 
-            this.enemy = enemy;
-
-            damageAmount = strength;
-
-            CollisionHandler.Instance.AddCollider(this);
-        }
-
-        public EnemyCollider(Rectangle rect, int strength)
-        {
-            bounds = rect;
-
-            this.enemy = null;
+            this.boomerang = boomerang;
 
             damageAmount = strength;
 
@@ -36,10 +26,6 @@ namespace Sprint3
         }
 
 
-        public EnemyCollider()
-        {
-
-        }
 
         public Rectangle Bounds()
         {
@@ -48,7 +34,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "enemy" || tag == "Enemy";
+            return tag == "enemy" || tag == "Enemy" || tag == "EnemyBoomerang";
         }
 
         public bool Equals(ICollider col)
@@ -58,11 +44,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
-            {
-                enemy.MoveAwayFromCollision(collision);
-                
-            }
+            
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
@@ -73,16 +55,16 @@ namespace Sprint3
             }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
-                enemy.MoveAwayFromCollision(collision);
-                
+                boomerang.BounceOff(collision);
+
             }
 
-            
+
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "TakeDamage") enemy.TakeDamage((int)value);
+           //nothing
         }
 
         public void Update(Point point)

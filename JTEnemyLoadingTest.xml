@@ -15,7 +15,13 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Stalfos</ObjectName>
 				<Location>2 6</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Goriya</ObjectName>
+				<Location>2 7</Location>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>

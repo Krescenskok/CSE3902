@@ -10,15 +10,15 @@ namespace Sprint3
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    class GoriyaWalkRightSprite : ISprite
+    class GoriyaWalkSprite : ISprite
     {
         public Texture2D texture { get; set; }
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
         private int rows = spriteSheetSize[0];
         private int columns = spriteSheetSize[1];
 
-        private int row = EnemySpriteFactory.GetRow("RedGoriyaRight");
-        private int startColumn = EnemySpriteFactory.GetColumn("RedGoriyaRight");
+        private int row;
+        private int startColumn;
         private int currentAnimatedFrame;
         private const int totalAnimatedFrames = 2;
 
@@ -28,9 +28,10 @@ namespace Sprint3
         private const int frameRate = 10;
         private const int maxFrameRate = 60;
 
-        private Vector2 spriteSize;
+        private Point spriteSize;
+        private Point drawSize;
 
-        public GoriyaWalkRightSprite(Texture2D texture)
+        public GoriyaWalkSprite(Texture2D texture, string sheetID)
         {
             currentAnimatedFrame = 0;
             currentFrame = 0;
@@ -41,12 +42,17 @@ namespace Sprint3
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
 
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
+
+            row = EnemySpriteFactory.GetRow(sheetID);
+            startColumn = EnemySpriteFactory.GetColumn(sheetID);
         }
+
 
         public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
+            
 
             currentFrame++;
             if (currentFrame == trueFrameCount)
@@ -54,19 +60,24 @@ namespace Sprint3
                 currentFrame = 0;
             }
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
+
             currentAnimatedFrame += startColumn;
 
-
-            Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame,spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X , drawSize.Y );
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
+          
         }
 
         public void Load(Game game)
         {
             texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
         }
 
 

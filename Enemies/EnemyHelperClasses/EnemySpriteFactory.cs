@@ -110,42 +110,29 @@ namespace Sprint3
 
             if(num == 1)
             {
-                return new GoriyaWalkLeftSprite(texture);
-            }else if(num == 2)
+                return new GoriyaWalkSprite(texture, "RedGoriyaLeft");
+            }
+            else if(num == 2)
             {
-                return new GoriyaWalkRightSprite(texture);
-            }else if(num == 3)
+                return new GoriyaWalkSprite(texture, "RedGoriyaRight");
+            }
+            else if(num == 3)
             {
-                return new GoriyaWalkUpSprite(texture);
+                return new GoriyaWalkSprite(texture, "RedGoriyaUp");
 
             }
             else
             {
-                return new GoriyaWalkDownSprite(texture);
+                return new GoriyaWalkSprite(texture, "RedGoriyaDown");
             }
 
         }
 
         public ISprite CreateGoriyaWalkingSprite(string direction)
         {
-       
-            if (direction.Equals("left"))
-            {
-                return new GoriyaWalkLeftSprite(texture);
-            }
-            else if (direction.Equals("right"))
-            {
-                return new GoriyaWalkRightSprite(texture);
-            }
-            else if (direction.Equals("up"))
-            {
-                return new GoriyaWalkUpSprite(texture);
-
-            }
-            else
-            {
-                return new GoriyaWalkDownSprite(texture);
-            }
+            string sheetID = "RedGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
+           
+            return new GoriyaWalkSprite(texture, sheetID);
 
         }
 

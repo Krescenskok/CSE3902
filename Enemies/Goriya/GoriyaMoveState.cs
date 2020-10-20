@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Security;
 using System.Text;
 
@@ -12,20 +14,27 @@ namespace Sprint3
     public class GoriyaMoveState : IEnemyState
     {
         private Goriya gorilla;
+        
         private Vector2 location;
         private Vector2 boomerangLocation;
 
         private Vector2 moveDirection;
-        private int[] directionModifier;
+        
 
-        private List<Goriya.direction> possibleDirections;
+        private enum Direction { left, right, up, down };
+        List<Direction> possibleDirections;
+        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        Direction currentDirection;
 
-        private const float moveSpeed = 1;
+
+        private const int moveSpeed = 1;
 
         private const int boomerangThrowTime = 50;
         private int timeSinceThrown;
         private bool currentlyThrowing;
         private bool returning;
+
+        private Random RandomNumber;
 
         public GoriyaMoveState(Goriya goriya, Vector2 location)
         {
@@ -37,55 +46,71 @@ namespace Sprint3
 
 
             goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite("right"));
-
+            currentDirection = right;
             moveDirection.X = 1;
             moveDirection.Y = 0;
 
-            directionModifier = new int[2];
-            directionModifier[0] = -1;
-            directionModifier[1] = 1;
-
             timeSinceThrown = 0;
+
+            RandomNumber = new Random();
+            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
         public void Attack()
         {
             if (!currentlyThrowing)
             {
-                gorilla.SetBoomerang(true);
+                //gorilla.SetBoomerang(true);
                 currentlyThrowing = true;
                 returning = false;
                 timeSinceThrown = 0;
+                gorilla.SetBoomerang(new GoriyaBoomerang(location, currentDirection.ToString(),moveSpeed));
             }
             
         }
 
         public void ChangeDirection()
         {
-            possibleDirections = gorilla.GetDirections();
 
-            Random rand = new Random();
-            Goriya.direction newDirection = possibleDirections[rand.Next(0, possibleDirections.Count)];
 
-            moveDirection.X = CheckDirection(newDirection, Goriya.direction.right, Goriya.direction.left);
-            moveDirection.Y = CheckDirection(newDirection, Goriya.direction.down, Goriya.direction.up);
+            currentDirection = RandomDirection(possibleDirections);
 
-            string direction = moveDirection.X > 0 ? "right" : "left";
-            direction = moveDirection.Y > 0 ? "down" : direction;
-            direction = moveDirection.Y < 0 ? "up" : direction;
+            moveDirection.Y = CheckDirection(currentDirection, down, up);
+            moveDirection.X = CheckDirection(currentDirection, right, left);
 
-            gorilla.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite(direction));
+            possibleDirections = new List<Direction> { left, right, up, down };
 
-            gorilla.UpdateDirection(newDirection);
+            string dir = currentDirection.ToString();
+
+            gorilla.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite(dir));
+
 
         }
 
-        public float CheckDirection(Goriya.direction dir, Goriya.direction pos, Goriya.direction neg)
+        private Direction RandomDirection(List<Direction> directions)
+        {
+            int rand = RandomNumber.Next(0, directions.Count);
+            return directions[rand];
+        }
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            possibleDirections.Remove((Direction)collision.From());
+            Direction dir = (Direction)collision.From();
+          
+            if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
+        }
+
+
+        private int CheckDirection(Direction dir, Direction pos, Direction neg)
         {
             if (dir.Equals(pos)) return 1;
             if (dir.Equals(neg)) return -1;
             return 0;
         }
+
 
         public void Die()
         {
@@ -106,41 +131,25 @@ namespace Sprint3
         public void Update()
         {
 
-            bool boomerangIsLeaving = currentlyThrowing && timeSinceThrown < boomerangThrowTime && !returning;
-            bool boomerangComingBack = currentlyThrowing && timeSinceThrown > 0 && returning;
-            bool boomerangAtEndOfThrow = currentlyThrowing && timeSinceThrown == boomerangThrowTime && !returning;
-            bool boomerangDone = currentlyThrowing && timeSinceThrown == 0 && returning;
+       
 
-            if (boomerangIsLeaving)
+            
+            if(gorilla.GetBoomerang() == null || gorilla.GetBoomerang().Finished())
             {
-                boomerangLocation.X += moveDirection.X * moveSpeed * 5;
-                boomerangLocation.Y += moveDirection.Y * moveSpeed * 5;               
-                gorilla.UpdateBoomerangLocation(boomerangLocation);
-                timeSinceThrown++;
-            }
-            else if (boomerangAtEndOfThrow)
-            {
-                returning = true;
-            }
-            else if(boomerangComingBack)
-            {
-                boomerangLocation.X -= moveDirection.X * moveSpeed * 5;
-                boomerangLocation.Y -= moveDirection.Y * moveSpeed* 5;
-                gorilla.UpdateBoomerangLocation(boomerangLocation);
-                timeSinceThrown--;
-            }
-            else if(boomerangDone)
-            {
+
                 currentlyThrowing = false;
-                gorilla.SetBoomerang(false);
-                returning = false;
+                gorilla.SetBoomerang(null);
+
+                int rand = RandomNumber.Next(0, 1000);
+                if (rand < 10) ChangeDirection();
                 
-            }
-            else
-            {
                 MoveOneUnit();
+
+                if (rand > 10 && rand < 30) Attack();
+
                 
             }
+            
 
         }
 
@@ -153,14 +162,10 @@ namespace Sprint3
             gorilla.UpdateBoomerangLocation(location);
         }
 
-        public void MoveAwayFromCollision(Collision collision)
-        {
-            throw new NotImplementedException();
-        }
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            //wait
         }
     }
 }

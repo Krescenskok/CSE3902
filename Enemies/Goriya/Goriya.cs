@@ -20,20 +20,18 @@ namespace Sprint3
 
         public IEnemyState state;
         private ISprite sprite;
+        private GoriyaWalkSprite gorSprite;
         private ISprite boomerang;
         private bool throwBoomerang;
 
-        private Vector2 size;
+        private GoriyaBoomerang boomy;
 
         private Game game;
 
-        public enum direction { left , right , up, down };
-        List<direction> availableDirections;
-        direction currentDirection;
-
-        private const int randomMovementMultiplier = 1000;
 
         private EnemyCollider collider;
+
+        private const int attack = 5;
 
         public void SetSprite(ISprite sprite)
         {
@@ -42,10 +40,15 @@ namespace Sprint3
 
         }
 
-        public void SetBoomerang(bool set)
+        public void SetBoomerang(GoriyaBoomerang boomerang)
         {
-            throwBoomerang = set;
+            boomy = boomerang;
             
+        }
+
+        public GoriyaBoomerang GetBoomerang()
+        {
+            return boomy;
         }
 
         public void UpdateLocation(Vector2 location)
@@ -65,18 +68,22 @@ namespace Sprint3
         {
             this.game = game;
             state = new EnemySpawnState(this,game);
+            
 
             this.location = location;
             boomerangLocation = location;
 
-            size.X = 100;
-            size.Y = 100;
-            
-            currentDirection = direction.right;
-
             boomerang = EnemySpriteFactory.Instance.CreateBoomerangSprite();
+
+            collider = new EnemyCollider();
           
             throwBoomerang = false;
+        }
+        public void Spawn()
+        {
+            state = new GoriyaMoveState(this, location);
+            gorSprite = (GoriyaWalkSprite)sprite;
+            collider = new EnemyCollider(gorSprite.GetRectangle(), state, attack);
         }
 
         public void Attack()
@@ -103,31 +110,18 @@ namespace Sprint3
         {
             sprite.Draw(spriteBatch, location, 0, Color.White);
             if (throwBoomerang) boomerang.Draw(spriteBatch, boomerangLocation, 0, Color.White);
+            if (boomy != null) boomy.Draw(spriteBatch);
         }
 
         public void Update()
         {
            
             state.Update();
-
+            collider.Update(location.ToPoint());
+            if (boomy != null) boomy.Update();
         }
 
 
-        public List<direction> GetDirections()
-        {
-            return availableDirections;
-        }
-
-
-
-        public void UpdateDirection(direction dir)
-        {
-            currentDirection = dir;
-        }
-
-        public void Spawn()
-        {
-            state = new GoriyaMoveState(this, location);
-        }
+        
     }
 }

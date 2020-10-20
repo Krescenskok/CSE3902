@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,18 +15,19 @@ namespace Sprint3
 
     /// <summary>
     /// Author: JT Thrash
-    /// <para>Singleton class for displaying Enemies and NPCs. Used in main Game class</para>
+    /// <para>Singleton class for displaying and updating enemies in current room</para>
     /// </summary>
     public class RoomEnemies
     {
 
         private static readonly RoomEnemies instance = new RoomEnemies();
 
-        List<IEnemy> enemies;
-        List<EnemyDeath> deaths;
+        private List<IEnemy> enemies;
+        private List<EnemyDeath> deaths;
 
-        List<TestCollider> testObjects;
-        
+        private List<TestCollider> testObjects;
+
+   
 
         public static RoomEnemies Instance
         {
@@ -45,69 +47,68 @@ namespace Sprint3
     
         public void LoadRoom(Game game, XElement room)
         {
+                enemies = new List<IEnemy>();
+                testObjects = new List<TestCollider>();
 
-
-            enemies = new List<IEnemy>();
-
-            testObjects = new List<TestCollider>();
-
-           
-            
-            
-            List<XElement> items = room.Elements("Item").ToList();
-            foreach (XElement item in items)
-            {
-                XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
-                XElement locTag = item.Element("Location");
-                XElement aliveTag = item.Element("Alive");
-
-                string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                string objLoc = locTag.Value;
-                bool alive = aliveTag.Value.Equals("true");
-
-                if (objType.Equals("Enemy") && alive)
+                List<XElement> items = room.Elements("Item").ToList();
+                foreach (XElement item in items)
                 {
-                    int row = int.Parse( objLoc.Substring(0, objLoc.IndexOf(" ")));
-                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
+                    XElement typeTag = item.Element("ObjectType");
+                    XElement nameTag = item.Element("ObjectName");
+                    XElement locTag = item.Element("Location");
+                    XElement aliveTag = item.Element("Alive");
 
-                    
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    string objType = typeTag.Value;
+                    string objName = nameTag.Value;
+                    string objLoc = locTag.Value;
 
-                    if (objName.Equals("Rope"))
+                    bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+
+                    if (objType.Equals("Enemy") && alive)
                     {
-                        enemies.Add(new Rope(game, location,item));
-                       
-
-                    }
-                    else if (objName.Equals("Stalfos"))
-                    {
-                        enemies.Add(new Stalfos(game, location,item));
-                    }
-                    //more if-else for other enemies
+                        int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
+                        int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
 
-                    if (objName.Equals("PlayerTest1"))
-                    {
-                       testObjects.Add(new TestCollider(location.ToPoint(), new Point(50, game.Window.ClientBounds.Height), game));
+                        Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+
+                        if (objName.Equals("Rope"))
+                        {
+                            enemies.Add(new Rope(game, location, item));
+
+
+                        }
+                        else if (objName.Equals("Stalfos"))
+                        {
+                            enemies.Add(new Stalfos(game, location, item));
+                        }
+                        else if (objName.Equals("Goriya"))
+                        {
+                            enemies.Add(new Goriya(game, location));
+                        }
+                        //more if-else for other enemies
+
+
+                        if (objName.Equals("PlayerTest1"))
+                        {
+                            testObjects.Add(new TestCollider(location.ToPoint(), new Point(50, game.Window.ClientBounds.Height), game));
+                        }
+
+                        if (objName.Equals("PlayerTest2"))
+                        {
+                            testObjects.Add(new TestCollider(location.ToPoint(), new Point(game.Window.ClientBounds.Width, 50), game));
+                        }
                     }
 
-                    if (objName.Equals("PlayerTest2"))
-                    {
-                        testObjects.Add(new TestCollider(location.ToPoint(), new Point(game.Window.ClientBounds.Width, 50), game));
-                    }
                 }
-                
-            }
-
-
-
-            
 
            
 
-            
+
+
+
+
+
         }
 
 
@@ -125,7 +126,11 @@ namespace Sprint3
             {
                 deaths[i].Update();
             }
+
+            
         }
+
+       
 
         public void Draw(SpriteBatch batch)
         {
