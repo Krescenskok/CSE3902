@@ -4,20 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace Sprint3.RoomHandling
 {
-    class ItemStatus : IStatus
+    class BlockStatus : IStatus
     {
         Boolean IsActive;
-        ISprite Item;
+        ISprite Block;
         Vector2 Location;
 
 
-        public ItemStatus(ISprite item)
+        public BlockStatus(ISprite block)
         {
             IsActive = true;
-            Item = item;
+            Block = block;
         }
 
         public void setInactive()

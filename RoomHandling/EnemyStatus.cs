@@ -4,20 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace Sprint3.RoomHandling
 {
-    class ItemStatus : IStatus
+    class EnemyStatus : IStatus
     {
         Boolean IsActive;
-        ISprite Item;
+        ISprite Enemy;
+        int Health;
         Vector2 Location;
 
 
-        public ItemStatus(ISprite item)
+        public EnemyStatus(ISprite enemy)
         {
             IsActive = true;
-            Item = item;
+            Enemy = enemy;
         }
 
         public void setInactive()
@@ -28,6 +28,10 @@ namespace Sprint3.RoomHandling
         public void setActive()
         {
             IsActive = true;
+        }
+        public void modifyHealth(int healthModifier)
+        {
+            Health += healthModifier;
         }
         public void modifyLocation(Vector2 locationUpdate)
         {
