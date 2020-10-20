@@ -69,9 +69,6 @@ namespace Sprint3
 
                         activeCommand = kvp.Value;
                     
-                    
-
-
 
                 }
             }

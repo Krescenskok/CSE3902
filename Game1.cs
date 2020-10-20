@@ -27,13 +27,11 @@ namespace Sprint3
         ItemsCommand ItemPersistent;
         BlocksCommand BlockPersistent;
 
-
         LinkPlayer linkPlayer = new LinkPlayer();
 
         public Items.LinkItems items;
         public Blocks.LinkBlocks blocks;
-
-       
+        EnemyCollider test;
 
         public Game1()
         {
@@ -45,8 +43,6 @@ namespace Sprint3
         protected override void Initialize()
         {
             base.Initialize();
-
-        
         }
 
         protected override void LoadContent()
@@ -70,27 +66,38 @@ namespace Sprint3
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
-            
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
+
+            CollisionHandler collisionHandler = CollisionHandler.Instance;
+            test = new EnemyCollider(new Rectangle(100, 100, 64, 64), new Aquamentus(new Vector2(100, 100)).State, 10);
+            collisionHandler.AddCollider(new PlayerCollider(linkPlayer));
         }
 
         protected override void Update(GameTime gameTime)
         {
-
-            foreach (var cont in controllers)
+            if(linkPlayer.Health == 0)
             {
-                ICommand command = cont.HandleInput(this);
-
-                if (command != null)
-                {
-                    activeCommand = command;
-                    activeCommand.Update(gameTime);
-                    
-                    break;
-                }
-
+                activeCommand = new ResetCommand(linkPlayer, items, blocks);
+                activeCommand.Update(gameTime);
             }
+            else
+            {
+                foreach (var cont in controllers)
+                {
+                    ICommand command = cont.HandleInput(this);
+
+                    if (command != null)
+                    {
+                        activeCommand = command;
+                        activeCommand.Update(gameTime);
+
+                        break;
+                    }
+
+                }
+            }
+            
 
 
             EnemyNPCDisplay.Instance.Update();
@@ -98,7 +105,7 @@ namespace Sprint3
             ItemPersistent.Update(gameTime);
             BlockPersistent.Update(gameTime);
             CollisionHandler.Instance.Update();
-            
+
 
             base.Update(gameTime);
         }
@@ -121,8 +128,6 @@ namespace Sprint3
             _spriteBatch.End();
 
             base.Draw(gameTime);
-
-
         }
     }
 }

@@ -39,11 +39,10 @@ namespace Sprint3.Link
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 150)
             {
                 location.Y += MOVEMENT;
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
-
 
                 if (currentFrame == 0)
                 {
@@ -55,6 +54,7 @@ namespace Sprint3.Link
                     location.Y = 445;
             }
             link.IsAttacking = false;
+            link.IsStopped = true;
 
             return location;
         }

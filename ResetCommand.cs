@@ -34,7 +34,7 @@ namespace Sprint3
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-           LinkCommand linkReset = new LinkCommand(Player, "R");
+            LinkCommand linkReset = new LinkCommand(Player, "R");
             BlocksCommand blockReset = new BlocksCommand(spriteBatch, this.Blocks, false, true);
             ItemsCommand itemReset = new ItemsCommand(spriteBatch, this.Items, false, true);
 

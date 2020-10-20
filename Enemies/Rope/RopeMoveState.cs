@@ -87,7 +87,7 @@ namespace Sprint3
             if (collision.Up()) possibleDirections.Remove(Direction.up);
             if (collision.Down()) possibleDirections.Remove(Direction.down);
 
-            
+            Debug.WriteLine("collision from: " + collision.From());
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }
@@ -104,7 +104,7 @@ namespace Sprint3
         public void Update()
         {
 
-            if (RandomNumber.Next(0,100) == 0) ChangeDirection();
+            if (RandomNumber.Next(0,10000) == 0) ChangeDirection();
          
             MoveOneUnit(); 
         }

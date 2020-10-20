@@ -29,7 +29,12 @@ namespace Sprint3
 
 
             fireBallList = new List<FireBall>(); //added by JT
-        } 
+        }
+
+        public IEnemyState State
+        {
+            get { return state; }
+        }
 
         public void SetSprite(ISprite sprite)
         {

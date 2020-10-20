@@ -29,26 +29,23 @@ namespace Sprint3.Link
         {
             if (Key.Equals("R"))
             {
-                linkPlayer.Stationary();
-                linkPlayer.LocationInitialized = false;
+                linkPlayer.Reset();
             }
 
             else if (Key.Equals("E"))
             {
+            
                 linkPlayer.IsDamaged = true;
+                
             }
             if (!linkPlayer.IsAttacking)
             {
-
-
 
                 if ((Key.Equals("N") || (Key.Equals("Z"))))
                 {
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
                 }
-
-
 
                 else if ((Key.Equals("A")) || (Key.Equals("Left")))
                 {

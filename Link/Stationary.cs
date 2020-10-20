@@ -12,14 +12,42 @@ namespace Sprint3.Link
             this.link = link;
         }
 
+        Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
+        int i = 0;
+
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime,Vector2 location)
         {
-            if (linkSprite == null)
+            if (link.IsDamaged)
             {
-                linkSprite = SpriteFactory.Instance.CreateLinkSprite();
+
+                if (link.DamageStartTime == 0)
+                    link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
+                else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
+                {
+                    Color col = colors[i];
+                    i++;
+                    linkSprite.Draw(spriteBatch, location, currentFrame, col);
+
+                    if (i == colors.Length - 1)
+                    {
+                        i = 0;
+                    }
+                }
+                else
+                {
+                    link.IsDamaged = false;
+                }
+
+            }
+            else
+            {
+                if (linkSprite == null)
+                {
+                    linkSprite = SpriteFactory.Instance.CreateLinkSprite();
+                }
+                linkSprite.Draw(spriteBatch, location, 0, Color.White);
             }
 
-            linkSprite.Draw(spriteBatch,location, 0, Color.White);
         }
 
         public override Vector2 HandleMagicalRod(GameTime gameTime,Vector2 location)

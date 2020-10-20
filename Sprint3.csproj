@@ -13,6 +13,7 @@
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Content\marioOneDirection.png" />
+    <None Remove="TESTTEXTFILE.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -34,5 +35,8 @@
     <Compile Remove="Sprint0\DisplayNonAnimatedSpriteAtFixedPosition.cs" />
     <Compile Remove="Sprint0\DisplayNonAnimatedSpriteUpAndDown.cs" />
     <Compile Remove="Sprint0\AnimatedSprite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collision\" />
   </ItemGroup>
 </Project>
