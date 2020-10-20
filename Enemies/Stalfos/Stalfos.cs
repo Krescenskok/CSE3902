@@ -87,7 +87,9 @@ namespace Sprint3
             this.location = location;
         }
 
-
-
+        public EnemyCollider GetCollider()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

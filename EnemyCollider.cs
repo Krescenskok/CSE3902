@@ -41,6 +41,11 @@ namespace Sprint3
 
         }
 
+        public void ChangeState(IEnemyState state)
+        {
+            enemy = state;
+        }
+
         public Rectangle Bounds()
         {
             return bounds;

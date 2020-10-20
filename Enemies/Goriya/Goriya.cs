@@ -16,13 +16,12 @@ namespace Sprint3
     {
 
         private Vector2 location;
-        private Vector2 boomerangLocation;
+       
 
         public IEnemyState state;
         private ISprite sprite;
         private GoriyaWalkSprite gorSprite;
-        private ISprite boomerang;
-        private bool throwBoomerang;
+        
 
         private GoriyaBoomerang boomy;
 
@@ -32,6 +31,7 @@ namespace Sprint3
         private EnemyCollider collider;
 
         private const int attack = 5;
+        private int HP = 15;
 
         public void SetSprite(ISprite sprite)
         {
@@ -51,33 +51,26 @@ namespace Sprint3
             return boomy;
         }
 
+        public EnemyCollider Collider()
+        {
+            return collider;
+        }
+
         public void UpdateLocation(Vector2 location)
         {
             this.location = location;
-            boomerangLocation = location;
+            
         }
-
-        public void UpdateBoomerangLocation(Vector2 location)
-        {
-            boomerangLocation = location;
-        }
-
 
 
         public Goriya(Game game, Vector2 location)
         {
             this.game = game;
+            this.location = location;
             state = new EnemySpawnState(this,game);
             
-
-            this.location = location;
-            boomerangLocation = location;
-
-            boomerang = EnemySpriteFactory.Instance.CreateBoomerangSprite();
-
             collider = new EnemyCollider();
           
-            throwBoomerang = false;
         }
         public void Spawn()
         {
@@ -86,42 +79,36 @@ namespace Sprint3
             collider = new EnemyCollider(gorSprite.GetRectangle(), state, attack);
         }
 
-        public void Attack()
-        {
-            state.Attack();
-        }
-
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this,location);
         }
 
         public void TakeDamage(int amount)
         {
-            state.TakeDamage(amount);
+            HP -= amount;
+            if (HP <= 0) Die();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, location, 0, Color.White);
-            if (throwBoomerang) boomerang.Draw(spriteBatch, boomerangLocation, 0, Color.White);
+            
             if (boomy != null) boomy.Draw(spriteBatch);
         }
 
         public void Update()
         {
-           
             state.Update();
             collider.Update(location.ToPoint());
             if (boomy != null) boomy.Update();
         }
 
-
-        
+        public EnemyCollider GetCollider()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace Sprint3
 
         void Spawn();
 
+        EnemyCollider GetCollider();
+
         
     }
 }

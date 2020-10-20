@@ -34,6 +34,10 @@ namespace Sprint3
             {"RedGoriyaUp", new Vector2( 4,3)},
             {"RedGoriyaRight", new Vector2( 4,4)},
             {"RedGoriyaLeft", new Vector2( 4,5)},
+            {"HurtGoriyaDown", new Vector2( 3,2)},
+            {"HurtGoriyaUp", new Vector2( 3,3)},
+            {"HurtGoriyaRight", new Vector2( 3,4)},
+            {"HurtGoriyaLeft", new Vector2( 3,5)},
             {"Keese", new Vector2( 2,0)},
             {"Gel", new Vector2( 0,6)},
             {"Boomerang", new Vector2( 2,10)},
@@ -133,6 +137,14 @@ namespace Sprint3
             string sheetID = "RedGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
            
             return new GoriyaWalkSprite(texture, sheetID);
+
+        }
+
+        public ISprite CreateGoriyaDamagedSprite(string direction)
+        {
+            string sheetID = "HurtGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
+
+            return new GoriyaDamagedSprite(texture, sheetID);
 
         }
 

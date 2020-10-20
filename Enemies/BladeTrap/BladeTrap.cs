@@ -50,5 +50,10 @@ namespace Sprint3
         {
             throw new NotImplementedException();
         }
+
+        public EnemyCollider GetCollider()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

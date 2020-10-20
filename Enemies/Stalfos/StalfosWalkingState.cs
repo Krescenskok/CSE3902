@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint3
@@ -88,7 +89,7 @@ namespace Sprint3
             if (collision.Up()) possibleDirections.Remove(Direction.up);
             if (collision.Down()) possibleDirections.Remove(Direction.down);
 
-
+            
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }

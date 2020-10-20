@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Sprint3
@@ -15,11 +17,16 @@ namespace Sprint3
         private Vector2 location;
 
         private Vector2 moveDirection;
-       
 
-        private List<Keese.direction> possibleDirections;
+
+        public enum Direction { left, right, up, down };
+        
+        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        List<Direction> possibleDirections;
+        List<Direction> currentDirection;
 
         private const float moveSpeed = 1;
+        private Random RandomNumber = new Random();
 
         public KeeseMoveState(Keese keese, Vector2 location)
         {
@@ -28,6 +35,8 @@ namespace Sprint3
             moveDirection = new Vector2(1, 0);
 
             keese.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
+
+            ChangeDirection();
         }
 
         public void Attack()
@@ -37,56 +46,70 @@ namespace Sprint3
 
         public void ChangeDirection()
         {
-            possibleDirections = bat.GetDirections();
-
-            Random rand = new Random();
-            List<Keese.direction> newDirection = new List<Keese.direction>();
+            possibleDirections = new List<Direction> { left, right, up, down };
+            currentDirection = new List<Direction>();
             
-            Keese.direction directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
-            Keese.direction directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
+            Direction directionOne = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
+            Direction directionTwo = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
 
             //avoid conflicting movement input ex. moving left and right simultaneously
-            while((int)directionOne == (int)directionTwo * -1)
+            while(OppositeDirections(directionOne,directionTwo))
             {
-                directionOne = possibleDirections[rand.Next(0, possibleDirections.Count)];
-                directionTwo = possibleDirections[rand.Next(0, possibleDirections.Count)];
+                directionOne = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
+                directionTwo = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
             }
 
-            newDirection.Add(directionOne);
-            newDirection.Add(directionTwo);
+            currentDirection.Add(directionOne);
+            currentDirection.Add(directionTwo);
 
-            bat.UpdateDirection(newDirection);
+            
 
-            moveDirection.X = CheckDirection(newDirection, Keese.direction.right, Keese.direction.left);
-            moveDirection.Y = CheckDirection(newDirection, Keese.direction.up, Keese.direction.down);
+            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = CheckDirection(currentDirection,up, down);
 
         }
 
-        public float CheckDirection(List<Keese.direction> newDir, Keese.direction pos, Keese.direction neg)
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            Direction dir = (Direction)collision.From();
+            possibleDirections.Remove(dir);
+
+            
+           
+
+            if (!possibleDirections.Contains(currentDirection[0]) || !possibleDirections.Contains(currentDirection[1])) ChangeDirection();
+            
+        }
+
+
+        private int CheckDirection(List<Direction> newDir, Direction pos, Direction neg)
         {
             if (newDir.Contains(pos)) return 1;
             if (newDir.Contains(neg)) return -1;
             return 0;
         }
 
+        private bool OppositeDirections(Direction dir1,Direction dir2)
+        {
+            return dir1.Equals(left) && dir2.Equals(right)
+                    || dir1.Equals(right) && dir2.Equals(left)
+                    || dir1.Equals(up) && dir2.Equals(down)
+                    || dir1.Equals(down) && dir2.Equals(up);
+        }
+
+
         public void Die()
         {
             //change to dying state
         }
 
-        public Vector2 GetLocation()
-        {
-            return location;
-        }
-
-        public void TakeDamage()
-        {
-            //subtract from health
-            //call Die() if health < 0
-        }
-
+  
         public void Update()
         {
+            if (RandomNumber.Next(0, 100) == 0) ChangeDirection();
             MoveOneUnit();
         }
 
@@ -97,14 +120,11 @@ namespace Sprint3
             bat.UpdateLocation(location);
         }
 
-        public void MoveAwayFromCollision(Collision collision)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            //nothing
         }
     }
 }

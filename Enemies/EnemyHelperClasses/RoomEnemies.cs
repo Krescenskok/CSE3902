@@ -86,6 +86,10 @@ namespace Sprint3
                         {
                             enemies.Add(new Goriya(game, location));
                         }
+                        else if (objName.Equals("Keese"))
+                        {
+                            enemies.Add(new Keese(game, location));
+                        }
                         //more if-else for other enemies
 
 
@@ -155,6 +159,7 @@ namespace Sprint3
         {
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
+            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
         }
 
         public void Destroy(EnemyDeath death)

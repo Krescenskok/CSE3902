@@ -19,7 +19,7 @@
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Goriya</ObjectName>
+				<ObjectName>Keese</ObjectName>
 				<Location>2 7</Location>
 				<Alive>true</Alive>
 			</Item>

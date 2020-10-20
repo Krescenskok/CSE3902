@@ -44,6 +44,11 @@ namespace Sprint3
             colliders.Add(newCol);
         }
 
+        public void RemoveCollider(ICollider col)
+        {
+            colliders.Remove(col);
+        }
+
         public void Update()
         {
 

@@ -13,11 +13,9 @@ namespace Sprint3
     /// </summary>
     public class GoriyaMoveState : IEnemyState
     {
-        private Goriya gorilla;
+        private Goriya goriya;
         
         private Vector2 location;
-        private Vector2 boomerangLocation;
-
         private Vector2 moveDirection;
         
 
@@ -28,43 +26,33 @@ namespace Sprint3
 
 
         private const int moveSpeed = 1;
-
-        private const int boomerangThrowTime = 50;
-        private int timeSinceThrown;
         private bool currentlyThrowing;
-        private bool returning;
+        
 
         private Random RandomNumber;
 
         public GoriyaMoveState(Goriya goriya, Vector2 location)
         {
-            gorilla = goriya;
-
+            this.goriya = goriya;
             this.location = location;
 
-            boomerangLocation = location;
 
-
-            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite("right"));
-            currentDirection = right;
-            moveDirection.X = 1;
-            moveDirection.Y = 0;
-
-            timeSinceThrown = 0;
 
             RandomNumber = new Random();
             possibleDirections = new List<Direction> { left, right, up, down };
+            ChangeDirection();
+
+          
+            goriya.Collider().ChangeState(this);
         }
 
         public void Attack()
         {
             if (!currentlyThrowing)
             {
-                //gorilla.SetBoomerang(true);
+                
                 currentlyThrowing = true;
-                returning = false;
-                timeSinceThrown = 0;
-                gorilla.SetBoomerang(new GoriyaBoomerang(location, currentDirection.ToString(),moveSpeed));
+                goriya.SetBoomerang(new GoriyaBoomerang(location, currentDirection.ToString(),moveSpeed));
             }
             
         }
@@ -82,7 +70,7 @@ namespace Sprint3
 
             string dir = currentDirection.ToString();
 
-            gorilla.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite(dir));
+            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaWalkingSprite(dir));
 
 
         }
@@ -117,35 +105,24 @@ namespace Sprint3
             //change to dying state
         }
 
-        public Vector2 GetLocation()
-        {
-            return location;
-        }
-
-        public void TakeDamage()
-        {
-            //subtract from health
-            //call Die() if health < 0
-        }
-
         public void Update()
         {
 
        
 
             
-            if(gorilla.GetBoomerang() == null || gorilla.GetBoomerang().Finished())
+            if(goriya.GetBoomerang() == null || goriya.GetBoomerang().Finished())
             {
 
                 currentlyThrowing = false;
-                gorilla.SetBoomerang(null);
+                goriya.SetBoomerang(null);
 
                 int rand = RandomNumber.Next(0, 1000);
                 if (rand < 10) ChangeDirection();
                 
                 MoveOneUnit();
 
-                if (rand > 10 && rand < 30) Attack();
+                if (rand == 11) Attack();
 
                 
             }
@@ -157,15 +134,17 @@ namespace Sprint3
         {
             location.X += moveDirection.X * moveSpeed;
             location.Y += moveDirection.Y * moveSpeed;
-            boomerangLocation = location;
-            gorilla.UpdateLocation(location);
-            gorilla.UpdateBoomerangLocation(location);
+           
+            goriya.UpdateLocation(location);
+           
         }
 
 
         public void TakeDamage(int amount)
         {
-            //wait
+            goriya.TakeDamage(amount);
+            goriya.state = new GoriyaDamagedState(currentDirection.ToString(), goriya, location, moveSpeed);
+            
         }
     }
 }
