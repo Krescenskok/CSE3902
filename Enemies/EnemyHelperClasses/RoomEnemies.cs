@@ -184,6 +184,13 @@ namespace Sprint3
             CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
         }
 
+        public void Destroy(IEnemy enemy)
+        {
+            enemies.Remove(enemy);
+            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+        }
+        
+
         public void Destroy(EnemyDeath death)
         {
             deaths.Remove(death);
