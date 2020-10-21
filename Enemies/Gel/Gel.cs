@@ -17,25 +17,32 @@ namespace Sprint3
         private Vector2 location;
         public IEnemyState state;
         private ISprite sprite;
+        private GelMoveSprite gSprite;
 
-        private EnemyCollider collider;
+        private EnemyCollider innerCollider;
+        private GelBlockCollider outsideCollider;
         private const int ATTACK_POWER = 5;
+        private int HP = 50;
 
+        
        
         public Gel(Game game, Vector2 location)
         {
             this.location = location;
             this.game = game;
             state = new EnemySpawnState(this, game);
-            collider = new EnemyCollider();
-
+            innerCollider = new EnemyCollider();
+            outsideCollider = new GelBlockCollider();
+            
         }
 
         public void Spawn()
         {
             state = new GelMoveState(this, location, game);
-            GelMoveSprite gSprite = (GelMoveSprite)sprite;
-            collider = new EnemyCollider(gSprite.GetRectangle(), state, ATTACK_POWER);
+            gSprite = (GelMoveSprite)sprite;
+            innerCollider = new EnemyCollider(gSprite.GetRectangle(), state, ATTACK_POWER);
+            
+            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state);
             
         }
 
@@ -53,23 +60,27 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            collider.Update(location.ToPoint());
-            
+            innerCollider.Update(location.ToPoint());
+
+            if(gSprite != null)outsideCollider.Update(gSprite.OuterColliderLocation(location));
+           
         }
 
         public void TakeDamage(int amount)
         {
-            state.TakeDamage(amount);
+            HP -= amount;
+            if (HP <= 0) Die();
         }
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
+            CollisionHandler.Instance.RemoveCollider(outsideCollider);
         }
 
         public void Draw(SpriteBatch batch)
         {
-            
+           
             sprite.Draw(batch, location, 0, Color.White);
             
         }
@@ -78,7 +89,8 @@ namespace Sprint3
 
         public EnemyCollider GetCollider()
         {
-            throw new NotImplementedException();
+            return innerCollider;
+
         }
     }
 }

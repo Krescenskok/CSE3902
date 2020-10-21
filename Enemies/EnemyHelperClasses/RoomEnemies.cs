@@ -101,15 +101,7 @@ namespace Sprint3
                 //more if-else for other enemies
 
 
-                    if (objName.Equals("PlayerTest1"))
-                    {
-                        testObjects.Add(new TestCollider(location.ToPoint(), new Point(50, game.Window.ClientBounds.Height), game));
-                    }
-
-                    if (objName.Equals("PlayerTest2"))
-                    {
-                        testObjects.Add(new TestCollider(location.ToPoint(), new Point(game.Window.ClientBounds.Width, 50), game));
-                    }
+                    
 
                     if (objName.Equals("Block"))
                     {
@@ -123,7 +115,7 @@ namespace Sprint3
                             {
                                 Point loc = new Point(j * size.X, i* size.Y);
 
-                                if (j % 2 == 0 && i % 2 == 0) testObjects.Add(new TestCollider(loc, size, game));
+                                if (j % 2 == 0 && i % 2 == 0) testObjects.Add(new TestCollider(loc, size, game,0));
                                 
 
 

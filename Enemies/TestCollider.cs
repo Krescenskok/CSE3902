@@ -14,15 +14,21 @@ namespace Sprint3
 
         private ColliderVisualSprite visual;
         private Vector2 location;
-        
-        
 
-        public TestCollider(Point location, Point size, Game game)
+        private int attack;
+
+        public TestCollider(Point location, Point size, Game game, int attack)
         {
             bounds = new Rectangle(location, size);
             CollisionHandler.Instance.AddCollider(this);
             visual = new ColliderVisualSprite(game, size.ToVector2());
             this.location = location.ToVector2();
+            this.attack = attack;
+        }
+
+        public TestCollider()
+        {
+
         }
 
         public void Draw(SpriteBatch batch)
@@ -66,7 +72,7 @@ namespace Sprint3
         {
             if (col.CompareTag("enemy"))
             {
-                col.SendMessage("TakeDamage", 5);
+                col.SendMessage("TakeDamage", attack);
             }
         }
     }

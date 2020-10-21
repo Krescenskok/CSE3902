@@ -44,15 +44,17 @@ namespace Sprint3
         {
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
-            int screenWidth = game.GraphicsDevice.Viewport.Width;
-            int screenHeight = game.GraphicsDevice.Viewport.Height;
+            int playAreaWidth = game.GraphicsDevice.Viewport.Width / 2;
+            int playAreaHeight = game.GraphicsDevice.Viewport.Height / 2;
 
             
 
-            int tileWidth = screenWidth / tileColumns;
-            int tileHeight = screenHeight / tileRows;
+            int tileWidth = playAreaWidth / tileColumns;
+            int tileHeight = playAreaHeight / tileRows;
             Point tileSize = new Point(tileWidth, tileHeight);
             this.tileSize = tileSize;
+
+            Debug.Write("x: " + tileSize.X + " Y: " + tileSize.Y);
 
             for (int i = 0; i < tileRows; i++)
             {
@@ -124,6 +126,52 @@ namespace Sprint3
             result.Y = row * tileSize.Y;
 
             return result;
+        }
+
+        public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)
+        {
+            
+            bool vertical = start.X == end.X;
+            
+
+            List<Rectangle> path = new List<Rectangle>();
+
+            if (start.Equals(end)) { Debug.WriteLine("nonono"); }
+
+            if (vertical)
+            {
+                int increment = start.Y < end.Y ? 1 : -1;
+                int col = start.X / tileSize.X;
+                int startRow = start.Y / tileSize.Y;
+                int endRow = end.Y / tileSize.Y;
+                
+                for(int k = startRow; k != endRow + increment; k += increment)
+                {
+                    path.Add(savedGrid[k][col]);
+                    
+                }
+            }
+            else
+            {
+                int increment = start.X < end.X ? 1 : -1;
+                int startCol = start.X / tileSize.X;
+                int row = start.Y / tileSize.Y;
+                int endCol = end.X / tileSize.X;
+                
+                for (int k = startCol; k != endCol + increment; k += increment)
+                {
+                    path.Add(savedGrid[row][k]);
+                   
+                }
+            }
+            //Debug.WriteLine("");
+            //foreach (Rectangle rect in path)
+            //{
+            //    Debug.Write(rect.Location + " ");
+            //}
+
+            return path;
+
         }
     }
 }

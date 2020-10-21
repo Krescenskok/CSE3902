@@ -83,7 +83,24 @@ namespace Sprint3
 
         public Rectangle GetRectangle()
         {
-            return new Rectangle(new Point(), GridGenerator.Instance.GetTileSize());
+            return new Rectangle(new Point(), drawSize);
+        }
+
+        public Rectangle GetRectangle2()
+        {
+            Rectangle rect = new Rectangle(new Point(), GridGenerator.Instance.GetTileSize());
+            //increase size to ensure constant collision with surrounding blocks
+            rect.Width = (int) (rect.Width * 1.5);
+            rect.Height = (int)(rect.Height * 1.5);
+            return rect;
+        }
+
+        public Point OuterColliderLocation(Vector2 location)
+        {
+            Point leftCorner = location.ToPoint();
+            leftCorner.X -= 5;
+            leftCorner.Y -= 5;
+            return leftCorner;
         }
     }
 }

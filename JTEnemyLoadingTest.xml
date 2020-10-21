@@ -17,36 +17,30 @@
 				<Location>2 6</Location>
 				<Alive>false</Alive>
 			</Item>
+			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Gel</ObjectName>
-				<Location>6 11</Location>
+				<Location>1 11</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Gel</ObjectName>
-				<Location>6 11</Location>
+				<Location>1 11</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Gel</ObjectName>
-				<Location>6 11</Location>
+				<Location>1 11</Location>
 				<Alive>true</Alive>
 			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Gel</ObjectName>
-				<Location>6 11</Location>
-				<Alive>true</Alive>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Gel</ObjectName>
-				<Location>6 11</Location>
-				<Alive>true</Alive>
-			</Item>
+			
+			
+			
+			
+			
 			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
