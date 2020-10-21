@@ -11,7 +11,7 @@ namespace Sprint2
 {
     public enum Item
     {
-        Arrow, BlueCandle, BluePotion, BlueRing, Bomb, Boomerang, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        SwordBeam, Arrow, BlueCandle, BluePotion, BlueRing, Bomb, Boomerang, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
         Heart, HeartContainer, Key, Map, Rupee, SilverSword, TriforcePiece, Wand, WoodenSword
     };
     public class ItemsStateMachine
@@ -45,6 +45,7 @@ namespace Sprint2
             itemToState.Add(Item.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), location));
             itemToState.Add(Item.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), location));
             itemToState.Add(Item.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), location));
+            itemToState.Add(Item.SwordBeam, new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), location, "Right"));
 
             var itemArray = Enum.GetValues(typeof(Item)).Cast<Item>().ToArray();
 

@@ -12,7 +12,7 @@ namespace Sprint2
         private Texture2D itemsSpriteSheet;
         private Texture2D particlesSheet;
         private Texture2D explosionSheet;
-        private Vector2 itemSheetSize = new Vector2(10, 8);
+        private Vector2 itemSheetSize = new Vector2(12, 8);
         private Vector2 explosionDimensions = new Vector2(50, 100);
 
         private static ItemsFactory instance = new ItemsFactory();
@@ -145,6 +145,31 @@ namespace Sprint2
         public ISprite CreateSilverSwordSprite()
         {
             return new SilverSwordSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateUpBeamSprite()
+        {
+            return new UpBeamSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateDownBeamSprite()
+        {
+            return new DownBeamSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateLeftBeamSprite()
+        {
+            return new LeftBeamSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateRightBeamSprite()
+        {
+            return new RightBeamSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateBeamImpactSprite()
+        {
+            return new BeamImpactSprite(itemsSpriteSheet);
         }
 
         public ISprite CreateTriforcePieceSprite()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/Files/Github/CSE3902/Content/File.spritefont</SourceFile>
-  <SourceTime>2020-10-09T15:05:49.3236657-04:00</SourceTime>
+  <SourceTime>2020-10-20T22:02:40.5736968-04:00</SourceTime>
   <DestFile>D:/Files/Github/CSE3902/Content/bin/DesktopGL/File.xnb</DestFile>
-  <DestTime>2020-10-20T22:02:21.4500603-04:00</DestTime>
+  <DestTime>2020-10-20T22:27:10.0218871-04:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
