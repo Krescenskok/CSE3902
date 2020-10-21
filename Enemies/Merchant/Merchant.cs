@@ -11,18 +11,17 @@ namespace Sprint3.EnemyAndNPC.Merchant
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class Merchant
+    class Merchant : INPC
     {
         private Vector2 MerchantePos;
-        private ISprite MerchantSprite;
-        
+        private MerchantSprite MerchantSprite;
+        private NPCCollider MerchantCollider;
 
         public Merchant(Vector2 initialPos)
         {
             MerchantePos = initialPos;
-            MerchantSprite = EnemySpriteFactory.Instance.CreateMerchantSprite();
-
-            
+            MerchantSprite = (MerchantSprite) EnemySpriteFactory.Instance.CreateMerchantSprite();
+            MerchantCollider = new NPCCollider(MerchantSprite.getRectangle(initialPos));
         }
 
         public void Die()
@@ -38,9 +37,12 @@ namespace Sprint3.EnemyAndNPC.Merchant
 
         public void Draw(SpriteBatch spriteBatch, GameTime time)
         {
-            MerchantSprite.Draw(spriteBatch, MerchantePos, 0, Color.White);
-            
+            MerchantSprite.Draw(spriteBatch, MerchantePos, 0, Color.White);  
         }
 
+        public NPCCollider GetCollider()
+        {
+            return MerchantCollider;
+        }
     }
 }
