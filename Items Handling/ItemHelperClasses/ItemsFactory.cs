@@ -52,6 +52,11 @@ namespace Sprint2
             return new ErasedSprite(itemsSpriteSheet);
         }
 
+        public ISprite CreateProjectileImpactSprite()
+        {
+            return new ProjectileImpactSprite(itemsSpriteSheet);
+        }
+
         public ISprite CreateExplosionSprite()
         {
             return new ExplosionSprite(explosionSheet);

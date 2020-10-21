@@ -69,7 +69,8 @@ namespace Sprint2
 
         public void Expire()
         {
-            arrow.UpdateSprite(ItemsFactory.Instance.EraseSprite());
+            arrow.UpdateSprite(ItemsFactory.Instance.CreateProjectileImpactSprite());
+            arrow.Impact();
         }
 
         public void Collected()

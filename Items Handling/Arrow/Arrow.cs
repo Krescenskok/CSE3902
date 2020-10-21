@@ -39,6 +39,11 @@ namespace Sprint2
             this.item = sprite;
         }
 
+        public void Impact()
+        {
+            state = new ArrowImpactState(this, location);
+        }
+
         public void Update()
         {
             state.Update();
