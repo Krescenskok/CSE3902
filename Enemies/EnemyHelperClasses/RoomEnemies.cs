@@ -47,67 +47,94 @@ namespace Sprint3
     
         public void LoadRoom(Game game, XElement room)
         {
-                enemies = new List<IEnemy>();
-                testObjects = new List<TestCollider>();
+            enemies = new List<IEnemy>();
+            testObjects = new List<TestCollider>();
 
-                List<XElement> items = room.Elements("Item").ToList();
-                foreach (XElement item in items)
+            List<XElement> items = room.Elements("Item").ToList();
+            foreach (XElement item in items)
+            {
+                XElement typeTag = item.Element("ObjectType");
+                XElement nameTag = item.Element("ObjectName");
+                XElement locTag = item.Element("Location");
+                XElement aliveTag = item.Element("Alive");
+
+                string objType = typeTag.Value;
+                string objName = nameTag.Value;
+                string objLoc = locTag.Value;
+
+                bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+
+                if (objType.Equals("Enemy") && alive)
                 {
-                    XElement typeTag = item.Element("ObjectType");
-                    XElement nameTag = item.Element("ObjectName");
-                    XElement locTag = item.Element("Location");
-                    XElement aliveTag = item.Element("Alive");
+                    int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
+                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-                    string objType = typeTag.Value;
-                    string objName = nameTag.Value;
-                    string objLoc = locTag.Value;
 
-                    bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
 
-                    if (objType.Equals("Enemy") && alive)
+                    if (objName.Equals("Rope"))
                     {
-                        int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
-                        int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
+                        enemies.Add(new Rope(game, location, item));
 
 
-                        Vector2 location = GridGenerator.Instance.GetLocation(row, column);
-
-                        if (objName.Equals("Rope"))
-                        {
-                            enemies.Add(new Rope(game, location, item));
-
-
-                        }
-                        else if (objName.Equals("Stalfos"))
-                        {
-                            enemies.Add(new Stalfos(game, location, item));
-                        }
-                        else if (objName.Equals("Goriya"))
-                        {
-                            enemies.Add(new Goriya(game, location));
-                        }
-                        else if (objName.Equals("Keese"))
-                        {
-                            enemies.Add(new Keese(game, location));
-                        }else if (objName.Equals("Gel"))
-                        {
-                            enemies.Add(new Gel(game, location));
-                        }
-                        //more if-else for other enemies
+                    }
+                    else if (objName.Equals("Stalfos"))
+                    {
+                        enemies.Add(new Stalfos(game, location, item));
+                    }
+                    else if (objName.Equals("Goriya"))
+                    {
+                        enemies.Add(new Goriya(game, location));
+                    }
+                    else if (objName.Equals("Keese"))
+                    {
+                        enemies.Add(new Keese(game, location));
+                    }else if (objName.Equals("Gel"))
+                    {
+                        enemies.Add(new Gel(game, location));
+                    }
+                else if (objName.Equals("Dodongo"))
+                {
+                    enemies.Add(new Dodongo
+                        (location));
+                }
+                //more if-else for other enemies
 
 
-                        if (objName.Equals("PlayerTest1"))
-                        {
-                            testObjects.Add(new TestCollider(location.ToPoint(), new Point(50, game.Window.ClientBounds.Height), game));
-                        }
-
-                        if (objName.Equals("PlayerTest2"))
-                        {
-                            testObjects.Add(new TestCollider(location.ToPoint(), new Point(game.Window.ClientBounds.Width, 50), game));
-                        }
+                    if (objName.Equals("PlayerTest1"))
+                    {
+                        testObjects.Add(new TestCollider(location.ToPoint(), new Point(50, game.Window.ClientBounds.Height), game));
                     }
 
+                    if (objName.Equals("PlayerTest2"))
+                    {
+                        testObjects.Add(new TestCollider(location.ToPoint(), new Point(game.Window.ClientBounds.Width, 50), game));
+                    }
+
+                    if (objName.Equals("Block"))
+                    {
+                        Point size = GridGenerator.Instance.GetTileSize();
+                        Point small = size;
+                        small.X = size.X / 2;
+                        small.Y = size.Y / 2;
+                        for(int i = 0; i < 5; i++)
+                        {
+                            for(int j = 0; j < 10; j++)
+                            {
+                                Point loc = new Point(j * size.X, i* size.Y);
+
+                                if (j % 2 == 0 && i % 2 == 0) testObjects.Add(new TestCollider(loc, size, game));
+                                
+
+
+                            }
+                        }
+                        
+                    }
                 }
+            }
+
+        }
 
            
 
@@ -116,7 +143,7 @@ namespace Sprint3
 
 
 
-        }
+        
 
 
 

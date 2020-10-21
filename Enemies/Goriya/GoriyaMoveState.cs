@@ -86,7 +86,7 @@ namespace Sprint3
             possibleDirections = new List<Direction> { left, right, up, down };
 
             possibleDirections.Remove((Direction)collision.From());
-            Direction dir = (Direction)collision.From();
+            
           
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }

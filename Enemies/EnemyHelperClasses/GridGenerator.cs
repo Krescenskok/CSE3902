@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Text;
 
@@ -46,6 +47,8 @@ namespace Sprint3
             int screenWidth = game.GraphicsDevice.Viewport.Width;
             int screenHeight = game.GraphicsDevice.Viewport.Height;
 
+            
+
             int tileWidth = screenWidth / tileColumns;
             int tileHeight = screenHeight / tileRows;
             Point tileSize = new Point(tileWidth, tileHeight);
@@ -69,6 +72,11 @@ namespace Sprint3
 
 
             return gridTiles;
+        }
+
+        public List<List<Rectangle>> GetGrid()
+        {
+            return savedGrid;
         }
 
         /// <summary>

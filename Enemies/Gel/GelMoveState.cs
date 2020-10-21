@@ -15,18 +15,25 @@ namespace Sprint3
     {
 
         private Vector2 location;
-        private Rectangle gridLocation;
+        private Rectangle locationRectangle;
         private Rectangle nextLoc;
-        
+        private Rectangle lastPositionOnGrid;
         
         private const int tileColumns = 12;
         private const int tileRows = 7;
         private List<List<Rectangle>> gridTiles;
+        private Point tileSize;
         private int currentRow;
         private int currentCol;
 
 
-        
+        private enum Direction { left, right, up, down };
+        List<Direction> possibleDirections;
+        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        Direction currentDirection;
+
+
+
         private Vector2 moveDirection;
         private Gel gelly;
 
@@ -39,6 +46,8 @@ namespace Sprint3
 
         Random RandomNumber;
 
+        private int timeSinceLastCollision = 0;
+
         public GelMoveState(Gel gel, Vector2 location, Game game)
         {
             this.location = location;
@@ -47,22 +56,27 @@ namespace Sprint3
             gelly.SetSprite(EnemySpriteFactory.Instance.CreateGelMoveSprite());
             
 
-            gridTiles = GridGenerator.Instance.GetGrid(game, tileColumns, tileRows);
-            gridLocation = GridGenerator.Instance.GetGridLocation(location);
+            gridTiles = GridGenerator.Instance.GetGrid();
+            locationRectangle = GridGenerator.Instance.GetGridLocation(location);
+            lastPositionOnGrid = locationRectangle;
 
-            this.location = gridLocation.Location.ToVector2();
+            this.location = locationRectangle.Location.ToVector2();
             gelly.UpdateLocation(this.location);
 
-            Point tileSize = GridGenerator.Instance.GetTileSize();
+            tileSize = GridGenerator.Instance.GetTileSize();
 
-            currentCol = gridLocation.X / tileSize.X;
-            currentRow = gridLocation.Y / tileSize.Y;
+            currentCol = locationRectangle.X / tileSize.X;
+            currentRow = locationRectangle.Y / tileSize.Y;
 
             stoppedMoving = true;
 
             RandomNumber = new Random();
 
             coolDownClock = coolDownTimes[RandomNumber.Next(0, coolDownTimes.Length)];
+
+            possibleDirections = new List<Direction> { left, right, up, down };
+
+            
         }
 
         public void Attack()
@@ -77,15 +91,68 @@ namespace Sprint3
             bool moveWithinRow = RandomNumber.Next(0, 2) == 0;
             bool moveWithinColumn = !moveWithinRow;
 
-            int nextRow = moveWithinColumn ? RandomNumber.Next(0, tileRows) : currentRow;
-            int nextCol = moveWithinRow ? RandomNumber.Next(0, tileColumns) : currentCol;
+            int nextRow;
+            int nextCol;
+            
+            if(possibleDirections.Count == 4) // can move in any direction
+            {
+                nextRow = moveWithinColumn ? RandomNumber.Next(0, tileRows) : currentRow;
+                nextCol = moveWithinRow ? RandomNumber.Next(0, tileColumns) : currentCol;
+            }
+            else //block or wall is blocking path
+            {
+
+                if (locationRectangle.X % tileSize.X != 0 || locationRectangle.Y % tileSize.Y != 0)
+                {
+                    locationRectangle = lastPositionOnGrid; location = locationRectangle.Location.ToVector2();
+                    currentCol = locationRectangle.X / locationRectangle.Width;
+                    currentRow = locationRectangle.Y / locationRectangle.Height;
+                    location = locationRectangle.Location.ToVector2();
+                    gelly.UpdateLocation(location);
+                }
+              
+
+                int rowMin = MinBound(up, currentRow), colMin = MinBound(left, currentCol);
+                int rowMax = MaxBound(down, currentRow, tileRows), colMax = MaxBound(right, currentCol, tileColumns);
+
+                nextRow = moveWithinColumn ? RandomNumber.Next(rowMin, rowMax) : currentRow;
+                nextCol = moveWithinRow ? RandomNumber.Next(colMin, colMax) : currentCol;
+            }
+            
 
             nextLoc = gridTiles[nextRow][nextCol];
 
             moveDirection.Y = CompareTwoNums(nextRow, currentRow);
             moveDirection.X = CompareTwoNums(nextCol, currentCol);
+            currentDirection = CalculateDirection();
 
-            
+        }
+
+        public float CompareTwoNums(float num1, float num2)
+        {
+            if (num1 < num2) return -1;
+            if (num1 > num2) return 1;
+            return 0;
+        }
+
+        private Direction CalculateDirection()
+        {
+            if (moveDirection.X > 0) return right;
+            else if (moveDirection.X < 0) return left;
+            else if (moveDirection.Y > 0) return down;
+            else return up;
+        }
+
+        private int MinBound(Direction dir, int current)
+        {
+            if (!possibleDirections.Contains(dir)) return current;
+            return 0;
+        }
+
+        private int MaxBound(Direction dir, int current, int max)
+        {
+            if (!possibleDirections.Contains(dir)) return current;
+            return max;
         }
 
         public void Update()
@@ -96,12 +163,11 @@ namespace Sprint3
                 ResetCoolDownClock();
                 ChangeDirection();
                 stoppedMoving = false;
+
             }
-            else if(gridLocation.X == nextLoc.X && gridLocation.Y == nextLoc.Y)
+            else if(locationRectangle.X == nextLoc.X && locationRectangle.Y == nextLoc.Y)
             {
                 stoppedMoving = true;
-                currentCol = gridLocation.X / gridLocation.Width;
-                currentRow = gridLocation.Y / gridLocation.Height;
                 coolDownClock = Math.Max(0, coolDownClock - 1);
             }
             else
@@ -109,13 +175,22 @@ namespace Sprint3
                 MoveOneUnit();                
             }
 
+            //update location on grid
+            currentCol = locationRectangle.X / locationRectangle.Width;
+            currentRow = locationRectangle.Y / locationRectangle.Height;
+            if (locationRectangle.X % tileSize.X == 0 && locationRectangle.Y % tileSize.Y == 0) lastPositionOnGrid = locationRectangle;
+
+            //reset movement possibilities after a collision
+            if (timeSinceLastCollision > 10) possibleDirections = new List<Direction> { left, right, up, down };
+            else timeSinceLastCollision++;
+
         }
 
         public void MoveOneUnit()
         {
             location.X += moveDirection.X * moveSpeed;
             location.Y += moveDirection.Y * moveSpeed;
-            gridLocation.Location = location.ToPoint();  
+            locationRectangle.Location = location.ToPoint();  
             gelly.UpdateLocation(location);
         }
 
@@ -131,12 +206,7 @@ namespace Sprint3
             return coolDownClock <= 0 || coolDownClock == coolDownTime || coolDownTime == default;
         }
 
-        public float CompareTwoNums(float num1, float num2)
-        {            
-            if (num1 < num2) return - 1;
-            if (num1 > num2) return 1;
-            return 0;
-        }
+        
 
         public void Die()
         {
@@ -150,12 +220,15 @@ namespace Sprint3
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            timeSinceLastCollision = 0;
+            possibleDirections.Remove((Direction)collision.From());
+            if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
+            
         }
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+           //
         }
     }
 }

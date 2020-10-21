@@ -28,7 +28,9 @@ namespace Sprint3
         private const int frameRate = 30;
         private const int maxFrameRate = 60;
 
-        private Vector2 spriteSize;
+        private Point spriteSize;
+        private Point drawSize;
+        private Point centerOffset;
 
         public GelMoveSprite(Texture2D texture)
         {
@@ -41,7 +43,12 @@ namespace Sprint3
 
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
 
+            Point tile = GridGenerator.Instance.GetTileSize();
+            centerOffset.X = (tile.X - drawSize.X) / 2;
+            centerOffset.Y = (tile.Y - drawSize.Y) / 2;
         }
 
 
@@ -60,9 +67,10 @@ namespace Sprint3
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
+            Vector2 centerLocation = location + centerOffset.ToVector2();
 
-            Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)centerLocation.X, (int)centerLocation.Y, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -73,5 +81,9 @@ namespace Sprint3
             texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
         }
 
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(new Point(), GridGenerator.Instance.GetTileSize());
+        }
     }
 }

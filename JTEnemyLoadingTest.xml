@@ -9,50 +9,51 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Rope</ObjectName>
 				<Location>2 10</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Stalfos</ObjectName>
 				<Location>2 6</Location>
+				<Alive>false</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>6 11</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Gel</ObjectName>
-				<Location>2 7</Location>
+				<Location>6 11</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest1</ObjectName>
+				<ObjectName>Gel</ObjectName>
+				<Location>6 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>6 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>6 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Block</ObjectName>
 				<Location>0 0</Location>
 			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest1</ObjectName>
-				<Location>0 11</Location>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest2</ObjectName>
-				<Location>0 0</Location>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest2</ObjectName>
-				<Location>6 0</Location>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest</ObjectName>
-				<Location>3 11</Location>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>PlayerTest</ObjectName>
-				<Location>5 2</Location>
-			</Item>
+			
 		</Room>
 		
 		

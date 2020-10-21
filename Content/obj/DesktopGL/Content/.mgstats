@@ -1,9 +1,9 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/BossSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/BossSpriteSheet.xnb","TextureProcessor","Texture2DContent",3172,58453,0.1594033
+"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/BossSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/BossSpriteSheet.xnb","TextureProcessor","Texture2DContent",3591,58453,0.158379
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/EnemySpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/EnemySpriteSheet.xnb","TextureProcessor","Texture2DContent",10014,324565,0.1501034
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/File.spritefont","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/File.xnb","FontDescriptionProcessor","SpriteFontContent",2062,21538,0.1014678
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/itemSprites.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/itemSprites.xnb","TextureProcessor","Texture2DContent",17767,44885,0.0046971
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/LinkSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/LinkSpriteSheet.xnb","TextureProcessor","Texture2DContent",30572,573525,0.0164579
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/marioOneDirection.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/marioOneDirection.xnb","TextureProcessor","Texture2DContent",42050,131157,0.004975
-"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/NPCSpriteSheet.xnb","TextureProcessor","Texture2DContent",1363,9301,0.0018353
+"C:/Users/Jordan/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/NPCSpriteSheet.xnb","TextureProcessor","Texture2DContent",1351,9301,0.0021221
 "C:/Users/Jordan/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png","C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/zelda_tiles_focused.xnb","TextureProcessor","Texture2DContent",100028,424585,0.0110455

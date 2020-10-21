@@ -49,6 +49,7 @@ namespace Sprint3
         public Rectangle Bounds()
         {
             return bounds;
+            
         }
 
         public bool CompareTag(string tag)
