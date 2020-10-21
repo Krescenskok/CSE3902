@@ -77,13 +77,7 @@ namespace Sprint3
             {
                 col.SendMessage("PlayerTakeDamage", damageAmount);
             }
-            else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
-            {
-                enemy.MoveAwayFromCollision(collision);
-                
-            }
-
-            
+           
         }
 
         public void SendMessage(string msg, object value)
