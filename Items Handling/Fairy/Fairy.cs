@@ -41,6 +41,11 @@ namespace Sprint2.Items
             state.Expire();
         }
 
+        public void UpdateSprite(ISprite sprite)
+        {
+            this.item = sprite;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);

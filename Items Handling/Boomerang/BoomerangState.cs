@@ -21,6 +21,11 @@ namespace Sprint2.Items
         private float updatePerSec = 40;
         private float speed;
 
+        private bool leaving = true;
+        private bool returning = false;
+        private bool midpoint = false;
+        private bool finishedThrow = false;
+
         public BoomerangState(Boomerang item, Vector2 initPos, string direction)
         {
             this.item = item;
@@ -34,10 +39,13 @@ namespace Sprint2.Items
 
         public void Update()
         {
-            bool leaving = thrown && (thrownTime < travelTime) && !comingBack;
-            bool returning = thrown && (thrownTime > 0) && comingBack;
-            bool midpoint = thrown && (thrownTime == travelTime) && !comingBack;
-            bool finishedThrow = thrown && (thrownTime >= 2*travelTime) && comingBack;
+            Vector2 linkLocation = new Vector2(20, 20); //need to be able to gain Link's current location for return logic
+            float distanceToLink = (float)Math.Sqrt(Math.Pow((position.X), 2) + Math.Pow((position.Y), 2));
+
+            leaving = thrown && (thrownTime < travelTime) && !comingBack;
+            returning = thrown && (thrownTime > 0) && comingBack;
+            midpoint = thrown && (thrownTime == travelTime) && !comingBack;
+            finishedThrow = thrown && comingBack && distanceToLink == 0;
 
             if (leaving)
             {
@@ -58,7 +66,6 @@ namespace Sprint2.Items
                 {
                     position.Y += speed;
                 }
-                thrownTime++;
             }
             else if (midpoint)
             {
@@ -66,23 +73,16 @@ namespace Sprint2.Items
             }
             else if (returning)
             {
-                if (direction.Equals("Right"))
+                distanceToLink = (float)Math.Sqrt(Math.Pow((position.X+linkLocation.X), 2) + Math.Pow((position.Y+linkLocation.Y), 2));
+                if (distanceToLink != 0)
                 {
-                    position.X -= speed;
+                    AdjustReturnLocation(linkLocation);
                 }
-                else if (direction.Equals("Left"))
+                else
                 {
-                    position.X += speed;
+                    returning = false;
+                    finishedThrow = true;
                 }
-                else if (direction.Equals("Up"))
-                {
-                    position.Y += speed;
-                }
-                else if (direction.Equals("Down"))
-                {
-                    position.Y -= speed;
-                }
-                thrownTime++;
             }
             else if (finishedThrow)
             {
@@ -91,6 +91,7 @@ namespace Sprint2.Items
                 item.ThrowBoomerang(false);
                 Expire();
             }
+            thrownTime++;
             item.UpdateLocation(position);
 
             if (thrownTime % 5 == 0)
@@ -100,9 +101,31 @@ namespace Sprint2.Items
             item.UpdateFrame(frame % 4);
         }
 
+
+        public void AdjustReturnLocation(Vector2 linkLocation)
+        {
+            if (position.X < linkLocation.X)
+            {
+                position.X += speed;
+            }
+            else
+            {
+                position.X -= speed;
+            }
+
+            if (position.Y < linkLocation.Y)
+            {
+                position.Y += speed;
+            }
+            else
+            {
+                position.Y -= speed;
+            }
+        }
+
         public void Expire()
         {
-            //erases boomerang only - Link still has in inventory
+            item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()

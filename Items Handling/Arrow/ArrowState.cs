@@ -14,7 +14,7 @@ namespace Sprint2
         private float updatePerSec = 40;
         private float speed;
         private int runTime;
-        private const int maxTime = 50;
+        private const int maxTime = 250;
 
         public ArrowState(Arrow arrow, Vector2 location, string direction)
         {
@@ -46,15 +46,30 @@ namespace Sprint2
             arrow.UpdateLocation(location);
             runTime++;
 
+            ExpireCheck(); 
+        }
+
+        public void ExpireCheck()
+        {
+            if (location.X < 0 || location.X > GraphicsDeviceManager.DefaultBackBufferWidth)
+            {
+                Expire();
+            }
+
+            if (location.Y < 0 || location.Y > GraphicsDeviceManager.DefaultBackBufferHeight)
+            {
+                Expire();
+            }
+
             if (runTime >= maxTime)
             {
                 Expire();
-            }    
+            }
         }
 
         public void Expire()
         {
-            
+            arrow.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()

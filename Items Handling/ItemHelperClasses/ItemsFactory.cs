@@ -12,7 +12,7 @@ namespace Sprint2
         private Texture2D itemsSpriteSheet;
         private Texture2D particlesSheet;
         private Texture2D explosionSheet;
-        private Vector2 itemSheetSize = new Vector2(9, 8);
+        private Vector2 itemSheetSize = new Vector2(10, 8);
         private Vector2 explosionDimensions = new Vector2(50, 100);
 
         private static ItemsFactory instance = new ItemsFactory();
@@ -59,7 +59,7 @@ namespace Sprint2
 
         public ISprite CreateArrowSprite()
         {
-            return new BlueCandleSprite(itemsSpriteSheet);
+            return new ArrowSprite(itemsSpriteSheet);
         }
 
         public ISprite CreateBlueCandleSprite()
@@ -92,10 +92,6 @@ namespace Sprint2
             return new BowSprite(itemsSpriteSheet);
         }
 
-        public ISprite CreateBraceletSprite()
-        {
-            return new BraceletSprite(itemsSpriteSheet);
-        }
         public ISprite CreateClockSprite()
         {
             return new ClockSprite(itemsSpriteSheet);
@@ -115,16 +111,7 @@ namespace Sprint2
             return new FairySprite(itemsSpriteSheet);
         }
 
-        public ISprite CreateFancyKeySprite()
-        {
-            return new FancyKeySprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateFancySwordSprite()
-        {
-            return new FancySwordSprite(itemsSpriteSheet);
-        }
-
+       
         public ISprite CreateHalfHeartSprite()
         {
             return new HalfHeartSprite(itemsSpriteSheet);
@@ -143,71 +130,16 @@ namespace Sprint2
         public ISprite CreateKeySprite()
         {
             return new KeySprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateLetterSprite()
-        {
-            return new LetterSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateMagicalBoomerangSprite()
-        {
-            return new MagicalBoomerangSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateMagicBookoSprite()
-        {
-            return new MagicBookSprite(itemsSpriteSheet);
-        }
+        }      
 
         public ISprite CreateMapSprite()
         {
             return new MapSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateMeatSprite()
-        {
-            return new MeatSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateRaftSprite()
-        {
-            return new RaftSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateRecorderSprite()
-        {
-            return new RecorderSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateRedCandleSprite()
-        {
-            return new RedCandleSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateRedPotionSprite()
-        {
-            return new RedPotionSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateRedRingSprite()
-        {
-            return new RedRingSprite(itemsSpriteSheet);
-        }
+        }        
 
         public ISprite CreateRupeeSprite()
         {
             return new RupeeSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateShieldSprite()
-        {
-            return new ShieldSprite(itemsSpriteSheet);
-        }
-
-        public ISprite CreateSilverArrowSprite()
-        {
-            return new SilverArrowSprite(itemsSpriteSheet);
         }
 
         public ISprite CreateSilverSwordSprite()

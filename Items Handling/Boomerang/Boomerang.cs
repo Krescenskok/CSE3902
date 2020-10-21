@@ -33,6 +33,11 @@ namespace Sprint2.Items
             this.drawnFrame = frame;
         }
 
+        public void UpdateSprite(ISprite sprite)
+        {
+            this.item = sprite;
+        }
+
         public void ThrowBoomerang(bool throwing)
         {
             this.throwing = throwing;

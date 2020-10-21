@@ -34,6 +34,11 @@ namespace Sprint2
             this.location = location;
         }
 
+        public void UpdateSprite(ISprite sprite)
+        {
+            this.item = sprite;
+        }
+
         public void Update()
         {
             state.Update();

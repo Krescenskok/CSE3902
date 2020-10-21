@@ -9,16 +9,10 @@ using System.Text;
 
 namespace Sprint2
 {
-   /* public enum Item
-    {
-        Compass, Rupee, Boomerang, Map, Letter, Key, FancyKey, HeartContainer, TriforcePiece, MagicalBoomerang, Heart, HalfHeart, EmptyHeart,
-        MagicBook, Clock, Fairy, RedRing, BlueRing, RedPotion, BluePotion, WoodenSword, SilverSword, Wand, Raft, Arrow, SilverArrow, RedCandle,
-        BlueCandle, Bomb, FancySword, Shield, Meat, Bow, Bracelet, Recorder
-    };*/
     public enum Item
     {
-        Bomb, Arrow, SilverArrow, HalfHeart, Rupee, Boomerang, TriforcePiece, MagicalBoomerang, Heart, HeartContainer, EmptyHeart,
-        Fairy
+        Arrow, BlueCandle, BluePotion, BlueRing, Bomb, Boomerang, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        Heart, HeartContainer, Key, Map, Rupee, SilverSword, TriforcePiece, Wand, WoodenSword
     };
     public class ItemsStateMachine
     {
@@ -37,12 +31,10 @@ namespace Sprint2
             itemToState.Add(Item.Clock, new Clock(ItemsFactory.Instance.CreateClockSprite(), location));
             itemToState.Add(Item.EmptyHeart, new EmptyHeart(ItemsFactory.Instance.CreateEmptyHeartSprite(), location));
             itemToState.Add(Item.Fairy, new Fairy(ItemsFactory.Instance.CreateFairySprite(), location));
-            itemToState.Add(Item.FancyKey, new FancyKey(ItemsFactory.Instance.CreateFancyKeySprite(), location));
             itemToState.Add(Item.HalfHeart, new HalfHeart(ItemsFactory.Instance.CreateHalfHeartSprite(), location));
             itemToState.Add(Item.Heart, new Heart(ItemsFactory.Instance.CreateHeartSprite(), location));
             itemToState.Add(Item.HeartContainer, new HeartContainer(ItemsFactory.Instance.CreateHeartContainerSprite(), location));
             itemToState.Add(Item.Key, new Key(ItemsFactory.Instance.CreateKeySprite(), location));
-            itemToState.Add(Item.MagicalBoomerang, new MagicalBoomerang(ItemsFactory.Instance.CreateMagicalBoomerangSprite(), location, "Down"));
             itemToState.Add(Item.Map, new Map(ItemsFactory.Instance.CreateMapSprite(), location));
             itemToState.Add(Item.TriforcePiece, new TriforcePiece(ItemsFactory.Instance.CreateTriforcePieceSprite(), location));
             itemToState.Add(Item.Arrow, new Arrow(ItemsFactory.Instance.CreateArrowSprite(), location, "Down"));
@@ -50,18 +42,6 @@ namespace Sprint2
             itemToState.Add(Item.BluePotion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), location)); ;
             itemToState.Add(Item.BlueRing, new BlueRing(ItemsFactory.Instance.CreateBlueRingSprite(), location));
             itemToState.Add(Item.Bomb, new  Bomb(ItemsFactory.Instance.CreateBombSprite(), location));
-            itemToState.Add(Item.Bracelet, new Bracelet(ItemsFactory.Instance.CreateBraceletSprite(), location));
-            itemToState.Add(Item.FancySword, new FancySword(ItemsFactory.Instance.CreateFancySwordSprite(), location));
-            itemToState.Add(Item.Letter, new Letter(ItemsFactory.Instance.CreateLetterSprite(), location));
-            itemToState.Add(Item.MagicBook, new MagicBook(ItemsFactory.Instance.CreateMagicBookoSprite(), location));
-            itemToState.Add(Item.Meat, new Meat(ItemsFactory.Instance.CreateMeatSprite(), location));
-            itemToState.Add(Item.Raft, new Raft(ItemsFactory.Instance.CreateRaftSprite(), location));
-            itemToState.Add(Item.Recorder, new Recorder(ItemsFactory.Instance.CreateRecorderSprite(), location));
-            itemToState.Add(Item.RedCandle, new RedCandle(ItemsFactory.Instance.CreateRedCandleSprite(), location));
-            itemToState.Add(Item.RedPotion, new RedPotion(ItemsFactory.Instance.CreateRedPotionSprite(), location));
-            itemToState.Add(Item.RedRing, new RedRing(ItemsFactory.Instance.CreateRedRingSprite(), location));
-            itemToState.Add(Item.Shield, new Shield(ItemsFactory.Instance.CreateShieldSprite(), location));
-            itemToState.Add(Item.SilverArrow, new SilverArrow(ItemsFactory.Instance.CreateSilverArrowSprite(), location, "Down"));
             itemToState.Add(Item.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), location));
             itemToState.Add(Item.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), location));
             itemToState.Add(Item.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), location));

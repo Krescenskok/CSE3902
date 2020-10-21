@@ -39,11 +39,14 @@ namespace Sprint2.Items
         public void Expire()
         {
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
+
+            //remove item from room
         }
 
         public void Collected()
         {
-
+            //add to inventory
+            Expire();
         }
     }
 }

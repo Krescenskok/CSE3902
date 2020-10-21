@@ -17,6 +17,8 @@ namespace Sprint2.Items
             this.item = item;
             runTime = 0;
             this.position = initPos;
+
+            //remove a bomb from inventory
         }
 
         public void Update()

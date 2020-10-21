@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/Files/Github/CSE3902/Content/itemSprites.png</SourceFile>
-  <SourceTime>2020-10-17T15:51:59.1177894-04:00</SourceTime>
+  <SourceTime>2020-10-20T22:01:10.662258-04:00</SourceTime>
   <DestFile>D:/Files/Github/CSE3902/Content/bin/DesktopGL/itemSprites.xnb</DestFile>
-  <DestTime>2020-10-19T21:28:40.2889757-04:00</DestTime>
+  <DestTime>2020-10-20T22:02:21.4580382-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
