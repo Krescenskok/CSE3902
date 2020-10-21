@@ -22,10 +22,11 @@ namespace Sprint2.Items
             state = new TriforcePieceState(this, location);
         }
 
-        public void UpdateLocation(Vector2 location)
+        public void UpdateSprite(ISprite sprite)
         {
-            this.location = location;
+            this.item = sprite;
         }
+
         public void UpdateFrame(int frame)
         {
             this.drawnFrame = frame;

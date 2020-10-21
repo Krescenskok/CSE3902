@@ -11,7 +11,7 @@ namespace Sprint2
 {
     public enum Item
     {
-        Arrow, BlueCandle, BluePotion, BlueRing, Bomb, Boomerang, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        WandBeam, Boomerang, Arrow, BlueCandle, BluePotion, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
         Heart, HeartContainer, Key, Map, Rupee, SilverSword, TriforcePiece, Wand, WoodenSword, SwordBeam
     };
     public class ItemsStateMachine
@@ -22,11 +22,11 @@ namespace Sprint2
         private LinkedListNode<Item> current;
         private Vector2 location = new Vector2(100, 50);
 
-        public ItemsStateMachine()
+        public ItemsStateMachine(Link.LinkPlayer link)
         {
             itemToState.Add(Item.Compass, new Compass(ItemsFactory.Instance.CreateCompassSprite(), location));
             itemToState.Add(Item.Rupee, new Rupee(ItemsFactory.Instance.CreateRupeeSprite(), location));
-            itemToState.Add(Item.Boomerang, new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), location, "Down"));
+            itemToState.Add(Item.Boomerang, new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), location, "Down", link));
             itemToState.Add(Item.Bow, new Bow(ItemsFactory.Instance.CreateBowSprite(), location));
             itemToState.Add(Item.Clock, new Clock(ItemsFactory.Instance.CreateClockSprite(), location));
             itemToState.Add(Item.EmptyHeart, new EmptyHeart(ItemsFactory.Instance.CreateEmptyHeartSprite(), location));
@@ -46,6 +46,7 @@ namespace Sprint2
             itemToState.Add(Item.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), location));
             itemToState.Add(Item.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), location));
             itemToState.Add(Item.SwordBeam, new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), location, "Right"));
+            itemToState.Add(Item.WandBeam, new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite("Right"), location, "Right"));
 
             var itemArray = Enum.GetValues(typeof(Item)).Cast<Item>().ToArray();
 

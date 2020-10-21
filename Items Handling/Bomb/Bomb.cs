@@ -21,11 +21,6 @@ namespace Sprint2.Items
             state = new BombState(this, location);
         }
 
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-        }
-
         public void UpdateFrame(int frame)
         {
             this.drawnFrame = frame;

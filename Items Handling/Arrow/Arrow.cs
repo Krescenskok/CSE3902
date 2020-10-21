@@ -41,7 +41,7 @@ namespace Sprint2
 
         public void Impact()
         {
-            state = new ArrowImpactState(this, location);
+            state = new ArrowImpactState(this);
         }
 
         public void Update()

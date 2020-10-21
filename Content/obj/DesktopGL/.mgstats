@@ -1,11 +1,12 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Files/Github/CSE3902/Content/BossSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/BossSpriteSheet.xnb","TextureProcessor","Texture2DContent",3172,58453,0.1516016
-"D:/Files/Github/CSE3902/Content/EnemySpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/EnemySpriteSheet.xnb","TextureProcessor","Texture2DContent",6334,161629,0.0069447
+"D:/Files/Github/CSE3902/Content/BossSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/BossSpriteSheet.xnb","TextureProcessor","Texture2DContent",3172,58453,0.1137384
+"D:/Files/Github/CSE3902/Content/EnemySpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/EnemySpriteSheet.xnb","TextureProcessor","Texture2DContent",6334,161629,0.0049858
 "D:/Files/Github/CSE3902/Content/explosion.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/explosion.xnb","TextureProcessor","Texture2DContent",13680,20085,0.0029919
-"D:/Files/Github/CSE3902/Content/File.spritefont","D:/Files/Github/CSE3902/Content/bin/DesktopGL/File.xnb","FontDescriptionProcessor","SpriteFontContent",2062,21521,0.2054512
-"D:/Files/Github/CSE3902/Content/itemSprites.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/itemSprites.xnb","TextureProcessor","Texture2DContent",15410,76885,0.1126985
-"D:/Files/Github/CSE3902/Content/LinkSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/LinkSpriteSheet.xnb","TextureProcessor","Texture2DContent",30572,573525,0.0209434
-"D:/Files/Github/CSE3902/Content/marioOneDirection.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/marioOneDirection.xnb","TextureProcessor","Texture2DContent",42050,131157,0.005985
-"D:/Files/Github/CSE3902/Content/NPCSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/NPCSpriteSheet.xnb","TextureProcessor","Texture2DContent",1363,9301,0.0019941
-"D:/Files/Github/CSE3902/Content/particles.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/particles.xnb","TextureProcessor","Texture2DContent",14280,11605,0.0029919
-"D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/zelda_tiles_focused.xnb","TextureProcessor","Texture2DContent",100028,424585,0.0169543
+"D:/Files/Github/CSE3902/Content/File.spritefont","D:/Files/Github/CSE3902/Content/bin/DesktopGL/File.xnb","FontDescriptionProcessor","SpriteFontContent",2062,21521,0.1411727
+"D:/Files/Github/CSE3902/Content/itemSprites.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/itemSprites.xnb","TextureProcessor","Texture2DContent",15410,76885,0.0049872
+"D:/Files/Github/CSE3902/Content/LinkSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/LinkSpriteSheet.xnb","TextureProcessor","Texture2DContent",30572,573525,0.0159573
+"D:/Files/Github/CSE3902/Content/marioOneDirection.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/marioOneDirection.xnb","TextureProcessor","Texture2DContent",42050,131157,0.0039884
+"D:/Files/Github/CSE3902/Content/NPCSpriteSheet.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/NPCSpriteSheet.xnb","TextureProcessor","Texture2DContent",1363,9301,0.001995
+"D:/Files/Github/CSE3902/Content/particles.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/particles.xnb","TextureProcessor","Texture2DContent",14280,11605,0.0009552
+"D:/Files/Github/CSE3902/Content/wandbeam.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/wandbeam.xnb","TextureProcessor","Texture2DContent",13539,12885,0.0972888
+"D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png","D:/Files/Github/CSE3902/Content/bin/DesktopGL/zelda_tiles_focused.xnb","TextureProcessor","Texture2DContent",100028,424585,0.0141936

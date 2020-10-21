@@ -25,6 +25,10 @@ namespace Sprint2.Items
         {
             this.location = location;
         }
+        public void UpdateSprite(ISprite sprite)
+        {
+            this.item = sprite;
+        }
 
         public void UpdateFrame(int frame)
         {
@@ -39,11 +43,6 @@ namespace Sprint2.Items
         public void Expire()
         {
             state.Expire();
-        }
-
-        public void UpdateSprite(ISprite sprite)
-        {
-            this.item = sprite;
         }
 
         public void Draw(SpriteBatch spriteBatch)

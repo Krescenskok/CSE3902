@@ -1,25 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint2.Items
 {
-    public class Rupee : IItems
+    public class WandBeam : IItems
     {
         private Vector2 location;
         private ISprite item;
+
         private int drawnFrame;
         private IItemsState state;
+        private string direction;
 
-        public Rupee(ISprite item, Vector2 location)
+        public WandBeam(ISprite item, Vector2 location, string direction)
         {
             this.location = location;
+            this.direction = direction;
             this.item = item;
             drawnFrame = 0;
-            state = new RupeeState(this, location);
+            state = new WandBeamState(this, location, direction);
+        }
+
+        public void UpdateLocation(Vector2 location)
+        {
+            this.location = location;
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -46,5 +53,7 @@ namespace Sprint2.Items
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
+
+
     }
 }

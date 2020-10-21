@@ -21,9 +21,9 @@ namespace Sprint2.Items
             state = new EmptyHeartState(this, location);
         }
 
-        public void UpdateLocation(Vector2 location)
+        public void UpdateSprite(ISprite sprite)
         {
-            this.location = location;
+            this.item = sprite;
         }
 
         public void Update()

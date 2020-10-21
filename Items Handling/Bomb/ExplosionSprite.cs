@@ -24,9 +24,8 @@ namespace Sprint2.Items
         {
             int width = (int) sheetSize.X;
             int height = (int) sheetSize.Y / 2;
-
             int xLoc = 0;
-            int yLoc = currentFrame * (int)(sheetSize.Y / 2);
+            int yLoc = currentFrame * (int)(sheetSize.Y / 2 + 2);
 
             sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
             destinationRectangle = new Rectangle((int)location.X - width, (int)location.Y - height / 2, 2 * width, 2 * height);

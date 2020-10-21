@@ -13,9 +13,11 @@
     <File>D:/Files/Github/CSE3902/Content/marioOneDirection.png</File>
     <File>D:/Files/Github/CSE3902/Content/NPCSpriteSheet.png</File>
     <File>D:/Files/Github/CSE3902/Content/particles.png</File>
+    <File>D:/Files/Github/CSE3902/Content/wandbeam.png</File>
     <File>D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -12,8 +12,10 @@ namespace Sprint2
         private Texture2D itemsSpriteSheet;
         private Texture2D particlesSheet;
         private Texture2D explosionSheet;
+        private Texture2D wandBeamSheet;
         private Vector2 itemSheetSize = new Vector2(12, 8);
         private Vector2 explosionDimensions = new Vector2(50, 100);
+        private Vector2 wandBeamDimensions = new Vector2(4, 2);
 
         private static ItemsFactory instance = new ItemsFactory();
 
@@ -35,6 +37,7 @@ namespace Sprint2
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             particlesSheet = content.Load<Texture2D>("particles");
             explosionSheet = content.Load<Texture2D>("explosion");
+            wandBeamSheet = content.Load<Texture2D>("wandbeam");
         }
 
         public Vector2 GetSheetSize()
@@ -45,6 +48,11 @@ namespace Sprint2
         public Vector2 GetExplosionSheetSize()
         {
             return explosionDimensions;
+        }
+
+        public Vector2 GetWandBeamSheetSize()
+        {
+            return wandBeamDimensions;
         }
 
         public ISprite EraseSprite()
@@ -60,6 +68,26 @@ namespace Sprint2
         public ISprite CreateExplosionSprite()
         {
             return new ExplosionSprite(explosionSheet);
+        }
+
+        public ISprite CreateWandBeamSprite(string direction)
+        {
+            if (direction.Equals("Right"))
+            {
+                return new WandBeamRightSprite(wandBeamSheet);
+            }
+            if (direction.Equals("Left"))
+            {
+                return new WandBeamLeftSprite(wandBeamSheet);
+            }
+            if (direction.Equals("Up"))
+            {
+                return new WandBeamUpSprite(wandBeamSheet);
+            }
+            else
+            {
+                return new WandBeamDownSprite(wandBeamSheet);
+            }
         }
 
         public ISprite CreateArrowSprite()

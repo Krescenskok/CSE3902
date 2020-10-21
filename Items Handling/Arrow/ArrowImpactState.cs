@@ -8,18 +8,13 @@ namespace Sprint2
     public class ArrowImpactState : IItemsState
     {
         private Arrow arrow;
-        private string direction;
         private Vector2 location;
-        private float speedPerSec = 30;
-        private float updatePerSec = 40;
-        private float speed;
         private int runTime;
         private const int maxTime = 75;
 
-        public ArrowImpactState(Arrow arrow, Vector2 location)
+        public ArrowImpactState(Arrow arrow)
         {
             this.arrow = arrow;
-            this.location = location;
             runTime = 0;
         }
 

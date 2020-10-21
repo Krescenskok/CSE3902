@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint2.Link;
 
 namespace Sprint2
 {
@@ -12,10 +13,10 @@ namespace Sprint2
 
 
         
-        public LinkItems(SpriteBatch spriteBatch)
+        public LinkItems(SpriteBatch spriteBatch, LinkPlayer link)
         {
             this.SpriteBatch = spriteBatch;
-            StateMachine = new ItemsStateMachine();
+            StateMachine = new ItemsStateMachine(link);
             PrevState = StateMachine;
         }
 

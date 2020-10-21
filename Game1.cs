@@ -55,7 +55,7 @@ namespace Sprint2
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new LinkItems(_spriteBatch);
+            items = new LinkItems(_spriteBatch, linkPlayer);
             blocks = new Blocks.LinkBlocks(_spriteBatch);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));

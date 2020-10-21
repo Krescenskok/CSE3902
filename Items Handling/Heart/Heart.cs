@@ -10,7 +10,6 @@ namespace Sprint2.Items
     {
         private Vector2 location;
         private ISprite item;
-        private int currentFrame = 0;
         private int drawnFrame;
         private IItemsState state;
 
@@ -22,10 +21,11 @@ namespace Sprint2.Items
             state = new HeartState(this, location);
         }
 
-        public void UpdateLocation(Vector2 location)
+        public void UpdateSprite(ISprite sprite)
         {
-            this.location = location;
+            this.item = sprite;
         }
+
         public void UpdateFrame(int frame)
         {
             this.drawnFrame = frame;
@@ -39,11 +39,6 @@ namespace Sprint2.Items
         public void Expire()
         {
             state.Expire();
-        }
-
-        public void UpdateSprite(ISprite sprite)
-        {
-            this.item = sprite;
         }
 
         public void Draw(SpriteBatch spriteBatch)

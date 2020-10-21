@@ -21,9 +21,9 @@ namespace Sprint2.Items
             state = new KeyState(this, location);
         }
 
-        public void UpdateLocation(Vector2 location)
+        public void UpdateSprite(ISprite sprite)
         {
-            this.location = location;
+            this.item = sprite;
         }
 
         public void Update()
@@ -36,10 +36,6 @@ namespace Sprint2.Items
             state.Expire();
         }
 
-        public void UpdateSprite(ISprite sprite)
-        {
-            this.item = sprite;
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

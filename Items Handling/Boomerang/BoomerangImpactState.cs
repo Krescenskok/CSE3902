@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
+using Sprint2.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Sprint2
 {
-    public class BeamImpactState : IItemsState
+    public class BoomerangImpactState : IItemsState
     {
-        private SwordBeam item;
+        private Boomerang item;
         private int runTime;
-        private const int maxTime = 250;
+        private const int maxTime = 75;
 
-        public BeamImpactState(SwordBeam item)
+        public BoomerangImpactState(Boomerang item)
         {
             this.item = item;
             runTime = 0;
@@ -19,8 +20,6 @@ namespace Sprint2
 
         public void Update()
         {
-            //make the sprites spread out
-
             runTime++;
             if (runTime >= maxTime)
             {

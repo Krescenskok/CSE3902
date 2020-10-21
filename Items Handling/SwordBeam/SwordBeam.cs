@@ -52,7 +52,7 @@ namespace Sprint2
 
         public void SwordImpact()
         {
-            state = new BeamImpactState(this, location);
+            state = new BeamImpactState(this);
         }
 
         public void Collect()
