@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -43,8 +43,17 @@ namespace Sprint3.Link
 
                 if ((Key.Equals("N") || (Key.Equals("Z"))))
                 {
+
+                    if(linkPlayer.state is Stationary)
+                    {
+                        linkPlayer.CurrentWeapon = Weapon.WoodenSword;
+                        linkPlayer.Stationary();
+                    }
+
+                 
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
+                   
                 }
 
                 else if ((Key.Equals("A")) || (Key.Equals("Left")))
@@ -82,16 +91,11 @@ namespace Sprint3.Link
 
                 else if ((Key.Equals("D2")) || (Key.Equals("NumPad2")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.WoodenSword;
-                }
-
-                else if ((Key.Equals("D3")) || (Key.Equals("NumPad3")))
-                {
                     linkPlayer.CurrentWeapon = Weapon.MagicalRod;
                 }
+            
 
             }
-
 
             linkPlayer.Update(gameTime);
 
