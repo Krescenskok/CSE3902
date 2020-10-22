@@ -21,21 +21,17 @@ namespace Sprint2.Items
             
         }
 
-        public void Drink()
-        {
-            //restores Link's health
-            Expire();
-        }
-
         public void Expire()
         {
             //remove from inventory
+            //if none left, erase sprite
+            potion.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
             //add to inventory
-            //if there is already a blue potion in inventory - combine 2 blues to make a red potion
+            Expire();
         }
     }
 }

@@ -18,17 +18,18 @@ namespace Sprint2.Items
 
         public void Update()
         {
-
+            
         }
 
         public void Expire()
         {
-                    
+            candle.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
-
+            //add one to inventory
+            Expire();
         }
     }
 }

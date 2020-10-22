@@ -23,7 +23,7 @@ namespace Sprint2.Items
 
         public void Expire()
         {
-
+            item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()

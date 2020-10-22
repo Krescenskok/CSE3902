@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Sprint2
 {
-    public class ArrowSprite : ISprite
+    public class ArrowUpSprite : ISprite
     {
         Texture2D texture;
         private Rectangle sourceRectangle;
@@ -15,7 +15,7 @@ namespace Sprint2
         private Vector2 sheetSize;
         private int sheetLocation = 56;
 
-        public ArrowSprite(Texture2D texture)
+        public ArrowUpSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();

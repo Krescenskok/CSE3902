@@ -5,20 +5,18 @@ using System.Text;
 
 namespace Sprint2.Items
 {
-    public class HalfHeartState : IItemsState
+    public class FullHeartState : IItemsState
     {
-        private HalfHeart item;
-        private Vector2 position;
+        private FullHeart item;
 
-        public HalfHeartState(HalfHeart item, Vector2 initPos)
+        public FullHeartState(FullHeart item)
         {
             this.item = item;
-            this.position = initPos;
         }
 
         public void Update()
         {
-
+           
         }
 
         public void Expire()

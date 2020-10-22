@@ -23,12 +23,13 @@ namespace Sprint2.Items
 
         public void Expire()
         {
-
+            ring.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
-
+            //add 1 to inventory
+            Expire();
         }
     }
 }

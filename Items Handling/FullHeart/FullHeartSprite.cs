@@ -5,17 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint2.Items
 {
-    public class ArrowSprite : ISprite
+    public class FullHeartSprite : ISprite
     {
         Texture2D texture;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 56;
+        private int sheetLocation = 0;
 
-        public ArrowSprite(Texture2D texture)
+        public FullHeartSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();

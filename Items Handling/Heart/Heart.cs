@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint2.Items
 {
+    //this is the heart that link can collect to replenish hearts
     public class Heart : IItems
     {
         private Vector2 location;

@@ -7,15 +7,15 @@ using System.Text;
 
 namespace Sprint2
 {
-    public class ArrowSprite : ISprite
+    public class ArrowDownSprite : ISprite
     {
         Texture2D texture;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 56;
+        private int sheetLocation = 59;
 
-        public ArrowSprite(Texture2D texture)
+        public ArrowDownSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();

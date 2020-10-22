@@ -10,7 +10,7 @@ namespace Sprint2
         private SwordBeam item;
         private string direction;
         private Vector2 location;
-        private float speedPerSec = 30;
+        private float speedPerSec = 90;
         private float updatePerSec = 40;
         private float speed;
         private int runTime;

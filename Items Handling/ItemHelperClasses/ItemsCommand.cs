@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Sprint2
 {
@@ -9,7 +11,8 @@ namespace Sprint2
         LinkItems Items;
         bool DoSwap;
         bool GoingForward;
-        
+        bool pressed = false;
+        bool released = true;
 
 
         public ItemsCommand(SpriteBatch spriteBatch, LinkItems items, bool doSwap, bool goingForward)
@@ -26,6 +29,17 @@ namespace Sprint2
 
         public void ExecuteCommand(Game game, GameTime gameTime,  SpriteBatch spriteBatch)
         {
+            KeyboardState state = Keyboard.GetState();
+            if (state.GetPressedKeyCount() > 0)
+            {
+                pressed = true;
+                released = false;
+            }
+            else
+            {
+                pressed = false;
+                released = true;
+            }
             if (!DoSwap)
             {                
                 Items.Draw();
@@ -39,13 +53,17 @@ namespace Sprint2
 
         public void Update(GameTime GameTime)
         {
-            if (DoSwap)
+            if (!pressed && released)
             {
-                Items.ChangeState(this.GoingForward);
-                Items.Update();
-            } else
-            {
-                Items.Update();
+                if (DoSwap)
+                {
+                    Items.ChangeState(this.GoingForward);
+                    Items.Update();
+                }
+                else
+                {
+                    Items.Update();
+                }
             }
             
   

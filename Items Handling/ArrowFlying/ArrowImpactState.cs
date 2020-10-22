@@ -8,7 +8,6 @@ namespace Sprint2
     public class ArrowImpactState : IItemsState
     {
         private Arrow arrow;
-        private Vector2 location;
         private int runTime;
         private const int maxTime = 75;
 
@@ -16,6 +15,7 @@ namespace Sprint2
         {
             this.arrow = arrow;
             runTime = 0;
+            arrow.UpdateSprite(ItemsFactory.Instance.CreateProjectileImpactSprite());
         }
 
         public void Update()
@@ -34,7 +34,7 @@ namespace Sprint2
 
         public void Collected()
         {
-           
+           //can't collect
         }
     }
 }

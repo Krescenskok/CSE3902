@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint2.Items
+namespace Sprint2
 {
-    public class WoodenSword : IItems
+    //class for the arrow object drawn in the shop/Link's inventory
+    public class ArrowObject : IItems
     {
         private Vector2 location;
         private ISprite item;
-
-        private int drawnFrame;
+        private int drawnFrame = 0;
         private IItemsState state;
 
-        public WoodenSword(ISprite item, Vector2 location)
+        public ArrowObject(ISprite item, Vector2 location)
         {
             this.location = location;
-            this.item = item;
-            drawnFrame = 0;
-            state = new WoodenSwordState(this, location);
+            state = new ArrowState(this);
         }
+
+        public void UpdateLocation(Vector2 location)
+        {
+            this.location = location;
+        }
+
         public void UpdateSprite(ISprite sprite)
         {
             this.item = sprite;
-        }
-
-        public void Update()
-        {
-            state.Update();
         }
 
         public void Expire()
@@ -36,9 +36,20 @@ namespace Sprint2.Items
             state.Expire();
         }
 
+        public void Update()
+        {
+            state.Update();
+        }
+
+        public void Collect()
+        {
+            state.Collected();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
+        
     }
 }

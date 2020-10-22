@@ -7,15 +7,15 @@ using System.Text;
 
 namespace Sprint2
 {
-    public class ArrowSprite : ISprite
+    public class ArrowLeftSprite : ISprite
     {
         Texture2D texture;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 56;
+        private int sheetLocation = 60;
 
-        public ArrowSprite(Texture2D texture)
+        public ArrowLeftSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();
@@ -24,7 +24,7 @@ namespace Sprint2
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
             int width = texture.Width / (int)sheetSize.Y;
-            int drawnWidth = width;
+            int drawnWidth = width * 2;
 
             int height = texture.Height / (int)sheetSize.X;
             int row = (int)((float)(sheetLocation + currentFrame) / (float)(int)sheetSize.Y);

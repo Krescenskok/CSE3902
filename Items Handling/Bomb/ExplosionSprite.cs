@@ -13,6 +13,7 @@ namespace Sprint2.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
+        private const int buffer = 8;
 
         public ExplosionSprite(Texture2D texture)
         {
@@ -28,7 +29,7 @@ namespace Sprint2.Items
             int yLoc = currentFrame * (int)(sheetSize.Y / 2 + 2);
 
             sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
-            destinationRectangle = new Rectangle((int)location.X - width, (int)location.Y - height / 2, 2 * width, 2 * height);
+            destinationRectangle = new Rectangle((int)location.X - width + buffer, (int)location.Y - height / 2, 2 * width, 2 * height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

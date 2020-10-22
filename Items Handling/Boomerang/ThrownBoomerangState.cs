@@ -18,7 +18,7 @@ namespace Sprint2.Items
         private int thrownTime = 0;
         private const int travelTime = 100;
 
-        private const float speedPerSec = 55;
+        private const float speedPerSec = 70;
         private const float updatePerSec = 40;
         private float speed;
 

@@ -90,9 +90,24 @@ namespace Sprint2
             }
         }
 
-        public ISprite CreateArrowSprite()
+        public ISprite CreateArrowSprite(string direction)
         {
-            return new ArrowSprite(itemsSpriteSheet);
+            if (direction.Equals("Right"))
+            {
+                return new ArrowRightSprite(itemsSpriteSheet);
+            }
+            if (direction.Equals("Left"))
+            {
+                return new ArrowLeftSprite(itemsSpriteSheet);
+            }
+            if (direction.Equals("Up"))
+            {
+                return new ArrowUpSprite(itemsSpriteSheet);
+            }
+            else
+            {
+                return new ArrowDownSprite(itemsSpriteSheet);
+            }
         }
 
         public ISprite CreateBlueCandleSprite()

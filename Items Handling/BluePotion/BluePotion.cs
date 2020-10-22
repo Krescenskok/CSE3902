@@ -36,6 +36,12 @@ namespace Sprint2.Items
             state.Expire();
         }
 
+        public void Drink()
+        {
+            //restore link's health
+            Expire();
+        }
+
         public void Collect()
         {
             state.Collected();

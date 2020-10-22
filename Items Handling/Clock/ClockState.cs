@@ -9,6 +9,9 @@ namespace Sprint2.Items
     {
         private Clock item;
         private Vector2 position;
+        private int runTime = 0;
+        private const int maxTime = 800;
+        private bool collected = false;
 
         public ClockState(Clock item, Vector2 initPos)
         {
@@ -18,17 +21,27 @@ namespace Sprint2.Items
 
         public void Update()
         {
-
+            if (collected)
+            {
+                runTime++;
+                if (runTime >= maxTime)
+                {
+                    collected = false;
+                    //disable the effects of the clock
+                }
+            }
         }
 
         public void Expire()
         {
-
+            item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
-            //makes Link flash and grants him temporary immunity
+            collected = true;
+            //makes Link flash, freezes enemies, and grants him temporary immunity
+            Expire();
         }
     }
 }

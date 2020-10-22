@@ -6,21 +6,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint2.Items
 {
-    public class WoodenSword : IItems
+    //this is the full heart for link's lives, not the collectable object
+    public class FullHeart : IItems
     {
         private Vector2 location;
         private ISprite item;
-
         private int drawnFrame;
         private IItemsState state;
 
-        public WoodenSword(ISprite item, Vector2 location)
+        public FullHeart(ISprite item, Vector2 location)
         {
             this.location = location;
             this.item = item;
             drawnFrame = 0;
-            state = new WoodenSwordState(this, location);
+            state = new FullHeartState(this);
         }
+
         public void UpdateSprite(ISprite sprite)
         {
             this.item = sprite;
