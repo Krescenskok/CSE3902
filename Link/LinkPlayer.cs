@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,16 +12,17 @@ namespace Sprint3.Link
         MagicalRod,
 
     }
-    public class LinkPlayer : ILinkState
+    public class LinkPlayer 
     {
         public ILinkState state;
 
         bool loc = false;
-        Vector2 currentLocation;
+        public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
-        private float health = 100;
+        private float health = 30;
+        public bool isWalkingInPlace = false;
 
 
 
@@ -29,7 +30,7 @@ namespace Sprint3.Link
         {
             get {
 
-                Rectangle t =  new Rectangle((int)currentLocation.X, (int)currentLocation.Y, 32, 32);
+                Rectangle t =  new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
                 return t;
             }
         }
@@ -92,6 +93,13 @@ namespace Sprint3.Link
 
         }
 
+        public bool IsWalkingInPlace
+        {
+            get { return isWalkingInPlace; }
+            set { isWalkingInPlace = value; }
+        }
+
+        public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public LinkPlayer()
         {
@@ -102,32 +110,36 @@ namespace Sprint3.Link
         public void Update(GameTime gameTime)
         {
 
-            currentLocation = state.Update(gameTime, currentLocation);
+            CurrentLocation = state.Update(gameTime, CurrentLocation);
         }
 
         public void MovingLeft()
         {
-            state.MovingLeft();
+            if (!(state is MoveLeft))
+                state = new MoveLeft(this);
         }
 
         public void MovingRight()
         {
-            state.MovingRight();
+            if (!(state is MoveRight))
+                state = new MoveRight(this);
         }
 
         public void MovingUp()
         {
-            state.MovingUp();
+            if (!(state is MoveUp))
+                state = new MoveUp(this);
         }
 
         public void MovingDown()
         {
-            state.MovingDown();
+            if (!(state is MoveDown))
+                state = new MoveDown(this);
         }
 
         public void Reset()
         {
-            state.Stationary();
+            state = new Stationary(this);
             Health = 100;
 
             LocationInitialized = false;
@@ -144,28 +156,12 @@ namespace Sprint3.Link
             if (loc == false)
             {
                 loc = true;
-                currentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
             }
 
-            state.Draw(spriteBatch, gameTime, currentLocation);
+            state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
-        public void Stationary()
-        {
-            state.Stationary();
-        }
-
-        public Vector2 Update(GameTime gameTime, Vector2 location)
-        {
-
-            return location;
-        }
-
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
-        {
-
-        }
-
-
+       
     }
 }
