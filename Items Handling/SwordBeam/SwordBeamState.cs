@@ -15,7 +15,7 @@ namespace Sprint2
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 250;
+        private const int maxTime = 50;
 
         public SwordBeamState(SwordBeam item, Vector2 location, string direction)
         {
@@ -77,7 +77,7 @@ namespace Sprint2
 
         public void Expire()
         {
-            //item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite());
+            item.SwordImpact();
         }
 
         public void Collected()

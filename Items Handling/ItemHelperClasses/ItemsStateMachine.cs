@@ -12,8 +12,8 @@ namespace Sprint2
 {
     public enum Item
     {
-        Arrow, BluePotion, SilverSword, WandBeam, Boomerang,BlueCandle, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
-        Heart, HeartContainer, Key, Map, Rupee, TriforcePiece, Wand, WoodenSword, SwordBeam
+        SwordBeam, Arrow, BluePotion, SilverSword, WandBeam, Boomerang,BlueCandle, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        Heart, HeartContainer, Key, Map, Rupee, TriforcePiece, Wand, WoodenSword
     };
     public class ItemsStateMachine
     {

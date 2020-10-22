@@ -4,6 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/Files/Github/CSE3902/Content/beamImpact.png</File>
     <File>D:/Files/Github/CSE3902/Content/BossSpriteSheet.png</File>
     <File>D:/Files/Github/CSE3902/Content/EnemySpriteSheet.png</File>
     <File>D:/Files/Github/CSE3902/Content/explosion.png</File>
@@ -17,6 +18,7 @@
     <File>D:/Files/Github/CSE3902/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
