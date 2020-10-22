@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint3.Link
 {
-    public class Stationary: Movement
+    public class Stationary : Movement
     {
         
-        public Stationary(LinkPlayer link)
+        public Stationary(LinkPlayer link) : base(link)
         {
-            this.link = link;
+
         }
 
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
@@ -26,7 +26,7 @@ namespace Sprint3.Link
                 {
                     Color col = colors[i];
                     i++;
-                    linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                    linkSprite.Draw(spriteBatch, location, 96, col);
 
                     if (i == colors.Length - 1)
                     {
@@ -45,7 +45,7 @@ namespace Sprint3.Link
                 {
                     linkSprite = SpriteFactory.Instance.CreateLinkSprite();
                 }
-                linkSprite.Draw(spriteBatch, location, 0, Color.White);
+                linkSprite.Draw(spriteBatch, location, 96, Color.White);
             }
 
         }
