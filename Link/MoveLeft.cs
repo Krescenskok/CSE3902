@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,18 +9,22 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = -10;
 
-        public MoveLeft(LinkPlayer link)
+        public MoveLeft(LinkPlayer link) : base(link)
         {
-            this.link = link;
+
         }
 
-  
+
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 150)
+            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.X += MOVEMENT;
+                if(!link.isWalkingInPlace)
+                {
+                    location.X += MOVEMENT;
+                }
+                
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
                 if (currentFrame == 4)
@@ -31,6 +35,8 @@ namespace Sprint3.Link
                 if (location.X <= 0)
                     location.X = 0;
             }
+
+
             link.IsAttacking = false;
             link.IsStopped = true;
 
@@ -108,13 +114,6 @@ namespace Sprint3.Link
 
             return location;
         }
-
-
-        
-
-        public override void MovingLeft()
-        {
-            
-        }
+       
     }
 }
