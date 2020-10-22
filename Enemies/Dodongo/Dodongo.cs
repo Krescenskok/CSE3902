@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Enemies.Dodongo;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Sprint3
 {
@@ -11,28 +13,51 @@ namespace Sprint3
     /// </summary>
     class Dodongo : IEnemy
     {
-        IEnemyState dodongoState;
-        ISprite dodongoSprite;
+        public IEnemyState dodongoState;
+        private ISprite dodongoSprite;
+        private DodongoMovingSprite dodongoMovingSprite;
         private int dodongoHP;
         private Vector2 dodongoPos;
+        private EnemyCollider dodongoCollider;
+        private const int AttackStrength = 5;
+        private string direction;
+        private XElement dodongoInfo;
+        private Point faceColliderSize = new Point(6, 6);
+        private DodongoFaceCollider faceCollider;
 
-        public Dodongo(Vector2 initialPos)
+        public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
-            dodongoHP = 3;
+            dodongoHP = 2;
+            direction = "Right";
+            dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
-
-            SetSprite("Right");
+            dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos), AttackStrength);
+            faceCollider = new DodongoFaceCollider()
         }
 
-        public void SetSprite(string direction)
+        public string GetDirection()
         {
-            dodongoSprite = EnemySpriteFactory.Instance.CreateDodongoSprite(direction);
+            return direction;
+        }
+
+        public Rectangle SetFacePos()
+        {
+            Rectangle result;
+            
+            return result;
+        }
+
+        public void UpdateDirection(string newDirection)
+        {
+            direction = newDirection;
         }
 
         public void Update()
         {
             dodongoState.Update();
+            dodongoCollider.Update(dodongoPos.ToPoint());
         }
 
         public void UpdatePos(Vector2 newPos)
@@ -40,14 +65,22 @@ namespace Sprint3
             dodongoPos = newPos;
         }
 
-        public void TakeDamage(int amount)
-        {
-            dodongoState.TakeDamage(amount);
-        }
 
-        public void LostHp()
+        public void LostHP()
         {
             dodongoHP--;
+        }
+
+        public Boolean checkAlive()
+        {
+            return dodongoHP >= 0;
+        }
+
+        public void Die()
+        {
+            CollisionHandler.Instance.RemoveCollider(dodongoCollider);
+            RoomEnemies.Instance.Destroy(this, dodongoPos);
+            dodongoInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -57,17 +90,16 @@ namespace Sprint3
 
         public void SetSprite(ISprite sprite)
         {
-            throw new NotImplementedException();
+            dodongoSprite = sprite;
         }
 
         public void Spawn()
         {
-            throw new NotImplementedException();
         }
 
         public EnemyCollider GetCollider()
         {
-            throw new NotImplementedException();
+            return dodongoCollider;
         }
     }
 }
