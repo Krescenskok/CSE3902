@@ -179,9 +179,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint3.csproj",
-      "projectName": "Sprint3",
-      "projectPath": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint3.csproj",
+      "projectUniqueName": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint2Final.csproj",
+      "projectName": "Sprint2Final",
+      "projectPath": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\Sprint2Final.csproj",
       "packagesPath": "C:\\Users\\Jordan\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jordan\\Documents\\GitHub\\CSE3902\\obj\\",
       "projectStyle": "PackageReference",

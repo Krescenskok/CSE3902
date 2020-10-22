@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Items
+namespace Sprint2Final.Items
 {
     class ItemsCommand : ICommand
     {

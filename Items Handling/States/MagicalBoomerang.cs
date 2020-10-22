@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Items.States
+namespace Sprint2Final.Items.States
 {
     public class MagicalBoomerang : IItemsState
     {

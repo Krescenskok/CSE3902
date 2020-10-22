@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint2Final.Items
 {
     public class Compass : IItemsState
     {

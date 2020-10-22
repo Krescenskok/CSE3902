@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint2Final.Enemies;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.EnemyAndNPC.Merchant
+namespace Sprint2Final.EnemyAndNPC.Merchant
 {
     /// <summary>
     /// Author: Yuan Hong

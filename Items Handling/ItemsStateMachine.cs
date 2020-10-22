@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Items.States;
+using Sprint2Final.Items.States;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint2Final.Items
 {
     public enum Item
     {

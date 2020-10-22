@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sprint3
+namespace Sprint2Final
 {
     public static class Program
     {

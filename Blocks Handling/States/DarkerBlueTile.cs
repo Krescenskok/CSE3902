@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Blocks
+namespace Sprint2Final.Blocks
 {
     public class DarkerBlueTile : IBlockState
     {

@@ -1,12 +1,12 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Link;
- using Sprint3.Blocks;
-using Sprint3.Items;
-using Sprint3.EnemyAndNPC;
+using Sprint2Final.Link;
+ using Sprint2Final.Blocks;
+using Sprint2Final.Items;
+using Sprint2Final.EnemyAndNPC;
 
-namespace Sprint3
+namespace Sprint2Final
 {
 
     public class ResetCommand : ICommand

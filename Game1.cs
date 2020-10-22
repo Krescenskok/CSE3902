@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Items;
-using Sprint3.Link;
-using Sprint3;
-using Sprint3.Enemies;
-using Sprint3.Blocks;
+using Sprint2Final.Items;
+using Sprint2Final.Link;
+using Sprint2Final;
+using Sprint2Final.Enemies;
+using Sprint2Final.Blocks;
 using System.Xml.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Linq;
 
-namespace Sprint3
+namespace Sprint2Final
 {
 
     public class Game1 : Game

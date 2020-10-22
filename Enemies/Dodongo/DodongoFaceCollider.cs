@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Enemies.Dodongo
+namespace Sprint2Final.Enemies.Dodongo
 {
     class DodongoFaceCollider : ICollider
     {

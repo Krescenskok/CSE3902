@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint2Final
 {
     /// <summary>
     /// Generates list of list of rectangles for objects that move uniformly on a grid

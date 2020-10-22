@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint2Final;
 
-namespace Sprint3.Blocks
+namespace Sprint2Final.Blocks
 
 {
 

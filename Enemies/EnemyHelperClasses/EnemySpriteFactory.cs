@@ -1,16 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
-using Sprint3.Enemies.Zol;
-using Sprint3.EnemyAndNPC.AquamentusAndFireballs;
-using Sprint3.EnemyAndNPC.Merchant;
-using Sprint3.EnemyAndNPC.OldMan;
+using Sprint2Final.Enemies;
+using Sprint2Final.Enemies.Zol;
+using Sprint2Final.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint2Final.EnemyAndNPC.Merchant;
+using Sprint2Final.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint2Final
 {
     /// <summary>
     /// <para>Factory for generating Enemy and NPC sprites</para>

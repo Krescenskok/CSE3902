@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Link
+namespace Sprint2Final.Link
 {
     public enum Weapon
     {

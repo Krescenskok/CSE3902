@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace Sprint3
+namespace Sprint2Final
 {
     /// <summary>
     /// Author: Yuan Hong

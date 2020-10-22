@@ -10,7 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint2Final
 {
     public class Rope : IEnemy
     {

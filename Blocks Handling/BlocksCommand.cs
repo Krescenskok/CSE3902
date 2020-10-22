@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Blocks
+namespace Sprint2Final.Blocks
 {
     class BlocksCommand : ICommand
     {

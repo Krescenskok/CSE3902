@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint2Final;
 
-namespace Sprint3.Link
+namespace Sprint2Final.Link
 {
     public class LinkSprite : ISprite
     {
