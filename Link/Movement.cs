@@ -57,6 +57,8 @@ namespace Sprint3.Link
 
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
+          
+
             if (link.IsStopped)
             {
                 if (location.X <= 0)
@@ -69,6 +71,7 @@ namespace Sprint3.Link
 
             if (link.IsAttacking)
             {
+
                 if (link.CurrentWeapon == Weapon.WoodenSword)
                 {
                     return HandleWoodenSword(gameTime, location);
@@ -83,6 +86,10 @@ namespace Sprint3.Link
                 }
 
             }
+            if(link.IsPickingUpItem)
+            {
+                return HandlePickUpItem(gameTime, location);
+            }
 
             return HandleShield(gameTime, location);
         }
@@ -93,6 +100,7 @@ namespace Sprint3.Link
         public abstract Vector2 HandleSword(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleShield(GameTime gameTime, Vector2 location);
+        public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
 
 
 
