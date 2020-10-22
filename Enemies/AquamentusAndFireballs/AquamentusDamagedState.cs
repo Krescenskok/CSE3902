@@ -11,45 +11,65 @@ namespace Sprint3
     /// </summary>
     class AquamentusDamagedState : IEnemyState
     {
+        private Aquamentus aquamentus;
+        private Vector2 aquamentusPos;
+        private int attackPosYValueAdjust = 6;
+        private Vector2 targetPos = new Vector2(100, 100);
+        private int recoverCountDown = 20;
+
         public AquamentusDamagedState(Aquamentus aquamentus, Vector2 initalPos)
         {
-
+            this.aquamentus = aquamentus;
+            aquamentusPos = initalPos;
+            aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDragonSprite());
         }
 
 
         public void Attack()
         {
-            throw new NotImplementedException();
+            Vector2 attackPos = new Vector2(aquamentusPos.X, aquamentusPos.Y + attackPosYValueAdjust);
+            aquamentus.SpawnFireBall(attackPos, targetPos);
         }
 
-        public void ChangeDirection()
-        {
-            throw new NotImplementedException();
-        }
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Die()
         {
-            throw new NotImplementedException();
+            aquamentus.Die();
         }
 
-        public void TakeDamage()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            if(recoverCountDown < 0)
+            {
+                if (aquamentus.checkAlive())
+                {
+                    aquamentus.state = new AquamentusNormalState(aquamentus, aquamentusPos);
+                }
+                else
+                {
+                    Die();
+                }
+            }
+            else
+            {
+                recoverCountDown--;
+            }
         }
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            //wont take damage in DamagedState
+        }
+
+        public void ChangeDirection()
+        {
+            //wont use
         }
     }
 }

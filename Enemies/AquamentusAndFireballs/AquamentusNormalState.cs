@@ -12,15 +12,15 @@ namespace Sprint3
     /// </summary>
     class AquamentusNormalState : IEnemyState
     {
-
-        private Aquamentus AquamentusNormal;
+        private Aquamentus aquamentus;
         private Vector2 aquamentusPos;
         private int attackPosYValueAdjust = 6;
         private Vector2 targetPos = new Vector2(100, 100);
 
+
         public AquamentusNormalState(Aquamentus aquamentus, Vector2 initialPos)
         {
-            AquamentusNormal = aquamentus;
+            this.aquamentus = aquamentus;
             aquamentusPos = initialPos;
             aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDragonSprite());
         }
@@ -28,12 +28,12 @@ namespace Sprint3
         public void Attack()
         {
             Vector2 attackPos = new Vector2(aquamentusPos.X, aquamentusPos.Y + attackPosYValueAdjust);
-            AquamentusNormal.SpawnFireBall(attackPos, targetPos);
+            aquamentus.SpawnFireBall(attackPos, targetPos);
         }
 
         public void ChangeDirection()
         {
-            //Do nothing
+            //wont use
         }
 
         public void Die()
@@ -41,37 +41,21 @@ namespace Sprint3
             //enemy die in damaged state
         }
 
-
-
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            AquamentusNormal.LostHP();
-            AquamentusNormal.state = new AquamentusDamagedState(AquamentusNormal, aquamentusPos);
-        }
-
-        public void MoveLeft()
-        {
-            aquamentusPos.X-=2;
+            aquamentus.LostHP(amount);
+            aquamentus.state = new AquamentusDamagedState(aquamentus, aquamentusPos);
         }
 
         public void Update()
         {
-            MoveLeft();
-            AquamentusNormal.ChangePos(aquamentusPos);
-            if (AquamentusNormal.TryAttack())
-            {
-                Attack();
-            }
+            //do nothing
         }
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            //aquamentus move in its own area
         }
 
-        public void TakeDamage(int amount)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
