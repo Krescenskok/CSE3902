@@ -13,18 +13,19 @@ namespace Sprint3
     /// </summary>
     class DodongoMovingState : IEnemyState
     {
-        Dodongo dodongoMoving;
+        Dodongo dodongo;
         private Vector2 dodongoPos;
-        private string direction;
+        private string direction = "Right";
         private float speedPerSec = 25;
         private float updatePerSec = 30;
         private float speed;
         public DodongoMovingState(Dodongo dodongo, Vector2 initialPos)
         {
-            dodongoMoving = dodongo;
+            this.dodongo = dodongo;
             dodongoPos = initialPos;
-            direction = "Right";
+            direction = dodongo.GetDirection();
             speed = speedPerSec / updatePerSec;
+            dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDodongoSprite(direction)) ;
         }
 
         public void Attack()
@@ -47,25 +48,21 @@ namespace Sprint3
                 {
                     direction = directionArray[directionIndex];
                     findNewDirection = true;
-                    dodongoMoving.SetSprite(direction);
+                    dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDodongoSprite(direction));
                 }
             }
         }
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            ChangeDirection();
         }
 
         public void Die()
         {
-            //do nothing
+            //die in DamagedState
         }
 
-        public void TakeDamage()
-        {
-            //do nothing for now
-        }
 
         public void Update()
         {
@@ -85,13 +82,17 @@ namespace Sprint3
             {
                 dodongoPos.X += speed;
             }
-
-            dodongoMoving.UpdatePos(dodongoPos);
+            dodongo.UpdatePos(dodongoPos);
         }
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            if (amount == -1)
+            {
+                dodongo.LostHP();
+                dodongo.dodongoState = new DodongoDamagedState(dodongo, dodongoPos);
+                dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDodongoSprite(direction));
+            }
         }
     }
 }
