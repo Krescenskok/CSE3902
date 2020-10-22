@@ -23,6 +23,7 @@ namespace Sprint3.Link
         private double damageStartTime;
         private float health = 30;
         public bool isWalkingInPlace = false;
+        private bool isPickingUpItem = false;
 
 
 
@@ -101,6 +102,8 @@ namespace Sprint3.Link
 
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
+        public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
+
         public LinkPlayer()
         {
 
@@ -137,6 +140,11 @@ namespace Sprint3.Link
                 state = new MoveDown(this);
         }
 
+        public void Stationary()
+        {
+             state = new Stationary(this);
+        }
+
         public void Reset()
         {
             state = new Stationary(this);
@@ -146,6 +154,8 @@ namespace Sprint3.Link
             IsAttacking = false;
             IsDamaged = false;
             IsStopped = false;
+            IsWalkingInPlace = false;
+            IsPickingUpItem = false;
 
           
         }
@@ -161,6 +171,9 @@ namespace Sprint3.Link
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
+
+        
+        
 
        
     }
