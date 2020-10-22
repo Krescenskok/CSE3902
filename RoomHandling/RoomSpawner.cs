@@ -30,7 +30,12 @@ namespace Sprint3.RoomHandling
         List<List<IStatus>> dungeonStatus;
         List<TestCollider> testObjects;
         int roomNumber;
-        
+        Dictionary<int, String> roomNewXMLs = new Dictionary<int, String>();
+
+        List<XElement> Rooms;
+
+
+
 
         public static RoomSpawner Instance
         {
@@ -47,6 +52,13 @@ namespace Sprint3.RoomHandling
             List<IBlockState> IBlocks = new List<IBlockState>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
+            dungeonStatus = new List<List<IStatus>>();
+
+            List<XElement> iRooms = Elements("Item").ToList();
+        }
+
+        public void Reset()
+        {
             dungeonStatus = new List<List<IStatus>>();
         }
 

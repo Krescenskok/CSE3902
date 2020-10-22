@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png</SourceFile>
-  <SourceTime>2020-10-09T14:30:49.2985133-04:00</SourceTime>
+  <SourceTime>2020-10-15T18:13:36-04:00</SourceTime>
   <DestFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/NPCSpriteSheet.xnb</DestFile>
-  <DestTime>2020-10-19T16:21:40.78308-04:00</DestTime>
+  <DestTime>2020-10-22T19:34:34.1239951-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
