@@ -179,9 +179,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Files\\Github\\CSE3902\\Sprint2Final.csproj",
-      "projectName": "Sprint2Final",
-      "projectPath": "D:\\Files\\Github\\CSE3902\\Sprint2Final.csproj",
+      "projectUniqueName": "D:\\Files\\Github\\CSE3902\\Sprint3.csproj",
+      "projectName": "Sprint3",
+      "projectPath": "D:\\Files\\Github\\CSE3902\\Sprint3.csproj",
       "packagesPath": "C:\\Users\\yanna\\.nuget\\packages\\",
       "outputPath": "D:\\Files\\Github\\CSE3902\\obj\\",
       "projectStyle": "PackageReference",
