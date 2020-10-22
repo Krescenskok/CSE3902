@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final.Enemies;
-using Sprint2Final.EnemyAndNPC.Merchant;
-using Sprint2Final.EnemyAndNPC.OldMan;
+using Sprint3.Enemies;
+using Sprint3.EnemyAndNPC.Merchant;
+using Sprint3.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     /// <summary>
     /// Author: JT Thrash

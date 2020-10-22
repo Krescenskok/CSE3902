@@ -4,11 +4,11 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint2Final.Items;
-using Sprint2Final.Link;
-using Sprint2Final.Blocks;
+using Sprint3.Items;
+using Sprint3.Link;
+using Sprint3.Blocks;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     public class KeyboardController : IController
     {

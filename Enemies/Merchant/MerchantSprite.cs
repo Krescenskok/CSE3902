@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2Final.EnemyAndNPC.Merchant
+namespace Sprint3.EnemyAndNPC.Merchant
 {
     /// <summary>
     /// Author: Yuan Hong

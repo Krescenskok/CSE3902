@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     public class GoriyaDamagedState : IEnemyState
     {

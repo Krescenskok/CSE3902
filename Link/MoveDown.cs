@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint2Final.Link
+namespace Sprint3.Link
 {
     public class MoveDown: Movement
     {

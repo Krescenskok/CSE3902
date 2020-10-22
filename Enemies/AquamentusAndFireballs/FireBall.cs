@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint3.EnemyAndNPC.AquamentusAndFireballs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong

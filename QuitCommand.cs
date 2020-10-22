@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     public class QuitCommand : ICommand
     {

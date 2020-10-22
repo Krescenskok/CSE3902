@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     /// <summary>
     /// class which detects all collisions in game and sends appropriate messages to colliding objects

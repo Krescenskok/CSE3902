@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final;
+using Sprint3;
 
-namespace Sprint2Final.Items
+namespace Sprint3.Items
 {
 
     public class ItemsSprite : ISprite

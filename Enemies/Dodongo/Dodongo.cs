@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final.Enemies.Dodongo;
+using Sprint3.Enemies.Dodongo;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong

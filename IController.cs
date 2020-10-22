@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     interface IController
     {

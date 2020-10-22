@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final.Enemies;
+using Sprint3.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint2Final
+namespace Sprint3
 {
     /// <summary>
     /// <author>JT Thrash</author>

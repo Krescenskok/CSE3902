@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2Final.Blocks;
+using Sprint3.Blocks;
 
-namespace Sprint2Final.Blocks
+namespace Sprint3.Blocks
 {
     public class LinkBlocks
     {
