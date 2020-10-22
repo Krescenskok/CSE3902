@@ -11,11 +11,12 @@ namespace Sprint2
         private int runTime;
         private const int maxTime = 250;
         private int frame = 0;
+        private int row = 0;
 
         public BeamImpactState(SwordBeam item)
         {
             this.item = item;
-            item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite());
+            item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite(0));
             item.UpdateFrame(0);
             runTime = 0;
         }
@@ -29,6 +30,12 @@ namespace Sprint2
             {
                 frame++;
                 item.UpdateFrame(frame % 2);
+            }
+
+            if (runTime % (maxTime / 3) == 0)
+            {
+                row++;
+                item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite(row));
             }
 
             if (runTime >= maxTime)

@@ -78,9 +78,9 @@ namespace Sprint2
             return new ExplosionSprite(explosionSheet);
         }
 
-        public ISprite CreateBeamImpactSprite()
+        public ISprite CreateBeamImpactSprite(int row)
         {
-            return new BeamImpactSprite(swordBeamImpactSheet);
+            return new BeamImpactSprite(swordBeamImpactSheet, row);
         }
 
         public ISprite CreateWandBeamSprite(string direction)
