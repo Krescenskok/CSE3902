@@ -24,17 +24,6 @@ namespace Sprint3
             CollisionHandler.Instance.AddCollider(this);
         }
 
-        public EnemyCollider(Rectangle rect, int strength)
-        {
-            bounds = rect;
-
-            this.enemy = null;
-
-            damageAmount = strength;
-
-            CollisionHandler.Instance.AddCollider(this);
-        }
-
 
         public EnemyCollider()
         {
@@ -64,7 +53,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall"))
             {
                 enemy.MoveAwayFromCollision(collision);
                 
@@ -73,16 +62,20 @@ namespace Sprint3
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From().ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
+
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("PlayerTakeDamage", damageAmount);
+                
+                col.SendMessage("TakeDamage" + direction, damageAmount);
             }
-           
+            
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "TakeDamage") enemy.TakeDamage((int)value);
+            if (msg == "EnemyTakeDamage" || msg == "TakeDamage") enemy.TakeDamage((int)value);
         }
 
         public void Update(Point point)

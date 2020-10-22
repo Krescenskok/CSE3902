@@ -32,8 +32,8 @@
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Gel</ObjectName>
-				<Location>1 11</Location>
+				<ObjectName>Dodongo</ObjectName>
+				<Location>2 2</Location>
 				<Alive>true</Alive>
 			</Item>
 			

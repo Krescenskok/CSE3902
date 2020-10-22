@@ -48,7 +48,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "PlayerWeapon";
+            return tag == "Wall" || tag == "wall";
         }
 
         

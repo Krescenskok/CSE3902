@@ -95,8 +95,7 @@ namespace Sprint3
                     }
                 else if (objName.Equals("Dodongo"))
                 {
-                    enemies.Add(new Dodongo
-                        (location));
+                    enemies.Add(new Dodongo(game,location,item));
                 }
                 //more if-else for other enemies
 

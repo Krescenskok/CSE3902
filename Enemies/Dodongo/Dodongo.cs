@@ -34,7 +34,7 @@ namespace Sprint3
             dodongoState = new DodongoMovingState(this, initialPos);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
             dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos), AttackStrength);
-            faceCollider = new DodongoFaceCollider()
+            faceCollider = new DodongoFaceCollider(SetFacePos(),dodongoState,AttackStrength);
         }
 
         public string GetDirection()
@@ -44,7 +44,7 @@ namespace Sprint3
 
         public Rectangle SetFacePos()
         {
-            Rectangle result;
+            Rectangle result = new Rectangle();
             
             return result;
         }
