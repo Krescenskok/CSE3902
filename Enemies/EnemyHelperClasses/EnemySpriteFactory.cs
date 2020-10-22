@@ -212,34 +212,27 @@ namespace Sprint3
         {
             return new AquamentusNormalSprite(bossTextrue);
         }
+        
+        public ISprite CreateDamagedDragonSprite()
+        {
+            return new AquamentusDamagedSprite(bossTextrue);
+        }
 
         public ISprite CreateFireBall()
         {
             return new FireBallSprite(bossTextrue);
         }
 
+        
         public ISprite CreateDodongoSprite(string direction)
         {
-            if (direction.Equals("Forward"))
-            {
-                return new DodongoForwardSprite(bossTextrue);
-            }
-            else if (direction.Equals("Backward"))
-            {
-                return new DodongoBackwardSprite(bossTextrue);
-            }
-            else if (direction.Equals("Left"))
-            {
-                return new DodongoLeftSprite(bossTextrue);
-            }
-            else if (direction.Equals("Right"))
-            {
-                return new DodongoRightSprite(bossTextrue);
-            }
-            else
-            {
-                throw new Exception();
-            }
+            return new DodongoMovingSprite(bossTextrue, direction);
+
+        }
+
+        public ISprite CreateDamagedDodongoSprite(string direction)
+        {
+            return new DodongoDamagedSprite(bossTextrue, direction);
         }
     }
 }
