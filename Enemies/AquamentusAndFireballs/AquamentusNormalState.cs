@@ -45,6 +45,7 @@ namespace Sprint3
         {
             aquamentus.LostHP(amount);
             aquamentus.state = new AquamentusDamagedState(aquamentus, aquamentusPos);
+            aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDragonSprite());
         }
 
         public void Update()
