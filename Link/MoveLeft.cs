@@ -114,6 +114,28 @@ namespace Sprint3.Link
 
             return location;
         }
-       
+
+        public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 4:
+                    case 5: currentFrame = 8; break;
+                    case 8: currentFrame = 9; break;
+                    case 9:
+                        currentFrame = 4;
+                        link.IsStopped = true;
+                        link.IsPickingUpItem = false;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
     }
 }
