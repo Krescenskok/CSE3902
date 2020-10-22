@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,19 +9,15 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = -10;
 
-        
-        public MoveUp(LinkPlayer link)
+
+        public MoveUp(LinkPlayer link) : base(link)
         {
-            this.link = link;
+
         }
 
-       
-
-       
-       
         public override Vector2 HandleShield(GameTime gameTime,Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 150)
+            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
                 location.Y += MOVEMENT;
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
@@ -116,8 +112,6 @@ namespace Sprint3.Link
             return location;
         }
 
-        public override void MovingUp()
-        {
-        }
+       
     }
 }
