@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint2.Link;
+using Sprint3.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2.Items
+namespace Sprint3.Items
 {
     public class ReturningBoomerangState : IItemsState
     {

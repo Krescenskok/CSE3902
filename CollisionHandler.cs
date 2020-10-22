@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3Final
 {
     //class which detects all collisions in game and sends appropriate messages to colliding objects
     public class CollisionHandler

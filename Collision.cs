@@ -1,9 +1,9 @@
-﻿using Sprint2;
+﻿using Sprint3;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2Final
+namespace Sprint3Final
 {
     public class Collision
     {

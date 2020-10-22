@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     public class DisplayNextEnemy : ICommand
     {

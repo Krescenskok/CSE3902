@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint2.Items
+namespace Sprint3.Items
 {
     public class TriforcePiece : IItems
     {

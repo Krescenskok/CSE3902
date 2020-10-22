@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint2;
+using Sprint3;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     public class ArrowSprite : ISprite
     {

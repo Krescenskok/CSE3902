@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2.Items
+namespace Sprint3.Items
 {
     public class BombExplosionState : IItemsState
     {

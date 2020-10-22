@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     /// Author: Yuan Hong

@@ -4,14 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/BossSpriteSheet.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/EnemySpriteSheet.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/File.spritefont</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/itemSprites.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/LinkSpriteSheet.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/marioOneDirection.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/NPCSpriteSheet.png</File>
-    <File>C:/Users/andre/Documents/Sprint2Final (4)/Sprint2Final/Content/zelda_tiles_focused.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/BossSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/EnemySpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/File.spritefont</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/itemSprites.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/LinkSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/marioOneDirection.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/NPCSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/Sprint3Final (4)/Sprint3Final/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

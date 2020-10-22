@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     public interface IItems
     {

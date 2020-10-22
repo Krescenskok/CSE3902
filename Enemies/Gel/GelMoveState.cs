@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sprint2
+namespace Sprint3
 {
     /// <summary>
     ///Moves gel either up or down to another tile and stops
