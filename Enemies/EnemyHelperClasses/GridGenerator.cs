@@ -81,6 +81,16 @@ namespace Sprint3
             return savedGrid;
         }
 
+        public int GetGridWidth()
+        {
+            return savedGrid[0].Count * tileSize.X;
+        }
+
+        public int GetGridHeight()
+        {
+            return savedGrid.Count * tileSize.Y;
+        }
+
         /// <summary>
         /// Snaps input location to rectangle on grid. Returns null grid not yet formed.
         /// </summary>

@@ -33,6 +33,10 @@ namespace Sprint3
         private const int attack = 5;
         private int HP = 15;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public void SetSprite(ISprite sprite)
         {
 
@@ -102,7 +106,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            collider.Update(location.ToPoint());
+            collider.Update(this);
             if (boomy != null) boomy.Update();
         }
 

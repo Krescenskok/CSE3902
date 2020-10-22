@@ -29,7 +29,9 @@ namespace Sprint3
         private const int attack = 5;
         private int HP = 10;
 
-       
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
 
         public Rope(Game game, Vector2 location, XElement xml)
         {
@@ -55,7 +57,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            collider.Update(location.ToPoint());
+            collider.Update(this);
 
            
         }

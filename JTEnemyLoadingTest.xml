@@ -13,40 +13,47 @@
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Stalfos</ObjectName>
-				<Location>2 6</Location>
-				<Alive>false</Alive>
-			</Item>
-			
-			<Item>
-				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Gel</ObjectName>
-				<Location>1 11</Location>
-				<Alive>true</Alive>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Gel</ObjectName>
-				<Location>1 11</Location>
-				<Alive>true</Alive>
-			</Item>
-			<Item>
-				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Dodongo</ObjectName>
-				<Location>2 2</Location>
+				<Location>3 3</Location>
 				<Alive>true</Alive>
 			</Item>
 			
 			
-			
-			
-			
-			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
-				<ObjectName>Block</ObjectName>
+				<ObjectName>Trap</ObjectName>
+				<Location>6 11</Location>
+				<Direction1>left</Direction1>
+				<Direction2>up</Direction2>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>0 11</Location>
+				<Direction1>left</Direction1>
+				<Direction2>down</Direction2>
+				<Alive>true</Alive>
+			</Item>
+
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>6 0</Location>
+				<Direction1>right</Direction1>
+				<Direction2>up</Direction2>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
 				<Location>0 0</Location>
+				<Direction1>right</Direction1>
+				<Direction2>down</Direction2>
+				<Alive>true</Alive>
 			</Item>
+			
+			
 			
 		</Room>
 		

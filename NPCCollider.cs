@@ -15,6 +15,8 @@ namespace Sprint3
             CollisionHandler.Instance.AddCollider(this);
         }
 
+        public string Tag { get => "NPC"; }
+
         public Rectangle Bounds()
         {
             return bounds;

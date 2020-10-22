@@ -16,6 +16,10 @@ namespace Sprint3
         private ISprite sprite;
         private Vector2 location;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Zol(Game game, Vector2 location)
         {
             this.location = location;

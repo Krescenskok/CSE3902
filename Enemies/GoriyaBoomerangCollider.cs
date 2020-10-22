@@ -14,6 +14,8 @@ namespace Sprint3.Enemies
 
         GoriyaBoomerang boomerang;
 
+        public string Tag { get => "Enemy"; }
+
         public GoriyaBoomerangCollider(GoriyaBoomerang boomerang, Rectangle rect, int strength)
         {
             bounds = rect;
@@ -25,7 +27,7 @@ namespace Sprint3.Enemies
             CollisionHandler.Instance.AddCollider(this);
         }
 
-
+       
 
         public Rectangle Bounds()
         {

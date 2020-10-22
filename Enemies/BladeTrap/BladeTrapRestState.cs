@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint3
@@ -16,11 +16,12 @@ namespace Sprint3
         private Vector2 location;
         private Vector2 target;
         private BladeTrap trap;
+        private int attackLength;
 
-        public BladeTrapRestState(Vector2 location, Vector2 target, BladeTrap trap)
+        public BladeTrapRestState(Vector2 location,BladeTrap trap)
         {
             this.location = location;
-            this.target = target;
+            trap.SetSprite(EnemySpriteFactory.Instance.CreateBladeTrapSprite());
             this.trap = trap;
         }
 
@@ -28,9 +29,17 @@ namespace Sprint3
         {
         }
 
+        public void SetDirection(Vector2 newDirection, int length)
+        {
+            target = newDirection;
+            attackLength = length;
+
+           // Debug.WriteLine("location: " + location + " target: " + newTarget);
+        }
+
         public void Attack()
         {
-            trap.state = new BladeTrapAttackState(location,target,trap);
+            trap.state = new BladeTrapAttackState(location,target,trap,attackLength);
         }
 
         public void ChangeDirection()
@@ -40,7 +49,7 @@ namespace Sprint3
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void Die()
@@ -55,12 +64,12 @@ namespace Sprint3
 
         public void Update()
         {
-            Attack();
+            //wait
         }
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+           //cannot be damaged
         }
     }
 }

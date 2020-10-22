@@ -12,6 +12,9 @@ namespace Sprint3
         private Rectangle bounds;
         private IEnemyState enemy;
         private int damageAmount;
+        public string tag;
+
+        public string Tag { get => tag; }
 
         public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength)
         {
@@ -19,6 +22,19 @@ namespace Sprint3
 
             this.enemy = enemy;
 
+            damageAmount = strength;
+
+            CollisionHandler.Instance.AddCollider(this);
+
+            tag = "Enemy";
+        }
+
+        public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength, string tag)
+        {
+            bounds = rect;
+
+            this.enemy = enemy;
+            this.tag = tag;
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this);
@@ -43,7 +59,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "enemy" || tag == "Enemy";
+            return tag == this.tag;
         }
 
         public bool Equals(ICollider col)
@@ -53,7 +69,8 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall"))
+            
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("trap"))
             {
                 enemy.MoveAwayFromCollision(collision);
                 
@@ -78,9 +95,11 @@ namespace Sprint3
             if (msg == "EnemyTakeDamage" || msg == "TakeDamage") enemy.TakeDamage((int)value);
         }
 
-        public void Update(Point point)
+
+        public void Update(IEnemy enemy)
         {
-            bounds.Location = point;
+            this.enemy = enemy.State;
+            bounds.Location = enemy.Location.ToPoint();
         }
     }
 }

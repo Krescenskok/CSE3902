@@ -27,6 +27,10 @@ namespace Sprint3
         private int HP = 10;
         private const int attack = 5;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
@@ -72,7 +76,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            collider.Update(location.ToPoint());
+            collider.Update(this);
         }
 
         public void SetSprite(ISprite sprite)

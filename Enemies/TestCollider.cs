@@ -17,6 +17,8 @@ namespace Sprint3
 
         private int attack;
 
+        public string Tag { get => "wall"; }
+
         public TestCollider(Point location, Point size, Game game, int attack)
         {
             bounds = new Rectangle(location, size);

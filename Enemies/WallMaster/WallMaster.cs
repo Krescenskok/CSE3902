@@ -14,6 +14,10 @@ namespace Sprint3
     {
         public Vector2 location { get; set; }
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public IEnemyState state;
         private ISprite sprite;
 

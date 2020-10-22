@@ -10,7 +10,8 @@ namespace Sprint3
     {
         private Rectangle bounds;
         private GelMoveState gel;
-       
+
+        public string Tag {get =>  "GelBlock";}
 
         public GelBlockCollider(Rectangle rect, GelMoveState gel)
         {

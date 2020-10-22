@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint3
@@ -13,25 +14,29 @@ namespace Sprint3
     {
 
         private Vector2 location;
-        private Vector2 target;
+      
         private Vector2 origin;
         private Vector2 direction;
+        private int attackLength;
         private BladeTrap trap;
 
         private bool returningToRest;
+        private bool endOfReach;
+        private bool endOfReturn;
 
         private int moveSpeed;
 
 
-        public BladeTrapAttackState(Vector2 location, Vector2 target, BladeTrap trap)
+        public BladeTrapAttackState(Vector2 location, Vector2 direction, BladeTrap trap, int attackLength)
         {
             this.location = location;
             origin = location;
-            this.target = target;
+            this.direction = direction;
             this.trap = trap;
 
-            direction = target - location;
-            direction.Normalize();
+            this.attackLength = attackLength;
+
+          
 
             returningToRest = false;
 
@@ -50,12 +55,13 @@ namespace Sprint3
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+           
+            endOfReach = true;
         }
 
         public void Die()
         {
-            trap.state = new BladeTrapRestState(origin,target,trap);
+            trap.state = new BladeTrapRestState(origin,trap);
         }
 
         public void TakeDamage()
@@ -66,9 +72,12 @@ namespace Sprint3
         public void Update()
         {
 
-            
-            bool endOfReach = location.X >= target.X && location.Y >= target.Y;
-            bool endOfReturn = location.X <= origin.X && location.Y <= origin.Y;
+
+            if (!endOfReach) endOfReach = Vector2.Distance(location, origin) >= attackLength;
+
+           
+            //endOfReturn = location.X <= origin.X && location.Y <= origin.Y;
+            endOfReturn = Vector2.Distance(location, origin) < 1;
 
             if(!returningToRest && !endOfReach || returningToRest && !endOfReturn)
             {
@@ -79,7 +88,9 @@ namespace Sprint3
             {
                 direction = Vector2.Negate(direction);
                 returningToRest = true;
-                moveSpeed = 2;
+                moveSpeed = 1;
+
+                Debug.WriteLine("returning");
             }else if(returningToRest && endOfReturn)
             {
                 Die();
@@ -90,7 +101,7 @@ namespace Sprint3
 
         public void TakeDamage(int amount)
         {
-            throw new NotImplementedException();
+            //does not take damage
         }
     }
 }

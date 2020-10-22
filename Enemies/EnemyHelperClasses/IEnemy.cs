@@ -18,6 +18,9 @@ namespace Sprint3
 
         EnemyCollider GetCollider();
 
+        Vector2 Location { get; }
+
+        IEnemyState State { get; }
         
     }
 }

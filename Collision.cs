@@ -16,10 +16,13 @@ namespace Sprint3
 
         private Vector2 location;
 
-        public Collision(Direction dir, Vector2 location)
+        public ICollider other;
+
+        public Collision(Direction dir, Vector2 location, ICollider other)
         {
             this.dir = dir;
             this.location = location;
+            this.other = other;
         }
 
         public Collision()

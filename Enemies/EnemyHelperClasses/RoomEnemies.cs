@@ -93,10 +93,15 @@ namespace Sprint3
                     {
                         enemies.Add(new Gel(game, location));
                     }
-                else if (objName.Equals("Dodongo"))
-                {
-                    enemies.Add(new Dodongo(game,location,item));
-                }
+                    else if (objName.Equals("Dodongo"))
+                    {
+                        enemies.Add(new Dodongo(game,location,item));
+                    }else if (objName.Equals("Trap"))
+                    {
+                        string dir1 = item.Element("Direction1").Value;
+                        string dir2 = item.Element("Direction2").Value;
+                        enemies.Add(new BladeTrap(game, location, dir1, dir2));
+                    }
                 //more if-else for other enemies
 
 

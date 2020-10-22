@@ -25,6 +25,10 @@ namespace Sprint3
         private Point faceColliderSize = new Point(6, 6);
         private DodongoFaceCollider faceCollider;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
@@ -33,7 +37,7 @@ namespace Sprint3
             dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
-            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos), AttackStrength);
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),dodongoState, AttackStrength);
             faceCollider = new DodongoFaceCollider(SetFacePos(),dodongoState,AttackStrength);
         }
 
@@ -57,7 +61,7 @@ namespace Sprint3
         public void Update()
         {
             dodongoState.Update();
-            dodongoCollider.Update(dodongoPos.ToPoint());
+            dodongoCollider.Update(this);
         }
 
         public void UpdatePos(Vector2 newPos)

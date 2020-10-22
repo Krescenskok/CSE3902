@@ -18,12 +18,16 @@ namespace Sprint3
         private Vector2 fireBallPos;
         private EnemyCollider fireBallCollider;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength)
         {
             fireBallState = new FireBallState(this,aquamentus, initialPos, targetPos);
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
             fireBallSprite = (FireBallSprite)sprite;
-            fireBallCollider = new EnemyCollider(fireBallSprite.GetRectangle(initialPos), attackStrength);
+            fireBallCollider = new EnemyCollider(fireBallSprite.GetRectangle(initialPos),fireBallState,attackStrength);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -59,7 +63,7 @@ namespace Sprint3
         public void Update()
         {
             fireBallState.Update();
-            fireBallCollider.Update(fireBallPos.ToPoint());
+            fireBallCollider.Update(this);
         }
     }
 }

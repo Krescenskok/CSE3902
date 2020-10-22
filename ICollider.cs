@@ -14,6 +14,8 @@ namespace Sprint3
         /// <param name="tag"></param>
         /// <returns>true if tag equals specified string</returns>
         bool CompareTag(string tag);
+
+        string Tag { get; }
         bool Equals(ICollider col);
 
         /// <summary>

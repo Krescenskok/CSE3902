@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Sprint3
@@ -24,8 +24,10 @@ namespace Sprint3
         private const int ATTACK_POWER = 5;
         private int HP = 50;
 
-        
-       
+        public Vector2 Location { get => location; }
+
+        public IEnemyState State { get => state; }
+
         public Gel(Game game, Vector2 location)
         {
             this.location = location;
@@ -60,7 +62,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            innerCollider.Update(location.ToPoint());
+            innerCollider.Update(this);
 
             if(gSprite != null)outsideCollider.Update(gSprite.OuterColliderLocation(location));
            

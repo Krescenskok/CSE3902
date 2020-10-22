@@ -11,6 +11,8 @@ namespace Sprint3.Enemies.Dodongo
         private IEnemyState dodongo;
         private int damageAmount;
 
+        public string Tag { get => "dodongo"; }
+
         public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo, int strength)
         {
             bounds = rect;
@@ -19,6 +21,8 @@ namespace Sprint3.Enemies.Dodongo
             CollisionHandler.Instance.AddCollider(this);
 
         }
+
+        
 
         public Rectangle Bounds()
         {

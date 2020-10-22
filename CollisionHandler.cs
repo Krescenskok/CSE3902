@@ -58,6 +58,7 @@ namespace Sprint3
                 for(int j = 0; j < colliders.Count; j++)
                 {
 
+                    
                     List<ICollider> key = new List<ICollider> { colliders[i], colliders[j] };
 
                     
@@ -91,6 +92,8 @@ namespace Sprint3
                     
                 }
             }
+
+            
         }
 
         private bool ColliderOverlap(ICollider col1, ICollider col2)
@@ -122,10 +125,10 @@ namespace Sprint3
 
             Collision result = new Collision();
 
-            if (leftSide) result =  LeftCollision(collisionPoint);
-            if (rightSide) result = RightCollision(collisionPoint);
-            if (topSide) result = TopCollision(collisionPoint);
-            if (bottomSide) result = BottomCollision(collisionPoint);
+            if (leftSide) result =  LeftCollision(collisionPoint, col2);
+            if (rightSide) result = RightCollision(collisionPoint, col2);
+            if (topSide) result = TopCollision(collisionPoint, col2);
+            if (bottomSide) result = BottomCollision(collisionPoint, col2);
 
             
 
@@ -133,21 +136,21 @@ namespace Sprint3
 
         }
 
-        public static Collision LeftCollision(Vector2 loc)
+        public static Collision LeftCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.left,loc);
+            return new Collision(Collision.Direction.left,loc, other);
         }
-        public static Collision RightCollision(Vector2 loc)
+        public static Collision RightCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.right,loc);
+            return new Collision(Collision.Direction.right,loc, other);
         }
-        public static Collision TopCollision(Vector2 loc)
+        public static Collision TopCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.up, loc);
+            return new Collision(Collision.Direction.up, loc, other);
         }
-        public static Collision BottomCollision(Vector2 loc)
+        public static Collision BottomCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.down, loc);
+            return new Collision(Collision.Direction.down, loc, other);
         }
 
 

@@ -32,6 +32,10 @@ namespace Sprint3
         private float speed;
         private int directionIndex = -1;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Aquamentus(Game game, Vector2 initialPos, XElement xml)
         {
             aquamentusPos = initialPos;
@@ -123,7 +127,7 @@ namespace Sprint3
             }
             aquamentusPos.X += directionIndex * speed;
             state.Update();
-            aquamentusCollider.Update(aquamentusPos.ToPoint());
+            aquamentusCollider.Update(this);
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }

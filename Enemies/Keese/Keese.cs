@@ -25,6 +25,10 @@ namespace Sprint3
         private const int ATTACK = 5;
         private int HP = 10;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Keese(Game game, Vector2 location)
         {
             this.game = game;
@@ -75,7 +79,7 @@ namespace Sprint3
         {
             
             state.Update();
-            collider.Update(location.ToPoint());
+            collider.Update(this);
         }
 
         public EnemyCollider GetCollider()
