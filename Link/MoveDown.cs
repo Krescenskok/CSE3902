@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,36 +10,16 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = 10;
 
-        
-        public MoveDown(LinkPlayer link)
-        {
-            this.link = link;
-        }
 
-        public override void MovingLeft()
+        public MoveDown(LinkPlayer link) : base(link)
         {
-            link.state = new MoveLeft(link);
-        }
 
-        public override void MovingRight()
-        {
-            link.state = new MoveRight(link);
-        }
-
-        public override void MovingUp()
-        {
-            link.state = new MoveUp(link);
-        }
-
-        public override void Stationary()
-        {
-            link.state = new Stationary(link);
         }
 
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 150)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
                 location.Y += MOVEMENT;
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
@@ -130,9 +110,6 @@ namespace Sprint3.Link
             return location;
         }
 
-        public override void MovingDown()
-        {
-            
-        }
+        
     }
 }
