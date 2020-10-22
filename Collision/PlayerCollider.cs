@@ -56,15 +56,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == Weapon.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 20);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 35);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
@@ -75,15 +75,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == Weapon.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 20);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 35);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
@@ -94,15 +94,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == Weapon.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 20);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 35);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
@@ -113,15 +113,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == Weapon.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 20);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == Weapon.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 35);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
@@ -152,7 +152,7 @@ namespace Sprint3
 
             if (msg == "PickUpItem")
             {
-                //linkPlayer.PickUpItem = true;
+                linkPlayer.IsPickingUpItem = true;
             }
         }
     }
