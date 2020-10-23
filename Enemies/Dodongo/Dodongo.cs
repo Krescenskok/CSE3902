@@ -25,9 +25,9 @@ namespace Sprint3
         private Point faceColliderSize = new Point(6, 6);
         private DodongoFaceCollider faceCollider;
 
-        public Vector2 Location => throw new NotImplementedException();
+        public Vector2 Location { get => dodongoPos; }
 
-        public IEnemyState State => throw new NotImplementedException();
+        public IEnemyState State { get => dodongoState; }
 
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
