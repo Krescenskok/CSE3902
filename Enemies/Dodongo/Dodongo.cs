@@ -38,7 +38,7 @@ namespace Sprint3
             dodongoState = new DodongoMovingState(this, initialPos);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
             dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),dodongoState, AttackStrength);
-            faceCollider = new DodongoFaceCollider(SetFacePos(),dodongoState,AttackStrength);
+            faceCollider = new DodongoFaceCollider(new Rectangle(0,0,6,6),dodongoState,AttackStrength);
         }
 
         public string GetDirection()
@@ -46,11 +46,30 @@ namespace Sprint3
             return direction;
         }
 
-        public Rectangle SetFacePos()
+        public Point UpdateFacePos()
         {
-            Rectangle result = new Rectangle();
-            
-            return result;
+            Vector2 result;
+            if(direction == "Right")
+            {
+                result.X = dodongoPos.X + 32; 
+                result.Y = dodongoPos.Y + 5;
+            }
+            else if(direction == "Left")
+            {
+                result.X = dodongoPos.X - 6; 
+                result.Y = dodongoPos.Y + 5;
+            }
+            else if(direction == "Forward")
+            {
+                result.X = dodongoPos.X + 5; 
+                result.Y = dodongoPos.Y + 16;
+            }
+            else
+            {
+                result.X = dodongoPos.X + 5; 
+                result.Y = dodongoPos.Y - 6;
+            }
+            return result.ToPoint();
         }
 
         public void UpdateDirection(string newDirection)
@@ -62,6 +81,7 @@ namespace Sprint3
         {
             dodongoState.Update();
             dodongoCollider.Update(this);
+            faceCollider.Update(UpdateFacePos());
         }
 
         public void UpdatePos(Vector2 newPos)
@@ -83,6 +103,7 @@ namespace Sprint3
         public void Die()
         {
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
+            CollisionHandler.Instance.RemoveCollider(faceCollider);
             RoomEnemies.Instance.Destroy(this, dodongoPos);
             dodongoInfo.SetElementValue("Alive", "false");
         }

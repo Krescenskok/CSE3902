@@ -12,10 +12,12 @@ namespace Sprint3
     class DodongoMovingSprite : ISprite
     {
         Texture2D texture;
-        private static int[] spriteSize = { 32, 16 };
+        private static int[] horizontalSpriteSize = { 32, 16 };
+        private static int[] verticalSpriteSize = { 16, 16 };
+        private int[] spriteSize = { 0, 0 };
         private Vector2 sourcePos = new Vector2(0, 60);
         private const int NumUpdatePerSec = 30;
-        private const int FrameRate = 5;
+        private const int FrameRate = 6;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter;
         private int frameIndex = 0;
@@ -27,6 +29,34 @@ namespace Sprint3
         {
             this.texture = texture;
             this.direction = direction;
+            if (direction == "Right" || direction == "Left")
+            {
+                spriteSize[0] = horizontalSpriteSize[0];
+                spriteSize[1] = horizontalSpriteSize[1];
+                sourcePos.Y = 60;
+                if (direction == "Right")
+                {
+                    sourcePos.X = 0 * drawSize.X;
+                }
+                else
+                {
+                    sourcePos.X = 2 * drawSize.X;
+                }
+            }
+            else
+            {
+                spriteSize[0] = verticalSpriteSize[0];
+                spriteSize[1] = verticalSpriteSize[1];
+                sourcePos.Y = 46;
+                if (direction == "Forward")
+                {
+                    sourcePos.X = 0 * drawSize.X;
+                }
+                else
+                {
+                    sourcePos.X = 2 * drawSize.X;
+                }
+            }
             drawSize.X = spriteSize[0] * spriteSizeIndex;
             drawSize.Y = spriteSize[1] * spriteSizeIndex;
         }
@@ -37,14 +67,14 @@ namespace Sprint3
             {
                 if (frameIndex == 1)
                 {
-                    frameIndex = 0;
+                    frameIndex = -1;
                 }
                 else
                 {
                     frameIndex = 1;
                 }
                 updateCounter = 0;
-                sourcePos.X = frameIndex * spriteSize[0];
+                sourcePos.X += frameIndex * spriteSize[0];
             }
             else
             {
@@ -59,6 +89,5 @@ namespace Sprint3
         {
             return new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
         }
-
     }
 }
