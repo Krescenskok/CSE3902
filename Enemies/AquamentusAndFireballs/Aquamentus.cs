@@ -32,9 +32,9 @@ namespace Sprint3
         private float speed;
         private int directionIndex = -1;
 
-        public Vector2 Location => throw new NotImplementedException();
+        public Vector2 Location { get => aquamentusPos; }
 
-        public IEnemyState State => throw new NotImplementedException();
+        public IEnemyState State { get => state; }
 
         public Aquamentus(Game game, Vector2 initialPos, XElement xml)
         {
