@@ -1,6 +1,8 @@
-Write up a document with useful information on your project. This might include: program controls, descriptions of known bugs that program has, 
-and details of any tools or processes your team used that aren't explicitly required (for example, calculating and using Code Metrics as part of your design process)
+# CSE3902
+Sprint 3
+Group 5
 
+Task board screenshot is included in the zip file: "TaskBoard"
 
 Program controls are the same from last game:
 - The arrow keys move link, along with wasd. 
@@ -12,4 +14,22 @@ Program controls are the same from last game:
 - q is used to quit
 - r is used to reset the game
 
-For this sprint, we implemented collisions between all the different objects (blocks, items, Link, and enemies)
+For this sprint, we implemented collisions between all the different objects (blocks, items, Link, and enemies), and implemented the effects of what happens when certain objects collide with each other. 
+
+Andrew and Ann worked on item collisions and cleaned up the code for all related item classes.
+Krescens worked on cleaning up code for Link, fixing his movement, created new methods for certain actions, and implemented collisions.
+Noah worked on collisions with blocks.
+JT created the collision handler and a template for all collisions. Yuan and JT worked to create collisions with enemies and bosses.
+
+Code reviews and analysis were done with FxCop Analyzers
+
+Code review for Link:
+
+
+Code review for Items:
+
+
+Code review for Enemies:
+
+
+Code review for Blocks:
