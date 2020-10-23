@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using Sprint3.Items;
 using Sprint3.Items.States;
 using Sprint3.Blocks;
+using System.Linq.Expressions;
 
 namespace Sprint3.RoomHandling
 {
@@ -30,9 +31,13 @@ namespace Sprint3.RoomHandling
         List<List<IStatus>> dungeonStatus;
         List<TestCollider> testObjects;
         int roomNumber;
-        Dictionary<int, String> roomNewXMLs = new Dictionary<int, String>();
+        Dictionary<String, XElement> roomXMLs;
 
         List<XElement> Rooms;
+
+        XElement xml;
+
+        List<XElement> rooms;
 
 
 
@@ -54,18 +59,29 @@ namespace Sprint3.RoomHandling
             deaths = new List<EnemyDeath>();
             dungeonStatus = new List<List<IStatus>>();
 
-            List<XElement> iRooms = Elements("Item").ToList();
+            xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
+            xml.Attribute("Type").Name.ToString();
+
+            roomXMLs = xml.Elements("Room").ToDictionary(p => p.Attribute("Type").Value);
+
         }
 
         public void Reset()
         {
             dungeonStatus = new List<List<IStatus>>();
+
+            xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
+            xml.Attribute("Type").Name.ToString();
+
+            roomXMLs = xml.Elements("Room").ToDictionary(p => p.Attribute("Type").Value);
         }
 
     
-        public void LoadRoom(Game game, XElement room)
+        public void LoadRoom(Game game, String roomName)
         {
-            roomNumber = 1; //PULL FROM FILE
+            XElement room = roomXMLs[roomName];
+
+            roomNumber = 
 
             List<IStatus> roomStatus = new List<IStatus>();
             dungeonStatus.Insert(roomNumber, roomStatus);
@@ -210,6 +226,8 @@ namespace Sprint3.RoomHandling
             {
                 IBlocks[i].Update();
             }
+
+
         }
 
         public void Draw(SpriteBatch batch)
@@ -238,6 +256,11 @@ namespace Sprint3.RoomHandling
             {
                 deaths[i].Draw(batch);
             }
+        }
+        public void Destroy(IEnemy enemy, Vector2 location)
+        {
+            deaths.Add(new EnemyDeath(location));
+            enemies.Remove(enemy);
         }
 
         public void Destroy(IEnemy enemy, Vector2 location)

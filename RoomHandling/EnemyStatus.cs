@@ -29,13 +29,6 @@ namespace Sprint3.RoomHandling
         {
             IsActive = true;
         }
-        public void modifyHealth(int healthModifier)
-        {
-            Health += healthModifier;
-        }
-        public void modifyLocation(Vector2 locationUpdate)
-        {
-            Location = locationUpdate;
-        }
+
     }
 }
