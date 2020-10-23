@@ -6,6 +6,8 @@ Task board screenshot is included in the zip file: "TaskBoard"
 
 Known bugs: The collision with Link's shield deflecting the enemy fireballs does not work
 
+Notes on the damage on Link from enemies: We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int. Each heart for Link represents 20hp.
+
 Program controls are the same from last game:
 - The arrow keys move link, along with wasd. 
 - To attack, n or z is pressed, and to change weapons
