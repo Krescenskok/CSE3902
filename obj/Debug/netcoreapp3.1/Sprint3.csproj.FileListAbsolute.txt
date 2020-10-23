@@ -35,3 +35,7 @@ C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.csproj.
 C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.dll
 C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.pdb
 C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.genruntimeconfig.cache
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\beamImpact.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\explosion.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\particles.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\wandbeam.xnb
