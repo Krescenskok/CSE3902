@@ -4,6 +4,8 @@ Group 5
 
 Task board screenshot is included in the zip file: "TaskBoard"
 
+Known bugs: The collision with Link's shield deflecting the enemy fireballs does not work
+
 Program controls are the same from last game:
 - The arrow keys move link, along with wasd. 
 - To attack, n or z is pressed, and to change weapons
