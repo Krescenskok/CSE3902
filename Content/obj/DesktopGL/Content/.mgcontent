@@ -4,14 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/BossSpriteSheet.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/EnemySpriteSheet.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/File.spritefont</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/itemSprites.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/LinkSpriteSheet.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/marioOneDirection.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png</File>
-    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/BossSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/EnemySpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/File.spritefont</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/itemSprites.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/LinkSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/marioOneDirection.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png</File>
+    <File>C:/Users/andre/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

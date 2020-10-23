@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</SourceFile>
-  <SourceTime>2020-10-09T14:42:16.586056-04:00</SourceTime>
-  <DestFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/zelda_tiles_focused.xnb</DestFile>
-  <DestTime>2020-10-22T20:32:24.0497665-04:00</DestTime>
+  <SourceFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</SourceFile>
+  <SourceTime>2020-10-15T18:13:36-04:00</SourceTime>
+  <DestFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/zelda_tiles_focused.xnb</DestFile>
+  <DestTime>2020-10-22T21:04:26.9611237-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
