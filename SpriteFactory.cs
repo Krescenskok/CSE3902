@@ -40,11 +40,7 @@ namespace Sprint3
             return new LinkSprite(linkSpriteSheet);
 		}
         
-		
-        public ISprite CreateItemsSprite()
-        {
-            return new ItemsSprite(itemsSpriteSheet);
-        }
+
         public ISprite CreateBlocksSprite()
         {
             return new BlocksSprite(blocksSpriteSheet);
