@@ -15,7 +15,7 @@ namespace Sprint3
         LinkPlayer player;
 
 
-        public Items.LinkItems items;
+        public LinkItems items;
 
         //LinkItems item;
 

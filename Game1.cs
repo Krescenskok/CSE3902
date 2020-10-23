@@ -34,7 +34,7 @@ namespace Sprint3
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        public Items.LinkItems items;
+        public LinkItems items;
         public Blocks.LinkBlocks blocks;
 
 
@@ -65,11 +65,11 @@ namespace Sprint3
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
-            
+            ItemsFactory.Instance.LoadItemsTextures(Content);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new Items.LinkItems(_spriteBatch);
+            items = new LinkItems(_spriteBatch,linkPlayer);
             blocks = new Blocks.LinkBlocks(_spriteBatch);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
