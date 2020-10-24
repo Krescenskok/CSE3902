@@ -106,3 +106,9 @@
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.dll
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.pdb
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.pdb

@@ -18,8 +18,6 @@ namespace Sprint3
 
         private Vector2 spritePos;
 
-
-
         List<IController> controllers = new List<IController>();
 
         ICommand activeCommand;
