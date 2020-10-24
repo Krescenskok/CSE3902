@@ -51,7 +51,15 @@ namespace Sprint3.Link
             }
             else
             {
-                linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
+                if (link.UseRing)
+                {
+                    System.Diagnostics.Debug.WriteLine("Should be true: " + link.UseRing);
+                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
+                }
+                else
+                {
+                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
+                }
             }
         }
 
@@ -65,25 +73,40 @@ namespace Sprint3.Link
                     location.X = 0;
                 else if (location.X >= 780)
                         location.X = 780;
+                else if (location.Y <= 0)
+                    location.Y = 0;
+                else if (location.Y >= 445)
+                    location.Y = 445;
 
                 return location;
             }
 
             if (link.IsAttacking)
             {
+                System.Diagnostics.Debug.WriteLine(link.CurrentWeapon);
 
-                if (link.CurrentWeapon == Weapon.WoodenSword)
+                if (link.CurrentWeapon == Item.WoodenSword)
                 {
                     return HandleWoodenSword(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Weapon.Sword)
+                else if (link.CurrentWeapon == Item.Sword)
                 {
                     return HandleSword(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Weapon.MagicalRod)
+                else if (link.CurrentWeapon == Item.MagicalRod)
                 {
                     return HandleMagicalRod(gameTime, location);
                 }
+                else if (link.CurrentWeapon == Item.ArrowBow)
+                {
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == Item.BlueRing)
+                {
+                    link.UseRing = true;
+                }
+
+                System.Diagnostics.Debug.WriteLine(link.UseRing);
 
             }
             if(link.IsPickingUpItem)
@@ -101,6 +124,7 @@ namespace Sprint3.Link
         public abstract Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleShield(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
+        public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
 
 
 
