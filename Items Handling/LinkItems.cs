@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Link;
 
-namespace Sprint3.Items
+namespace Sprint3
 {
     public class LinkItems
     {
@@ -12,10 +13,10 @@ namespace Sprint3.Items
 
 
         
-        public LinkItems(SpriteBatch spriteBatch)
+        public LinkItems(SpriteBatch spriteBatch, LinkPlayer link)
         {
             this.SpriteBatch = spriteBatch;
-            StateMachine = new ItemsStateMachine();
+            StateMachine = new ItemsStateMachine(link);
             PrevState = StateMachine;
         }
 

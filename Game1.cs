@@ -24,10 +24,12 @@ namespace Sprint3
         LinkCommand LinkPersistent;
         ItemsCommand ItemPersistent;
         BlocksCommand BlockPersistent;
+        ProjectilesCommand ProjectilePersistent;
+
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        public Items.LinkItems items;
+        public LinkItems items;
         public Blocks.LinkBlocks blocks;
         EnemyCollider test;
 
@@ -47,12 +49,15 @@ namespace Sprint3
         {
             font = Content.Load<SpriteFont>("File");
 
+            ItemsFactory.Instance.LoadItemsTextures(Content);
+
+
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new Items.LinkItems(_spriteBatch);
+            items = new LinkItems(_spriteBatch, linkPlayer);
             blocks = new Blocks.LinkBlocks(_spriteBatch);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
@@ -61,8 +66,12 @@ namespace Sprint3
             LinkPersistent = new LinkCommand(linkPlayer, "");
             ItemPersistent = new ItemsCommand(_spriteBatch, items, false, false);
             BlockPersistent = new BlocksCommand(_spriteBatch, blocks, false, false);
+            ProjectilePersistent = ProjectilesCommand.Instance;
+            ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
+            
+
             EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
@@ -102,6 +111,8 @@ namespace Sprint3
             LinkPersistent.Update(gameTime);
             ItemPersistent.Update(gameTime);
             BlockPersistent.Update(gameTime);
+            ProjectilePersistent.Update(gameTime);
+
             CollisionHandler.Instance.Update();
 
 
@@ -120,6 +131,8 @@ namespace Sprint3
             LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             ItemPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             BlockPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+
             EnemyNPCDisplay.Instance.Draw(_spriteBatch, gameTime);
 
 

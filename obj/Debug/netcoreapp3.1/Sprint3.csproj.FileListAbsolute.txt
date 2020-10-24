@@ -106,9 +106,43 @@
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.dll
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.pdb
 /Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
-/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.deps.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.dev.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csproj.CopyComplete
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.dll
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/beamImpact.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/explosion.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/particles.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/wandbeam.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache

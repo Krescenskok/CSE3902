@@ -81,23 +81,22 @@ namespace Sprint3.Link
 
                 else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
                 {
-                    linkPlayer.CurrentWeapon = Item.Sword;
+                    linkPlayer.CurrentWeapon = ItemForLink.Sword;
                 }
 
                 else if ((Key.Equals("D2")) || (Key.Equals("NumPad2")))
                 {
-                    linkPlayer.CurrentWeapon = Item.MagicalRod;
+                    linkPlayer.CurrentWeapon = ItemForLink.MagicalRod;
                 }
 
                 else if ((Key.Equals("D3")) || (Key.Equals("NumPad3")))
                 {
-                    linkPlayer.CurrentWeapon = Item.ArrowBow;
+                    linkPlayer.CurrentWeapon = ItemForLink.ArrowBow;
                 }
 
                 else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
                 {
-                    System.Diagnostics.Debug.WriteLine("HERE");
-                    linkPlayer.CurrentWeapon = Item.BlueRing;
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueRing;
                 }
 
             }

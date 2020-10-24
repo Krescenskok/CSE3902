@@ -62,7 +62,7 @@ namespace Sprint3.Link
 
                 if(link.Health == link.FullHealth)
                 {
-                    Projectiles.Instance.SwordBeam();
+                    ProjectilesCommand.Instance.SwordBeam();
                 }
             }
 

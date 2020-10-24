@@ -53,15 +53,15 @@ namespace Sprint3
                     {
                         if (linkPlayer.state is MoveLeft)
                         {
-                            if (linkPlayer.CurrentWeapon == Item.WoodenSword)
+                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 5);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.Sword)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 10);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.MagicalRod)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", 15);
                             }
@@ -72,15 +72,15 @@ namespace Sprint3
                     {
                         if(linkPlayer.state is MoveRight)
                         {
-                            if (linkPlayer.CurrentWeapon == Item.WoodenSword)
+                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 5);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.Sword)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 10);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.MagicalRod)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", 15);
                             }
@@ -91,15 +91,15 @@ namespace Sprint3
                     {
                         if (linkPlayer.state is MoveUp)
                         {
-                            if (linkPlayer.CurrentWeapon == Item.WoodenSword)
+                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 5);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.Sword)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 10);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.MagicalRod)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", 15);
                             }
@@ -110,15 +110,15 @@ namespace Sprint3
                     {
                         if (linkPlayer.state is MoveDown)
                         {
-                            if (linkPlayer.CurrentWeapon == Item.WoodenSword)
+                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 5);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.Sword)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", 10);
                             }
-                            else if (linkPlayer.CurrentWeapon == Item.MagicalRod)
+                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", 15);
                             }

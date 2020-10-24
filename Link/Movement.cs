@@ -85,28 +85,26 @@ namespace Sprint3.Link
             {
                 System.Diagnostics.Debug.WriteLine(link.CurrentWeapon);
 
-                if (link.CurrentWeapon == Item.WoodenSword)
+                if (link.CurrentWeapon == ItemForLink.WoodenSword)
                 {
                     return HandleWoodenSword(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Item.Sword)
+                else if (link.CurrentWeapon == ItemForLink.Sword)
                 {
                     return HandleSword(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Item.MagicalRod)
+                else if (link.CurrentWeapon == ItemForLink.MagicalRod)
                 {
                     return HandleMagicalRod(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Item.ArrowBow)
+                else if (link.CurrentWeapon == ItemForLink.ArrowBow)
                 {
                     return HandleArrowBow(gameTime, location);
                 }
-                else if (link.CurrentWeapon == Item.BlueRing)
+                else if (link.CurrentWeapon == ItemForLink.BlueRing)
                 {
                     link.UseRing = true;
                 }
-
-                System.Diagnostics.Debug.WriteLine(link.UseRing);
 
             }
             if(link.IsPickingUpItem)

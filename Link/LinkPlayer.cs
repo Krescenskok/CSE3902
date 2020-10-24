@@ -6,7 +6,7 @@ using Sprint3.Items;
 
 namespace Sprint3.Link
 {
-    public enum Item
+    public enum ItemForLink
     {
         Shield,
         WoodenSword,
@@ -93,10 +93,10 @@ namespace Sprint3.Link
         }
 
 
-        private Item currentWeapon = Item.WoodenSword;
+        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
 
 
-        public Item CurrentWeapon
+        public ItemForLink CurrentWeapon
         {
             get { return currentWeapon; }
             set { currentWeapon = value; }
