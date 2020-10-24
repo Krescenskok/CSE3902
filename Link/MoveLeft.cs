@@ -117,7 +117,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -127,9 +127,30 @@ namespace Sprint3.Link
                     case 5: currentFrame = 8; break;
                     case 8: currentFrame = 9; break;
                     case 9:
-                        currentFrame = 4;
+                        currentFrame = 0;
                         link.IsStopped = true;
                         link.IsPickingUpItem = false;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
+        public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 4:
+                    case 5: currentFrame = 18; break;
+                    case 18:
+                        currentFrame = 4;
+                        link.IsAttacking = false;
+                        link.IsStopped = true;
                         break;
                 }
             }

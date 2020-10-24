@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -112,7 +112,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -131,6 +131,28 @@ namespace Sprint3.Link
 
             return location;
         }
+
+        public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 0:
+                    case 1: currentFrame = 16; break;
+                    case 16:
+                        currentFrame = 0;
+                        link.IsAttacking = false;
+                        link.IsStopped = true;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
 
 
     }

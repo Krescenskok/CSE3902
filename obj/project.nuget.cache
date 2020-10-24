@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uyvFLshzjNHZKvz4ix0d/feeEHYLPzAE/OzRKGgF84Xk7SKZsAOnlOnZ6A7mK1bBd8YfKRh4IDNbZpurawO2uA==",
+  "dgSpecHash": "7XWXyBYbS4b0gNldTfK7INgct8RCv/TMsQfumzHbJ05LShFDIX/4JFkXBxZZ1ERuvn15IClPWGixYynbetnB7g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\andre\\Documents\\GitHub\\CSE3902\\Sprint3.csproj",
+  "projectFilePath": "/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/Sprint3.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\andre\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\andre\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    "/Users/krescenskok/.nuget/packages/monogame.content.builder.task/3.8.0.1641/monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "/Users/krescenskok/.nuget/packages/monogame.framework.desktopgl/3.8.0.1641/monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
   ],
   "logs": []
 }

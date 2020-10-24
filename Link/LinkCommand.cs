@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,6 +27,8 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime )
         {
+            System.Diagnostics.Debug.WriteLine(Key);
+
             if (Key.Equals("R"))
             {
                 linkPlayer.Reset();
@@ -92,10 +94,11 @@ namespace Sprint3.Link
                     linkPlayer.CurrentWeapon = Item.ArrowBow;
                 }
 
-                //else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
-                //{
-                //    linkPlayer.CurrentWeapon = Item.ArrowBow;
-                //}
+                else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
+                {
+                    System.Diagnostics.Debug.WriteLine("HERE");
+                    linkPlayer.CurrentWeapon = Item.BlueRing;
+                }
 
             }
 

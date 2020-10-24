@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -62,7 +62,7 @@ namespace Sprint3.Link
 
                 if(link.Health == link.FullHealth)
                 {
-                    Projectiles.Instance.SwordBeam(link.CurrentLocation);
+                    Projectiles.Instance.SwordBeam();
                 }
             }
 
