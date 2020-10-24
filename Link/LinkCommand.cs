@@ -44,16 +44,9 @@ namespace Sprint3.Link
                 if ((Key.Equals("N") || (Key.Equals("Z"))))
                 {
 
-                    if(linkPlayer.state is Stationary)
-                    {
-                        linkPlayer.CurrentWeapon = Weapon.WoodenSword;
-                        linkPlayer.Stationary();
-                    }
-
-                 
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
-                   
+
                 }
 
                 else if ((Key.Equals("A")) || (Key.Equals("Left")))
@@ -86,14 +79,23 @@ namespace Sprint3.Link
 
                 else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.Sword;
+                    linkPlayer.CurrentWeapon = Item.Sword;
                 }
 
                 else if ((Key.Equals("D2")) || (Key.Equals("NumPad2")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.MagicalRod;
+                    linkPlayer.CurrentWeapon = Item.MagicalRod;
                 }
-            
+
+                else if ((Key.Equals("D3")) || (Key.Equals("NumPad3")))
+                {
+                    linkPlayer.CurrentWeapon = Item.ArrowBow;
+                }
+
+                //else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
+                //{
+                //    linkPlayer.CurrentWeapon = Item.ArrowBow;
+                //}
 
             }
 
