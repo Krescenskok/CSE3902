@@ -1,17 +1,23 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Items;
 
 namespace Sprint3.Link
 {
-    public enum Weapon
+    public enum Item
     {
         Shield,
         WoodenSword,
         Sword,
         MagicalRod,
+        ArrowBow,
+        BlueRing
 
     }
+
+   
     public class LinkPlayer 
     {
         public ILinkState state;
@@ -21,11 +27,14 @@ namespace Sprint3.Link
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
-        private float health = 30;
+        private float health = 60;
         public bool isWalkingInPlace = false;
         private bool isPickingUpItem = false;
+        private int numOfRupee = 0;
+        private bool useRing = false;
+        private int fullHealth = 60;
 
-
+        public List<IItems> itemsPickedUp;
 
         public Rectangle Bounds
         {
@@ -84,10 +93,10 @@ namespace Sprint3.Link
         }
 
 
-        private Weapon currentWeapon = Weapon.Shield;
+        private Item currentWeapon = Item.WoodenSword;
 
 
-        public Weapon CurrentWeapon
+        public Item CurrentWeapon
         {
             get { return currentWeapon; }
             set { currentWeapon = value; }
@@ -103,6 +112,12 @@ namespace Sprint3.Link
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
+
+        public int NumOfRupee { get => numOfRupee; set => numOfRupee = value; }
+
+        public bool UseRing { get => useRing; set => useRing = value; }
+
+        public int FullHealth { get => fullHealth; set => fullHealth = value; }
 
         public LinkPlayer()
         {
