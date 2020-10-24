@@ -4,9 +4,12 @@ Group 5
 
 Task board screenshot is included in the zip file: "TaskBoard"
 
-Known bugs: The collision with Link's shield deflecting the enemy fireballs does not work
+Known bugs:
+- The collision with Link's shield deflecting the enemy fireballs does not work
 
-Notes on the damage on Link from enemies: We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int. Each heart for Link represents 20hp.
+Notes on the damage on Link from enemies:
+- We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int.
+- Each heart for Link represents 20hp.
 
 Notes on the items Link uses:
 - When Link uses the blue ring, he changes his color to aquamarine. There are no sprites with Link's tunic being white, so we decided to tint his entire sprite to be a different color and represent that the blue ring has been used.
