@@ -23,12 +23,13 @@ namespace Sprint3.Link
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
             linkPlayer.Draw(game, spriteBatch, gameTime );
+            ProjectilesCommand.Instance.ExecuteCommand(game, gameTime, spriteBatch);
         }
 
         public void Update(GameTime gameTime )
         {
             System.Diagnostics.Debug.WriteLine(Key);
-
+            ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
             {
                 linkPlayer.Reset();
@@ -99,6 +100,20 @@ namespace Sprint3.Link
                     linkPlayer.CurrentWeapon = ItemForLink.BlueRing;
                 }
 
+                else if (Key.Equals("D5") || Key.Equals("NumPad5"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else if (Key.Equals("D6") || Key.Equals("NumPad6"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else if (Key.Equals("D7") || Key.Equals("NumPad7"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueCandle;
+                }
             }
 
             linkPlayer.Update(gameTime);

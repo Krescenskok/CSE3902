@@ -1,31 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Link;
 
-namespace Sprint3
+namespace Sprint3.Items
 {
-    //class for the arrow that link shoots, AKA the moving arrow
-    public class Arrow : IItems
+    public class BoomerangObject : IItems
     {
-        private Vector2 location;
-        public bool expired = false;
+        public Vector2 location
+        {
+            get { return location; }
+            set { location = value; }
+        }
         private ISprite item;
-        private int drawnFrame = 0;
+        private int drawnFrame;
         private IItemsState state;
+        private bool throwing;
+        private bool returning;
+        private LinkPlayer link;
+        private string direction;
 
-        public Arrow(ISprite item, Vector2 location, string direction)
+        public BoomerangObject(ISprite item, Vector2 location)
         {
             this.location = location;
             this.item = item;
-            state = new ArrowFlyingState(this, location, direction);
-        }
-
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
+            drawnFrame = 0;
+            state = new BoomerangObjectState(this, location);
+            throwing = true;
+            returning = false;
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -33,14 +37,14 @@ namespace Sprint3
             this.item = sprite;
         }
 
-        public void Impact()
-        {
-            state = new ArrowImpactState(this);
-        }
-
         public void Update()
         {
             state.Update();
+        }
+
+        public void Expire()
+        {
+
         }
 
         public void Collect()
@@ -52,6 +56,5 @@ namespace Sprint3
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
-        
     }
 }

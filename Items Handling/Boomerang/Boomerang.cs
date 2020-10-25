@@ -10,6 +10,7 @@ namespace Sprint3.Items
     public class Boomerang : IItems
     {
         private Vector2 location;
+        public bool returned = false;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
@@ -17,6 +18,7 @@ namespace Sprint3.Items
         private bool returning;
         private LinkPlayer link;
         private string direction;
+        private List<IItems> impactList = new List<IItems>();
 
         public Boomerang(ISprite item, Vector2 location, string direction, LinkPlayer link)
         {
@@ -58,14 +60,14 @@ namespace Sprint3.Items
 
         public void Impact()
         {
-            item = ItemsFactory.Instance.CreateProjectileImpactSprite();
-            state = new BoomerangImpactState(this);
+            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location));
         }
 
         public void ReturnedToLink()
         {
             if (throwing && returning) 
-            { 
+            {
+                returned = true;
                 state.Expire();
             }
         }
@@ -76,7 +78,26 @@ namespace Sprint3.Items
             {
                 state.Update();
             }
+
+            if (impactList.Count > 0)
+            {
+                foreach (IItems hit in impactList)
+                {
+                    hit.Update();
+
+                    if (((BoomerangImpact) hit).isExpired)
+                    {
+                        impactList.Remove(hit);
+                    }
+                }
+            }
         }
+
+        public void Expire()
+        {
+
+        }
+
         public void Collect()
         {
             state.Collected();

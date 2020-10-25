@@ -83,7 +83,8 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            
+            item.ThrowBoomerang(true, true);
+            item.Returning();
         }
 
         public void Collected()

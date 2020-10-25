@@ -14,9 +14,9 @@ namespace Sprint3.Items
 
         private int frame = 0;
         private int thrownTime = 0;
-        private const int buffer = 100;
+        private const int buffer = 10;
 
-        private const float speedPerSec = 70;
+        private const float speedPerSec = 40;
         private const float updatePerSec = 40;
         private float speed;
 
@@ -30,17 +30,15 @@ namespace Sprint3.Items
 
         public void Update()
         {
-            Vector2 linkLocation = new Vector2(40, 40); //need to change - get link's current location
+            Vector2 linkLocation = link.CurrentLocation;
             int distanceToLink = (int)Math.Sqrt(Math.Pow((position.X+linkLocation.X), 2) + Math.Pow((position.Y+linkLocation.Y), 2));
-
-            //expire only when boomerang collides with link
 
             AdjustReturnLocation(linkLocation);
             item.UpdateLocation(position);
             thrownTime++;
 
-            //this is only here so the boomerang will erase during testing
-            if (thrownTime >= 500)
+            //check if returned to link
+            if (Math.Abs((int) position.X - (int) link.CurrentLocation.X) < buffer && Math.Abs((int)position.Y - (int)link.CurrentLocation.Y) < buffer)
             {
                 item.ReturnedToLink();
             }
@@ -75,13 +73,12 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            item.ThrowBoomerang(false, false);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
-            //if enemy hits it, then enemy takes damage
+            //for enemies only
             item.Impact();
         }
     }

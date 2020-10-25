@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Link;
 
 namespace Sprint3.Items
 {
-    public class WandBeam : IItems
+    public class BoomerangImpact : IItems
     {
-        private Vector2 location;
-        public bool expired = false;
+        public Vector2 location
+        {
+            get { return location; }
+            set { location = value; }
+        }
         private ISprite item;
-
         private int drawnFrame;
         private IItemsState state;
+        private bool throwing;
+        private bool returning;
+        private LinkPlayer link;
         private string direction;
-
-        public WandBeam(ISprite item, Vector2 location, string direction)
+        public bool isExpired = false;
+        public BoomerangImpact(ISprite item, Vector2 location)
         {
             this.location = location;
-            this.direction = direction;
             this.item = item;
             drawnFrame = 0;
-            state = new WandBeamState(this, location, direction);
-        }
-
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
+            state = new BoomerangImpactState(this, location);
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -35,27 +35,25 @@ namespace Sprint3.Items
             this.item = sprite;
         }
 
-        public void UpdateFrame(int frame)
-        {
-            this.drawnFrame = frame;
-        }
-
         public void Update()
         {
             state.Update();
+            isExpired = ((BoomerangImpactState) state).isExpired;
         }
 
         public void Expire()
         {
-            expired = true;
-            state.Expire();
+
+        }
+
+        public void Collect()
+        {
+            state.Collected();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
-
-
     }
 }

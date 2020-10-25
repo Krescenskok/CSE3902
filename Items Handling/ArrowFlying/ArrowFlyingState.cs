@@ -12,6 +12,7 @@ namespace Sprint3
         private Vector2 location;
         private float speedPerSec = 90;
         private float updatePerSec = 40;
+        private int runTime = 0;
         private float speed;
 
         public ArrowFlyingState(Arrow arrow, Vector2 location, string direction)
@@ -41,6 +42,13 @@ namespace Sprint3
                 location.Y += speed;
             }
             arrow.UpdateLocation(location);
+
+            //for testing only
+            runTime++;
+            if (runTime > 100)
+            {
+                Expire();
+            }
         }
 
         public void Expire()

@@ -60,10 +60,6 @@ namespace Sprint3.Link
                         break;
                 }
 
-                if(link.Health == link.FullHealth)
-                {
-                    ProjectilesCommand.Instance.SwordBeam();
-                }
             }
 
             return location;
@@ -160,6 +156,7 @@ namespace Sprint3.Link
 
             return location;
         }
+
 
 
 

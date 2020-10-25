@@ -40,12 +40,13 @@ namespace Sprint3
 
             if (runTime >= maxTime)
             {
-                Expire();
+                item.Expire();
             }
         }
 
         public void Expire()
         {
+            item.expired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

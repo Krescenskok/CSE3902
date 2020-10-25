@@ -1,24 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint3.Items
 {
-    public class BoomerangImpactState : IItemsState
+    public class CandleFireState : IItemsState
     {
-        private BoomerangImpact item;
-        private Vector2 location;
-        private int runTime;
-        private const int maxTime = 50;
-        public bool isExpired = false;
+        private CandleFire item;
+        private Vector2 position;
+        private int runTime = 0;
+        private const int maxTime = 200;
 
-        public BoomerangImpactState(BoomerangImpact item, Vector2 location)
+        public CandleFireState(CandleFire item, Vector2 initPos)
         {
-            this.location = location; 
             this.item = item;
-            runTime = 0;
+            this.position = initPos;
         }
 
         public void Update()
@@ -32,13 +29,14 @@ namespace Sprint3
 
         public void Expire()
         {
-            isExpired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()
         {
-           
+            //both link and enemies can be damaged by fire
+
+            Expire();
         }
     }
 }

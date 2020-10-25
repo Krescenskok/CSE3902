@@ -6,38 +6,36 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint3.Items
 {
-    public class WandBeam : IItems
+    public class CandleFire : IItems
     {
-        private Vector2 location;
-        public bool expired = false;
+        public Vector2 location
+        {
+            get { return location; }
+            set { location = value; }
+        }
         private ISprite item;
+        private IItemsState state;
 
         private int drawnFrame;
-        private IItemsState state;
-        private string direction;
 
-        public WandBeam(ISprite item, Vector2 location, string direction)
+        private bool isExpired = false;
+        public bool expired
         {
-            this.location = location;
-            this.direction = direction;
-            this.item = item;
-            drawnFrame = 0;
-            state = new WandBeamState(this, location, direction);
+            get { return isExpired; }
+            set { isExpired = value; }
         }
 
-        public void UpdateLocation(Vector2 location)
+        public CandleFire(ISprite item, Vector2 location)
         {
             this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new CandleFireState(this, location);
         }
 
         public void UpdateSprite(ISprite sprite)
         {
             this.item = sprite;
-        }
-
-        public void UpdateFrame(int frame)
-        {
-            this.drawnFrame = frame;
         }
 
         public void Update()
@@ -47,15 +45,17 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            expired = true;
             state.Expire();
+        }
+
+        public void Collect()
+        {
+            state.Collected();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
-
-
     }
 }
