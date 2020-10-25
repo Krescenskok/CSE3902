@@ -10,7 +10,7 @@ namespace Sprint3.Items
         private Bomb item;
         private Vector2 position;
         private int runTime;
-        private const int maxTime = 100;
+        private const int maxTime = 500;
 
         public BombState(Bomb item, Vector2 initPos)
         {
