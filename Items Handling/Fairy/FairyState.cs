@@ -13,7 +13,7 @@ namespace Sprint3.Items
         private const int horizontal = 100;
         private const int vertical = 80;
         private int runTime;
-        private const int maxTime = 50;
+        private const int maxTime = 500;
         private int frame;
         private bool right;
         private bool down;

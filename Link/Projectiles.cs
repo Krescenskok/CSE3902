@@ -1,18 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint3.Items;
 
 namespace Sprint3.Link
 {
-    public class ProjectilesCommand: ICommand
+    public class ProjectilesCommand
     {
         private double lastTime;
         LinkPlayer link;
-        Vector2 itemLocation;
-        Heart silverSword;
+        IItems item;
+        private List<IItems> placedItems = new List<IItems>();
+        private bool beamMade = false;
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
+
+        public LinkPlayer Link
+        {
+            get { return link; }
+            set { link = value; }
+        }
 
         public static ProjectilesCommand Instance
         {
@@ -21,12 +29,9 @@ namespace Sprint3.Link
                 return instance;
             }
         }
-
-        public LinkPlayer Link { get => link; set => link = value; }
-
         public ProjectilesCommand()
         {
-           
+
         }
 
         public void ArrowBow()
@@ -34,28 +39,61 @@ namespace Sprint3.Link
 
         }
 
-        public void SwordBeam()
+        public void SwordBeam(string direction)
         {
+            if (link.Health == link.FullHealth && !beamMade) 
+            {
+                beamMade = true;
+                System.Diagnostics.Debug.WriteLine("Created beam");
+                if (direction.Equals("Down"))
+                {
+                    item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), link.CurrentLocation, direction);
+                    link.itemsPlacedByLink.Add(item);
+                }
+                else if (direction.Equals("Right"))
+                {
+                    item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), link.CurrentLocation, direction);
+                    link.itemsPlacedByLink.Add(item);
+                }
+                else if (direction.Equals("Left"))
+                {
+                    item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), link.CurrentLocation, direction);
+                    link.itemsPlacedByLink.Add(item);
+                }
+                else
+                {
+                    item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), link.CurrentLocation, direction);
+                    link.itemsPlacedByLink.Add(item);
+                }
+            }
+            ExpireCheck();
 
-            System.Diagnostics.Debug.WriteLine("Created beam");
-            itemLocation = link.currentLocation;
-
-            silverSword = new Heart(ItemsFactory.Instance.CreateHeartSprite(), itemLocation);
-
-       
         }
 
-        public void DoInit(Game game)
+        public void ExpireCheck()
         {
+            List<IItems> list = new List<IItems>();
+            foreach (IItems item in link.itemsPlacedByLink)
+            {
+                if (item is SwordBeam && (((SwordBeam)item).expired == true))
+                {
+                        beamMade = false;
+                        list.Add(item);
+                }
+            }
+            foreach (IItems item in list)
+            {
+                link.RemovePlacedItem(item);
+            }
+
         }
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            System.Diagnostics.Debug.WriteLine("beam");
-            if (silverSword!=null)
+            placedItems = link.itemsPlacedByLink;
+            foreach (IItems projectile in placedItems)
             {
-                System.Diagnostics.Debug.WriteLine("drawing beam");
-                silverSword.Draw(spriteBatch);
+                projectile.Draw(spriteBatch);
             }
 
         }
@@ -65,11 +103,10 @@ namespace Sprint3.Link
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                if(silverSword!=null)
+                placedItems = link.itemsPlacedByLink;
+                foreach (IItems projectile in placedItems)
                 {
-                    itemLocation.X += 10;
-                    silverSword.Location = itemLocation;
-                    lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+                    projectile.Update();
                 }
                
             }

@@ -23,12 +23,13 @@ namespace Sprint3.Link
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
             linkPlayer.Draw(game, spriteBatch, gameTime );
+            ProjectilesCommand.Instance.ExecuteCommand(game, gameTime, spriteBatch);
         }
 
         public void Update(GameTime gameTime )
         {
             System.Diagnostics.Debug.WriteLine(Key);
-
+            ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
             {
                 linkPlayer.Reset();

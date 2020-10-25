@@ -54,26 +54,14 @@ namespace Sprint3
                 item.UpdateFrame(frame % 2);
             }
 
-            ExpireCheck(); 
+            //for testing only
+            if (runTime > 100)
+            {
+                item.Expire();
+            }
+
         }
 
-        public void ExpireCheck()
-        {
-            if (location.X < 0 || location.X > GraphicsDeviceManager.DefaultBackBufferWidth)
-            {
-                Expire();
-            }
-
-            if (location.Y < 0 || location.Y > GraphicsDeviceManager.DefaultBackBufferHeight)
-            {
-                Expire();
-            }
-
-            if (runTime >= maxTime)
-            {
-                Expire();
-            }
-        }
 
         public void Expire()
         {
@@ -82,7 +70,8 @@ namespace Sprint3
 
         public void Collected()
         {
-           
+            //enemy gets damaged
+            item.SwordImpact();
         }
     }
 }

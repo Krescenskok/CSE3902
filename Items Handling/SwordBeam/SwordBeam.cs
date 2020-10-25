@@ -10,6 +10,7 @@ namespace Sprint3
     public class SwordBeam : IItems
     {
         private Vector2 location;
+        public bool expired = false;
         private ISprite item;
         private string direction;
         private int drawnFrame;
@@ -53,6 +54,12 @@ namespace Sprint3
         public void SwordImpact()
         {
             state = new BeamImpactState(this);
+            Update();
+        }
+
+        public void Expire()
+        {
+            state.Expire();
         }
 
         public void Collect()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,18 +8,22 @@ namespace Sprint3.Link
     public abstract class Movement : ILinkState
     {
         protected LinkPlayer link;
+   
 
-        protected ISprite linkSprite;
+    protected ISprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
 
         protected int currentFrame;
 
         int i = 0;
 
+        private List<IItems> itemsPlacedByLink = new List<IItems>();
+
         public Movement(LinkPlayer link)
         {
             this.link = link;
             link.isWalkingInPlace = false;
+            itemsPlacedByLink = link.itemsPlacedByLink;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
@@ -61,11 +66,22 @@ namespace Sprint3.Link
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
                 }
             }
+
+            itemsPlacedByLink = link.itemsPlacedByLink;
+            foreach (IItems projectile in itemsPlacedByLink)
+            {
+                projectile.Draw(spriteBatch);
+            }
+
         }
 
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
-          
+            itemsPlacedByLink = link.itemsPlacedByLink;
+            foreach (IItems projectile in itemsPlacedByLink)
+            {
+                projectile.Update();
+            }
 
             if (link.IsStopped)
             {
@@ -87,6 +103,7 @@ namespace Sprint3.Link
 
                 if (link.CurrentWeapon == ItemForLink.WoodenSword)
                 {
+                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
                     return HandleWoodenSword(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.Sword)
@@ -105,6 +122,7 @@ namespace Sprint3.Link
                 {
                     link.UseRing = true;
                 }
+
 
             }
             if(link.IsPickingUpItem)

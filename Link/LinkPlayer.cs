@@ -36,6 +36,23 @@ namespace Sprint3.Link
 
         public List<IItems> itemsPickedUp;
 
+        public List<IItems> itemsPlacedByLink = new List<IItems>();
+        public void RemovePlacedItem(IItems item)
+        {
+            if (itemsPlacedByLink.Contains(item))
+            {
+                itemsPlacedByLink.Remove(item);
+            }
+        }
+
+
+        string direction = "Down";
+        public string LinkDirection
+        {
+            get { return direction; }
+            set { direction = value; }
+        }
+
         public Rectangle Bounds
         {
             get {
@@ -129,30 +146,35 @@ namespace Sprint3.Link
         {
 
             CurrentLocation = state.Update(gameTime, CurrentLocation);
+            
         }
 
         public void MovingLeft()
         {
             if (!(state is MoveLeft))
                 state = new MoveLeft(this);
+            LinkDirection = "Left";
         }
 
         public void MovingRight()
         {
             if (!(state is MoveRight))
                 state = new MoveRight(this);
+            LinkDirection = "Right";
         }
 
         public void MovingUp()
         {
             if (!(state is MoveUp))
                 state = new MoveUp(this);
+            LinkDirection = "Up";
         }
 
         public void MovingDown()
         {
             if (!(state is MoveDown))
                 state = new MoveDown(this);
+            LinkDirection = "Down";
         }
 
         public void Stationary()
