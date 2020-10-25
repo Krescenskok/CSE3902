@@ -10,7 +10,12 @@ namespace Sprint3
     public class SwordBeam : IItems
     {
         private Vector2 location;
-        public bool expired = false;
+        private bool isExpired = false;
+        public bool expired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
         private ISprite item;
         private string direction;
         private int drawnFrame;

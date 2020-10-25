@@ -29,6 +29,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
+            item.expired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

@@ -9,7 +9,12 @@ namespace Sprint3.Items
     public class WandBeam : IItems
     {
         private Vector2 location;
-        public bool expired = false;
+        private bool isExpired = false;
+        public bool expired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
         private ISprite item;
 
         private int drawnFrame;
