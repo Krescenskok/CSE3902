@@ -16,8 +16,7 @@ namespace Sprint3.Link
         BlueRing,
         Boomerang,
         BlueCandle,
-        Bomb,
-        Clock
+        Bomb
     }
 
    
@@ -36,7 +35,6 @@ namespace Sprint3.Link
         private int numOfRupee = 0;
         private bool useRing = false;
         private int fullHealth = 60;
-        private int delay = 2;
 
         public List<IItems> itemsPickedUp;
 
@@ -140,8 +138,6 @@ namespace Sprint3.Link
 
         public int FullHealth { get => fullHealth; set => fullHealth = value; }
 
-        public int Delay { get => delay; set => delay = value; }
-
         public LinkPlayer()
         {
 
@@ -152,7 +148,6 @@ namespace Sprint3.Link
         {
 
             CurrentLocation = state.Update(gameTime, CurrentLocation);
-            delay--;
             
         }
 

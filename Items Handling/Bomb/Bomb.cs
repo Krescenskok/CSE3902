@@ -12,14 +12,12 @@ namespace Sprint3.Items
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
-
         private bool isExpired = false;
         public bool expired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
-
         public Bomb(ISprite item, Vector2 location)
         {
             this.location = location;

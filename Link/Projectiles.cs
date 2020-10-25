@@ -10,13 +10,15 @@ namespace Sprint3.Link
     {
         private double lastTime;
         LinkPlayer link;
+        private const int buffer = 50;
         IItems item;
         private List<IItems> placedItems = new List<IItems>();
         private bool beamMade = false;
         private bool arrowMade = false;
         private bool wandMade = false;
         private bool boomerangMade = false;
-        private bool candleFire = false;
+        private bool candleMade = false;
+        private bool bombMade = false;
         private Vector2 itemLocation;
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
@@ -55,7 +57,7 @@ namespace Sprint3.Link
         public void SwordBeam(string direction)
         {
             itemLocation = link.CurrentLocation;
-        
+
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
@@ -69,14 +71,14 @@ namespace Sprint3.Link
                 else if (direction.Equals("Right"))
                 {
                     itemLocation.Y += 8;
-              
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Left"))
                 {
                     itemLocation.Y += 8;
-                  
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
@@ -94,10 +96,11 @@ namespace Sprint3.Link
         public void WandBeam(string direction)
         {
             itemLocation = link.CurrentLocation;
-        
+
             if (!wandMade)
             {
-                if(direction.Equals("Down")) {
+                if (direction.Equals("Down"))
+                {
                     itemLocation.Y += 10;
                     itemLocation.X += 10;
                 }
@@ -136,24 +139,65 @@ namespace Sprint3.Link
             ExpireCheck();
         }
 
-        public void BlueCandle(string direction)
+        public void CandleBurn(string direction)
         {
-            itemLocation = link.CurrentLocation;
-            itemLocation.Y -= 10;
-            if(!candleFire)
+            Vector2 loc = link.CurrentLocation;
+            if (!candleMade)
             {
-                candleFire = true;
-                item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), itemLocation);
+                candleMade = true;
+                loc.X += 10;
+                if (direction.Equals("Up"))
+                {
+                    loc.Y -= buffer;
+                }
+                else if (direction.Equals("Down"))
+                {
+                    loc.Y += buffer;
+                }
+                else if (direction.Equals("Right"))
+                {
+                    loc.X += buffer;
+                }
+                else
+                {
+                    loc.X -= buffer;
+                }
+
+                item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
-
-
         }
 
-        public void Bomb(string direction)
-        {
 
+        public void SpawnBomb(string direction)
+        {
+            Vector2 loc = link.CurrentLocation;
+            if (!bombMade)
+            {
+                bombMade = true;
+                loc.X += 10;
+                if (direction.Equals("Up"))
+                {
+                    loc.Y -= buffer;
+                }
+                else if (direction.Equals("Down"))
+                {
+                    loc.Y += buffer;
+                }
+                else if (direction.Equals("Right"))
+                {
+                    loc.X += buffer;
+                }
+                else
+                {
+                    loc.X -= buffer;
+                }
+
+                item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
         }
 
         public void ExpireCheck()
@@ -163,8 +207,8 @@ namespace Sprint3.Link
             {
                 if (item is SwordBeam && (((SwordBeam)item).expired == true))
                 {
-                     beamMade = false;
-                     list.Add(item);
+                    beamMade = false;
+                    list.Add(item);
                 }
                 else if (item is Arrow && ((Arrow)item).expired == true)
                 {
@@ -183,15 +227,15 @@ namespace Sprint3.Link
                 }
                 else if (item is CandleFire && ((CandleFire)item).expired == true)
                 {
-                    candleFire = false;
+                    candleMade = false;
+                    list.Add(item);
+                }
+                else if (item is Bomb && ((Bomb)item).expired == true)
+                {
+                    bombMade = false;
                     list.Add(item);
                 }
             }
-            foreach (IItems item in list)
-            {
-                link.RemovePlacedItem(item);
-            }
-
         }
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
@@ -214,7 +258,7 @@ namespace Sprint3.Link
                 {
                     projectile.Update();
                 }
-               
+
             }
         }
     }

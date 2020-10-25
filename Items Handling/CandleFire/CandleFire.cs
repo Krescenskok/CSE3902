@@ -8,22 +8,17 @@ namespace Sprint3.Items
 {
     public class CandleFire : IItems
     {
-        public Vector2 location
-        {
-            get { return location; }
-            set { location = value; }
-        }
-        private ISprite item;
-        private IItemsState state;
-
-        private int drawnFrame;
-
+        private Vector2 location;
         private bool isExpired = false;
         public bool expired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
+        private ISprite item;
+        private IItemsState state;
+
+        private int drawnFrame;
 
         public CandleFire(ISprite item, Vector2 location)
         {

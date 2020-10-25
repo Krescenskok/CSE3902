@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Sprint3.Items;
 
 namespace Sprint3.Link
 {
@@ -107,12 +109,12 @@ namespace Sprint3.Link
 
                 else if (Key.Equals("D6") || Key.Equals("NumPad6"))
                 {
-                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueCandle;
                 }
 
                 else if (Key.Equals("D7") || Key.Equals("NumPad7"))
                 {
-                    linkPlayer.CurrentWeapon = ItemForLink.BlueCandle;
+                    linkPlayer.CurrentWeapon = ItemForLink.Bomb;
                 }
             }
 

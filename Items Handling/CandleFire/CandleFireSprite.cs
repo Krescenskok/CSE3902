@@ -18,7 +18,7 @@ namespace Sprint3.Items
         public CandleFireSprite(Texture2D texture)
         {
             this.texture = texture;
-            sheetSize = ItemsFactory.Instance.GetSheetSize();
+            sheetSize = ItemsFactory.Instance.GetParticlesSheetSize();
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

@@ -225,15 +225,7 @@ namespace Sprint3
             if (msg == "Hand")
             {
                 linkPlayer.currentLocation = (Vector2)value;
-            }
 
-            if (msg == "Special Block")
-            {
-                linkPlayer.isWalkingInPlace = true;
-                if(linkPlayer.Delay <= 0)
-                {
-                    linkPlayer.isWalkingInPlace = false;
-                }
             }
         }
     }
