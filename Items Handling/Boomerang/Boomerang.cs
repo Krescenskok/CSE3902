@@ -10,6 +10,7 @@ namespace Sprint3.Items
     public class Boomerang : IItems
     {
         private Vector2 location;
+        public bool returned = false;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
@@ -66,6 +67,7 @@ namespace Sprint3.Items
         {
             if (throwing && returning) 
             {
+                returned = true;
                 state.Expire();
             }
         }

@@ -15,6 +15,7 @@ namespace Sprint3.Link
         private bool beamMade = false;
         private bool arrowMade = false;
         private bool wandMade = false;
+        private bool boomerangMade = false;
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -89,7 +90,13 @@ namespace Sprint3.Link
 
         public void BoomerangThrow(string direction)
         {
-
+            if (!boomerangMade)
+            {
+                boomerangMade = true;
+                item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), link.CurrentLocation, direction, link);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
         }
 
         public void ExpireCheck()
@@ -110,6 +117,11 @@ namespace Sprint3.Link
                 else if (item is WandBeam && ((WandBeam)item).expired == true)
                 {
                     wandMade = false;
+                    list.Add(item);
+                }
+                else if (item is Boomerang && ((Boomerang)item).returned == true)
+                {
+                    boomerangMade = false;
                     list.Add(item);
                 }
             }

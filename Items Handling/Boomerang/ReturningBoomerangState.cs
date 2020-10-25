@@ -14,9 +14,9 @@ namespace Sprint3.Items
 
         private int frame = 0;
         private int thrownTime = 0;
-        private const int buffer = 100;
+        private const int buffer = 10;
 
-        private const float speedPerSec = 70;
+        private const float speedPerSec = 40;
         private const float updatePerSec = 40;
         private float speed;
 
@@ -37,8 +37,8 @@ namespace Sprint3.Items
             item.UpdateLocation(position);
             thrownTime++;
 
-            //this is only here so the boomerang will erase during testing
-            if (position.Equals(link.CurrentLocation))
+            //check if returned to link
+            if (Math.Abs((int) position.X - (int) link.CurrentLocation.X) < buffer && Math.Abs((int)position.Y - (int)link.CurrentLocation.Y) < buffer)
             {
                 item.ReturnedToLink();
             }

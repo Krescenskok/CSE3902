@@ -123,6 +123,12 @@ namespace Sprint3.Link
                 {
                     link.UseRing = true;
                 }
+                else if (link.CurrentWeapon == ItemForLink.Boomerang)
+                {
+                    ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
 
 
             }

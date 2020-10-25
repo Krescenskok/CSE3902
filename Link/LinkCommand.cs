@@ -95,11 +95,25 @@ namespace Sprint3.Link
                     linkPlayer.CurrentWeapon = ItemForLink.ArrowBow;
                 }
 
-                else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
+                else if ((Key.Equals("D5")) || (Key.Equals("NumPad5")))
                 {
                     linkPlayer.CurrentWeapon = ItemForLink.BlueRing;
                 }
 
+                else if (Key.Equals("D4") || Key.Equals("NumPad4"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else if (Key.Equals("D6") || Key.Equals("NumPad6"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else 
+                { 
+                
+                }
             }
 
             linkPlayer.Update(gameTime);
