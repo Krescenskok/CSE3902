@@ -8,6 +8,7 @@ Known bugs/issues:
 - The collision with Link's shield deflecting the enemy fireballs does not work
 - The impact animation for the sword beam does not have the blinking projectiles spread out.
 - Link can only have one projectile (arrow, wand beam, sword beam, boomerang) actively flying in the air at a time. (In other words: if you try to shoot 2 sword beams/wand beams/arrows in a row, the second projectile sprite will not draw. It is only when the first fired projectile expires that a second can be drawn.) 
+- Similarily to above, Link can only place one bomb and set one fire (using candle) at a time.
 - The explosion animation for the bomb is not very smooth.
 
 Notes on the damage on Link from enemies:
