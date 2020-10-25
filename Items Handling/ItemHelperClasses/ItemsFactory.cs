@@ -73,6 +73,11 @@ namespace Sprint3
             return new ProjectileImpactSprite(itemsSpriteSheet);
         }
 
+        public ISprite CreateCandleFireSprite()
+        {
+            return new CandleFireSprite(particlesSheet);
+        }
+
         public ISprite CreateExplosionSprite()
         {
             return new ExplosionSprite(explosionSheet);
