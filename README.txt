@@ -8,7 +8,7 @@ Known bugs/issues:
 - The collision with Link's shield deflecting the enemy fireballs does not work
 - The impact animation for the sword beam does not have the blinking projectiles spread out.
 - Link can only have one projectile (arrow, wand beam, sword beam, boomerang) actively flying in the air at a time. (In other words: if you try to shoot 2 sword beams/wand beams/arrows in a row, the second projectile sprite will not draw. It is only when the first fired projectile expires that a second can be drawn.) 
-- For an unknown reason, the projectile impact sprites may draw a boomerang sprite instead of the impact effect sprite.
+- The explosion animation for the bomb is not very smooth.
 
 Notes on the damage on Link from enemies:
 - We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int.
