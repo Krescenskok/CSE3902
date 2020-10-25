@@ -33,7 +33,6 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            item.expired = true;
             item.Exploded();
         }
 

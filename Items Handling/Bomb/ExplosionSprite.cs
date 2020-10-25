@@ -23,12 +23,13 @@ namespace Sprint3.Items
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            int width = (int) sheetSize.X;
-            int height = (int) sheetSize.Y / 2;
-            int xLoc = 0;
-            int yLoc = currentFrame * (int)(sheetSize.Y / 2 + 2);
+            int width = (int)texture.Width / (int)sheetSize.Y;
+            int height = (int)texture.Height;
+            int xLoc = currentFrame * width;
+            int yLoc = 0;
 
             sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
+            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height, 2 * width, 2 * height);
             destinationRectangle = new Rectangle((int)location.X - width + buffer, (int)location.Y - height / 2, 2 * width, 2 * height);
 
 

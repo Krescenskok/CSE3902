@@ -9,14 +9,13 @@ namespace Sprint3.Items
     {
         private Bomb item;
         private Vector2 position;
-        private int runTime = 0;
+        private int runTime;
+        private const int maxTime = 240;
         private int frame = 0;
-        private const int maxTime = 100;
 
-        public BombExplosionState(Bomb item, Vector2 initPos)
+        public BombExplosionState(Bomb item)
         {
             this.item = item;
-            this.position = initPos;
             item.UpdateSprite(ItemsFactory.Instance.CreateExplosionSprite());
             item.UpdateFrame(runTime);
         }
@@ -24,12 +23,13 @@ namespace Sprint3.Items
         public void Update()
         {
             runTime++;
-            if (runTime == maxTime / 2)
+            if (runTime % (maxTime / 3) == 0)
             {
                 frame++;
                 item.UpdateFrame(frame);
             }
-            else if (runTime >= maxTime)
+
+            if (runTime >= maxTime)
             {
                 Expire();
             }
@@ -38,6 +38,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
+            item.expired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
 
             //remove item from room

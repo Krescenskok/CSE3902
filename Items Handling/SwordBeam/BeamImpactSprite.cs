@@ -13,21 +13,19 @@ namespace Sprint3
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int row;
 
-        public BeamImpactSprite(Texture2D texture, int row)
+        public BeamImpactSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSwordBeamSheetSize();
-            this.row = row;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            int width = (int)texture.Width / 2;
-            int height = (int)texture.Height / 3;
+            int width = (int)texture.Width / (int) sheetSize.Y;
+            int height = (int)texture.Height;
             int xLoc = currentFrame * width;
-            int yLoc = row * currentFrame * (int)(sheetSize.Y / 3);
+            int yLoc = 0;
 
             sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
             destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height, 2 * width, 2 * height);

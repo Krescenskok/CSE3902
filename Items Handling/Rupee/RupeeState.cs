@@ -10,7 +10,7 @@ namespace Sprint3.Items
         private Rupee item;
         private Vector2 position;
         private int runTime;
-        private const int maxTime = 50;
+        private const int maxTime = 500;
         private int frame;
 
         public RupeeState(Rupee item, Vector2 initPos)
