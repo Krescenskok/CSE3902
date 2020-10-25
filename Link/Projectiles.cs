@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint3.Items;
@@ -10,12 +11,15 @@ namespace Sprint3.Link
     {
         private double lastTime;
         LinkPlayer link;
+        private const int buffer = 50;
         IItems item;
         private List<IItems> placedItems = new List<IItems>();
         private bool beamMade = false;
         private bool arrowMade = false;
         private bool wandMade = false;
         private bool boomerangMade = false;
+        private bool candleMade = false;
+        private bool bombMade = false;
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -99,6 +103,66 @@ namespace Sprint3.Link
             ExpireCheck();
         }
 
+        public void CandleBurn(string direction)
+        {
+            Vector2 loc = link.CurrentLocation;
+            if (!candleMade)
+            {
+                candleMade = true;
+                loc.X += 10;
+                if (direction.Equals("Up"))
+                {
+                    loc.Y -= buffer;
+                }
+                else if (direction.Equals("Down"))
+                {
+                    loc.Y += buffer;
+                }
+                else if (direction.Equals("Right"))
+                {
+                    loc.X += buffer;
+                }
+                else
+                {
+                    loc.X -= buffer;
+                }
+
+                item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
+        }
+
+        public void SpawnBomb(string direction)
+        {
+            Vector2 loc = link.CurrentLocation;
+            if (!bombMade)
+            {
+                bombMade = true;
+                loc.X += 10;
+                if (direction.Equals("Up"))
+                {
+                    loc.Y -= buffer;
+                }
+                else if (direction.Equals("Down"))
+                {
+                    loc.Y += buffer;
+                }
+                else if (direction.Equals("Right"))
+                {
+                    loc.X += buffer;
+                }
+                else
+                {
+                    loc.X -= buffer;
+                }
+
+                item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
+        }
+
         public void ExpireCheck()
         {
             List<IItems> list = new List<IItems>();
@@ -122,6 +186,16 @@ namespace Sprint3.Link
                 else if (item is Boomerang && ((Boomerang)item).returned == true)
                 {
                     boomerangMade = false;
+                    list.Add(item);
+                }
+                else if (item is CandleFire && ((CandleFire)item).expired == true)
+                {
+                    candleMade = false;
+                    list.Add(item);
+                }
+                else if (item is Bomb && ((Bomb)item).expired == true)
+                {
+                    bombMade = false;
                     list.Add(item);
                 }
             }

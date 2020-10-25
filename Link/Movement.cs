@@ -129,7 +129,18 @@ namespace Sprint3.Link
                     //animation to throw is same as bow
                     return HandleArrowBow(gameTime, location);
                 }
-
+                else if (link.CurrentWeapon == ItemForLink.BlueCandle)
+                {
+                    ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Bomb)
+                {
+                    ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
 
             }
             if(link.IsPickingUpItem)

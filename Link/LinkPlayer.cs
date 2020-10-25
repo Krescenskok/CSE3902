@@ -14,8 +14,9 @@ namespace Sprint3.Link
         MagicalRod,
         ArrowBow,
         BlueRing,
-        Boomerang
-
+        Boomerang,
+        BlueCandle,
+        Bomb
     }
 
    

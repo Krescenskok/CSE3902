@@ -15,6 +15,7 @@ namespace Sprint3
         private Texture2D wandBeamSheet;
         private Texture2D swordBeamImpactSheet;
         private Vector2 itemSheetSize = new Vector2(12, 8);
+        private Vector2 particlesSheetSize = new Vector2(2, 4);
         private Vector2 explosionDimensions = new Vector2(50, 100);
         private Vector2 wandBeamDimensions = new Vector2(4, 2);
         private Vector2 swordBeamDimensions = new Vector2(3, 2);
@@ -46,6 +47,11 @@ namespace Sprint3
         public Vector2 GetSheetSize()
         {
             return itemSheetSize;
+        }
+
+        public Vector2 GetParticlesSheetSize()
+        {
+            return particlesSheetSize;
         }
 
         public Vector2 GetExplosionSheetSize()

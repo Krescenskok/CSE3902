@@ -13,7 +13,7 @@ namespace Sprint3Final.Items_Handling.ItemHelperClasses
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 45;
+        private int sheetLocation = 47;
 
         public ProjectileImpactSprite(Texture2D texture)
         {
