@@ -53,6 +53,7 @@ namespace Sprint3.Items
                 item.UpdateFrame(frame % 2);
             }
 
+            //for testing only
             ExpireCheck();
         }
         public void ExpireCheck()
@@ -75,7 +76,8 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-
+            item.expired = true;
+            item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 
         public void Collected()

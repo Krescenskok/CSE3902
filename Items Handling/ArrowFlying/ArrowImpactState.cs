@@ -29,6 +29,7 @@ namespace Sprint3
 
         public void Expire()
         {
+            arrow.expired = true;
             arrow.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

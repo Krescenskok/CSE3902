@@ -13,6 +13,8 @@ namespace Sprint3.Link
         IItems item;
         private List<IItems> placedItems = new List<IItems>();
         private bool beamMade = false;
+        private bool arrowMade = false;
+        private bool wandMade = false;
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -34,17 +36,22 @@ namespace Sprint3.Link
 
         }
 
-        public void ArrowBow()
+        public void ArrowBow(string direction)
         {
-
+            if (!arrowMade)
+            {
+                arrowMade = true;
+                item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), link.CurrentLocation, direction);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
         }
 
         public void SwordBeam(string direction)
         {
-            if (link.Health == link.FullHealth && !beamMade) 
+            if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                System.Diagnostics.Debug.WriteLine("Created beam");
                 if (direction.Equals("Down"))
                 {
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), link.CurrentLocation, direction);
@@ -67,6 +74,21 @@ namespace Sprint3.Link
                 }
             }
             ExpireCheck();
+        }
+
+        public void WandBeam(string direction)
+        {
+            if (!wandMade)
+            {
+                wandMade = true;
+                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), link.CurrentLocation, direction);
+                link.itemsPlacedByLink.Add(item);
+            }
+            ExpireCheck();
+        }
+
+        public void BoomerangThrow(string direction)
+        {
 
         }
 
@@ -79,6 +101,16 @@ namespace Sprint3.Link
                 {
                         beamMade = false;
                         list.Add(item);
+                }
+                else if (item is Arrow && ((Arrow)item).expired == true)
+                {
+                    arrowMade = false;
+                    list.Add(item);
+                }
+                else if (item is WandBeam && ((WandBeam)item).expired == true)
+                {
+                    wandMade = false;
+                    list.Add(item);
                 }
             }
             foreach (IItems item in list)

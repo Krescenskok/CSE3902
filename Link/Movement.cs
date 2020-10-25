@@ -67,8 +67,7 @@ namespace Sprint3.Link
                 }
             }
 
-            itemsPlacedByLink = link.itemsPlacedByLink;
-            foreach (IItems projectile in itemsPlacedByLink)
+            foreach (IItems projectile in link.itemsPlacedByLink)
             {
                 projectile.Draw(spriteBatch);
             }
@@ -77,8 +76,7 @@ namespace Sprint3.Link
 
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
-            itemsPlacedByLink = link.itemsPlacedByLink;
-            foreach (IItems projectile in itemsPlacedByLink)
+            foreach (IItems projectile in link.itemsPlacedByLink)
             {
                 projectile.Update();
             }
@@ -108,14 +106,17 @@ namespace Sprint3.Link
                 }
                 else if (link.CurrentWeapon == ItemForLink.Sword)
                 {
+                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
                     return HandleSword(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.MagicalRod)
                 {
+                    ProjectilesCommand.Instance.WandBeam(link.LinkDirection);
                     return HandleMagicalRod(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.ArrowBow)
                 {
+                    ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
                     return HandleArrowBow(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.BlueRing)

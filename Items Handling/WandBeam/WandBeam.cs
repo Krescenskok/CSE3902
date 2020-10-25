@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class WandBeam : IItems
     {
         private Vector2 location;
+        public bool expired = false;
         private ISprite item;
 
         private int drawnFrame;
@@ -46,6 +47,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
+            expired = true;
             state.Expire();
         }
 
