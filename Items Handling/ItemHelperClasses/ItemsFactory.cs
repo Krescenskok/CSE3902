@@ -239,6 +239,11 @@ namespace Sprint3
             return new RightBeamSprite(itemsSpriteSheet);
         }
 
+        public ISprite CreateShieldSprite()
+        {
+            return new ShieldSprite(itemsSpriteSheet);
+        }
+
         public ISprite CreateTriforcePieceSprite()
         {
             return new TriforcePieceSprite(itemsSpriteSheet);

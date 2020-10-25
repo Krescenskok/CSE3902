@@ -12,7 +12,7 @@ namespace Sprint3
 {
     public enum Item
     {
-        CandleFire, SwordBeam, Arrow, BluePotion, SilverSword, WandBeam, Boomerang,BlueCandle, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        Shield, CandleFire, SwordBeam, Arrow, BluePotion, SilverSword, WandBeam, Boomerang,BlueCandle, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
         Heart, HeartContainer, Key, Map, Rupee, TriforcePiece, Wand, WoodenSword
     };
     public class ItemsStateMachine
@@ -27,6 +27,7 @@ namespace Sprint3
         public ItemsStateMachine(LinkPlayer link)
         {
             this.link = link;
+            itemToState.Add(Item.Shield, new Shield(ItemsFactory.Instance.CreateShieldSprite(), location));
             itemToState.Add(Item.CandleFire, new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), location));
             itemToState.Add(Item.Compass, new Compass(ItemsFactory.Instance.CreateCompassSprite(), location));
             itemToState.Add(Item.Rupee, new Rupee(ItemsFactory.Instance.CreateRupeeSprite(), location));
