@@ -44,17 +44,29 @@ namespace Sprint3
         {
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
-            int playAreaWidth = game.GraphicsDevice.Viewport.Width / 2;
-            int playAreaHeight = game.GraphicsDevice.Viewport.Height / 2;
 
-            
+            int screenWidth = game.Window.ClientBounds.Width;
+            int screenHeight = game.Window.ClientBounds.Height;
+
+            int roomSpriteGridOffset = 32;
+            int roomSpriteGridWidth = 190;
+            int roomSpriteGridHeight = 110;
+            int roomSpriteWidth = 256;
+            int roomSpriteHeight = 176;
+
+
+            Point topLeft = new Point(roomSpriteGridOffset * screenWidth / roomSpriteGridWidth, roomSpriteGridOffset * screenHeight / roomSpriteGridHeight);
+
+
+            int playAreaWidth = roomSpriteGridWidth * screenWidth / roomSpriteWidth;
+            int playAreaHeight = roomSpriteGridHeight * screenHeight / roomSpriteHeight;
 
             int tileWidth = playAreaWidth / tileColumns;
             int tileHeight = playAreaHeight / tileRows;
             Point tileSize = new Point(tileWidth, tileHeight);
             this.tileSize = tileSize;
 
-            Debug.Write("x: " + tileSize.X + " Y: " + tileSize.Y);
+            
 
             for (int i = 0; i < tileRows; i++)
             {
@@ -62,7 +74,7 @@ namespace Sprint3
 
                 for (int j = 0; j < tileColumns; j++)
                 {
-                   Point position = new Point(j * tileWidth, i * tileHeight);
+                   Point position = new Point(j * tileWidth, i * tileHeight) + topLeft;
 
                     gridTiles[i].Add(new Rectangle(position, tileSize));
 
@@ -146,7 +158,7 @@ namespace Sprint3
 
             List<Rectangle> path = new List<Rectangle>();
 
-            if (start.Equals(end)) { Debug.WriteLine("nonono"); }
+            
 
             if (vertical)
             {
