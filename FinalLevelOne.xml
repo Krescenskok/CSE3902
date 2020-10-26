@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+	<Asset Type="MyDataTypes.LevelObjectData[]">
+
+
+		<!-- First Room Content-->
+		<Room id ="1">
+			
+			<!-- Statue Blocks Left Side-->
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>1 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>1 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>3 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>3 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>5 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdLeft</ObjectName>
+				<Location>5 4</Location>
+			</Item>
+
+			<!-- Statue Blocks Right Side-->
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>1 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>1 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>3 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>3 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>5 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BirdRight</ObjectName>
+				<Location>5 10</Location>
+			</Item>
+			
+			
+			
+		
+			
+		</Room>
+		
+		
+	</Asset>
+</XnaContent>
