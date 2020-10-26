@@ -47,4 +47,12 @@ ensure that our own code would work with everyone else's.
 
 It was detrimental for our group because we couldn't meet in person (like previous classes could) because it was harder to communicate and
 ask questions. It would've been much easier if we met in person to actually interact with the project code to find mistakes if there were any, rather than just 
-watching a group member share their screen and try to figure out what was going on.
+watching a group member share their screen and try to figure out what was going on. Some group members started pretty late into the sprint (due to midterms and 
+other assignments from classes), which was detrimental for our group. Since we needed each other's code for collision, it made it difficult to make progress 
+within our own tasks. Near the end of the sprint, it also caused us to become stressed out due to the fact that we didn't have much time left. Also, we had 
+merging errors with mgcontent and spent a while trying to figure out why certain things wouldn't merge together. But through this we learned that we shouldn't 
+include the mgcontent, and keep the .cs files.
+
+For next sprint, we will try our best to start earlier (which should be easier now that midterms are mostly over), we will continue to meet frequently via zoom to
+discuss our progress and ask questions, and we will also continue to ensure that we are only committing the .cs files and not the unncessary documents needed for
+visual studio project to work correctly.
