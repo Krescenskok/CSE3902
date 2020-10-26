@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +12,7 @@ namespace Sprint3.Link
 
     protected ISprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
-
+        Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
         protected int currentFrame;
 
         int i = 0;
@@ -28,29 +28,49 @@ namespace Sprint3.Link
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
         {
+            Color col;
             if (linkSprite == null)
                 linkSprite = SpriteFactory.Instance.CreateLinkSprite();
 
 
-            if (link.IsDamaged)
+            if (link.IsDamaged || link.Clock)
             {
 
                 if (link.DamageStartTime == 0)
                     link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
                 else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
                 {
-                    Color col = colors[i];
-                    i++;
-                    linkSprite.Draw(spriteBatch, location, currentFrame, col);
-
-                    if (i == colors.Length - 1)
+                    if(link.IsDamaged)
                     {
-                        i = 0;
+                        col = colors[i];
+                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                        i++;
+                        if (i == colors.Length - 1)
+                        {
+                            i = 0;
+                        }
+
                     }
+                    else if (link.Clock)
+                    {
+                        col = clockColors[i];
+                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                        i++;
+                        if (i == clockColors.Length - 1)
+                        {
+                            i = 0;
+                        }
+
+                    }
+                  
+
+                   
                 }
                 else
                 {
                     link.IsDamaged = false;
+                    link.Clock = false;
+  
                 }
 
             }
@@ -58,9 +78,9 @@ namespace Sprint3.Link
             {
                 if (link.UseRing)
                 {
-                    System.Diagnostics.Debug.WriteLine("Should be true: " + link.UseRing);
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
                 }
+           
                 else
                 {
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
@@ -97,9 +117,8 @@ namespace Sprint3.Link
 
             if (link.IsAttacking)
             {
-                System.Diagnostics.Debug.WriteLine(link.CurrentWeapon);
 
-                if (link.CurrentWeapon == ItemForLink.WoodenSword)
+                if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
                 {
                     ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
                     return HandleWoodenSword(gameTime, location);
@@ -122,6 +141,7 @@ namespace Sprint3.Link
                 else if (link.CurrentWeapon == ItemForLink.BlueRing)
                 {
                     link.UseRing = true;
+                    return HandleArrowBow(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.Boomerang)
                 {
@@ -140,6 +160,13 @@ namespace Sprint3.Link
                     ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
                     //animation to throw is same as bow
                     return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Clock)
+                {
+                    link.Clock = true;
+                    //RoomEnemies.Instance.StunAllEnemies();
+                    return HandleArrowBow(gameTime, location);
+
                 }
 
             }
