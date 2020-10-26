@@ -20,8 +20,8 @@ namespace Sprint3.Link
         Clock
     }
 
-   
-    public class LinkPlayer 
+
+    public class LinkPlayer
     {
         public ILinkState state;
 
@@ -36,8 +36,8 @@ namespace Sprint3.Link
         private int numOfRupee = 0;
         private bool useRing = false;
         private int fullHealth = 60;
+        private int delay = 2;
         private bool clock = false;
-
         public List<IItems> itemsPickedUp;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
@@ -59,9 +59,10 @@ namespace Sprint3.Link
 
         public Rectangle Bounds
         {
-            get {
+            get
+            {
 
-                Rectangle t =  new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
+                Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
                 return t;
             }
         }
@@ -140,6 +141,7 @@ namespace Sprint3.Link
 
         public int FullHealth { get => fullHealth; set => fullHealth = value; }
 
+        public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
 
         public LinkPlayer()
@@ -152,7 +154,8 @@ namespace Sprint3.Link
         {
 
             CurrentLocation = state.Update(gameTime, CurrentLocation);
-            
+            delay--;
+
         }
 
         public void MovingLeft()
@@ -185,7 +188,7 @@ namespace Sprint3.Link
 
         public void Stationary()
         {
-             state = new Stationary(this);
+            state = new Stationary(this);
         }
 
         public void Reset()
@@ -200,7 +203,7 @@ namespace Sprint3.Link
             IsWalkingInPlace = false;
             IsPickingUpItem = false;
 
-          
+
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
@@ -215,9 +218,9 @@ namespace Sprint3.Link
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
-        
-        
 
-       
+
+
+
     }
 }

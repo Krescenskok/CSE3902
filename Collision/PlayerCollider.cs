@@ -38,7 +38,7 @@ namespace Sprint3
         public void HandleCollision(ICollider col, Collision collision)
         {
 
-           
+
 
         }
 
@@ -70,7 +70,7 @@ namespace Sprint3
 
                     else if (collision.Right())
                     {
-                        if(linkPlayer.state is MoveRight)
+                        if (linkPlayer.state is MoveRight)
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
@@ -125,7 +125,7 @@ namespace Sprint3
                         }
                     }
                 }
-                
+
             }
 
             if (col.CompareTag("item"))
@@ -201,12 +201,12 @@ namespace Sprint3
             if (msg == "Item")
             {
                 linkPlayer.IsPickingUpItem = true;
-                linkPlayer.itemsPickedUp.Add((IItems) value);
+                linkPlayer.itemsPickedUp.Add((IItems)value);
             }
             if (msg == "Heal")
             {
-                linkPlayer.Health += (float) value;
-                if(linkPlayer.Health >= linkPlayer.FullHealth)
+                linkPlayer.Health += (float)value;
+                if (linkPlayer.Health >= linkPlayer.FullHealth)
                 {
                     linkPlayer.Health = 30;
                 }
@@ -225,7 +225,15 @@ namespace Sprint3
             if (msg == "Hand")
             {
                 linkPlayer.currentLocation = (Vector2)value;
+            }
 
+            if (msg == "Special Block")
+            {
+                linkPlayer.isWalkingInPlace = true;
+                if (linkPlayer.Delay <= 0)
+                {
+                    linkPlayer.isWalkingInPlace = false;
+                }
             }
         }
     }
