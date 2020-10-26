@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Sprint3
 {
-    public class ItemCollider : ICollider
+    public class ProjectileCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
@@ -17,27 +17,27 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ItemCollider(Rectangle rect, IItems item, IItemsState state, string name)
+        public ProjectileCollider(Rectangle rect, IItems item, IItemsState state, string name)
         {
             bounds = rect;
 
             this.item = item;
 
-            this.state = item.State;
+            this.state = state;
 
             CollisionHandler.Instance.AddCollider(this);
 
             this.name = name;
         }
 
-        public ItemCollider()
+        public ProjectileCollider()
         {
 
         }
 
         public void ChangeState(IItemsState state)
         {
-            this.state = state;
+            item = state;
         }
 
         public Rectangle Bounds()
@@ -48,7 +48,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == name || tag == "Item";
+            return tag == name || tag == "Projectile";
         }
 
         public bool Equals(ICollider col)
@@ -85,23 +85,22 @@ namespace Sprint3
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From().ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
+                if (col.CompareTag("Enemy")) col.SendMessage("EnemyTakeDamage" + direction, damageAmount);
+            
 
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Dissapear")
-            {
-                this.item.State.Expire();
-            }
+
             
         }
 
 
-        public void Update(IItems itemObj)
+        public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
