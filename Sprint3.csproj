@@ -69,7 +69,4 @@
     <Compile Remove="Items Handling\States\Letter.cs" />
     <Compile Remove="Items Handling\States\Compass.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Collision\" />
-  </ItemGroup>
 </Project>

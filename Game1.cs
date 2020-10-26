@@ -6,6 +6,12 @@ using Sprint3.Link;
 using Sprint3;
 using Sprint3.Enemies;
 using Sprint3.Blocks;
+using System.Xml.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Linq;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace Sprint3
 {
@@ -25,6 +31,7 @@ namespace Sprint3
         ItemsCommand ItemPersistent;
         BlocksCommand BlockPersistent;
         ProjectilesCommand ProjectilePersistent;
+        XElement xml;
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
@@ -70,15 +77,19 @@ namespace Sprint3
             ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
-            
 
-            EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
+            //set up room loader
+            GridGenerator.Instance.GetGrid(this, 12, 7);
+            xml = XElement.Load("../../../JTEnemyLoadingTest.xml").Element("Asset");
+            List<XElement> rooms = xml.Elements("Room").ToList();
+
+            //load enemies for room 1
+            RoomEnemies.Instance.LoadRoom(this, rooms[0]);
+
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
 
-            CollisionHandler collisionHandler = CollisionHandler.Instance;
-            test = new EnemyCollider(new Rectangle(100, 100, 64, 64), new Aquamentus(new Vector2(100, 100)).State, 10);
-            collisionHandler.AddCollider(new PlayerCollider(linkPlayer));
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -104,10 +115,12 @@ namespace Sprint3
 
                 }
             }
-            
 
 
-            EnemyNPCDisplay.Instance.Update();
+            RoomSpawner.Instance.Update();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space)) RoomEnemies.Instance.StunAllEnemies();
+
             LinkPersistent.Update(gameTime);
             ItemPersistent.Update(gameTime);
             BlockPersistent.Update(gameTime);
@@ -133,8 +146,7 @@ namespace Sprint3
             BlockPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
 
-            EnemyNPCDisplay.Instance.Draw(_spriteBatch, gameTime);
-
+            RoomSpawner.Instance.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
