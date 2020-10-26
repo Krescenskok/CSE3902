@@ -15,29 +15,54 @@ namespace Sprint3.Link
         }
 
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
+        Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua};
+
         int i = 0;
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime,Vector2 location)
         {
-            if (link.IsDamaged)
+            Color col;
+            if (link.IsDamaged || link.Clock)
             {
 
                 if (link.DamageStartTime == 0)
                     link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
                 else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
                 {
-                    Color col = colors[i];
-                    i++;
-                    linkSprite.Draw(spriteBatch, location, currentFrame, col);
-
-                    if (i == colors.Length - 1)
+                    if (link.IsDamaged)
                     {
-                        i = 0;
+                        col = colors[i];
+                        System.Diagnostics.Debug.WriteLine(i);
+
+                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                        i++;
+                        if (i == colors.Length - 1)
+                        {
+                            i = 0;
+                        }
+
                     }
+                    else if (link.Clock)
+                    {
+                        col = clockColors[i];
+                        System.Diagnostics.Debug.WriteLine(i);
+                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                        i++;
+                        if (i == clockColors.Length - 1)
+                        {
+                            i = 0;
+                        }
+
+                    }
+
+
+
                 }
                 else
                 {
                     link.IsDamaged = false;
+                    link.Clock = false;
+
                 }
 
             }
@@ -50,7 +75,6 @@ namespace Sprint3.Link
                 }
                 if (link.UseRing)
                 {
-                    System.Diagnostics.Debug.WriteLine("Should be true: " + link.UseRing);
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
                 }
                 else

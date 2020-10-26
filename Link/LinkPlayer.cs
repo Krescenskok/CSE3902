@@ -16,7 +16,8 @@ namespace Sprint3.Link
         BlueRing,
         Boomerang,
         BlueCandle,
-        Bomb
+        Bomb,
+        Clock
     }
 
    
@@ -35,6 +36,7 @@ namespace Sprint3.Link
         private int numOfRupee = 0;
         private bool useRing = false;
         private int fullHealth = 60;
+        private bool clock = false;
 
         public List<IItems> itemsPickedUp;
 
@@ -137,6 +139,8 @@ namespace Sprint3.Link
         public bool UseRing { get => useRing; set => useRing = value; }
 
         public int FullHealth { get => fullHealth; set => fullHealth = value; }
+
+        public bool Clock { get => clock; set => clock = value; }
 
         public LinkPlayer()
         {

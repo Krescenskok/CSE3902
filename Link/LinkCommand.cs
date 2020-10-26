@@ -81,6 +81,10 @@ namespace Sprint3.Link
                     linkPlayer.IsAttacking = false;
                     linkPlayer.MovingDown();
                 }
+                else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Shield;
+                }
 
                 else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
                 {
@@ -116,6 +120,12 @@ namespace Sprint3.Link
                 {
                     linkPlayer.CurrentWeapon = ItemForLink.Bomb;
                 }
+                else if (Key.Equals("D8") || Key.Equals("NumPad8"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Clock;
+                }
+
+
             }
 
             linkPlayer.Update(gameTime);

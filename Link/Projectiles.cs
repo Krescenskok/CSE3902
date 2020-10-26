@@ -20,6 +20,9 @@ namespace Sprint3.Link
         private bool boomerangMade = false;
         private bool candleMade = false;
         private bool bombMade = false;
+        private bool clockMade = false;
+
+
         private Vector2 itemLocation;
 
 
@@ -72,14 +75,14 @@ namespace Sprint3.Link
                 }
                 else if (direction.Equals("Right"))
                 {
-                    itemLocation.Y += 8;
+                    itemLocation.Y += 5;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Left"))
                 {
-                    itemLocation.Y += 8;
+                    itemLocation.Y += 6;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
@@ -133,7 +136,7 @@ namespace Sprint3.Link
             if (!boomerangMade)
             {
                 itemLocation = link.CurrentLocation;
-                itemLocation.Y -= 10;
+                itemLocation.Y += 10;
                 boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 link.itemsPlacedByLink.Add(item);

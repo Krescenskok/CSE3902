@@ -40,6 +40,8 @@ namespace Sprint3
             commandsList.Add(Keys.N, new LinkCommand(player, "N"));
             commandsList.Add(Keys.Z, new LinkCommand(player, "Z"));
             commandsList.Add(Keys.E, new LinkCommand(player, "E"));
+            commandsList.Add(Keys.D0, new LinkCommand(player, "D0"));
+            commandsList.Add(Keys.NumPad0, new LinkCommand(player, "NumPad0"));
             commandsList.Add(Keys.D1, new LinkCommand(player, "D1"));
             commandsList.Add(Keys.NumPad1, new LinkCommand(player, "NumPad1"));
             commandsList.Add(Keys.D2, new LinkCommand(player, "D2"));
@@ -54,6 +56,8 @@ namespace Sprint3
             commandsList.Add(Keys.NumPad6, new LinkCommand(player, "NumPad6"));
             commandsList.Add(Keys.D7, new LinkCommand(player, "D7"));
             commandsList.Add(Keys.NumPad7, new LinkCommand(player, "NumPad7"));
+            commandsList.Add(Keys.D8, new LinkCommand(player, "D8"));
+            commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
             commandsList.Add(Keys.R, new ResetCommand(player, game.items, game.blocks));
             commandsList.Add(Keys.P, new DisplayNextEnemy(Keys.P));
             commandsList.Add(Keys.O, new DisplayPreviousEnemy(Keys.O));
