@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class BlueCandle : IItems
     {
         private Vector2 location;
+        private ItemCollider blueCandleCollider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame; 

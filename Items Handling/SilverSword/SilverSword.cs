@@ -9,12 +9,15 @@ namespace Sprint3.Items
     public class SilverSword : IItems
     {
         private Vector2 location;
+        private ItemCollider silverSwordCollider;
         private ISprite item;
         private IItemsState state;
 
         private int drawnFrame;
 
         public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public SilverSword(ISprite item, Vector2 location)
         {

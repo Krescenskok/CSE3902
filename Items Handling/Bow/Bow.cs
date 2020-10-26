@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class Bow : IItems
     {
         private Vector2 location;
+        private ItemCollider bowCollider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;

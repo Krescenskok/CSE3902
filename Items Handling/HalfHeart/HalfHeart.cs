@@ -8,17 +8,23 @@ namespace Sprint3.Items
 {
     public class HalfHeart : IItems
     {
-        private Vector2 location;
         private ISprite item;
-        private IItemsState state;
         private int drawnFrame;
+
+        private Vector2 location;
+
+        private IItemsState state;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public HalfHeart(ISprite item, Vector2 location)
         {
-            this.location = location;
+            Location = location;
             this.item = item;
             drawnFrame = 0;
-            state = new HalfHeartState(this, location);
+            State = new HalfHeartState(this, location);
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -28,17 +34,17 @@ namespace Sprint3.Items
 
         public void Update()
         {
-            state.Update();
+            State.Update();
         }
 
         public void Expire()
         {
-            state.Expire();
+            State.Expire();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            item.Draw(spriteBatch, location, drawnFrame, Color.White);
+            item.Draw(spriteBatch, Location, drawnFrame, Color.White);
         }
     }
 }

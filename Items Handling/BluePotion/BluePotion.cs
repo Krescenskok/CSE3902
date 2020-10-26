@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class BluePotion : IItems
     {
         private Vector2 location;
+        private ItemCollider bluePotionCollider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;

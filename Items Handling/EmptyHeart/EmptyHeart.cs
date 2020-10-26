@@ -13,6 +13,10 @@ namespace Sprint3.Items
         private IItemsState state;
         private int drawnFrame;
 
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
+
         public EmptyHeart(ISprite item, Vector2 location)
         {
             this.location = location;

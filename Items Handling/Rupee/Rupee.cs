@@ -10,9 +10,14 @@ namespace Sprint3.Items
     public class Rupee : IItems
     {
         private Vector2 location;
+        private ItemCollider rupeeCollider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public Rupee(ISprite item, Vector2 location)
         {

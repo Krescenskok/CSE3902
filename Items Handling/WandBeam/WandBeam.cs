@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class WandBeam : IItems
     {
         private Vector2 location;
+        private ItemCollider wandBeamCollider;
         private bool isExpired = false;
         public bool expired
         {
@@ -20,6 +21,10 @@ namespace Sprint3.Items
         private int drawnFrame;
         private IItemsState state;
         private string direction;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public WandBeam(ISprite item, Vector2 location, string direction)
         {

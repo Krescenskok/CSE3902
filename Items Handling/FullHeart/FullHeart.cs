@@ -13,6 +13,9 @@ namespace Sprint3.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public FullHeart(ISprite item, Vector2 location)
         {

@@ -11,5 +11,9 @@ namespace Sprint3
         void Update();
 
         void Draw(SpriteBatch spriteBatch);
+
+        Vector2 Location { get; }
+
+        IItemsState State { get; }
     }
 }

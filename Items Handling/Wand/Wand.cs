@@ -9,10 +9,15 @@ namespace Sprint3.Items
     public class Wand : IItems
     {
         private Vector2 location;
+        private ItemCollider wandCollider;
         private ISprite item;
 
         private int drawnFrame;
         private IItemsState state;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public Wand(ISprite item, Vector2 location)
         {
