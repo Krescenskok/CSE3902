@@ -89,10 +89,25 @@ namespace Sprint3
 
         public void SendMessage(string msg, object value)
         {
+            
+
             if (msg == "EnemyTakeDamage") enemy.TakeDamage((int)value);
             else if (msg == "Stun" && !Name.Equals("Keese")) enemy.Stun();
             else if (msg == "Stun") enemy.Die();
-            
+            else if (msg.Contains("EnemyTakeDamage") && (name.Equals("Stalfos") || name.Equals("Goriya")))
+            { 
+                string dir = msg.Substring(15);
+
+                StalfosWalkingState stalfos = enemy as StalfosWalkingState;
+                GoriyaMoveState goriya = enemy as GoriyaMoveState;
+
+                if (stalfos != null) stalfos.TakeDamage(dir, (int)value);
+                else if (goriya != null) goriya.TakeDamage(dir, (int)value);
+                
+            }
+
+
+
         }
 
 

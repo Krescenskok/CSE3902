@@ -127,6 +127,12 @@ namespace Sprint3
             if (stillAlive) skeleton.state = new StalfosDamagedState(currentDirection.ToString(), skeleton, location);
         }
 
+        public void TakeDamage(string dir, int amount)
+        {
+            bool stillAlive = skeleton.SubtractHP(amount);
+            if (stillAlive) skeleton.state = new StalfosDamagedState(dir, skeleton, location);
+        }
+
         #region //unused methods
         public void Attack()
         {
