@@ -150,6 +150,13 @@ namespace Sprint3
             
         }
 
+        public void TakeDamage(string dir, int amount)
+        {
+            goriya.TakeDamage(amount);
+            goriya.state = new GoriyaDamagedState(dir, goriya, location, moveSpeed);
+
+        }
+
         public void Stun()
         {
             currentMoveSpeed = 0;
