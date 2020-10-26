@@ -59,7 +59,7 @@ Code analysis for Link: 4 warnings, 0 errors
 - A field is never used: Removed the field declaration to get rid of the warning (initally used for testing)
 - A field is never used: Removed the field declaration to get rid of the warning
 
-Code analysis for Items:
+Code analysis for Items: 23 warnings, 0 errors.
 - A field is never used: Removed the field declaration to get rid of the warning
 - A field is given a value but is never used: Removed the field and assignment to get rid of the warning.
 
