@@ -5,7 +5,7 @@ Group 5
 Task board screenshot is included in the zip file with the name: "TaskBoard"
 
 Known bugs/issues:
-- The collision with Link's shield deflecting the enemy fireballs does not work
+- The collision with Link's shield deflecting the enemy fireballs does not work (for now, the shield uses the wooden sword instead)
 - The impact animation for the sword beam does not have the blinking projectiles spread out.
 - Link can only have one projectile (arrow, wand beam, sword beam, boomerang) actively flying in the air at a time. (In other words: if you try to shoot 2 sword beams/wand beams/arrows in a row, the second projectile sprite will not draw. It is only when the first fired projectile expires that a second can be drawn.) 
 - Similarily to above, Link can only place one bomb and set one fire (using candle) at a time.
@@ -28,6 +28,15 @@ Program controls are the same from last game:
 - o and p are still used to switch between enemies (this will be removed later on, just kept it to debug if needed)
 - q is used to quit
 - r is used to reset the game
+- 0: Wooden sword
+- 1: Silver sword
+- 2: Magical Rod
+- 3: Arrow
+- 4: Blue ring
+- 5: Boomerang
+- 6: Candle flame
+- 7: Bomb
+- 8: Clock
 
 For this sprint, we implemented collisions between all the different objects (blocks, items, Link, and enemies), and implemented the effects of what happens when certain objects collide with each other. 
 
