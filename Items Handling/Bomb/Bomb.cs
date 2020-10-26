@@ -38,7 +38,7 @@ namespace Sprint3.Items
 
         public void Exploded()
         {
-            state = new BombExplosionState(this, location);
+            state = new BombExplosionState(this);
             Update();
         }
 

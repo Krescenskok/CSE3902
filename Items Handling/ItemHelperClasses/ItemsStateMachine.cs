@@ -12,7 +12,7 @@ namespace Sprint3
 {
     public enum Item
     {
-        CandleFire, SwordBeam, Arrow, BluePotion, SilverSword, WandBeam, Boomerang,BlueCandle, BlueRing, Bomb, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
+        Bomb, Boomerang, SwordBeam, Shield, CandleFire, Arrow, BluePotion, SilverSword, WandBeam, BlueCandle, BlueRing, Bow, Clock, Compass, EmptyHeart, Fairy, HalfHeart, 
         Heart, HeartContainer, Key, Map, Rupee, TriforcePiece, Wand, WoodenSword
     };
     public class ItemsStateMachine
@@ -21,12 +21,13 @@ namespace Sprint3
         private IItems item;
         private LinkedList<Item> itemList;
         private LinkedListNode<Item> current;
-        private Vector2 location = new Vector2(100, 50);
+        private Vector2 location = new Vector2(100, 300);
         private LinkPlayer link;
 
         public ItemsStateMachine(LinkPlayer link)
         {
             this.link = link;
+            itemToState.Add(Item.Shield, new Shield(ItemsFactory.Instance.CreateShieldSprite(), location));
             itemToState.Add(Item.CandleFire, new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), location));
             itemToState.Add(Item.Compass, new Compass(ItemsFactory.Instance.CreateCompassSprite(), location));
             itemToState.Add(Item.Rupee, new Rupee(ItemsFactory.Instance.CreateRupeeSprite(), location));
@@ -63,7 +64,6 @@ namespace Sprint3
 
         public void Update()
         {
-            item = itemToState[current.Value];
             item.Update();
         }
         
@@ -92,6 +92,8 @@ namespace Sprint3
                     current = itemList.Last;
                 }
             }
+
+            item = itemToState[current.Value];
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -108,6 +110,8 @@ namespace Sprint3
         public void ResetAllItems()
         {
             itemToState = new Dictionary<Item, IItems>();
+            itemToState.Add(Item.Shield, new Shield(ItemsFactory.Instance.CreateShieldSprite(), location));
+            itemToState.Add(Item.CandleFire, new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), location));
             itemToState.Add(Item.Compass, new Compass(ItemsFactory.Instance.CreateCompassSprite(), location));
             itemToState.Add(Item.Rupee, new Rupee(ItemsFactory.Instance.CreateRupeeSprite(), location));
             itemToState.Add(Item.Boomerang, new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), location, "Down", link));

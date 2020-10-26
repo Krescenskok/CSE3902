@@ -51,6 +51,7 @@ namespace Sprint3.Link
 
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
+             
 
                 }
 

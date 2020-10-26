@@ -20,7 +20,7 @@ namespace Sprint3
         private string direction;
         private int drawnFrame;
         private IItemsState state;
-        
+
         private float xPos;
         private float yPos;
         private float initialY;
@@ -76,6 +76,6 @@ namespace Sprint3
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
-        
+
     }
 }

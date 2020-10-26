@@ -16,9 +16,9 @@ namespace Sprint3
         private Texture2D swordBeamImpactSheet;
         private Vector2 itemSheetSize = new Vector2(12, 8);
         private Vector2 particlesSheetSize = new Vector2(2, 4);
-        private Vector2 explosionDimensions = new Vector2(50, 100);
+        private Vector2 explosionDimensions = new Vector2(1, 3);
         private Vector2 wandBeamDimensions = new Vector2(4, 2);
-        private Vector2 swordBeamDimensions = new Vector2(3, 2);
+        private Vector2 swordBeamDimensions = new Vector2(1, 6);
 
         private static ItemsFactory instance = new ItemsFactory();
 
@@ -39,9 +39,9 @@ namespace Sprint3
         {
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             particlesSheet = content.Load<Texture2D>("particles");
-            explosionSheet = content.Load<Texture2D>("explosion");
+            explosionSheet = content.Load<Texture2D>("explosionRow");
             wandBeamSheet = content.Load<Texture2D>("wandbeam");
-            swordBeamImpactSheet = content.Load<Texture2D>("beamImpact");
+            swordBeamImpactSheet = content.Load<Texture2D>("beamImpactRow");
         }
 
         public Vector2 GetSheetSize()
@@ -89,9 +89,9 @@ namespace Sprint3
             return new ExplosionSprite(explosionSheet);
         }
 
-        public ISprite CreateBeamImpactSprite(int row)
+        public ISprite CreateBeamImpactSprite()
         {
-            return new BeamImpactSprite(swordBeamImpactSheet, row);
+            return new BeamImpactSprite(swordBeamImpactSheet);
         }
 
         public ISprite CreateWandBeamSprite(string direction)
@@ -237,6 +237,11 @@ namespace Sprint3
         public ISprite CreateRightBeamSprite()
         {
             return new RightBeamSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateShieldSprite()
+        {
+            return new ShieldSprite(itemsSpriteSheet);
         }
 
         public ISprite CreateTriforcePieceSprite()

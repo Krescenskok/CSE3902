@@ -8,11 +8,7 @@ namespace Sprint3.Items
 {
     public class Shield : IItems
     {
-        public Vector2 location
-        {
-            get { return location; }
-            set { location = value; }
-        }
+        private Vector2 location;
         private ISprite item;
         private IItemsState state;
 

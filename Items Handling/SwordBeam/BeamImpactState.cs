@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,14 +8,14 @@ namespace Sprint3
     {
         private SwordBeam item;
         private int runTime;
-        private const int maxTime = 250;
+        private const int maxTime = 60;
         private int frame = 0;
-        private int row = 0;
+        private int stage = 0;
 
         public BeamImpactState(SwordBeam item)
         {
             this.item = item;
-            item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite(0));
+            item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite());
             item.UpdateFrame(0);
             runTime = 0;
         }
@@ -29,13 +28,13 @@ namespace Sprint3
             if (runTime % 5 == 0)
             {
                 frame++;
-                item.UpdateFrame(frame % 2);
+                item.UpdateFrame(stage + frame % 2);
             }
 
             if (runTime % (maxTime / 3) == 0)
             {
-                row++;
-                item.UpdateSprite(ItemsFactory.Instance.CreateBeamImpactSprite(row));
+                stage += 2;
+                item.UpdateFrame(stage + frame % 2);
             }
 
             if (runTime >= maxTime)
@@ -52,7 +51,7 @@ namespace Sprint3
 
         public void Collected()
         {
-           
+
         }
     }
 }

@@ -143,6 +143,7 @@ namespace Sprint3.Link
                 else if (link.CurrentWeapon == ItemForLink.BlueRing)
                 {
                     link.UseRing = true;
+                    return HandleArrowBow(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.Boomerang)
                 {
@@ -165,6 +166,9 @@ namespace Sprint3.Link
                 else if (link.CurrentWeapon == ItemForLink.Clock)
                 {
                     link.Clock = true;
+                    //RoomEnemies.Instance.StunAllEnemies();
+                    return HandleArrowBow(gameTime, location);
+
                 }
 
             }
