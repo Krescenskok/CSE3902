@@ -164,7 +164,7 @@ namespace Sprint3.Link
                 else if (link.CurrentWeapon == ItemForLink.Clock)
                 {
                     link.Clock = true;
-                    RoomEnemies.Instance.StunAllEnemies();
+                    //RoomEnemies.Instance.StunAllEnemies();
                     return HandleArrowBow(gameTime, location);
 
                 }

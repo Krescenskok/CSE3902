@@ -41,6 +41,9 @@ namespace Sprint3.Link
                 return instance;
             }
         }
+
+        public double LastTime { get => lastTime; set => lastTime = value; }
+
         public ProjectilesCommand()
         {
 
@@ -260,7 +263,7 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)
             {
                 placedItems = link.itemsPlacedByLink;
                 foreach (IItems projectile in placedItems)

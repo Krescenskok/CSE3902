@@ -9,10 +9,9 @@ namespace Sprint3
 {
     public class PlayerCollider : ICollider
     {
-        private Rectangle bounds;
-        private float damageAmount;
+        //private Rectangle bounds;
         LinkPlayer linkPlayer;
-        String Key;
+        //String Key;
 
 
         public PlayerCollider(LinkPlayer linkPlayer)
