@@ -53,7 +53,12 @@ Andrew and JT created and worked on the basic structure for file reading and roo
 Code reviews and analysis were done with FxCop Analyzers.
 
 
-Code review for Link:
+Code review for Link: 4 warnings, 0 errors
+- A field is never used: Removed the field declaration to get rid of the warning
+- Initial declaration didn't have a value: Created a get/set to get rid of the warning
+- A field is never used: Removed the field declaration to get rid of the warning (initally used for testing)
+- A field is never used: Removed the field declaration to get rid of the warning
+
 
 
 Code review for Items:
