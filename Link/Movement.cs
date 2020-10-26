@@ -54,7 +54,6 @@ namespace Sprint3.Link
                     else if (link.Clock)
                     {
                         col = clockColors[i];
-                        System.Diagnostics.Debug.WriteLine(i);
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == clockColors.Length - 1)
@@ -118,7 +117,6 @@ namespace Sprint3.Link
 
             if (link.IsAttacking)
             {
-                System.Diagnostics.Debug.WriteLine(link.CurrentWeapon);
 
                 if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
                 {

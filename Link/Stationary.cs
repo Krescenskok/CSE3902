@@ -32,7 +32,6 @@ namespace Sprint3.Link
                     if (link.IsDamaged)
                     {
                         col = colors[i];
-                        System.Diagnostics.Debug.WriteLine(i);
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
@@ -45,7 +44,6 @@ namespace Sprint3.Link
                     else if (link.Clock)
                     {
                         col = clockColors[i];
-                        System.Diagnostics.Debug.WriteLine(i);
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == clockColors.Length - 1)

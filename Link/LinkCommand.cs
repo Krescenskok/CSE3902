@@ -30,7 +30,6 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime )
         {
-            System.Diagnostics.Debug.WriteLine(Key);
             ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
             {
