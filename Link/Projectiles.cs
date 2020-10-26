@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint3.Items;
@@ -20,6 +21,7 @@ namespace Sprint3.Link
         private bool candleMade = false;
         private bool bombMade = false;
         private Vector2 itemLocation;
+
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -128,10 +130,10 @@ namespace Sprint3.Link
 
         public void BoomerangThrow(string direction)
         {
-            itemLocation = link.CurrentLocation;
-            itemLocation.Y -= 10;
             if (!boomerangMade)
             {
+                itemLocation = link.CurrentLocation;
+                itemLocation.Y -= 10;
                 boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 link.itemsPlacedByLink.Add(item);
@@ -168,7 +170,6 @@ namespace Sprint3.Link
             }
             ExpireCheck();
         }
-
 
         public void SpawnBomb(string direction)
         {
@@ -207,8 +208,8 @@ namespace Sprint3.Link
             {
                 if (item is SwordBeam && (((SwordBeam)item).expired == true))
                 {
-                    beamMade = false;
-                    list.Add(item);
+                        beamMade = false;
+                        list.Add(item);
                 }
                 else if (item is Arrow && ((Arrow)item).expired == true)
                 {
@@ -236,6 +237,11 @@ namespace Sprint3.Link
                     list.Add(item);
                 }
             }
+            foreach (IItems item in list)
+            {
+                link.RemovePlacedItem(item);
+            }
+
         }
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
@@ -258,7 +264,7 @@ namespace Sprint3.Link
                 {
                     projectile.Update();
                 }
-
+               
             }
         }
     }
