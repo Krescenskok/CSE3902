@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
@@ -21,6 +21,10 @@ namespace Sprint3.Link
         private bool candleMade = false;
         private bool bombMade = false;
 
+
+        private Vector2 itemLocation;
+
+
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
         public LinkPlayer Link
@@ -36,6 +40,9 @@ namespace Sprint3.Link
                 return instance;
             }
         }
+
+        public double LastTime { get => lastTime; set => lastTime = value; }
+
         public ProjectilesCommand()
         {
 
@@ -46,7 +53,9 @@ namespace Sprint3.Link
             if (!arrowMade)
             {
                 arrowMade = true;
-                item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), link.CurrentLocation, direction);
+                itemLocation = link.CurrentLocation;
+                itemLocation.Y += 10;
+                item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -54,27 +63,37 @@ namespace Sprint3.Link
 
         public void SwordBeam(string direction)
         {
+            itemLocation = link.CurrentLocation;
+
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
                 if (direction.Equals("Down"))
                 {
-                    item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), link.CurrentLocation, direction);
+                    itemLocation.X += 12;
+
+                    item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Right"))
                 {
-                    item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), link.CurrentLocation, direction);
+                    itemLocation.Y += 5;
+
+                    item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Left"))
                 {
-                    item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), link.CurrentLocation, direction);
+                    itemLocation.Y += 6;
+
+                    item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else
                 {
-                    item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), link.CurrentLocation, direction);
+                    itemLocation.X += 8;
+
+                    item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
             }
@@ -83,10 +102,32 @@ namespace Sprint3.Link
 
         public void WandBeam(string direction)
         {
+            itemLocation = link.CurrentLocation;
+
             if (!wandMade)
             {
+                if (direction.Equals("Down"))
+                {
+                    itemLocation.Y += 10;
+                    itemLocation.X += 10;
+                }
+                else if (direction.Equals("Left"))
+                {
+                    itemLocation.Y += 10;
+                    itemLocation.X -= 10;
+                }
+                else if (direction.Equals("Right"))
+                {
+                    itemLocation.Y += 10;
+                    itemLocation.X += 10;
+                }
+                else
+                {
+                    itemLocation.Y -= 10;
+                    itemLocation.X += 6;
+                }
                 wandMade = true;
-                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), link.CurrentLocation, direction);
+                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -96,8 +137,10 @@ namespace Sprint3.Link
         {
             if (!boomerangMade)
             {
+                itemLocation = link.CurrentLocation;
+                itemLocation.Y += 10;
                 boomerangMade = true;
-                item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), link.CurrentLocation, direction, link);
+                item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -219,7 +262,7 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)
             {
                 placedItems = link.itemsPlacedByLink;
                 foreach (IItems projectile in placedItems)
