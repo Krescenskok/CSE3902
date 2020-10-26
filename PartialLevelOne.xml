@@ -4,7 +4,7 @@
 
 
 		<!-- First Room Content-->
-		<Room Type ="Room1">
+		<Room id ="1">
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Rope</ObjectName>

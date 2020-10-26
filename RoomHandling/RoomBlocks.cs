@@ -82,15 +82,15 @@ namespace Sprint3
                         }        
                     } else if (objName.Equals("BirdLeft"))
                     {
-                        roomBlocks.Add(new BirdLeft(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+                        //roomBlocks.Add(new BirdLeft(ItemsFactory.Instance.CreateBirdRightSprite(), location));
                     }
                     else if (objName.Equals("BirdRight"))
                     {
-                        roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+                       //roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
                     }
                     else if (objName.Equals("BirdRight"))
                     {
-                        roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+                       // roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
                     }
                 }
             }
@@ -108,7 +108,7 @@ namespace Sprint3
             
             for (int i = 0; i < roomBlocks.Count; i++)
             {
-                roomBlocks[i].Draw(batch);
+                //roomBlocks[i].Draw(batch);
             }
 
             foreach (TestCollider col in testObjects)
@@ -119,7 +119,7 @@ namespace Sprint3
         public void Destroy(LinkBlocks block)
         {
             roomBlocks.Remove(block);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            //CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
         }        
 
 

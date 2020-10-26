@@ -12,13 +12,15 @@ namespace Sprint3
         private Rectangle bounds;
         private float damageAmount;
         LinkPlayer linkPlayer;
-        String Key;
+        String Name;
 
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
         }
+
+        string ICollider.Name => throw new NotImplementedException();
 
         public Rectangle Bounds()
         {

@@ -84,7 +84,7 @@ namespace Sprint3
             List<XElement> rooms = xml.Elements("Room").ToList();
 
             //load enemies for room 1
-            RoomEnemies.Instance.LoadRoom(this, rooms[0]);
+            RoomSpawner.Instance.LoadRoom(this, 1);
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);

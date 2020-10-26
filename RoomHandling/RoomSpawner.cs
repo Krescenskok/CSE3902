@@ -43,7 +43,7 @@ namespace Sprint3
         {
             xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
             xml.Attribute("Type").Name.ToString();
-            roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("Type").Value));
+            roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
         }
 
         public void Reset()
@@ -65,8 +65,8 @@ namespace Sprint3
         public void Update()
         {
             RoomEnemies.Instance.Update();
-            RoomItems.Instance.Update();
-            RoomBlocks.Instance.Update();
+            //RoomItems.Instance.Update();
+            //RoomBlocks.Instance.Update();
         }
 
         public void RoomChange(Game game, int roomNumber)
@@ -77,8 +77,8 @@ namespace Sprint3
         public void Draw(SpriteBatch batch)
         {
             RoomEnemies.Instance.Draw(batch);
-            RoomItems.Instance.Draw(batch);
-            RoomBlocks.Instance.Draw(batch);
+            //RoomItems.Instance.Draw(batch);
+            //RoomBlocks.Instance.Draw(batch);
         }
 
 
