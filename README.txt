@@ -50,21 +50,20 @@ Yuan and JT worked to create collisions with enemies and bosses.
 Andrew and JT created and worked on the basic structure for file reading and room drawing.
 
 
-Code reviews and analysis were done with FxCop Analyzers.
+Code analysis was done with FxCop Analyzers.
 
 
-Code review for Link: 4 warnings, 0 errors
+Code analysis for Link: 4 warnings, 0 errors
 - A field is never used: Removed the field declaration to get rid of the warning
 - Initial declaration didn't have a value: Created a get/set to get rid of the warning
 - A field is never used: Removed the field declaration to get rid of the warning (initally used for testing)
 - A field is never used: Removed the field declaration to get rid of the warning
 
+Code analysis for Items:
+- A field is never used: Removed the field declaration to get rid of the warning
+- A field is given a value but is never used: Removed the field and assignment to get rid of the warning.
+
+Code analysis for Enemies:
 
 
-Code review for Items:
-
-
-Code review for Enemies:
-
-
-Code review for Blocks:
+Code analysis for Blocks:
