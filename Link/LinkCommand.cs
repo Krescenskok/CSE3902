@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,7 +30,6 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime )
         {
-            System.Diagnostics.Debug.WriteLine(Key);
             ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
             {
@@ -51,6 +50,7 @@ namespace Sprint3.Link
 
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
+             
 
                 }
 
@@ -80,6 +80,10 @@ namespace Sprint3.Link
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
                     linkPlayer.MovingDown();
+                }
+                else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Shield;
                 }
 
                 else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
@@ -116,6 +120,12 @@ namespace Sprint3.Link
                 {
                     linkPlayer.CurrentWeapon = ItemForLink.Bomb;
                 }
+                else if (Key.Equals("D8") || Key.Equals("NumPad8"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Clock;
+                }
+
+
             }
 
             linkPlayer.Update(gameTime);
