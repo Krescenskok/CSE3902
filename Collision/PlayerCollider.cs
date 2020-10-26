@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Sprint3;
 using Sprint3.Link;
 using System;
@@ -231,6 +231,7 @@ namespace Sprint3
             {
                 linkPlayer.isWalkingInPlace = true;
                 if (linkPlayer.Delay <= 0)
+
                 {
                     linkPlayer.isWalkingInPlace = false;
                 }
