@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Sprint3
 {
@@ -49,9 +50,7 @@ namespace Sprint3
         /// <param name="pos2">target vector for blade trap</param>
         public void Load(Game game, Vector2 pos, Vector2 pos2)
         {
-            enemies = new List<IEnemy> {  new Rope(game,pos), new Stalfos(game,pos), new Keese(game,pos),
-                new Goriya(game,pos), new Gel(game, pos), new BladeTrap(pos,pos2) , new WallMaster(game,pos),
-                new Aquamentus(pos), new Dodongo(pos), new Zol(game,pos)};
+      
 
             currentEnemy = enemies[0];
 

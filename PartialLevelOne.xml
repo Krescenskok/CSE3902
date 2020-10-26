@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+	<Asset Type="MyDataTypes.LevelObjectData[]">
+
+
+		<!-- First Room Content-->
+		<Room Type ="Room1">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Rope</ObjectName>
+				<Location>2 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest1</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest1</ObjectName>
+				<Location>0 11</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest2</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest2</ObjectName>
+				<Location>6 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest</ObjectName>
+				<Location>3 11</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>PlayerTest</ObjectName>
+				<Location>5 2</Location>
+			</Item>
+		</Room>
+		
+		
+	</Asset>
+</XnaContent>

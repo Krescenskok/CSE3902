@@ -11,5 +11,18 @@ namespace Sprint3
 
         void Update();
         void Draw(SpriteBatch spriteBatch);
+
+        void SetSprite(ISprite sprite);
+
+        void Spawn();
+
+        EnemyCollider GetCollider();
+
+        Vector2 Location { get; }
+
+        IEnemyState State { get; }
+
+        
+        
     }
 }

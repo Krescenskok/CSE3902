@@ -7,13 +7,15 @@ namespace Sprint3
 {
     public interface IEnemyState
     {
-        public void TakeDamage();
+        public void TakeDamage(int amount);
         public void ChangeDirection();
         public void MoveAwayFromCollision(Collision collision);
         public void Die();
         public void Attack();
 
         public void Update();
+
+        public void Stun();
 
     }
 }

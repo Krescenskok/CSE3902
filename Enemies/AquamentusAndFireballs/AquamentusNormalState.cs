@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Link;
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -12,28 +13,30 @@ namespace Sprint3
     /// </summary>
     class AquamentusNormalState : IEnemyState
     {
-
-        private Aquamentus AquamentusNormal;
+        private Aquamentus aquamentus;
         private Vector2 aquamentusPos;
         private int attackPosYValueAdjust = 6;
-        private Vector2 targetPos = new Vector2(100, 100);
+        private LinkPlayer link;
 
-        public AquamentusNormalState(Aquamentus aquamentus, Vector2 initialPos)
+
+        public AquamentusNormalState(Aquamentus aquamentus, Vector2 initialPos, LinkPlayer link)
         {
-            AquamentusNormal = aquamentus;
+            this.aquamentus = aquamentus;
+            this.link = link;
             aquamentusPos = initialPos;
             aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDragonSprite());
         }
 
         public void Attack()
         {
+            Vector2 targetPos = link.CurrentLocation;
             Vector2 attackPos = new Vector2(aquamentusPos.X, aquamentusPos.Y + attackPosYValueAdjust);
-            AquamentusNormal.SpawnFireBall(attackPos, targetPos);
+            aquamentus.SpawnFireBall(attackPos, targetPos);
         }
 
         public void ChangeDirection()
         {
-            //Do nothing
+            //wont use
         }
 
         public void Die()
@@ -41,32 +44,26 @@ namespace Sprint3
             //enemy die in damaged state
         }
 
-
-
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            AquamentusNormal.LostHP();
-            AquamentusNormal.state = new AquamentusDamagedState(AquamentusNormal, aquamentusPos);
-        }
-
-        public void MoveLeft()
-        {
-            aquamentusPos.X-=2;
+            aquamentus.LostHP(amount);
+            aquamentus.state = new AquamentusDamagedState(aquamentus, aquamentusPos, link);
+            aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDragonSprite());
         }
 
         public void Update()
         {
-            MoveLeft();
-            AquamentusNormal.ChangePos(aquamentusPos);
-            if (AquamentusNormal.TryAttack())
-            {
-                Attack();
-            }
+            //do nothing
         }
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            //aquamentus move in its own area
+        }
+
+        public void Stun()
+        {
+            //stun implement
         }
     }
 }

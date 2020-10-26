@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.EnemyAndNPC.AquamentusAndFireballs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,27 +10,24 @@ namespace Sprint3
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class FireBall
+    class FireBall : IEnemy
     {
         private ISprite sprite;
+        private FireBallSprite fireBallSprite;
+        private FireBallState fireBallState;
         private Vector2 fireBallPos;
-        private Vector2 targetPos;
-        private double distanceX, distanceY;
-        private double deltaX, deltaY;
-        private double speedPerSec = 20;
-        private int updatePerSec = 30;
+        private EnemyCollider fireBallCollider;
 
-        public FireBall(Vector2 initialPos, Vector2 targetPos)
+        public Vector2 Location { get => fireBallPos; }
+
+        public IEnemyState State { get => fireBallState; }
+
+        public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength)
         {
-            fireBallPos = initialPos;
-            this.targetPos = targetPos;
-            distanceX = targetPos.X - initialPos.X;
-            distanceY = targetPos.Y - initialPos.Y;
-            double overallDistance = Math.Sqrt(Math.Pow(distanceX, 2) + Math.Pow(distanceY, 2));
-            double ratioToSpeed = speedPerSec / overallDistance;
-            deltaX = ratioToSpeed * distanceX / updatePerSec;
-            deltaY = ratioToSpeed * distanceY / updatePerSec;
+            fireBallState = new FireBallState(this,aquamentus, initialPos, targetPos);
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
+            fireBallSprite = (FireBallSprite)sprite;
+            fireBallCollider = new EnemyCollider(fireBallSprite.GetRectangle(initialPos),fireBallState,attackStrength, "fireball");
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -37,6 +35,25 @@ namespace Sprint3
             sprite.Draw(spriteBatch, fireBallPos, 0, Color.White);
         }
 
+        public void ChangePos(Vector2 newPos)
+        {
+            fireBallPos = newPos;
+        }
+
+        public EnemyCollider GetCollider()
+        {
+            return fireBallCollider;
+        }
+
+        public void SetSprite(ISprite sprite)
+        {
+            //wont use
+        }
+
+        public void Spawn()
+        {
+            //wont use
+        }
 
         public void TakeDamage()
         {
@@ -45,8 +62,8 @@ namespace Sprint3
 
         public void Update()
         {
-            fireBallPos.X += (float)deltaX;
-            fireBallPos.Y += (float)deltaY;
+            fireBallState.Update();
+            fireBallCollider.Update(this);
         }
     }
 }

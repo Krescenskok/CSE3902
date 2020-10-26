@@ -10,20 +10,16 @@ namespace Sprint3
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class Flame : INPCState
+    class Flame : INPC
     {
         private Vector2 flamePos;
-        private ISprite flameSprite;
-
+        private FlameSprite flameSprite;
+        private NPCCollider flameCollider;
         public Flame(Vector2 initialPos, Texture2D texture)
         {
             flamePos = initialPos;
-            flameSprite = EnemySpriteFactory.Instance.CreateFlameSprite();
-        }
-
-        public void Die()
-        {
-            //Falme wont die
+            flameSprite =(FlameSprite) EnemySpriteFactory.Instance.CreateFlameSprite();
+            flameCollider =new NPCCollider(flameSprite.getRectangle(initialPos));
         }
 
         public void Update()
@@ -33,6 +29,11 @@ namespace Sprint3
         public void Draw(SpriteBatch spriteBatch, GameTime time)
         {
             flameSprite.Draw(spriteBatch, flamePos, 0, Color.White);
+        }
+
+        public NPCCollider GetCollider()
+        {
+            return flameCollider;
         }
     }
 }

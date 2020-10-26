@@ -16,6 +16,10 @@ namespace Sprint3
         private ISprite sprite;
         private Vector2 location;
 
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IEnemyState State => throw new NotImplementedException();
+
         public Zol(Game game, Vector2 location)
         {
             this.location = location;
@@ -41,9 +45,9 @@ namespace Sprint3
             state.Update();
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            state.TakeDamage(amount);
         }
 
         public void Die()
@@ -56,6 +60,14 @@ namespace Sprint3
             sprite.Draw(batch, location, 0 , Color.White);
         }
 
+        public void Spawn()
+        {
+            throw new NotImplementedException();
+        }
 
+        public EnemyCollider GetCollider()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

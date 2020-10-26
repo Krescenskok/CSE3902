@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+	<Asset Type="MyDataTypes.LevelObjectData[]">
+
+
+		<!-- First Room Content-->
+		<Room id ="Room1">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Rope</ObjectName>
+				<Location>2 10</Location>
+				<Alive>false</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>2 10</Location>
+				<Alive>true</Alive>
+			</Item>
+			
+			
+			
+
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Walls</ObjectName>
+				<Location>0 0</Location>
+				<Alive>true</Alive>
+			</Item>
+			
+			
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>6 11</Location>
+				<Direction1>left</Direction1>
+				<Direction2>up</Direction2>
+				<Alive>false</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>0 11</Location>
+				<Direction1>left</Direction1>
+				<Direction2>down</Direction2>
+				<Alive>false</Alive>
+			</Item>
+
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>6 0</Location>
+				<Direction1>right</Direction1>
+				<Direction2>up</Direction2>
+				<Alive>false</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Trap</ObjectName>
+				<Location>0 0</Location>
+				<Direction1>right</Direction1>
+				<Direction2>down</Direction2>
+				<Alive>false</Alive>
+			</Item>
+			
+			
+			
+		</Room>
+		
+		
+
+	</Asset>
+</XnaContent>
