@@ -29,6 +29,17 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new BlueCandleState(this, location);
+            collider = new ItemCollider((item as BlueCandleSprite).Hitbox, this, this.state);
+        }
+
+        public BlueCandle(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new BlueCandleState(this, location);
+            collider = new ItemCollider((item as BlueCandleSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
 
         public void UpdateSprite(ISprite sprite)

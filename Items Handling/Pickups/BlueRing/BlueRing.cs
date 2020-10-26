@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -30,6 +31,19 @@ namespace Sprint3.Items
             drawnFrame = 0;
             state = new BlueRingState(this, location);
             equipped = false;
+            collider = new ItemCollider((item as BlueRingSprite).Hitbox, this, this.state);
+
+        }
+        public BlueRing(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new BlueRingState(this, location);
+            equipped = false;
+            collider = new ItemCollider((item as BlueRingSprite).Hitbox, this, this.state);
+            saveInfo = xml;
+
         }
 
         public void UpdateSprite(ISprite sprite)

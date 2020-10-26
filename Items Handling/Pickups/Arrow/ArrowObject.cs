@@ -29,19 +29,13 @@ namespace Sprint3
         {
             this.location = location;
             state = new ArrowState(this);
-            collider = new ItemCollider(item.getRectangle,this, this.state);
-        }
-        public ArrowObject(ISprite item, Vector2 location)
-        {
-            this.location = location;
-            state = new ArrowState(this);
-            collider = new ItemCollider(item.getRectangle, this, this.state);
+            collider = new ItemCollider((item as ArrowSprite).Hitbox,this, this.state);
         }
         public ArrowObject(ISprite item, Vector2 location, XElement xml)
         {
             this.location = location;
             state = new ArrowState(this);
-            collider = new ItemCollider(item.getRectangle, this, this.state);
+            collider = new ItemCollider((item as ArrowSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 

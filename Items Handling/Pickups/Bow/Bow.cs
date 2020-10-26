@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,6 +28,16 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new BowState(this, location);
+            collider = new ItemCollider((item as BowSprite).Hitbox, this, this.state);
+        }
+        public Bow(ISprite item, Vector2 location , XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new BowState(this, location);
+            collider = new ItemCollider((item as BowSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
         public void UpdateSprite(ISprite sprite)
         {

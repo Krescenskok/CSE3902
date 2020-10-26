@@ -51,7 +51,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
+            
             if (col.CompareTag("Block")) {
 
                 col.SendMessage("Item", this.item);

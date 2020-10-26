@@ -11,11 +11,19 @@ namespace Sprint3
     public class Arrow : IItems
     {
         private Vector2 location;
+        private ItemCollider collider;
         private ItemCollider arrowFlyingCollider;
         public bool expired = false;
         private ISprite item;
         private int drawnFrame = 0;
         private IItemsState state;
+
+
+        public Vector2 Location { get => location; }
+
+        public ICollider Collider { get => collider; }
+
+        public IItemsState State { get => state; }
 
         public Arrow(ISprite item, Vector2 location, string direction)
         {

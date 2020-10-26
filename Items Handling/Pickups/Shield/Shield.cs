@@ -29,7 +29,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new ShieldState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as ShieldSprite).Hitbox, this, this.state);
         }
         public Shield(ISprite item, Vector2 location, XElement xml)
         {
@@ -37,7 +37,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new ShieldState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as ShieldSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 

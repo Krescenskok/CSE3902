@@ -29,7 +29,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new WoodenSwordState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as WoodenSwordSprite).Hitbox, this, this.state);
         }
         public WoodenSword(ISprite item, Vector2 location, XElement xml)
         {
@@ -37,8 +37,8 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new WoodenSwordState(this, location);
-            collider = new ItemCollider();
-            this.saveInfo = xml;
+            collider = new ItemCollider((item as WoodenSwordSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
         public void UpdateSprite(ISprite sprite)
         {

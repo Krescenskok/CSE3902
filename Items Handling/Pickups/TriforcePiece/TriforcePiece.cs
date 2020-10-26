@@ -28,7 +28,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new TriforcePieceState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as TriforcePieceSprite).Hitbox, this, this.state);
         }
 
         public TriforcePiece(ISprite item, Vector2 location, XElement xml)
@@ -37,7 +37,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new TriforcePieceState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as TriforcePieceSprite).Hitbox, this, this.state);
             saveInfo = xml;
 
         }

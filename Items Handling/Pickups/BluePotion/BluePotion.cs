@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -28,6 +29,16 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new BluePotionState(this, location);
+            collider = new ItemCollider((item as BluePotionSprite).Hitbox, this, this.state);
+        }
+        public BluePotion(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new BluePotionState(this, location);
+            collider = new ItemCollider((item as BluePotionSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -48,7 +59,7 @@ namespace Sprint3.Items
         public void Drink()
         {
             //restore link's health
-            Expire();
+            state.Expire();
         }
 
         public void Collect()

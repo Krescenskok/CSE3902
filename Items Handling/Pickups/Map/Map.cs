@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Xml.Linq;
 
 namespace Sprint3.Items
 {
@@ -27,6 +28,17 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new MapState(this, location);
+            collider = new ItemCollider((item as MapSprite).Hitbox, this, this.state);
+        }
+
+        public Map(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new MapState(this, location);
+            collider = new ItemCollider((item as MapSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
 
         public void UpdateSprite(ISprite sprite)

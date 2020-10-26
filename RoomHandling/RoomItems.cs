@@ -155,10 +155,6 @@ namespace Sprint3
                 }
             }
             
-        
-
-
-
     public void Draw(SpriteBatch batch)
         {
             

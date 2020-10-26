@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint3.Link;
@@ -33,7 +34,20 @@ namespace Sprint3.Items
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
             throwing = true;
+
             returning = false;
+            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+        }
+        public BoomerangObject(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            this.item = item;
+            drawnFrame = 0;
+            state = new BoomerangObjectState(this, location);
+            throwing = true;
+            returning = false;
+            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            saveInfo = xml;
         }
 
         public void UpdateSprite(ISprite sprite)

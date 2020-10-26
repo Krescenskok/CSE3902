@@ -29,7 +29,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new SilverSwordState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as SilverSwordSprite).Hitbox, this, this.state);
         }
         public SilverSword(ISprite item, Vector2 location, XElement xml)
         {
@@ -37,7 +37,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new SilverSwordState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as SilverSwordSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 

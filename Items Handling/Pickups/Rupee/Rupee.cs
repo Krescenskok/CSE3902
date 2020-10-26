@@ -30,7 +30,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new RupeeState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as RupeeSprite).Hitbox, this, this.state);
         }
         public Rupee(ISprite item, Vector2 location, XElement xml)
         {
@@ -38,7 +38,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new RupeeState(this, location);
-            collider = new ItemCollider();
+            collider = new ItemCollider((item as RupeeSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 
