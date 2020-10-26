@@ -27,16 +27,24 @@ namespace Sprint3
 
         public ArrowObject(ISprite item, Vector2 location)
         {
-            Location = location;
+            this.location = location;
             state = new ArrowState(this);
-            arrowCollider = new ItemCollider(flameSprite.getRectangle(initialPos));
+            collider = new ItemCollider(item.getRectangle,this, this.state);
+        }
+        public ArrowObject(ISprite item, Vector2 location)
+        {
+            this.location = location;
+            state = new ArrowState(this);
+            collider = new ItemCollider(item.getRectangle, this, this.state);
+        }
+        public ArrowObject(ISprite item, Vector2 location, XElement xml)
+        {
+            this.location = location;
+            state = new ArrowState(this);
+            collider = new ItemCollider(item.getRectangle, this, this.state);
+            saveInfo = xml;
         }
 
-        public Vector2 Location // read-write instance property
-        {
-            get => _name;
-            set => _name = value;
-        }
 
         public void UpdateLocation(Vector2 location)
         {
@@ -55,7 +63,7 @@ namespace Sprint3
 
         public void Update()
         {
-            state.Update();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Collect()

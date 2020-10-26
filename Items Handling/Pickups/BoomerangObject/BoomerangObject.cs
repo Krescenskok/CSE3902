@@ -9,8 +9,9 @@ namespace Sprint3.Items
 {
     public class BoomerangObject : IItems
     {
-
-        private ItemCollider boomerangObjectCollider;
+        private XElement saveInfo;
+        private ItemCollider collider;
+        private Vector2 location;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
@@ -47,7 +48,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Collect()

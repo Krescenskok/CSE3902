@@ -8,6 +8,8 @@ namespace Sprint3.Items
 {
     public class BlueRing : IItems
     {
+        private XElement saveInfo;
+        private ItemCollider collider;
         private Vector2 location;
         private ItemCollider blueRingCollider;
         private ISprite item;
@@ -52,7 +54,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Collect()

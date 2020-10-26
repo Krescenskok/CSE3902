@@ -8,7 +8,8 @@ namespace Sprint3.Items
 {
     public class HeartContainer : IItems
     {
-        private ItemCollider heartContainerCollider;
+        private XElement saveInfo;
+        private ItemCollider collider;
         private ISprite item;
         private int drawnFrame;
 
@@ -42,7 +43,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

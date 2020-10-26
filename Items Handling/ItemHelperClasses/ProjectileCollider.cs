@@ -17,7 +17,7 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ProjectileCollider(Rectangle rect, IItems item, IItemsState state, string name)
+        public ProjectileCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
 
@@ -27,13 +27,8 @@ namespace Sprint3
 
             CollisionHandler.Instance.AddCollider(this);
 
-            this.name = name;
         }
 
-        public ProjectileCollider()
-        {
-
-        }
 
         public void ChangeState(IItemsState state)
         {

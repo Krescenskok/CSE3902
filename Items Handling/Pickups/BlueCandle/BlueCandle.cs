@@ -43,7 +43,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Collect()

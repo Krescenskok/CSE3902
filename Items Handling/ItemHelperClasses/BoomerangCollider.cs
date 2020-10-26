@@ -17,7 +17,7 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public BoomerangCollider(Rectangle rect, IItems item, IItemsState state, string name)
+        public BoomerangCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
 
@@ -26,12 +26,6 @@ namespace Sprint3
             this.state = state;
 
             CollisionHandler.Instance.AddCollider(this);
-
-            this.name = name;
-        }
-
-        public BoomerangCollider()
-        {
 
         }
 

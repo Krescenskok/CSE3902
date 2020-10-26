@@ -9,7 +9,8 @@ namespace Sprint3.Items
     public class Compass : IItems
     {
         private Vector2 location;
-        private ItemCollider compassCollider;
+        private XElement saveInfo;
+        private ItemCollider collider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
@@ -39,7 +40,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -9,7 +9,8 @@ namespace Sprint3.Items
     public class Fairy : IItems
     {
         private Vector2 location;
-        private ItemCollider fairyCollider;
+        private XElement saveInfo;
+        private ItemCollider collider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
@@ -49,7 +50,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

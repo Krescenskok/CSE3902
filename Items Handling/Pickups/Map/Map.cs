@@ -9,10 +9,11 @@ namespace Sprint3.Items
     public class Map : IItems
     {
         private Vector2 location;
-        private ItemCollider mapCollider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
+        private XElement saveInfo;
+        private ItemCollider collider;
 
         public ICollider Collider { get => collider; }
 
@@ -40,7 +41,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

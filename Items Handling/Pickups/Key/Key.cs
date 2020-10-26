@@ -9,7 +9,8 @@ namespace Sprint3.Items
     public class Key : IItems
     {
         private Vector2 location;
-        private ItemCollider keyCollider;
+        private XElement saveInfo;
+        private ItemCollider collider;
         private ISprite item;
         private int drawnFrame;
 
@@ -41,7 +42,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            state.Expire();
+            saveInfo.SetElementValue("Alive", "false");
         }
 
 

@@ -17,7 +17,7 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ItemCollider(Rectangle rect, IItems item, IItemsState state, string name)
+        public ItemCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
 
@@ -26,13 +26,6 @@ namespace Sprint3
             this.state = item.State;
 
             CollisionHandler.Instance.AddCollider(this);
-
-            this.name = name;
-        }
-
-        public ItemCollider()
-        {
-
         }
 
         public void ChangeState(IItemsState state)
