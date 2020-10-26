@@ -1,0 +1,24 @@
+Author of the code review: Krescens Kok
+Date of the code review: 10/26
+Sprint number: 5
+Name of the .cs file being reviewed: RoomSpawner.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Number of minutes taken to complete the review:
+Specific comments on what is readable and what is not: Very readable - I can tell what the purpose of the code is. He starts by creating an instance so that other
+classes can use the instance of the class and use the variables within the class. A get/set is used so the value can change outside of the class. The room spawner 
+method is used to display what objects are in each room, reset is used to reset the objects in the room, loadRoom loads the room in, update will update the objects
+in the room as Link destroys enemies. If the room changes, it will display the next room depending on the room number, and lastly, draw will draw the objects inside
+the room.
+
+
+Author of the code review: Krescens Kok
+Date of the code review: 10/26
+Sprint number: 5
+Name of the .cs file being reviewed: Andrew Sanchez
+Author of the .cs file being reviewed: RoomItems
+Specific comments on code quality: The code quality is good because a list is used to cycle through the items, making it easier to create the tags. Booleans are 
+used to ensure that items don't pop up more than once once Link leaves a room. The next chunk of code is long, but it cannot be avoided because of the amount of
+items that are included in this game. 
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: The long 
+chuck of code would be a hypothtical change, however, the current implementation could not easily support the change because it is already a sufficient implementation.
+It would be difficult due to the amount of items in the entire game. 
