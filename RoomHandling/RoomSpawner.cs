@@ -11,6 +11,7 @@ using Sprint3.Items;
 using Sprint3.Blocks;
 using System.Linq.Expressions;
 
+
 namespace Sprint3
 {
 
@@ -25,6 +26,10 @@ namespace Sprint3
 
         int roomNumber;
         Dictionary<int, XElement> roomXMLs;
+
+        List<RoomSprite> roomSprites;
+        RoomSprite currentRoomSprite;
+        Texture2D roomSpriteSheet;
 
         XElement xml;
 
@@ -44,6 +49,8 @@ namespace Sprint3
             xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
             xml.Attribute("Type").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
+
+           
         }
 
         public void Reset()
@@ -58,6 +65,7 @@ namespace Sprint3
         public void LoadRoom(Game game, int roomNumber)
         {
             XElement room = roomXMLs[roomNumber];
+            currentRoomSprite = roomSprites[roomNumber];
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);       
@@ -77,11 +85,35 @@ namespace Sprint3
         public void Draw(SpriteBatch batch)
         {
             RoomEnemies.Instance.Draw(batch);
+            currentRoomSprite.Draw(batch, Vector2.Zero, 0, Color.White);
             //RoomItems.Instance.Draw(batch);
             //RoomBlocks.Instance.Draw(batch);
         }
 
+        public void LoadAllRooms(Game game)
+        {
+            roomSpriteSheet = game.Content.Load<Texture2D>("RoomMap");
+            Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
 
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 3, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 4, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 3, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 0, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 3, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 4, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 4, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 5, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 0, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 2, drawSize));
+        }
 
     }
 }
