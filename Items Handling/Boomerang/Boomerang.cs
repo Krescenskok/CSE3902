@@ -10,6 +10,7 @@ namespace Sprint3.Items
     public class Boomerang : IItems
     {
         private Vector2 location;
+        private ItemCollider boomerangCollider;
         public bool returned = false;
         private ISprite item;
         private int drawnFrame;

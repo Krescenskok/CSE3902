@@ -9,12 +9,18 @@ namespace Sprint3.Items
     //this is the heart that link can collect to replenish hearts
     public class Heart : IItems
     {
-        private Vector2 location;
+
+        private ItemCollider heartCollider;
         private ISprite item;
         private int drawnFrame;
+
+        private Vector2 location;
+
         private IItemsState state;
 
         public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public Heart(ISprite item, Vector2 location)
         {

@@ -11,6 +11,7 @@ namespace Sprint3
     public class Arrow : IItems
     {
         private Vector2 location;
+        private ItemCollider arrowFlyingCollider;
         public bool expired = false;
         private ISprite item;
         private int drawnFrame = 0;

@@ -14,6 +14,7 @@ namespace Sprint3.Items
             get { return location; }
             set { location = value; }
         }
+        private ItemCollider boomerangObjectCollider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;

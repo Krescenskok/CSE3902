@@ -9,9 +9,11 @@ namespace Sprint3.Items
     public class Clock : IItems
     {
         private Vector2 location;
+        private ItemCollider clockCollider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
+
 
         public Clock(ISprite item, Vector2 location)
         {

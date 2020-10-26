@@ -10,15 +10,23 @@ namespace Sprint3
     //class for the arrow object drawn in the shop/Link's inventory
     public class ArrowObject : IItems
     {
-        private Vector2 location;
+   
+        private ItemCollider arrowCollider;
         private ISprite item;
         private int drawnFrame = 0;
         private IItemsState state;
 
         public ArrowObject(ISprite item, Vector2 location)
         {
-            this.location = location;
+            Location = location;
             state = new ArrowState(this);
+            arrowCollider = new ItemCollider(flameSprite.getRectangle(initialPos));
+        }
+
+        public Vector2 Location // read-write instance property
+        {
+            get => _name;
+            set => _name = value;
         }
 
         public void UpdateLocation(Vector2 location)

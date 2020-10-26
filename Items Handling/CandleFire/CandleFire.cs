@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class CandleFire : IItems
     {
         private Vector2 location;
+        private ItemCollider candleFireCollider;
         private bool isExpired = false;
         public bool expired
         {

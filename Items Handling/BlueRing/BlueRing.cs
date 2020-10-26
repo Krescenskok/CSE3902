@@ -9,6 +9,7 @@ namespace Sprint3.Items
     public class BlueRing : IItems
     {
         private Vector2 location;
+        private ItemCollider blueRingCollider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;

@@ -9,10 +9,15 @@ namespace Sprint3.Items
     public class Shield : IItems
     {
         private Vector2 location;
+        private ItemCollider shieldCollider;
         private ISprite item;
         private IItemsState state;
 
         private int drawnFrame;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public Shield(ISprite item, Vector2 location)
         {

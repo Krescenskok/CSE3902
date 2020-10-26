@@ -9,10 +9,15 @@ namespace Sprint3.Items
     public class WoodenSword : IItems
     {
         private Vector2 location;
+        private ItemCollider woodenSwordCollider;
         private ISprite item;
 
         private int drawnFrame;
         private IItemsState state;
+
+        public Vector2 Location { get => location; set => location = value; }
+
+        public IItemsState State { get => state; set => state = value; }
 
         public WoodenSword(ISprite item, Vector2 location)
         {
