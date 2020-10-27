@@ -41,7 +41,7 @@ namespace Sprint3
             {
                 location.Y += speed;
             }
-            arrow.UpdateLocation(location);
+            item.UpdateLocation(location);
 
             //for testing only
             runTime++;

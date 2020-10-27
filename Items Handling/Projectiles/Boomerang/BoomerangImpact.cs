@@ -14,6 +14,13 @@ namespace Sprint3.Items
             get { return location; }
             set { location = value; }
         }
+
+        public Vector2 Location => throw new NotImplementedException();
+
+        public IItemsState State => throw new NotImplementedException();
+
+        public ICollider Collider => throw new NotImplementedException();
+
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;

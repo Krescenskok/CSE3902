@@ -9,8 +9,7 @@ namespace Sprint3.Items
     public class Bomb : IItems
     {
         private Vector2 location;
-        private ProjectileCollider collider;
-        private ItemCollider bombCollider;
+        private BombCollider collider;
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
@@ -37,7 +36,7 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new BombState(this, location);
-            collider = new ProjectileCollider((item as ExplosionSprite).Hitbox, this, this.state);
+            collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
         }
 
         public void UpdateFrame(int frame)

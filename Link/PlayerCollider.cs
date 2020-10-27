@@ -19,6 +19,8 @@ namespace Sprint3
             this.linkPlayer = linkPlayer;
         }
 
+        public string Name => throw new NotImplementedException();
+
         public Rectangle Bounds()
         {
             return linkPlayer.Bounds;
