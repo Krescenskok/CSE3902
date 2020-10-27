@@ -25,7 +25,7 @@ namespace Sprint3
 
         }
 
-        public void ChangeRoomCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
+        public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
             RoomSpawner.Instance.RoomChange(game, roomNumber);
         }

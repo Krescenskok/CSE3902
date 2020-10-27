@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint3.Items;
 using Sprint3.Link;
 using Sprint3.Blocks;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace Sprint3
 {
@@ -16,14 +17,18 @@ namespace Sprint3
         const int minRoomNum = 1;
         int currentRoomNum;
         MouseState prevState;
-        IDictionary<Keys, ICommand> commandsList = new Dictionary<Integer, ICommand>();
+        IDictionary<int, ICommand> commandsList = new Dictionary<int, ICommand>();
 
         public MouseController(Game1 game, SpriteBatch spriteBatch)
         {
             currentRoomNum = minRoomNum;
             prevState = Mouse.GetState();
 
-
+            int i;
+            for (i=minRoomNum; i<=maxRoomNum; i++)
+            {
+                commandsList.Add(i, new ChangeRoomCommand(i));
+            }
         }
 
         public ICommand HandleInput(Game1 game)
@@ -51,10 +56,8 @@ namespace Sprint3
                     currentRoomNum++;
                 }
             }
-
             prevState = currentState;
-
-            return 
+            return commandsList[currentRoomNum];
         }
     }
 }
