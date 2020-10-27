@@ -19,6 +19,8 @@ namespace Sprint3
 
         private List<List<Rectangle>> savedGrid;
         private Point tileSize;
+
+        private Point topLeftOffset;
         
         public static GridGenerator Instance
         {
@@ -55,7 +57,7 @@ namespace Sprint3
             int roomSpriteHeight = 176;
 
 
-            Point topLeft = new Point(roomSpriteGridOffset * screenWidth / roomSpriteGridWidth, roomSpriteGridOffset * screenHeight / roomSpriteGridHeight);
+            topLeftOffset = new Point(roomSpriteGridOffset * screenWidth / roomSpriteGridWidth, roomSpriteGridOffset * screenHeight / roomSpriteGridHeight);
 
 
             int playAreaWidth = roomSpriteGridWidth * screenWidth / roomSpriteWidth;
@@ -74,7 +76,7 @@ namespace Sprint3
 
                 for (int j = 0; j < tileColumns; j++)
                 {
-                   Point position = new Point(j * tileWidth, i * tileHeight) + topLeft;
+                   Point position = new Point(j * tileWidth, i * tileHeight) + topLeftOffset;
 
                     gridTiles[i].Add(new Rectangle(position, tileSize));
 
@@ -146,6 +148,8 @@ namespace Sprint3
 
             result.X = col * tileSize.X;
             result.Y = row * tileSize.Y;
+
+            result = Vector2.Add(result, topLeftOffset.ToVector2());
 
             return result;
         }

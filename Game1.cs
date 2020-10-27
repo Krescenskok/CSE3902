@@ -75,6 +75,7 @@ namespace Sprint3
 
             //creat list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
+            System.Diagnostics.Debug.WriteLine("LoadContent");
             RoomSpawner.Instance.LoadRoom(this, 1);
             
 
@@ -88,6 +89,7 @@ namespace Sprint3
         {
             if(linkPlayer.Health == 0)
             {
+
                 activeCommand = new ResetCommand(linkPlayer);
                 activeCommand.Update(gameTime);
             }
@@ -131,10 +133,11 @@ namespace Sprint3
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
-            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+
 
             RoomSpawner.Instance.Draw(_spriteBatch);
+            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
 
             _spriteBatch.End();
 

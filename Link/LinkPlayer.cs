@@ -40,6 +40,8 @@ namespace Sprint3.Link
         private bool clock = false;
         public List<IItems> itemsPickedUp;
 
+        private PlayerCollider collider;
+
         public List<IItems> itemsPlacedByLink = new List<IItems>();
         public void RemovePlacedItem(IItems item)
         {
@@ -47,6 +49,7 @@ namespace Sprint3.Link
             {
                 itemsPlacedByLink.Remove(item);
             }
+            
         }
 
 
@@ -148,6 +151,7 @@ namespace Sprint3.Link
         {
 
             state = new Stationary(this);
+            collider = new PlayerCollider(this);
 
         }
         public void Update(GameTime gameTime)

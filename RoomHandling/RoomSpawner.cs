@@ -81,15 +81,17 @@ namespace Sprint3
 
         public void RoomChange(Game game, int roomNumber)
         {
+            Debug.WriteLine("changing room");
             LoadRoom(game, roomNumber);
         }
 
         public void Draw(SpriteBatch batch)
         {
-            RoomEnemies.Instance.Draw(batch);
+
             currentRoomSprite.Draw(batch, Vector2.Zero, 0, Color.White);
-            //RoomItems.Instance.Draw(batch);
-            //RoomBlocks.Instance.Draw(batch);
+            RoomEnemies.Instance.Draw(batch);
+            RoomItems.Instance.Draw(batch);
+            RoomBlocks.Instance.Draw(batch);
         }
 
         public void LoadAllRooms(Game game)

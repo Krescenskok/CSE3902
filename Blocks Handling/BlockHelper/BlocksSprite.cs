@@ -13,12 +13,15 @@ namespace Sprint3.Blocks
         private Rectangle destinationRectangle;
         private int columns = 4;
         private int rows = 3;
-        public int blockDimensionX = 150;
-        private int blockDimensionY = 150;
+        public int blockDimensionX;
+        private int blockDimensionY;
 
         public BlocksSprite(Texture2D texture)
         {
             this.texture = texture;
+
+            blockDimensionX = GridGenerator.Instance.GetTileSize().X;
+            blockDimensionY = GridGenerator.Instance.GetTileSize().Y;
 
         }
 
@@ -27,7 +30,9 @@ namespace Sprint3.Blocks
             Rectangle sourceRectangle;
             Rectangle destinationRectangle;
 
-            int width = texture.Width / columns;
+
+
+        int width = texture.Width / columns;
             int height = texture.Height / rows;
             int row = (int)((float)currentFrame / (float)columns);
             int column = currentFrame % columns;

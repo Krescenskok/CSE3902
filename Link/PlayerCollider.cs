@@ -17,6 +17,8 @@ namespace Sprint3
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
+            CollisionHandler.Instance.AddCollider(this);
+
         }
 
         public string Name => throw new NotImplementedException();
@@ -38,15 +40,24 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
+            if (col.CompareTag("Block"))
+            {
 
+                linkPlayer.isWalkingInPlace = true;
 
-
+            }
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-            if (col.CompareTag("enemy"))
+                if (col.CompareTag("Block"))
+                {
+
+                linkPlayer.isWalkingInPlace = true;
+
+            } else 
+                if (col.CompareTag("enemy"))
             {
                 if (linkPlayer.IsAttacking)
                 {

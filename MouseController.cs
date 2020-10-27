@@ -13,7 +13,7 @@ namespace Sprint3
 {
     public class MouseController : IController
     {
-        const int maxRoomNum = 19;
+        const int maxRoomNum = 18;
         const int minRoomNum = 1;
         int currentRoomNum;
         MouseState prevState;
@@ -24,15 +24,11 @@ namespace Sprint3
             currentRoomNum = minRoomNum;
             prevState = Mouse.GetState();
 
-            int i;
-            for (i=minRoomNum; i<=maxRoomNum; i++)
-            {
-                commandsList.Add(i, new ChangeRoomCommand(i));
-            }
         }
 
         public ICommand HandleInput(Game1 game)
         {
+            ICommand changeCommand = null;
             MouseState currentState = Mouse.GetState();
             if (currentState.LeftButton == ButtonState.Pressed && prevState.LeftButton != currentState.LeftButton)
             {
@@ -44,6 +40,7 @@ namespace Sprint3
                 {
                     currentRoomNum--;
                 }
+                changeCommand = new ChangeRoomCommand(currentRoomNum);
             }
             else if (currentState.RightButton == ButtonState.Pressed && prevState.RightButton != currentState.RightButton)
             {
@@ -55,9 +52,11 @@ namespace Sprint3
                 {
                     currentRoomNum++;
                 }
+                changeCommand = new ChangeRoomCommand(currentRoomNum);
             }
             prevState = currentState;
-            return commandsList[currentRoomNum];
+
+            return changeCommand;
         }
     }
 }
