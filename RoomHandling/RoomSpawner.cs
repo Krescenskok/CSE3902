@@ -46,7 +46,7 @@ namespace Sprint3
 
         private RoomSpawner()
         {
-            xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
+            xml = XElement.Load("../../../FinalLevelOne.xml").Element("Asset");
             xml.Attribute("Type").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
 
@@ -56,14 +56,16 @@ namespace Sprint3
         public void Reset()
         {
 
-            xml = XElement.Load("../../../PartialLevelOne.xml").Element("Asset");
+            xml = XElement.Load("../../../FinalLevelOne.xml").Element("Asset");
             xml.Attribute("Asset").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("Type").Value));
         }
 
     
         public void LoadRoom(Game game, int roomNumber)
+
         {
+            Debug.WriteLine("reading room");
             XElement room = roomXMLs[roomNumber];
             currentRoomSprite = roomSprites[roomNumber];
             RoomEnemies.Instance.LoadRoom(game, room);

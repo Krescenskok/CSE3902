@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint3.Blocks
 {
-    public class MoveableColumn : IBlock
+    public class MoveableUp : IBlock
     {
         private Vector2 spriteLocation;
         private Vector2 newLocation;
@@ -18,7 +18,7 @@ namespace Sprint3.Blocks
         private int shift;
         private BlockCollider collider;
 
-        public MoveableColumn(BlocksSprite block, Vector2 location)
+        public MoveableUp(BlocksSprite block, Vector2 location)
         {
             spriteLocation = location;
             this.block = block;
