@@ -22,11 +22,11 @@ namespace Sprint3.Items
         private IItemsState state;
         private string direction;
 
+        public Vector2 Location { get => location; }
+
         public ICollider Collider { get => collider; }
 
-        public Vector2 Location { get => location;}
-
-        public IItemsState State { get => state;}
+        public IItemsState State { get => state; }
 
         public WandBeam(ISprite itemSprite, Vector2 location, string direction)
         {
@@ -35,7 +35,16 @@ namespace Sprint3.Items
             this.itemSprite = itemSprite;
             drawnFrame = 0;
             state = new WandBeamState(this, location, direction);
-            collider = new ProjectileCollider();
+        
+            if (direction == "Down" || direction == "Up")
+            {
+                collider = new ProjectileCollider((itemSprite as DownBeamSprite).Hitbox, this, this.state, "WandBeam");
+            }
+            else if (direction == "Left" || direction == "Right")
+            {
+                collider = new ProjectileCollider((itemSprite as LeftBeamSprite).Hitbox, this, this.state, "WandBeam");
+            }
+
         }
 
         public void UpdateLocation(Vector2 location)

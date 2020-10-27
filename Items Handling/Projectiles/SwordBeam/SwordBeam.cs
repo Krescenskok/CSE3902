@@ -10,7 +10,7 @@ namespace Sprint3
     public class SwordBeam : IItems
     {
         private Vector2 location;
-        private ItemCollider swordBeamCollider;
+        private ProjectileCollider collider;
         private bool isExpired = false;
         public bool expired
         {
@@ -26,9 +26,11 @@ namespace Sprint3
         private float yPos;
         private float initialY;
 
-        public Vector2 Location { get => location; set => location = value; }
+        public Vector2 Location { get => location; }
 
-        public IItemsState State { get => state; set => state = value; }
+        public ICollider Collider { get => collider; }
+
+        public IItemsState State { get => state; }
 
         public SwordBeam(ISprite item, Vector2 location, string direction)
         {
@@ -39,6 +41,15 @@ namespace Sprint3
             this.item = item;
             state = new SwordBeamState(this, location, direction);
             this.direction = direction;
+
+            if (direction == "Down" || direction =="Up")
+            {
+                collider = new ProjectileCollider((item as DownBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            } else if (direction == "Left" || direction == "Right")
+            {
+                collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            }
+
         }
 
         public void UpdateLocation(Vector2 location)
