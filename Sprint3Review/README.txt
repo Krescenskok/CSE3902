@@ -12,6 +12,9 @@ Known bugs/issues:
 - Some item animations may be choppy.
 - When Link is damaged, currently, he is unable to walk through enemies without getting damaged
 - Moveable block that moves left/right can only move right, moveable block that moves up/down can only move up.
+- Block collisions are mostly nonfunctional, but we know why
+- Item collisions are mostly nonfunctional, but we know why
+- Room swapping is causing us to freeze past room 2
 
 Notes on the damage on Link from enemies:
 - We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int.
