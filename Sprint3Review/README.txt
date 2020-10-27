@@ -15,6 +15,13 @@ Known bugs/issues:
 - Block collisions are mostly nonfunctional, but we know why
 - Item collisions are mostly nonfunctional, but we know why
 - Room swapping is causing us to freeze past room 2
+- Colliders aren't being properly deleted between rooms - possible source of freezing
+- Blocks aren't in the right spots in rooms
+- Item collisions don't update location
+- Block collisions don't set their locations properly and are only colliding from the right
+- Link and enemies are walking through walls
+- Reset game isn't working
+
 
 Notes on the damage on Link from enemies:
 - We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int.
