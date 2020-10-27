@@ -106,47 +106,12 @@ namespace Sprint3
                     {
                         enemies.Add(new WallMaster(game, location, item));
                     }
-                //more if-else for other enemies
+                    //more if-else for other enemies
 
 
-                    
+                    Debug.WriteLine("checked for enemy");
 
-                    if (objName.Equals("Blocks"))
-                    {
-                        Point size = GridGenerator.Instance.GetTileSize();
-                        Point small = size;
-                        small.X = size.X / 2;
-                        small.Y = size.Y / 2;
-                        for(int i = 0; i < 5; i++)
-                        {
-                            for(int j = 0; j < 10; j++)
-                            {
-                                Point loc = new Point(j * size.X, i* size.Y);
-
-                                if (j % 2 == 0 && i % 2 == 0) testObjects.Add(new TestCollider(loc, size, game,0));
-                                
-
-
-                            }
-                        }
-                        
-                    }
-
-                    int areaWidth = GridGenerator.Instance.GetGridWidth();
-                    int areaHeight = GridGenerator.Instance.GetGridHeight();
-
-                    if (objName.Equals("Walls"))
-                    {
-                        Rectangle leftWall = new Rectangle(new Point(-1, 0), new Point(1, areaHeight));
-                        Rectangle rightWall = new Rectangle(new Point(areaWidth + 1, 0), new Point(1, areaHeight));
-                        Rectangle topWall = new Rectangle(new Point(0, -1), new Point(areaWidth, 1));
-                        Rectangle bottomWall = new Rectangle(new Point(0, areaHeight + 1), new Point(areaWidth, 1));
-
-                        testObjects.Add(new TestCollider(leftWall,game));
-                        testObjects.Add(new TestCollider(rightWall, game));
-                        testObjects.Add(new TestCollider(topWall, game));
-                        testObjects.Add(new TestCollider(bottomWall, game));
-                    }
+                  
                 }
             }
 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Sprint3.Blocks;
+using Sprint3.Link;
 
 namespace Sprint3
 {
@@ -23,9 +24,9 @@ namespace Sprint3
 
         private static readonly RoomBlocks instance = new RoomBlocks();
 
-        private List<LinkBlocks> roomBlocks;
+        private List<IBlock> roomBlocks;
 
-        private List<TestCollider> testObjects;
+       
 
         public static RoomBlocks Instance
         {
@@ -37,8 +38,8 @@ namespace Sprint3
 
         private RoomBlocks()
         {
-            roomBlocks = new List<LinkBlocks>();
-            testObjects = new List<TestCollider>();
+            roomBlocks = new List<IBlock>();
+           
         }
         public void LoadRoom(Game game, XElement room)
         {
@@ -64,33 +65,27 @@ namespace Sprint3
 
                     Vector2 location = GridGenerator.Instance.GetLocation(row, column);
 
-                    if (objName.Equals("Block")) //Whgat is this code??
+                    if (objName.Equals("BirdLeft"))
                     {
-
-                        Point size = GridGenerator.Instance.GetTileSize();
-                        Point small = size;
-                        small.X = size.X / 2;
-                        small.Y = size.Y / 2;
-                        for(int i = 0; i < 5; i++)
-                        {
-                            for(int j = 0; j < 10; j++)
-                            {
-                                Point loc = new Point(j * size.X, i* size.Y);
-
-                                if (j % 2 == 0 && i % 2 == 0) testObjects.Add(new TestCollider(loc, size, game,0));                             
-                            }
-                        }        
-                    } else if (objName.Equals("BirdLeft"))
-                    {
-                        //roomBlocks.Add(new BirdLeft(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+                        roomBlocks.Add(new BirdLeft(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                     }
                     else if (objName.Equals("BirdRight"))
                     {
-                       //roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+                       roomBlocks.Add(new BirdRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite,location));
                     }
-                    else if (objName.Equals("BirdRight"))
+                    else if (objName.Equals("Water"))
                     {
-                       // roomBlocks.Add(new BirdRight(ItemsFactory.Instance.CreateBirdRightSprite(), location));
+
+                        roomBlocks.Add(new DarkerBlueTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                    }else if (objName.Equals("Column"))
+                    {
+                        roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                    }else if (objName.Equals("MoveableColumnRight"))
+                    {
+                        roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                    }else if (objName.Equals("MoveableColumnUp"))
+                    {
+                        roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                     }
                 }
             }
@@ -108,19 +103,11 @@ namespace Sprint3
             
             for (int i = 0; i < roomBlocks.Count; i++)
             {
-                //roomBlocks[i].Draw(batch);
+                roomBlocks[i].Draw(batch);
             }
 
-            foreach (TestCollider col in testObjects)
-            {
-                col.Draw(batch);
-            }
+  
         }
-        public void Destroy(LinkBlocks block)
-        {
-            roomBlocks.Remove(block);
-            //CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
-        }        
 
 
 

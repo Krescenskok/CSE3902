@@ -36,7 +36,7 @@ namespace Sprint3.Blocks
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public void Draw(SpriteBatch spriteBatch)
         {
             block.Draw(spriteBatch, spriteLocation, drawnFrame);
 

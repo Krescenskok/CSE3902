@@ -29,12 +29,12 @@ namespace Sprint3
         ICommand activeCommand;
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
-        XElement xml;
+       
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        EnemyCollider test;
+       
 
         public Game1()
         {
@@ -111,7 +111,7 @@ namespace Sprint3
 
             RoomSpawner.Instance.Update();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) RoomEnemies.Instance.StunAllEnemies();
+            
 
             LinkPersistent.Update(gameTime);
             ProjectilePersistent.Update(gameTime);
