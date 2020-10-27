@@ -35,7 +35,7 @@ namespace Sprint3.EnemyAndNPC.Merchant
             //Merchant dont need to update
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             MerchantSprite.Draw(spriteBatch, MerchantePos, 0, Color.White);  
         }

@@ -10,6 +10,6 @@ namespace Sprint3
     {
         void Update();
 
-        void Draw(SpriteBatch batch, GameTime time);
+        void Draw(SpriteBatch batch);
     }
 }
