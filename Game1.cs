@@ -68,6 +68,7 @@ namespace Sprint3
             blocks = new Blocks.LinkBlocks(_spriteBatch);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
+            controllers.Add(new MouseController(this));
 
 
             LinkPersistent = new LinkCommand(linkPlayer, "");

@@ -19,7 +19,7 @@ namespace Sprint3
         MouseState prevState;
         IDictionary<int, ICommand> commandsList = new Dictionary<int, ICommand>();
 
-        public MouseController(Game1 game, SpriteBatch spriteBatch)
+        public MouseController(Game1 game)
         {
             currentRoomNum = minRoomNum;
             prevState = Mouse.GetState();
