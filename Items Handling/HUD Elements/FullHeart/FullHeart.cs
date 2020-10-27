@@ -13,6 +13,10 @@ namespace Sprint3.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
+        private ItemCollider collider;
+
+        public ICollider Collider { get => collider; }
+
         public Vector2 Location { get => location; set => location = value; }
 
         public IItemsState State { get => state; set => state = value; }

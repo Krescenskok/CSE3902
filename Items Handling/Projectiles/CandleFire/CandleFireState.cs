@@ -30,6 +30,7 @@ namespace Sprint3.Items
         public void Expire()
         {
             item.expired = true;
+            CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

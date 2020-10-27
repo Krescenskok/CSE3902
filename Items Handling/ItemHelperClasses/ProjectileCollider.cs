@@ -17,13 +17,15 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ProjectileCollider(Rectangle rect, IItems item, IItemsState state)
+        public ProjectileCollider(Rectangle rect, IItems item, IItemsState state, String name)
         {
             bounds = rect;
 
             this.item = item;
 
             this.state = state;
+
+            this.name = name;
 
             CollisionHandler.Instance.AddCollider(this);
 
@@ -32,7 +34,7 @@ namespace Sprint3
 
         public void ChangeState(IItemsState state)
         {
-            item = state;
+            this.state = state;
         }
 
         public Rectangle Bounds()
@@ -53,39 +55,31 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
-            if (col.CompareTag("Block")) {
-
-                col.SendMessage("Item", this.item);
-
-            } else if (col.CompareTag("Player"))
-            {
-                if (this.name.Equals("Heart"))
-                {
-                    col.SendMessage("Heal", this.item);
-                } else if (this.name.Equals("HeartContainer"))
-                {
-                    col.SendMessage("HealContainer", this.item);
-                } else
-                {
-                    col.SendMessage("Item", this.item);
-                }
-            } else if (col.CompareTag("Enemy"))
-            {
-                //ignore because only projectiles need interaction w/ enemy and this is handled in below function
-
-            } //we ignore other items (for now)
-
         }
-        //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             string direction = collision.From().ToString();
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
-                if (col.CompareTag("Enemy")) col.SendMessage("EnemyTakeDamage" + direction, damageAmount);
-            
-
+            if (col.CompareTag("Enemy"))
+            {
+                if (name == "Arrow")
+                {
+                    col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
+                }
+                else if (name == "CandleFire")
+                {
+                    col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
+                }
+                else if (name == "SwordBeam")
+                {
+                    col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
+                }
+                else if (name == "WandBeam")
+                {
+                    col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
+                }
+            }
         }
 
         public void SendMessage(string msg, object value)

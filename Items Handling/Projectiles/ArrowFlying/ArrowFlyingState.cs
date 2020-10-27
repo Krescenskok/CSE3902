@@ -7,7 +7,7 @@ namespace Sprint3
 {
     public class ArrowFlyingState : IItemsState
     {
-        private Arrow arrow;
+        private Arrow item;
         private string direction;
         private Vector2 location;
         private float speedPerSec = 90;
@@ -17,7 +17,7 @@ namespace Sprint3
 
         public ArrowFlyingState(Arrow arrow, Vector2 location, string direction)
         {
-            this.arrow = arrow;
+            this.item = arrow;
             this.direction = direction;
             this.location = location;
             speed = speedPerSec / updatePerSec;
@@ -53,8 +53,10 @@ namespace Sprint3
 
         public void Expire()
         {
+
+            CollisionHandler.Instance.RemoveCollider(item.Collider);
             //expires only when it hits an enemy or the walls. always leaves an impact when it expires.
-            arrow.Impact();
+            item.Impact();
         }
 
         public void Collected()

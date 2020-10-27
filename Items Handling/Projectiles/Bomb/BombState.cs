@@ -26,14 +26,14 @@ namespace Sprint3.Items
             runTime++;
             if (runTime >= maxTime)
             {
-                Expire();
+                item.Exploded();
             }
 
         }
 
         public void Expire()
         {
-            item.Exploded();
+            item.Expire();
         }
 
         public void Collected()

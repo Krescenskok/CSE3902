@@ -39,11 +39,6 @@ namespace Sprint3.Enemies.Dodongo
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
-            {
-                col.SendMessage("Eaten", 0);
-                dodongo.TakeDamage(-1);
-            }
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
@@ -51,12 +46,16 @@ namespace Sprint3.Enemies.Dodongo
             if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
             {
                 col.SendMessage("Eaten", 0);
-                dodongo.TakeDamage(-1);
             }
         }
 
         public void SendMessage(string msg, object value)
         {
+            if (msg == "Bomb")
+            {
+                dodongo.TakeDamage(-5);
+            }
+            
         }
 
         public void Update(Point point)

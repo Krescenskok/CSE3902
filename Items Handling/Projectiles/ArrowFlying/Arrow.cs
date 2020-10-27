@@ -11,8 +11,7 @@ namespace Sprint3
     public class Arrow : IItems
     {
         private Vector2 location;
-        private ItemCollider collider;
-        private ItemCollider arrowFlyingCollider;
+        private ProjectileCollider collider;
         public bool expired = false;
         private ISprite item;
         private int drawnFrame = 0;
@@ -30,6 +29,13 @@ namespace Sprint3
             this.location = location;
             this.item = item;
             state = new ArrowFlyingState(this, location, direction);
+            if (direction == "Left" || direction == "Right")
+            {
+                collider = new ProjectileCollider((item as ArrowLeftSprite).Hitbox, this, this.state, "Arrow");
+            } else
+            {
+                collider = new ProjectileCollider((item as ArrowDownSprite).Hitbox, this, this.state, "Arrow");
+            }
         }
 
         public void UpdateLocation(Vector2 location)

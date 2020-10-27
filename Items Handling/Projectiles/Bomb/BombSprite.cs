@@ -19,6 +19,8 @@ namespace Sprint3.Items
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

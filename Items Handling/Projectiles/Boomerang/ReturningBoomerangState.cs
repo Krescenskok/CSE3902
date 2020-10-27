@@ -73,6 +73,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
+            CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

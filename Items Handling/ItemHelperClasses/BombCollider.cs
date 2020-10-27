@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Sprint3;
+using Sprint3.Items;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Sprint3
 {
-    public class ItemCollider : ICollider
+    public class BombCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
@@ -17,16 +18,18 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ItemCollider(Rectangle rect, IItems item, IItemsState state)
+        public BombCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
 
             this.item = item;
 
-            this.state = item.State;
+            this.state = state;
 
             CollisionHandler.Instance.AddCollider(this);
+
         }
+
 
         public void ChangeState(IItemsState state)
         {
@@ -41,7 +44,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == name || tag == "Item";
+            return tag == name || tag == "Projectile";
         }
 
         public bool Equals(ICollider col)
@@ -53,35 +56,35 @@ namespace Sprint3
         {
 
 
-            if (col.CompareTag("Player"))
-            {
-
-                    col.SendMessage("Item", this.item);
-                
-            }
-
-
         }
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            if ((this.item as Bomb).Exploding)
+            {
+                if (col.CompareTag("Enemy"))
+                {
 
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
+                    col.SendMessage("EnemyTakeDamage", HPAmount.FourHits);
+                }
+                else if (col.CompareTag("DodongoFace") && !(this.item as Bomb).Exploding)
+                {
+                    col.SendMessage("Bomb", null);
+                }
+            }
 
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Dissapear")
-            {
-                this.item.State.Expire();
+            if (msg == "Eaten" && !(this.item as Bomb).Exploding) {
+                (this.item as Bomb).Expire();
             }
             
         }
 
 
-        public void Update(IItems itemObj)
+        public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();

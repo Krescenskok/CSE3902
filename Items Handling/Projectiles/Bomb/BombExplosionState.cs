@@ -38,8 +38,7 @@ namespace Sprint3.Items
 
         public void Expire()
         {
-            item.expired = true;
-            item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
+            item.Expire();
 
             //remove item from room
         }

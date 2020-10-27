@@ -10,7 +10,7 @@ namespace Sprint3.Items
     public class HeartContainer : IItems
     {
         private XElement saveInfo;
-        private ItemCollider collider;
+        private HealthCollider collider;
         private ISprite item;
         private int drawnFrame;
 
@@ -31,7 +31,7 @@ namespace Sprint3.Items
             drawnFrame = 0;
 
             state = new HeartContainerState(this, location);
-            collider = new ItemCollider((item as HeartContainerSprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as HeartContainerSprite).Hitbox, this, this.state, "HeartContainer");
         }
         public HeartContainer(ISprite item, Vector2 location, XElement xml)
         {
@@ -40,7 +40,7 @@ namespace Sprint3.Items
             drawnFrame = 0;
 
             state = new HeartContainerState(this, location);
-            collider = new ItemCollider((item as HeartContainerSprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as HeartContainerSprite).Hitbox, this, this.state, "HeartContainer");
             saveInfo = xml;
         }
 

@@ -53,27 +53,6 @@ namespace Sprint3
         public void HandleCollision(ICollider col, Collision collision)
         {
 
-            if (col.CompareTag("Block")) {
-
-                col.SendMessage("Item", this.item);
-
-            } else if (col.CompareTag("Player"))
-            {
-                if (this.name.Equals("Heart"))
-                {
-                    col.SendMessage("Heal", this.item);
-                } else if (this.name.Equals("HeartContainer"))
-                {
-                    col.SendMessage("HealContainer", this.item);
-                } else
-                {
-                    col.SendMessage("Item", this.item);
-                }
-            } else if (col.CompareTag("Enemy"))
-            {
-                //ignore because only projectiles need interaction w/ enemy and this is handled in below function
-
-            } //we ignore other items (for now)
 
         }
         //on impact, damage enemies if projectile, so its just one damage action

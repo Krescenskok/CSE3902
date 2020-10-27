@@ -10,7 +10,7 @@ namespace Sprint3.Items
     public class Boomerang : IItems
     {
         private Vector2 location;
-        private ItemCollider boomerangCollider;
+        private BoomerangCollider collider;
         public bool returned = false;
         private ISprite item;
         private int drawnFrame;
@@ -20,6 +20,12 @@ namespace Sprint3.Items
         private LinkPlayer link;
         private string direction;
         private List<IItems> impactList = new List<IItems>();
+
+        public Vector2 Location { get => location; }
+
+        public ICollider Collider { get => collider; }
+
+        public IItemsState State { get => state; }
 
         public Boomerang(ISprite item, Vector2 location, string direction, LinkPlayer link)
         {
@@ -31,6 +37,8 @@ namespace Sprint3.Items
             state = new ThrownBoomerangState(this, location, direction, link);
             throwing = true;
             returning = false;
+
+            collider = new BoomerangCollider((item as BoomerangSprite).Hitbox, this, this.state);
         }
 
         public void UpdateLocation(Vector2 location)
