@@ -7,23 +7,25 @@ using System.Text;
 
 namespace Sprint3
 {
-    public class ItemCollider : ICollider
+    public class HealthCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
         private int damageAmount;
-        public string name;
+        private string name;
 
         public string Name { get => name; }
 
-        public ItemCollider(Rectangle rect, IItems item, IItemsState state)
+        public HealthCollider(Rectangle rect, IItems item, IItemsState state, String name)
         {
             bounds = rect;
 
             this.item = item;
 
             this.state = item.State;
+
+            this.name = name;
 
             CollisionHandler.Instance.AddCollider(this);
         }
@@ -51,14 +53,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
-
-            if (col.CompareTag("Player"))
-            {
-
-                    col.SendMessage("Item", this.item);
-                
-            }
+            
 
 
         }
@@ -66,8 +61,20 @@ namespace Sprint3
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
+            if (col.CompareTag("Player"))
+            {
+                if (this.name.Equals("Heart"))
+                {
+                    col.SendMessage("Heal", this.item);
+                }
+                else if (this.name.Equals("HeartContainer"))
+                {
+                    col.SendMessage("HealContainer", this.item);
+                }
+
+                col.SendMessage("Item", this.item);
+            }
+
 
         }
 

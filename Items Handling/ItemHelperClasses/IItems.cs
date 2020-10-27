@@ -15,5 +15,7 @@ namespace Sprint3
         Vector2 Location { get; }
 
         IItemsState State { get; }
+
+        ICollider Collider { get; }
     }
 }

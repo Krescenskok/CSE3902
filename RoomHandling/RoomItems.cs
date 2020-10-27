@@ -155,10 +155,6 @@ namespace Sprint3
                 }
             }
             
-        
-
-
-
     public void Draw(SpriteBatch batch)
         {
             
@@ -177,7 +173,7 @@ namespace Sprint3
         public void Destroy(IItems item)
         {
             roomItems.Remove(item);
-           // CollisionHandler.Instance.RemoveCollider(roomItems.GetCollider());
+            
         }
         
 

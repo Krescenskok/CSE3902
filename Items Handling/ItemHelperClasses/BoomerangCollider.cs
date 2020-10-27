@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Sprint3
 {
-    public class ItemCollider : ICollider
+    public class BoomerangCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
@@ -17,15 +17,16 @@ namespace Sprint3
 
         public string Name { get => name; }
 
-        public ItemCollider(Rectangle rect, IItems item, IItemsState state)
+        public BoomerangCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
 
             this.item = item;
 
-            this.state = item.State;
+            this.state = state;
 
             CollisionHandler.Instance.AddCollider(this);
+
         }
 
         public void ChangeState(IItemsState state)
@@ -41,7 +42,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == name || tag == "Item";
+            return tag == name || tag == "Boomerang";
         }
 
         public bool Equals(ICollider col)
@@ -53,30 +54,17 @@ namespace Sprint3
         {
 
 
-            if (col.CompareTag("Player"))
-            {
-
-                    col.SendMessage("Item", this.item);
-                
-            }
-
-
         }
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
-
+       
+                if (col.CompareTag("Enemy")) col.SendMessage("Stun", null);
+            
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Dissapear")
-            {
-                this.item.State.Expire();
-            }
             
         }
 

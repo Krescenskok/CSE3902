@@ -37,12 +37,12 @@ namespace Sprint3
             LinkCommand linkReset = new LinkCommand(Player, "R");
             BlocksCommand blockReset = new BlocksCommand(spriteBatch, this.Blocks, false, true);
             ItemsCommand itemReset = new ItemsCommand(spriteBatch, this.Items, false, true);
-
+            
             linkReset.Update(Gametime);
             blockReset.ExecuteCommand(game, Gametime, spriteBatch);
             itemReset.ExecuteCommand(game, Gametime, spriteBatch);
 
-            EnemyNPCDisplay.Instance.Reset();
+            RoomSpawner.Instance.Reset();
 
         }
     }
