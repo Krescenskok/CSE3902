@@ -92,6 +92,7 @@ namespace Sprint3
 
         public void LoadAllRooms(Game game)
         {
+            roomSprites = new List<RoomSprite>();
             roomSpriteSheet = game.Content.Load<Texture2D>("RoomMap");
             Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
 
@@ -99,20 +100,20 @@ namespace Sprint3
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 1, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 3, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 4, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 1, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 1, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 3, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 0, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 1, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 0, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 3, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 4, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 2, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 4, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 5, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 0, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 1, drawSize));
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 2, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 1, drawSize));
+            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 1, drawSize));
         }
 
     }
