@@ -86,4 +86,23 @@ Specific comments on what is readable and what is not:
 Straightforward and easy to read. Each variable and method is given a descriptive name. 
 The organization of the private variables could be redone for more streamlined reading.
 
+Author of the code review: Noah Fabec
+Date of the code review: 10/26
+Sprint number: 3
+Name of the .cs file being reviewed: Keese.cs
+Author of the .cs file being reviewed: JT Thrash
+Number of minutes taken to complete the review: 10
+Specific comments on what is readable and what is not: Code is very readable. All names are descriptive to the point where I can easily read what everything is used for.
+People who don't understand coding may not understand the word sprite and state, but other than that, great.
+
+
+Author of the code review: Noah Fabec
+Date of the code review: 10/26
+Sprint number: 3
+Name of the .cs file being reviewed: Goriya.cs
+Author of the .cs file being reviewed: JT Thrash
+Specific comments on code quality: Code is standard in every way. A few variables have the same name as their type which is a little confusing and the enemyCollider method is created twice, but other than that good code.
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: If every object were to work off the same health system, this
+code could pretty easily support that since HP is their own variable.
+
 
