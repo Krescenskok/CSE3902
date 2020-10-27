@@ -79,6 +79,7 @@ namespace Sprint3
                 {
                     col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
                 }
+                item.State.Expire();
             }
         }
 

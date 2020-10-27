@@ -65,6 +65,7 @@ namespace Sprint3
 
         public void Expire()
         {
+            CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.SwordImpact();
         }
 
@@ -72,6 +73,7 @@ namespace Sprint3
         {
             //enemy gets damaged
             item.SwordImpact();
+           
         }
     }
 }

@@ -15,10 +15,22 @@ namespace Sprint3
         private Vector2 sheetSize;
         private int sheetLocation = 74;
 
+
+        private Rectangle hitbox;
+
+        public Rectangle Hitbox { get => hitbox; }
+
         public DownBeamSprite(Texture2D texture)
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetSheetSize();
+
+            int width = texture.Width / (int)sheetSize.Y;
+
+            int height = texture.Height / (int)sheetSize.X;
+
+            hitbox = new Rectangle(0, 0, width * 2, height * 2);
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
