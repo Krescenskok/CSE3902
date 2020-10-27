@@ -67,3 +67,4 @@ Code analysis for Enemies:
 
 
 Code analysis for Blocks:
+- moveable block that moves left/right can only move right, moveable block that moves up/down can only move up
