@@ -102,6 +102,8 @@ Sprint number: 3
 Name of the .cs file being reviewed: Goriya.cs
 Author of the .cs file being reviewed: JT Thrash
 Specific comments on code quality: Code is standard in every way. A few variables have the same name as their type which is a little confusing and the enemyCollider method is created twice, but other than that good code.
+A hypothetical change to make to the game related to file being reviewed and 
+how the current implementation could or could not easily support that change: 
 A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: If every object were to work off the same health system, this
 code could pretty easily support that since HP is their own variable.
 
@@ -122,7 +124,31 @@ Date of the code review: 10/26/2020
 Sprite 3
 Name of .cs file being reviewed: ReturningBoomerangState.cs
 Author of .cs file being review: Ann Yan
-Time taken to complete review:  minutes
+Specific comments on code quality:
 Code is readable and variables have name according to their proposes. Variable distantceToLink in update() method seems not been used, 
 and I think constant float variable should have capital initial. Variable updatePerSec should be 60.
 Hypothetical change is making bommerang move in more angles. Currently it seems only able to move horizontal, vertical and in 45 degree angle. 
+
+
+Author of the code review: Andrew Sanchez
+Date of the code review: 10/26/2020
+Sprint number: 3
+Name of the .cs file being reviewed: Aquamentus.cs
+Author of the .cs file being reviewed: Yuan Hong
+Number of minutes taken to complete the review: 10
+Specific comments on what is readable and what is not: 
+Code is is readable. Variable names describe their main function.
+Variable name capitalization does not always follow convention.
+
+
+Author of the code review: Andrew Sanchez
+Date of the code review: 10/26/2020
+Sprint number: 3
+Name of the .cs file being reviewed: Dodongo.cs
+Author of the .cs file being reviewed: Yuan Hong
+Specific comments on code quality: 
+Seems good. Has various gets in order to obtain values. Code is standard otherwise.
+A hypothetical change to make to the game related to file being reviewed and 
+how the current implementation could or could not easily support that change: 
+Should change all the magic numbers into constants. 
+
