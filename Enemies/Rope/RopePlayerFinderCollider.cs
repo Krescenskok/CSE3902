@@ -9,6 +9,7 @@ namespace Sprint3
     public class RopePlayerFinderCollider : ICollider
     {
         public string Name { get => "RopeEyes"; }
+        public Layer layer { get; set; }
 
         private Rectangle bounds;
         private Rope rope;

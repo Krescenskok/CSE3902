@@ -12,6 +12,7 @@ namespace Sprint3
         private GelMoveState gel;
 
         public string Name {get =>  "GelBlock";}
+        public Layer layer { get; set; }
 
         public GelBlockCollider(Rectangle rect, GelMoveState gel)
         {

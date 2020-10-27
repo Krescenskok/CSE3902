@@ -18,6 +18,7 @@ namespace Sprint3
         private int attack;
 
         public string Name { get => "wall"; }
+        public Layer layer { get; set; }
 
         public TestCollider(Point location, Point size, Game game, int attack)
         {

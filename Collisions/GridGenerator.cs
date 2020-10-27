@@ -50,14 +50,15 @@ namespace Sprint3
             int screenWidth = game.Window.ClientBounds.Width;
             int screenHeight = game.Window.ClientBounds.Height;
 
-            int roomSpriteGridOffset = 32;
+            int roomSpriteGridOffsetY = 34;
+            int roomSpriteGridOffsetX = 33;
             int roomSpriteGridWidth = 190;
             int roomSpriteGridHeight = 110;
             int roomSpriteWidth = 256;
             int roomSpriteHeight = 176;
 
 
-            topLeftOffset = new Point(roomSpriteGridOffset * screenWidth / roomSpriteGridWidth, roomSpriteGridOffset * screenHeight / roomSpriteGridHeight);
+            topLeftOffset = new Point(roomSpriteGridOffsetX * screenWidth / roomSpriteGridWidth, roomSpriteGridOffsetY * screenHeight / roomSpriteGridHeight);
 
 
             int playAreaWidth = roomSpriteGridWidth * screenWidth / roomSpriteWidth;
@@ -88,6 +89,29 @@ namespace Sprint3
 
 
             return gridTiles;
+        }
+
+
+
+        public List<Rectangle> CollisionGrid(Game game, int rows, int col)
+        {
+            List<Rectangle> grid = new List<Rectangle>();
+
+            int cellSizeX = game.Window.ClientBounds.Width / col;
+            int cellSizeY = game.Window.ClientBounds.Height / rows;
+
+            Point cellSize = new Point(cellSizeX, cellSizeY);
+
+            for(int i = 0; i < rows; i++)
+            {
+                for(int j = 0; j < col; j++)
+                {
+                    grid.Add(new Rectangle(new Point(j * cellSizeX, i * cellSizeY), cellSize));
+                }
+            }
+
+
+            return grid;
         }
 
         public List<List<Rectangle>> GetGrid()

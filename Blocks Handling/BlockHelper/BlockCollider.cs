@@ -14,13 +14,16 @@ namespace Sprint3.Blocks
 
         public string Name => throw new NotImplementedException();
 
+        
+        public Layer layer { get; set; }
+
         public BlockCollider(Rectangle rect, IBlock block)
         {
             bounds = rect;
 
             this.block = block;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Block);
         }
 
         public Rectangle Bounds()

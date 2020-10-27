@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sprint3
 {
-    public interface IEnemy
+    public interface IEnemy : IMoveable
     {
 
         void Update();

@@ -109,7 +109,7 @@ namespace Sprint3
                     //more if-else for other enemies
 
 
-                    Debug.WriteLine("checked for enemy");
+                   
 
                   
                 }

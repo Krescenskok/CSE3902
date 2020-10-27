@@ -16,6 +16,7 @@ namespace Sprint3
         private string name;
 
         public string Name { get => name; }
+        public Layer layer { get; set; }
 
         public HealthCollider(Rectangle rect, IItems item, IItemsState state, String name)
         {

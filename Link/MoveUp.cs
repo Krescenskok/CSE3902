@@ -19,7 +19,10 @@ namespace Sprint3.Link
         {
             if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.Y += MOVEMENT;
+                if (!link.isWalkingInPlace)
+                {
+                    location.Y += MOVEMENT;
+                }
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
 

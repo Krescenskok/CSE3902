@@ -61,6 +61,7 @@ namespace Sprint3
         public bool SubtractHP(int amount)
         {
             HP -= amount;
+
             
             if (HP <= 0) { Die(); }
 

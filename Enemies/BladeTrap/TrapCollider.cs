@@ -16,6 +16,7 @@ namespace Sprint3
         private Rectangle bounds;
 
         public string Name { get => "trap"; }
+        public Layer layer { get; set; }
 
         public TrapCollider(Rectangle trapRect, IEnemyState state, string attackDirection, int attackRange)
         {

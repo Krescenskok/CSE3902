@@ -131,6 +131,7 @@ namespace Sprint3
         {
             bool stillAlive = skeleton.SubtractHP(amount);
             if (stillAlive) skeleton.state = new StalfosDamagedState(dir, skeleton, location);
+            
         }
 
         #region //unused methods

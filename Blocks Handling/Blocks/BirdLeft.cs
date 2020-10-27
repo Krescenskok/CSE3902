@@ -17,15 +17,18 @@ namespace Sprint3.Blocks
         private int drawnFrame;
         private BlockCollider collider;
 
+        
+
         public BirdLeft(BlocksSprite block, Vector2 location)
         {
             spriteLocation = location;
             this.block = block;
+            
             moveable = false;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
 
-            collider = new BlockCollider(block.getDestination(location), this);
+
         }
 
 
@@ -42,7 +45,11 @@ namespace Sprint3.Blocks
         public void Draw(SpriteBatch spriteBatch)
         {
             block.Draw(spriteBatch, spriteLocation, drawnFrame);
-
+            if (collider == null)
+            {
+                collider = new BlockCollider(block.getDestination(spriteLocation), this);
+                
+            }
         }
 
         public void setLocation(Vector2 location)
