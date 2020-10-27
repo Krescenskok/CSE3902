@@ -11,6 +11,7 @@ Known bugs/issues:
 - Similarily to above, Link can only place one bomb and set one fire (using candle) at a time.
 - Some item animations may be choppy.
 - When Link is damaged, currently, he is unable to walk through enemies without getting damaged
+- Moveable block that moves left/right can only move right, moveable block that moves up/down can only move up.
 
 Notes on the damage on Link from enemies:
 - We decided to make Link's full health 60hp because of the blue ring. Since the blue ring makes the damage decrease by half, this would be easier to implement using ints instead of doubles. So the enemy damage is either 10 or 20, so dividing by 2 will still be an int.
@@ -63,8 +64,7 @@ Code analysis for Items: 23 warnings, 0 errors.
 - A field is never used: Removed the field declaration to get rid of the warning
 - A field is given a value but is never used: Removed the field and assignment to get rid of the warning.
 
-Code analysis for Enemies:
+Code analysis for Enemies: 0 warnings, 0 errors.
 
 
-Code analysis for Blocks:
-- moveable block that moves left/right can only move right, moveable block that moves up/down can only move up
+Code analysis for Blocks: 0 warnings, 0 errors.
