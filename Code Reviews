@@ -1,9 +1,9 @@
 Author of the code review: Krescens Kok
 Date of the code review: 10/26
-Sprint number: 5
+Sprint number: 3
 Name of the .cs file being reviewed: RoomSpawner.cs
 Author of the .cs file being reviewed: Andrew Sanchez
-Number of minutes taken to complete the review:
+Number of minutes taken to complete the review: 10
 Specific comments on what is readable and what is not: Very readable - I can tell what the purpose of the code is. He starts by creating an instance so that other
 classes can use the instance of the class and use the variables within the class. A get/set is used so the value can change outside of the class. The room spawner 
 method is used to display what objects are in each room, reset is used to reset the objects in the room, loadRoom loads the room in, update will update the objects
@@ -13,7 +13,7 @@ the room.
 
 Author of the code review: Krescens Kok
 Date of the code review: 10/26
-Sprint number: 5
+Sprint number: 3
 Name of the .cs file being reviewed: Andrew Sanchez
 Author of the .cs file being reviewed: RoomItems
 Specific comments on code quality: The code quality is good because a list is used to cycle through the items, making it easier to create the tags. Booleans are 
@@ -55,4 +55,35 @@ Specific comments on what is readable and what is not:
 There is a very good naming convention in place. Every variable is descriptive.
 The method names are also descriptive. One thing that's not readable is the organization of variables,
 at the beginning and in the middle where get,set fields are awkwardly placed.
+
+
+
+
+
+Author of the code review: Ann Yan
+Date of the code review: 10/26/2020
+Sprint number: 3
+Name of the .cs file being reviewed: MovableRight
+Author of the .cs file being reviewed: Noah Fabec
+Specific comments on code quality:
+Pretty good. Logic is very straightforward. Methods are short and simple and serve one defined purpose.
+There are two methods that seem to do the same thing though, so one could probably be removed.
+Many of the magic numbers floating around for logic and mathematical computations could be redefined as constants. 
+
+A hypothetical change to make to the game related to file being reviewed and 
+how the current implementation could or could not easily support that change: 
+Instead of creating new vectors for the location vector changes, just update the individual coordinates of the vectors.
+This change would be relatively easy to implement and would not make a significant impact on the rest of the game.
+
+
+Author of the code review:  Ann Yan
+Date of the code review: 10/26/2020
+Sprint number: 3
+Name of the .cs file being reviewed: MoveableRight
+Author of the .cs file being reviewed: Noah Fabec
+Number of minutes taken to complete the review: 10
+Specific comments on what is readable and what is not: 
+Straightforward and easy to read. Each variable and method is given a descriptive name. 
+The organization of the private variables could be redone for more streamlined reading.
+
 
