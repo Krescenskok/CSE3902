@@ -18,7 +18,7 @@ namespace Sprint3.EnemyAndNPC.OldMan
         private Vector2 OldManPos;
         private NPCCollider OldManCollider;
 
-        public OldMan(Vector2 initialPos, int updatePerFlame)
+        public OldMan(Vector2 initialPos)
         {
             OldManPos = initialPos;
             State = new OldManNormalState(this, initialPos);
@@ -40,7 +40,7 @@ namespace Sprint3.EnemyAndNPC.OldMan
             State.Update();
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             OldManSprite.Draw(spriteBatch, OldManPos, 0, Color.White);
         }

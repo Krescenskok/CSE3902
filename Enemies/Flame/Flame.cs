@@ -15,7 +15,7 @@ namespace Sprint3
         private Vector2 flamePos;
         private FlameSprite flameSprite;
         private NPCCollider flameCollider;
-        public Flame(Vector2 initialPos, Texture2D texture)
+        public Flame(Vector2 initialPos)
         {
             flamePos = initialPos;
             flameSprite =(FlameSprite) EnemySpriteFactory.Instance.CreateFlameSprite();
@@ -26,7 +26,7 @@ namespace Sprint3
         {
             //do nothing
         }
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             flameSprite.Draw(spriteBatch, flamePos, 0, Color.White);
         }
