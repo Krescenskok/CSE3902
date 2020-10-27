@@ -79,13 +79,13 @@ namespace Sprint3
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
 
-            //set up room loader
+            //set up grid where everything is spawned
             GridGenerator.Instance.GetGrid(this, 12, 7);
-            xml = XElement.Load("../../../JTEnemyLoadingTest.xml").Element("Asset");
-            List<XElement> rooms = xml.Elements("Room").ToList();
 
-            //load enemies for room 1
+            //creat list of rooms
+            RoomSpawner.Instance.LoadAllRooms(this);
             RoomSpawner.Instance.LoadRoom(this, 1);
+            
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);

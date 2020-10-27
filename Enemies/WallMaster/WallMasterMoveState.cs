@@ -14,7 +14,7 @@ namespace Sprint3
     /// </summary>
     public class WallMasterMoveState : IEnemyState
     {
-
+        private Game game;
         private Vector2 location;
         private Rectangle currentSpace;
 
@@ -66,6 +66,7 @@ namespace Sprint3
         {
             this.location = location;
             this.master = master;
+            this.game = game;
 
             ISprite sprite = EnemySpriteFactory.Instance.CreateWallMasterSprite("");
             WallMasterSprite wSprite = (WallMasterSprite)sprite;
@@ -204,7 +205,8 @@ namespace Sprint3
 
         public void Attack()
         {
-            master.SetSprite(EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(currentWall.ToString()));
+            targetSpace = NearestSpace(location, outsideArea);
+            master.state = new WallMasterGrabbingLinkState(location, master, targetSpace, currentWall.ToString(), game);
         }
 
         public void Update()

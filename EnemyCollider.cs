@@ -75,6 +75,8 @@ namespace Sprint3
                 enemy.MoveAwayFromCollision(collision);
                 
             }
+
+            if (name.Equals("WallMaster") && col.CompareTag("Player")) { enemy.Attack(); col.SendMessage("Hand", (WallMasterMoveState)this.enemy); }
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
