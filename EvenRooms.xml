@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+	<Asset Type="MyDataTypes.LevelObjectData[]">
+
+
+		<!-- Second Room Content-->
+		<Room id ="2">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>1 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>5 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>2 3</Location>
+			</Item>
+		</Room>
+
+		<!-- Fourth Room Content-->
+		<Room id="4">
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>0 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 3</Location>
+			</Item>
+		</Room>
+		
+		<!-- Fifth Room Content-->
+		<Room id="5">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>0 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Key</ObjectName>
+				<Location>1 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 9</Location>
+			</Item>
+		
+		</Room>
+		
+		
+	</Asset>
+</XnaContent>
