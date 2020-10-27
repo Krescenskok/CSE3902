@@ -36,15 +36,23 @@ namespace Sprint3.Items
             drawnFrame = 0;
             state = new WandBeamState(this, location, direction);
         
-            if (direction == "Down" || direction == "Up")
+
+            if (direction == "Down")
             {
                 collider = new ProjectileCollider((itemSprite as DownBeamSprite).Hitbox, this, this.state, "WandBeam");
             }
-            else if (direction == "Left" || direction == "Right")
+            else if (direction == "Up")
+            {
+                collider = new ProjectileCollider((itemSprite as UpBeamSprite).Hitbox, this, this.state, "WandBeam");
+            }
+            else if (direction == "Left")
             {
                 collider = new ProjectileCollider((itemSprite as LeftBeamSprite).Hitbox, this, this.state, "WandBeam");
             }
-
+            else if (direction == "Right")
+            {
+                collider = new ProjectileCollider((itemSprite as RightBeamSprite).Hitbox, this, this.state, "WandBeam");
+            }
         }
 
         public void UpdateLocation(Vector2 location)

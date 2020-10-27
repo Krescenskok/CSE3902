@@ -42,12 +42,20 @@ namespace Sprint3
             state = new SwordBeamState(this, location, direction);
             this.direction = direction;
 
-            if (direction == "Down" || direction =="Up")
+            if (direction == "Down")
             {
                 collider = new ProjectileCollider((item as DownBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            } else if (direction == "Left" || direction == "Right")
+            }
+            else if (direction == "Up")
+            {
+                collider = new ProjectileCollider((item as UpBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            }
+            else if (direction == "Left")
             {
                 collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            } else if (direction == "Right")
+            {
+                collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
 
         }

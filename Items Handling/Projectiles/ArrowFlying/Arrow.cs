@@ -29,12 +29,22 @@ namespace Sprint3
             this.location = location;
             this.item = item;
             state = new ArrowFlyingState(this, location, direction);
-            if (direction == "Left" || direction == "Right")
-            {
-                collider = new ProjectileCollider((item as ArrowLeftSprite).Hitbox, this, this.state, "Arrow");
-            } else
+
+            if (direction == "Down")
             {
                 collider = new ProjectileCollider((item as ArrowDownSprite).Hitbox, this, this.state, "Arrow");
+            }
+            else if (direction == "Up")
+            {
+                collider = new ProjectileCollider((item as ArrowUpSprite).Hitbox, this, this.state, "Arrow");
+            }
+            else if (direction == "Left")
+            {
+                collider = new ProjectileCollider((item as ArrowLeftSprite).Hitbox, this, this.state, "Arrow");
+            }
+            else if (direction == "Right")
+            {
+                collider = new ProjectileCollider((item as ArrowRightSprite).Hitbox, this, this.state, "Arrow");
             }
         }
 

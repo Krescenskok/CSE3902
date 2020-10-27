@@ -36,7 +36,6 @@ namespace Sprint3.Items
             this.item = item;
             drawnFrame = 0;
             state = new BombState(this, location);
-            collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
         }
 
         public void UpdateFrame(int frame)
@@ -53,6 +52,7 @@ namespace Sprint3.Items
         {
             isExploding = true;
             state = new BombExplosionState(this);
+            collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
             Update();
         }
 
