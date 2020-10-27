@@ -6,7 +6,6 @@ using Sprint3;
 namespace Sprint3.Blocks
 
 {
-
     public class BlocksSprite : ISprite
     {
         Texture2D texture;
@@ -14,6 +13,8 @@ namespace Sprint3.Blocks
         private Rectangle destinationRectangle;
         private int columns = 4;
         private int rows = 3;
+        public int blockDimensionX = 150;
+        private int blockDimensionY = 150;
 
         public BlocksSprite(Texture2D texture)
         {
@@ -32,7 +33,7 @@ namespace Sprint3.Blocks
             int column = currentFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            destinationRectangle = new Rectangle((int)location.X, (int)location.Y, 150, 150);
+            destinationRectangle = new Rectangle((int)location.X, (int)location.Y, blockDimensionX, blockDimensionY);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -49,7 +50,7 @@ namespace Sprint3.Blocks
             int column = drawnFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)spriteLocation.X - width / 2, (int)spriteLocation.Y - height / 2, 2 * drawnWidth, 2 * height);
+            destinationRectangle = new Rectangle((int)spriteLocation.X - width / 2, (int)spriteLocation.Y - height / 2, blockDimensionX, blockDimensionY);
 
             
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -69,7 +70,7 @@ namespace Sprint3.Blocks
             Vector2 spriteOrigin = new Vector2(0, 0);
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2 * drawnWidth, 2 * height);
+            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, blockDimensionX, blockDimensionY);
 
             spriteBatch.Begin();
             spriteBatch.Draw(texture, location, sourceRectangle, Color.White, angle, spriteOrigin, 1.0f, SpriteEffects.None, 1);
@@ -84,6 +85,16 @@ namespace Sprint3.Blocks
                 return width * 2;
             }
             return width;
+        }
+
+        public Rectangle getDestination()
+        {
+            return destinationRectangle;
+        }
+
+        public Rectangle getDestination(Vector2 location)
+        {
+            return destinationRectangle = new Rectangle((int)location.X, (int)location.Y, blockDimensionX, blockDimensionY);
         }
 
     }
