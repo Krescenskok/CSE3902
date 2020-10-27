@@ -106,3 +106,23 @@ A hypothetical change to make to the game related to file being reviewed and how
 code could pretty easily support that since HP is their own variable.
 
 
+Author of the code review: Yuan Hong
+Date of the code review: 10/26/2020
+Sprite 3
+Name of .cs file being reviewed: Bomb.cs
+Author of .cs file being review: Ann Yan
+Time taken to complete review: 10 minutes
+Code is quite readable, and naming for variables and method is accurate so that easy to tell their proposes. 
+A hypothetical change could be saving variable of damage while exploding is bomb class and pass it into collider. 
+That might be useful if item data like amount of damage stored in separated file in future sprite.
+
+
+Author of the code review: Yuan Hong
+Date of the code review: 10/26/2020
+Sprite 3
+Name of .cs file being reviewed: ReturningBoomerangState.cs
+Author of .cs file being review: Ann Yan
+Time taken to complete review:  minutes
+Code is readable and variables have name according to their proposes. Variable distantceToLink in update() method seems not been used, 
+and I think constant float variable should have capital initial. Variable updatePerSec should be 60.
+Hypothetical change is making bommerang move in more angles. Currently it seems only able to move horizontal, vertical and in 45 degree angle. 
