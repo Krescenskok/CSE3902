@@ -39,19 +39,19 @@ namespace Sprint3.Items
 
             if (direction == "Down")
             {
-                collider = new ProjectileCollider((itemSprite as DownBeamSprite).Hitbox, this, this.state, "WandBeam");
+                collider = new ProjectileCollider((itemSprite as WandBeamDownSprite).Hitbox, this, this.state, "WandBeam");
             }
             else if (direction == "Up")
             {
-                collider = new ProjectileCollider((itemSprite as UpBeamSprite).Hitbox, this, this.state, "WandBeam");
+                collider = new ProjectileCollider((itemSprite as WandBeamUpSprite).Hitbox, this, this.state, "WandBeam");
             }
             else if (direction == "Left")
             {
-                collider = new ProjectileCollider((itemSprite as LeftBeamSprite).Hitbox, this, this.state, "WandBeam");
+                collider = new ProjectileCollider((itemSprite as WandBeamLeftSprite).Hitbox, this, this.state, "WandBeam");
             }
             else if (direction == "Right")
             {
-                collider = new ProjectileCollider((itemSprite as RightBeamSprite).Hitbox, this, this.state, "WandBeam");
+                collider = new ProjectileCollider((itemSprite as WandBeamRightSprite).Hitbox, this, this.state, "WandBeam");
             }
         }
 

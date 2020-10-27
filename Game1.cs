@@ -28,16 +28,12 @@ namespace Sprint3
 
         ICommand activeCommand;
         LinkCommand LinkPersistent;
-        ItemsCommand ItemPersistent;
-        BlocksCommand BlockPersistent;
         ProjectilesCommand ProjectilePersistent;
         XElement xml;
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        public LinkItems items;
-        public Blocks.LinkBlocks blocks;
         EnemyCollider test;
 
         public Game1()
@@ -64,16 +60,11 @@ namespace Sprint3
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new LinkItems(_spriteBatch, linkPlayer);
-            blocks = new Blocks.LinkBlocks(_spriteBatch);
-
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
-            ItemPersistent = new ItemsCommand(_spriteBatch, items, false, false);
-            BlockPersistent = new BlocksCommand(_spriteBatch, blocks, false, false);
             ProjectilePersistent = ProjectilesCommand.Instance;
             ProjectilePersistent.Link = linkPlayer;
 
@@ -97,7 +88,7 @@ namespace Sprint3
         {
             if(linkPlayer.Health == 0)
             {
-                activeCommand = new ResetCommand(linkPlayer, items, blocks);
+                activeCommand = new ResetCommand(linkPlayer);
                 activeCommand.Update(gameTime);
             }
             else
@@ -123,8 +114,6 @@ namespace Sprint3
             if (Keyboard.GetState().IsKeyDown(Keys.Space)) RoomEnemies.Instance.StunAllEnemies();
 
             LinkPersistent.Update(gameTime);
-            ItemPersistent.Update(gameTime);
-            BlockPersistent.Update(gameTime);
             ProjectilePersistent.Update(gameTime);
 
             CollisionHandler.Instance.Update();
@@ -143,8 +132,6 @@ namespace Sprint3
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
             LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            ItemPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            BlockPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
 
             RoomSpawner.Instance.Draw(_spriteBatch);
