@@ -16,6 +16,7 @@ namespace Sprint3
         }
 
         public string Name { get => "NPC"; }
+        public Layer layer { get; set; }
 
         public Rectangle Bounds()
         {

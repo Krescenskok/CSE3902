@@ -9,6 +9,7 @@ namespace Sprint3
     {
 
         public string Name { get => "WallMasterEyes"; }
+        public Layer layer { get; set; }
 
         private Rectangle bounds;
         private WallMaster master;

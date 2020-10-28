@@ -11,6 +11,7 @@ namespace Sprint3.Enemies.Dodongo
         private IEnemyState dodongo;
 
         public string Name { get => "dodongo"; }
+        public Layer layer { get; set; }
 
         public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo)
         {

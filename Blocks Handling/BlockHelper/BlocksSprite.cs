@@ -23,6 +23,7 @@ namespace Sprint3.Blocks
             blockDimensionX = GridGenerator.Instance.GetTileSize().X;
             blockDimensionY = GridGenerator.Instance.GetTileSize().Y;
 
+            destinationRectangle = new Rectangle(new Point(), new Point(blockDimensionX, blockDimensionY));
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
@@ -99,7 +100,7 @@ namespace Sprint3.Blocks
 
         public Rectangle getDestination(Vector2 location)
         {
-            return destinationRectangle = new Rectangle((int)location.X, (int)location.Y, blockDimensionX, blockDimensionY);
+            return destinationRectangle;
         }
 
     }

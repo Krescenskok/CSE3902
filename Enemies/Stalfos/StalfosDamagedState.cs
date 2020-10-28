@@ -24,16 +24,19 @@ namespace Sprint3
 
         public StalfosDamagedState(string dir, Stalfos stalfos, Vector2 location)
         {
-            if (dir.Equals(left.ToString())) currentDirection = right;
-            if (dir.Equals(right.ToString())) currentDirection = left;
-            if (dir.Equals(up.ToString())) currentDirection = down;
-            if (dir.Equals(down.ToString())) currentDirection = up;
+            string direction = dir.ToLower();
+            if (direction.Equals(right.ToString())) currentDirection = right;
+            if (direction.Equals(left.ToString())) currentDirection = left;
+            if (direction.Equals(down.ToString())) currentDirection = down;
+            if (direction.Equals(up.ToString())) currentDirection = up;
 
             moveDirection.Y = CheckDirection(currentDirection, down, up);
             moveDirection.X = CheckDirection(currentDirection, right, left);
 
             this.stalfos = stalfos;
             this.location = location;
+
+            this.stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosDamagedSprite());
         }
 
         private int CheckDirection(Direction dir, Direction pos, Direction neg)

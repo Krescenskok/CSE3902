@@ -29,21 +29,33 @@ namespace Sprint3
         /// </summary>
         private HashSet<List<ICollider>> collisions;
 
+        private Dictionary<int, List<ICollider>> spatialMap;
+        int rows = 3, col = 6;
+        Point cellSize;
+        int width;
+
         private CollisionHandler()
         {
             colliders = new List<ICollider>();
             removedColliders = new List<ICollider>();
             
             ListComparer<ICollider> listComparer = new ListComparer<ICollider>();
+          
             collisions = new HashSet<List<ICollider>>(listComparer);
-            
+
         }
 
 
        
 
+        public void AddCollider(ICollider newCol, Layer layer)
+        {
+            newCol.layer = layer;
+            colliders.Add(newCol);
+        }
         public void AddCollider(ICollider newCol)
         {
+            newCol.layer = Layers.Default;
             colliders.Add(newCol);
         }
 
@@ -52,42 +64,127 @@ namespace Sprint3
             removedColliders.Add(col);
         }
 
+
+        public void Initialize(Game game)
+        {
+            
+            spatialMap = new Dictionary<int, List<ICollider>>(rows * col);
+            for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
+
+            cellSize.X = game.Window.ClientBounds.Width / col;
+            cellSize.Y = game.Window.ClientBounds.Height / rows;
+            width = game.Window.ClientBounds.Width / cellSize.X;
+        }
+
+        public void RoomChange()
+        {
+            for(int i = 0; i < colliders.Count; i++)
+            {
+                if(!(colliders[i].layer is PlayerLayer))
+                {
+                    removedColliders.Add(colliders[i]);
+                }
+            }
+
+            colliders = colliders.Except(removedColliders).ToList();
+            removedColliders.Clear();
+        }
+
+        public void ClearMap()
+        {
+            spatialMap.Clear();
+            for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
+        }
+
+        private void RegisterCollider(ICollider col)
+        {
+            List<int> codes = GetCode(col.Bounds());
+            foreach(int id in codes)
+            {
+                spatialMap[id].Add(col);
+            }
+        }
+
+        private List<int> GetCode(Rectangle rect)
+        {
+
+            List<int> results = new List<int>();
+            Point topLeft = rect.Location;
+            Point topRight = new Point(rect.Right, rect.Top);
+            Point bottomLeft = new Point(rect.Left, rect.Bottom);
+            Point bottomRight = new Point(rect.Right, rect.Bottom);
+
+            AddToList(results, topLeft);
+            AddToList(results, topRight);
+            AddToList(results, bottomLeft);
+            AddToList(results, bottomRight);
+
+            return results;
+        }
+
+        private void AddToList(List<int> list, Point location)
+        {
+            int spatialPosition = location.X / cellSize.X + (location.Y / cellSize.Y) * width;
+            if (spatialPosition >= rows*col || spatialPosition < 0) spatialPosition = rows*col - 1;
+            if (!list.Contains(spatialPosition)) list.Add(spatialPosition);
+        }
+
+        private List<ICollider> FindNearbyColliders(ICollider col)
+        {
+            List<ICollider> colliders = new List<ICollider>();
+            List<int> codes = GetCode(col.Bounds());
+
+            foreach(int id in codes)
+            {
+                colliders.AddRange(spatialMap[id]);
+            }
+
+            return colliders;
+        }
+
         public void Update()
         {
 
-            //iterate through each pair of colliders, determine if they collide, handle collision
+            //add each collider to buckets in the spatial map
             for(int i = 0; i < colliders.Count; i++)
             {
-                for(int j = 0; j < colliders.Count; j++)
+                RegisterCollider(colliders[i]);
+            }
+
+            int numCol = 0;
+
+            //iterate through each collider and check if it collides with nearby colliders
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
+
+                foreach(ICollider other in nearbyColliders)
                 {
+                    List<ICollider> key = new List<ICollider> { colliders[i], other };
 
-                    
-                    List<ICollider> key = new List<ICollider> { colliders[i], colliders[j] };
 
-                    
-
-                    if (!colliders[i].Equals(colliders[j]) && ColliderOverlap(colliders[i],colliders[j])) //collision exists
+                    if (!colliders[i].Equals(other) && colliders[i].layer.CollidesWith(other) && ColliderOverlap(colliders[i], other)) //collision exists
                     {
-                        Collision collision = CalculateSide(colliders[i],colliders[j]);
-                        colliders[i].HandleCollision(colliders[j], collision);
+                        Collision collision = CalculateSide(colliders[i], other);
 
+                        numCol++;
 
                         if (collisions.Contains(key))   //collision was already happneing
                         {
 
-                            colliders[i].HandleCollision(colliders[j], collision);
+                            colliders[i].HandleCollision(other, collision);
 
                         }
                         else  // collision is just starting
                         {
-                            
+
                             collisions.Add(key);
-                            colliders[i].HandleCollision(colliders[j], collision);
-                            colliders[i].HandleCollisionEnter(colliders[j], collision);
+                            colliders[i].HandleCollision(other, collision);
+                            colliders[i].HandleCollisionEnter(other, collision);
                         }
 
                     }
-                    else if(collisions.Contains(key)) //collision has just ended
+                    else if (collisions.Contains(key)) //collision has just ended
                     {
                         collisions.Remove(key);
                     }
@@ -97,6 +194,8 @@ namespace Sprint3
             }
 
 
+            
+
             //remove colliders only after all collisions have been checked to prevent for loop error
             for(int i = 0; i < removedColliders.Count; i++)
             {
@@ -104,6 +203,9 @@ namespace Sprint3
             }
 
             removedColliders.Clear();
+
+            //reset spatial map
+            ClearMap();
         }
 
         private bool ColliderOverlap(ICollider col1, ICollider col2)
@@ -164,6 +266,7 @@ namespace Sprint3
         }
 
 
+       
 
         class ListComparer<T> : IEqualityComparer<List<T>>
         {

@@ -15,6 +15,7 @@ namespace Sprint3.Enemies
         GoriyaBoomerang boomerang;
 
         public string Name { get => "Enemy"; }
+        public Layer layer { get; set; }
 
         public GoriyaBoomerangCollider(GoriyaBoomerang boomerang, Rectangle rect, int strength)
         {

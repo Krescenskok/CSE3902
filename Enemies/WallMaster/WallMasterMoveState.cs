@@ -276,7 +276,7 @@ namespace Sprint3
         {
             if(inWall && !attacking)
             {
-                playerPosition = col.Location();
+                playerPosition = col.Location;
                 List<Rectangle> insideWall = insideMap[currentWall];
 
                 Rectangle playerPos = NearestSpace(playerPosition, insideWall);

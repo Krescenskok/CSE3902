@@ -45,6 +45,8 @@ namespace Sprint3
         /// <param name="collision"></param>
         void HandleCollisionEnter(ICollider col, Collision collision);
 
+        Layer layer { get; set; }
+
 
     }
 }

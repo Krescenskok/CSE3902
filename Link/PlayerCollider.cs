@@ -3,6 +3,7 @@ using Sprint3;
 using Sprint3.Link;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint3
@@ -17,11 +18,11 @@ namespace Sprint3
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
-            CollisionHandler.Instance.AddCollider(this);
-
+            CollisionHandler.Instance.AddCollider(this, Layers.Player);
         }
 
-        public string Name => throw new NotImplementedException();
+        public string Name { get => "Player"; }
+        public Layer layer { get; set; }
 
         public Rectangle Bounds()
         {

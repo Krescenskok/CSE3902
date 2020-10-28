@@ -46,6 +46,7 @@ namespace Sprint3
         protected override void Initialize()
         {
             base.Initialize();
+            CollisionHandler.Instance.Initialize(this);
         }
 
         protected override void LoadContent()
@@ -105,6 +106,10 @@ namespace Sprint3
                         activeCommand.Update(gameTime);
 
                         break;
+                    }
+                    else
+                    {
+                        activeCommand = null;
                     }
 
                 }

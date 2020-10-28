@@ -168,6 +168,11 @@ namespace Sprint3
             return new EnemyDeathSprite(texture);
         }
 
+        public ISprite CreateStalfosDamagedSprite()
+        {
+            return new StalfosDamagedSprite(texture);
+        }
+
 
 
         //*******new***********

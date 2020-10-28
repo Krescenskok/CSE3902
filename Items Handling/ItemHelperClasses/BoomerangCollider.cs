@@ -16,6 +16,7 @@ namespace Sprint3
         public string name;
 
         public string Name { get => name; }
+        public Layer layer { get; set; }
 
         public BoomerangCollider(Rectangle rect, IItems item, IItemsState state)
         {

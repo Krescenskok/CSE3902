@@ -24,7 +24,7 @@ namespace Sprint3
 
         private static readonly RoomSpawner instance = new RoomSpawner();
 
-        int roomNumber;
+        
         Dictionary<int, XElement> roomXMLs;
 
         List<RoomSprite> roomSprites;
@@ -57,17 +57,17 @@ namespace Sprint3
         {
 
             xml = XElement.Load("../../../FinalLevelOne.xml").Element("Asset");
-            xml.Attribute("Asset").Name.ToString();
-            roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("Type").Value));
+            xml.Attribute("Type").Name.ToString();
+            roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
         }
 
     
         public void LoadRoom(Game game, int roomNumber)
 
         {
-            Debug.WriteLine("reading room");
+            
             XElement room = roomXMLs[roomNumber];
-            currentRoomSprite = roomSprites[roomNumber];
+            currentRoomSprite = roomSprites[roomNumber - 1];
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);       
@@ -75,23 +75,25 @@ namespace Sprint3
         public void Update()
         {
             RoomEnemies.Instance.Update();
-            //RoomItems.Instance.Update();
-            //RoomBlocks.Instance.Update();
+            RoomItems.Instance.Update();
+            RoomBlocks.Instance.Update();
         }
 
         public void RoomChange(Game game, int roomNumber)
         {
-            Debug.WriteLine("changing room");
+            CollisionHandler.Instance.RoomChange();
             LoadRoom(game, roomNumber);
+            
         }
 
         public void Draw(SpriteBatch batch)
         {
 
             currentRoomSprite.Draw(batch, Vector2.Zero, 0, Color.White);
+            RoomBlocks.Instance.Draw(batch);
             RoomEnemies.Instance.Draw(batch);
             RoomItems.Instance.Draw(batch);
-            RoomBlocks.Instance.Draw(batch);
+            
         }
 
         public void LoadAllRooms(Game game)

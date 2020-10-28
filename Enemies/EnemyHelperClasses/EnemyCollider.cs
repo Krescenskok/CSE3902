@@ -15,6 +15,7 @@ namespace Sprint3
         public string name;
 
         public string Name { get => name; }
+        public Layer layer { get; set; }
 
         public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength)
         {
@@ -37,7 +38,7 @@ namespace Sprint3
             this.name = name;
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
         }
 
 
@@ -105,9 +106,9 @@ namespace Sprint3
 
                 if (stalfos != null) stalfos.TakeDamage(dir, (int)value);
                 else if (goriya != null) goriya.TakeDamage(dir, (int)value);
+                else enemy.TakeDamage((int)value);
 
-                enemy.TakeDamage((int) value);
-                
+
             }
             
 

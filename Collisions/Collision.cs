@@ -36,7 +36,7 @@ namespace Sprint3
         public bool Right() { return dir.Equals(Direction.right); }
         public bool Up() { return dir.Equals(Direction.up); }
         public bool Down() { return dir.Equals(Direction.down);}
-        public Vector2 Location() { return location; }
+        public Vector2 Location { get => location; }
         public Direction From() { return dir; }
     }
 }
