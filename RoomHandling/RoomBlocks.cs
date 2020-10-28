@@ -43,6 +43,7 @@ namespace Sprint3
         }
         public void LoadRoom(Game game, XElement room)
         {
+            roomBlocks = new List<IBlock>();
 
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)

@@ -96,7 +96,7 @@ namespace Sprint3
             if (msg == "EnemyTakeDamage") enemy.TakeDamage((int)value);
             else if (msg == "Stun" && !Name.Equals("Keese")) enemy.Stun();
             else if (msg == "Stun") enemy.Die();
-            else if (msg.Contains("EnemyTakeDamage") && (name.Equals("Stalfos") || name.Equals("Goriya")))
+            else if (msg.Contains("EnemyTakeDamage"))
             { 
                 string dir = msg.Substring(15);
 
@@ -105,8 +105,11 @@ namespace Sprint3
 
                 if (stalfos != null) stalfos.TakeDamage(dir, (int)value);
                 else if (goriya != null) goriya.TakeDamage(dir, (int)value);
+
+                enemy.TakeDamage((int) value);
                 
             }
+            
 
 
 

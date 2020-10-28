@@ -5,6 +5,7 @@ using Sprint3.Link;
  using Sprint3.Blocks;
 using Sprint3.Items;
 using Sprint3.EnemyAndNPC;
+using System.Diagnostics;
 
 namespace Sprint3
 {
@@ -29,9 +30,10 @@ namespace Sprint3
         }
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
+
         {
             LinkCommand linkReset = new LinkCommand(Player, "R");
-            
+            Debug.WriteLine("resetting");
             linkReset.Update(Gametime);
 
             RoomSpawner.Instance.Reset();

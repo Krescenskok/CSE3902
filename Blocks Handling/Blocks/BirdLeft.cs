@@ -24,6 +24,7 @@ namespace Sprint3.Blocks
             moveable = false;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
+
             collider = new BlockCollider(block.getDestination(location), this);
         }
 
