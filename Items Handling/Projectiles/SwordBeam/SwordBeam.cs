@@ -77,6 +77,7 @@ namespace Sprint3
 
         public void Update()
         {
+            collider.Update(this, this.state);
             state.Update();
         }
 
