@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint3.Enemies;
 using Sprint3.Enemies.Zol;
 using Sprint3.EnemyAndNPC.AquamentusAndFireballs;
 using Sprint3.EnemyAndNPC.Merchant;
@@ -23,23 +24,33 @@ namespace Sprint3
         private Texture2D bossTextrue;
         private Texture2D NPCTexture;
         
-        private static int[] sheetSize = { 15, 5 };
+        private static int[] sheetSize = { 15, 8 };
 
         private static Dictionary<string, Vector2> coordinateMappings = new Dictionary<string, Vector2>
         {
+            //use texture
             {"Stalfos", new Vector2( 2,12)},
-            {"RedGoriyaDown", new Vector2( 2,6)},
-            {"RedGoriyaUp", new Vector2( 2,7)},
-            {"RedGoriyaRight", new Vector2( 2,8)},
-            {"RedGoriyaLeft", new Vector2( 2,9)},
-            {"Keese", new Vector2( 0,1)},
+            {"RedGoriyaDown", new Vector2( 4,2)},
+            {"RedGoriyaUp", new Vector2( 4,3)},
+            {"RedGoriyaRight", new Vector2( 4,4)},
+            {"RedGoriyaLeft", new Vector2( 4,5)},
+            {"HurtGoriyaDown", new Vector2( 3,2)},
+            {"HurtGoriyaUp", new Vector2( 3,3)},
+            {"HurtGoriyaRight", new Vector2( 3,4)},
+            {"HurtGoriyaLeft", new Vector2( 3,5)},
+            {"Keese", new Vector2( 2,0)},
             {"Gel", new Vector2( 0,6)},
             {"Boomerang", new Vector2( 2,10)},
             {"WallMaster", new Vector2( 2,13)},
-            {"Trap", new Vector2(2,14) },
-            {"Zol", new Vector2(0,1) },
+            {"WallMasterTop", new Vector2( 4,13)},
+            {"Trap", new Vector2(0,14) },
+            {"Zol", new Vector2(0,0) },
             {"Rope", new Vector2(2,11) },
+            {"RopeLeft", new Vector2(4,11) },
+            {"Spawn", new Vector2(2,14) },
+            {"EnemyDeath", new Vector2(2,6) },
             
+            //use bossTexture and NPCTexture
             {"OldMan", new Vector2(0,0) },
             {"Merchant", new Vector2(0, 2) },
             {"Flame", new Vector2(0, 1) },
@@ -59,15 +70,7 @@ namespace Sprint3
             return (int)coordinateMappings[spriteName].X;
         }
 
-        private static EnemySpriteFactory instance = new EnemySpriteFactory();
-
-        public static EnemySpriteFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static EnemySpriteFactory Instance { get; } = new EnemySpriteFactory();
 
         public static int[] SheetSize()
         {
@@ -94,59 +97,24 @@ namespace Sprint3
             return new StalfosWalkingSprite(texture);
         }
 
-        public ISprite CreateStalfosSpawnSprite(StalfosSpawnState state)
-        {
-            return new StalfosSpawnSprite(state,texture);
-        }
-
         public ISprite CreateKeeseMoveSprite()
         {
             return new KeeseMoveSprite(texture);
         }
 
-        public ISprite CreateRandomGoriyaSprite()
+        public ISprite CreateGoriyaWalkingSprite(string direction)
         {
-            Random rand = new Random();
-            int num = rand.Next(1, 5);
-
-            if(num == 1)
-            {
-                return new GoriyaWalkLeftSprite(texture);
-            }else if(num == 2)
-            {
-                return new GoriyaWalkRightSprite(texture);
-            }else if(num == 3)
-            {
-                return new GoriyaWalkUpSprite(texture);
-
-            }
-            else
-            {
-                return new GoriyaWalkDownSprite(texture);
-            }
+            string sheetID = "RedGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
+           
+            return new GoriyaWalkSprite(texture, sheetID);
 
         }
 
-        public ISprite CreateGoriyaWalkingSprite(string direction)
+        public ISprite CreateGoriyaDamagedSprite(string direction)
         {
-       
-            if (direction.Equals("left"))
-            {
-                return new GoriyaWalkLeftSprite(texture);
-            }
-            else if (direction.Equals("right"))
-            {
-                return new GoriyaWalkRightSprite(texture);
-            }
-            else if (direction.Equals("up"))
-            {
-                return new GoriyaWalkUpSprite(texture);
+            string sheetID = "HurtGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
 
-            }
-            else
-            {
-                return new GoriyaWalkDownSprite(texture);
-            }
+            return new GoriyaDamagedSprite(texture, sheetID);
 
         }
 
@@ -161,9 +129,18 @@ namespace Sprint3
             return new GelMoveSprite(texture);
         }
 
-        public ISprite CreateWallMasterSprite()
+        public ISprite CreateWallMasterSprite(string dir)
         {
-            return new WallMasterSprite(texture);
+            string str = "";
+            if (dir == "top") str = "Top";
+            return new WallMasterSprite(texture, str);
+        }
+
+        public ISprite CreateWallMasterGrabSprite(string dir)
+        {
+            string str = "";
+            if (dir == "top") str = "Top";
+            return new WallMasterGrabbingLinkSprite(texture, str);
         }
 
         public ISprite CreateBladeTrapSprite()
@@ -176,11 +153,25 @@ namespace Sprint3
             return new ZolMoveSprite(texture);
         }
 
-        public ISprite CreateRopeMoveSprite()
+        public ISprite CreateRopeMoveSprite(string dir)
         {
-            return new RopeMoveSprite(texture);
+            return new RopeMoveSprite(texture, dir);
         }
 
+        public ISprite CreateSpawnSprite()
+        {
+            return new SpawnSprite(texture);
+        }
+
+        public ISprite CreateDyingSprite()
+        {
+            return new EnemyDeathSprite(texture);
+        }
+
+        public ISprite CreateStalfosDamagedSprite()
+        {
+            return new StalfosDamagedSprite(texture);
+        }
 
 
 
@@ -205,34 +196,27 @@ namespace Sprint3
         {
             return new AquamentusNormalSprite(bossTextrue);
         }
+        
+        public ISprite CreateDamagedDragonSprite()
+        {
+            return new AquamentusDamagedSprite(bossTextrue);
+        }
 
         public ISprite CreateFireBall()
         {
             return new FireBallSprite(bossTextrue);
         }
 
+        
         public ISprite CreateDodongoSprite(string direction)
         {
-            if (direction.Equals("Forward"))
-            {
-                return new DodongoForwardSprite(bossTextrue);
-            }
-            else if (direction.Equals("Backward"))
-            {
-                return new DodongoBackwardSprite(bossTextrue);
-            }
-            else if (direction.Equals("Left"))
-            {
-                return new DodongoLeftSprite(bossTextrue);
-            }
-            else if (direction.Equals("Right"))
-            {
-                return new DodongoRightSprite(bossTextrue);
-            }
-            else
-            {
-                throw new Exception();
-            }
+            return new DodongoMovingSprite(bossTextrue, direction);
+
+        }
+
+        public ISprite CreateDamagedDodongoSprite(string direction)
+        {
+            return new DodongoDamagedSprite(bossTextrue, direction);
         }
     }
 }

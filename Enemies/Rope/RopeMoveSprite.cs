@@ -30,7 +30,7 @@ namespace Sprint3
         private int height;
         private Point drawSize;
 
-        public RopeMoveSprite(Texture2D texture)
+        public RopeMoveSprite(Texture2D texture, string dir)
         {
 
             currentAnimatedFrame = 0;
@@ -45,6 +45,13 @@ namespace Sprint3
             width = (int)spriteSize.X;
             height = (int)spriteSize.Y;
             drawSize = new Point(width * 2, height * 2);
+
+
+            if (dir.Equals("left"))
+            {
+                row = EnemySpriteFactory.GetRow("RopeLeft");
+                startColumn = EnemySpriteFactory.GetColumn("RopeLeft");
+            }
             
         }
 
@@ -72,9 +79,5 @@ namespace Sprint3
 
         }
 
-        public void Load(Game game)
-        {
-            texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
-        }
     }
 }

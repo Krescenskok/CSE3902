@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -164,9 +164,12 @@ namespace Sprint3.Link
                 else if (link.CurrentWeapon == ItemForLink.Clock)
                 {
                     link.Clock = true;
-                    //RoomEnemies.Instance.StunAllEnemies();
+                    RoomEnemies.Instance.StunAllEnemies();
                     return HandleArrowBow(gameTime, location);
-
+                }
+                else if(link.LargeShield)
+                {
+                    return HandleShield(gameTime, location);
                 }
 
             }

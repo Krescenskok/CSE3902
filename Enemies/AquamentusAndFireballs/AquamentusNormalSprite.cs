@@ -18,13 +18,19 @@ namespace Sprint3
         private const int NumUpdatePerSec = 30;
         private const int FrameRate = 6;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
-        private int updateCounter;
+        private int updateCounter = 0;
         private int frameIndex = 3;
+        private Point drawSize;
+        private int spriteSizeIndex = 2;
+
         public AquamentusNormalSprite(Texture2D texture)
         {
             this.texture = texture;
             sourcePos.X = EnemySpriteFactory.GetColumn("Dragon") * spriteSize[0];
             sourcePos.Y = EnemySpriteFactory.GetRow("Dragon") * spriteSize[1];
+            drawSize.X = spriteSize[0] * spriteSizeIndex;
+            drawSize.Y = spriteSize[1] * spriteSizeIndex;
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
@@ -47,7 +53,7 @@ namespace Sprint3
                 updateCounter++;
             }
             Rectangle sourceRectangle = new Rectangle((int)sourcePos.X, (int)sourcePos.Y, spriteSize[0], spriteSize[1]);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, spriteSize[0], spriteSize[1]);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
@@ -55,5 +61,11 @@ namespace Sprint3
         {
             //do nothing
         }
+
+        public Rectangle GetRectangle(Vector2 location)
+        {
+            return new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
+        }
+
     }
 }

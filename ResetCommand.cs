@@ -5,6 +5,7 @@ using Sprint3.Link;
  using Sprint3.Blocks;
 using Sprint3.Items;
 using Sprint3.EnemyAndNPC;
+using System.Diagnostics;
 
 namespace Sprint3
 {
@@ -12,13 +13,9 @@ namespace Sprint3
     public class ResetCommand : ICommand
     {
         LinkPlayer Player;
-        LinkItems Items;
-        LinkBlocks Blocks;
-        public  ResetCommand(LinkPlayer player,  LinkItems items, LinkBlocks blocks)
+        public  ResetCommand(LinkPlayer player)
         {
             this.Player = player;
-            this.Items = items;
-            this.Blocks = blocks;
         }
 
         public void DoInit(Game game)
@@ -33,16 +30,13 @@ namespace Sprint3
         }
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
+
         {
             LinkCommand linkReset = new LinkCommand(Player, "R");
-            BlocksCommand blockReset = new BlocksCommand(spriteBatch, this.Blocks, false, true);
-            ItemsCommand itemReset = new ItemsCommand(spriteBatch, this.Items, false, true);
-
+            Debug.WriteLine("resetting");
             linkReset.Update(Gametime);
-            blockReset.ExecuteCommand(game, Gametime, spriteBatch);
-            itemReset.ExecuteCommand(game, Gametime, spriteBatch);
 
-            EnemyNPCDisplay.Instance.Reset();
+            RoomSpawner.Instance.Reset();
 
         }
     }

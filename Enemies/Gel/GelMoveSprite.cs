@@ -25,10 +25,12 @@ namespace Sprint3
         private int currentFrame;
         private int trueFrameCount;
 
-        private const int frameRate = 10;
+        private const int frameRate = 30;
         private const int maxFrameRate = 60;
 
-        private Vector2 spriteSize;
+        private Point spriteSize;
+        private Point drawSize;
+        private Point centerOffset;
 
         public GelMoveSprite(Texture2D texture)
         {
@@ -41,7 +43,12 @@ namespace Sprint3
 
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
 
+            Point tile = GridGenerator.Instance.GetTileSize();
+            centerOffset.X = (tile.X - drawSize.X) / 2;
+            centerOffset.Y = (tile.Y - drawSize.Y) / 2;
         }
 
 
@@ -60,18 +67,35 @@ namespace Sprint3
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
+            Vector2 centerLocation = location + centerOffset.ToVector2();
 
-            Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)centerLocation.X, (int)centerLocation.Y, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
         }
 
-        public void Load(Game game)
+        public Rectangle GetRectangle()
         {
-            texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
+            return new Rectangle(new Point(), drawSize);
         }
 
+        public Rectangle GetRectangle2()
+        {
+            Rectangle rect = new Rectangle(new Point(), GridGenerator.Instance.GetTileSize());
+            //increase size to ensure constant collision with surrounding blocks
+            rect.Width = (int) (rect.Width * 1.5);
+            rect.Height = (int)(rect.Height * 1.5);
+            return rect;
+        }
+
+        public Point OuterColliderLocation(Vector2 location)
+        {
+            Point leftCorner = location.ToPoint();
+            leftCorner.X -= 5;
+            leftCorner.Y -= 5;
+            return leftCorner;
+        }
     }
 }

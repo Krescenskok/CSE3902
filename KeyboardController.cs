@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
@@ -15,7 +15,6 @@ namespace Sprint3
         LinkPlayer player;
 
 
-        public LinkItems items;
 
         //LinkItems item;
 
@@ -26,8 +25,6 @@ namespace Sprint3
             this.player = linkPlayer;
 
             var state = Keyboard.GetState();
-            commandsList.Add(Keys.U, new ItemsCommand(spriteBatch, game.items, true, false));
-            commandsList.Add(Keys.I, new ItemsCommand(spriteBatch, game.items, true, true));
             commandsList.Add(Keys.Q, new QuitCommand());
             commandsList.Add(Keys.A, new LinkCommand(player, "A"));
             commandsList.Add(Keys.Left, new LinkCommand(player, "Left"));
@@ -58,11 +55,10 @@ namespace Sprint3
             commandsList.Add(Keys.NumPad7, new LinkCommand(player, "NumPad7"));
             commandsList.Add(Keys.D8, new LinkCommand(player, "D8"));
             commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
-            commandsList.Add(Keys.R, new ResetCommand(player, game.items, game.blocks));
-            commandsList.Add(Keys.P, new DisplayNextEnemy(Keys.P));
-            commandsList.Add(Keys.O, new DisplayPreviousEnemy(Keys.O));
-            commandsList.Add(Keys.T, new BlocksCommand(spriteBatch, game.blocks, true, false));
-            commandsList.Add(Keys.Y, new BlocksCommand(spriteBatch, game.blocks, true, true));
+            commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
+            commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
+            commandsList.Add(Keys.R, new ResetCommand(player));
+       
 
 
         }

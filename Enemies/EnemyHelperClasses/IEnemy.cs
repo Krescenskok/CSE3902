@@ -6,10 +6,23 @@ using System.Text;
 
 namespace Sprint3
 {
-    public interface IEnemy
+    public interface IEnemy : IMoveable
     {
 
         void Update();
         void Draw(SpriteBatch spriteBatch);
+
+        void SetSprite(ISprite sprite);
+
+        void Spawn();
+
+        EnemyCollider GetCollider();
+
+        Vector2 Location { get; }
+
+        IEnemyState State { get; }
+
+        
+        
     }
 }

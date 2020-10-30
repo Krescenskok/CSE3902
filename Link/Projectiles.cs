@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
@@ -20,7 +20,6 @@ namespace Sprint3.Link
         private bool boomerangMade = false;
         private bool candleMade = false;
         private bool bombMade = false;
-        private bool clockMade = false;
 
 
         private Vector2 itemLocation;

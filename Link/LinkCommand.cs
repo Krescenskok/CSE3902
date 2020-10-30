@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -123,6 +123,10 @@ namespace Sprint3.Link
                 else if (Key.Equals("D8") || Key.Equals("NumPad8"))
                 {
                     linkPlayer.CurrentWeapon = ItemForLink.Clock;
+                }
+                else if (Key.Equals("D9") || Key.Equals("NumPad9"))
+                {
+                    linkPlayer.LargeShield = true;
                 }
 
 

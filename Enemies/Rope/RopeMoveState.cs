@@ -9,17 +9,19 @@ namespace Sprint3
 {
     public class RopeMoveState : IEnemyState
     {
-
-        private Vector2 location;
-       
-        private Vector2 moveDirection;
         private Rope rope;
 
+        private Vector2 location;
+        private Vector2 moveDirection;
         
 
+        private const int normalMoveSpeed = 1;
+        private int moveSpeed = normalMoveSpeed;
 
-        private const int originalMoveSpeed = 1;
-        private int moveSpeed = originalMoveSpeed;
+
+        private const int attackTime = 60, stunTime = 120;
+        private int attackClock = 0, stunClock = 0;
+        private bool stunned = false, attacking = false;
 
         Random RandomNumber;
 
@@ -35,7 +37,7 @@ namespace Sprint3
             this.location = location;
             this.rope = rope;
 
-            this.rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite());
+            this.rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
 
 
             RandomNumber = new Random();
@@ -49,12 +51,17 @@ namespace Sprint3
 
         public void Attack()
         {
-            moveSpeed = originalMoveSpeed * 2;
+            if (!stunned)
+            {
+                moveSpeed = normalMoveSpeed * 2;
+                attackClock = attackTime;
+            }
+            
         }
 
         public void DontAttack()
         {
-            moveSpeed = originalMoveSpeed;
+            moveSpeed = normalMoveSpeed;
         }
 
         //choose new tile on current row or column and change movedirection
@@ -70,6 +77,11 @@ namespace Sprint3
 
 
             possibleDirections = new List<Direction> { left, right, up, down };
+
+            if (currentDirection.Equals(left)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
+            if (currentDirection.Equals(right)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("right"));
+
+            rope.UpdateDirection(currentDirection.ToString());
         }
 
         private Direction RandomDirection(List<Direction> directions)
@@ -87,9 +99,11 @@ namespace Sprint3
             if (collision.Up()) possibleDirections.Remove(Direction.up);
             if (collision.Down()) possibleDirections.Remove(Direction.down);
 
-            Debug.WriteLine("collision from: " + collision.From());
+            
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
+
+            attackClock = 0;
         }
 
 
@@ -103,8 +117,15 @@ namespace Sprint3
 
         public void Update()
         {
+           stunned = stunClock > 0;
+            attacking = attackClock > 0;
 
-            if (RandomNumber.Next(0,10000) == 0) ChangeDirection();
+            if (attacking) attackClock--;
+            if (stunned) stunClock--;
+            else if (!attacking && !stunned && moveSpeed != normalMoveSpeed) moveSpeed = normalMoveSpeed;
+
+
+            if (RandomNumber.Next(0,100) == 0 && attackClock <= 0) ChangeDirection();
          
             MoveOneUnit(); 
         }
@@ -124,9 +145,18 @@ namespace Sprint3
             //change to dying sprite
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            Die();
+            rope.SubtractHP(amount);
         }
+
+        public void Stun()
+        {
+            moveSpeed = 0;
+            stunClock = stunTime;
+
+        }
+
+        
     }
 }

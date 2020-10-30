@@ -6,6 +6,12 @@ using Sprint3.Link;
 using Sprint3;
 using Sprint3.Enemies;
 using Sprint3.Blocks;
+using System.Xml.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Linq;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace Sprint3
 {
@@ -22,16 +28,13 @@ namespace Sprint3
 
         ICommand activeCommand;
         LinkCommand LinkPersistent;
-        ItemsCommand ItemPersistent;
-        BlocksCommand BlockPersistent;
         ProjectilesCommand ProjectilePersistent;
+       
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
 
-        public LinkItems items;
-        public Blocks.LinkBlocks blocks;
-        EnemyCollider test;
+       
 
         public Game1()
         {
@@ -43,6 +46,7 @@ namespace Sprint3
         protected override void Initialize()
         {
             base.Initialize();
+            CollisionHandler.Instance.Initialize(this);
         }
 
         protected override void LoadContent()
@@ -57,35 +61,37 @@ namespace Sprint3
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new LinkItems(_spriteBatch, linkPlayer);
-            blocks = new Blocks.LinkBlocks(_spriteBatch);
-
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
+            controllers.Add(new MouseController(this));
 
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
-            ItemPersistent = new ItemsCommand(_spriteBatch, items, false, false);
-            BlockPersistent = new BlocksCommand(_spriteBatch, blocks, false, false);
             ProjectilePersistent = ProjectilesCommand.Instance;
             ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
+
+            //set up grid where everything is spawned
+            GridGenerator.Instance.GetGrid(this, 12, 7);
+
+            //creat list of rooms
+            RoomSpawner.Instance.LoadAllRooms(this);
+            System.Diagnostics.Debug.WriteLine("LoadContent");
+            RoomSpawner.Instance.LoadRoom(this, 1);
             
 
-            EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
 
-            CollisionHandler collisionHandler = CollisionHandler.Instance;
-            test = new EnemyCollider(new Rectangle(100, 100, 64, 64), new Aquamentus(new Vector2(100, 100)).State, 10);
-            collisionHandler.AddCollider(new PlayerCollider(linkPlayer));
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if(linkPlayer.Health == 0)
             {
-                activeCommand = new ResetCommand(linkPlayer, items, blocks);
+
+                activeCommand = new ResetCommand(linkPlayer);
                 activeCommand.Update(gameTime);
             }
             else
@@ -101,16 +107,20 @@ namespace Sprint3
 
                         break;
                     }
+                    else
+                    {
+                        activeCommand = null;
+                    }
 
                 }
             }
+
+
+            RoomSpawner.Instance.Update();
+
             
 
-
-            EnemyNPCDisplay.Instance.Update();
             LinkPersistent.Update(gameTime);
-            ItemPersistent.Update(gameTime);
-            BlockPersistent.Update(gameTime);
             ProjectilePersistent.Update(gameTime);
 
             CollisionHandler.Instance.Update();
@@ -128,13 +138,11 @@ namespace Sprint3
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
+
+
+            RoomSpawner.Instance.Draw(_spriteBatch);
             LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            ItemPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            BlockPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-
-            EnemyNPCDisplay.Instance.Draw(_spriteBatch, gameTime);
-
 
             _spriteBatch.End();
 

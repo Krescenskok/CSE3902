@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,7 +38,10 @@ namespace Sprint3.Link
         private int fullHealth = 60;
         private int delay = 2;
         private bool clock = false;
+        private bool largeShield = false;
         public List<IItems> itemsPickedUp;
+
+        private PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
         public void RemovePlacedItem(IItems item)
@@ -47,6 +50,7 @@ namespace Sprint3.Link
             {
                 itemsPlacedByLink.Remove(item);
             }
+            
         }
 
 
@@ -143,11 +147,13 @@ namespace Sprint3.Link
 
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
+        public bool LargeShield { get => largeShield; set => largeShield = value; }
 
         public LinkPlayer()
         {
 
             state = new Stationary(this);
+            collider = new PlayerCollider(this);
 
         }
         public void Update(GameTime gameTime)
@@ -202,11 +208,22 @@ namespace Sprint3.Link
             IsStopped = false;
             IsWalkingInPlace = false;
             IsPickingUpItem = false;
+            LargeShield = false;
+            UseRing = false;
+            Health = 60;
+            NumOfRupee = 0;
+            FullHealth = 60;
+            Delay = 2;
+            clock = false;
+            //if(itemsPickedUp.Count > 0)
+            //{
+            //    itemsPickedUp.Clear();
+            //}
 
 
-        }
+    }
 
-        public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
+    public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
 
             if (loc == false)

@@ -23,17 +23,33 @@ namespace Sprint3.Link
         {
             if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.X += MOVEMENT;
+                if(!link.isWalkingInPlace)
+                {
+                    location.X += MOVEMENT;
+                }
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
-                if (currentFrame == 2)
+                if(link.LargeShield)
                 {
-                    currentFrame = 3;
+                    if (currentFrame == 12)
+                    {
+                        currentFrame = 13;
+                    }
+                    else
+                        currentFrame = 12;
                 }
                 else
-                    currentFrame = 2;
+                {
+                    if (currentFrame == 2)
+                    {
+                        currentFrame = 3;
+                    }
+                    else
+                        currentFrame = 2;
+                }
                 if (location.X >= 780)
                     location.X = 780;
+
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -46,19 +62,37 @@ namespace Sprint3.Link
             if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
-                switch (currentFrame)
+                if (link.LargeShield)
                 {
-                    case 2:
-                    case 3: currentFrame = 27; break;
-                    case 27: currentFrame = 26; break;
-                    case 26: currentFrame = 25; break;
-                    case 25: currentFrame = 24; break;
-                    case 24:
-                        currentFrame = 2;
-                        link.IsAttacking = false;
-                        link.IsStopped = true;
-                        break;
+                    switch (currentFrame)
+                    {
+                        case 12:
+                        case 13: currentFrame = 27; break;
+                        case 27: currentFrame = 26; break;
+                        case 26: currentFrame = 25; break;
+                        case 25: currentFrame = 24; break;
+                        case 24:
+                            currentFrame = 12;
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (currentFrame)
+                    {
+                        case 2:
+                        case 3: currentFrame = 27; break;
+                        case 27: currentFrame = 26; break;
+                        case 26: currentFrame = 25; break;
+                        case 25: currentFrame = 24; break;
+                        case 24:
+                            currentFrame = 2;
+                            break;
+                    }
+                }
+
+                link.IsAttacking = false;
+                link.IsStopped = true;
 
             }
 
@@ -72,19 +106,39 @@ namespace Sprint3.Link
             {
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
-                switch (currentFrame)
+                if (link.LargeShield)
                 {
-                    case 2:
-                    case 3: currentFrame = 49; break;
-                    case 49: currentFrame = 48; break;
-                    case 48: currentFrame = 47; break;
-                    case 47: currentFrame = 46; break;
-                    case 46:
-                        currentFrame = 2;
-                        link.IsAttacking = false;
-                        link.IsStopped = true;
-                        break;
+                    switch (currentFrame)
+                    {
+                        case 12:
+                        case 13: currentFrame = 49; break;
+                        case 49: currentFrame = 48; break;
+                        case 48: currentFrame = 47; break;
+                        case 47: currentFrame = 46; break;
+                        case 46:
+                            currentFrame = 12;
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (currentFrame)
+                    {
+                        case 2:
+                        case 3: currentFrame = 49; break;
+                        case 49: currentFrame = 48; break;
+                        case 48: currentFrame = 47; break;
+                        case 47: currentFrame = 46; break;
+                        case 46:
+                            currentFrame = 2;
+                            break;
+                    }
+                }
+
+
+                link.IsAttacking = false;
+                link.IsStopped = true;
+
             }
 
             return location;
@@ -156,8 +210,6 @@ namespace Sprint3.Link
 
             return location;
         }
-
-
 
     }
 }

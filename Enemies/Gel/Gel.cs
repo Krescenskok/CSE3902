@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Sprint3
 {
@@ -13,17 +14,41 @@ namespace Sprint3
     /// </summary>
     public class Gel : IEnemy
     {
-
+        private Game game;
         private Vector2 location;
         public IEnemyState state;
         private ISprite sprite;
+        private GelMoveSprite gSprite;
 
-        public Gel(Game game, Vector2 location)
+        private EnemyCollider innerCollider;
+        private GelBlockCollider outsideCollider;
+        private int HP = HPAmount.EnemyLevel1;
+
+        public Vector2 Location { get => location; }
+
+        public IEnemyState State { get => state; }
+
+        private XElement saveData;
+
+        public Gel(Game game, Vector2 location, XElement xlm)
         {
             this.location = location;
+            this.game = game;
+            state = new EnemySpawnState(this, game);
+            innerCollider = new EnemyCollider();
+            outsideCollider = new GelBlockCollider();
 
-            state = new GelMoveState(this,location,game);
+            saveData = xlm;
+        }
 
+        public void Spawn()
+        {
+            state = new GelMoveState(this, location, game);
+            gSprite = (GelMoveSprite)sprite;
+            innerCollider = new EnemyCollider(gSprite.GetRectangle(), state, HPAmount.HalfHeart, "gel");
+            
+            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state);
+            
         }
 
         public void SetSprite(ISprite sprite)
@@ -40,22 +65,38 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
+            innerCollider.Update(this);
+
+            if(gSprite != null)outsideCollider.Update(gSprite.OuterColliderLocation(location));
+           
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            HP -= amount;
+            if (HP <= 0) Die();
         }
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
+            CollisionHandler.Instance.RemoveCollider(outsideCollider);
+            saveData.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch batch)
         {
+           
             sprite.Draw(batch, location, 0, Color.White);
+            
         }
 
+        
+
+        public EnemyCollider GetCollider()
+        {
+            return innerCollider;
+
+        }
     }
 }
