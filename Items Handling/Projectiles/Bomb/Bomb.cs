@@ -59,6 +59,11 @@ namespace Sprint3.Items
         public void Update()
         {
             state.Update();
+            if (isExploding)
+            {
+                collider.Update(this, this.state);
+            }
+            
         }
 
         public void Expire()

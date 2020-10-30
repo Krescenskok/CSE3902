@@ -44,6 +44,7 @@ namespace Sprint3.Items
         public void Update()
         {
             state.Update();
+            collider.Update(this, this.state);
         }
 
         public void Expire()

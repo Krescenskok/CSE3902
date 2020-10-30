@@ -77,8 +77,8 @@ namespace Sprint3
 
         public void Update()
         {
-            collider.Update(this, this.state);
             state.Update();
+            collider.Update(this, this.state);
         }
 
         public void SwordImpact()
