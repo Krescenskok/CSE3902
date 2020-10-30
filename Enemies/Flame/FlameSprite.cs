@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -19,13 +19,17 @@ namespace Sprint3
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter;
         private int frameIndex = 0;
-
+        private int spriteSizeIndex = 2;
+        private Point drawSize;
+            
         public FlameSprite(Texture2D texture)
         {
             updateCounter = 0;
             this.texture = texture;
             sourcePos.X = EnemySpriteFactory.GetColumn("Flame") * SpriteSize[0];
             sourcePos.Y = EnemySpriteFactory.GetRow("Flame") * SpriteSize[1];
+            drawSize.X = SpriteSize[0] * spriteSizeIndex;
+            drawSize.Y = SpriteSize[1] * spriteSizeIndex;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
@@ -48,13 +52,13 @@ namespace Sprint3
                 updateCounter++;
             }
             Rectangle sourceRectangle = new Rectangle((int)sourcePos.X, (int)sourcePos.Y, SpriteSize[0], SpriteSize[1]);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, SpriteSize[0], SpriteSize[1]);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
-        public void Load(Game game)
+        public Rectangle getRectangle(Vector2 location)
         {
-            //do nothing
+            return new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
         }
     }
 }

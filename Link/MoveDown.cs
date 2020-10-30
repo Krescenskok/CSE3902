@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class MoveDown: Movement
     {
@@ -10,30 +10,10 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = 10;
 
-        
-        public MoveDown(LinkPlayer link)
-        {
-            this.link = link;
-        }
 
-        public override void MovingLeft()
+        public MoveDown(LinkPlayer link) : base(link)
         {
-            link.state = new MoveLeft(link);
-        }
 
-        public override void MovingRight()
-        {
-            link.state = new MoveRight(link);
-        }
-
-        public override void MovingUp()
-        {
-            link.state = new MoveUp(link);
-        }
-
-        public override void Stationary()
-        {
-            link.state = new Stationary(link);
         }
 
 
@@ -41,9 +21,11 @@ namespace Sprint3.Link
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.Y += MOVEMENT;
+                if(!link.isWalkingInPlace)
+                {
+                    location.Y += MOVEMENT;
+                }
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
-
 
                 if (currentFrame == 0)
                 {
@@ -55,6 +37,7 @@ namespace Sprint3.Link
                     location.Y = 445;
             }
             link.IsAttacking = false;
+            link.IsStopped = true;
 
             return location;
         }
@@ -130,9 +113,50 @@ namespace Sprint3.Link
             return location;
         }
 
-        public override void MovingDown()
+        public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 0:
+                    case 1: currentFrame = 8; break;
+                    case 8: currentFrame = 9; break;
+                    case 9:
+                        currentFrame = 0;
+                        link.IsStopped = true;
+                        link.IsPickingUpItem = false;
+                        break;
+                }
+            }
+
+            return location;
         }
+
+        public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 0:
+                    case 1: currentFrame = 16; break;
+                    case 16:
+                        currentFrame = 0;
+                        link.IsAttacking = false;
+                        link.IsStopped = true;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
+
+
     }
 }

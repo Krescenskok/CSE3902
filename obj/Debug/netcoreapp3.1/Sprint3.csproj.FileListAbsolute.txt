@@ -1,37 +1,148 @@
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\mario.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\MarioSpritesheet.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\marioWalk.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\Running.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\SmileyWalk.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\test.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\BossSpriteSheet.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\EnemySpriteSheet.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\File.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\itemSprites.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\LinkSpriteSheet.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\marioOneDirection.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\NPCSpriteSheet.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\zelda_tiles_focused.xnb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.exe
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.deps.json
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.runtimeconfig.json
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.runtimeconfig.dev.json
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint3.pdb
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libSDL2-2.0.so.0
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libopenal.so.1
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\osx\native\libSDL2-2.0.0.dylib
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\osx\native\libopenal.1.dylib
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\SDL2.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\soft_oal.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\SDL2.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\soft_oal.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.csprojAssemblyReference.cache
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.AssemblyInfoInputs.cache
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.AssemblyInfo.cs
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.csproj.CoreCompileInputs.cache
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.csproj.CopyComplete
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.dll
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.pdb
-C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.deps.json
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.json
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.dev.json
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CopyComplete
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Downloads/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.deps.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.dev.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CopyComplete
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/CSE3902-EnemyFixing/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Sprint3.deps.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.dev.json
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.csproj.CopyComplete
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/Semester5/CSE 3902/Sprint3_Project/LinkFixing/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.deps.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.runtimeconfig.dev.json
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfoInputs.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.AssemblyInfo.cs
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csproj.CopyComplete
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.dll
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.pdb
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.genruntimeconfig.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/beamImpact.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/explosion.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/particles.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/wandbeam.xnb
+/Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint3.csprojAssemblyReference.cache

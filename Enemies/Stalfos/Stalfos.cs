@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// <author>JT Thrash</author>
@@ -14,65 +15,57 @@ namespace Sprint3
     /// </summary>
     public class Stalfos : IEnemy
     {
-        
-        public Vector2 location { get; set; }
 
+        XElement saveInfo;
         public IEnemyState state;
+
+        private Vector2 location;
         private ISprite sprite;
+        private StalfosWalkingSprite stalfosSprite;
+        private EnemyCollider collider;
 
-        private Vector2 size;
+        private int HP = HPAmount.EnemyLevel2;
 
-        private Game game;
+        public Vector2 Location { get => location; }
 
-        public enum direction { left, right, up, down };
-        List<direction> availableDirections;
-        direction currentDirection;
+        public IEnemyState State { get => state; }
 
-       
-
-        private int randomMovementMultiplier;
-
-        
-        public void SetSprite(ISprite sprite)
+        public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
-            this.sprite = sprite;
-            
-        }
-
-        public void UpdateLocation(Vector2 location)
-        {
             this.location = location;
+            state = new EnemySpawnState(this, game);
+            collider = new EnemyCollider();
+
+            saveInfo = xml;
+
         }
 
-
-
-        public Stalfos(Game game, Vector2 location)
+        public void Spawn()
         {
-            this.game = game;
-            this.location = location;
-            state = new StalfosWalkingState(this,location);
-
-            size = new Vector2(100, 100);
-
-            currentDirection = direction.right;
-
-            randomMovementMultiplier = 1;
+            state = new StalfosWalkingState(this, location);
+            stalfosSprite = (StalfosWalkingSprite)sprite;
+            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, HPAmount.HalfHeart, "Stalfos");
         }
 
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
+            saveInfo.SetElementValue("Alive", "false");
         }
 
-        public void TakeDamage()
+
+        
+        /// <returns>true when stalfos HP is > 0</returns>
+        public bool SubtractHP(int amount)
         {
-            state.TakeDamage();
+            HP -= amount;
+
+            
+            if (HP <= 0) { Die(); }
+
+            return HP > 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -82,58 +75,25 @@ namespace Sprint3
 
         public void Update()
         {
-            int xMax = (int)(location.X + size.X);
-            int yMax = (int)(location.Y + size.Y);
-            int xMin = (int)location.X;
-            int yMin = (int)location.Y;
-            
-            int boundX = game.GraphicsDevice.Viewport.Width;
-            int boundY = game.GraphicsDevice.Viewport.Height;
-
-            bool blockedOnRight = xMax >= boundX && currentDirection == direction.right;
-            bool blockedOnLeft = xMin <= 0 && currentDirection == direction.left;
-            bool blockedAbove = yMax >= boundY && currentDirection == direction.up;
-            bool blockedBelow = yMin <= 0 && currentDirection == direction.down;
-
-
-            if (blockedAbove || blockedBelow || blockedOnLeft || blockedOnRight)
-            {
-                availableDirections = new List<direction>{ direction.left, direction.right, direction.up, direction.down};
-
-                if (blockedOnRight) availableDirections.Remove(direction.right);
-                if (blockedOnLeft) availableDirections.Remove(direction.left);
-                if (blockedAbove) availableDirections.Remove(direction.up);
-                if (blockedBelow) availableDirections.Remove(direction.down);
-
-                ChangeDirection();
-            }
-            else //move randomly
-            {
-                Random r = new Random();
-                int randNum = r.Next(0, 100 / randomMovementMultiplier);
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if(randNum == 0)
-                {
-                    ChangeDirection();
-                }
-            }
-
-
             state.Update();
-            
+            collider.Update(this);
         }
 
-
-        public List<direction> GetDirections()
+        public void SetSprite(ISprite sprite)
         {
-            return availableDirections;
+
+            this.sprite = sprite;
+
         }
 
-        public void UpdateDirection(direction newDirection)
+        public void UpdateLocation(Vector2 location)
         {
-            currentDirection = newDirection;
+            this.location = location;
         }
 
+        public EnemyCollider GetCollider()
+        {
+            return collider;
+        }
     }
 }

@@ -1,26 +1,30 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class MoveLeft : Movement
     {
         private double lastTime;
         int MOVEMENT = -10;
 
-        public MoveLeft(LinkPlayer link)
+        public MoveLeft(LinkPlayer link) : base(link)
         {
-            this.link = link;
+
         }
 
-  
+
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
             if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.X += MOVEMENT;
+                if(!link.isWalkingInPlace)
+                {
+                    location.X += MOVEMENT;
+                }
+                
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
                 if (currentFrame == 4)
@@ -31,7 +35,10 @@ namespace Sprint3.Link
                 if (location.X <= 0)
                     location.X = 0;
             }
+
+
             link.IsAttacking = false;
+            link.IsStopped = true;
 
             return location;
         }
@@ -108,12 +115,48 @@ namespace Sprint3.Link
             return location;
         }
 
-
-        
-
-        public override void MovingLeft()
+        public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 4:
+                    case 5: currentFrame = 8; break;
+                    case 8: currentFrame = 9; break;
+                    case 9:
+                        currentFrame = 0;
+                        link.IsStopped = true;
+                        link.IsPickingUpItem = false;
+                        break;
+                }
+            }
+
+            return location;
         }
+
+        public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 4:
+                    case 5: currentFrame = 18; break;
+                    case 18:
+                        currentFrame = 4;
+                        link.IsAttacking = false;
+                        link.IsStopped = true;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
     }
 }

@@ -2,28 +2,27 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class MoveUp: Movement
     {
         private double lastTime;
         int MOVEMENT = -10;
 
-        
-        public MoveUp(LinkPlayer link)
+
+        public MoveUp(LinkPlayer link) : base(link)
         {
-            this.link = link;
+
         }
 
-       
-
-       
-       
         public override Vector2 HandleShield(GameTime gameTime,Vector2 location)
         {
             if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
             {
-                location.Y += MOVEMENT;
+                if (!link.isWalkingInPlace)
+                {
+                    location.Y += MOVEMENT;
+                }
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
 
@@ -37,6 +36,7 @@ namespace Sprint3.Link
                     location.Y = 0;
             }
             link.IsAttacking = false;
+            link.IsStopped = true;
 
             return location;
         }
@@ -115,8 +115,48 @@ namespace Sprint3.Link
             return location;
         }
 
-        public override void MovingUp()
+        public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 6:
+                    case 7: currentFrame = 8; break;
+                    case 8: currentFrame = 9; break;
+                    case 9:
+                        currentFrame = 0;
+                        link.IsStopped = true;
+                        link.IsPickingUpItem = false;
+                        break;
+                }
+            }
+
+            return location;
         }
+
+        public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            {
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+                switch (currentFrame)
+                {
+                    case 6:
+                    case 7: currentFrame = 19; break;
+                    case 19:
+                        currentFrame = 6;
+                        link.IsAttacking = false;
+                        link.IsStopped = true;
+                        break;
+                }
+            }
+
+            return location;
+        }
+
     }
 }

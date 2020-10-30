@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -19,8 +19,8 @@ namespace Sprint3
         private int row = EnemySpriteFactory.GetRow("Trap");
         private int column = EnemySpriteFactory.GetColumn("Trap");
 
-        private Vector2 spriteSize;
-        
+        private Point spriteSize;
+        private Point drawSize;
 
         public BladeTrapSprite(Texture2D texture)
         {
@@ -28,16 +28,15 @@ namespace Sprint3
 
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
         }
 
         public void Draw(SpriteBatch batch, Vector2 location, int currentFrame, Color color)
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
-
-
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+           
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * column, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -47,6 +46,11 @@ namespace Sprint3
         public void Load(Game game)
         {
             //do nothing
+        }
+
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(new Point(), drawSize);
         }
     }
 }

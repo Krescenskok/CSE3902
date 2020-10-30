@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Sprite class for when stalfos (skeleton) is walking normally
@@ -31,15 +31,11 @@ namespace Sprint3
         private const int frameRate = 5;
         private const int originalRate = 60;
 
-        private Vector2 spriteSize;
+        private Point spriteSize;
+        private Point drawSize;
 
-        public Vector2 SpriteSize()
-        {
-            return spriteSize;
-        }
-        
+    
        
-
 
         public StalfosWalkingSprite(Texture2D texture)
         {
@@ -57,6 +53,9 @@ namespace Sprint3
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
 
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
+
         }
 
 
@@ -64,12 +63,10 @@ namespace Sprint3
 
         public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
+            
 
-
-            Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -83,11 +80,12 @@ namespace Sprint3
             currentAnimatedFrame += startColumn;
         }
 
-        public void Load(Game game)
+
+        public Rectangle GetRectangle()
         {
-            texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
+            return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
         }
 
-        
+
     }
 }

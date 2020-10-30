@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Sprint4.Items;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class LinkCommand : ICommand
     {
@@ -23,32 +25,34 @@ namespace Sprint3.Link
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
             linkPlayer.Draw(game, spriteBatch, gameTime );
+            ProjectilesCommand.Instance.ExecuteCommand(game, gameTime, spriteBatch);
         }
 
         public void Update(GameTime gameTime )
         {
+            ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
             {
-                linkPlayer.Stationary();
-                linkPlayer.LocationInitialized = false;
+                linkPlayer.Reset();
             }
 
             else if (Key.Equals("E"))
             {
+            
                 linkPlayer.IsDamaged = true;
+                
             }
             if (!linkPlayer.IsAttacking)
             {
 
-
-
                 if ((Key.Equals("N") || (Key.Equals("Z"))))
                 {
+
                     linkPlayer.IsAttacking = true;
                     linkPlayer.IsStopped = false;
+             
+
                 }
-
-
 
                 else if ((Key.Equals("A")) || (Key.Equals("Left")))
                 {
@@ -77,24 +81,52 @@ namespace Sprint3.Link
                     linkPlayer.IsAttacking = false;
                     linkPlayer.MovingDown();
                 }
+                else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Shield;
+                }
 
                 else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.Sword;
+                    linkPlayer.CurrentWeapon = ItemForLink.Sword;
                 }
 
                 else if ((Key.Equals("D2")) || (Key.Equals("NumPad2")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.WoodenSword;
+                    linkPlayer.CurrentWeapon = ItemForLink.MagicalRod;
                 }
 
                 else if ((Key.Equals("D3")) || (Key.Equals("NumPad3")))
                 {
-                    linkPlayer.CurrentWeapon = Weapon.MagicalRod;
+                    linkPlayer.CurrentWeapon = ItemForLink.ArrowBow;
                 }
 
-            }
+                else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueRing;
+                }
 
+                else if (Key.Equals("D5") || Key.Equals("NumPad5"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else if (Key.Equals("D6") || Key.Equals("NumPad6"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueCandle;
+                }
+
+                else if (Key.Equals("D7") || Key.Equals("NumPad7"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Bomb;
+                }
+                else if (Key.Equals("D8") || Key.Equals("NumPad8"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Clock;
+                }
+
+
+            }
 
             linkPlayer.Update(gameTime);
 

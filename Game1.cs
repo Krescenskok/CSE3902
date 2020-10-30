@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Items;
-using Sprint3.Link;
-using Sprint3;
-using Sprint3.Enemies;
-using Sprint3.Blocks;
+using Sprint4.Items;
+using Sprint4.Link;
+using Sprint4;
+using Sprint4.Enemies;
+using Sprint4.Blocks;
+using System.Xml.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Linq;
+using Microsoft.Xna.Framework.Input;
 
-namespace Sprint3
+
+namespace Sprint4
 {
 
     public class Game1 : Game
@@ -18,20 +24,15 @@ namespace Sprint3
 
         private Vector2 spritePos;
 
-
-
         List<IController> controllers = new List<IController>();
 
         ICommand activeCommand;
         LinkCommand LinkPersistent;
-        ItemsCommand ItemPersistent;
-        BlocksCommand BlockPersistent;
+        ProjectilesCommand ProjectilePersistent;
+       
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
-
-        public Items.LinkItems items;
-        public Blocks.LinkBlocks blocks;
 
        
 
@@ -45,60 +46,85 @@ namespace Sprint3
         protected override void Initialize()
         {
             base.Initialize();
-
-        
+            CollisionHandler.Instance.Initialize(this);
         }
 
         protected override void LoadContent()
         {
             font = Content.Load<SpriteFont>("File");
 
+            ItemsFactory.Instance.LoadItemsTextures(Content);
+
+
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            items = new Items.LinkItems(_spriteBatch);
-            blocks = new Blocks.LinkBlocks(_spriteBatch);
-
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
+            controllers.Add(new MouseController(this));
 
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
-            ItemPersistent = new ItemsCommand(_spriteBatch, items, false, false);
-            BlockPersistent = new BlocksCommand(_spriteBatch, blocks, false, false);
+            ProjectilePersistent = ProjectilesCommand.Instance;
+            ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
-            EnemyNPCDisplay.Instance.Load(this, new Vector2 ( 220, 220 ), new Vector2 (220, 420));
+
+            //set up grid where everything is spawned
+            GridGenerator.Instance.GetGrid(this, 12, 7);
+
+            //creat list of rooms
+            RoomSpawner.Instance.LoadAllRooms(this);
+            System.Diagnostics.Debug.WriteLine("LoadContent");
+            RoomSpawner.Instance.LoadRoom(this, 1);
             
+
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
         _graphics.GraphicsDevice.Viewport.Height / 2);
+
+
         }
 
         protected override void Update(GameTime gameTime)
         {
-
-            foreach (var cont in controllers)
+            if(linkPlayer.Health == 0)
             {
-                ICommand command = cont.HandleInput(this);
 
-                if (command != null)
+                activeCommand = new ResetCommand(linkPlayer);
+                activeCommand.Update(gameTime);
+            }
+            else
+            {
+                foreach (var cont in controllers)
                 {
-                    activeCommand = command;
-                    activeCommand.Update(gameTime);
-                    
-                    break;
-                }
+                    ICommand command = cont.HandleInput(this);
 
+                    if (command != null)
+                    {
+                        activeCommand = command;
+                        activeCommand.Update(gameTime);
+
+                        break;
+                    }
+                    else
+                    {
+                        activeCommand = null;
+                    }
+
+                }
             }
 
 
-            EnemyNPCDisplay.Instance.Update();
-            LinkPersistent.Update(gameTime);
-            ItemPersistent.Update(gameTime);
-            BlockPersistent.Update(gameTime);
-            CollisionHandler.Instance.Update();
+            RoomSpawner.Instance.Update();
+
             
+
+            LinkPersistent.Update(gameTime);
+            ProjectilePersistent.Update(gameTime);
+
+            CollisionHandler.Instance.Update();
+
 
             base.Update(gameTime);
         }
@@ -112,17 +138,15 @@ namespace Sprint3
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
-            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            ItemPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            BlockPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            EnemyNPCDisplay.Instance.Draw(_spriteBatch, gameTime);
 
+
+            RoomSpawner.Instance.Draw(_spriteBatch);
+            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
-
-
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class WallMasterSprite : ISprite
     {
@@ -25,9 +25,10 @@ namespace Sprint3
         private const int frameRate = 5;
         private const int maxFrameRate = 60;
 
-        private Vector2 spriteSize;
+        private Point spriteSize;
+        private Point drawSize;
 
-        public WallMasterSprite(Texture2D texture)
+        public WallMasterSprite(Texture2D texture, string dir)
         {
 
             currentAnimatedFrame = 0;
@@ -38,13 +39,15 @@ namespace Sprint3
 
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
+            drawSize.X = spriteSize.X * 2;
+            drawSize.Y = spriteSize.Y * 2;
 
-        }
+            row = EnemySpriteFactory.GetRow("WallMaster" + dir);
+            startColumn = EnemySpriteFactory.GetColumn("WallMaster" + dir);
+    }
 
         public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
 
             currentFrame++;
             if (currentFrame == trueFrameCount)
@@ -55,15 +58,18 @@ namespace Sprint3
             currentAnimatedFrame += startColumn;
 
 
-            Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * 2, height * 2);
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
-        public void Load(Game game)
+        public Rectangle GetRectangle()
         {
-            texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
+            return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
         }
+
+
+   
     }
 }

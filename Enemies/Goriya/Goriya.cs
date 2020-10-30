@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -16,22 +18,27 @@ namespace Sprint3
     {
 
         private Vector2 location;
-        private Vector2 boomerangLocation;
+       
 
         public IEnemyState state;
         private ISprite sprite;
-        private ISprite boomerang;
-        private bool throwBoomerang;
+        private GoriyaWalkSprite gorSprite;
+        
 
-        private Vector2 size;
+        private GoriyaBoomerang boomy;
 
         private Game game;
 
-        public enum direction { left , right , up, down };
-        List<direction> availableDirections;
-        direction currentDirection;
 
-        private const int randomMovementMultiplier = 1000;
+        private EnemyCollider collider;
+
+        private int HP = HPAmount.EnemyLevel3;
+
+        public Vector2 Location { get => location; }
+
+        public IEnemyState State { get => state; }
+
+        private XElement saveData;
 
         public void SetSprite(ISprite sprite)
         {
@@ -40,132 +47,76 @@ namespace Sprint3
 
         }
 
-        public void SetBoomerang(bool set)
+        public void SetBoomerang(GoriyaBoomerang boomerang)
         {
-            throwBoomerang = set;
+            boomy = boomerang;
             
+        }
+
+        public GoriyaBoomerang GetBoomerang()
+        {
+            return boomy;
+        }
+
+        public EnemyCollider Collider()
+        {
+            return collider;
         }
 
         public void UpdateLocation(Vector2 location)
         {
             this.location = location;
-            boomerangLocation = location;
-        }
-
-        public void UpdateBoomerangLocation(Vector2 location)
-        {
-            boomerangLocation = location;
+            
         }
 
 
-
-        public Goriya(Game game, Vector2 location)
+        public Goriya(Game game, Vector2 location, XElement xml)
         {
             this.game = game;
-            state = new GoriyaMoveState(this, location);
-
             this.location = location;
-            boomerangLocation = location;
-
-            size.X = 100;
-            size.Y = 100;
+            state = new EnemySpawnState(this,game);
             
-            currentDirection = direction.right;
-
-            boomerang = EnemySpriteFactory.Instance.CreateBoomerangSprite();
-          
-            throwBoomerang = false;
+            collider = new EnemyCollider();
+            saveData = xml;
         }
-
-        public void Attack()
+        public void Spawn()
         {
-            state.Attack();
+            state = new GoriyaMoveState(this, location);
+            gorSprite = (GoriyaWalkSprite)sprite;
+            collider = new EnemyCollider(gorSprite.GetRectangle(), state, HPAmount.HalfHeart, "Goriya");
         }
 
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this,location);
+            saveData.SetElementValue("Alive", "false");
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            HP -= amount;
+            if (HP <= 0) Die();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, location, 0, Color.White);
-            if (throwBoomerang) boomerang.Draw(spriteBatch, boomerangLocation, 0, Color.White);
+            
+            if (boomy != null) boomy.Draw(spriteBatch);
         }
 
         public void Update()
         {
-            int xMax = (int)(location.X + size.X);
-            int yMax = (int)(location.Y + size.Y);
-            int xMin = (int)location.X;
-            int yMin = (int)location.Y;
-
-            int boundX = game.GraphicsDevice.Viewport.Width;
-            int boundY = game.GraphicsDevice.Viewport.Height;
-
-            bool blockedOnRight = xMax >= boundX && currentDirection.Equals(direction.right);
-            bool blockedOnLeft = xMin <= 0 && currentDirection.Equals(direction.left);
-            bool blockedAbove = yMin <= 0 && currentDirection.Equals(direction.up);
-            bool blockedBelow = yMax >= boundY && currentDirection.Equals(direction.down);
-
-
-            if (blockedAbove || blockedBelow || blockedOnLeft || blockedOnRight)
-            {
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if (blockedOnRight) availableDirections.Remove(direction.right);
-                if (blockedOnLeft) availableDirections.Remove(direction.left);
-                if (blockedAbove) availableDirections.Remove(direction.up);
-                if (blockedBelow) availableDirections.Remove(direction.down);
-
-
-                ChangeDirection();
-
-
-            }
-            else //move randomly
-            {
-                Random r = new Random();
-                int randNum = r.Next(0, randomMovementMultiplier);
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if (randNum == 0 && !throwBoomerang)
-                {
-                    ChangeDirection();
-                }
-                else if(randNum < 5)
-                {
-                    Attack();
-                }
-            }
-
             state.Update();
-
+            collider.Update(this);
+            if (boomy != null) boomy.Update();
         }
 
-
-        public List<direction> GetDirections()
+        public EnemyCollider GetCollider()
         {
-            return availableDirections;
+            return collider;
         }
-
-
-
-        public void UpdateDirection(direction dir)
-        {
-            currentDirection = dir;
-        }
-
-    
     }
 }

@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -17,19 +18,39 @@ namespace Sprint3
         public IEnemyState state;
         private ISprite sprite;
 
-        private Vector2 size =  new Vector2(100,100);
-
         private Game game;
+        
 
-        public enum direction { left = -1, right = 1, up = 2, down = -2};
-        List<direction> availableDirections;
-        List<direction> currentDirection;
+        private EnemyCollider collider;
 
-        private int directionChangeCoolDown;
+        private int HP = HPAmount.EnemyLevel1;
 
-        private int randomMovementMultiplier;
+        public Vector2 Location { get => location; }
 
+        public IEnemyState State { get => state; }
 
+        private XElement saveData;
+
+        public Keese(Game game, Vector2 location, XElement xml)
+        {
+            this.game = game;
+            this.location = location;
+            state = new EnemySpawnState(this, game);
+
+            collider = new EnemyCollider();
+
+            saveData = xml;
+        }
+
+        public void Spawn()
+        {
+            
+            state = new KeeseMoveState(this, location);
+            KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
+            collider = new EnemyCollider(kSprite.GetRectangle(), state,HPAmount.HalfHeart,"Keese");
+
+            Debug.Write(kSprite.GetRectangle().Width + ", " + kSprite.GetRectangle().Height);
+        }
         public void SetSprite(ISprite sprite)
         {
             this.sprite = sprite;
@@ -39,34 +60,18 @@ namespace Sprint3
         {
             this.location = location;
         }
-
-
-
-        public Keese(Game game, Vector2 location)
-        {
-            this.game = game;
-            this.location = location;
-            state = new KeeseMoveState(this, location);
-
-            currentDirection = new List<direction>() { direction.right, direction.left };
-
-            directionChangeCoolDown = 0;
-            randomMovementMultiplier = 1;
-        }
-
-        public void ChangeDirection()
-        {
-            state.ChangeDirection();
-        }
+     
 
         public void Die()
         {
-            state.Die();
+            RoomEnemies.Instance.Destroy(this, location);
+            saveData.SetElementValue("Alive", "false");
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int amount)
         {
-            state.TakeDamage();
+            HP -= amount;
+            if (HP <= 0) Die();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -76,70 +81,14 @@ namespace Sprint3
 
         public void Update()
         {
-            int xMax = (int)(location.X + size.X);
-            int yMax = (int)(location.Y + size.Y);
-            int xMin = (int)location.X;
-            int yMin = (int)location.Y;
-
-            int boundX = game.GraphicsDevice.Viewport.Width;
-            int boundY = game.GraphicsDevice.Viewport.Height;
-
-            bool blockedOnRight = xMax >= boundX && currentDirection.Contains(direction.right);
-            bool blockedOnLeft = xMin <= 0 && currentDirection.Contains(direction.left);
-            bool blockedAbove = yMax >= boundY && currentDirection.Contains(direction.up);
-            bool blockedBelow = yMin <= 0 && currentDirection.Contains(direction.down);
-
-
-            if (blockedAbove || blockedBelow || blockedOnLeft || blockedOnRight && directionChangeCoolDown == 0)
-            {
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if (blockedOnRight) availableDirections.Remove(direction.right);
-                if (blockedOnLeft) availableDirections.Remove(direction.left);
-                if (blockedAbove) availableDirections.Remove(direction.up);
-                if (blockedBelow) availableDirections.Remove(direction.down);
-
-
-                ChangeDirection();
-
-
-            }
-            else //move randomly
-            {
-                Random r = new Random();
-                int randNum = r.Next(0, 100 / randomMovementMultiplier);
-                availableDirections = new List<direction> { direction.left, direction.right, direction.up, direction.down };
-
-                if (randNum == 0)
-                {
-                    ChangeDirection();
-                }
-            }
-
+            
             state.Update();
-
+            collider.Update(this);
         }
 
-
-        public List<direction> GetDirections()
+        public EnemyCollider GetCollider()
         {
-            return availableDirections;
-        }
-
-      
-
-        public void UpdateDirection(List<direction> dir)
-        {
-            currentDirection[0] = dir[0];
-            currentDirection[1] = dir[1];
-        }
-
-        public int CoolDown(int var, bool resetCoolDown)
-        {
-            if (resetCoolDown) return 10;
-            if (var == 0) return 0;
-            return --var;
-
+            return collider;
         }
     }
 }

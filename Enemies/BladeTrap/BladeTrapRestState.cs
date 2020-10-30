@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -16,16 +16,30 @@ namespace Sprint3
         private Vector2 location;
         private Vector2 target;
         private BladeTrap trap;
+        private int attackLength;
 
-        public BladeTrapRestState(Vector2 location, Vector2 target, BladeTrap trap)
+        public BladeTrapRestState(Vector2 location,BladeTrap trap)
         {
             this.location = location;
-            this.target = target;
+            trap.SetSprite(EnemySpriteFactory.Instance.CreateBladeTrapSprite());
             this.trap = trap;
         }
+
+        public BladeTrapRestState()
+        {
+        }
+
+        public void SetDirection(Vector2 newDirection, int length)
+        {
+            target = newDirection;
+            attackLength = length;
+
+        }
+
+        #region //unused methods
         public void Attack()
         {
-            trap.state = new BladeTrapAttackState(location,target,trap);
+            trap.state = new BladeTrapAttackState(location,target,trap,attackLength);
         }
 
         public void ChangeDirection()
@@ -35,7 +49,7 @@ namespace Sprint3
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void Die()
@@ -43,14 +57,21 @@ namespace Sprint3
             //do nothing
         }
 
-        public void TakeDamage()
-        {
-            //do nothing
-        }
-
         public void Update()
         {
-            Attack();
+            //wait
         }
+
+        public void TakeDamage(int amount)
+        {
+           //cannot be damaged
+        }
+
+        public void Stun()
+        {
+            //can't be stunned
+        }
+
+        #endregion
     }
 }

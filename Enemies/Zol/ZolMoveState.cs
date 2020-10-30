@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -140,6 +140,16 @@ namespace Sprint3
         }
 
         public void MoveAwayFromCollision(Collision collision)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Stun()
         {
             throw new NotImplementedException();
         }

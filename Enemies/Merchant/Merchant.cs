@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.EnemyAndNPC.Merchant
+namespace Sprint4.EnemyAndNPC.Merchant
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -35,7 +35,7 @@ namespace Sprint3.EnemyAndNPC.Merchant
             //Merchant dont need to update
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime time)
+        public void Draw(SpriteBatch spriteBatch)
         {
             MerchantSprite.Draw(spriteBatch, MerchantePos, 0, Color.White);  
         }
