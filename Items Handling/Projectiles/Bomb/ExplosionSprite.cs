@@ -25,7 +25,7 @@ namespace Sprint3.Items
 
             int width = texture.Width / (int)sheetSize.Y;
 
-            int height = texture.Height / (int)sheetSize.X;
+            int height = texture.Height;
 
             hitbox = new Rectangle(0, 0, width * 2, height * 2);
         }

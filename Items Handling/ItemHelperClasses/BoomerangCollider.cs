@@ -70,7 +70,7 @@ namespace Sprint3
         }
 
 
-        public void Update(IItems itemObj)
+        public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
