@@ -13,7 +13,7 @@ namespace Sprint3.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 0;
+        private const int sheetLocation = 0;
 
         private Rectangle hitbox;
 

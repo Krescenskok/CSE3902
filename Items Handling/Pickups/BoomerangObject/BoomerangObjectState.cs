@@ -11,8 +11,6 @@ namespace Sprint3.Items
         private BoomerangObject item;
         private Vector2 position;
 
-        private bool leaving = true;
-
         public BoomerangObjectState(BoomerangObject item, Vector2 initPos)
         {
             this.item = item;

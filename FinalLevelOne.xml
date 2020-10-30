@@ -1624,7 +1624,7 @@
 		</Room>
 		
 		<!-- 18th Room Content -->
-		<Room>
+		<Room id="18">
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
