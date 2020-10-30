@@ -83,6 +83,7 @@ namespace Sprint3.Items
 
         public void Update()
         {
+
             if (throwing)
             {
                 state.Update();
@@ -100,6 +101,7 @@ namespace Sprint3.Items
                     }
                 }
             }
+            collider.Update(this, this.state);
         }
 
         public void Expire()
