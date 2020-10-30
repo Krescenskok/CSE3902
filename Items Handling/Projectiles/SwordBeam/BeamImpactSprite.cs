@@ -1,0 +1,39 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Sprint4;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Sprint4
+{
+    public class BeamImpactSprite : ISprite
+    {
+        Texture2D texture;
+        private Rectangle sourceRectangle;
+        private Rectangle destinationRectangle;
+        private Vector2 sheetSize;
+
+        public BeamImpactSprite(Texture2D texture)
+        {
+            this.texture = texture;
+            sheetSize = ItemsFactory.Instance.GetSwordBeamSheetSize();
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        {
+            int width = (int)texture.Width / (int) sheetSize.Y;
+            int height = (int)texture.Height;
+            int xLoc = currentFrame * width;
+            int yLoc = 0;
+
+            sourceRectangle = new Rectangle(xLoc, yLoc, width, height);
+            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height, 2 * width, 2 * height);
+
+
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+
+
+        }
+    }
+}

@@ -1,0 +1,220 @@
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.csprojAssemblyReference.cache
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfoInputs.cache
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfo.cs
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CoreCompileInputs.cache
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/File.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/mario.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/Running.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/test.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.exe
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.deps.json
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.json
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.dev.json
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/Sprint2Final.pdb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CopyComplete
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.dll
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
+C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/File.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/mario.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/Running.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/test.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.exe
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.deps.json
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.json
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.dev.json
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.pdb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csprojAssemblyReference.cache
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfoInputs.cache
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfo.cs
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CoreCompileInputs.cache
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CopyComplete
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.dll
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
+D:/Downloads/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/File.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/mario.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/Running.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/test.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.exe
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.deps.json
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.json
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.dev.json
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.pdb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csprojAssemblyReference.cache
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfoInputs.cache
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfo.cs
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CoreCompileInputs.cache
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CopyComplete
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.dll
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
+D:/Files/School/Proj - Interactive Systems/Sprint 2/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.deps.json
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.json
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.dev.json
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.pdb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csprojAssemblyReference.cache
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfoInputs.cache
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfo.cs
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CopyComplete
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.dll
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
+/Users/krescenskok/Downloads/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/mario.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/MarioSpritesheet.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioWalk.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/Running.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/SmileyWalk.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/test.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/BossSpriteSheet.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/EnemySpriteSheet.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/File.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/itemSprites.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheet.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/marioOneDirection.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/NPCSpriteSheet.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Content/zelda_tiles_focused.xnb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.deps.json
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.json
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.runtimeconfig.dev.json
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/Sprint2Final.pdb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/osx/native/libopenal.1.dylib
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/SDL2.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/soft_oal.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/SDL2.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/soft_oal.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csprojAssemblyReference.cache
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfoInputs.cache
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.AssemblyInfo.cs
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CoreCompileInputs.cache
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.csproj.CopyComplete
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.dll
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.pdb
+/Users/krescenskok/Desktop/Sprint2PreCodeReview 3/Sprint2PreCodeReview/Sprint2PreCodeReview/obj/Debug/netcoreapp3.1/Sprint2Final.genruntimeconfig.cache
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.csprojAssemblyReference.cache
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.AssemblyInfoInputs.cache
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.AssemblyInfo.cs
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.csproj.CoreCompileInputs.cache
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\BossSpriteSheet.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\EnemySpriteSheet.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\File.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\itemSprites.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\LinkSpriteSheet.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\mario.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\marioOneDirection.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\MarioSpritesheet.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\marioWalk.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\NPCSpriteSheet.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\Running.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\SmileyWalk.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\test.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Content\zelda_tiles_focused.xnb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.exe
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.deps.json
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.runtimeconfig.json
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.runtimeconfig.dev.json
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\Sprint2Final.pdb
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\osx\native\libopenal.1.dylib
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\SDL2.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\soft_oal.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\SDL2.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\soft_oal.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.csproj.CopyComplete
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.dll
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.pdb
+C:\Users\Jordan\Documents\GitHub\CSE3902\obj\Debug\netcoreapp3.1\Sprint2Final.genruntimeconfig.cache
