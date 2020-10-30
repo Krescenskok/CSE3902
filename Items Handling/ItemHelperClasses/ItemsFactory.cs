@@ -14,11 +14,11 @@ namespace Sprint3
         private Texture2D explosionSheet;
         private Texture2D wandBeamSheet;
         private Texture2D swordBeamImpactSheet;
-        private Vector2 itemSheetSize = new Vector2(12, 8);
-        private Vector2 particlesSheetSize = new Vector2(2, 4);
-        private Vector2 explosionDimensions = new Vector2(1, 3);
-        private Vector2 wandBeamDimensions = new Vector2(4, 2);
-        private Vector2 swordBeamDimensions = new Vector2(1, 6);
+        private readonly Vector2 itemSheetSize = new Vector2(12, 8);
+        private readonly Vector2 particlesSheetSize = new Vector2(2, 4);
+        private readonly Vector2 explosionDimensions = new Vector2(1, 3);
+        private readonly Vector2 wandBeamDimensions = new Vector2(4, 2);
+        private readonly Vector2 swordBeamDimensions = new Vector2(1, 6);
 
         private static ItemsFactory instance = new ItemsFactory();
 

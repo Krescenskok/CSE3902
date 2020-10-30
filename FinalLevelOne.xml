@@ -986,7 +986,7 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>5 1</Location>
-				<Alive>true</Alive>
+				<Alive>true</Alive>				
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
@@ -1047,7 +1047,7 @@
 				<Alive>true</Alive>
 			</Item>
 		</Room>
-		
+
 		<!-- Fifth Room Content-->
 		<Room id="5">
 			<Item>
@@ -1060,6 +1060,7 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Stalfos</ObjectName>
 				<Location>2 7</Location>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
@@ -1105,7 +1106,7 @@
 				<ObjectName>Column</ObjectName>
 				<Location>4 9</Location>
 			</Item>
-		
+
 		</Room>
 		
 		<!-- 8th Room Content-->
@@ -1623,7 +1624,7 @@
 		</Room>
 		
 		<!-- 18th Room Content -->
-		<Room id ="18">
+		<Room id="18">
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
