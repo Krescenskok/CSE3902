@@ -82,7 +82,7 @@ namespace Sprint4
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            string direction = collision.From().ToString();
+            string direction = collision.From.ToString();
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
             if (col.CompareTag("Player")) col.SendMessage("TakeDamage" + direction, damageAmount);
@@ -99,7 +99,7 @@ namespace Sprint4
             else if (msg == "Stun") enemy.Die();
             else if (msg.Contains("EnemyTakeDamage"))
             { 
-                string dir = msg.Substring(15);
+               Direction dir = Directions.Parse(msg.Substring(15));
 
                 StalfosWalkingState stalfos = enemy as StalfosWalkingState;
                 GoriyaMoveState goriya = enemy as GoriyaMoveState;

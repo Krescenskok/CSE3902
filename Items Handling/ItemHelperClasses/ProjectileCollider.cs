@@ -59,7 +59,7 @@ namespace Sprint4
         }
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            string direction = collision.From().ToString();
+            string direction = collision.From.ToString();
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
             if (col.CompareTag("Enemy"))

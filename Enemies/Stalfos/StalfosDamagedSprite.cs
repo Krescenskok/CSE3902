@@ -15,32 +15,28 @@ namespace Sprint4
 
         private readonly int row = EnemySpriteFactory.GetRow("Stalfos");
         private readonly int startColumn = EnemySpriteFactory.GetColumn("Stalfos");
-        private int currentAnimatedFrame;
-        private int totalAnimatedFrames;
+        private int currentAnimatedFrame = 0;
+        private const int totalAnimatedFrames = 2;
 
-        private int currentFrame;
+        private int currentFrame = 0;
         private int trueFrameCount;
 
 
 
         private const int frameRate = 5;
         private const int originalRate = 60;
+        private const int spriteSizeMultiplier = 2;
 
         private Point spriteSize;
         private Point drawSize;
 
+        
 
 
 
         public StalfosDamagedSprite(Texture2D texture)
         {
 
-
-            currentAnimatedFrame = 0;
-
-            totalAnimatedFrames = 2;
-
-            currentFrame = 0;
             trueFrameCount = totalAnimatedFrames * (originalRate / frameRate);
 
             this.texture = texture;
@@ -48,8 +44,8 @@ namespace Sprint4
             spriteSize.X = texture.Width / columns;
             spriteSize.Y = texture.Height / rows;
 
-            drawSize.X = spriteSize.X * 2;
-            drawSize.Y = spriteSize.Y * 2;
+            drawSize.X = spriteSize.X * spriteSizeMultiplier;
+            drawSize.Y = spriteSize.Y * spriteSizeMultiplier;
 
         }
 

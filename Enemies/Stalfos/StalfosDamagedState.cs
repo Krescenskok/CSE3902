@@ -8,9 +8,9 @@ namespace Sprint4
     public class StalfosDamagedState : IEnemyState
     {
 
-        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
         
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        
+        
         Direction currentDirection;
 
         Vector2 moveDirection;
@@ -22,16 +22,12 @@ namespace Sprint4
 
         private Stalfos stalfos;
 
-        public StalfosDamagedState(string dir, Stalfos stalfos, Vector2 location)
+        public StalfosDamagedState(Direction dir, Stalfos stalfos, Vector2 location)
         {
-            string direction = dir.ToLower();
-            if (direction.Equals(right.ToString())) currentDirection = right;
-            if (direction.Equals(left.ToString())) currentDirection = left;
-            if (direction.Equals(down.ToString())) currentDirection = down;
-            if (direction.Equals(up.ToString())) currentDirection = up;
+            currentDirection = dir;
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CalculateY(currentDirection);
+            moveDirection.X = Directions.CalculateX(currentDirection);
 
             this.stalfos = stalfos;
             this.location = location;
@@ -39,12 +35,7 @@ namespace Sprint4
             this.stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosDamagedSprite());
         }
 
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
+      
         public void Attack()
         {
             //do nothing

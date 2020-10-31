@@ -38,7 +38,6 @@ namespace Sprint4
             collider = new EnemyCollider();
 
             saveInfo = xml;
-
         }
 
         public void Spawn()
@@ -63,9 +62,9 @@ namespace Sprint4
             HP -= amount;
 
             
-            if (HP <= 0) { Die(); }
+            if (HP <= HPAmount.Zero) { Die(); }
 
-            return HP > 0;
+            return HP > HPAmount.Zero;
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -8,7 +8,9 @@ using Sprint4.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Sprint4
 {
@@ -19,12 +21,17 @@ namespace Sprint4
     public class EnemySpriteFactory
     {
         private Texture2D texture;
-
-        
-        private Texture2D bossTextrue;
+        private Texture2D bossTexture;
         private Texture2D NPCTexture;
+
+        string enemyTextureName;
+        string bossTextureName;
+        string NPCTextureName;
         
         private static int[] sheetSize = { 15, 8 };
+
+
+      
 
         private static Dictionary<string, Vector2> coordinateMappings = new Dictionary<string, Vector2>
         {
@@ -58,7 +65,28 @@ namespace Sprint4
             {"FireBall", new Vector2 (0, 32) }
         };
 
-      
+        public void Load(XElement factory)
+        {
+            List<XElement> coordinates = factory.Elements("Position").ToList();
+            foreach(XElement coordinate in coordinates)
+            {
+                string callName = coordinate.Element("Name").Value;
+                string xValue = coordinate.Element("XValue").Value;
+                string yValue = coordinate.Element("YValue").Value;
+                int x = int.Parse(xValue), y = int.Parse(yValue);
+                coordinateMappings.Add(callName, new Vector2(x, y));
+            }
+
+            XElement spriteSheetSize = factory.Element("SheetSize");
+            int width = int.Parse(spriteSheetSize.Element("Width").Value);
+            int height = int.Parse(spriteSheetSize.Element("Height").Value);
+
+            sheetSize = new int[2] { height, width };
+
+            enemyTextureName = factory.Element("EnemySheetName").Value;
+            NPCTextureName = factory.Element("NPCSheetName").Value;
+            bossTextureName = factory.Element("BossSheetName").Value;
+        }
 
         public static int GetRow(string spriteName)
         {
@@ -88,7 +116,7 @@ namespace Sprint4
 
             //****
             NPCTexture = game.Content.Load<Texture2D>("NPCSpriteSheet");
-            bossTextrue = game.Content.Load<Texture2D>("BossSpriteSheet");
+            bossTexture = game.Content.Load<Texture2D>("BossSpriteSheet");
             //****
         }
 
@@ -194,29 +222,29 @@ namespace Sprint4
 
         public ISprite CreateDragonSprite()
         {
-            return new AquamentusNormalSprite(bossTextrue);
+            return new AquamentusNormalSprite(bossTexture);
         }
         
         public ISprite CreateDamagedDragonSprite()
         {
-            return new AquamentusDamagedSprite(bossTextrue);
+            return new AquamentusDamagedSprite(bossTexture);
         }
 
         public ISprite CreateFireBall()
         {
-            return new FireBallSprite(bossTextrue);
+            return new FireBallSprite(bossTexture);
         }
 
         
         public ISprite CreateDodongoSprite(string direction)
         {
-            return new DodongoMovingSprite(bossTextrue, direction);
+            return new DodongoMovingSprite(bossTexture, direction);
 
         }
 
         public ISprite CreateDamagedDodongoSprite(string direction)
         {
-            return new DodongoDamagedSprite(bossTextrue, direction);
+            return new DodongoDamagedSprite(bossTexture, direction);
         }
     }
 }

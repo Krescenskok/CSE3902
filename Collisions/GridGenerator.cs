@@ -21,6 +21,8 @@ namespace Sprint4
         private Point tileSize;
 
         private Point topLeftOffset;
+
+        private Point playArea;
         
         public static GridGenerator Instance
         {
@@ -51,7 +53,7 @@ namespace Sprint4
             int screenHeight = game.Window.ClientBounds.Height;
 
             int roomSpriteGridOffsetY = 34;
-            int roomSpriteGridOffsetX = 33;
+            int roomSpriteGridOffsetX = 34;
             int roomSpriteGridWidth = 190;
             int roomSpriteGridHeight = 110;
             int roomSpriteWidth = 256;
@@ -63,6 +65,8 @@ namespace Sprint4
 
             int playAreaWidth = roomSpriteGridWidth * screenWidth / roomSpriteWidth;
             int playAreaHeight = roomSpriteGridHeight * screenHeight / roomSpriteHeight;
+            playArea = new Point(playAreaWidth, playAreaHeight);
+
 
             int tileWidth = playAreaWidth / tileColumns;
             int tileHeight = playAreaHeight / tileRows;
@@ -180,8 +184,13 @@ namespace Sprint4
 
         public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)
         {
+
+            int startX = start.X - topLeftOffset.X;
+            int startY = start.Y - topLeftOffset.Y;
+            int endX = end.X - topLeftOffset.X;
+            int endY = end.Y = topLeftOffset.Y;
             
-            bool vertical = start.X == end.X;
+            bool vertical = startX == endX;
             
 
             List<Rectangle> path = new List<Rectangle>();
@@ -190,10 +199,10 @@ namespace Sprint4
 
             if (vertical)
             {
-                int increment = start.Y < end.Y ? 1 : -1;
-                int col = start.X / tileSize.X;
-                int startRow = start.Y / tileSize.Y;
-                int endRow = end.Y / tileSize.Y;
+                int increment = startY < endY ? 1 : -1;
+                int col = startX / tileSize.X;
+                int startRow = startY / tileSize.Y;
+                int endRow = endY / tileSize.Y;
                 
                 for(int k = startRow; k != endRow + increment; k += increment)
                 {
@@ -203,10 +212,10 @@ namespace Sprint4
             }
             else
             {
-                int increment = start.X < end.X ? 1 : -1;
-                int startCol = start.X / tileSize.X;
-                int row = start.Y / tileSize.Y;
-                int endCol = end.X / tileSize.X;
+                int increment = startX < endX ? 1 : -1;
+                int startCol = startX / tileSize.X;
+                int row = startY / tileSize.Y;
+                int endCol = endX / tileSize.X;
                 
                 for (int k = startCol; k != endCol + increment; k += increment)
                 {
@@ -214,14 +223,19 @@ namespace Sprint4
                    
                 }
             }
-            //Debug.WriteLine("");
-            //foreach (Rectangle rect in path)
-            //{
-            //    Debug.Write(rect.Location + " ");
-            //}
-
+           
             return path;
 
+        }
+
+        public int GetColumn(int xPosition)
+        {
+            return (xPosition - topLeftOffset.X) / tileSize.X;
+        }
+
+        public int GetRow(int yPosition)
+        {
+            return (yPosition - topLeftOffset.Y) / tileSize.Y;
         }
     }
 }

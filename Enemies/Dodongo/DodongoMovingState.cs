@@ -56,7 +56,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            if(collision.From().ToString() == "right" && direction == "Left")
+            if(collision.From.ToString() == "right" && direction == "Left")
             {
                 dodongoPos.X -= 3;
                 dodongo.UpdatePos(dodongoPos);

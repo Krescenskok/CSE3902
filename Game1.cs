@@ -76,7 +76,7 @@ namespace Sprint4
 
             //creat list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
-            System.Diagnostics.Debug.WriteLine("LoadContent");
+            
             RoomSpawner.Instance.LoadRoom(this, 1);
             
 

@@ -88,7 +88,7 @@ namespace Sprint4
 
         public void BounceOff(Collision collision)
         {
-            if(collision.From().ToString().Equals(directionStr))
+            if(collision.From.ToString().Equals(directionStr))
                 returning = true;
         }
     }

@@ -62,7 +62,7 @@ namespace Sprint4
             {
                 if (linkPlayer.IsAttacking)
                 {
-                    if (collision.Left())
+                    if (collision.Left)
                     {
                         if (linkPlayer.state is MoveLeft)
                         {
@@ -81,7 +81,7 @@ namespace Sprint4
                         }
                     }
 
-                    else if (collision.Right())
+                    else if (collision.Right)
                     {
                         if (linkPlayer.state is MoveRight)
                         {
@@ -100,7 +100,7 @@ namespace Sprint4
                         }
                     }
 
-                    else if (collision.Up())
+                    else if (collision.Up)
                     {
                         if (linkPlayer.state is MoveUp)
                         {
@@ -119,7 +119,7 @@ namespace Sprint4
                         }
                     }
 
-                    else if (collision.Down())
+                    else if (collision.Down)
                     {
                         if (linkPlayer.state is MoveDown)
                         {

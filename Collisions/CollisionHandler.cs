@@ -250,19 +250,19 @@ namespace Sprint4
 
         public static Collision LeftCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.left,loc, other);
+            return new Collision(Direction.left,loc, other);
         }
         public static Collision RightCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.right,loc, other);
+            return new Collision(Direction.right,loc, other);
         }
         public static Collision TopCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.up, loc, other);
+            return new Collision(Direction.up, loc, other);
         }
         public static Collision BottomCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.down, loc, other);
+            return new Collision(Direction.down, loc, other);
         }
 
 

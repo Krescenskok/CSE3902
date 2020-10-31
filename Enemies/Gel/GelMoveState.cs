@@ -26,11 +26,11 @@ namespace Sprint4
         private List<List<Rectangle>> gridTiles;
         private Point tileSize;
         private int currentRow, currentCol;
-       
 
-        private enum Direction { left, right, up, down };
+
+        Direction left = Direction.left,right = Direction.right, up = Direction.up, down = Direction.down;
         List<Direction> possibleDirections;
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        
         Direction currentDirection;
         private Vector2 moveDirection;
 
@@ -64,15 +64,15 @@ namespace Sprint4
             this.location = currentSpace.Location.ToVector2();
             gelly.UpdateLocation(this.location);
 
-            currentCol = currentSpace.X / tileSize.X;
-            currentRow = currentSpace.Y / tileSize.Y;
+            currentCol = GridGenerator.Instance.GetColumn(currentSpace.X);
+            currentRow = GridGenerator.Instance.GetRow(currentSpace.Y);
 
             stoppedMoving = true;
             RandomNumber = new Random();
 
             coolDownClock = coolDownTimes[RandomNumber.Next(0, coolDownTimes.Length)];
 
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default;
         }
 
         public void Update()
@@ -100,12 +100,12 @@ namespace Sprint4
             }
 
             //update location on grid
-            currentCol = currentSpace.X / currentSpace.Width;
-            currentRow = currentSpace.Y / currentSpace.Height;
+            currentCol = GridGenerator.Instance.GetColumn(currentSpace.X);
+            currentRow = GridGenerator.Instance.GetRow(currentSpace.Y);
 
 
             //Update last space visited and next space to visit on grid
-            
+
             if (currentSpace.Intersects(nextSpaceOnGrid))
             {
                 lastSpaceOnGrid = nextSpaceOnGrid;
@@ -118,7 +118,7 @@ namespace Sprint4
         public void CheckIfBlockingPath(ICollider col, Collision collision)
         {
 
-            possibleDirections.Remove((Direction)collision.From());
+            possibleDirections.Remove(collision.From);
             if (!possibleDirections.Contains(currentDirection) && LiesOnPath(col.Bounds()) && lastSpaceOnGrid == currentSpace)
             {
 
@@ -252,7 +252,7 @@ namespace Sprint4
         }
         public void FreeToMove()
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default;
         }
 
         public void TakeDamage(int amount)

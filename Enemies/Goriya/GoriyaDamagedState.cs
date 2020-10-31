@@ -8,9 +8,9 @@ namespace Sprint4
     public class GoriyaDamagedState : IEnemyState
     {
 
-        private enum Direction { left , right , up , down  };
+        
 
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        
         Direction currentDirection;
 
         Vector2 moveDirection;
@@ -24,30 +24,22 @@ namespace Sprint4
 
         private Goriya goriya;
 
-        public GoriyaDamagedState(string dir, Goriya goriya, Vector2 location, int moveSpeed)
+        public GoriyaDamagedState(Direction dir, Goriya goriya, Vector2 location, int moveSpeed)
         {
-            if (dir.Equals(left.ToString())) currentDirection = right;
-            if (dir.Equals(right.ToString())) currentDirection = left;
-            if (dir.Equals(up.ToString())) currentDirection = down;
-            if (dir.Equals(down.ToString())) currentDirection = up;
+            currentDirection = dir;
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CalculateY(currentDirection);
+            moveDirection.X = Directions.CalculateX(currentDirection);
 
             this.goriya = goriya;
             this.location = location;
             this.moveSpeed = moveSpeed * normalSpeedMultiplier;
 
             goriya.Collider().ChangeState(this);
-            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir));
+            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir.ToString()));
         }
 
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
+      
         public void Attack()
         {
             //do nothing
@@ -66,7 +58,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            Direction collisionDirection = (Direction)collision.From();
+            Direction collisionDirection = collision.From;
             if (collisionDirection.Equals(currentDirection))
             {
                 moveSpeed = 0;

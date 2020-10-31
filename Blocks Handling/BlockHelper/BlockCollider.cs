@@ -45,7 +45,7 @@ namespace Sprint4.Blocks
         {
             if (col.CompareTag("Player") && block.GetMoveable())
             {
-                block.move(collision.From().ToString());
+                block.move(collision.From.ToString());
                 col.SendMessage("Special Block", null);
             }
         }
