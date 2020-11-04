@@ -36,7 +36,7 @@ namespace Sprint3.Link
         private int numOfRupee = 0;
         private bool useRing = false;
         private int fullHealth = 60;
-        private int delay = 2;
+        private int delay;
         private bool clock = false;
         private bool largeShield = false;
         public List<IItems> itemsPickedUp;

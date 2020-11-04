@@ -24,6 +24,11 @@ namespace Sprint3.Link
             this.link = link;
             link.isWalkingInPlace = false;
             itemsPlacedByLink = link.itemsPlacedByLink;
+            if (link.Delay <= 0)
+            {
+                link.isWalkingInPlace = false;
+
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
@@ -43,12 +48,14 @@ namespace Sprint3.Link
                     if(link.IsDamaged)
                     {
                         col = colors[i];
+                     
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == colors.Length - 1)
                         {
                             i = 0;
                         }
+                        link.currentLocation = location;
 
                     }
                     else if (link.Clock)
@@ -62,9 +69,7 @@ namespace Sprint3.Link
                         }
 
                     }
-                  
 
-                   
                 }
                 else
                 {
@@ -181,16 +186,12 @@ namespace Sprint3.Link
             return HandleShield(gameTime, location);
         }
 
-        
-
         public abstract Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleSword(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleShield(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
-
-
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {

@@ -12,12 +12,14 @@ namespace Sprint3
     {
         //private Rectangle bounds;
         LinkPlayer linkPlayer;
+        private IItems item;
         //String Key;
 
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
+            this.item = item;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
         }
 
@@ -150,61 +152,69 @@ namespace Sprint3
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "TakeDamageRight")
+            if(!linkPlayer.IsDamaged)
             {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
+                if (msg == "TakeDamageRight")
                 {
-                    linkPlayer.Health -= ((int)value) / 2;
-                }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.X -= 100;
-            }
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+                    linkPlayer.currentLocation.X += 50;
 
-            else if (msg == "TakeDamageLeft")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
-                {
-                    linkPlayer.Health -= ((int)value) / 2;
                 }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.X += 100;
-            }
 
-            else if (msg == "TakeDamageUp")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
+                else if (msg == "TakeDamageLeft")
                 {
-                    linkPlayer.Health -= ((int)value) / 2;
-                }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.Y += 100;
-            }
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
 
-            else if (msg == "TakeDamageDown")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
-                {
-                    linkPlayer.Health -= ((int)value) / 2;
+                    linkPlayer.currentLocation.X -= 50;
                 }
-                else
+
+                else if (msg == "TakeDamageUp")
                 {
-                    linkPlayer.Health -= (int)value;
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+
+                    linkPlayer.currentLocation.Y -= 50;
                 }
-                linkPlayer.currentLocation.Y -= 100;
+
+                else if (msg == "TakeDamageDown")
+                {
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+
+                    linkPlayer.currentLocation.Y += 50;
+                }
             }
+            
 
             if (msg == "WalkInPlace")
             {
@@ -243,11 +253,7 @@ namespace Sprint3
             if (msg == "Special Block")
             {
                 linkPlayer.isWalkingInPlace = true;
-                if (linkPlayer.Delay <= 0)
-
-                {
-                    linkPlayer.isWalkingInPlace = false;
-                }
+                linkPlayer.Delay = 2;
             }
 
             if( msg == "LargeShield")
