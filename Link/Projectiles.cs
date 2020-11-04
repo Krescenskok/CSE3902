@@ -21,6 +21,16 @@ namespace Sprint3.Link
         private bool candleMade = false;
         private bool bombMade = false;
 
+        int DRAW_TEN = 10;
+        int DRAW_SIX = 6;
+        int DRAW_FIVE = 5;
+        int DRAW_EIGHT = 8;
+        int DRAW_TWELVE = 12;
+        int TIME = 100;
+        String UP = "UP";
+        String DOWN = "DOWN";
+        String RIGHT = "RIGHT";
+        String LEFT = "LEFT";
 
         private Vector2 itemLocation;
 
@@ -54,7 +64,7 @@ namespace Sprint3.Link
             {
                 arrowMade = true;
                 itemLocation = link.CurrentLocation;
-                itemLocation.Y += 10;
+                itemLocation.Y += DRAW_TEN;
                 item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
                 link.itemsPlacedByLink.Add(item);
             }
@@ -68,30 +78,30 @@ namespace Sprint3.Link
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                if (direction.Equals("Down"))
+                if (direction.Equals(DOWN))
                 {
-                    itemLocation.X += 12;
+                    itemLocation.X += DRAW_TWELVE;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
-                    itemLocation.Y += 5;
+                    itemLocation.Y += DRAW_FIVE;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
-                else if (direction.Equals("Left"))
+                else if (direction.Equals(LEFT))
                 {
-                    itemLocation.Y += 6;
+                    itemLocation.Y += DRAW_SIX;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else
                 {
-                    itemLocation.X += 8;
+                    itemLocation.X += DRAW_EIGHT;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
@@ -106,25 +116,25 @@ namespace Sprint3.Link
 
             if (!wandMade)
             {
-                if (direction.Equals("Down"))
+                if (direction.Equals(DOWN))
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X += 10;
+                    itemLocation.Y += DRAW_TEN;
+                    itemLocation.X += DRAW_TEN;
                 }
-                else if (direction.Equals("Left"))
+                else if (direction.Equals(LEFT))
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X -= 10;
+                    itemLocation.Y += DRAW_TEN;
+                    itemLocation.X -= DRAW_TEN;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X += 10;
+                    itemLocation.Y += DRAW_TEN;
+                    itemLocation.X += DRAW_TEN;
                 }
                 else
                 {
-                    itemLocation.Y -= 10;
-                    itemLocation.X += 6;
+                    itemLocation.Y -= DRAW_TEN;
+                    itemLocation.X += DRAW_SIX;
                 }
                 wandMade = true;
                 item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
@@ -138,7 +148,7 @@ namespace Sprint3.Link
             if (!boomerangMade)
             {
                 itemLocation = link.CurrentLocation;
-                itemLocation.Y += 10;
+                itemLocation.Y += DRAW_TEN;
                 boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 link.itemsPlacedByLink.Add(item);
@@ -152,16 +162,16 @@ namespace Sprint3.Link
             if (!candleMade)
             {
                 candleMade = true;
-                loc.X += 10;
-                if (direction.Equals("Up"))
+                loc.X += DRAW_TEN;
+                if (direction.Equals(UP))
                 {
                     loc.Y -= buffer;
                 }
-                else if (direction.Equals("Down"))
+                else if (direction.Equals(DOWN))
                 {
                     loc.Y += buffer;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
                     loc.X += buffer;
                 }
@@ -182,16 +192,16 @@ namespace Sprint3.Link
             if (!bombMade)
             {
                 bombMade = true;
-                loc.X += 10;
-                if (direction.Equals("Up"))
+                loc.X += DRAW_TEN;
+                if (direction.Equals(UP))
                 {
                     loc.Y -= buffer;
                 }
-                else if (direction.Equals("Down"))
+                else if (direction.Equals(DOWN))
                 {
                     loc.Y += buffer;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
                     loc.X += buffer;
                 }
@@ -262,7 +272,7 @@ namespace Sprint3.Link
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > TIME)
             {
                 placedItems = link.itemsPlacedByLink;
                 foreach (IItems projectile in placedItems)

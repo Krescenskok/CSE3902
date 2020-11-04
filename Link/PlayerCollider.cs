@@ -14,7 +14,32 @@ namespace Sprint3
         LinkPlayer linkPlayer;
         private IItems item;
         //String Key;
-
+        int WOODEN_DAMAGE = 5;
+        int SWORD_DAMAGE = 10;
+        int ROD_DAMAGE = 15;
+        int TWO = 2;
+        int LOC_CHANGE = 50;
+        int HEAL = 30;
+        int HEALTH_INC = 10;
+        String ENEMY_TAKE_DAMAGE = "EnemyTakeDamage";
+        String TAKE_DAMAGE_RIGHT = "TakeDamageRight";
+        String TAKE_DAMAGE_DOWN = "TakeDamageDown";
+        String TAKE_DAMAGE_LEFT = "TakeDamageLeft";
+        String TAKE_DAMAGE_UP = "TakeDamageUP";
+        String PLAYER = "Player";
+        String pPLAYER = "player";
+        String BLOCK = "Block";
+        String ENEMY = "enemy";
+        String ITEM = "Item";
+        String DISAPPEAR = "Disappear";
+        String WALKINPLACE = "WalkInPlace";
+        String HEAL_STR = "Heal";
+        String HEARTCONTAINER = "HeartContainer";
+        String RUPEE = "Rupee";
+        String HAND = "Hand";
+        String SPECIALBLOCK = "Special Block";
+        String LARGESHIELD = "Large Shield";
+  
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
@@ -23,7 +48,7 @@ namespace Sprint3
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
         }
 
-        public string Name { get => "Player"; }
+        public string Name { get => PLAYER; }
         public Layer layer { get; set; }
 
         public Rectangle Bounds()
@@ -33,7 +58,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "Player" || tag == "player";
+            return tag == PLAYER || tag == pPLAYER;
         }
 
         public bool Equals(ICollider col)
@@ -43,7 +68,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block"))
+            if (col.CompareTag(BLOCK))
             {
 
                 linkPlayer.isWalkingInPlace = true;
@@ -54,13 +79,13 @@ namespace Sprint3
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Block"))
+                if (col.CompareTag(BLOCK))
                 {
 
                 linkPlayer.isWalkingInPlace = true;
 
             } else 
-                if (col.CompareTag("enemy"))
+                if (col.CompareTag(ENEMY))
             {
                 if (linkPlayer.IsAttacking)
                 {
@@ -70,15 +95,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
                             }
                         }
                     }
@@ -89,15 +114,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
                             }
                         }
                     }
@@ -108,15 +133,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
                             }
                         }
                     }
@@ -127,15 +152,15 @@ namespace Sprint3
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
                             }
                         }
                     }
@@ -143,9 +168,9 @@ namespace Sprint3
 
             }
 
-            if (col.CompareTag("item"))
+            if (col.CompareTag(ITEM))
             {
-                col.SendMessage("Disappear", null);
+                col.SendMessage(DISAPPEAR, null);
             }
 
         }
@@ -154,109 +179,109 @@ namespace Sprint3
         {
             if(!linkPlayer.IsDamaged)
             {
-                if (msg == "TakeDamageRight")
+                if (msg == TAKE_DAMAGE_RIGHT)
                 {
                     linkPlayer.IsDamaged = true;
                     if (linkPlayer.UseRing)
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.Health -= ((int)value) / TWO;
                     }
                     else
                     {
                         linkPlayer.Health -= (int)value;
                     }
-                    linkPlayer.currentLocation.X += 50;
+                    linkPlayer.currentLocation.X += LOC_CHANGE;
 
                 }
 
-                else if (msg == "TakeDamageLeft")
+                else if (msg == TAKE_DAMAGE_LEFT)
                 {
                     linkPlayer.IsDamaged = true;
                     if (linkPlayer.UseRing)
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.Health -= ((int)value) / TWO;
                     }
                     else
                     {
                         linkPlayer.Health -= (int)value;
                     }
 
-                    linkPlayer.currentLocation.X -= 50;
+                    linkPlayer.currentLocation.X -= LOC_CHANGE;
                 }
 
-                else if (msg == "TakeDamageUp")
+                else if (msg == TAKE_DAMAGE_UP)
                 {
                     linkPlayer.IsDamaged = true;
                     if (linkPlayer.UseRing)
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.Health -= ((int)value) / TWO;
                     }
                     else
                     {
                         linkPlayer.Health -= (int)value;
                     }
 
-                    linkPlayer.currentLocation.Y -= 50;
+                    linkPlayer.currentLocation.Y -= LOC_CHANGE;
                 }
 
-                else if (msg == "TakeDamageDown")
+                else if (msg == TAKE_DAMAGE_DOWN)
                 {
                     linkPlayer.IsDamaged = true;
                     if (linkPlayer.UseRing)
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.Health -= ((int)value) / TWO;
                     }
                     else
                     {
                         linkPlayer.Health -= (int)value;
                     }
 
-                    linkPlayer.currentLocation.Y += 50;
+                    linkPlayer.currentLocation.Y += LOC_CHANGE;
                 }
             }
             
 
-            if (msg == "WalkInPlace")
+            if (msg == WALKINPLACE)
             {
                 linkPlayer.isWalkingInPlace = true;
             }
 
-            if (msg == "Item")
+            if (msg == ITEM)
             {
                 linkPlayer.IsPickingUpItem = true;
                 linkPlayer.itemsPickedUp.Add((IItems)value);
             }
-            if (msg == "Heal")
+            if (msg == HEAL_STR)
             {
                 linkPlayer.Health += (float)value;
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
                 {
-                    linkPlayer.Health = 30;
+                    linkPlayer.Health = HEAL;
                 }
             }
-            if (msg == "Heartcontainer")
+            if (msg == HEARTCONTAINER)
             {
-                linkPlayer.FullHealth += 10;
+                linkPlayer.FullHealth += HEALTH_INC;
                 linkPlayer.Health = linkPlayer.FullHealth;
             }
 
-            if (msg == "Rupee")
+            if (msg == RUPEE)
             {
                 linkPlayer.NumOfRupee++;
             }
 
-            if (msg == "Hand")
+            if (msg == HAND)
             {
                 linkPlayer.currentLocation = (Vector2)value;
             }
 
-            if (msg == "Special Block")
+            if (msg == SPECIALBLOCK)
             {
                 linkPlayer.isWalkingInPlace = true;
-                linkPlayer.Delay = 2;
+                linkPlayer.Delay = TWO;
             }
 
-            if( msg == "LargeShield")
+            if( msg == LARGESHIELD)
             {
                 linkPlayer.LargeShield = true;
             }

@@ -20,22 +20,26 @@ namespace Sprint3.Link
         Clock
     }
 
+    
 
     public class LinkPlayer
     {
         public ILinkState state;
-
+        const float HEALTH = 60;
+        const int NUM_OF_RUPEE = 0;
+        
+   
         bool loc = false;
         public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
-        private float health = 60;
+        private float health = HEALTH;
         public bool isWalkingInPlace = false;
         private bool isPickingUpItem = false;
-        private int numOfRupee = 0;
+        private int numOfRupee = NUM_OF_RUPEE;
         private bool useRing = false;
-        private int fullHealth = 60;
+        private float fullHealth = HEALTH;
         private int delay;
         private bool clock = false;
         private bool largeShield = false;
@@ -143,7 +147,7 @@ namespace Sprint3.Link
 
         public bool UseRing { get => useRing; set => useRing = value; }
 
-        public int FullHealth { get => fullHealth; set => fullHealth = value; }
+        public float FullHealth { get => fullHealth; set => fullHealth = value; }
 
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
@@ -200,8 +204,6 @@ namespace Sprint3.Link
         public void Reset()
         {
             state = new Stationary(this);
-            Health = 100;
-
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;
@@ -210,10 +212,10 @@ namespace Sprint3.Link
             IsPickingUpItem = false;
             LargeShield = false;
             UseRing = false;
-            Health = 60;
-            NumOfRupee = 0;
-            FullHealth = 60;
-            Delay = 2;
+            Health = HEALTH;
+            NumOfRupee = NUM_OF_RUPEE;
+            FullHealth = HEALTH;
+            Delay = 0;
             clock = false;
             //if(itemsPickedUp.Count > 0)
             //{

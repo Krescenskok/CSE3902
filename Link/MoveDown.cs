@@ -9,7 +9,9 @@ namespace Sprint3.Link
 
         private double lastTime;
         int MOVEMENT = 10;
-
+        int TIME = 100;
+        int Y_LOCATION = 445;
+        int PICKUP = 300;
 
         public MoveDown(LinkPlayer link) : base(link)
         {
@@ -19,7 +21,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
                 if(!link.isWalkingInPlace)
                 {
@@ -47,8 +49,8 @@ namespace Sprint3.Link
                         currentFrame = 0;
                 }
               
-                if (location.Y >= 445)
-                    location.Y = 445;
+                if (location.Y >= Y_LOCATION)
+                    location.Y = Y_LOCATION;
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -58,7 +60,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -101,7 +103,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandleSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
                 lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -145,7 +147,7 @@ namespace Sprint3.Link
         
         public override Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -186,7 +188,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > PICKUP)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -224,7 +226,7 @@ namespace Sprint3.Link
 
         public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > PICKUP)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 

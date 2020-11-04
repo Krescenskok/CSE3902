@@ -11,6 +11,7 @@ namespace Sprint3.Link
         Texture2D texture;
         int TOTAL_ROWS = 7;
         int TOTAL_COLS = 20;
+        int TWO = 2;
 
         public LinkSprite(Texture2D texture)
         {
@@ -26,7 +27,7 @@ namespace Sprint3.Link
             int column = currentFrame % TOTAL_COLS;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2*width, 2*height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X - width / TWO, (int)location.Y - height / TWO, TWO*width, TWO*height);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, color);
         }

@@ -16,6 +16,9 @@ namespace Sprint3.Link
         protected int currentFrame;
 
         int i = 0;
+        int X_LOCATION = 780;
+        int Y_LOCATION = 445;
+        int ZERO = 0;
 
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -108,14 +111,14 @@ namespace Sprint3.Link
 
             if (link.IsStopped)
             {
-                if (location.X <= 0)
-                    location.X = 0;
-                else if (location.X >= 780)
-                        location.X = 780;
-                else if (location.Y <= 0)
-                    location.Y = 0;
-                else if (location.Y >= 445)
-                    location.Y = 445;
+                if (location.X <= ZERO)
+                    location.X = ZERO;
+                else if (location.X >= X_LOCATION)
+                        location.X = X_LOCATION;
+                else if (location.Y <= ZERO)
+                    location.Y = ZERO;
+                else if (location.Y >= Y_LOCATION)
+                    location.Y = Y_LOCATION;
 
                 return location;
             }
