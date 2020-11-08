@@ -41,7 +41,7 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall"))
             {
 
                 linkPlayer.isWalkingInPlace = true;
@@ -52,7 +52,7 @@ namespace Sprint4
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Block"))
+                if (col.CompareTag("Block") || col.CompareTag("Wall"))
                 {
 
                 linkPlayer.isWalkingInPlace = true;
@@ -249,6 +249,11 @@ namespace Sprint4
                     linkPlayer.isWalkingInPlace = false;
                 }
             }
+        }
+
+        public void Update()
+        {
+            //put here to update collider location
         }
     }
 }

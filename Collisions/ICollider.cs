@@ -47,6 +47,6 @@ namespace Sprint4
 
         Layer layer { get; set; }
 
-
+        void Update();
     }
 }

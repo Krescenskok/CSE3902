@@ -131,7 +131,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            bat.TakeDamage(amount);
+            
         }
 
         public void Stun()

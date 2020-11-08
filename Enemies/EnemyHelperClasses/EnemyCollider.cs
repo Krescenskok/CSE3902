@@ -10,14 +10,14 @@ namespace Sprint4
     public class EnemyCollider : ICollider
     {
         private Rectangle bounds;
-        private IEnemyState enemy;
+        private IEnemy enemy;
         private int damageAmount;
         public string name;
 
         public string Name { get => name; }
         public Layer layer { get; set; }
 
-        public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength)
+        public EnemyCollider(Rectangle rect, IEnemy enemy, int strength)
         {
             bounds = rect;
 
@@ -25,12 +25,12 @@ namespace Sprint4
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.Enemy);
 
             name = "Enemy";
         }
 
-        public EnemyCollider(Rectangle rect, IEnemyState enemy, int strength, string name)
+        public EnemyCollider(Rectangle rect, IEnemy enemy, int strength, string name)
         {
             bounds = rect;
 
@@ -47,10 +47,7 @@ namespace Sprint4
 
         }
 
-        public void ChangeState(IEnemyState state)
-        {
-            enemy = state;
-        }
+
 
         public Rectangle Bounds()
         {
@@ -73,11 +70,12 @@ namespace Sprint4
             
             if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("Trap"))
             {
-                enemy.MoveAwayFromCollision(collision);
+                enemy.ObstacleCollision(collision);
                 
             }
 
-            if (name.Equals("WallMaster") && col.CompareTag("Player")) { enemy.Attack(); col.SendMessage("Hand", (WallMasterMoveState)this.enemy); }
+            WallMaster master = enemy.State as WallMaster;
+            if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
@@ -85,28 +83,23 @@ namespace Sprint4
             string direction = collision.From.ToString();
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
+
+            WallMaster master = enemy.State as WallMaster;
             if (col.CompareTag("Player")) col.SendMessage("TakeDamage" + direction, damageAmount);
-            if (name.Equals("WallMaster") && col.CompareTag("Player")) { enemy.Attack(); col.SendMessage("Hand", (WallMasterMoveState)this.enemy); }
+            if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
             else if (col.CompareTag("Item")) col.SendMessage("Impact", 0);
         }
 
         public void SendMessage(string msg, object value)
         {
-            
 
-            if (msg == "EnemyTakeDamage") enemy.TakeDamage((int)value);
-            else if (msg == "Stun" && !Name.Equals("Keese")) enemy.Stun();
-            else if (msg == "Stun") enemy.Die();
+
+            if (msg == "Stun") enemy.Stun();
             else if (msg.Contains("EnemyTakeDamage"))
-            { 
-               Direction dir = Directions.Parse(msg.Substring(15));
+            {
+                Direction dir = Directions.Parse(msg.Substring(15));
 
-                StalfosWalkingState stalfos = enemy as StalfosWalkingState;
-                GoriyaMoveState goriya = enemy as GoriyaMoveState;
-
-                if (stalfos != null) stalfos.TakeDamage(dir, (int)value);
-                else if (goriya != null) goriya.TakeDamage(dir, (int)value);
-                else enemy.TakeDamage((int)value);
+                enemy.TakeDamage(dir, (int)value);
 
 
             }
@@ -117,9 +110,8 @@ namespace Sprint4
         }
 
 
-        public void Update(IEnemy enemy)
+        public void Update()
         {
-            this.enemy = enemy.State;
             bounds.Location = enemy.Location.ToPoint();
         }
     }

@@ -38,6 +38,9 @@ namespace Sprint4
 
         public IEnemyState State { get => state; }
 
+        public List<ICollider> Colliders { get => new List<ICollider> { aquamentusCollider }; }
+        
+
         public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
         {
             this.link = link;
@@ -49,7 +52,7 @@ namespace Sprint4
             state = new AquamentusNormalState(this, aquamentusPos, link);
             fireBallList = new List<FireBall>(); //added by JT
             aquamentusSprite = (AquamentusNormalSprite)sprite;
-            aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), state, AttackStrength);
+            aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
             speed = moveSpeedPerSec / UpdatePerSec;
         }
 
@@ -75,8 +78,8 @@ namespace Sprint4
 
         public void Die()
         {
-            CollisionHandler.Instance.RemoveCollider(GetCollider());
-            RoomEnemies.Instance.Destroy(this);
+            
+            RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
         }
 
@@ -130,7 +133,7 @@ namespace Sprint4
             }
             aquamentusPos.X += directionIndex * speed;
             state.Update();
-            aquamentusCollider.Update(this);
+            
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
@@ -145,9 +148,22 @@ namespace Sprint4
             }
         }
 
-        public EnemyCollider GetCollider()
+      
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return aquamentusCollider;
+            LostHP(amount);
         }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            //do nothing
+        }
+
+        public void Stun()
+        {
+           //stun implementation
+        }
+
     }
 }

@@ -26,8 +26,8 @@ namespace Sprint4
             this.col = col;
 
 
-            spriteSize.X = 256;
-            spriteSize.Y = 176;
+            spriteSize.X = texture.Bounds.Width / 6;
+            spriteSize.Y = texture.Bounds.Height / 6;
 
             drawSize = size;
         }

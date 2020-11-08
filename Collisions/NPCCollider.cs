@@ -12,7 +12,7 @@ namespace Sprint4
         public NPCCollider(Rectangle rectangle)
         {
             bounds = rectangle;
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.NPC);
         }
 
         public string Name { get => "NPC"; }
@@ -47,6 +47,10 @@ namespace Sprint4
         public void Update(Point point)
         {
             bounds.Location = point;
+        }
+        public void Update()
+        {
+
         }
     }
 }

@@ -47,8 +47,6 @@ namespace Sprint4
             possibleDirections = new List<Direction> { left, right, up, down };
             ChangeDirection();
 
-          
-            goriya.Collider().ChangeState(this);
         }
 
         public void Attack()
@@ -145,17 +143,12 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            goriya.TakeDamage(amount);
+            
             goriya.state = new GoriyaDamagedState(currentDirection, goriya, location, moveSpeed);
             
         }
 
-        public void TakeDamage(Direction dir, int amount)
-        {
-            goriya.TakeDamage(amount);
-            goriya.state = new GoriyaDamagedState(dir, goriya, location, moveSpeed);
 
-        }
 
         public void Stun()
         {

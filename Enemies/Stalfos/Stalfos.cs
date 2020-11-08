@@ -29,6 +29,7 @@ namespace Sprint4
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
@@ -44,7 +45,7 @@ namespace Sprint4
         {
             state = new StalfosWalkingState(this, location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, HPAmount.HalfHeart, "Stalfos");
+            collider = new EnemyCollider(stalfosSprite.GetRectangle(), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 
@@ -56,15 +57,19 @@ namespace Sprint4
 
 
         
-        /// <returns>true when stalfos HP is > 0</returns>
-        public bool SubtractHP(int amount)
+      
+        public void TakeDamage(Direction dir, int amount)
         {
             HP -= amount;
 
+            if (HP <= HPAmount.Zero) Die();
+            else state = new StalfosDamagedState(dir, this, location);
             
-            if (HP <= HPAmount.Zero) { Die(); }
+        }
 
-            return HP > HPAmount.Zero;
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -75,7 +80,7 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            
         }
 
         public void SetSprite(ISprite sprite)
@@ -90,9 +95,11 @@ namespace Sprint4
             this.location = location;
         }
 
-        public EnemyCollider GetCollider()
+
+
+        public void Stun()
         {
-            return collider;
+            state.Stun();
         }
     }
 }

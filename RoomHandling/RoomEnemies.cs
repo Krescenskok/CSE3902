@@ -27,6 +27,7 @@ namespace Sprint4
 
         private List<TestCollider> testObjects;
 
+        private Game game;
    
 
         public static RoomEnemies Instance
@@ -49,6 +50,7 @@ namespace Sprint4
         {
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
+            this.game = game;
 
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)
@@ -124,7 +126,7 @@ namespace Sprint4
 
 
 
-        public void AddTestCollider(Rectangle rect, Game game)
+        public void AddTestCollider(Rectangle rect)
         {
             testObjects.Add(new TestCollider(rect, game));
         }
@@ -173,13 +175,13 @@ namespace Sprint4
         {
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
         }
 
         public void Destroy(IEnemy enemy)
         {
             enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
         }
         
 

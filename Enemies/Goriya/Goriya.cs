@@ -37,6 +37,7 @@ namespace Sprint4
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
         private XElement saveData;
 
@@ -58,10 +59,7 @@ namespace Sprint4
             return boomy;
         }
 
-        public EnemyCollider Collider()
-        {
-            return collider;
-        }
+      
 
         public void UpdateLocation(Vector2 location)
         {
@@ -83,7 +81,7 @@ namespace Sprint4
         {
             state = new GoriyaMoveState(this, location);
             gorSprite = (GoriyaWalkSprite)sprite;
-            collider = new EnemyCollider(gorSprite.GetRectangle(), state, HPAmount.HalfHeart, "Goriya");
+            collider = new EnemyCollider(gorSprite.GetRectangle(), this, HPAmount.HalfHeart, "Goriya");
         }
 
 
@@ -93,12 +91,7 @@ namespace Sprint4
             saveData.SetElementValue("Alive", "false");
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-            
-        }
+    
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -110,13 +103,35 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            
             if (boomy != null) boomy.Update();
         }
 
         public EnemyCollider GetCollider()
         {
             return collider;
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+            else state = new GoriyaDamagedState(dir, this, location, 2);
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            state.Stun();
+        }
+
+        public void Attack()
+        {
+            state.Attack();
         }
     }
 }

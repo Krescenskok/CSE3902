@@ -27,7 +27,7 @@ namespace Sprint4
 
             this.state = state;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
 
         }
 
@@ -85,10 +85,17 @@ namespace Sprint4
         }
 
 
+        //this can probably be deleted//
         public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

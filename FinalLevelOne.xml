@@ -5,12 +5,54 @@
 
 		<!-- First Room Content-->
 		<Room id ="1">
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			
 			
 			<!-- Statue Blocks Left Side-->
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>BirdLeft</ObjectName>
-				<Location>1 1</Location>
+				<Location>0 0</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>

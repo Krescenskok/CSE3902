@@ -16,9 +16,17 @@ namespace Sprint4
 
         void Spawn();
 
-        EnemyCollider GetCollider();
+        
+        void TakeDamage(Direction dir, int amount);
+        void ObstacleCollision(Collision collision);
 
-        Vector2 Location { get; }
+        void Stun();
+
+       
+        List<ICollider> Colliders { get; }
+        
+
+        new Vector2 Location { get; }
 
         IEnemyState State { get; }
 

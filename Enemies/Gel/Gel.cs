@@ -28,6 +28,8 @@ namespace Sprint4
 
         public IEnemyState State { get => state; }
 
+        public List<ICollider> Colliders { get => new List<ICollider> { innerCollider,outsideCollider }; }
+
         private XElement saveData;
 
         public Gel(Game game, Vector2 location, XElement xlm)
@@ -45,9 +47,9 @@ namespace Sprint4
         {
             state = new GelMoveState(this, location, game);
             gSprite = (GelMoveSprite)sprite;
-            innerCollider = new EnemyCollider(gSprite.GetRectangle(), state, HPAmount.HalfHeart, "gel");
+            innerCollider = new EnemyCollider(gSprite.GetRectangle(), this, HPAmount.HalfHeart, "gel");
             
-            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state);
+            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state, this);
             
         }
 
@@ -65,22 +67,12 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            innerCollider.Update(this);
-
-            if(gSprite != null)outsideCollider.Update(gSprite.OuterColliderLocation(location));
-           
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-        }
 
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this, location);
-            CollisionHandler.Instance.RemoveCollider(outsideCollider);
             saveData.SetElementValue("Alive", "false");
         }
 
@@ -91,12 +83,31 @@ namespace Sprint4
             
         }
 
-        
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
+        }
 
         public EnemyCollider GetCollider()
         {
             return innerCollider;
 
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void Stun()
+        {
+            state.Stun();
+        }
+
+        public void Attack()
+        {
+            //does nothing
         }
     }
 }

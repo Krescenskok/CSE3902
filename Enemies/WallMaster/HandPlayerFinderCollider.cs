@@ -28,7 +28,7 @@ namespace Sprint4
 
             state = (WallMasterMoveState)wallMaster.State;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
         }
 
 
@@ -52,19 +52,24 @@ namespace Sprint4
         public void HandleCollision(ICollider col, Collision collision)
         {
 
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.LockOnToPlayerPosition(collision);
+            if (col.CompareTag("Player") ) state.LockOnToPlayerPosition(collision);
 
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.LockOnToPlayerPosition(collision);
+            if (col.CompareTag("Player")) state.LockOnToPlayerPosition(collision);
 
         }
 
         public void SendMessage(string msg, object value)
         {
             //does not handle messages
+        }
+
+        public void Update()
+        {
+
         }
     }
 }

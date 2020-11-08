@@ -14,7 +14,7 @@ namespace Sprint4.Blocks
 
         public string Name => throw new NotImplementedException();
 
-        
+        bool yes = false;
         public Layer layer { get; set; }
 
         public BlockCollider(Rectangle rect, IBlock block)
@@ -63,6 +63,8 @@ namespace Sprint4.Blocks
         public void Update()
         {
             bounds = block.getDestination();
+           
+            
         }
     }
 }

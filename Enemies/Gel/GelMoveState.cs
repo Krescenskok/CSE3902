@@ -18,8 +18,8 @@ namespace Sprint4
         
 
         private Rectangle currentSpace, targetSpaceOnGrid, nextSpaceOnGrid,lastSpaceOnGrid;
-        private List<Rectangle> pathSpaces;
-        
+        private List<Rectangle> pathSpaces = new List<Rectangle>();
+        private Rectangle path = new Rectangle();
         
         private const int tileColumns = 12;
         private const int tileRows = 7;
@@ -72,7 +72,7 @@ namespace Sprint4
 
             coolDownClock = coolDownTimes[RandomNumber.Next(0, coolDownTimes.Length)];
 
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
         }
 
         public void Update()
@@ -123,17 +123,18 @@ namespace Sprint4
             {
 
                 ChangeDirection();
-
+                
                 
             }
+            possibleDirections = Directions.Default();
 
         }
 
         //choose new tile on current row or column and change movedirection
         public void ChangeDirection()
         {
-            bool leftRightOpen = possibleDirections.Contains(left) || possibleDirections.Contains(right);
-            bool upDownOpen = possibleDirections.Contains(up) || possibleDirections.Contains(down);
+            bool leftRightOpen = possibleDirections.Contains(left) && currentCol > 0 || possibleDirections.Contains(right) && currentCol < tileColumns;
+            bool upDownOpen = possibleDirections.Contains(up) && currentRow > 0 || possibleDirections.Contains(down) && currentRow < tileRows;
 
             bool moveWithinRow = (RandomNumber.Next(0, 2) == 0 && leftRightOpen) || !upDownOpen;
             bool moveWithinColumn = !moveWithinRow;
@@ -150,6 +151,7 @@ namespace Sprint4
             }
             else //block or wall is blocking path
             {
+                
                 int rowMin = MinBound(up, currentRow), colMin = MinBound(left, currentCol);
                 int rowMax = MaxBound(down, currentRow, tileRows), colMax = MaxBound(right, currentCol, tileColumns);
 
@@ -171,6 +173,7 @@ namespace Sprint4
 
             //get list of spaces between current space and destination
             pathSpaces = GridGenerator.Instance.GetStraightPath(currentSpace, targetSpaceOnGrid);
+            path = GridGenerator.Instance.PathCollider(pathSpaces);
             nextSpaceOnGrid = pathSpaces[1];
             currentSpace = pathSpaces[0];
             
@@ -241,24 +244,14 @@ namespace Sprint4
         public bool LiesOnPath(Rectangle other)
         {
 
-            for (int i = pathSpaces.IndexOf(lastSpaceOnGrid); i < pathSpaces.Count;i++)
-            {
-                if(pathSpaces[i].Intersects(other) || pathSpaces[i].Contains(other))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return path.Intersects(other) || path.Contains(other);
         }
         public void FreeToMove()
         {
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
         }
 
-        public void TakeDamage(int amount)
-        {
-            gelly.TakeDamage(amount);
-        }
+        
 
         #region //unused methods
         public void Attack()
@@ -274,6 +267,10 @@ namespace Sprint4
         public void Die()
         {
             //do nothing
+        }
+        public void TakeDamage(int amount)
+        {
+            //
         }
         #endregion
 

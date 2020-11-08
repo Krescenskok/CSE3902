@@ -25,7 +25,7 @@ namespace Sprint4.Enemies
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
         }
 
        
@@ -70,9 +70,9 @@ namespace Sprint4.Enemies
            //nothing
         }
 
-        public void Update(Point point)
+        public void Update()
         {
-            bounds.Location = point;
+            bounds.Location = boomerang.Location;
         }
     }
 }

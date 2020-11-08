@@ -13,6 +13,8 @@ namespace Sprint4
         private Vector2 location;
         private Vector2 direction;
         private string directionStr;
+
+        public Point Location { get => location.ToPoint(); }
         
 
         private int timeSinceThrown;
@@ -73,7 +75,7 @@ namespace Sprint4
             }
 
 
-            collider.Update(location.ToPoint());
+           
         }
 
         public void Draw(SpriteBatch batch)

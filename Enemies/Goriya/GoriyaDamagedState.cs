@@ -35,7 +35,7 @@ namespace Sprint4
             this.location = location;
             this.moveSpeed = moveSpeed * normalSpeedMultiplier;
 
-            goriya.Collider().ChangeState(this);
+            
             goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir.ToString()));
         }
 

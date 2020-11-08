@@ -388,7 +388,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            master.TakeDamage(amount);
+            
         }
 
         public void Stun()

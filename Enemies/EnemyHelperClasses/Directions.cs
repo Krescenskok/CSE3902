@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint4
@@ -14,11 +15,11 @@ namespace Sprint4
         private static Direction Down { get => Direction.down; }
         private static Direction None { get => Direction.none; }
 
-        
 
 
-        public static List<Direction> Default { get; } = new List<Direction> { Left, Right, Up, Down };
-        public static List<Direction> LeftUp { get; } = new List<Direction> { Left, Up };
+        private static List<Direction> all = new List<Direction> { Left, Right, Up, Down };
+        public static List<Direction> Default() { return new List<Direction>(all); }
+        public static List<Direction> LeftUp { get; } =  new List<Direction> { Left, Up };
         public static List<Direction> RightUp { get; } = new List<Direction> { Right, Up };
         public static List<Direction> DownRight { get; } = new List<Direction> { Right, Down };
         public static List<Direction> DownLeft { get; } = new List<Direction> { Left, Down };
@@ -50,6 +51,7 @@ namespace Sprint4
             return directions[rand];
         }
 
+       
         public static Direction Parse(string str)
         {
             if (str == "left" || str == "Left") return Left;
@@ -67,8 +69,8 @@ namespace Sprint4
         /// <returns></returns>
         public static bool Chance(float likelihood)
         {
-            int chanceInHundred = (int)(likelihood * 10);
-            int randomCap = 100 / chanceInHundred;
+            float chanceInHundred = (likelihood * 10);
+            int randomCap = (int)(100 / chanceInHundred);
             return random.Next(0, randomCap) == 0;
         }
     }

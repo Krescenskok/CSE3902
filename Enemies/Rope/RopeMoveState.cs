@@ -80,7 +80,7 @@ namespace Sprint4
             if (currentDirection.Equals(left)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
             if (currentDirection.Equals(right)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("right"));
 
-            rope.UpdateDirection(currentDirection.ToString());
+            rope.UpdateDirection(currentDirection);
         }
 
         private Direction RandomDirection(List<Direction> directions)
@@ -91,7 +91,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
 
             possibleDirections.Remove(collision.From);
 
@@ -141,7 +141,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            rope.SubtractHP(amount);
+            //
         }
 
         public void Stun()

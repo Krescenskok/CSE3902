@@ -42,7 +42,7 @@ namespace Sprint4
 
         public void Die()
         {
-            CollisionHandler.Instance.RemoveCollider(fireBall.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(fireBall.Colliders);
             aquamentus.RemoveFireBall(fireBall);
         }
 

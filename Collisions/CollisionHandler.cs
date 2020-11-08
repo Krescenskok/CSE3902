@@ -53,16 +53,18 @@ namespace Sprint4
             newCol.layer = layer;
             colliders.Add(newCol);
         }
-        public void AddCollider(ICollider newCol)
-        {
-            newCol.layer = Layers.Default;
-            colliders.Add(newCol);
-        }
+      
 
         public void RemoveCollider(ICollider col)
         {
             removedColliders.Add(col);
         }
+
+        public void RemoveCollider(List<ICollider> colliders)
+        {
+            foreach (ICollider col in colliders) removedColliders.Add(col);
+        }
+        
 
 
         public void Initialize(Game game)
@@ -148,6 +150,7 @@ namespace Sprint4
             //add each collider to buckets in the spatial map
             for(int i = 0; i < colliders.Count; i++)
             {
+                colliders[i].Update();
                 RegisterCollider(colliders[i]);
             }
 
@@ -191,6 +194,8 @@ namespace Sprint4
 
                     
                 }
+
+               if(numCol > 5) Debug.WriteLine(numCol);
             }
 
 

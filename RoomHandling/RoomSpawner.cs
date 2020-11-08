@@ -70,13 +70,15 @@ namespace Sprint4
             currentRoomSprite = roomSprites[roomNumber - 1];
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
-            RoomBlocks.Instance.LoadRoom(game, room);       
+            RoomBlocks.Instance.LoadRoom(game, room);
+            RoomWalls.Instance.LoadRoom(game, room);
         }
         public void Update()
         {
             RoomEnemies.Instance.Update();
             RoomItems.Instance.Update();
             RoomBlocks.Instance.Update();
+            RoomWalls.Instance.Update();
         }
 
         public void RoomChange(Game game, int roomNumber)
@@ -99,7 +101,7 @@ namespace Sprint4
         public void LoadAllRooms(Game game)
         {
             roomSprites = new List<RoomSprite>();
-            roomSpriteSheet = game.Content.Load<Texture2D>("RoomMap");
+            roomSpriteSheet = game.Content.Load<Texture2D>("RoomMapFixed");
             Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
 
             roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 2, drawSize));

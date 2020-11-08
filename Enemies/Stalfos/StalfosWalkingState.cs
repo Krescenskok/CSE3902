@@ -37,7 +37,7 @@ namespace Sprint4
             stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosWalkingSprite());
 
             currentDirection = Direction.right;
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
             moveDirection.X = 1;
             moveDirection.Y = 0;
         }
@@ -49,10 +49,13 @@ namespace Sprint4
 
             currentDirection = Directions.RandomDirection(possibleDirections);
 
+            
+
             moveDirection.Y = Directions.CheckDirection(currentDirection, Direction.down, Direction.up);
             moveDirection.X = Directions.CheckDirection(currentDirection, Direction.right, Direction.left);
 
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
+            
         }
 
 
@@ -61,7 +64,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = Directions.Default;
+            possibleDirections = Directions.Default();
             possibleDirections.Remove(collision.From);
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
@@ -71,6 +74,8 @@ namespace Sprint4
 
         public void Update()
         {
+            
+
             if (Directions.Chance(randomness)) ChangeDirection();
             MoveOneUnit();
 
@@ -94,18 +99,6 @@ namespace Sprint4
         }
 
 
-        public void TakeDamage(int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(currentDirection, skeleton, location);
-        }
-
-        public void TakeDamage(Direction dir, int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(dir, skeleton, location);
-            
-        }
 
         #region //unused methods
         public void Attack()
@@ -116,6 +109,11 @@ namespace Sprint4
         public void Die()
         {
             //change to dying state
+        }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
