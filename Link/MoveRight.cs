@@ -12,7 +12,7 @@ namespace Sprint3.Link
         int MOVEMENT = 10;
         int TIME = 100;
         int PICKUP = 300;
-        int X_LOCATION = 780;
+        int X_LOCATION = 660;
 
 
         public MoveRight(LinkPlayer link) : base(link)

@@ -9,14 +9,13 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = -10;
         int TIME = 100;
-        int X_LOCATION = 0;
+        int X_LOCATION = 90;
         int PICKUP = 300;
 
         public MoveLeft(LinkPlayer link) : base(link)
         {
 
         }
-
 
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)

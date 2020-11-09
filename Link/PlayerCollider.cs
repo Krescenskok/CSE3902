@@ -53,7 +53,9 @@ namespace Sprint3
 
         public Rectangle Bounds()
         {
+
             return linkPlayer.Bounds;
+
         }
 
         public bool CompareTag(string tag)

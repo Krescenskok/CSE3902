@@ -10,7 +10,7 @@ namespace Sprint3.Link
         private double lastTime;
         int MOVEMENT = 10;
         int TIME = 100;
-        int Y_LOCATION = 445;
+        int Y_LOCATION = 375;
         int PICKUP = 300;
 
         public MoveDown(LinkPlayer link) : base(link)

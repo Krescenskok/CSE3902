@@ -18,7 +18,7 @@ namespace Sprint3.Link
             this.texture = texture;
         }
 
-        public void Draw(SpriteBatch spriteBatch,   Vector2 location, int currentFrame, Color color)
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
             
             int width = texture.Width / TOTAL_COLS;

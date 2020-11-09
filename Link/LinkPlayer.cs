@@ -69,7 +69,6 @@ namespace Sprint3.Link
         {
             get
             {
-
                 Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
                 return t;
             }
