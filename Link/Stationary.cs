@@ -208,5 +208,12 @@ namespace Sprint3.Link
         {
             throw new NotImplementedException();
         }
+
+        public override Rectangle Bounds()
+        {
+
+            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+
+        }
     }
 }

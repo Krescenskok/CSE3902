@@ -195,11 +195,13 @@ namespace Sprint3.Link
         public abstract Vector2 HandleShield(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
+        
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
         }
 
-        
+        public abstract Rectangle Bounds();
+    
     }
 }

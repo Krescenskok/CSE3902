@@ -14,7 +14,7 @@ namespace Sprint3
     {
         LinkPlayer player;
 
-
+        int delay = 0;
 
         //LinkItems item;
 
@@ -58,6 +58,7 @@ namespace Sprint3
             commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
             commandsList.Add(Keys.R, new ResetCommand(player));
+            commandsList.Add(Keys.G, new PauseCommand());
        
 
 
@@ -75,12 +76,25 @@ namespace Sprint3
                 if (kstate.IsKeyDown(kvp.Key))
                 {
 
-                        activeCommand = kvp.Value;
-                    
+                    activeCommand = kvp.Value;
+                    if (activeCommand is PauseCommand)
+                    {
+                        if (delay == 0 )
+                        {
+                            ((PauseCommand)activeCommand).IsPause = !((PauseCommand)activeCommand).IsPause;
+
+                            System.Diagnostics.Debug.WriteLine(((PauseCommand)activeCommand).IsPause);
+
+                            delay = 20;
+                        }
+                   
+                    }
 
                 }
             }
 
+            if (delay > 0)
+                delay--;
 
             return activeCommand;
         }

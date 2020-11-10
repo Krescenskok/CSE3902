@@ -68,9 +68,8 @@ namespace Sprint3.Link
         public Rectangle Bounds
         {
             get
-            {
-                Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
-                return t;
+            { 
+                return state.Bounds();
             }
         }
 

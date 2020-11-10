@@ -33,7 +33,7 @@ namespace Sprint3
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
-
+        bool isPaused = false;
        
 
         public Game1()
@@ -97,35 +97,36 @@ namespace Sprint3
             {
                 foreach (var cont in controllers)
                 {
-                    ICommand command = cont.HandleInput(this);
+                    activeCommand = cont.HandleInput(this);
 
-                    if (command != null)
+                    if (activeCommand != null)
                     {
-                        activeCommand = command;
-                        activeCommand.Update(gameTime);
-
                         break;
                     }
-                    else
-                    {
-                        activeCommand = null;
-                    }
-
+                
                 }
             }
 
 
-            RoomSpawner.Instance.Update();
+            if (activeCommand is PauseCommand)
+            {
+                isPaused = ((PauseCommand)activeCommand).IsPause;
+            }
 
-            
+            if (!isPaused)
+            {
+                if (activeCommand != null)
+                    activeCommand.Update(gameTime);
 
-            LinkPersistent.Update(gameTime);
-            ProjectilePersistent.Update(gameTime);
+                RoomSpawner.Instance.Update();
+                LinkPersistent.Update(gameTime);
+                ProjectilePersistent.Update(gameTime);
+                CollisionHandler.Instance.Update();
+                base.Update(gameTime);
 
-            CollisionHandler.Instance.Update();
+            }
 
-
-            base.Update(gameTime);
+           
         }
 
         protected override void Draw(GameTime gameTime)

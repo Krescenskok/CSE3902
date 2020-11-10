@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint3.Link
 {
-    public class MoveDown: Movement
+    public class MoveDown : Movement
     {
 
         private double lastTime;
@@ -15,7 +15,7 @@ namespace Sprint3.Link
 
         public MoveDown(LinkPlayer link) : base(link)
         {
-           
+
         }
 
 
@@ -23,7 +23,7 @@ namespace Sprint3.Link
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                if(!link.isWalkingInPlace)
+                if (!link.isWalkingInPlace)
                 {
                     location.Y += MOVEMENT;
                 }
@@ -48,7 +48,7 @@ namespace Sprint3.Link
                     else
                         currentFrame = 0;
                 }
-              
+
                 if (location.Y >= Y_LOCATION)
                     location.Y = Y_LOCATION;
             }
@@ -60,9 +60,9 @@ namespace Sprint3.Link
 
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
                 if (link.LargeShield)
                 {
@@ -89,7 +89,7 @@ namespace Sprint3.Link
                         case 21: currentFrame = 20; break;
                         case 20:
                             currentFrame = 1;
-                        break;
+                            break;
                     }
 
                 }
@@ -103,9 +103,9 @@ namespace Sprint3.Link
 
         public override Vector2 HandleSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
+                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
                 if (link.LargeShield)
                 {
@@ -135,7 +135,7 @@ namespace Sprint3.Link
                             break;
                     }
                 }
-                
+
 
                 link.IsAttacking = false;
                 link.IsStopped = true;
@@ -144,7 +144,7 @@ namespace Sprint3.Link
             return location;
         }
 
-        
+
         public override Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location)
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
@@ -262,7 +262,17 @@ namespace Sprint3.Link
             return location;
         }
 
+        public override Rectangle Bounds()
+        {
+            if(link.CurrentWeapon == ItemForLink.WoodenSword)
+            {
+                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 10, 10);
+            }
 
+            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+        }
 
     }
+
+    
 }

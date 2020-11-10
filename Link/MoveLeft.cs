@@ -262,5 +262,17 @@ namespace Sprint3.Link
             return location;
         }
 
+        public override Rectangle Bounds()
+        {
+
+            if (link.CurrentWeapon == ItemForLink.WoodenSword)
+            {
+                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 10, 10);
+            }
+
+            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+
+        }
+
     }
 }
