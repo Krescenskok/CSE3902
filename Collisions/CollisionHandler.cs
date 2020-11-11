@@ -98,6 +98,12 @@ namespace Sprint4
             for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
         }
 
+        public void ResetMap()
+        {
+            ClearMap();
+
+        }
+
         private void RegisterCollider(ICollider col)
         {
             List<int> codes = GetCode(col.Bounds());
@@ -111,15 +117,19 @@ namespace Sprint4
         {
 
             List<int> results = new List<int>();
-            Point topLeft = rect.Location;
-            Point topRight = new Point(rect.Right, rect.Top);
-            Point bottomLeft = new Point(rect.Left, rect.Bottom);
-            Point bottomRight = new Point(rect.Right, rect.Bottom);
+
+            Point camOffset = Camera.Instance.Location.ToPoint(); ;
+            Point topLeft = rect.Location + camOffset;
+            Point topRight = new Point(rect.Right, rect.Top) + camOffset;
+            Point bottomLeft = new Point(rect.Left, rect.Bottom) + camOffset;
+            Point bottomRight = new Point(rect.Right, rect.Bottom) + camOffset;
 
             AddToList(results, topLeft);
             AddToList(results, topRight);
             AddToList(results, bottomLeft);
             AddToList(results, bottomRight);
+
+         
 
             return results;
         }
@@ -161,6 +171,8 @@ namespace Sprint4
             {
                 List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
 
+                nearbyColliders.AddRange(RoomWalls.Instance.Walls); //walls too big for spatial mapping
+
                 foreach(ICollider other in nearbyColliders)
                 {
                     List<ICollider> key = new List<ICollider> { colliders[i], other };
@@ -195,7 +207,7 @@ namespace Sprint4
                     
                 }
 
-               if(numCol > 5) Debug.WriteLine(numCol);
+               
             }
 
 

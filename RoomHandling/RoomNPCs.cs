@@ -25,7 +25,7 @@ namespace Sprint4
         private static readonly RoomNPCs instance = new RoomNPCs();
 
         private List<INPC> NPCs;
-        
+        private Camera cam = Camera.Instance;
 
        
 
@@ -71,7 +71,7 @@ namespace Sprint4
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
 
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
 
                     if (objName.Equals("Flame"))
                     {

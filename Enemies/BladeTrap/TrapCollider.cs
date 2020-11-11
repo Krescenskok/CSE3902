@@ -25,6 +25,7 @@ namespace Sprint4
 
             
             trapState = trap.state;
+            this.trap = trap;
 
             attackLength = attackRange / 2;
 

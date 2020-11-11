@@ -25,7 +25,7 @@ namespace Sprint4
         private static readonly RoomBlocks instance = new RoomBlocks();
 
         private List<IBlock> roomBlocks;
-
+        private Camera cam = Camera.Instance;
        
 
         public static RoomBlocks Instance
@@ -64,7 +64,7 @@ namespace Sprint4
                     int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
 
                     if (objName.Equals("BirdLeft"))
                     {
@@ -80,7 +80,7 @@ namespace Sprint4
                         roomBlocks.Add(new Stairs(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                     }else if (objName.Equals("Column"))
                     {
-                        roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, game));
+                        roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                     }else if (objName.Equals("MoveableColumnRight"))
                     {
                         roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));

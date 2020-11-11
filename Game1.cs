@@ -26,6 +26,8 @@ namespace Sprint4
 
         List<IController> controllers = new List<IController>();
 
+        public Camera camera;
+
         ICommand activeCommand;
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
@@ -41,6 +43,8 @@ namespace Sprint4
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            
         }
 
         protected override void Initialize()
@@ -74,14 +78,18 @@ namespace Sprint4
             //set up grid where everything is spawned
             GridGenerator.Instance.GetGrid(this, 12, 7);
 
-            //creat list of rooms
+
+            camera = Camera.Instance;
+            camera.Load(this);
+
+            //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
             
             RoomSpawner.Instance.LoadRoom(this, 1);
             
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
-        _graphics.GraphicsDevice.Viewport.Height / 2);
+            _graphics.GraphicsDevice.Viewport.Height / 2);
 
 
         }
@@ -117,21 +125,19 @@ namespace Sprint4
 
 
             RoomSpawner.Instance.Update();
-
-            
-
             LinkPersistent.Update(gameTime);
             ProjectilePersistent.Update(gameTime);
 
             CollisionHandler.Instance.Update();
 
+            camera.Update();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
             if (activeCommand != null)
@@ -139,9 +145,11 @@ namespace Sprint4
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
 
-
+            
             RoomSpawner.Instance.Draw(_spriteBatch);
             LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+
             ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
 
             _spriteBatch.End();

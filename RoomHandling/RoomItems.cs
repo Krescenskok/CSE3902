@@ -18,6 +18,7 @@ namespace Sprint4
         private static readonly RoomItems instance = new RoomItems();
 
         private List<IItems> roomItems;
+        private Camera cam = Camera.Instance;
 
         private List<TestCollider> testObjects;
         public static RoomItems Instance
@@ -59,7 +60,7 @@ namespace Sprint4
                     int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
 
                     if (objName.Equals("Arrow"))
                     {

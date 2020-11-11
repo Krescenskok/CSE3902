@@ -28,6 +28,7 @@ namespace Sprint4
         private List<TestCollider> testObjects;
 
         private Game game;
+        private Camera cam;
    
 
         public static RoomEnemies Instance
@@ -43,6 +44,7 @@ namespace Sprint4
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
+            cam = Camera.Instance;
         }
 
     
@@ -56,11 +58,13 @@ namespace Sprint4
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
+                string objType = typeTag.Value;
+
                 XElement nameTag = item.Element("ObjectName");
                 XElement locTag = item.Element("Location");
                 XElement aliveTag = item.Element("Alive");
 
-                string objType = typeTag.Value;
+                
                 string objName = nameTag.Value;
                 string objLoc = locTag.Value;
 
@@ -71,8 +75,8 @@ namespace Sprint4
                     int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
 
                     if (objName.Equals("Rope"))
                     {
@@ -108,7 +112,7 @@ namespace Sprint4
                     {
                         enemies.Add(new WallMaster(game, location, item));
                     }
-                    //more if-else for other enemies
+                   
 
 
                    

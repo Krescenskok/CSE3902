@@ -3,9 +3,79 @@
 	<Asset Type="MyDataTypes.LevelObjectData[]">
 
 
+		<!-- Walls-->
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>Left</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>LeftTop</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>LeftBottom</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>Top</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>TopLeft</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>TopRight</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>Right</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>RightTop</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>RightBottom</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>Bottom</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>BottomLeft</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<Item>
+			<ObjectType>Wall</ObjectType>
+			<ObjectName>BottomRight</ObjectName>
+			<Location>0 0</Location>
+		</Item>
+
+		<!-- Walls-->
+
 		<!-- First Room Content-->
 		<Room id ="1">
 
+			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
 				<ObjectName>LeftTop</ObjectName>
@@ -46,13 +116,14 @@
 				<ObjectName>BottomRight</ObjectName>
 				<Location>0 0</Location>
 			</Item>
+			<!-- Walls-->
 			
 			
 			<!-- Statue Blocks Left Side-->
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>BirdLeft</ObjectName>
-				<Location>0 0</Location>
+				<Location>1 1</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -120,6 +191,37 @@
 
 		<!-- Third Room Content-->
 		<Room id ="3">
+			
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
 
 			<!-- Columns Left Side-->
 			<Item>
@@ -227,6 +329,44 @@
 		<!-- Sixth Room Content-->
 		<Room id ="6">
 
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+
+			<!-- Walls-->
+
 			<!-- Columns Middle-->
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -303,6 +443,35 @@
 
 		<!-- Seventh Room Content-->
 		<Room id ="7">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
 
 			<!-- Columns-->
 			<Item>
@@ -393,6 +562,48 @@
 		<!-- Ninth Room Content-->
 		<Room id ="9">
 
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
+
 			<!-- Column-->
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -429,6 +640,64 @@
 
 		<!-- Eleventh Room Content-->
 		<Room id ="11">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
 
 			<!-- Columns-->
 			<Item>
@@ -482,6 +751,42 @@
 
 		<!-- Thirteenth Room Content-->
 		<Room id ="13">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
 
 			<!-- Water -->
 			<Item>
@@ -753,6 +1058,35 @@
 		<!-- Fifteenth Room Content-->
 		<Room id ="15">
 
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
+
 			<!-- Columns-->
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -924,6 +1258,35 @@
 		<!-- Seventeenth Room Content-->
 		<Room id ="17">
 
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
+
 			<!-- Trap -->
 			<Item>
 				<ObjectType>Enemy</ObjectType>
@@ -1018,6 +1381,35 @@
 
 		<!-- Second Room Content-->
 		<Room id ="2">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
@@ -1040,6 +1432,43 @@
 
 		<!-- Fourth Room Content-->
 		<Room id="4">
+			
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Column</ObjectName>
@@ -1092,6 +1521,48 @@
 
 		<!-- Fifth Room Content-->
 		<Room id="5">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Stalfos</ObjectName>
@@ -1153,6 +1624,47 @@
 		
 		<!-- 8th Room Content-->
 		<Room id ="8">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Column</ObjectName>
@@ -1243,6 +1755,36 @@
 		
 		<!-- 10th Room Content-->
 		<Room id ="10">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>NPC</ObjectType>
 				<ObjectName>OldMan</ObjectName>
@@ -1265,6 +1807,42 @@
 		
 		<!-- 12th Room Content-->
 		<Room id ="12">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>TopRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>WallMaster</ObjectName>
@@ -1413,6 +1991,42 @@
 		
 		<!-- 14th Room Content-->
 		<Room id ="14">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>RightBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Column</ObjectName>
@@ -1529,6 +2143,43 @@
 		
 		<!-- 16th Room Content-->
 		<Room id ="16">
+
+			<!-- Walls-->
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftTop</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>LeftBottom</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Top</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomLeft</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+
+			<!-- Walls-->
+			
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Goriya</ObjectName>
