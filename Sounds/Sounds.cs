@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,8 +20,14 @@ namespace Sprint4
         private Dictionary<string, SoundEffectInstance> sounds;
 
         private SoundEffectInstance lowHealth;
+        private SoundEffectInstance BGM;
 
         private Game game;
+        public bool Muted { get; private set; }
+
+
+        private KeyboardState state;
+        private KeyboardState prevState;
 
         public void LoadSounds(Game game)
         {
@@ -31,22 +38,47 @@ namespace Sprint4
 
             lowHealth = Get("LowHealth");
             lowHealth.IsLooped = true;
+
+            BGM = Get("DungeonTheme");
+            BGM.IsLooped = true;
+            BGM.Play();
         }
 
-        public void Mute()
+        public void Update()
         {
+            state = Keyboard.GetState();
+
+            if (state.IsKeyDown(Keys.M) && !prevState.IsKeyDown(Keys.M)) ToggleMute();
+
+            prevState = state;
+        }
+
+        private void ToggleMute()
+        {
+            if (Muted) UnMute();
+            else Mute();
+        }
+
+        private void Mute()
+        {
+            
+            
             foreach(KeyValuePair<string,SoundEffectInstance> pair in sounds)
             {
                 pair.Value.Volume = 0;
             }
+            Muted = true;
+            
+            
         }
 
-        public void UnMute()
+        private void UnMute()
         {
             foreach (KeyValuePair<string, SoundEffectInstance> pair in sounds)
             {
                 pair.Value.Volume = 1;
             }
+            Muted = false;
         }
 
 

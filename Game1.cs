@@ -132,6 +132,7 @@ namespace Sprint4
             CollisionHandler.Instance.Update();
 
             camera.Update();
+            Sounds.Instance.Update();
 
             base.Update(gameTime);
         }

@@ -206,6 +206,12 @@
 /processorParam:Quality=Best
 /build:Sounds/DoorUnlock.wav
 
+#begin Sounds/DungeonTheme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/DungeonTheme.wav
+
 #begin Sounds/EnemyDie.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
