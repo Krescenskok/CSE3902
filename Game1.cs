@@ -27,6 +27,7 @@ namespace Sprint4
         List<IController> controllers = new List<IController>();
 
         public Camera camera;
+       
 
         ICommand activeCommand;
         LinkCommand LinkPersistent;
@@ -59,7 +60,7 @@ namespace Sprint4
 
             ItemsFactory.Instance.LoadItemsTextures(Content);
 
-
+            Sounds.Instance.LoadSounds(this);
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 

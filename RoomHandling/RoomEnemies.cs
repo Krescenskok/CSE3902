@@ -180,12 +180,14 @@ namespace Sprint4
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
+            Sounds.Instance.PlayEnemyDie();
         }
 
         public void Destroy(IEnemy enemy)
         {
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
+            Sounds.Instance.PlayEnemyDie();
         }
         
 

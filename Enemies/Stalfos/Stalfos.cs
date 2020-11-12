@@ -31,6 +31,8 @@ namespace Sprint4
         public IEnemyState State { get => state; }
         public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
+        
+
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
@@ -62,8 +64,13 @@ namespace Sprint4
         {
             HP -= amount;
 
-            if (HP <= HPAmount.Zero) Die();
-            else state = new StalfosDamagedState(dir, this, location);
+            if (HP <= HPAmount.Zero) { Die(); //Sounds.Instance.PlayEnemyDie(); 
+            }
+            else 
+            { 
+                state = new StalfosDamagedState(dir, this, location);
+                //Sounds.Instance.PlayEnemyHit();
+            }
             
         }
 

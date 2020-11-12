@@ -52,10 +52,13 @@ namespace Sprint4.Enemies
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From.ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
+
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("PlayerTakeDamage", damageAmount);
-            }
+                    col.SendMessage("TakeDamage" + direction, damageAmount);
+                }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
                 boomerang.BounceOff(collision);

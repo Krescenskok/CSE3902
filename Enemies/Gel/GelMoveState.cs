@@ -133,8 +133,8 @@ namespace Sprint4
         //choose new tile on current row or column and change movedirection
         public void ChangeDirection()
         {
-            bool leftRightOpen = possibleDirections.Contains(left) && currentCol > 0 || possibleDirections.Contains(right) && currentCol < tileColumns;
-            bool upDownOpen = possibleDirections.Contains(up) && currentRow > 0 || possibleDirections.Contains(down) && currentRow < tileRows;
+            bool leftRightOpen = possibleDirections.Contains(left) && currentCol > 0 || possibleDirections.Contains(right) && currentCol < tileColumns - 1;
+            bool upDownOpen = possibleDirections.Contains(up) && currentRow > 0 || possibleDirections.Contains(down) && currentRow < tileRows - 1;
 
             bool moveWithinRow = (RandomNumber.Next(0, 2) == 0 && leftRightOpen) || !upDownOpen;
             bool moveWithinColumn = !moveWithinRow;
