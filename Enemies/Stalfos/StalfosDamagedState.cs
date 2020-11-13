@@ -54,7 +54,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            //do nothing
+            stalfos.state = new StalfosWalkingState(stalfos, location);
         }
 
         public void TakeDamage(int amount)

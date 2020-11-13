@@ -51,8 +51,8 @@ namespace Sprint4
                     else
                         currentFrame = 2;
                 }
-                if (location.X >= X_LOCATION)
-                    location.X = X_LOCATION;
+                //if (location.X >= X_LOCATION)
+                //    location.X = X_LOCATION;
 
             }
             link.IsAttacking = false;

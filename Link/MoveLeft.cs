@@ -47,8 +47,8 @@ namespace Sprint4
                         currentFrame = 4;
                 }
 
-                if (location.X <= X_LOCATION)
-                    location.X = X_LOCATION;
+                //if (location.X <= X_LOCATION)
+                //    location.X = X_LOCATION;
             }
 
 
