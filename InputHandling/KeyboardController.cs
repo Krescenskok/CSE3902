@@ -56,7 +56,7 @@ namespace Sprint4
             commandsList.Add(Keys.D8, new LinkCommand(player, "D8"));
             commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
             commandsList.Add(Keys.R, new ResetCommand(player));
-       
+           
 
 
         }
