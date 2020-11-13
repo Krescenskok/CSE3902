@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
+using Sprint4;
+using Sprint4.Link;
 
 namespace Sprint4.Link
 {
@@ -21,35 +22,42 @@ namespace Sprint4.Link
     }
 
 
+
     public class LinkPlayer
     {
         public ILinkState state;
+        const float HEALTH = 60;
+        const int NUM_OF_RUPEE = 0;
+
 
         bool loc = false;
         public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
-        private float health = 60;
+        private float health = HEALTH;
         public bool isWalkingInPlace = false;
         private bool isPickingUpItem = false;
-        private int numOfRupee = 0;
+        private int numOfRupee = NUM_OF_RUPEE;
         private bool useRing = false;
-        private int fullHealth = 60;
-        private int delay = 2;
+        private float fullHealth = HEALTH;
+        private int delay;
         private bool clock = false;
+        private bool largeShield = false;
         public List<IItems> itemsPickedUp;
+        private bool drawShield = true;
 
         private PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
+
         public void RemovePlacedItem(IItems item)
         {
             if (itemsPlacedByLink.Contains(item))
             {
                 itemsPlacedByLink.Remove(item);
             }
-            
+
         }
 
 
@@ -64,9 +72,7 @@ namespace Sprint4.Link
         {
             get
             {
-
-                Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
-                return t;
+                return state.Bounds();
             }
         }
 
@@ -142,10 +148,12 @@ namespace Sprint4.Link
 
         public bool UseRing { get => useRing; set => useRing = value; }
 
-        public int FullHealth { get => fullHealth; set => fullHealth = value; }
+        public float FullHealth { get => fullHealth; set => fullHealth = value; }
 
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
+        public bool LargeShield { get => largeShield; set => largeShield = value; }
+        public bool DrawShield { get => drawShield; set => drawShield = value; }
 
         public LinkPlayer()
         {
@@ -198,14 +206,24 @@ namespace Sprint4.Link
         public void Reset()
         {
             state = new Stationary(this);
-            Health = 100;
-
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;
             IsStopped = false;
             IsWalkingInPlace = false;
             IsPickingUpItem = false;
+            LargeShield = false;
+            UseRing = false;
+            Health = HEALTH;
+            NumOfRupee = NUM_OF_RUPEE;
+            FullHealth = HEALTH;
+            Delay = 0;
+            clock = false;
+            DrawShield = true;
+            if (itemsPickedUp != null && itemsPickedUp.Count > 0)
+            {
+                itemsPickedUp.Clear();
+            }
 
 
         }
