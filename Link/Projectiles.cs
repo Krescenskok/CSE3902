@@ -68,9 +68,9 @@ namespace Sprint4.Link
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                if (direction.Equals("Down"))
+                if (direction.Equals("Down") || link.state is Stationary)
                 {
-                    itemLocation.X += 12;
+                    itemLocation.X += 14;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
@@ -84,7 +84,7 @@ namespace Sprint4.Link
                 }
                 else if (direction.Equals("Left"))
                 {
-                    itemLocation.Y += 6;
+                    itemLocation.Y += 7;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
@@ -106,7 +106,7 @@ namespace Sprint4.Link
 
             if (!wandMade)
             {
-                if (direction.Equals("Down"))
+                if (direction.Equals("Down") || link.state is Stationary)
                 {
                     itemLocation.Y += 10;
                     itemLocation.X += 10;
@@ -187,7 +187,7 @@ namespace Sprint4.Link
                 {
                     loc.Y -= buffer;
                 }
-                else if (direction.Equals("Down"))
+                if (direction.Equals("Down") || link.state is Stationary)
                 {
                     loc.Y += buffer;
                 }

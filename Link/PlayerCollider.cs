@@ -26,7 +26,7 @@ namespace Sprint4
 
         public Rectangle Bounds()
         {
-            return linkPlayer.Bounds;
+             return linkPlayer.Bounds;
         }
 
         public bool CompareTag(string tag)

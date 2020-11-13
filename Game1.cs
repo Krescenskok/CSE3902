@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Items;
@@ -36,8 +36,8 @@ namespace Sprint4
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
+        bool isPaused = false;
 
-       
 
         public Game1()
         {
@@ -107,34 +107,38 @@ namespace Sprint4
             {
                 foreach (var cont in controllers)
                 {
-                    ICommand command = cont.HandleInput(this);
+                    activeCommand = cont.HandleInput(this);
 
-                    if (command != null)
+                    if (activeCommand != null)
                     {
-                        activeCommand = command;
-                        activeCommand.Update(gameTime);
-
                         break;
-                    }
-                    else
-                    {
-                        activeCommand = null;
                     }
 
                 }
             }
 
 
-            RoomSpawner.Instance.Update();
-            LinkPersistent.Update(gameTime);
-            ProjectilePersistent.Update(gameTime);
+            if (activeCommand is PauseCommand)
+            {
+                isPaused = ((PauseCommand)activeCommand).IsPause;
+            }
 
-            CollisionHandler.Instance.Update();
+            if (!isPaused)
+            {
+                if (activeCommand != null)
+                    activeCommand.Update(gameTime);
 
-            camera.Update();
-            Sounds.Instance.Update();
+                RoomSpawner.Instance.Update();
+                LinkPersistent.Update(gameTime);
+                ProjectilePersistent.Update(gameTime);
+                CollisionHandler.Instance.Update();
+                camera.Update();
+                Sounds.Instance.Update();
+                base.Update(gameTime);
 
-            base.Update(gameTime);
+            }
+
+          
         }
 
         protected override void Draw(GameTime gameTime)
