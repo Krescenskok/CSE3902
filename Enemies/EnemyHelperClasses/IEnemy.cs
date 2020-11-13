@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public interface IEnemy : IMoveable
     {
@@ -16,9 +16,17 @@ namespace Sprint3
 
         void Spawn();
 
-        EnemyCollider GetCollider();
+        
+        void TakeDamage(Direction dir, int amount);
+        void ObstacleCollision(Collision collision);
 
-        Vector2 Location { get; }
+        void Stun();
+
+       
+        List<ICollider> Colliders { get; }
+        
+
+        new Vector2 Location { get; }
 
         IEnemyState State { get; }
 

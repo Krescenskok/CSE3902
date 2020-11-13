@@ -6,7 +6,7 @@ using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3
+namespace Sprint4
 {
     //class for the arrow object drawn in the shop/Link's inventory
     public class ArrowObject : IItems

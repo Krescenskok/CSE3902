@@ -4,11 +4,11 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint3.Items;
-using Sprint3.Link;
-using Sprint3.Blocks;
+using Sprint4.Items;
+using Sprint4.Link;
+using Sprint4.Blocks;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class KeyboardController : IController
     {
@@ -59,7 +59,8 @@ namespace Sprint3
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
             commandsList.Add(Keys.R, new ResetCommand(player));
             commandsList.Add(Keys.G, new PauseCommand());
-       
+
+
 
 
         }
@@ -79,20 +80,18 @@ namespace Sprint3
                     activeCommand = kvp.Value;
                     if (activeCommand is PauseCommand)
                     {
-                        if (delay == 0 )
+                        if (delay == 0)
                         {
                             ((PauseCommand)activeCommand).IsPause = !((PauseCommand)activeCommand).IsPause;
 
-                            System.Diagnostics.Debug.WriteLine(((PauseCommand)activeCommand).IsPause);
-
                             delay = 20;
                         }
-                   
+
                     }
 
                 }
+              
             }
-
             if (delay > 0)
                 delay--;
 

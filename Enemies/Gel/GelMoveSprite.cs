@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -90,12 +90,6 @@ namespace Sprint3
             return rect;
         }
 
-        public Point OuterColliderLocation(Vector2 location)
-        {
-            Point leftCorner = location.ToPoint();
-            leftCorner.X -= 5;
-            leftCorner.Y -= 5;
-            return leftCorner;
-        }
+        
     }
 }

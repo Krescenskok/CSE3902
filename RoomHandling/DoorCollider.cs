@@ -3,20 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
-    public class NPCCollider : ICollider
+    public class DoorCollider : ICollider
     {
-        private Rectangle bounds;
 
-        public NPCCollider(Rectangle rectangle)
-        {
-            bounds = rectangle;
-            CollisionHandler.Instance.AddCollider(this);
-        }
+        public string name;
+        public Rectangle bounds;
 
-        public string Name { get => "NPC"; }
+        public string Name { get => name; }
         public Layer layer { get; set; }
+
+
+        public DoorCollider(Point location, Point size)
+        {
+            bounds.Location = location;
+            bounds.Size = size;
+
+            CollisionHandler.Instance.AddCollider(this, Layers.Wall);
+        }
 
         public Rectangle Bounds()
         {
@@ -25,7 +30,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "NPC";
+            return tag == "Door" || tag == "door";
         }
 
         public bool Equals(ICollider col)
@@ -35,18 +40,25 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
+            //no action
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            if (col.CompareTag("Player"))
+            {
+               
+            }
         }
 
         public void SendMessage(string msg, object value)
         {
+           
         }
-        public void Update(Point point)
+
+        public void Update()
         {
-            bounds.Location = point;
+            //doesn't update
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class EnemyDeath
     {

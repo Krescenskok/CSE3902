@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -79,7 +79,7 @@ namespace Sprint3
         {
             possibleDirections = new List<Direction> { left, right, up, down };
 
-            Direction dir = (Direction)collision.From();
+            Direction dir = (Direction)collision.From;
             possibleDirections.Remove(dir);
 
            
@@ -131,7 +131,7 @@ namespace Sprint3
 
         public void TakeDamage(int amount)
         {
-            bat.TakeDamage(amount);
+            
         }
 
         public void Stun()

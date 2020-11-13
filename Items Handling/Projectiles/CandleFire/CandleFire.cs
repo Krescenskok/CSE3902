@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class CandleFire : IItems
     {
@@ -44,6 +44,7 @@ namespace Sprint3.Items
         public void Update()
         {
             state.Update();
+            collider.Update(this, this.state);
         }
 
         public void Expire()

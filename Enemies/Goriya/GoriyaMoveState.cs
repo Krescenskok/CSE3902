@@ -6,7 +6,7 @@ using System.IO;
 using System.Net.Security;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -18,8 +18,6 @@ namespace Sprint3
         private Vector2 location;
         private Vector2 moveDirection;
         
-
-        private enum Direction { left, right, up, down };
         List<Direction> possibleDirections;
         Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
         Direction currentDirection;
@@ -31,6 +29,9 @@ namespace Sprint3
         
 
         private Random RandomNumber;
+        private const float directionChangeLikelihood = 0.1f;
+        private const float attackLikelihood = 0.01f;
+
 
         private const int stunTime = 120;
         private int stunClock = 0;
@@ -46,8 +47,6 @@ namespace Sprint3
             possibleDirections = new List<Direction> { left, right, up, down };
             ChangeDirection();
 
-          
-            goriya.Collider().ChangeState(this);
         }
 
         public void Attack()
@@ -89,7 +88,7 @@ namespace Sprint3
         {
             possibleDirections = new List<Direction> { left, right, up, down };
 
-            possibleDirections.Remove((Direction)collision.From());
+            possibleDirections.Remove((Direction)collision.From);
             
           
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
@@ -122,12 +121,11 @@ namespace Sprint3
                 currentlyThrowing = false;
                 goriya.SetBoomerang(null);
 
-                int rand = RandomNumber.Next(0, 1000);
-                if (rand < 10) ChangeDirection();
                 
+                
+                if (Directions.Chance(directionChangeLikelihood)) ChangeDirection();
                 MoveOneUnit();
-
-                if (rand == 11) Attack();
+                if (Directions.Chance(attackLikelihood)) Attack();
             }
             
 
@@ -145,17 +143,12 @@ namespace Sprint3
 
         public void TakeDamage(int amount)
         {
-            goriya.TakeDamage(amount);
-            goriya.state = new GoriyaDamagedState(currentDirection.ToString(), goriya, location, moveSpeed);
+            
+            goriya.state = new GoriyaDamagedState(currentDirection, goriya, location, moveSpeed);
             
         }
 
-        public void TakeDamage(string dir, int amount)
-        {
-            goriya.TakeDamage(amount);
-            goriya.state = new GoriyaDamagedState(dir, goriya, location, moveSpeed);
 
-        }
 
         public void Stun()
         {

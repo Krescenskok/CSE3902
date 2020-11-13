@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Link;
+using Sprint4.Link;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class Boomerang : IItems
     {
@@ -83,6 +83,7 @@ namespace Sprint3.Items
 
         public void Update()
         {
+
             if (throwing)
             {
                 state.Update();
@@ -100,6 +101,7 @@ namespace Sprint3.Items
                     }
                 }
             }
+            collider.Update(this, this.state);
         }
 
         public void Expire()

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class ItemCollider : ICollider
     {
@@ -26,7 +26,7 @@ namespace Sprint3
 
             this.state = item.State;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Item);
         }
 
         public void ChangeState(IItemsState state)
@@ -81,11 +81,17 @@ namespace Sprint3
             
         }
 
-
+        //can probably be deleted//
         public void Update(IItems itemObj)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

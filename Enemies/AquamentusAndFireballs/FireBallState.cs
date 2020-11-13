@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     class FireBallState : IEnemyState
     {
@@ -42,7 +42,7 @@ namespace Sprint3
 
         public void Die()
         {
-            CollisionHandler.Instance.RemoveCollider(fireBall.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(fireBall.Colliders);
             aquamentus.RemoveFireBall(fireBall);
         }
 

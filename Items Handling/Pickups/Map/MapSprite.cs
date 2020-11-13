@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class MapSprite : ISprite
     {
@@ -13,7 +13,7 @@ namespace Sprint3.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 40;
+        private const int sheetLocation = 40;
         private Rectangle hitbox;
 
         public Rectangle Hitbox { get => hitbox; }
@@ -41,7 +41,6 @@ namespace Sprint3.Items
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
             destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2 * drawnWidth, 2 * height);
-
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }

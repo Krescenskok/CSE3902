@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
-using Sprint3.Enemies;
+using Sprint4;
+using Sprint4.Enemies;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class Rope : IEnemy
     {
@@ -27,13 +27,15 @@ namespace Sprint3
        
         private EnemyCollider collider;
         private RopePlayerFinderCollider finderCollider;
-        private string currentDirection = "right";
+        private Direction currentDirection = Direction.right;
+        public Direction direction { get => currentDirection; }
 
         private int HP = HPAmount.EnemyLevel1;
 
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider,finderCollider }; }
 
         public Rope(Game game, Vector2 location, XElement xml)
         {
@@ -53,15 +55,13 @@ namespace Sprint3
         {
             state = new RopeMoveState(this, location, game);
             rp = (RopeMoveSprite)sprite;
-            collider = new EnemyCollider(rp.GetRectangle(), state, HPAmount.HalfHeart);
+            collider = new EnemyCollider(rp.GetRectangle(), this, HPAmount.HalfHeart);
             finderCollider = new RopePlayerFinderCollider(rp.GetRectangle(), this, game);
         }
 
         public void Update()
         {
             state.Update();
-            collider.Update(this);
-            finderCollider.Update(currentDirection);
            
         }
 
@@ -84,12 +84,6 @@ namespace Sprint3
             
         }
 
-        public void SubtractHP(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-
-        }
 
 
         public void Die()
@@ -100,14 +94,26 @@ namespace Sprint3
             
         }
 
-        public EnemyCollider GetCollider()
-        {
-            return collider;
-        }
 
-        public void UpdateDirection(string dir)
+        public void UpdateDirection(Direction dir)
         {
             currentDirection = dir;
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            state.Stun();
         }
     }
 }

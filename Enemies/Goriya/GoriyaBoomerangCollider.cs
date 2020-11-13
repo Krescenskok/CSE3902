@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Enemies
+namespace Sprint4.Enemies
 {
     public class GoriyaBoomerangCollider : ICollider
     {
@@ -25,7 +25,7 @@ namespace Sprint3.Enemies
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
         }
 
        
@@ -52,10 +52,13 @@ namespace Sprint3.Enemies
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From.ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
+
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("PlayerTakeDamage", damageAmount);
-            }
+                    col.SendMessage("TakeDamage" + direction, damageAmount);
+                }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
                 boomerang.BounceOff(collision);
@@ -70,9 +73,9 @@ namespace Sprint3.Enemies
            //nothing
         }
 
-        public void Update(Point point)
+        public void Update()
         {
-            bounds.Location = point;
+            bounds.Location = boomerang.Location;
         }
     }
 }

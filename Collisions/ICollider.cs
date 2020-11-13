@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public interface ICollider
     {
@@ -47,6 +47,6 @@ namespace Sprint3
 
         Layer layer { get; set; }
 
-
+        void Update();
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 
-namespace Sprint3.Blocks
+namespace Sprint4.Blocks
 
 {
     public class BlocksSprite : ISprite
@@ -56,7 +56,7 @@ namespace Sprint3.Blocks
             int column = drawnFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)spriteLocation.X - width / 2, (int)spriteLocation.Y - height / 2, blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)spriteLocation.X , (int)spriteLocation.Y , blockDimensionX, blockDimensionY);
 
             
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -76,7 +76,7 @@ namespace Sprint3.Blocks
             Vector2 spriteOrigin = new Vector2(0, 0);
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)location.X , (int)location.Y , blockDimensionX, blockDimensionY);
 
             spriteBatch.Begin();
             spriteBatch.Draw(texture, location, sourceRectangle, Color.White, angle, spriteOrigin, 1.0f, SpriteEffects.None, 1);

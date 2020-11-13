@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class RopePlayerFinderCollider : ICollider
     {
@@ -15,7 +15,7 @@ namespace Sprint3
         private Rope rope;
         private RopeMoveState state;
         private Rectangle ropeSize;
-        private string currentDirection;
+        private Direction currentDirection;
 
         private int verticalReach;
         private int horizontalReach;
@@ -26,7 +26,7 @@ namespace Sprint3
         {
 
             this.rope = rope;
-            currentDirection = "right";
+            currentDirection = Direction.right;
 
             ropeSize = ropeRect;
 
@@ -37,7 +37,7 @@ namespace Sprint3
 
             state = (RopeMoveState)rope.State;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
         }
 
         public RopePlayerFinderCollider(Rope rope)
@@ -49,27 +49,27 @@ namespace Sprint3
             return bounds;
         }
 
-        public void Update(string dir)
+        public void Update()
         {
-            if (!dir.Equals(currentDirection)) CalculateBounds(dir);
+            if (!rope.direction.Equals(currentDirection)) CalculateBounds(rope.direction);
             bounds.Location = (rope.Location - locationOffset).ToPoint();
            
         }
 
-        private void CalculateBounds(string dir)
+        private void CalculateBounds(Direction dir)
         {
-            if (dir.Equals("right"))
+            if (dir.Equals(Direction.right))
             {
                 bounds.Height = ropeSize.Height;
                 bounds.Width = horizontalReach;
                 bounds.Location = rope.Location.ToPoint();
-            }else if (dir.Equals("left"))
+            }else if (dir.Equals(Direction.left))
             {
                 bounds.Height = ropeSize.Height;
                 bounds.Width = horizontalReach;
                 bounds.Location = rope.Location.ToPoint();
                 bounds.X = bounds.X - horizontalReach;
-            }else if (dir.Equals("up"))
+            }else if (dir.Equals(Direction.up))
             {
                 bounds.Height = verticalReach;
                 bounds.Width = ropeSize.Width;
@@ -100,14 +100,14 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.Attack();
+            if (col.CompareTag("Player") ) state.Attack();
 
 
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.Attack();
+            if (col.CompareTag("Player")) state.Attack();
            
         }
 
@@ -115,5 +115,7 @@ namespace Sprint3
         {
            //does not handle messages
         }
+
+       
     }
 }

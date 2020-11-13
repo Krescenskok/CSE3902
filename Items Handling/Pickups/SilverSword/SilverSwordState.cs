@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class SilverSwordState : IItemsState
     {

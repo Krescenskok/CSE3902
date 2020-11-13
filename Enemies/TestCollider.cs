@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class TestCollider : ICollider
     {
@@ -23,7 +23,7 @@ namespace Sprint3
         public TestCollider(Point location, Point size, Game game, int attack)
         {
             bounds = new Rectangle(location, size);
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.Default);
             visual = new ColliderVisualSprite(game, size.ToVector2());
             this.location = location.ToVector2();
             this.attack = attack;
@@ -36,7 +36,7 @@ namespace Sprint3
             this.location = rect.Location.ToVector2();
             attack = 0;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.Trigger);
         }
 
         public TestCollider()
@@ -61,7 +61,7 @@ namespace Sprint3
 
         public bool CompareTag(string tag)
         {
-            return tag == "Wal" || tag == "wal";
+            return tag == "Wall" || tag == "wal";
         }
 
         
@@ -87,6 +87,11 @@ namespace Sprint3
             {
                 col.SendMessage("TakeDamage", attack);
             }
+        }
+
+        public void Update()
+        {
+           //nothing
         }
     }
 }

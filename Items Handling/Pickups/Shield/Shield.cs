@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class Shield : IItems
     {

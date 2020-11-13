@@ -1,15 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class Collision
     {
-        public enum Direction { left, right, up, down };
+        
         private Direction dir;
 
      
@@ -32,11 +32,11 @@ namespace Sprint3
 
         
 
-        public bool Left() { return dir.Equals(Direction.left); }
-        public bool Right() { return dir.Equals(Direction.right); }
-        public bool Up() { return dir.Equals(Direction.up); }
-        public bool Down() { return dir.Equals(Direction.down);}
+        public bool Left { get => dir.Equals(Direction.left); }
+        public bool Right { get => dir.Equals(Direction.right); }
+        public bool Up { get => dir.Equals(Direction.up); }
+        public bool Down { get => dir.Equals(Direction.down);}
         public Vector2 Location { get => location; }
-        public Direction From() { return dir; }
+        public Direction From { get => dir; }
     }
 }

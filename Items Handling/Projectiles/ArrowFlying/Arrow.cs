@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3
+namespace Sprint4
 {
     //class for the arrow that link shoots, AKA the moving arrow
     public class Arrow : IItems
@@ -66,6 +66,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
+            collider.Update(this, this.state);
         }
 
         public void Collect()

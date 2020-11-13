@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class LinkSprite : ISprite
     {
@@ -11,14 +11,13 @@ namespace Sprint3.Link
         Texture2D texture;
         int TOTAL_ROWS = 7;
         int TOTAL_COLS = 20;
-        int TWO = 2;
 
         public LinkSprite(Texture2D texture)
         {
             this.texture = texture;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        public void Draw(SpriteBatch spriteBatch,   Vector2 location, int currentFrame, Color color)
         {
             
             int width = texture.Width / TOTAL_COLS;
@@ -27,7 +26,7 @@ namespace Sprint3.Link
             int column = currentFrame % TOTAL_COLS;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X - width / TWO, (int)location.Y - height / TWO, TWO*width, TWO*height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2*width, 2*height);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, color);
         }

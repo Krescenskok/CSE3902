@@ -1,13 +1,13 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Link;
- using Sprint3.Blocks;
-using Sprint3.Items;
-using Sprint3.EnemyAndNPC;
+using Sprint4.Link;
+ using Sprint4.Blocks;
+using Sprint4.Items;
+using Sprint4.EnemyAndNPC;
 using System.Diagnostics;
 
-namespace Sprint3
+namespace Sprint4
 {
 
     public class ResetCommand : ICommand
@@ -33,7 +33,6 @@ namespace Sprint3
 
         {
             LinkCommand linkReset = new LinkCommand(Player, "R");
-            Debug.WriteLine("resetting");
             linkReset.Update(Gametime);
 
             RoomSpawner.Instance.Reset();

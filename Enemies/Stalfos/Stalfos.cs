@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// <author>JT Thrash</author>
@@ -29,6 +29,9 @@ namespace Sprint3
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+
+        
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
@@ -38,14 +41,13 @@ namespace Sprint3
             collider = new EnemyCollider();
 
             saveInfo = xml;
-
         }
 
         public void Spawn()
         {
             state = new StalfosWalkingState(this, location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, HPAmount.HalfHeart, "Stalfos");
+            collider = new EnemyCollider(stalfosSprite.GetRectangle(), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 
@@ -57,15 +59,24 @@ namespace Sprint3
 
 
         
-        /// <returns>true when stalfos HP is > 0</returns>
-        public bool SubtractHP(int amount)
+      
+        public void TakeDamage(Direction dir, int amount)
         {
             HP -= amount;
 
+            if (HP <= HPAmount.Zero) { Die(); //Sounds.Instance.PlayEnemyDie(); 
+            }
+            else 
+            { 
+                state = new StalfosDamagedState(dir, this, location);
+                //Sounds.Instance.PlayEnemyHit();
+            }
             
-            if (HP <= 0) { Die(); }
+        }
 
-            return HP > 0;
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -76,7 +87,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            
         }
 
         public void SetSprite(ISprite sprite)
@@ -91,9 +102,11 @@ namespace Sprint3
             this.location = location;
         }
 
-        public EnemyCollider GetCollider()
+
+
+        public void Stun()
         {
-            return collider;
+            state.Stun();
         }
     }
 }

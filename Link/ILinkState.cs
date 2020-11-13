@@ -2,7 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
+
 {
     public interface ILinkState
     {

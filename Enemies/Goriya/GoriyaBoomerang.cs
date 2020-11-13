@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies;
+using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class GoriyaBoomerang
     {
@@ -13,6 +13,8 @@ namespace Sprint3
         private Vector2 location;
         private Vector2 direction;
         private string directionStr;
+
+        public Point Location { get => location.ToPoint(); }
         
 
         private int timeSinceThrown;
@@ -73,7 +75,7 @@ namespace Sprint3
             }
 
 
-            collider.Update(location.ToPoint());
+           
         }
 
         public void Draw(SpriteBatch batch)
@@ -88,7 +90,7 @@ namespace Sprint3
 
         public void BounceOff(Collision collision)
         {
-            if(collision.From().ToString().Equals(directionStr))
+            if(collision.From.ToString().Equals(directionStr))
                 returning = true;
         }
     }

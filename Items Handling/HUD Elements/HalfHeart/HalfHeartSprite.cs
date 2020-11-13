@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class HalfHeartSprite : ISprite
     {

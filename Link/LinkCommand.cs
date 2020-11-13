@@ -1,10 +1,12 @@
 using System;
+using System.Windows.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint3.Items;
+using Sprint4.Items;
+using Sprint4.Link;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public class LinkCommand : ICommand
     {
@@ -24,11 +26,11 @@ namespace Sprint3.Link
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            linkPlayer.Draw(game, spriteBatch, gameTime );
+            linkPlayer.Draw(game, spriteBatch, gameTime);
             ProjectilesCommand.Instance.ExecuteCommand(game, gameTime, spriteBatch);
         }
 
-        public void Update(GameTime gameTime )
+        public void Update(GameTime gameTime)
         {
             ProjectilesCommand.Instance.Update(gameTime);
             if (Key.Equals("R"))
@@ -38,9 +40,13 @@ namespace Sprint3.Link
 
             else if (Key.Equals("E"))
             {
-            
+
                 linkPlayer.IsDamaged = true;
-                
+
+            }
+            else if (Key.Equals("D9") || Key.Equals("NumPad9"))
+            {
+                linkPlayer.LargeShield = true;
             }
             if (!linkPlayer.IsAttacking)
             {
@@ -121,10 +127,7 @@ namespace Sprint3.Link
                 {
                     linkPlayer.CurrentWeapon = ItemForLink.Clock;
                 }
-                else if (Key.Equals("D9") || Key.Equals("NumPad9"))
-                {
-                    linkPlayer.LargeShield = true;
-                }
+               
 
 
             }

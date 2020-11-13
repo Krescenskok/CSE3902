@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class RoomSprite : ISprite
     {
@@ -26,8 +26,8 @@ namespace Sprint3
             this.col = col;
 
 
-            spriteSize.X = 256;
-            spriteSize.Y = 176;
+            spriteSize.X = texture.Bounds.Width / 6;
+            spriteSize.Y = texture.Bounds.Height / 6;
 
             drawSize = size;
         }

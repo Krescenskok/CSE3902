@@ -10,7 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
 
     /// <summary>
@@ -27,6 +27,8 @@ namespace Sprint3
 
         private List<TestCollider> testObjects;
 
+        private Game game;
+        private Camera cam;
    
 
         public static RoomEnemies Instance
@@ -42,6 +44,7 @@ namespace Sprint3
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
+            cam = Camera.Instance;
         }
 
     
@@ -49,16 +52,19 @@ namespace Sprint3
         {
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
+            this.game = game;
 
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
+                string objType = typeTag.Value;
+
                 XElement nameTag = item.Element("ObjectName");
                 XElement locTag = item.Element("Location");
                 XElement aliveTag = item.Element("Alive");
 
-                string objType = typeTag.Value;
+                
                 string objName = nameTag.Value;
                 string objLoc = locTag.Value;
 
@@ -69,8 +75,8 @@ namespace Sprint3
                     int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
 
                     if (objName.Equals("Rope"))
                     {
@@ -106,7 +112,7 @@ namespace Sprint3
                     {
                         enemies.Add(new WallMaster(game, location, item));
                     }
-                    //more if-else for other enemies
+                   
 
 
                    
@@ -124,7 +130,7 @@ namespace Sprint3
 
 
 
-        public void AddTestCollider(Rectangle rect, Game game)
+        public void AddTestCollider(Rectangle rect)
         {
             testObjects.Add(new TestCollider(rect, game));
         }
@@ -173,13 +179,15 @@ namespace Sprint3
         {
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
+            Sounds.Instance.PlayEnemyDie();
         }
 
         public void Destroy(IEnemy enemy)
         {
             enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
+            Sounds.Instance.PlayEnemyDie();
         }
         
 

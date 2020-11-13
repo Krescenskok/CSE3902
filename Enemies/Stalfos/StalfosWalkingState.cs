@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -17,15 +17,12 @@ namespace Sprint3
         private Vector2 location;
         private Vector2 moveDirection;
 
-        
 
-        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
         List<Direction> possibleDirections;
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
         Direction currentDirection;
-        
 
-        Random RandomNumber;
+
+        private float randomness = 0.1f;
 
         private const int normalMoveSpeed = 1;
         private int currentMoveSpeed = normalMoveSpeed;
@@ -39,12 +36,10 @@ namespace Sprint3
 
             stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosWalkingSprite());
 
-            currentDirection = right;
+            currentDirection = Direction.right;
+            possibleDirections = Directions.Default();
             moveDirection.X = 1;
             moveDirection.Y = 0;
-
-            RandomNumber = new Random();
-            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
         
@@ -52,44 +47,25 @@ namespace Sprint3
         public void ChangeDirection()
         {
 
+            currentDirection = Directions.RandomDirection(possibleDirections);
 
-            currentDirection = RandomDirection(possibleDirections);
+            
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CheckDirection(currentDirection, Direction.down, Direction.up);
+            moveDirection.X = Directions.CheckDirection(currentDirection, Direction.right, Direction.left);
 
-
-
-            possibleDirections = new List<Direction> { left, right, up, down };
-
-
+            possibleDirections = Directions.Default();
+            
         }
 
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
 
- 
 
-        private Direction RandomDirection(List<Direction> directions)
-        {
-            int rand = RandomNumber.Next(0, directions.Count);
-            return directions[rand];
-        }
+      
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
-
-            if (collision.Left()) possibleDirections.Remove(Direction.left);
-            if (collision.Right()) possibleDirections.Remove(Direction.right);
-            if (collision.Up()) possibleDirections.Remove(Direction.up);
-            if (collision.Down()) possibleDirections.Remove(Direction.down);
-
-            
+            possibleDirections = Directions.Default();
+            possibleDirections.Remove(collision.From);
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }
@@ -98,7 +74,9 @@ namespace Sprint3
 
         public void Update()
         {
-            if (RandomNumber.Next(0, 100) == 0) ChangeDirection();
+            
+
+            if (Directions.Chance(randomness)) ChangeDirection();
             MoveOneUnit();
 
             if (stunClock > 0) stunClock--;
@@ -121,18 +99,6 @@ namespace Sprint3
         }
 
 
-        public void TakeDamage(int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(currentDirection.ToString(), skeleton, location);
-        }
-
-        public void TakeDamage(string dir, int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(dir, skeleton, location);
-            
-        }
 
         #region //unused methods
         public void Attack()
@@ -143,6 +109,11 @@ namespace Sprint3
         public void Die()
         {
             //change to dying state
+        }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

@@ -1,17 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3.Link;
+using Sprint4.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class BoomerangObjectState : IItemsState
     {
         private BoomerangObject item;
         private Vector2 position;
-
-        private bool leaving = true;
 
         public BoomerangObjectState(BoomerangObject item, Vector2 initPos)
         {

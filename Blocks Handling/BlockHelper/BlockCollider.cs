@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3.Blocks
+namespace Sprint4.Blocks
 {
     public class BlockCollider : ICollider
     {
@@ -14,7 +14,7 @@ namespace Sprint3.Blocks
 
         public string Name => throw new NotImplementedException();
 
-        
+        bool yes = false;
         public Layer layer { get; set; }
 
         public BlockCollider(Rectangle rect, IBlock block)
@@ -45,7 +45,7 @@ namespace Sprint3.Blocks
         {
             if (col.CompareTag("Player") && block.GetMoveable())
             {
-                block.move(collision.From().ToString());
+                block.move(collision.From.ToString());
                 col.SendMessage("Special Block", null);
             }
         }
@@ -63,6 +63,8 @@ namespace Sprint3.Blocks
         public void Update()
         {
             bounds = block.getDestination();
+           
+            
         }
     }
 }

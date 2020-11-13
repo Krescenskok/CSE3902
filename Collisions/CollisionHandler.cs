@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// class which detects all collisions in game and sends appropriate messages to colliding objects
@@ -53,16 +53,18 @@ namespace Sprint3
             newCol.layer = layer;
             colliders.Add(newCol);
         }
-        public void AddCollider(ICollider newCol)
-        {
-            newCol.layer = Layers.Default;
-            colliders.Add(newCol);
-        }
+      
 
         public void RemoveCollider(ICollider col)
         {
             removedColliders.Add(col);
         }
+
+        public void RemoveCollider(List<ICollider> colliders)
+        {
+            foreach (ICollider col in colliders) removedColliders.Add(col);
+        }
+        
 
 
         public void Initialize(Game game)
@@ -96,6 +98,12 @@ namespace Sprint3
             for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
         }
 
+        public void ResetMap()
+        {
+            ClearMap();
+
+        }
+
         private void RegisterCollider(ICollider col)
         {
             List<int> codes = GetCode(col.Bounds());
@@ -109,15 +117,19 @@ namespace Sprint3
         {
 
             List<int> results = new List<int>();
-            Point topLeft = rect.Location;
-            Point topRight = new Point(rect.Right, rect.Top);
-            Point bottomLeft = new Point(rect.Left, rect.Bottom);
-            Point bottomRight = new Point(rect.Right, rect.Bottom);
+
+            Point camOffset = Camera.Instance.Location.ToPoint(); ;
+            Point topLeft = rect.Location + camOffset;
+            Point topRight = new Point(rect.Right, rect.Top) + camOffset;
+            Point bottomLeft = new Point(rect.Left, rect.Bottom) + camOffset;
+            Point bottomRight = new Point(rect.Right, rect.Bottom) + camOffset;
 
             AddToList(results, topLeft);
             AddToList(results, topRight);
             AddToList(results, bottomLeft);
             AddToList(results, bottomRight);
+
+         
 
             return results;
         }
@@ -148,6 +160,7 @@ namespace Sprint3
             //add each collider to buckets in the spatial map
             for(int i = 0; i < colliders.Count; i++)
             {
+                colliders[i].Update();
                 RegisterCollider(colliders[i]);
             }
 
@@ -157,6 +170,8 @@ namespace Sprint3
             for (int i = 0; i < colliders.Count; i++)
             {
                 List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
+
+                nearbyColliders.AddRange(RoomWalls.Instance.Walls); //walls too big for spatial mapping
 
                 foreach(ICollider other in nearbyColliders)
                 {
@@ -191,6 +206,8 @@ namespace Sprint3
 
                     
                 }
+
+               
             }
 
 
@@ -250,19 +267,19 @@ namespace Sprint3
 
         public static Collision LeftCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.left,loc, other);
+            return new Collision(Direction.left,loc, other);
         }
         public static Collision RightCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.right,loc, other);
+            return new Collision(Direction.right,loc, other);
         }
         public static Collision TopCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.up, loc, other);
+            return new Collision(Direction.up, loc, other);
         }
         public static Collision BottomCollision(Vector2 loc, ICollider other)
         {
-            return new Collision(Collision.Direction.down, loc, other);
+            return new Collision(Direction.down, loc, other);
         }
 
 

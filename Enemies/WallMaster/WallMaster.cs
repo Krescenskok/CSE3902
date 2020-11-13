@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -20,6 +20,7 @@ namespace Sprint3
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider,playerFinder }; }
 
         public IEnemyState state;
         private ISprite sprite;
@@ -38,7 +39,7 @@ namespace Sprint3
 
             state = new WallMasterMoveState(location, game, this);
             masterSprite = (WallMasterSprite)sprite;
-            collider = new EnemyCollider(masterSprite.GetRectangle(), state, HPAmount.HalfHeart, "WallMaster");
+            collider = new EnemyCollider(masterSprite.GetRectangle(), this, HPAmount.HalfHeart, "WallMaster");
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
             
@@ -66,16 +67,15 @@ namespace Sprint3
             sprite.Draw(batch, location, 0 , Color.White);
         }
 
+        internal void Attack()
+        {
+            state.Attack();
+        }
+
         public void Update()
         {
             state.Update();
-            collider.Update(this);
-        }
-
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
+            
         }
      
         public void Die()
@@ -84,9 +84,21 @@ namespace Sprint3
             saveData.SetElementValue("Alive", "false");
         }
 
-        public EnemyCollider GetCollider()
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return collider;
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+           //does not have obstacles
+        }
+
+        public void Stun()
+        {
+            state.Stun();
         }
     }
 }

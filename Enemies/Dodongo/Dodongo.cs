@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Enemies.Dodongo;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -29,6 +28,8 @@ namespace Sprint3
 
         public IEnemyState State { get => dodongoState; }
 
+        public List<ICollider> Colliders { get => new List<ICollider> { dodongoCollider, faceCollider }; }
+
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
@@ -37,8 +38,8 @@ namespace Sprint3
             dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
-            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),dodongoState, AttackStrength);
-            faceCollider = new DodongoFaceCollider(new Rectangle(0,0,6,6),dodongoState);
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),this, AttackStrength);
+            faceCollider = new DodongoFaceCollider(new Rectangle(0,0,6,6),dodongoState,this);
         }
 
         public string GetDirection()
@@ -77,15 +78,13 @@ namespace Sprint3
             direction = newDirection;
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
-            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(dodongoPos), dodongoState, AttackStrength);
-            CollisionHandler.Instance.AddCollider(dodongoCollider);
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(dodongoPos), this, AttackStrength);
+            CollisionHandler.Instance.AddCollider(dodongoCollider, Layers.Enemy);
         }
 
         public void Update()
         {
             dodongoState.Update();
-            dodongoCollider.Update(this);
-            faceCollider.Update(UpdateFacePos());
         }
 
         public void UpdatePos(Vector2 newPos)
@@ -126,9 +125,21 @@ namespace Sprint3
         {
         }
 
-        public EnemyCollider GetCollider()
+      
+        public void TakeDamage(Direction dir, int amount)
         {
-            return dodongoCollider;
+            dodongoState.TakeDamage(amount);
         }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            dodongoState.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            dodongoState.Stun();
+        }
+
     }
 }

@@ -3,21 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Enemies.Dodongo
+namespace Sprint4
 {
     class DodongoFaceCollider : ICollider
     {
         private Rectangle bounds;
         private IEnemyState dodongo;
+        private Dodongo dodongoBase;
 
         public string Name { get => "dodongo"; }
         public Layer layer { get; set; }
 
-        public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo)
+        public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo, Dodongo dongo)
         {
             bounds = rect;
             this.dodongo = dodongo;
-            CollisionHandler.Instance.AddCollider(this);
+            dodongoBase = dongo;
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
 
         }
 
@@ -62,6 +64,11 @@ namespace Sprint3.Enemies.Dodongo
         public void Update(Point point)
         {
             bounds.Location = point;
+        }
+
+        public void Update()
+        {
+            bounds.Location = dodongoBase.UpdateFacePos();
         }
     }
 }

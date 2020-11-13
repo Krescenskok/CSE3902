@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class PauseCommand : ICommand
 
@@ -30,7 +30,7 @@ namespace Sprint3
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-           
+
         }
     }
 }

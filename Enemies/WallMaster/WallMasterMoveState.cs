@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -388,7 +388,7 @@ namespace Sprint3
 
         public void TakeDamage(int amount)
         {
-            master.TakeDamage(amount);
+            
         }
 
         public void Stun()

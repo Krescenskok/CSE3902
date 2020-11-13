@@ -4,12 +4,12 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint3.Items;
-using Sprint3.Link;
-using Sprint3.Blocks;
+using Sprint4.Items;
+using Sprint4.Link;
+using Sprint4.Blocks;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class MouseController : IController
     {
@@ -41,6 +41,7 @@ namespace Sprint3
                     currentRoomNum--;
                 }
                 changeCommand = new ChangeRoomCommand(currentRoomNum);
+                //Camera.Instance.ScrollDown(2); //for testing, can remove
             }
             else if (currentState.RightButton == ButtonState.Pressed && prevState.RightButton != currentState.RightButton)
             {
@@ -53,6 +54,7 @@ namespace Sprint3
                     currentRoomNum++;
                 }
                 changeCommand = new ChangeRoomCommand(currentRoomNum);
+                //Camera.Instance.ScrollUp(3); //for testing, can remove
             }
             prevState = currentState;
 

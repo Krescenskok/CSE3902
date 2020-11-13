@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class Bomb : IItems
     {
@@ -59,6 +59,11 @@ namespace Sprint3.Items
         public void Update()
         {
             state.Update();
+            if (isExploding)
+            {
+                collider.Update(this, this.state);
+            }
+            
         }
 
         public void Expire()

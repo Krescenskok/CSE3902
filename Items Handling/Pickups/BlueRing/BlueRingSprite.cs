@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Items
+namespace Sprint4.Items
 {
     public class BlueRingSprite : ISprite
     {
@@ -13,7 +13,7 @@ namespace Sprint3.Items
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
-        private int sheetLocation = 11;
+        private const int sheetLocation = 11;
         private Rectangle hitbox;
 
         public Rectangle Hitbox { get => hitbox; }

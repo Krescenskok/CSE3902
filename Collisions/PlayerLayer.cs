@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class PlayerLayer : Layer
     {
@@ -11,6 +11,7 @@ namespace Sprint3
             return other.layer is EnemyLayer
                 || other.layer is ItemLayer
                 || other.layer is ObstacleLayer
+                || other.layer is NPC_Layer
                 || other.layer is DefaultLayer;
 
         }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -22,6 +22,9 @@ namespace Sprint3
         
         public IEnemyState state;
         public IEnemyState State { get => state; }
+
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+
         private ISprite sprite;
         private BladeTrapSprite bladeSprite;
 
@@ -49,12 +52,12 @@ namespace Sprint3
         public void Spawn()
         {
             state = new BladeTrapRestState(location,this);
-            BladeTrapRestState initialState = (BladeTrapRestState)state;
+            
             bladeSprite = (BladeTrapSprite)sprite;
             Rectangle objectSize = bladeSprite.GetRectangle();
             objectSize.Location = location.ToPoint();
 
-            collider = new EnemyCollider(objectSize, state, HPAmount.HalfHeart, "Trap");
+            collider = new EnemyCollider(objectSize, this, HPAmount.HalfHeart, "Trap");
 
 
             int horizontalAttackRange = GridGenerator.Instance.GetGridWidth();
@@ -69,17 +72,14 @@ namespace Sprint3
             if (direction2.Equals("right") || direction2.Equals("left")) attackRange2 = horizontalAttackRange;
             else attackRange2 = verticalAttackRange;
 
-            playerFinderOne = new TrapCollider(objectSize, initialState, direction1, attackRange1);
-            playerFinderTwo = new TrapCollider(objectSize, initialState, direction2, attackRange2);
+            playerFinderOne = new TrapCollider(objectSize, this, direction1, attackRange1);
+            playerFinderTwo = new TrapCollider(objectSize, this, direction2, attackRange2);
         }
         
 
         public void Update()
         {
             state.Update();
-            collider.Update(this);
-            playerFinderOne.Update(this);
-            playerFinderTwo.Update(this);
         }
 
         public void UpdateLocation(Vector2 location)
@@ -103,6 +103,24 @@ namespace Sprint3
             return collider;
         }
 
-       
+        public void TakeDamage(Direction dir, int amount)
+        {
+            //cannot be damaged
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            //cannot be stunned
+        }
+
+        public void Attack()
+        {
+          
+        }
     }
 }

@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3.Items;
+using Sprint4;
+using Sprint4.Link;
 
-namespace Sprint3.Link
+namespace Sprint4.Link
 {
     public enum ItemForLink
     {
@@ -20,15 +21,15 @@ namespace Sprint3.Link
         Clock
     }
 
-    
+
 
     public class LinkPlayer
     {
         public ILinkState state;
         const float HEALTH = 60;
         const int NUM_OF_RUPEE = 0;
-        
-   
+
+
         bool loc = false;
         public Vector2 currentLocation;
         private bool isAttacking = false;
@@ -44,17 +45,19 @@ namespace Sprint3.Link
         private bool clock = false;
         private bool largeShield = false;
         public List<IItems> itemsPickedUp;
+        private bool drawShield = true;
 
         private PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
+
         public void RemovePlacedItem(IItems item)
         {
             if (itemsPlacedByLink.Contains(item))
             {
                 itemsPlacedByLink.Remove(item);
             }
-            
+
         }
 
 
@@ -68,7 +71,7 @@ namespace Sprint3.Link
         public Rectangle Bounds
         {
             get
-            { 
+            {
                 return state.Bounds();
             }
         }
@@ -150,6 +153,7 @@ namespace Sprint3.Link
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
         public bool LargeShield { get => largeShield; set => largeShield = value; }
+        public bool DrawShield { get => drawShield; set => drawShield = value; }
 
         public LinkPlayer()
         {
@@ -215,15 +219,16 @@ namespace Sprint3.Link
             FullHealth = HEALTH;
             Delay = 0;
             clock = false;
-            //if(itemsPickedUp.Count > 0)
-            //{
-            //    itemsPickedUp.Clear();
-            //}
+            DrawShield = true;
+            if (itemsPickedUp != null && itemsPickedUp.Count > 0)
+            {
+                itemsPickedUp.Clear();
+            }
 
 
-    }
+        }
 
-    public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
 
             if (loc == false)

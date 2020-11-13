@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -19,6 +19,7 @@ namespace Sprint3
         public Vector2 Location => throw new NotImplementedException();
 
         public IEnemyState State => throw new NotImplementedException();
+        public List<ICollider> Colliders { get => null; }
 
         public Zol(Game game, Vector2 location)
         {
@@ -62,12 +63,25 @@ namespace Sprint3
 
         public void Spawn()
         {
-            throw new NotImplementedException();
+            //
         }
 
-        public EnemyCollider GetCollider()
+ 
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            throw new NotImplementedException();
+            state.TakeDamage(amount);
+            
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            state.Stun();
         }
     }
 }

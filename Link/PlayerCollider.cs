@@ -1,66 +1,37 @@
 using Microsoft.Xna.Framework;
-using Sprint3;
-using Sprint3.Link;
+using Sprint4;
+using Sprint4.Link;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class PlayerCollider : ICollider
     {
         //private Rectangle bounds;
         LinkPlayer linkPlayer;
-        private IItems item;
         //String Key;
-        int WOODEN_DAMAGE = 5;
-        int SWORD_DAMAGE = 10;
-        int ROD_DAMAGE = 15;
-        int TWO = 2;
-        int LOC_CHANGE = 50;
-        int HEAL = 30;
-        int HEALTH_INC = 10;
-        String ENEMY_TAKE_DAMAGE = "EnemyTakeDamage";
-        String TAKE_DAMAGE_RIGHT = "TakeDamageRight";
-        String TAKE_DAMAGE_DOWN = "TakeDamageDown";
-        String TAKE_DAMAGE_LEFT = "TakeDamageLeft";
-        String TAKE_DAMAGE_UP = "TakeDamageUP";
-        String PLAYER = "Player";
-        String pPLAYER = "player";
-        String BLOCK = "Block";
-        String ENEMY = "enemy";
-        String ITEM = "Item";
-        String DISAPPEAR = "Disappear";
-        String WALKINPLACE = "WalkInPlace";
-        String HEAL_STR = "Heal";
-        String HEARTCONTAINER = "HeartContainer";
-        String RUPEE = "Rupee";
-        String HAND = "Hand";
-        String SPECIALBLOCK = "Special Block";
-        String LARGESHIELD = "Large Shield";
-  
+
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
-            this.item = item;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
         }
 
-        public string Name { get => PLAYER; }
+        public string Name { get => "Player"; }
         public Layer layer { get; set; }
 
         public Rectangle Bounds()
         {
-
-            return linkPlayer.Bounds;
-
+             return linkPlayer.Bounds;
         }
 
         public bool CompareTag(string tag)
         {
-            return tag == PLAYER || tag == pPLAYER;
+            return tag == "Player" || tag == "player";
         }
 
         public bool Equals(ICollider col)
@@ -70,7 +41,7 @@ namespace Sprint3
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag(BLOCK))
+            if (col.CompareTag("Block") || col.CompareTag("Wall"))
             {
 
                 linkPlayer.isWalkingInPlace = true;
@@ -81,88 +52,88 @@ namespace Sprint3
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag(BLOCK))
+                if (col.CompareTag("Block") || col.CompareTag("Wall"))
                 {
 
                 linkPlayer.isWalkingInPlace = true;
 
             } else 
-                if (col.CompareTag(ENEMY))
+                if (col.CompareTag("enemy"))
             {
                 if (linkPlayer.IsAttacking)
                 {
-                    if (collision.Left())
+                    if (collision.Left)
                     {
                         if (linkPlayer.state is MoveLeft)
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
 
-                    else if (collision.Right())
+                    else if (collision.Right)
                     {
                         if (linkPlayer.state is MoveRight)
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
 
-                    else if (collision.Up())
+                    else if (collision.Up)
                     {
                         if (linkPlayer.state is MoveUp)
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
 
-                    else if (collision.Down())
+                    else if (collision.Down)
                     {
                         if (linkPlayer.state is MoveDown)
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, WOODEN_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 5);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, SWORD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 10);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage(ENEMY_TAKE_DAMAGE, ROD_DAMAGE);
+                                col.SendMessage("EnemyTakeDamage", 15);
                             }
                         }
                     }
@@ -170,123 +141,119 @@ namespace Sprint3
 
             }
 
-            if (col.CompareTag(ITEM))
+            if (col.CompareTag("item"))
             {
-                col.SendMessage(DISAPPEAR, null);
+                col.SendMessage("Disappear", null);
             }
 
         }
 
         public void SendMessage(string msg, object value)
         {
-            if(!linkPlayer.IsDamaged)
+            if (msg == "TakeDamageRight")
             {
-                if (msg == TAKE_DAMAGE_RIGHT)
+                linkPlayer.IsDamaged = true;
+                if (linkPlayer.UseRing)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                    {
-                        linkPlayer.Health -= ((int)value) / TWO;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-                    linkPlayer.currentLocation.X += LOC_CHANGE;
-
+                    linkPlayer.Health -= ((int)value) / 2;
                 }
-
-                else if (msg == TAKE_DAMAGE_LEFT)
+                else
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                    {
-                        linkPlayer.Health -= ((int)value) / TWO;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-
-                    linkPlayer.currentLocation.X -= LOC_CHANGE;
+                    linkPlayer.Health -= (int)value;
                 }
-
-                else if (msg == TAKE_DAMAGE_UP)
-                {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                    {
-                        linkPlayer.Health -= ((int)value) / TWO;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-
-                    linkPlayer.currentLocation.Y -= LOC_CHANGE;
-                }
-
-                else if (msg == TAKE_DAMAGE_DOWN)
-                {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                    {
-                        linkPlayer.Health -= ((int)value) / TWO;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-
-                    linkPlayer.currentLocation.Y += LOC_CHANGE;
-                }
+                linkPlayer.currentLocation.X -= 100;
             }
-            
 
-            if (msg == WALKINPLACE)
+            else if (msg == "TakeDamageLeft")
+            {
+                linkPlayer.IsDamaged = true;
+                if (linkPlayer.UseRing)
+                {
+                    linkPlayer.Health -= ((int)value) / 2;
+                }
+                else
+                {
+                    linkPlayer.Health -= (int)value;
+                }
+                linkPlayer.currentLocation.X += 100;
+            }
+
+            else if (msg == "TakeDamageUp")
+            {
+                linkPlayer.IsDamaged = true;
+                if (linkPlayer.UseRing)
+                {
+                    linkPlayer.Health -= ((int)value) / 2;
+                }
+                else
+                {
+                    linkPlayer.Health -= (int)value;
+                }
+                linkPlayer.currentLocation.Y += 100;
+            }
+
+            else if (msg == "TakeDamageDown")
+            {
+                linkPlayer.IsDamaged = true;
+                if (linkPlayer.UseRing)
+                {
+                    linkPlayer.Health -= ((int)value) / 2;
+                }
+                else
+                {
+                    linkPlayer.Health -= (int)value;
+                }
+                linkPlayer.currentLocation.Y -= 100;
+            }
+
+            if (msg == "WalkInPlace")
             {
                 linkPlayer.isWalkingInPlace = true;
             }
 
-            if (msg == ITEM)
+            if (msg == "Item")
             {
                 linkPlayer.IsPickingUpItem = true;
                 linkPlayer.itemsPickedUp.Add((IItems)value);
             }
-            if (msg == HEAL_STR)
+            if (msg == "Heal")
             {
                 linkPlayer.Health += (float)value;
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
                 {
-                    linkPlayer.Health = HEAL;
+                    linkPlayer.Health = 30;
                 }
             }
-            if (msg == HEARTCONTAINER)
+            if (msg == "Heartcontainer")
             {
-                linkPlayer.FullHealth += HEALTH_INC;
+                linkPlayer.FullHealth += 10;
                 linkPlayer.Health = linkPlayer.FullHealth;
             }
 
-            if (msg == RUPEE)
+            if (msg == "Rupee")
             {
                 linkPlayer.NumOfRupee++;
             }
 
-            if (msg == HAND)
+            if (msg == "Hand")
             {
                 linkPlayer.currentLocation = (Vector2)value;
             }
 
-            if (msg == SPECIALBLOCK)
+            if (msg == "Special Block")
             {
                 linkPlayer.isWalkingInPlace = true;
-                linkPlayer.Delay = TWO;
-            }
+                if (linkPlayer.Delay <= 0)
 
-            if( msg == LARGESHIELD)
-            {
-                linkPlayer.LargeShield = true;
+                {
+                    linkPlayer.isWalkingInPlace = false;
+                }
             }
+        }
+
+        public void Update()
+        {
+            //put here to update collider location
         }
     }
 }

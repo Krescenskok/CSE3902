@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: JT Thrash
@@ -28,6 +28,7 @@ namespace Sprint3
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
         private XElement saveData;
 
@@ -47,9 +48,8 @@ namespace Sprint3
             
             state = new KeeseMoveState(this, location);
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
-            collider = new EnemyCollider(kSprite.GetRectangle(), state,HPAmount.HalfHeart,"Keese");
+            collider = new EnemyCollider(kSprite.GetRectangle(), this,HPAmount.HalfHeart,"Keese");
 
-            Debug.Write(kSprite.GetRectangle().Width + ", " + kSprite.GetRectangle().Height);
         }
         public void SetSprite(ISprite sprite)
         {
@@ -68,11 +68,7 @@ namespace Sprint3
             saveData.SetElementValue("Alive", "false");
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-        }
+    
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -83,12 +79,25 @@ namespace Sprint3
         {
             
             state.Update();
-            collider.Update(this);
+            
         }
 
-        public EnemyCollider GetCollider()
+  
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return collider;
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            Die();
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3Final.Items_Handling.ItemHelperClasses
+namespace Sprint4Final.Items_Handling.ItemHelperClasses
 {
     public class ErasedSprite : ISprite
     {

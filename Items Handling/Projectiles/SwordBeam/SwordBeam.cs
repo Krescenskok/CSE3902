@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class SwordBeam : IItems
     {
@@ -78,6 +78,7 @@ namespace Sprint3
         public void Update()
         {
             state.Update();
+            collider.Update(this, this.state);
         }
 
         public void SwordImpact()

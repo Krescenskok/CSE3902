@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace Sprint3
+namespace Sprint4
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -56,7 +56,7 @@ namespace Sprint3
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            if(collision.From().ToString() == "right" && direction == "Left")
+            if(collision.From.ToString() == "right" && direction == "Left")
             {
                 dodongoPos.X -= 3;
                 dodongo.UpdatePos(dodongoPos);

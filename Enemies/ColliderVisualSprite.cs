@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint3.Enemies
+namespace Sprint4.Enemies
 {
     public class ColliderVisualSprite
     {

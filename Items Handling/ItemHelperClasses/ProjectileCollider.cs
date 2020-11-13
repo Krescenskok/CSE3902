@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint3;
+using Sprint4;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint3
+namespace Sprint4
 {
     public class ProjectileCollider : ICollider
     {
@@ -28,7 +29,7 @@ namespace Sprint3
 
             this.name = name;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
 
         }
 
@@ -59,7 +60,7 @@ namespace Sprint3
         }
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            string direction = collision.From().ToString();
+            string direction = collision.From.ToString();
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
             if (col.CompareTag("Enemy"))
@@ -90,11 +91,17 @@ namespace Sprint3
             
         }
 
-
+        //can probably be deleted//
         public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }
