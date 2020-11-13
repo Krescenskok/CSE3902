@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,14 +9,17 @@ namespace Sprint4.Link
     public abstract class Movement : ILinkState
     {
         protected LinkPlayer link;
-   
 
-    protected ISprite linkSprite;
+
+        protected ISprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
         protected int currentFrame;
 
         int i = 0;
+        int X_LOCATION = 780;
+        int Y_LOCATION = 445;
+        int ZERO = 0;
 
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -24,6 +28,11 @@ namespace Sprint4.Link
             this.link = link;
             link.isWalkingInPlace = false;
             itemsPlacedByLink = link.itemsPlacedByLink;
+            if (link.Delay <= 0)
+            {
+                link.isWalkingInPlace = false;
+
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
@@ -31,6 +40,24 @@ namespace Sprint4.Link
             Color col;
             if (linkSprite == null)
                 linkSprite = SpriteFactory.Instance.CreateLinkSprite();
+
+            if (link.LargeShield && link.DrawShield)
+            {
+
+                if (link.state is MoveDown)
+                {
+                    currentFrame = 10;
+                }
+                else if (link.state is MoveLeft)
+                {
+                    currentFrame = 14;
+                }
+                else if (link.state is MoveRight)
+                {
+                    currentFrame = 12;
+                }
+                link.DrawShield = false;
+            }
 
 
             if (link.IsDamaged || link.Clock)
@@ -40,15 +67,17 @@ namespace Sprint4.Link
                     link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
                 else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
                 {
-                    if(link.IsDamaged)
+                    if (link.IsDamaged)
                     {
                         col = colors[i];
+
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == colors.Length - 1)
                         {
                             i = 0;
                         }
+                        link.currentLocation = location;
 
                     }
                     else if (link.Clock)
@@ -62,25 +91,26 @@ namespace Sprint4.Link
                         }
 
                     }
-                  
 
-                   
                 }
                 else
                 {
                     link.IsDamaged = false;
                     link.Clock = false;
-  
+
                 }
 
             }
+
+     
+
             else
             {
                 if (link.UseRing)
                 {
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
                 }
-           
+
                 else
                 {
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
@@ -94,6 +124,17 @@ namespace Sprint4.Link
 
         }
 
+
+        public void delayExecute(double interval, ElapsedEventHandler handler)
+        {
+            Timer t = new Timer();
+            t.Elapsed += handler;
+            t.Interval = interval;
+            t.AutoReset = false;
+            t.Start();
+        }
+
+
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
             foreach (IItems projectile in link.itemsPlacedByLink)
@@ -103,34 +144,33 @@ namespace Sprint4.Link
 
             if (link.IsStopped)
             {
-                if (location.X <= 0)
-                    location.X = 0;
-                else if (location.X >= 780)
-                        location.X = 780;
-                else if (location.Y <= 0)
-                    location.Y = 0;
-                else if (location.Y >= 445)
-                    location.Y = 445;
+                if (location.X <= ZERO)
+                    location.X = ZERO;
+                else if (location.X >= X_LOCATION)
+                    location.X = X_LOCATION;
+                else if (location.Y <= ZERO)
+                    location.Y = ZERO;
+                else if (location.Y >= Y_LOCATION)
+                    location.Y = Y_LOCATION;
 
                 return location;
             }
-
             if (link.IsAttacking)
             {
 
                 if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
                 {
-                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
+                    delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                     return HandleWoodenSword(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.Sword)
                 {
-                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
+                    delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                     return HandleSword(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.MagicalRod)
                 {
-                    ProjectilesCommand.Instance.WandBeam(link.LinkDirection);
+                    delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
                     return HandleMagicalRod(gameTime, location);
                 }
                 else if (link.CurrentWeapon == ItemForLink.ArrowBow)
@@ -166,19 +206,20 @@ namespace Sprint4.Link
                     link.Clock = true;
                     RoomEnemies.Instance.StunAllEnemies();
                     return HandleArrowBow(gameTime, location);
-
+                }
+                else if (link.LargeShield)
+                {
+                    return HandleShield(gameTime, location);
                 }
 
             }
-            if(link.IsPickingUpItem)
+            if (link.IsPickingUpItem)
             {
                 return HandlePickUpItem(gameTime, location);
             }
 
             return HandleShield(gameTime, location);
         }
-
-        
 
         public abstract Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleSword(GameTime gameTime, Vector2 location);
@@ -188,11 +229,11 @@ namespace Sprint4.Link
         public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
 
 
-
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
         }
 
-        
+        public abstract Rectangle Bounds();
+
     }
 }
