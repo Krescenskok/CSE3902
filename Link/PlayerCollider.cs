@@ -161,7 +161,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.X -= 100;
+                linkPlayer.currentLocation.X += 100;
             }
 
             else if (msg == "TakeDamageLeft")
@@ -175,7 +175,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.X += 100;
+                linkPlayer.currentLocation.X -= 100;
             }
 
             else if (msg == "TakeDamageUp")
@@ -189,7 +189,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.Y += 100;
+                linkPlayer.currentLocation.Y -= 100;
             }
 
             else if (msg == "TakeDamageDown")
@@ -203,7 +203,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.Y -= 100;
+                linkPlayer.currentLocation.Y += 100;
             }
 
             if (msg == "WalkInPlace")

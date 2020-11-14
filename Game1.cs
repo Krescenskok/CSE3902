@@ -60,7 +60,7 @@ namespace Sprint4
 
             ItemsFactory.Instance.LoadItemsTextures(Content);
 
-            //Sounds.Instance.LoadSounds(this);
+            Sounds.Instance.LoadSounds(this);
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
@@ -133,7 +133,7 @@ namespace Sprint4
                 ProjectilePersistent.Update(gameTime);
                 CollisionHandler.Instance.Update();
                 camera.Update();
-                //Sounds.Instance.Update();
+                Sounds.Instance.Update();
                 base.Update(gameTime);
 
             }
