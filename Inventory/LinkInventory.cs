@@ -62,8 +62,8 @@ namespace Sprint4
             KeyCount = 0;
             PotionCount = 0;
 
-            inventoryBG = game.Content.Load<Texture2D>("InventoryBlank");
-            cursorTexture = game.Content.Load<Texture2D>("cursor");
+            inventoryBG = game.Content.Load<Texture2D>("HUDandInv/InventoryBlank");
+            cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
 
             inventorySprite = new InventorySprite(inventoryBG, new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height));
             Point bgSize = ((InventorySprite)inventorySprite).InventorySize;

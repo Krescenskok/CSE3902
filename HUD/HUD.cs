@@ -72,13 +72,13 @@ namespace Sprint4
 
         public void LoadHUD(Game1 game)
         {
-            HUDTexture = game.Content.Load<Texture2D>("FullInventory");
+            HUDTexture = game.Content.Load<Texture2D>("HUDandInv/HUD");
             HUDMap.Instance.LoadHUDMap(game);
             Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height / THIRD);
             sprite = new HUDSprite(HUDTexture, drawSize);
             
-            HUDfont = game.Content.Load<SpriteFont>("HUDText");
-            rupeeCountLocation = new Vector2(game.Window.ClientBounds.Width / THIRD + (ABUFFER/ 2), game.Window.ClientBounds.Height / (FIVE + THIRD));
+            HUDfont = game.Content.Load<SpriteFont>("HUDandInv/HUDText");
+            rupeeCountLocation = new Vector2(drawSize.X / THIRD + (ABUFFER/ 2), game.Window.ClientBounds.Height / (FIVE + THIRD));
             keyCountLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + INVENTORY_GAP);
             bombCountLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + (INVENTORY_GAP / 2));
 

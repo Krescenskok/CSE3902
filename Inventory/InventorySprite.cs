@@ -30,7 +30,6 @@ namespace Sprint4
             Rectangle destinationRectangle = new Rectangle(0, 0, size.X, size.Y);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
         }
 
     }

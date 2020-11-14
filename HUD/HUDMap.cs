@@ -57,9 +57,9 @@ namespace Sprint4
 
         public void LoadHUDMap(Game1 game)
         {
-            mapIndivRoomsTexture = game.Content.Load<Texture2D>("soloRooms");
-            mapCurrRoomTexture = game.Content.Load<Texture2D>("SingularLocations");
-            mapMarkerTexture = game.Content.Load<Texture2D>("MapIndicator");
+            mapIndivRoomsTexture = game.Content.Load<Texture2D>("HUDandInv/soloRooms");
+            mapCurrRoomTexture = game.Content.Load<Texture2D>("HUDandInv/SingularLocations");
+            mapMarkerTexture = game.Content.Load<Texture2D>("HUDandInv/MapIndicator");
 
             Point mapSize = new Point(game.Window.ClientBounds.Width / FORTH, game.Window.ClientBounds.Height / (TWO*THREE));
             Point mapLocation = new Point(game.Window.ClientBounds.Width / (FORTH * FORTH), game.Window.ClientBounds.Height / (FORTH*TWO));

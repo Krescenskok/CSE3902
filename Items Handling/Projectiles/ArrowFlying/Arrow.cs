@@ -74,6 +74,11 @@ namespace Sprint4
             state.Collected();
         }
 
+        public void Expire()
+        {
+            state.Expire();
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);

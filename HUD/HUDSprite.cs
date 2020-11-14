@@ -19,10 +19,9 @@ namespace Sprint4
             this.size = size;
         }
 
-
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            Rectangle sourceRectangle = new Rectangle(0, YCOOR, texture.Width, texture.Height - YCOOR);
+            Rectangle sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height - YCOOR);
             Rectangle destinationRectangle = new Rectangle(0, 0, size.X, size.Y);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

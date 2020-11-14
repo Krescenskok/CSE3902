@@ -69,13 +69,15 @@ namespace Sprint4
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
-
             LinkPersistent = new LinkCommand(linkPlayer, "");
             ProjectilePersistent = ProjectilesCommand.Instance;
             ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             DoorSpriteFactory.Instance.LoadAllTextures(this);
+
+            HUD.Instance.LoadHUD(this);
+            LinkInventory.Instance.InitializeInventory(this);
 
 
             camera = Camera.Instance;
@@ -89,7 +91,6 @@ namespace Sprint4
             RoomSpawner.Instance.LoadAllRooms(this);
             
             RoomSpawner.Instance.LoadRoom(this, 1);
-            
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
@@ -125,7 +126,7 @@ namespace Sprint4
                 isPaused = ((PauseCommand)activeCommand).IsPause;
             }
 
-            if (!isPaused)
+            if (!isPaused && !LinkInventory.Instance.ShowInventory)
             {
                 if (activeCommand != null)
                     activeCommand.Update(gameTime);
@@ -135,6 +136,8 @@ namespace Sprint4
                 ProjectilePersistent.Update(gameTime);
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
+                HUD.Instance.UpdateHearts(linkPlayer);
+                HUD.Instance.UpdateInventoryCounts(LinkInventory.Instance.RupeeCount, LinkInventory.Instance.KeyCount, LinkInventory.Instance.BombCount);
                 base.Update(gameTime);
 
             }
@@ -146,22 +149,23 @@ namespace Sprint4
         {
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
 
-            
-            RoomSpawner.Instance.Draw(_spriteBatch);
-            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-            RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+            if (!LinkInventory.Instance.ShowInventory)
+            {
 
-            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                //RoomSpawner.Instance.Draw(_spriteBatch);
+                //LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                HUD.Instance.Draw(_spriteBatch);
+                //ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                base.Draw(gameTime);
+            }
 
             _spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

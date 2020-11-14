@@ -233,7 +233,7 @@ namespace Sprint4
             if (msg == "Item")
             {
                 linkPlayer.IsPickingUpItem = true;
-                linkPlayer.itemsPickedUp.Add((IItems)value);
+                LinkInventory.Instance.PickUpItem((IItems)value);
             }
             if (msg == "Heal")
             {
