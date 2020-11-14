@@ -29,7 +29,7 @@ namespace Sprint4
         {
             this.location = location;
             state = new ArrowState(this);
-            collider = new ItemCollider((item as ArrowSprite).Hitbox,this, this.state);
+            collider = new ItemCollider((item as ArrowUpSprite).Hitbox, this, this.state);
         }
         public ArrowObject(ISprite item, Vector2 location, XElement xml)
         {

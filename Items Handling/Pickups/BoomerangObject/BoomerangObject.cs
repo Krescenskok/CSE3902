@@ -36,7 +36,7 @@ namespace Sprint4.Items
             throwing = true;
 
             returning = false;
-            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
         }
         public BoomerangObject(ISprite item, Vector2 location, XElement xml)
         {

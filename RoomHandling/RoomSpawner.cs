@@ -42,7 +42,12 @@ namespace Sprint4
 
         XElement xml;
 
-
+        int currentRoom;
+        public int CurrentRoom
+        {
+            get { return currentRoom; }
+            set { currentRoom = value; }
+        }
 
 
         public static RoomSpawner Instance
@@ -96,6 +101,7 @@ namespace Sprint4
 
         public void RoomChange(Game game, int roomNumber, char heading)
         {
+            CurrentRoom = roomNumber;
             Hashtable numConnect = (Hashtable)roomConnections[roomNumber];
             int destinationRoom = (int)numConnect[heading];
             CollisionHandler.Instance.RoomChange();

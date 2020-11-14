@@ -10,6 +10,8 @@ namespace Sprint4
     {
         void Update();
 
+        void Expire();
+
         void Draw(SpriteBatch spriteBatch);
 
         Vector2 Location { get; }
