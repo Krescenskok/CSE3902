@@ -14,14 +14,11 @@ namespace Sprint4
         LinkPlayer linkPlayer;
         //String Key;
 
-       
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
-
-            
         }
 
         public string Name { get => "Player"; }
@@ -44,26 +41,21 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall"))
             {
 
-                linkPlayer.HandleObstacle(collision);
-
+                linkPlayer.isWalkingInPlace = true;
 
             }
-
-           
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+                if (col.CompareTag("Block") || col.CompareTag("Wall"))
                 {
 
-
-
-                linkPlayer.HandleObstacle(collision);
+                linkPlayer.isWalkingInPlace = true;
 
             } else 
                 if (col.CompareTag("enemy"))
@@ -154,17 +146,7 @@ namespace Sprint4
                 col.SendMessage("Disappear", null);
             }
 
-            if (col.CompareTag("LockedDoor")) //and link has key!
-            {
-                col.SendMessage("Unlock", null);
-            }
-
         }
-
-        public void HandleCollisionExit(ICollider col, Collision collision)
-        {
-        }
-
 
         public void SendMessage(string msg, object value)
         {
@@ -179,7 +161,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.X -= 100;
+                linkPlayer.currentLocation.X += 100;
             }
 
             else if (msg == "TakeDamageLeft")
@@ -193,7 +175,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.X += 100;
+                linkPlayer.currentLocation.X -= 100;
             }
 
             else if (msg == "TakeDamageUp")
@@ -207,7 +189,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.Y += 100;
+                linkPlayer.currentLocation.Y -= 100;
             }
 
             else if (msg == "TakeDamageDown")
@@ -221,7 +203,7 @@ namespace Sprint4
                 {
                     linkPlayer.Health -= (int)value;
                 }
-                linkPlayer.currentLocation.Y -= 100;
+                linkPlayer.currentLocation.Y += 100;
             }
 
             if (msg == "WalkInPlace")
@@ -272,7 +254,6 @@ namespace Sprint4
         public void Update()
         {
             //put here to update collider location
-
         }
     }
 }
