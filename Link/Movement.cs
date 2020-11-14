@@ -144,14 +144,15 @@ namespace Sprint4.Link
 
             if (link.IsStopped)
             {
-                if (location.X <= ZERO)
-                    location.X = ZERO;
-                else if (location.X >= X_LOCATION)
-                    location.X = X_LOCATION;
-                else if (location.Y <= ZERO)
-                    location.Y = ZERO;
-                else if (location.Y >= Y_LOCATION)
-                    location.Y = Y_LOCATION;
+                //unnecessary with wall colliders
+                //if (location.X <= ZERO)
+                //    location.X = ZERO;
+                //else if (location.X >= X_LOCATION)
+                //    location.X = X_LOCATION;
+                //else if (location.Y <= ZERO)
+                //    location.Y = ZERO;
+                //else if (location.Y >= Y_LOCATION)
+                //    location.Y = Y_LOCATION;
 
                 return location;
             }

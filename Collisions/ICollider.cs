@@ -45,6 +45,15 @@ namespace Sprint4
         /// <param name="collision"></param>
         void HandleCollisionEnter(ICollider col, Collision collision);
 
+
+        /// <summary>
+        /// Called once at the end of the collision
+        /// </summary>
+        /// <param name="col">The other collider</param>
+        /// <param name="collision"></param>
+        void HandleCollisionExit(ICollider col, Collision collision);
+
+
         Layer layer { get; set; }
 
         void Update();

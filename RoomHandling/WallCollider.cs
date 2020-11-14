@@ -7,10 +7,10 @@ namespace Sprint4
 {
     public class WallCollider : ICollider
     {
-        public string name;
+       
         public Rectangle bounds;
 
-        public string Name { get => name; }
+        public string Name { get => "Wall"; }
         public Layer layer { get; set; }
 
 
@@ -45,6 +45,10 @@ namespace Sprint4
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             //no action
+        }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
         }
 
         public void SendMessage(string msg, object value)

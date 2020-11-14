@@ -89,6 +89,11 @@ namespace Sprint4
             }
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void Update()
         {
            //nothing

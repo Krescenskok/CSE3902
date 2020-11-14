@@ -71,7 +71,7 @@ namespace Sprint4
                     int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
 
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
+                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
 
                     if (objName.Equals("Flame"))
                     {

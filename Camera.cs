@@ -23,6 +23,7 @@ namespace Sprint4
         private int screenHeight;
 
         private int nextRoom;
+        private char heading;
         private bool loadNextRoom = false;
 
         private Game game;
@@ -39,7 +40,7 @@ namespace Sprint4
 
             transform = Matrix.Identity;
             transform.Translation = new Vector3(-screenWidth * 2, -screenHeight * 5, 0);
-            transform.Translation = Vector3.Zero;
+            //transform.Translation = Vector3.Zero;
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
         }
@@ -55,6 +56,9 @@ namespace Sprint4
             Direction = Vector3.Up;
 
             nextRoom = roomNum;
+
+            Game1 game1 = game as Game1;
+            game1.isPaused = true;
         }
 
         public void ScrollDown(int roomNum)
@@ -64,22 +68,31 @@ namespace Sprint4
             Direction = Vector3.Down;
 
             nextRoom = roomNum;
+
+            Game1 game1 = game as Game1;
+            game1.isPaused = true;
         }
 
-        public void ScrollLeft(int roomNum)
+        public void ScrollRight(int roomNum)
         {
             Target = Transform.Translation + Vector3.Left * screenWidth;
 
             Direction = Vector3.Left;
             nextRoom = roomNum;
+
+            Game1 game1 = game as Game1;
+            game1.isPaused = true;
         }
 
-        public void ScrollRight(int roomNum)
+        public void ScrollLeft(int roomNum)
         {
             Target = Transform.Translation + Vector3.Right * screenWidth;
 
             Direction = Vector3.Right;
             nextRoom = roomNum;
+
+            Game1 game1 = game as Game1;
+            game1.isPaused = true;
         }
 
         public void Update()
@@ -93,8 +106,10 @@ namespace Sprint4
                 loadNextRoom = true;
             }else if (loadNextRoom)
             {
-               
-                
+
+                Game1 game1 = game as Game1;
+                game1.isPaused = false
+                    ;
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
             }

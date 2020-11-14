@@ -68,6 +68,11 @@ namespace Sprint4.Enemies
 
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void SendMessage(string msg, object value)
         {
            //nothing

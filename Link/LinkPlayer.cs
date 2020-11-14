@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint4;
@@ -50,6 +51,8 @@ namespace Sprint4.Link
         private PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
+
+        public List<Direction> possibleDirections = Directions.Default();
 
         public void RemovePlacedItem(IItems item)
         {
@@ -140,6 +143,11 @@ namespace Sprint4.Link
             set { isWalkingInPlace = value; }
         }
 
+        public void HandleObstacle(Collision col)
+        {
+            possibleDirections.Remove(col.From);
+        }
+
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
@@ -168,6 +176,8 @@ namespace Sprint4.Link
             CurrentLocation = state.Update(gameTime, CurrentLocation);
             delay--;
 
+
+            possibleDirections = Directions.Default();
         }
 
         public void MovingLeft()
@@ -234,7 +244,7 @@ namespace Sprint4.Link
             if (loc == false)
             {
                 loc = true;
-                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2) - Camera.Instance.Location;
             }
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);

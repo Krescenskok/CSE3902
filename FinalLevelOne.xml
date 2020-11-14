@@ -3,78 +3,38 @@
 	<Asset Type="MyDataTypes.LevelObjectData[]">
 
 
-		<!-- Walls-->
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>Left</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>LeftTop</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>LeftBottom</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>Top</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>TopLeft</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>TopRight</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>Right</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>RightTop</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>RightBottom</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>Bottom</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>BottomLeft</ObjectName>
-			<Location>0 0</Location>
-		</Item>
-
-		<Item>
-			<ObjectType>Wall</ObjectType>
-			<ObjectName>BottomRight</ObjectName>
-			<Location>0 0</Location>
-		</Item>
+		
 
 		<!-- Walls-->
 
 		<!-- First Room Content-->
 		<Room id ="1">
 
+			
+			
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>2</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>3</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>true</Locked>
+				<RoomNum>4</RoomNum>
+			</Item>
+		
+			
+			<!-- Doors-->
+			
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -191,6 +151,15 @@
 
 		<!-- Third Room Content-->
 		<Room id ="3">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>1</RoomNum>
+			</Item>
+			<!-- Doors-->
 			
 			<!-- Walls-->
 			<Item>
@@ -329,6 +298,25 @@
 		<!-- Sixth Room Content-->
 		<Room id ="6">
 
+
+
+			<!-- Doors-->
+		
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>5</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>9</RoomNum>
+			</Item>
+			
+			<!-- Doors-->
+			
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -412,37 +400,48 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>2 3</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>3 0</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>4 3</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>5 1</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>6 8</Location>
-				<Alive>true</Alive>
+				<Alive>false</Alive>
 			</Item>
 		</Room>
 		<!-- Sixth Room Content-->
 
 		<!-- Seventh Room Content-->
 		<Room id ="7">
+
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>5</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 
 			<!-- Walls-->
 			<Item>
@@ -562,6 +561,29 @@
 		<!-- Ninth Room Content-->
 		<Room id ="9">
 
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>10</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>8</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>6</RoomNum>
+			</Item>
+			<!-- Doors-->
+
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -640,6 +662,22 @@
 
 		<!-- Eleventh Room Content-->
 		<Room id ="11">
+
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>8</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>12</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>
@@ -751,6 +789,21 @@
 
 		<!-- Thirteenth Room Content-->
 		<Room id ="13">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>16</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>8</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>
@@ -1058,6 +1111,15 @@
 		<!-- Fifteenth Room Content-->
 		<Room id ="15">
 
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>14</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -1258,6 +1320,15 @@
 		<!-- Seventeenth Room Content-->
 		<Room id ="17">
 
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>16</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -1382,6 +1453,15 @@
 		<!-- Second Room Content-->
 		<Room id ="2">
 
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>1</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -1432,6 +1512,21 @@
 
 		<!-- Fourth Room Content-->
 		<Room id="4">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>5</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>1</RoomNum>
+			</Item>
+			<!-- Doors-->
 			
 			<!-- Walls-->
 			<Item>
@@ -1521,6 +1616,27 @@
 
 		<!-- Fifth Room Content-->
 		<Room id="5">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>6</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>7</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>4</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>
@@ -1624,6 +1740,27 @@
 		
 		<!-- 8th Room Content-->
 		<Room id ="8">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>9</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>11</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>13</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>
@@ -1756,6 +1893,15 @@
 		<!-- 10th Room Content-->
 		<Room id ="10">
 
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>9</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -1807,6 +1953,21 @@
 		
 		<!-- 12th Room Content-->
 		<Room id ="12">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>11</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>14</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>
@@ -1992,6 +2153,21 @@
 		<!-- 14th Room Content-->
 		<Room id ="14">
 
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Right</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>15</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>12</RoomNum>
+			</Item>
+			<!-- Doors-->
+
 			<!-- Walls-->
 			<Item>
 				<ObjectType>Wall</ObjectType>
@@ -2143,6 +2319,21 @@
 		
 		<!-- 16th Room Content-->
 		<Room id ="16">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Left</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>17</RoomNum>
+			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Locked>false</Locked>
+				<RoomNum>13</RoomNum>
+			</Item>
+			<!-- Doors-->
 
 			<!-- Walls-->
 			<Item>

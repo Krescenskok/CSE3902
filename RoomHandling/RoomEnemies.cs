@@ -23,12 +23,14 @@ namespace Sprint4
         private static readonly RoomEnemies instance = new RoomEnemies();
 
         private List<IEnemy> enemies;
+        public int EnemyCount { get => enemies.Count; }
         private List<EnemyDeath> deaths;
 
         private List<TestCollider> testObjects;
 
         private Game game;
-        private Camera cam;
+
+        private int currentRoom;
    
 
         public static RoomEnemies Instance
@@ -44,7 +46,7 @@ namespace Sprint4
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
-            cam = Camera.Instance;
+            
         }
 
     
@@ -53,6 +55,7 @@ namespace Sprint4
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             this.game = game;
+            currentRoom = int.Parse(room.Attribute("id").Value);
 
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)
@@ -60,64 +63,74 @@ namespace Sprint4
                 XElement typeTag = item.Element("ObjectType");
                 string objType = typeTag.Value;
 
-                XElement nameTag = item.Element("ObjectName");
-                XElement locTag = item.Element("Location");
-                XElement aliveTag = item.Element("Alive");
-
                 
-                string objName = nameTag.Value;
-                string objLoc = locTag.Value;
 
-                bool alive = aliveTag == null || aliveTag.Value.Equals("true");
-
-                if (objType.Equals("Enemy") && alive)
+                if (objType.Equals("Enemy"))
                 {
-                    int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
-                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-                    
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column) - cam.Location;
+                    XElement nameTag = item.Element("ObjectName");
+                    XElement locTag = item.Element("Location");
+                    XElement aliveTag = item.Element("Alive");
 
-                    if (objName.Equals("Rope"))
+
+                    string objName = nameTag.Value;
+                    string objLoc = locTag.Value;
+
+                    bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+
+                    if (alive)
                     {
-                        enemies.Add(new Rope(game, location, item));
+                        int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
+                        int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
+
+
+                        Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+
+                        if (objName.Equals("Rope"))
+                        {
+                            enemies.Add(new Rope(game, location, item));
+
+
+                        }
+                        else if (objName.Equals("Stalfos"))
+                        {
+                            enemies.Add(new Stalfos(game, location, item));
+                        }
+                        else if (objName.Equals("Goriya"))
+                        {
+                            enemies.Add(new Goriya(game, location, item));
+                        }
+                        else if (objName.Equals("Keese"))
+                        {
+                            enemies.Add(new Keese(game, location, item));
+                        }
+                        else if (objName.Equals("Gel"))
+                        {
+                            enemies.Add(new Gel(game, location, item));
+                        }
+                        else if (objName.Equals("Dodongo"))
+                        {
+                            enemies.Add(new Dodongo(game, location, item));
+
+                        }
+                        else if (objName.Equals("Trap"))
+                        {
+                            string dir1 = item.Element("Direction1").Value;
+                            string dir2 = item.Element("Direction2").Value;
+                            enemies.Add(new BladeTrap(game, location, dir1, dir2));
+                        }
+                        else if (objName.Equals("WallMaster"))
+                        {
+                            enemies.Add(new WallMaster(game, location, item));
+                        }
+
+
 
 
                     }
-                    else if (objName.Equals("Stalfos"))
-                    {
-                        enemies.Add(new Stalfos(game, location, item));
-                    }
-                    else if (objName.Equals("Goriya"))
-                    {
-                        enemies.Add(new Goriya(game, location,item));
-                    }
-                    else if (objName.Equals("Keese"))
-                    {
-                        enemies.Add(new Keese(game, location,item));
-                    }else if (objName.Equals("Gel"))
-                    {
-                        enemies.Add(new Gel(game, location, item));
-                    }
-                    else if (objName.Equals("Dodongo"))
-                    {
-                        enemies.Add(new Dodongo(game,location,item));
-
-                    }else if (objName.Equals("Trap"))
-                    {
-                        string dir1 = item.Element("Direction1").Value;
-                        string dir2 = item.Element("Direction2").Value;
-                        enemies.Add(new BladeTrap(game, location, dir1, dir2));
-                    }else if (objName.Equals("WallMaster"))
-                    {
-                        enemies.Add(new WallMaster(game, location, item));
-                    }
-                   
 
 
-                   
 
-                  
                 }
             }
 
@@ -151,7 +164,6 @@ namespace Sprint4
                 deaths[i].Update();
             }
 
-            
         }
 
        

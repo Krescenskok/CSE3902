@@ -36,7 +36,7 @@ namespace Sprint4
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
-        bool isPaused = false;
+        public bool isPaused = false;
 
 
         public Game1()
@@ -75,13 +75,15 @@ namespace Sprint4
             ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
-
-            //set up grid where everything is spawned
-            GridGenerator.Instance.GetGrid(this, 12, 7);
+            DoorSpriteFactory.Instance.LoadAllTextures(this);
 
 
             camera = Camera.Instance;
             camera.Load(this);
+
+
+            //set up grid where everything is spawned
+            GridGenerator.Instance.GetGrid(this, 12, 7);
 
             //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
@@ -132,13 +134,12 @@ namespace Sprint4
                 LinkPersistent.Update(gameTime);
                 ProjectilePersistent.Update(gameTime);
                 CollisionHandler.Instance.Update();
-                camera.Update();
                 Sounds.Instance.Update();
                 base.Update(gameTime);
 
             }
 
-          
+            camera.Update();
         }
 
         protected override void Draw(GameTime gameTime)

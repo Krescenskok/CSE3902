@@ -14,11 +14,14 @@ namespace Sprint4
         LinkPlayer linkPlayer;
         //String Key;
 
+       
 
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
+
+            
         }
 
         public string Name { get => "Player"; }
@@ -41,21 +44,26 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
             {
 
-                linkPlayer.isWalkingInPlace = true;
+                linkPlayer.HandleObstacle(collision);
+
 
             }
+
+           
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Block") || col.CompareTag("Wall"))
+                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
                 {
 
-                linkPlayer.isWalkingInPlace = true;
+
+
+                linkPlayer.HandleObstacle(collision);
 
             } else 
                 if (col.CompareTag("enemy"))
@@ -146,7 +154,17 @@ namespace Sprint4
                 col.SendMessage("Disappear", null);
             }
 
+            if (col.CompareTag("LockedDoor")) //and link has key!
+            {
+                col.SendMessage("Unlock", null);
+            }
+
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void SendMessage(string msg, object value)
         {
@@ -254,6 +272,7 @@ namespace Sprint4
         public void Update()
         {
             //put here to update collider location
+
         }
     }
 }

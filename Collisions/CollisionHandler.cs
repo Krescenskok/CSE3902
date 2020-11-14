@@ -21,7 +21,7 @@ namespace Sprint4
         /// </summary>
         private List<ICollider> colliders;
 
-        private List<ICollider> removedColliders;
+        private Queue<ICollider> removedColliders;
 
         
         /// <summary>
@@ -37,7 +37,7 @@ namespace Sprint4
         private CollisionHandler()
         {
             colliders = new List<ICollider>();
-            removedColliders = new List<ICollider>();
+            removedColliders = new Queue<ICollider>();
             
             ListComparer<ICollider> listComparer = new ListComparer<ICollider>();
           
@@ -57,12 +57,12 @@ namespace Sprint4
 
         public void RemoveCollider(ICollider col)
         {
-            removedColliders.Add(col);
+            removedColliders.Enqueue(col);
         }
 
         public void RemoveCollider(List<ICollider> colliders)
         {
-            foreach (ICollider col in colliders) removedColliders.Add(col);
+            foreach (ICollider col in colliders) removedColliders.Enqueue(col);
         }
         
 
@@ -84,7 +84,7 @@ namespace Sprint4
             {
                 if(!(colliders[i].layer is PlayerLayer))
                 {
-                    removedColliders.Add(colliders[i]);
+                    removedColliders.Enqueue(colliders[i]);
                 }
             }
 
@@ -173,6 +173,8 @@ namespace Sprint4
 
                 nearbyColliders.AddRange(RoomWalls.Instance.Walls); //walls too big for spatial mapping
 
+
+                Collision collision = new Collision();
                 foreach(ICollider other in nearbyColliders)
                 {
                     List<ICollider> key = new List<ICollider> { colliders[i], other };
@@ -180,7 +182,7 @@ namespace Sprint4
 
                     if (!colliders[i].Equals(other) && colliders[i].layer.CollidesWith(other) && ColliderOverlap(colliders[i], other)) //collision exists
                     {
-                        Collision collision = CalculateSide(colliders[i], other);
+                        collision = CalculateSide(colliders[i], other);
 
                         numCol++;
 
@@ -194,14 +196,16 @@ namespace Sprint4
                         {
 
                             collisions.Add(key);
-                            colliders[i].HandleCollision(other, collision);
+                            
                             colliders[i].HandleCollisionEnter(other, collision);
+                            colliders[i].HandleCollision(other, collision);
                         }
 
                     }
                     else if (collisions.Contains(key)) //collision has just ended
                     {
                         collisions.Remove(key);
+                        colliders[i].HandleCollisionExit(other,collision);
                     }
 
                     
@@ -214,12 +218,12 @@ namespace Sprint4
             
 
             //remove colliders only after all collisions have been checked to prevent for loop error
-            for(int i = 0; i < removedColliders.Count; i++)
+            while(removedColliders.Count > 0)
             {
-                colliders.Remove(removedColliders[i]);
+                colliders.Remove(removedColliders.Dequeue());
+                
             }
-
-            removedColliders.Clear();
+            
 
             //reset spatial map
             ClearMap();

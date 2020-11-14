@@ -12,19 +12,22 @@ namespace Sprint4
         public Rectangle bounds;
         public char orientation;
         public Door door;
-
-        public string Name { get => name; }
+        private bool takesKey;
+        public string Name { get => "LockedDoor"; }
         public Layer layer { get; set; }
 
 
-        public LockedDoorCollider(Door door, Point location, Point size, char orient)
+        public LockedDoorCollider(Door door, Point location, Point size, char orient, bool takesKey)
         {
             bounds.Location = location;
             bounds.Size = size;
             orientation = orient;
             this.door = door;
+            this.takesKey = takesKey;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
+
+            RoomEnemies.Instance.AddTestCollider(new Rectangle(location, size));
         }
 
         public Rectangle Bounds()
@@ -34,7 +37,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "LockedDoor" || tag == "lockeddoor";
+            return tag == "LockedDoor" || tag == "Door";
         }
 
         public bool Equals(ICollider col)
@@ -55,11 +58,15 @@ namespace Sprint4
             }
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Unlock")
+            if (msg == "Unlock" && takesKey)
             {
-                this.door.Unlock();
+                door.StartUnlock();
             }
         }
 

@@ -38,7 +38,7 @@ namespace Sprint4
         DungeonSprite topLayer;
         Texture2D dungeonSheet;
         Texture2D dungeonSheetOuter;
-        Hashtable roomConnections;
+        static Hashtable roomConnections;
 
         XElement xml;
 
@@ -77,13 +77,13 @@ namespace Sprint4
         {
             
             XElement room = roomXMLs[roomNumber];
-            currentRoomSprite = roomSprites[roomNumber - 1];
-            currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
+            //currentRoomSprite = roomSprites[roomNumber - 1];
+            //currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);
             RoomWalls.Instance.LoadRoom(game, room);
-            RoomDoors.Instance.LoadRoom(game, room, roomNumber);
+            RoomDoors.Instance.LoadRoom(game, room);
         }
         public void Update()
         {
@@ -103,10 +103,18 @@ namespace Sprint4
             
         }
 
+        public void RoomChange(Game game, int roomNumber)
+        {
+            GridGenerator.Instance.GetGrid(game, 12, 7);
+            CollisionHandler.Instance.RoomChange();
+            LoadRoom(game, roomNumber);
+        }
+
         public void Draw(SpriteBatch batch)
         {
             allRooms.Draw(batch);
-            currentRoomSprite.Draw(batch, Vector2.Zero, 0, Color.White);
+            RoomDoors.Instance.Draw(batch);
+            //currentRoomSprite.Draw(batch, Vector2.Zero, 0, Color.White);
             RoomBlocks.Instance.Draw(batch);
             RoomEnemies.Instance.Draw(batch);
             RoomItems.Instance.Draw(batch);
@@ -115,7 +123,7 @@ namespace Sprint4
         public void DrawTopLayer(SpriteBatch batch)
         {
             topLayer.Draw(batch);
-            currentRoomSpriteTopLayer.Draw(batch, Vector2.Zero, 0, Color.White);
+            //currentRoomSpriteTopLayer.Draw(batch, Vector2.Zero, 0, Color.White);
         }
 
         public void LoadAllRooms(Game game)
@@ -171,7 +179,7 @@ namespace Sprint4
 
         public static void InitRoomConnections()
         {
-            Hashtable roomConnections = new Hashtable();
+             roomConnections = new Hashtable();
 
             Hashtable roomOne = new Hashtable();
 

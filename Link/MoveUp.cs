@@ -23,7 +23,7 @@ namespace Sprint4
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                if (!link.isWalkingInPlace)
+                if (link.possibleDirections.Contains(Direction.up))
                 {
                     location.Y += MOVEMENT;
                 }

@@ -10,18 +10,24 @@ namespace Sprint4
 
         public string name;
         public Rectangle bounds;
-        public char orientation;
+        public Direction entrySide;
         public Door door;
 
         public string Name { get => name; }
         public Layer layer { get; set; }
 
+        private bool trigger = false;
 
         public UnlockedDoorCollider(Door door, Point location, Point size, char orient)
         {
             bounds.Location = location;
             bounds.Size = size;
-            orientation = orient;
+
+            if (orient == 'L') entrySide = Direction.left;
+            else if (orient == 'R') entrySide = Direction.right;
+            else if (orient == 'T') entrySide = Direction.up;
+            else if (orient == 'B') entrySide = Direction.down;
+            
             this.door = door;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
@@ -34,7 +40,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "Door" || tag == "door";
+            return tag == "Door" || tag == entrySide.ToString();
         }
 
         public bool Equals(ICollider col)
@@ -44,16 +50,28 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            //no action
+            if (col.CompareTag("Player") && collision.From.Equals(entrySide) && trigger == true)
+            {
+                door.ChangeRoom();
+                trigger = false;
+            }
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player"))
+            if (col.CompareTag("Player") && !collision.From.Equals(entrySide))
             {
-                col.SendMessage("Door", null);
+                trigger = true;
+                
             }
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+
+
+        }
+
 
         public void SendMessage(string msg, object value)
         {
