@@ -13,14 +13,13 @@ namespace Sprint4.Items
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
-        private bool isExpired = false;
         private bool isExploding = false;
-        public bool Expired
+        private bool isExpired = false;
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
-
 
         public Vector2 Location { get => location; }
 

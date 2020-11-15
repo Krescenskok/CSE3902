@@ -16,6 +16,12 @@ namespace Sprint4.Items
 
         private int drawnFrame;
         private IItemsState state;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public Vector2 Location { get => location;}
 
@@ -52,6 +58,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            IsExpired = false;
             saveInfo.SetElementValue("Alive", "false");
         }
 

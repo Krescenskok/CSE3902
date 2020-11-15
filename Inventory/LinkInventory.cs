@@ -62,7 +62,7 @@ namespace Sprint4
             KeyCount = 0;
             PotionCount = 0;
 
-            inventoryBG = game.Content.Load<Texture2D>("HUDandInv/InventoryBlank");
+            inventoryBG = game.Content.Load<Texture2D>("HUDandInv/FullInventory");
             cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
 
             inventorySprite = new InventorySprite(inventoryBG, new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height));
@@ -266,6 +266,7 @@ namespace Sprint4
             }
 
             cursorLocation[secondSlotItem].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+
         }
 
     }

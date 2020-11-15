@@ -19,5 +19,7 @@ namespace Sprint4
         IItemsState State { get; }
 
         ICollider Collider { get; }
+
+        bool IsExpired { get; set; }
     }
 }

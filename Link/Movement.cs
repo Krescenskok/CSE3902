@@ -137,10 +137,7 @@ namespace Sprint4.Link
 
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
-            foreach (IItems projectile in link.itemsPlacedByLink)
-            {
-                projectile.Update();
-            }
+            ProjectilesCommand.Instance.Update(gameTime);
 
             if (link.IsStopped)
             {

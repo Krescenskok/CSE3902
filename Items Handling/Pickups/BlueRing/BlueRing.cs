@@ -17,6 +17,12 @@ namespace Sprint4.Items
         private IItemsState state;
         private int drawnFrame;
         private bool equipped;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 

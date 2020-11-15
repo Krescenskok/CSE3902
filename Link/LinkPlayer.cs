@@ -45,7 +45,6 @@ namespace Sprint4.Link
         private int delay;
         private bool clock = false;
         private bool largeShield = false;
-        public List<IItems> itemsPickedUp;
         private bool drawShield = true;
 
         private PlayerCollider collider;
@@ -56,11 +55,10 @@ namespace Sprint4.Link
 
         public void RemovePlacedItem(IItems item)
         {
-            if (itemsPlacedByLink.Contains(item))
+            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
             {
                 itemsPlacedByLink.Remove(item);
             }
-
         }
 
 
@@ -230,12 +228,7 @@ namespace Sprint4.Link
             Delay = 0;
             clock = false;
             DrawShield = true;
-            if (itemsPickedUp != null && itemsPickedUp.Count > 0)
-            {
-                itemsPickedUp.Clear();
-            }
-
-
+            
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)

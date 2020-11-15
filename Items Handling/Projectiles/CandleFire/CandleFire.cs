@@ -11,7 +11,7 @@ namespace Sprint4.Items
         private Vector2 location;
         private ProjectileCollider collider;
         private bool isExpired = false;
-        public bool expired
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }

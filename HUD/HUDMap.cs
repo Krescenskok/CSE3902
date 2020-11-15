@@ -18,9 +18,12 @@ namespace Sprint4
         List<ISprite> currentMapLocationSprites;
         List<ISprite> individualRoomSprites;
         Dictionary<int,Boolean> visitedRoom;
+        private Point mapTopLoc;
+        private Point mapBottomLoc;
+        Point bossMarkerLocation;
+        Point bossMarkerLocationBottom;
         private ISprite bossLocation;
         private int linkRoom;
-        private Vector2 mapName;
         private bool drawMap = false;
         private bool drawBossLocation = false;
         private int ROOM_BUFFER = 40;
@@ -55,61 +58,62 @@ namespace Sprint4
 
         }
 
-        public void LoadHUDMap(Game1 game)
+        public void LoadHUDMap(Game1 game, Point HUDSize)
         {
             mapIndivRoomsTexture = game.Content.Load<Texture2D>("HUDandInv/soloRooms");
             mapCurrRoomTexture = game.Content.Load<Texture2D>("HUDandInv/SingularLocations");
             mapMarkerTexture = game.Content.Load<Texture2D>("HUDandInv/MapIndicator");
 
-            Point mapSize = new Point(game.Window.ClientBounds.Width / FORTH, game.Window.ClientBounds.Height / (TWO*THREE));
-            Point mapLocation = new Point(game.Window.ClientBounds.Width / (FORTH * FORTH), game.Window.ClientBounds.Height / (FORTH*TWO));
-            InitializeMap(mapSize, mapLocation);
+            Point mapSize = new Point(HUDSize.X / FORTH, HUDSize.Y / 2);
+            mapTopLoc = new Point(HUDSize.X / (FORTH * FORTH), game.Window.ClientBounds.Height / (FORTH*TWO));
+            mapBottomLoc = new Point(mapTopLoc.X, mapTopLoc.Y + game.Window.ClientBounds.Height - HUDSize.Y);
+            InitializeMap(mapSize);
 
-            Point bossMarkerLocation = new Point(mapLocation.X * FORTH, mapLocation.Y + (2*THREE*THREE));
-            bossLocation = new HUDMapMarkerSprite(mapMarkerTexture, bossMarkerLocation);
+            bossMarkerLocation = new Point(mapTopLoc.X * FORTH, mapTopLoc.Y + (2*THREE*THREE));
+            bossMarkerLocationBottom = new Point(bossMarkerLocation.X, bossMarkerLocation.Y + game.Window.ClientBounds.Height - HUDSize.Y);
+            bossLocation = new HUDMapMarkerSprite(mapMarkerTexture);
 
-            mapName = new Vector2(mapLocation.X + ROOM_BUFFER, mapLocation.Y - ROOM_BUFFER);
         }
 
-        private void InitializeMap(Point size, Point mapLoc)
+        private void InitializeMap(Point size)
         {
             currentMapLocationSprites = new List<ISprite>();
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 0, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 1, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 2, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 3, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 4, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 0, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 1, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 4, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 2, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 3, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 0, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 1, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 2, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 3, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 4, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 0, size, mapLoc));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 1, size, mapLoc));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 0, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 1, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 2, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 3, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 4, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 0, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 1, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 4, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 2, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 3, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 0, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 1, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 2, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 3, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 4, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 0, size));
+            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 1, size));
 
             individualRoomSprites = new List<ISprite>();
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 0, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 1, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 2, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 3, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 4, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 0, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 1, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 4, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 2, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 3, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 0, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 1, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 2, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 3, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 4, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 0, size, mapLoc));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 1, size, mapLoc));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 0, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 1, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 2, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 3, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 4, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 0, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 1, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 4, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 2, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 3, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 0, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 1, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 2, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 3, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 4, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 0, size));
+            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 1, size));
 
             visitedRoom = new Dictionary<int, Boolean>();
             int i;
@@ -133,15 +137,24 @@ namespace Sprint4
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font, int pos)
         {
-            spriteBatch.DrawString(font, "LEVEL 1", mapName, Color.White);
+            Vector2 loc;
+            if (pos == 0)
+            {
+                loc = new Vector2(mapTopLoc.X, mapTopLoc.Y);
+            }
+            else
+            {
+                loc = new Vector2(mapBottomLoc.X, mapBottomLoc.Y);
+            }
+
             GetLinkLocation();
             if (HasMap)
             {
                 foreach (HUDMapSprite room in individualRoomSprites)
                 {
-                    room.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+                    room.Draw(spriteBatch, loc, 0, Color.White);
                 }
             }
             else
@@ -151,15 +164,15 @@ namespace Sprint4
                 { 
                     if (visitedRoom[i])
                     {
-                        individualRoomSprites[i].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+                        individualRoomSprites[i].Draw(spriteBatch, loc, 0, Color.White);
                     }
                 }
             }
-            currentMapLocationSprites[linkRoom].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+            currentMapLocationSprites[linkRoom].Draw(spriteBatch, loc, 0, Color.White);
 
             if (HasCompass)
             {
-                bossLocation.Draw(spriteBatch, Vector2.Zero, 0, Color.Red);
+                bossLocation.Draw(spriteBatch, loc, 0, Color.Red);
             }
         }
 

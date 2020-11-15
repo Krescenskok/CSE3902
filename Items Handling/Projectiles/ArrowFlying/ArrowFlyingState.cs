@@ -14,6 +14,7 @@ namespace Sprint4
         private float updatePerSec = 40;
         private int runTime = 0;
         private float speed;
+        private const int maxTime = 250;
 
         public ArrowFlyingState(Arrow arrow, Vector2 location, string direction)
         {
@@ -43,9 +44,9 @@ namespace Sprint4
             }
             item.UpdateLocation(location);
 
-            //for testing only
+
             runTime++;
-            if (runTime > 100)
+            if (runTime > maxTime)
             {
                 Expire();
             }
@@ -53,7 +54,6 @@ namespace Sprint4
 
         public void Expire()
         {
-
             CollisionHandler.Instance.RemoveCollider(item.Collider);
             //expires only when it hits an enemy or the walls. always leaves an impact when it expires.
             item.Impact();

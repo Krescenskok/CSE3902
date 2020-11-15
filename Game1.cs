@@ -27,7 +27,8 @@ namespace Sprint4
         List<IController> controllers = new List<IController>();
 
         public Camera camera;
-       
+
+        private const int offset = 160;
 
         ICommand activeCommand;
         LinkCommand LinkPersistent;
@@ -52,10 +53,13 @@ namespace Sprint4
         {
             base.Initialize();
             CollisionHandler.Instance.Initialize(this);
+
         }
 
         protected override void LoadContent()
         {
+
+
             font = Content.Load<SpriteFont>("File");
 
             ItemsFactory.Instance.LoadItemsTextures(Content);
@@ -157,15 +161,25 @@ namespace Sprint4
 
             if (!LinkInventory.Instance.ShowInventory)
             {
-
-                //RoomSpawner.Instance.Draw(_spriteBatch);
-                //LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                HUD.Instance.Draw(_spriteBatch);
-                //ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                RoomSpawner.Instance.Draw(_spriteBatch);
+                LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                HUD.Instance.DrawTop(_spriteBatch);
                 base.Draw(gameTime);
-            }
+                _spriteBatch.End();
 
-            _spriteBatch.End();
+                _spriteBatch.Begin();
+                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                _spriteBatch.End();
+            }
+            else
+            {
+                _spriteBatch.End();
+
+                _spriteBatch.Begin();
+                LinkInventory.Instance.Draw(_spriteBatch);
+                //HUD.Instance.DrawBottom(_spriteBatch);
+                _spriteBatch.End();
+            }
         }
     }
 }

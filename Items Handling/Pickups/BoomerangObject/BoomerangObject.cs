@@ -18,8 +18,13 @@ namespace Sprint4.Items
         private IItemsState state;
         private bool throwing;
         private bool returning;
-        private LinkPlayer link;
         private string direction;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 

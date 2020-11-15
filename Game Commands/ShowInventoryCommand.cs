@@ -27,7 +27,6 @@ namespace Sprint4
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
             LinkInventory.Instance.ShowInventory = !LinkInventory.Instance.ShowInventory;
-            LinkInventory.Instance.Draw(spriteBatch);
         }
     }
 }

@@ -62,13 +62,14 @@ namespace Sprint4
             }
 
 
+
+
         }
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
                 if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
 
         }
 
