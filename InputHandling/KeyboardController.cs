@@ -13,12 +13,14 @@ namespace Sprint4
     public class KeyboardController : IController
     {
         LinkPlayer player;
+        KeyboardState prevState;
 
         int delay = 0;
 
         //LinkItems item;
 
         IDictionary<Keys, ICommand> commandsList = new Dictionary<Keys, ICommand>();
+        List<Keys> movementKeys = new List<Keys>();
 
         public KeyboardController(LinkPlayer linkPlayer, Game1 game, SpriteBatch spriteBatch)
         {
@@ -58,11 +60,23 @@ namespace Sprint4
             commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
             commandsList.Add(Keys.R, new ResetCommand(player));
+            commandsList.Add(Keys.Space, new ShowInventoryCommand());
+            commandsList.Add(Keys.I, new ChangeSecondItemCommand(true));
+            commandsList.Add(Keys.U, new ChangeSecondItemCommand(false));
+            commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
             commandsList.Add(Keys.G, new PauseCommand());
 
+            movementKeys.Add(Keys.W);
+            movementKeys.Add(Keys.A);
+            movementKeys.Add(Keys.S);
+            movementKeys.Add(Keys.D);
+            movementKeys.Add(Keys.Up);
+            movementKeys.Add(Keys.Down);
+            movementKeys.Add(Keys.Right);
+            movementKeys.Add(Keys.Left);
 
 
-
+            prevState = Keyboard.GetState();
         }
 
         public ICommand HandleInput(Game1 game)
@@ -76,8 +90,19 @@ namespace Sprint4
             {
                 if (kstate.IsKeyDown(kvp.Key))
                 {
+                    foreach (Keys k in movementKeys)
+                    {
+                        if (kstate.IsKeyDown(k))
+                        {
+                            activeCommand = kvp.Value;
+                        }
 
-                    activeCommand = kvp.Value;
+                    }
+                    if (kstate.IsKeyDown(kvp.Key) != prevState.IsKeyDown(kvp.Key))
+                    {
+                        activeCommand = kvp.Value;
+                    }
+
                     if (activeCommand is PauseCommand)
                     {
                         if (delay == 0)
@@ -86,7 +111,6 @@ namespace Sprint4
 
                             delay = 20;
                         }
-
                     }
 
                 }
@@ -94,6 +118,8 @@ namespace Sprint4
             }
             if (delay > 0)
                 delay--;
+
+            prevState = kstate;
 
             return activeCommand;
         }

@@ -41,25 +41,39 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall"))
-            {
+                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+                {
 
-                linkPlayer.isWalkingInPlace = true;
+                    linkPlayer.isWalkingInPlace = true;
+                    linkPlayer.HandleObstacle(collision);
 
-            }
+
+                }
+
+
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-
-                if (col.CompareTag("Block") || col.CompareTag("Wall"))
-                {
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+            {
 
                 linkPlayer.isWalkingInPlace = true;
+                linkPlayer.HandleObstacle(collision);
 
-            } else 
-                if (col.CompareTag("enemy"))
+
+            }
+            
+           if (col.CompareTag("enemy"))
+                col.SendMessage("Dissapear", null);
+
+            if (col.CompareTag("LockedDoor")) //and link has key!
             {
+                col.SendMessage("Unlock", null);
+            }
+
+
+            
                 if (linkPlayer.IsAttacking)
                 {
                     if (collision.Left)
@@ -139,13 +153,18 @@ namespace Sprint4
                     }
                 }
 
-            }
+            
 
             if (col.CompareTag("item"))
             {
                 col.SendMessage("Disappear", null);
             }
 
+        }
+
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
         }
 
         public void SendMessage(string msg, object value)
@@ -214,7 +233,7 @@ namespace Sprint4
             if (msg == "Item")
             {
                 linkPlayer.IsPickingUpItem = true;
-                linkPlayer.itemsPickedUp.Add((IItems)value);
+                LinkInventory.Instance.PickUpItem((IItems)value);
             }
             if (msg == "Heal")
             {

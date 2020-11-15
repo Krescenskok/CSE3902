@@ -157,9 +157,9 @@ namespace Sprint4
                     switch (currentFrame)
                     {
                         case 10:
-                        case 11: currentFrame = 39; break;
-                        case 39: currentFrame = 38; break;
-                        case 38: currentFrame = 43; break;
+                        case 11: currentFrame = 59; break;
+                        case 59: currentFrame = 58; break;
+                        case 58: currentFrame = 43; break;
                         case 43: currentFrame = 42; break;
                         case 42:
                             currentFrame = 11;

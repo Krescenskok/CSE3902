@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Link;
@@ -23,7 +23,7 @@ namespace Sprint4
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                if (!link.isWalkingInPlace)
+                if (link.possibleDirections.Contains(Direction.up))
                 {
                     location.Y += MOVEMENT;
                 }
@@ -36,8 +36,8 @@ namespace Sprint4
                 }
                 else
                     currentFrame = 6;
-                if (location.Y <= Y_LOCATION)
-                    location.Y = Y_LOCATION;
+                //if (location.Y <= Y_LOCATION)
+                //    location.Y = Y_LOCATION;
             }
             link.IsAttacking = false;
             link.IsStopped = true;

@@ -33,6 +33,7 @@ namespace Sprint4
 
         {
             LinkCommand linkReset = new LinkCommand(Player, "R");
+            Debug.WriteLine("resetting");
             linkReset.Update(Gametime);
 
             RoomSpawner.Instance.Reset();

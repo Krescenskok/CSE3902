@@ -68,7 +68,7 @@ namespace Sprint4
         public void HandleCollision(ICollider col, Collision collision)
         {
             
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("Trap"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("Trap") || col.CompareTag("Door"))
             {
                 enemy.ObstacleCollision(collision);
                 
@@ -77,6 +77,11 @@ namespace Sprint4
             WallMaster master = enemy.State as WallMaster;
             if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {

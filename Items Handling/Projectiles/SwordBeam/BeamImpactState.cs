@@ -9,6 +9,7 @@ namespace Sprint4
         private SwordBeam item;
         private int runTime;
         private const int maxTime = 60;
+        private const int thirdTime = maxTime / 3;
         private int frame = 0;
         private int stage = 0;
 
@@ -22,8 +23,6 @@ namespace Sprint4
 
         public void Update()
         {
-            //make the sprites spread out
-
             runTime++;
             if (runTime % 5 == 0)
             {
@@ -31,7 +30,7 @@ namespace Sprint4
                 item.UpdateFrame(stage + frame % 2);
             }
 
-            if (runTime % (maxTime / 3) == 0)
+            if (runTime % thirdTime == 0)
             {
                 stage += 2;
                 item.UpdateFrame(stage + frame % 2);
@@ -45,7 +44,7 @@ namespace Sprint4
 
         public void Expire()
         {
-            item.expired = true;
+            item.IsExpired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

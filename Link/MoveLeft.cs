@@ -23,7 +23,7 @@ namespace Sprint4
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                if (!link.isWalkingInPlace)
+                if (link.possibleDirections.Contains(Direction.left))
                 {
                     location.X += MOVEMENT;
                 }
@@ -47,8 +47,8 @@ namespace Sprint4
                         currentFrame = 4;
                 }
 
-                if (location.X <= X_LOCATION)
-                    location.X = X_LOCATION;
+                //if (location.X <= X_LOCATION)
+                //    location.X = X_LOCATION;
             }
 
 

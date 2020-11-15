@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Link;
@@ -24,7 +24,7 @@ namespace Sprint4
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
-                if (!link.isWalkingInPlace)
+                if (link.possibleDirections.Contains(Direction.down))
                 {
                     location.Y += MOVEMENT;
                 }
@@ -50,8 +50,8 @@ namespace Sprint4
                         currentFrame = 0;
                 }
 
-                if (location.Y >= Y_LOCATION)
-                    location.Y = Y_LOCATION;
+                //if (location.Y >= Y_LOCATION)
+                //    location.Y = Y_LOCATION;
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -115,9 +115,9 @@ namespace Sprint4
                     switch (currentFrame)
                     {
                         case 10:
-                        case 11: currentFrame = 39; break;
-                        case 39: currentFrame = 38; break;
-                        case 38: currentFrame = 43; break;
+                        case 11: currentFrame = 59; break;
+                        case 59: currentFrame = 58; break;
+                        case 58: currentFrame = 43; break;
                         case 43: currentFrame = 42; break;
                         case 42:
                             currentFrame = 11;

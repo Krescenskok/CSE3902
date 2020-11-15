@@ -21,6 +21,13 @@ namespace Sprint4.Link
         private bool candleMade = false;
         private bool bombMade = false;
 
+        private readonly string UP = "Up";
+        private readonly string DOWN = "Down";
+        private readonly string LEFT = "Left";
+        private readonly string RIGHT = "Right";
+
+        private const int DISPLACEMENT = 10;
+
 
         private Vector2 itemLocation;
 
@@ -106,24 +113,24 @@ namespace Sprint4.Link
 
             if (!wandMade)
             {
-                if (direction.Equals("Down") || link.state is Stationary)
+                if (direction.Equals(DOWN) || link.state is Stationary)
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X += 10;
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X += DISPLACEMENT;
                 }
-                else if (direction.Equals("Left"))
+                else if (direction.Equals(LEFT))
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X -= 10;
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X -= DISPLACEMENT;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
-                    itemLocation.Y += 10;
-                    itemLocation.X += 10;
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X += DISPLACEMENT;
                 }
                 else
                 {
-                    itemLocation.Y -= 10;
+                    itemLocation.Y -= DISPLACEMENT;
                     itemLocation.X += 6;
                 }
                 wandMade = true;
@@ -211,37 +218,38 @@ namespace Sprint4.Link
             List<IItems> list = new List<IItems>();
             foreach (IItems item in link.itemsPlacedByLink)
             {
-                if (item is SwordBeam && (((SwordBeam)item).expired == true))
+                if (item is SwordBeam && item.IsExpired)
                 {
-                        beamMade = false;
-                        list.Add(item);
+                    beamMade = false;
+                    list.Add(item);
                 }
-                else if (item is Arrow && ((Arrow)item).expired == true)
+                else if (item is Arrow && item.IsExpired)
                 {
                     arrowMade = false;
                     list.Add(item);
                 }
-                else if (item is WandBeam && ((WandBeam)item).expired == true)
+                else if (item is WandBeam && item.IsExpired)
                 {
                     wandMade = false;
                     list.Add(item);
                 }
-                else if (item is Boomerang && ((Boomerang)item).returned == true)
+                else if (item is Boomerang && item.IsExpired)
                 {
                     boomerangMade = false;
                     list.Add(item);
                 }
-                else if (item is CandleFire && ((CandleFire)item).expired == true)
+                else if (item is CandleFire && item.IsExpired)
                 {
                     candleMade = false;
                     list.Add(item);
                 }
-                else if (item is Bomb && ((Bomb)item).expired == true)
+                else if (item is Bomb && item.IsExpired)
                 {
                     bombMade = false;
                     list.Add(item);
-                }
+                }                
             }
+
             foreach (IItems item in list)
             {
                 link.RemovePlacedItem(item);
@@ -268,9 +276,10 @@ namespace Sprint4.Link
                 foreach (IItems projectile in placedItems)
                 {
                     projectile.Update();
-                }
-               
+                }               
             }
+
+            ExpireCheck();
         }
     }
 }

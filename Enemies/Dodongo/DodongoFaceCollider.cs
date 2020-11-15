@@ -52,6 +52,10 @@ namespace Sprint4
             }
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
         public void SendMessage(string msg, object value)
         {
             if (msg == "Bomb")

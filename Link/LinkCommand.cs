@@ -53,8 +53,22 @@ namespace Sprint4.Link
 
                 if ((Key.Equals("N") || (Key.Equals("Z"))))
                 {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
+                    if (linkPlayer.itemsPlacedByLink.Count == 0)
+                    {
+                        linkPlayer.IsAttacking = true;
+                        linkPlayer.IsStopped = false;
+                    }
+                    else
+                    {
+                        foreach (IItems item in linkPlayer.itemsPlacedByLink)
+                        {
+                            if (item.IsExpired)
+                            {
+                                linkPlayer.IsAttacking = true;
+                                linkPlayer.IsStopped = false;
+                            }
+                        }
+                    }
                 }
 
                 else if ((Key.Equals("A")) || (Key.Equals("Left")))

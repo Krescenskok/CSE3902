@@ -76,6 +76,11 @@ namespace Sprint4
 
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void SendMessage(string msg, object value)
         {
             if (msg == "Eaten" && !(this.item as Bomb).Exploding) {
