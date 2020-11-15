@@ -15,8 +15,8 @@ namespace Sprint4
         private Texture2D mapIndivRoomsTexture;
         private Texture2D mapCurrRoomTexture;
         private Texture2D mapMarkerTexture;
-        List<ISprite> currentMapLocationSprites;
-        List<ISprite> individualRoomSprites;
+        Dictionary<int, ISprite> currentMapLocationSprites;
+        Dictionary<int, ISprite> individualRoomSprites;
         Dictionary<int,Boolean> visitedRoom;
         private Point mapTopLoc;
         private Point mapBottomLoc;
@@ -77,50 +77,51 @@ namespace Sprint4
 
         private void InitializeMap(Point size)
         {
-            currentMapLocationSprites = new List<ISprite>();
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 0, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 1, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 2, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 3, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 0, 4, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 0, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 1, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 4, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 2, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 1, 3, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 0, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 1, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 2, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 3, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 2, 4, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 0, size));
-            currentMapLocationSprites.Add(new HUDMapSprite(mapCurrRoomTexture, 3, 1, size));
+            currentMapLocationSprites = new Dictionary<int, ISprite>();
+            currentMapLocationSprites.Add(1, new HUDMapSprite(mapCurrRoomTexture, 0, 0, size));
+            currentMapLocationSprites.Add(2, new HUDMapSprite(mapCurrRoomTexture, 0, 1, size));
+            currentMapLocationSprites.Add(3, new HUDMapSprite(mapCurrRoomTexture, 0, 2, size));
+            currentMapLocationSprites.Add(4, new HUDMapSprite(mapCurrRoomTexture, 0, 3, size));
+            currentMapLocationSprites.Add(5, new HUDMapSprite(mapCurrRoomTexture, 0, 4, size));
+            currentMapLocationSprites.Add(6, new HUDMapSprite(mapCurrRoomTexture, 1, 0, size));
+            currentMapLocationSprites.Add(7, new HUDMapSprite(mapCurrRoomTexture, 1, 1, size));
+            currentMapLocationSprites.Add(8, new HUDMapSprite(mapCurrRoomTexture, 1, 2, size));
+            currentMapLocationSprites.Add(9, new HUDMapSprite(mapCurrRoomTexture, 1, 3, size));
+            currentMapLocationSprites.Add(10, new HUDMapSprite(mapCurrRoomTexture, 1, 4, size));
+            currentMapLocationSprites.Add(11, new HUDMapSprite(mapCurrRoomTexture, 2, 0, size));
+            currentMapLocationSprites.Add(12, new HUDMapSprite(mapCurrRoomTexture, 2, 1, size));
+            currentMapLocationSprites.Add(13, new HUDMapSprite(mapCurrRoomTexture, 2, 4, size));
+            currentMapLocationSprites.Add(14, new HUDMapSprite(mapCurrRoomTexture, 2, 2, size));
+            currentMapLocationSprites.Add(15, new HUDMapSprite(mapCurrRoomTexture, 2, 3, size));
+            currentMapLocationSprites.Add(16, new HUDMapSprite(mapCurrRoomTexture, 3, 0, size));
+            currentMapLocationSprites.Add(17, new HUDMapSprite(mapCurrRoomTexture, 3, 1, size));
 
-            individualRoomSprites = new List<ISprite>();
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 0, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 1, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 2, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 3, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 0, 4, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 0, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 1, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 4, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 2, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 1, 3, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 0, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 1, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 2, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 3, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 2, 4, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 0, size));
-            individualRoomSprites.Add(new HUDMapSprite(mapIndivRoomsTexture, 3, 1, size));
+            individualRoomSprites = new Dictionary<int, ISprite>();
+            individualRoomSprites.Add(1, new HUDMapSprite(mapIndivRoomsTexture, 0, 0, size));
+            individualRoomSprites.Add(2, new HUDMapSprite(mapIndivRoomsTexture, 0, 1, size));
+            individualRoomSprites.Add(3, new HUDMapSprite(mapIndivRoomsTexture, 0, 2, size));
+            individualRoomSprites.Add(4, new HUDMapSprite(mapIndivRoomsTexture, 0, 3, size));
+            individualRoomSprites.Add(5, new HUDMapSprite(mapIndivRoomsTexture, 0, 4, size));
+            individualRoomSprites.Add(6, new HUDMapSprite(mapIndivRoomsTexture, 1, 0, size));
+            individualRoomSprites.Add(7, new HUDMapSprite(mapIndivRoomsTexture, 1, 1, size));
+            individualRoomSprites.Add(8, new HUDMapSprite(mapIndivRoomsTexture, 1, 2, size));
+            individualRoomSprites.Add(9, new HUDMapSprite(mapIndivRoomsTexture, 1, 3, size));
+            individualRoomSprites.Add(10, new HUDMapSprite(mapIndivRoomsTexture, 1, 4, size));
+            individualRoomSprites.Add(11, new HUDMapSprite(mapIndivRoomsTexture, 2, 0, size));
+            individualRoomSprites.Add(12, new HUDMapSprite(mapIndivRoomsTexture, 2, 1, size));
+            individualRoomSprites.Add(13, new HUDMapSprite(mapIndivRoomsTexture, 2, 4, size));
+            individualRoomSprites.Add(14, new HUDMapSprite(mapIndivRoomsTexture, 2, 2, size));
+            individualRoomSprites.Add(15, new HUDMapSprite(mapIndivRoomsTexture, 2, 3, size));
+            individualRoomSprites.Add(16, new HUDMapSprite(mapIndivRoomsTexture, 3, 0, size));
+            individualRoomSprites.Add(17, new HUDMapSprite(mapIndivRoomsTexture, 3, 1, size));
 
             visitedRoom = new Dictionary<int, Boolean>();
             int i;
-            for (i=0; i< LASTROOM; i++)
+            for (i=1; i< LASTROOM; i++)
             {
                 visitedRoom.Add(i, false);
             }
+            visitedRoom[1] = true;
 
         }
 
@@ -152,21 +153,20 @@ namespace Sprint4
             GetLinkLocation();
             if (HasMap)
             {
-                foreach (HUDMapSprite room in individualRoomSprites)
+                foreach (HUDMapSprite room in individualRoomSprites.Values)
                 {
                     room.Draw(spriteBatch, loc, 0, Color.White);
                 }
             }
             else
             {
-                int i;
-                for (i=0; i< individualRoomSprites.Count; i++)
-                { 
-                    if (visitedRoom[i])
+                foreach (KeyValuePair<int, Boolean> pair in visitedRoom)
+                {
+                    if (pair.Value)
                     {
-                        individualRoomSprites[i].Draw(spriteBatch, loc, 0, Color.White);
+                        individualRoomSprites[pair.Key].Draw(spriteBatch, loc, 0, Color.White);
                     }
-                }
+                }                
             }
             currentMapLocationSprites[linkRoom].Draw(spriteBatch, loc, 0, Color.White);
 

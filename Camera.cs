@@ -108,8 +108,7 @@ namespace Sprint4
             {
 
                 Game1 game1 = game as Game1;
-                game1.isPaused = false
-                    ;
+                game1.isPaused = false; ;
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
             }

@@ -10,8 +10,8 @@ namespace Sprint4.Inventory
     {
         private Texture2D mapIndivRoomsTexture;
         private Texture2D mapCurrRoomTexture;
-        List<ISprite> currentMapLocationSprites;
-        List<ISprite> individualRoomSprites;
+        Dictionary<int, ISprite> currentMapLocationSprites;
+        Dictionary<int, ISprite> individualRoomSprites;
         Dictionary<int, Boolean> visitedRoom;
         private int linkRoom;
         Vector2 mapLocation;
@@ -52,23 +52,24 @@ namespace Sprint4.Inventory
         {
             int i;
 
-            currentMapLocationSprites = new List<ISprite>();
-            for (i=0; i<18; i++)
+            currentMapLocationSprites = new Dictionary<int, ISprite>();
+            for (i=1; i<18; i++)
             {
-                currentMapLocationSprites.Add(new InventoryMapSprite(mapCurrRoomTexture, i, size));
+                currentMapLocationSprites.Add(i, new InventoryMapSprite(mapCurrRoomTexture, i-1, size));
             }
 
-            individualRoomSprites = new List<ISprite>();
-            for (i = 0; i < LASTROOM; i++)
+            individualRoomSprites = new Dictionary<int, ISprite> ();
+            for (i = 1; i < LASTROOM; i++)
             {
-                individualRoomSprites.Add(new InventoryMapSprite(mapIndivRoomsTexture, i, size));
+                individualRoomSprites.Add(i, new InventoryMapSprite(mapIndivRoomsTexture, i-1, size));
             }
 
             visitedRoom = new Dictionary<int, Boolean>();
-            for (i = 0; i < LASTROOM; i++)
+            for (i = 1; i < LASTROOM; i++)
             {
                 visitedRoom.Add(i, false);
             }
+            visitedRoom[1] = true;
         }
 
         public void GetLinkLocation()
@@ -90,12 +91,11 @@ namespace Sprint4.Inventory
 
             if (!HUDMap.Instance.HasMap)
             {
-                int i;
-                for (i = 0; i < individualRoomSprites.Count; i++)
+                foreach (KeyValuePair<int, Boolean> pair in visitedRoom)
                 {
-                    if (visitedRoom[i])
+                    if (pair.Value)
                     {
-                        individualRoomSprites[i].Draw(spriteBatch, mapLocation, 0, Color.White);
+                        individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
                     }
                 }
             }
