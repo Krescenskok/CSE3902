@@ -303,7 +303,7 @@ namespace Sprint4
         public void DrawTop(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
-            HUDMap.Instance.Draw(spriteBatch, HUDfont, 0);
+            HUDMap.Instance.Draw(spriteBatch, 0);
             if (bSlotItems.ContainsKey(bSlot))
             {
                 bSlotItems[bSlot].Draw(spriteBatch);
@@ -320,7 +320,7 @@ namespace Sprint4
 
         public void DrawBottom(SpriteBatch spriteBatch)
         {
-            HUDMap.Instance.Draw(spriteBatch, HUDfont, 1);
+            HUDMap.Instance.Draw(spriteBatch, 1);
             if (bSlotItemsBottom.ContainsKey(bSlot))
             {
                 bSlotItemsBottom[bSlot].Draw(spriteBatch);
@@ -333,6 +333,25 @@ namespace Sprint4
             {
                 heart.Draw(spriteBatch);
             }
+        }
+
+
+        public void Reset()
+        {
+            UpdateInventoryCounts(0, 0, 0);
+
+            aSlotItems.Clear();
+            bSlotItems.Clear();
+            aSlotItemsBottom.Clear();
+            bSlotItemsBottom.Clear();
+            InitializeSlotItems();
+
+            maxHearts = THIRD;
+            drawnHearts.Clear();
+            drawnHeartsBottom.Clear();
+            InitializeHearts();
+
+            HUDMap.Instance.Reset();
         }
 
     }

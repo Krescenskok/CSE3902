@@ -20,13 +20,20 @@ namespace Sprint4
         }
 
         private bool showInventory = false;
-        private Texture2D inventoryBG;
+        private Texture2D emptyBG;
+        private Texture2D compBG;
+        private Texture2D mapBG;
+        private Texture2D fullBG;
         private Texture2D cursorTexture;
         private int rupeeCount;
         private int bombCount;
         private int keyCount;
         private int potionCount;
-        private ISprite inventorySprite;
+        private ISprite defaultInvSprite;
+        private ISprite compassInvSprite;
+        private ISprite mapInvSprite;
+        private ISprite fullInvSprite;
+        private ISprite drawnSprite;
         private SecondaryItem secondSlotItem;
         private Dictionary<SecondaryItem, IItems> secondItems = new Dictionary<SecondaryItem, IItems>();
         private Dictionary<SecondaryItem, Boolean> secondInInventory = new Dictionary<SecondaryItem, Boolean>();
@@ -39,10 +46,8 @@ namespace Sprint4
         private const int CURSOR_ADJUST = 30;
         private const int ITEM_ADJUST_X = 20;
         private const int ITEM_ADJUST_Y = 60/4;
-        private const int CURSOR_SIZE = 50;
         private const int TWO = 2;
-        private const int FULL_HEART = 20;
-        private const int HALF_HEART = 10;
+        private const int CURSOR_SIZE = 50;
 
         private static readonly LinkInventory instance = new LinkInventory();
 
@@ -64,19 +69,39 @@ namespace Sprint4
             KeyCount = 0;
             PotionCount = 0;
 
-            inventoryBG = game.Content.Load<Texture2D>("HUDandInv/FullInventory");
+
+            emptyBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_Empty");
+            compBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_Comp"); ;
+            mapBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_Map"); ;
+            fullBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_CompMap"); ;
             cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
 
-            inventorySprite = new InventorySprite(inventoryBG, new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height));
-            Point bgSize = ((InventorySprite)inventorySprite).InventorySize;
+            Point dimensions = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
+            defaultInvSprite = new InventorySprite(emptyBG, dimensions);
+            compassInvSprite = new InventorySprite(compBG, dimensions);
+            mapInvSprite = new InventorySprite(mapBG, dimensions);
+            fullInvSprite = new InventorySprite(fullBG, dimensions);
+            drawnSprite = defaultInvSprite;
 
+            Point bgSize = ((InventorySprite)defaultInvSprite).InventorySize;
+
+            Inventory.InventoryMap.Instance.LoadInventoryMap(game, bgSize);
+
+            InitializeItems(bgSize);
+
+        }
+
+        private void InitializeItems(Point bgSize)
+        {
             Vector2 row1 = new Vector2(bgSize.X / 2 + ITEMS_GAP, bgSize.Y / 3 + (CURSOR_ADJUST));
             Vector2 row2 = new Vector2(bgSize.X / 2 + ITEMS_GAP, row1.Y + ITEM_ADJUST_X * 2);
+            Point cursor = new Point((int)row1.X - ITEMS_GAP, (int)row1.Y - ITEMS_GAP);
 
-            Point cursor = new Point((int) row1.X - ITEMS_GAP, (int) row1.Y - ITEMS_GAP);
-            Vector2 item = new Vector2((float) cursor.X + (ITEM_ADJUST_X), (float) cursor.Y + (ITEM_ADJUST_Y));
+            InitializeCursor(cursor, row2, bgSize);
+
+            Vector2 item = new Vector2((float)cursor.X + (ITEM_ADJUST_X), (float)cursor.Y + (ITEM_ADJUST_Y));
             Vector2 currentItemLoc = new Vector2(row1.X / 2 - ITEM_ADJUST_X, item.Y);
-            
+
             secondItems.Add(SecondaryItem.Boomerang, new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), item));
             item.X += CURSOR_GAP;
             secondItems.Add(SecondaryItem.Bomb, new BombObject(ItemsFactory.Instance.CreateBombSprite(), item));
@@ -96,19 +121,6 @@ namespace Sprint4
             secondInInventory.Add(SecondaryItem.Candle, false);
             secondInInventory.Add(SecondaryItem.Potion, true);
 
-            Point cursorSize = new Point(CURSOR_SIZE, CURSOR_SIZE);
-            cursorLocation.Add(SecondaryItem.Boomerang, new CursorSprite(cursorTexture, cursorSize, cursor));
-            cursor.X += CURSOR_GAP;
-            cursorLocation.Add(SecondaryItem.Bomb, new CursorSprite(cursorTexture, cursorSize, cursor));
-            cursor.X += CURSOR_GAP;
-            cursorLocation.Add(SecondaryItem.Arrow, new CursorSprite(cursorTexture, cursorSize, cursor));
-            cursorLocation.Add(SecondaryItem.Bow, new CursorSprite(cursorTexture, cursorSize, cursor));
-            cursor.X += CURSOR_GAP;
-            cursorLocation.Add(SecondaryItem.Candle, new CursorSprite(cursorTexture, cursorSize, cursor));
-            cursor.X = (int) row2.X - ITEMS_GAP;
-            cursor.Y = (int) row2.Y - CURSOR_GAP;
-            cursorLocation.Add(SecondaryItem.Potion, new CursorSprite(cursorTexture, cursorSize, cursor));
-
             currentSecondItems.Add(SecondaryItem.Boomerang, new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), currentItemLoc)); ;
             currentSecondItems.Add(SecondaryItem.Bomb, new BombObject(ItemsFactory.Instance.CreateBombSprite(), currentItemLoc));
             currentSecondItems.Add(SecondaryItem.Arrow, new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(DIRECTION), currentItemLoc));
@@ -117,7 +129,23 @@ namespace Sprint4
             currentSecondItems.Add(SecondaryItem.Potion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), currentItemLoc));
 
             HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
+        }
 
+        private void InitializeCursor(Point cursor, Vector2 row2, Point inventoryBG)
+        {
+            Point cursorSize = new Point(CURSOR_SIZE, CURSOR_SIZE);
+
+            cursorLocation.Add(SecondaryItem.Boomerang, new CursorSprite(cursorTexture, cursorSize, cursor));
+            cursor.X += CURSOR_GAP;
+            cursorLocation.Add(SecondaryItem.Bomb, new CursorSprite(cursorTexture, cursorSize, cursor));
+            cursor.X += CURSOR_GAP;
+            cursorLocation.Add(SecondaryItem.Arrow, new CursorSprite(cursorTexture, cursorSize, cursor));
+            cursorLocation.Add(SecondaryItem.Bow, new CursorSprite(cursorTexture, cursorSize, cursor));
+            cursor.X += CURSOR_GAP;
+            cursorLocation.Add(SecondaryItem.Candle, new CursorSprite(cursorTexture, cursorSize, cursor));
+            cursor.X = (int)row2.X - ITEMS_GAP;
+            cursor.Y = (int)row2.Y - CURSOR_GAP;
+            cursorLocation.Add(SecondaryItem.Potion, new CursorSprite(cursorTexture, cursorSize, cursor));
         }
 
         public void Reset()
@@ -130,6 +158,9 @@ namespace Sprint4
             {
                 secondInInventory[item.Key] = false;
             }
+
+            secondSlotItem = SecondaryItem.Arrow;
+            
         }
 
         public bool ShowInventory
@@ -267,10 +298,33 @@ namespace Sprint4
             }
         }
        
+        private void UpdateBGSprite()
+        {
+            if (HUDMap.Instance.HasCompass && HUDMap.Instance.HasMap)
+            {
+                drawnSprite = fullInvSprite;
+            }
+            else if (HUDMap.Instance.HasCompass)
+            {
+                drawnSprite = compassInvSprite;
+            }
+            else if (HUDMap.Instance.HasMap)
+            {
+                drawnSprite = mapInvSprite;
+            }
+            else
+            {
+                drawnSprite = defaultInvSprite;
+            }
+        }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            inventorySprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+            UpdateBGSprite();
+            drawnSprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+
+            InventoryMap.Instance.Draw(spriteBatch);
             
             foreach (KeyValuePair<SecondaryItem, Boolean> pair in secondInInventory)
             {

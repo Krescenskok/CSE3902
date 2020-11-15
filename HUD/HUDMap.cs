@@ -117,7 +117,7 @@ namespace Sprint4
 
             visitedRoom = new Dictionary<int, Boolean>();
             int i;
-            for (i=0; i<18; i++)
+            for (i=0; i< LASTROOM; i++)
             {
                 visitedRoom.Add(i, false);
             }
@@ -137,7 +137,7 @@ namespace Sprint4
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont font, int pos)
+        public void Draw(SpriteBatch spriteBatch, int pos)
         {
             Vector2 loc;
             if (pos == 0)
@@ -174,6 +174,19 @@ namespace Sprint4
             {
                 bossLocation.Draw(spriteBatch, loc, 0, Color.Red);
             }
+        }
+
+        public void Reset()
+        {
+            visitedRoom.Clear();
+            int i;
+            for (i = 0; i < LASTROOM; i++)
+            {
+                visitedRoom.Add(i, false);
+            }
+
+            HasMap = false;
+            HasCompass = false;
         }
 
 
