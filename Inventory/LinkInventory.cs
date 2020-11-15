@@ -41,6 +41,8 @@ namespace Sprint4
         private const int ITEM_ADJUST_Y = 60/4;
         private const int CURSOR_SIZE = 50;
         private const int TWO = 2;
+        private const int FULL_HEART = 20;
+        private const int HALF_HEART = 10;
 
         private static readonly LinkInventory instance = new LinkInventory();
 
@@ -89,7 +91,7 @@ namespace Sprint4
 
             secondInInventory.Add(SecondaryItem.Boomerang, false);
             secondInInventory.Add(SecondaryItem.Bomb, false);
-            secondInInventory.Add(SecondaryItem.Arrow, false);
+            secondInInventory.Add(SecondaryItem.Arrow, true);
             secondInInventory.Add(SecondaryItem.Bow, false);
             secondInInventory.Add(SecondaryItem.Candle, false);
             secondInInventory.Add(SecondaryItem.Potion, true);
@@ -113,6 +115,8 @@ namespace Sprint4
             currentSecondItems.Add(SecondaryItem.Bow, new Bow(ItemsFactory.Instance.CreateBowSprite(), currentItemLoc));
             currentSecondItems.Add(SecondaryItem.Candle, new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), currentItemLoc));
             currentSecondItems.Add(SecondaryItem.Potion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), currentItemLoc));
+
+            HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
 
         }
 
@@ -163,7 +167,7 @@ namespace Sprint4
             get { return secondItems[secondSlotItem]; }
         }
 
-        public void PickUpItem(IItems item)
+        public void PickUpItem(IItems item, LinkPlayer link)
         {
             if (item is BoomerangObject)
             {
@@ -189,6 +193,22 @@ namespace Sprint4
             else if (item is ArrowObject)
             {
                 secondInInventory[SecondaryItem.Arrow] = true;
+            }
+            else if (item is BombObject)
+            {
+                BombCount++;
+            }
+            else if (item is Key)
+            {
+                KeyCount++;
+            }
+            else if (item is Map)
+            {
+                HUDMap.Instance.HasMap = true;
+            }
+            else if (item is Compass)
+            {
+                HUDMap.Instance.HasCompass = true;
             }
         }
 

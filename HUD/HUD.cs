@@ -17,8 +17,9 @@ namespace Sprint4
         private Texture2D HUDTexture;
         private ISprite sprite;
         private SpriteFont HUDfont;
-        private IItems bSlot;
         private IItems aSlot;
+        private IItems aSlotBottom;
+        private LinkInventory.SecondaryItem bSlot;
         private Vector2 bSlotLocation;
         private Vector2 aSlotLocation;
         private Vector2 rupeeCountLocation;
@@ -31,7 +32,9 @@ namespace Sprint4
         private Vector2 bombCountBottomLocation;
         private Vector2 bottomCorner;
         private Dictionary<LinkInventory.SecondaryItem, IItems> bSlotItems = new Dictionary<LinkInventory.SecondaryItem, IItems>();
+        private Dictionary<LinkInventory.SecondaryItem, IItems> bSlotItemsBottom = new Dictionary<LinkInventory.SecondaryItem, IItems>();
         private List<IItems> aSlotItems = new List<IItems>();
+        private List<IItems> aSlotItemsBottom = new List<IItems>();
         private const string direction = "Up";
         private Dictionary<String, IItems> hearts = new Dictionary<String, IItems>();
         private List<IItems> drawnHearts = new List<IItems>();
@@ -87,11 +90,11 @@ namespace Sprint4
             HUDfont = game.Content.Load<SpriteFont>("HUDandInv/HUDText");
 
             rupeeCountLocation = new Vector2(drawSize.X / THIRD + (ABUFFER/ 2), game.Window.ClientBounds.Height / (FIVE + THIRD));
-            rupeeCountBottomLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + bottomAdjust);
+            rupeeCountBottomLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + bottomAdjust + 10);
             keyCountLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + INVENTORY_GAP);
-            keyCountBottomLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + bottomAdjust);
+            keyCountBottomLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + bottomAdjust + 10);
             bombCountLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + (INVENTORY_GAP / 2));
-            bombCountBottomLocation = new Vector2(bombCountLocation.X, bombCountLocation.Y + bottomAdjust);
+            bombCountBottomLocation = new Vector2(bombCountLocation.X, bombCountLocation.Y + bottomAdjust + 10);
 
             bSlotLocation = new Vector2(drawSize.X / 2 + BBUFFER, drawSize.Y * THIRD / FIVE);
             bSlotBottomLocation = new Vector2(bSlotLocation.X, bSlotLocation.Y + bottomAdjust);
@@ -145,9 +148,12 @@ namespace Sprint4
         private void InitializeSlotItems()
         {
             aSlotItems.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), aSlotLocation));
-
-            bSlot = null;
+            aSlotItemsBottom.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), aSlotBottomLocation));
             aSlot = aSlotItems.ElementAt(0);
+            aSlotBottom = aSlotItemsBottom.ElementAt(0);
+
+            bSlot = LinkInventory.SecondaryItem.Arrow;
+            bSlotItems.Add(bSlot, CreateBItem(bSlot, TOP));
         }
 
         public void IncreaseMaxHeartNumber()
@@ -221,38 +227,53 @@ namespace Sprint4
         {
             if (!bSlotItems.ContainsKey(item))
             {
-                bSlotItems.Add(item, CreateBItem(item));
+                bSlotItems.Add(item, CreateBItem(item, TOP));
+            }
+            if (!bSlotItemsBottom.ContainsKey(item))
+            {
+                bSlotItemsBottom.Add(item, CreateBItem(item, BOTTOM));
             }
 
-            bSlot = bSlotItems[item];
+            bSlot = item;
+
         }
 
-        private IItems CreateBItem(LinkInventory.SecondaryItem item)
+        private IItems CreateBItem(LinkInventory.SecondaryItem item, string place)
         {
+            Vector2 loc;
+            if (place is TOP)
+            {
+                loc = bSlotLocation;
+            }
+            else
+            {
+                loc = bSlotBottomLocation;
+            }
+
             switch (item)
             {
                 case LinkInventory.SecondaryItem.Candle:
-                    return new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), bSlotLocation);
+                    return new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), loc);
                     break;
 
                 case LinkInventory.SecondaryItem.Arrow:
-                    return new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(direction), bSlotLocation);
+                    return new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(direction), loc);
                     break;
 
                 case LinkInventory.SecondaryItem.Bomb:
-                    return new BombObject(ItemsFactory.Instance.CreateBombSprite(), bSlotLocation);
+                    return new BombObject(ItemsFactory.Instance.CreateBombSprite(), loc);
                     break;
 
                 case LinkInventory.SecondaryItem.Boomerang:
-                    return new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), bSlotLocation);
+                    return new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), loc);
                     break;
 
                 case LinkInventory.SecondaryItem.Bow:
-                    return new Bow(ItemsFactory.Instance.CreateBowSprite(), bSlotLocation);
+                    return new Bow(ItemsFactory.Instance.CreateBowSprite(), loc);
                     break;
 
                 default: //potion
-                    return new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), bSlotLocation);
+                    return new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), loc);
                     break;
             }
         }
@@ -263,8 +284,13 @@ namespace Sprint4
             {
                 aSlotItems.Add(item);
             }
+            if (!aSlotItemsBottom.Contains(item))
+            {
+                aSlotItemsBottom.Add(item);
+            }
 
             aSlot = aSlotItems.ElementAt(aSlotItems.IndexOf(item));
+            aSlotBottom = aSlotItemsBottom.ElementAt(aSlotItemsBottom.IndexOf(item));
         }
 
         public void UpdateInventoryCounts(int rupeeCount, int keyCount, int bombCount)
@@ -278,9 +304,9 @@ namespace Sprint4
         {
             sprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
             HUDMap.Instance.Draw(spriteBatch, HUDfont, 0);
-            if (bSlot != null)
+            if (bSlotItems.ContainsKey(bSlot))
             {
-                bSlot.Draw(spriteBatch);
+                bSlotItems[bSlot].Draw(spriteBatch);
             }
             aSlot.Draw(spriteBatch);
             spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountLocation, Color.White);
@@ -294,13 +320,12 @@ namespace Sprint4
 
         public void DrawBottom(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, bottomCorner, 0, Color.White);
             HUDMap.Instance.Draw(spriteBatch, HUDfont, 1);
-            if (bSlot != null)
+            if (bSlotItemsBottom.ContainsKey(bSlot))
             {
-                bSlot.Draw(spriteBatch);
+                bSlotItemsBottom[bSlot].Draw(spriteBatch);
             }
-            aSlot.Draw(spriteBatch);
+            aSlotBottom.Draw(spriteBatch);
             spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountBottomLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountBottomLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountBottomLocation, Color.White);

@@ -87,7 +87,6 @@ namespace Sprint4.Items
 
         public void Update()
         {
-
             if (throwing)
             {
                 state.Update();
@@ -108,7 +107,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-
+            state.Expire();
         }
 
         public void Collect()
@@ -119,6 +118,10 @@ namespace Sprint4.Items
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
+            foreach (IItems hit in impactList)
+            {
+                hit.Draw(spriteBatch);
+            }
         }
     }
 }

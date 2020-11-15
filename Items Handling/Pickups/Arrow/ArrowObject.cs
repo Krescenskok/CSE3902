@@ -73,6 +73,8 @@ namespace Sprint4
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (item is null)
+                item = ItemsFactory.Instance.CreateArrowSprite("Up");
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
         

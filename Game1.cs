@@ -163,12 +163,13 @@ namespace Sprint4
             {
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                HUD.Instance.DrawTop(_spriteBatch);
+                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 base.Draw(gameTime);
                 _spriteBatch.End();
 
                 _spriteBatch.Begin();
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                HUD.Instance.DrawTop(_spriteBatch);
                 _spriteBatch.End();
             }
             else
@@ -177,7 +178,7 @@ namespace Sprint4
 
                 _spriteBatch.Begin();
                 LinkInventory.Instance.Draw(_spriteBatch);
-                //HUD.Instance.DrawBottom(_spriteBatch);
+                HUD.Instance.DrawBottom(_spriteBatch);
                 _spriteBatch.End();
             }
         }

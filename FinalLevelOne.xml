@@ -1309,7 +1309,10 @@
 			<!-- Triforce Piece-->
 
 			<Item>
-				<ObjectType>Triforce</ObjectType>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>TriforcePiece</ObjectName>
+				<Location>3 4</Location>
+				<Alive>true</Alive>
 			</Item>
 
 			<!-- Triforce piece-->
