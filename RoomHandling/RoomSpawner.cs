@@ -111,6 +111,7 @@ namespace Sprint4
 
         public void RoomChange(Game game, int roomNumber)
         {
+            CurrentRoom = roomNumber;
             GridGenerator.Instance.GetGrid(game, 12, 7);
             CollisionHandler.Instance.RoomChange();
             LoadRoom(game, roomNumber);
