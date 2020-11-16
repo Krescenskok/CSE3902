@@ -140,7 +140,7 @@ namespace Sprint4
 
         }
 
-        private ItemForLink secondWeapon = ItemForLink.ArrowBow;
+        private ItemForLink secondWeapon = ItemForLink.Boomerang;
         public ItemForLink SecondaryWeapon
         {
             get { return secondWeapon; }

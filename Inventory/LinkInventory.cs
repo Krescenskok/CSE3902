@@ -149,7 +149,10 @@ namespace Sprint4
             currentFirstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), currentItemLoc));
             currentFirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), currentItemLoc));
 
-            HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
+            HUD.Instance.SetBSlotItem(SecondaryItem.Boomerang);
+
+            secondSlotItem = SecondaryItem.Boomerang;
+            firstSlotItem = PrimaryItem.WoodenSword;
         }
 
         private void InitializeCursor(Point cursor, Vector2 row2, Point inventoryBG)
@@ -189,10 +192,8 @@ namespace Sprint4
                 secondInInventory[item.Key] = false;
             }
 
-            secondSlotItem = SecondaryItem.Arrow;
+            secondSlotItem = SecondaryItem.Boomerang;
             firstSlotItem = PrimaryItem.WoodenSword;
-
-
         }
 
         public bool ShowInventory
