@@ -146,7 +146,6 @@ namespace Sprint4
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
-                HUD.Instance.UpdateInventoryCounts(LinkInventory.Instance.RupeeCount, LinkInventory.Instance.KeyCount, LinkInventory.Instance.BombCount);
                 base.Update(gameTime);
 
             }

@@ -251,24 +251,27 @@ namespace Sprint4
             }
             if (msg == "Heal")
             {
-                linkPlayer.Health += (float)value;
+                if (value is Sprint4.Items.Heart)
+                {
+                    linkPlayer.Health += FULL_HEART;
+                }
+                else if (value is Sprint4.Items.Fairy)
+                {
+                    linkPlayer.Health += HALF_HEART;
+                }
+
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
                 {
                     linkPlayer.Health = linkPlayer.FullHealth;
                 }
                 HUD.Instance.UpdateHearts(linkPlayer);
             }
-            if (msg == "Heartcontainer")
+            if (msg == "HeartContainer")
             {
+                HUD.Instance.IncreaseMaxHeartNumber();
                 linkPlayer.FullHealth += FULL_HEART;
                 linkPlayer.Health = linkPlayer.FullHealth;
-                HUD.Instance.IncreaseMaxHeartNumber();
                 HUD.Instance.UpdateHearts(linkPlayer);
-            }
-
-            if (msg == "Rupee")
-            {
-                LinkInventory.Instance.RupeeCount++;
             }
 
             if (msg == "Hand")
