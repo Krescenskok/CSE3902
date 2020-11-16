@@ -136,7 +136,7 @@ namespace Sprint4
 
             if (game.IsGameOver)
             {
-                if (!(activeCommand is ResetCommand))
+                if (!(activeCommand is ResetCommand) && !(activeCommand is QuitCommand))
                 {
                     return null;
                 }
