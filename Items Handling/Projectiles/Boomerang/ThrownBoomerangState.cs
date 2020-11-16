@@ -59,6 +59,7 @@ namespace Sprint4.Items
                 frame++;
             }
             item.UpdateFrame(frame % 4);
+
         }
 
         public void AdjustPosition()

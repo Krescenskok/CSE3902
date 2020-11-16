@@ -10,6 +10,8 @@ namespace Sprint4
     {
         void Update();
 
+        void Expire();
+
         void Draw(SpriteBatch spriteBatch);
 
         Vector2 Location { get; }
@@ -17,5 +19,7 @@ namespace Sprint4
         IItemsState State { get; }
 
         ICollider Collider { get; }
+
+        bool IsExpired { get; set; }
     }
 }

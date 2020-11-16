@@ -39,13 +39,11 @@ namespace Sprint4
         private float health = HEALTH;
         public bool isWalkingInPlace;
         private bool isPickingUpItem = false;
-        private int numOfRupee = NUM_OF_RUPEE;
         private bool useRing = false;
         private float fullHealth = HEALTH;
         private int delay;
         private bool clock = false;
         private bool largeShield = false;
-        public List<IItems> itemsPickedUp;
         private bool drawShield = true;
 
         private PlayerCollider collider;
@@ -56,11 +54,10 @@ namespace Sprint4
 
         public void RemovePlacedItem(IItems item)
         {
-            if (itemsPlacedByLink.Contains(item))
+            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
             {
                 itemsPlacedByLink.Remove(item);
             }
-
         }
 
 
@@ -152,8 +149,6 @@ namespace Sprint4
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
 
-        public int NumOfRupee { get => numOfRupee; set => numOfRupee = value; }
-
         public bool UseRing { get => useRing; set => useRing = value; }
 
         public float FullHealth { get => fullHealth; set => fullHealth = value; }
@@ -225,17 +220,11 @@ namespace Sprint4
             LargeShield = false;
             UseRing = false;
             Health = HEALTH;
-            NumOfRupee = NUM_OF_RUPEE;
             FullHealth = HEALTH;
             Delay = 0;
             clock = false;
             DrawShield = true;
-            if (itemsPickedUp != null && itemsPickedUp.Count > 0)
-            {
-                itemsPickedUp.Clear();
-            }
 
-            Debug.WriteLine("reset");
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)

@@ -29,7 +29,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            item.expired = true;
+            item.IsExpired = true;
+
             CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }

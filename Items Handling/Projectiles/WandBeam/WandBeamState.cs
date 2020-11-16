@@ -15,7 +15,7 @@ namespace Sprint4.Items
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 250;
+        private const int maxTime = 400;
 
         public WandBeamState(WandBeam item, Vector2 initPos, string direction)
         {
@@ -53,30 +53,17 @@ namespace Sprint4.Items
                 item.UpdateFrame(frame % 2);
             }
 
-            //for testing only
-            ExpireCheck();
-        }
-        public void ExpireCheck()
-        {
-            if (location.X < 0 || location.X > GraphicsDeviceManager.DefaultBackBufferWidth)
+            if (runTime > maxTime)
             {
                 Expire();
             }
 
-            if (location.Y < 0 || location.Y > GraphicsDeviceManager.DefaultBackBufferHeight)
-            {
-                Expire();
-            }
-
-            if (runTime >= maxTime)
-            {
-                Expire();
-            }
         }
 
         public void Expire()
         {
-            item.expired = true;
+            item.IsExpired = true;
+
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
             CollisionHandler.Instance.RemoveCollider(item.Collider);
         }

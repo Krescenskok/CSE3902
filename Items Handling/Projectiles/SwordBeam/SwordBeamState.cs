@@ -15,7 +15,7 @@ namespace Sprint4
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 50;
+        private const int maxTime = 400;
 
         public SwordBeamState(SwordBeam item, Vector2 location, string direction)
         {
@@ -54,8 +54,7 @@ namespace Sprint4
                 item.UpdateFrame(frame % 2);
             }
 
-            //for testing only
-            if (runTime > 100)
+            if (runTime > maxTime)
             {
                 item.Expire();
             }
@@ -72,7 +71,7 @@ namespace Sprint4
         public void Collected()
         {
             //enemy gets damaged
-            item.SwordImpact();
+            Expire();
            
         }
     }

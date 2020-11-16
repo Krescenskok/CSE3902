@@ -57,7 +57,13 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
+            if (col.CompareTag("Wall"))
+            {
+                item.State.Expire();
+            }
         }
+
+
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             string direction = collision.From.ToString();
@@ -81,6 +87,11 @@ namespace Sprint4
                 {
                     col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
                 }
+                item.State.Expire();
+            }
+
+            if (col.CompareTag("Wall"))
+            {
                 item.State.Expire();
             }
         }

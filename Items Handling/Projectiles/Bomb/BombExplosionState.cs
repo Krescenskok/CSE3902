@@ -38,6 +38,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             item.Expire();
 
             //remove item from room
@@ -45,7 +47,7 @@ namespace Sprint4.Items
 
         public void Collected()
         {
-            //add to inventory
+
             Expire();
         }
     }

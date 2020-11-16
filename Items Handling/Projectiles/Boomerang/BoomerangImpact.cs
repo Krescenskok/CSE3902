@@ -15,6 +15,14 @@ namespace Sprint4.Items
             set { location = value; }
         }
 
+
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
+
         public Vector2 Location => throw new NotImplementedException();
 
         public IItemsState State => throw new NotImplementedException();
@@ -24,11 +32,7 @@ namespace Sprint4.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-        private bool throwing;
-        private bool returning;
-        private LinkPlayer link;
-        private string direction;
-        public bool isExpired = false;
+
         public BoomerangImpact(ISprite item, Vector2 location)
         {
             this.location = location;
@@ -45,12 +49,12 @@ namespace Sprint4.Items
         public void Update()
         {
             state.Update();
-            isExpired = ((BoomerangImpactState) state).isExpired;
         }
 
         public void Expire()
         {
-
+            IsExpired = true;
+            state.Expire();
         }
 
         public void Collect()
