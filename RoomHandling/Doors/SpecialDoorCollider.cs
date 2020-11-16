@@ -24,6 +24,7 @@ namespace Sprint4
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
 
+
         }
 
         public Rectangle Bounds()
@@ -33,7 +34,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "Doorway";
+            return tag == "Doorway" || tag == "Door";
         }
 
         public bool Equals(ICollider col)

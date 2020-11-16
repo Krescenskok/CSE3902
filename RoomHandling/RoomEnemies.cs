@@ -111,9 +111,9 @@ namespace Sprint4
                         {
                             enemies.Add(new Gel(game, location, item));
                         }
-                        else if (objName.Equals("Dodongo"))
+                        else if (objName.Equals("Aquamentus"))
                         {
-                            enemies.Add(new Dodongo(game, location, item));
+                            enemies.Add(new Aquamentus(game, location, item,(game as Game1).LinkPlayer));
 
                         }
                         else if (objName.Equals("Trap"))
@@ -137,8 +137,9 @@ namespace Sprint4
                 }
             }
 
+            
             allDead = enemies.Count == 0;
-
+            
         }
 
            
@@ -209,7 +210,6 @@ namespace Sprint4
             Sounds.Instance.PlayEnemyDie();
 
             allDead = enemies.Count == 0;
-            Debug.WriteLine(allDead);
         }
 
         public void Destroy(IEnemy enemy)

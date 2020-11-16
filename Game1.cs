@@ -154,6 +154,7 @@ namespace Sprint4
             }
 
             camera.Update();
+            
         }
 
         protected override void Draw(GameTime gameTime)

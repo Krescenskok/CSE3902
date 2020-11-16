@@ -12,20 +12,21 @@ namespace Sprint4
         public Rectangle bounds;
         public char orientation;
         public Door door;
-        private bool takesKey;
+        
         public string Name { get => "LockedDoor"; }
         public Layer layer { get; set; }
 
 
-        public LockedDoorCollider(Door door, Point location, Point size, char orient, bool takesKey)
+        public LockedDoorCollider(Door door, Point location, Point size, char orient)
         {
             bounds.Location = location;
             bounds.Size = size;
             orientation = orient;
             this.door = door;
-            this.takesKey = takesKey;
+            
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
+
 
         }
 
@@ -60,9 +61,10 @@ namespace Sprint4
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Unlock" && takesKey)
+            if (msg == "Unlock" && LinkInventory.Instance.KeyCount > 0)
             {
                 door.StartUnlock();
+                LinkInventory.Instance.KeyCount--;
             }
         }
 
