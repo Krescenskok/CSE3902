@@ -17,9 +17,7 @@ namespace Sprint4.Link
         protected int currentFrame;
 
         int i = 0;
-        int X_LOCATION = 780;
-        int Y_LOCATION = 445;
-        int ZERO = 0;
+   
 
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -69,6 +67,7 @@ namespace Sprint4.Link
                 {
                     if (link.IsDamaged)
                     {
+                        link.Health -= 1;
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
