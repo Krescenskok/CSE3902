@@ -1,0 +1,75 @@
+Near the end of the sprint, write up a brief report on how your team performed this sprint, using the burndown chart from the board as the basis for discussion.
+Feel free to also discuss your processes as a whole. Were any changes your made this sprint constructive or detrimental? Do you have any plans for doing things differently next sprint?
+
+Our team performed pretty well during this sprint. We met up via zoom when it was assigned and listed out all the bugs from the previous sprint as well as the
+tasks we needed to complete for this sprint. We also figured out when we were all available just in case we needed to meet up again and work together on the project.
+For this sprint, we left the tasks open ended and let each member choose what task they wanted to work on, working to complete all of them. We used trello for our
+task board to see what needed to be done first (fixing bugs from sprint 3) and things that could wait till later. 
+
+For this sprint, these are the tasks that were completed by each member:
+- JT: 
+  - Room switching
+  - Link colliding with blocks from all sides
+  - Room change gets rid of colliders from previous rooms
+  - Active command resets so freezing between changes doesn't happen
+  - Camera controller
+  - HUD and inventory drawing
+  - Enemies and Link shouldn't be able to walk on walls
+  - Room transitions
+  - Movable Object for updating collider location at once
+  - Sound
+  - Link and Enemy Hitboxes
+  - Fix the water tiles
+  - NPCs in black Room
+  - Some enemies should drop items when defeated
+- Andrew:
+  - Room switching
+  - Room change gets rid of colliders from previous rooms
+  - Active command resets so freezing between changes doesn't happen
+  - Item collisions need to update location
+  - Sword beam tweaks
+  - Doors
+  - Room transitions
+  - Reset game
+  - Sound
+  - Weird Null exceptions with room switch
+  - Link and Enemy Hitboxes
+  - Link Wall collision math
+  - Projectile Expiration when they hit walls/doors
+- Ann:
+  - Item collisions need to update location
+  - HUD and inventory drawing
+  - Changing keys to use items (removing number and switching to N and B)
+  - Inventory
+  - HUD
+  - Projectiles expire when they hit the walls
+  - Inventory and using items
+  - Projectile Expiration when they hit walls/doors
+- Krescens:
+  - Link teleports in the right direction when he takes damage
+  - Changing keys to use items (removing number and switching to N and B)
+  - Taskboard chart
+  - Sprint reflection
+  - ReadMe
+  - Game Over screen
+  - Pause function
+  - Add delay so Link can't continuously attack
+  - Enemies and Link shouldn't be able to walk on walls
+  - Add to Link's location when he walks through doors
+  - Link's special shield
+  - Link can't be damaged when he's attacking an enemy and they collide (in the direction he's attacking)
+  - Ghosting through enemies when damaged
+  - Reset game
+  - Link and Enemy Hitboxes
+  - Link Wall collision math
+  - Projectile Expiration when they hit walls/doors
+- Yuan:
+  - Enemies and Link shouldn't be able to walk on walls
+  - Sound
+  - Some enemies should drop items when defeated
+  - NPCs in black Room
+- Noah:
+  - Link colliding with blocks from all sides
+  - Blocks move
+  - Blocks - fix collision and draw locations
+
