@@ -42,8 +42,8 @@ namespace Sprint4
             collider = new EnemyCollider(masterSprite.GetRectangle(), this, HPAmount.HalfHeart, "WallMaster");
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
-            
 
+            
 
             saveData = xml;
         }

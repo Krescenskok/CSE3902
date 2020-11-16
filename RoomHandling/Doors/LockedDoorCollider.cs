@@ -37,7 +37,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "LockedDoor" || tag == "Door";
+            return tag == "LockedDoor" || tag == "Doorway" || tag == "Door";
         }
 
         public bool Equals(ICollider col)
@@ -52,10 +52,7 @@ namespace Sprint4
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player"))
-            {
-                col.SendMessage("LockedDoor", null);
-            }
+
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)

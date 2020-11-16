@@ -41,7 +41,7 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
                 {
 
                     linkPlayer.isWalkingInPlace = true;
@@ -55,7 +55,7 @@ namespace Sprint4
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
             {
 
                 linkPlayer.isWalkingInPlace = true;

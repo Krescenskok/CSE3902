@@ -11,7 +11,7 @@ namespace Sprint4
         private Texture2D texture;
 
         private Point spriteSize;
-        
+        private Point drawSize;
 
 
   
@@ -20,11 +20,14 @@ namespace Sprint4
         {
 
             this.texture = texture;
-           
+
+            Point size = Camera.Instance.playArea.Size;
 
             spriteSize.X = texture.Bounds.Width;
             spriteSize.Y = texture.Bounds.Height;
 
+            drawSize.X = size.X * 6;
+            drawSize.Y = size.Y * 6;
         }
 
 
@@ -43,7 +46,7 @@ namespace Sprint4
 
 
             Rectangle sourceRectangle = new Rectangle(0, 0, spriteSize.X, spriteSize.Y);
-            Rectangle destinationRectangle = new Rectangle(0, 0, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle(0, 0, drawSize.X, drawSize.Y);
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 

@@ -51,7 +51,9 @@ namespace Sprint4
         protected override void Initialize()
         {
             base.Initialize();
-            CollisionHandler.Instance.Initialize(this);
+            
+
+           
         }
 
         protected override void LoadContent()
@@ -78,8 +80,12 @@ namespace Sprint4
             DoorSpriteFactory.Instance.LoadAllTextures(this);
 
 
+            //do not move//
             camera = Camera.Instance;
             camera.Load(this);
+            //do not move//
+
+            CollisionHandler.Instance.Initialize(this);
 
 
             //set up grid where everything is spawned
@@ -144,9 +150,13 @@ namespace Sprint4
 
         protected override void Draw(GameTime gameTime)
         {
+
+            
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Viewport = camera.gameView;
+
+            GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
