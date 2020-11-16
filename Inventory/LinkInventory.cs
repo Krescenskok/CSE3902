@@ -56,13 +56,15 @@ namespace Sprint4
 
         private const string DIRECTION = "Up";
         private const int THREE = 3;
-        private const int ITEMS_GAP = 80;
+        private const int FIFTY = 50;
+        private const int ITEMS_GAP = 60;
         private const int CURSOR_GAP = 75;
         private const int CURSOR_ADJUST = 30;
         private const int ITEM_ADJUST_X = 20;
         private const int ITEM_ADJUST_Y = 60/4;
         private const int TWO = 2;
-        private const int CURSOR_SIZE = 50;
+        private const int FIVE = 5;
+        private const int CURSOR_SIZE = 40;
         private const int BOMB = 5;
         private const int KEY = 1;
 
@@ -106,31 +108,31 @@ namespace Sprint4
 
         private void InitializeItems(Point bgSize)
         {
-            Vector2 row1 = new Vector2(bgSize.X / 2 + ITEMS_GAP, bgSize.Y / THREE);
-            Vector2 row2 = new Vector2(bgSize.X / 2 + ITEMS_GAP, row1.Y + ITEM_ADJUST_X * 2);
-            Point cursor = new Point((int)row1.X - ITEMS_GAP, (int)row1.Y - ITEMS_GAP);
+            Vector2 row1 = new Vector2(bgSize.X / 2 - THREE + FIFTY, bgSize.Y / FIVE + FIVE*TWO + TWO);
+            Point cursor = new Point((int)row1.X - FIFTY, (int)row1.Y - CURSOR_ADJUST);
 
-            InitializeCursor(cursor, row2, bgSize);
+            InitializeCursor(cursor, bgSize);
 
-            Vector2 item = new Vector2((float)cursor.X + (ITEM_ADJUST_X), (float)cursor.Y + (ITEM_ADJUST_Y));
-            Vector2 currentItemLoc = new Vector2(row1.X / 2 - ITEM_ADJUST_X, item.Y);
+            Vector2 item = new Vector2((float) cursor.X + (CURSOR_SIZE / 2), (float) cursor.Y + FIVE * TWO);
+            float startX = item.X;
+            Vector2 currentItemLoc = new Vector2(row1.X / 2 - (ITEM_ADJUST_X / 2) + TWO, item.Y + FIVE);
 
             secondItems.Add(SecondaryItem.Boomerang, new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Bomb, new BombObject(ItemsFactory.Instance.CreateBombSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Candle, new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Arrow, new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(DIRECTION), item));
             secondItems.Add(SecondaryItem.Bow, new Bow(ItemsFactory.Instance.CreateBowSprite(), item));
-            item.X = row2.X - ITEMS_GAP + ITEM_ADJUST_X;
-            item.Y = row2.Y - ITEMS_GAP + ITEM_ADJUST_X;
+            item.X = startX;
+            item.Y += CURSOR_SIZE ;
             secondItems.Add(SecondaryItem.Potion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
             secondInInventory.Add(SecondaryItem.Boomerang, true);
@@ -159,22 +161,25 @@ namespace Sprint4
             firstSlotItem = PrimaryItem.WoodenSword;
         }
 
-        private void InitializeCursor(Point cursor, Vector2 row2, Point inventoryBG)
+        private void InitializeCursor(Point cursor, Point inventoryBG)
         {
             Point cursorSize = new Point(CURSOR_SIZE, CURSOR_SIZE);
+            cursor.X += FIVE;
+            cursor.Y += TWO;
+            int startX = cursor.X;
             int i;
             for (i=0; i < CURSORMAX/2; i++)
             {
                 cursorLocation.Add(i, new CursorSprite(cursorTexture, cursorSize, cursor));
-                cursor.X += CURSOR_GAP;
+                cursor.X += ITEMS_GAP;
             }
 
-            cursor.X = (int)row2.X - ITEMS_GAP;
-            cursor.Y = (int)row2.Y - CURSOR_GAP;
+            cursor.X = startX;
+            cursor.Y += CURSOR_SIZE;
             for (i = CURSORMAX/2; i <= CURSORMAX; i++)
             {
                 cursorLocation.Add(i, new CursorSprite(cursorTexture, cursorSize, cursor));
-                cursor.X += CURSOR_GAP;
+                cursor.X += ITEMS_GAP;
             }
         }
 
