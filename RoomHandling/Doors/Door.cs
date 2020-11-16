@@ -27,7 +27,7 @@ namespace Sprint4
         private int unlockClock = 0;
         private bool unlocked = false;
 
-        
+        public bool open;
 
         public Door(Game game, Point innerLocation, Point size, int nextRoom, char heading, DoorType type, XElement item, Point outerLocation, int currentRoom)
         {
@@ -42,19 +42,22 @@ namespace Sprint4
             
             if (type == DoorType.locked)
             {
-                outerCollider = new LockedDoorCollider(this, outerLocation, size, heading, true);
+                outerCollider = new LockedDoorCollider(this, outerLocation, size, heading);
+                open = false;
             } else if(type == DoorType.normal)
             {
-                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, false); 
+                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, false);
+                open = true;
 
             } else if(type == DoorType.special_open)
             {
                 outerCollider = new SpecialDoorCollider(this,outerLocation,size);
+                open = true;
             }
 
             innerCollider = new UnlockedDoorCollider(this, innerLocation, size, heading);
 
-            RoomEnemies.Instance.AddTestCollider(new Rectangle(outerLocation, size));
+            
 
         }
 
@@ -75,6 +78,7 @@ namespace Sprint4
             CollisionHandler.Instance.RemoveCollider(outerCollider);
             saveInfo.SetElementValue("Type", "normal");
             outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading, CurrentRoom == 6);
+            open = true;
         }
 
         public void Close()
@@ -82,6 +86,7 @@ namespace Sprint4
             CollisionHandler.Instance.RemoveCollider(outerCollider);
             saveInfo.SetElementValue("Type", "locked");
             outerCollider = new SpecialDoorCollider(this, outerLocation, Size);
+            open = false;
         }
 
         //doors that open with a key
@@ -98,12 +103,11 @@ namespace Sprint4
 
         public void StartUnlock()
         {
-            if (LinkInventory.Instance.KeyCount > 0)
-            {
-                unlocked = true;
-                unlockClock = unlockTime;
-                LinkInventory.Instance.KeyCount--;
-            }
+
+            unlocked = true;
+            unlockClock = unlockTime;
+   
+
         }
 
         public void Update()
