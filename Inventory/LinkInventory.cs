@@ -55,6 +55,7 @@ namespace Sprint4
         private const int CURSORMAX = 8;
 
         private const string DIRECTION = "Up";
+        private const int THREE = 3;
         private const int ITEMS_GAP = 80;
         private const int CURSOR_GAP = 75;
         private const int CURSOR_ADJUST = 30;
@@ -62,6 +63,8 @@ namespace Sprint4
         private const int ITEM_ADJUST_Y = 60/4;
         private const int TWO = 2;
         private const int CURSOR_SIZE = 50;
+        private const int BOMB = 5;
+        private const int KEY = 1;
 
         private static readonly LinkInventory instance = new LinkInventory();
 
@@ -103,7 +106,7 @@ namespace Sprint4
 
         private void InitializeItems(Point bgSize)
         {
-            Vector2 row1 = new Vector2(bgSize.X / 2 + ITEMS_GAP, bgSize.Y / 3 + (CURSOR_ADJUST));
+            Vector2 row1 = new Vector2(bgSize.X / 2 + ITEMS_GAP, bgSize.Y / THREE);
             Vector2 row2 = new Vector2(bgSize.X / 2 + ITEMS_GAP, row1.Y + ITEM_ADJUST_X * 2);
             Point cursor = new Point((int)row1.X - ITEMS_GAP, (int)row1.Y - ITEMS_GAP);
 
@@ -178,9 +181,9 @@ namespace Sprint4
         private void InitializeCounts()
         {
             RupeeCount = 0;
-            BombCount = 5;
-            KeyCount = 1;
-            PotionCount = 1;
+            BombCount = BOMB;
+            KeyCount = KEY;
+            PotionCount = KEY;
 
         }
 
@@ -268,6 +271,10 @@ namespace Sprint4
             else if (item is ArrowObject)
             {
                 secondInInventory[SecondaryItem.Arrow] = true;
+            }
+            else if (item is Rupee)
+            {
+                RupeeCount++;
             }
             else if (item is BombObject)
             {

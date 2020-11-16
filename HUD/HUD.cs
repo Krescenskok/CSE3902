@@ -45,9 +45,6 @@ namespace Sprint4
         int emptyCount = 0;
         int fullCount = 0;
         int halfCount = 0;
-        int rupeeCount = 0;
-        int keyCount = 0; 
-        int bombCount = 0;
 
         private const int THIRD = 3;
         private const int FIVE = 5;
@@ -177,7 +174,7 @@ namespace Sprint4
             emptyCount = 0;
             halfCount = 0;
             int healthLost = (int)(link.FullHealth - link.Health);
-            if (healthLost > 0)
+            if (healthLost != 0)
             {
                 if (healthLost % FULL_HEART == 0)
                 {
@@ -220,6 +217,7 @@ namespace Sprint4
                     emptyCount--;
                 }
             }
+            prevHealth = (int) link.Health;
 
         }
 
@@ -322,13 +320,6 @@ namespace Sprint4
         }
 
 
-        public void UpdateInventoryCounts(int rupeeCount, int keyCount, int bombCount)
-        {
-            this.rupeeCount = rupeeCount;
-            this.keyCount = keyCount;
-            this.bombCount = bombCount;
-        }
-
         public void DrawTop(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
@@ -338,9 +329,9 @@ namespace Sprint4
                 bSlotItems[bSlot].Draw(spriteBatch);
             }
             aSlotItems[aSlot].Draw(spriteBatch);
-            spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.RupeeCount, rupeeCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.KeyCount, keyCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.BombCount, bombCountLocation, Color.White);
             foreach (IItems heart in drawnHearts)
             {
                 heart.Draw(spriteBatch);
@@ -355,9 +346,9 @@ namespace Sprint4
                 bSlotItemsBottom[bSlot].Draw(spriteBatch);
             }
             aSlotItemsBottom[aSlot].Draw(spriteBatch); ;
-            spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountBottomLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountBottomLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.RupeeCount, rupeeCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.KeyCount, keyCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.BombCount, bombCountBottomLocation, Color.White);
             foreach (IItems heart in drawnHeartsBottom)
             {
                 heart.Draw(spriteBatch);
@@ -367,8 +358,6 @@ namespace Sprint4
 
         public void Reset()
         {
-            UpdateInventoryCounts(0, 0, 0);
-
             aSlotItems.Clear();
             bSlotItems.Clear();
             aSlotItemsBottom.Clear();
