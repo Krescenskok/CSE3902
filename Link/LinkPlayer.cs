@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint4;
 using Sprint4.Link;
 
-namespace Sprint4.Link
+namespace Sprint4
 {
     public enum ItemForLink
     {
@@ -37,7 +37,7 @@ namespace Sprint4.Link
         private bool isDamaged = false;
         private double damageStartTime;
         private float health = HEALTH;
-        public bool isWalkingInPlace = false;
+        public bool isWalkingInPlace;
         private bool isPickingUpItem = false;
         private bool useRing = false;
         private float fullHealth = HEALTH;
@@ -224,7 +224,7 @@ namespace Sprint4.Link
             Delay = 0;
             clock = false;
             DrawShield = true;
-            
+
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)

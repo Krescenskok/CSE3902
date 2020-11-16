@@ -5,44 +5,36 @@ using System.Text;
 
 namespace Sprint4
 {
-    public class HandPlayerFinderCollider : ICollider
+    public class SpecialDoorCollider : IDoorCollider
     {
 
-        public string Name { get => "WallMasterEyes"; }
+        public string name;
+        public Rectangle bounds;
+        public Door door;
+        public string Name { get => "LockedDoor"; }
         public Layer layer { get; set; }
 
-        private Rectangle bounds;
-        private WallMaster master;
-        private WallMasterMoveState state;
-      
-  
 
-        public HandPlayerFinderCollider(Rectangle masterRect, WallMaster wallMaster, Game game)
+        public SpecialDoorCollider(Door door, Point location, Point size)
         {
+            bounds.Location = location;
+            bounds.Size = size;
+            this.door = door;
+           
 
-            master = wallMaster;
-            
-            bounds = masterRect;
+            CollisionHandler.Instance.AddCollider(this, Layers.Door);
 
-            
-
-            state = (WallMasterMoveState)wallMaster.State;
-
-            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
-            
+            RoomEnemies.Instance.AddTestCollider(new Rectangle(location, size));
         }
-
 
         public Rectangle Bounds()
         {
             return bounds;
         }
 
-
-      
         public bool CompareTag(string tag)
         {
-            return tag == Name;
+            return tag == "Doorway";
         }
 
         public bool Equals(ICollider col)
@@ -52,16 +44,11 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
-            if (col.CompareTag("Player") ) state.LockOnToPlayerPosition(collision);
-
-
-
+            //no action
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player")) state.LockOnToPlayerPosition(collision);
 
         }
 
@@ -71,12 +58,12 @@ namespace Sprint4
 
         public void SendMessage(string msg, object value)
         {
-            //does not handle messages
+            
         }
 
         public void Update()
         {
-
+            //doesn't update
         }
     }
 }

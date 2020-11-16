@@ -20,6 +20,7 @@ namespace Sprint4
             bounds.Size = size;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Wall);
+           
         }
 
         public Rectangle Bounds()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint4
@@ -40,7 +41,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "Door" || tag == entrySide.ToString();
+            return tag == "UnlockedDoor" || tag == entrySide.ToString();
         }
 
         public bool Equals(ICollider col)
@@ -62,7 +63,7 @@ namespace Sprint4
             if (col.CompareTag("Player") && !collision.From.Equals(entrySide))
             {
                 trigger = true;
-                
+
             }
         }
 

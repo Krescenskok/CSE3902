@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint4
@@ -8,8 +9,10 @@ namespace Sprint4
     {
         public bool CollidesWith(ICollider other)
         {
-            return other is PlayerLayer
-                || other is DefaultLayer;
+
+            
+            return other.layer is PlayerLayer
+                || other.layer is DefaultLayer;
 
         }
     }

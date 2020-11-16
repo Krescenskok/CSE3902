@@ -31,7 +31,8 @@ namespace Sprint4
         private Game game;
 
         private int currentRoom;
-   
+
+        public bool allDead;
 
         public static RoomEnemies Instance
         {
@@ -52,6 +53,8 @@ namespace Sprint4
     
         public void LoadRoom(Game game, XElement room)
         {
+            
+
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             this.game = game;
@@ -134,6 +137,8 @@ namespace Sprint4
                 }
             }
 
+            allDead = enemies.Count == 0;
+
         }
 
            
@@ -193,6 +198,9 @@ namespace Sprint4
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
             Sounds.Instance.PlayEnemyDie();
+
+            allDead = enemies.Count == 0;
+            Debug.WriteLine(allDead);
         }
 
         public void Destroy(IEnemy enemy)
@@ -200,6 +208,8 @@ namespace Sprint4
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
             Sounds.Instance.PlayEnemyDie();
+
+            allDead = enemies.Count == 0;
         }
         
 

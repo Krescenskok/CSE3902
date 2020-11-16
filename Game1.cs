@@ -52,7 +52,8 @@ namespace Sprint4
         protected override void Initialize()
         {
             base.Initialize();
-            CollisionHandler.Instance.Initialize(this);
+
+
 
         }
 
@@ -84,8 +85,12 @@ namespace Sprint4
             LinkInventory.Instance.InitializeInventory(this);
 
 
+            //do not move//
             camera = Camera.Instance;
             camera.Load(this);
+            //do not move//
+
+            CollisionHandler.Instance.Initialize(this);
 
 
             //set up grid where everything is spawned
@@ -151,7 +156,13 @@ namespace Sprint4
 
         protected override void Draw(GameTime gameTime)
         {
+
+            
             _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+
+            GraphicsDevice.Viewport = camera.gameView;
+
 
             GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)

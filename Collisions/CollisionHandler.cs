@@ -21,6 +21,8 @@ namespace Sprint4
         /// </summary>
         private List<ICollider> colliders;
 
+        private ICollider player;
+
         private Queue<ICollider> removedColliders;
 
         
@@ -37,6 +39,7 @@ namespace Sprint4
         private CollisionHandler()
         {
             colliders = new List<ICollider>();
+            
             removedColliders = new Queue<ICollider>();
             
             ListComparer<ICollider> listComparer = new ListComparer<ICollider>();
@@ -46,7 +49,6 @@ namespace Sprint4
         }
 
 
-       
 
         public void AddCollider(ICollider newCol, Layer layer)
         {
@@ -73,9 +75,11 @@ namespace Sprint4
             spatialMap = new Dictionary<int, List<ICollider>>(rows * col);
             for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
 
-            cellSize.X = game.Window.ClientBounds.Width / col;
-            cellSize.Y = game.Window.ClientBounds.Height / rows;
-            width = game.Window.ClientBounds.Width / cellSize.X;
+            Point screenSize = Camera.Instance.playArea.Size;
+
+            cellSize.X = screenSize.X / col;
+            cellSize.Y = screenSize.Y / rows;
+            width = screenSize.X / cellSize.X;
         }
 
         public void RoomChange()
@@ -88,8 +92,12 @@ namespace Sprint4
                 }
             }
 
+
+
             colliders = colliders.Except(removedColliders).ToList();
             removedColliders.Clear();
+
+           
         }
 
         public void ClearMap()
@@ -129,7 +137,6 @@ namespace Sprint4
             AddToList(results, bottomLeft);
             AddToList(results, bottomRight);
 
-         
 
             return results;
         }
@@ -164,15 +171,18 @@ namespace Sprint4
                 RegisterCollider(colliders[i]);
             }
 
-            int numCol = 0;
+            
 
             //iterate through each collider and check if it collides with nearby colliders
             for (int i = 0; i < colliders.Count; i++)
             {
+                if (colliders[i].layer is PlayerLayer && player is null) player = colliders[i];
+
                 List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
 
+                
                 nearbyColliders.AddRange(RoomWalls.Instance.Walls); //walls too big for spatial mapping
-
+                nearbyColliders.Add(player);
 
                 Collision collision = new Collision();
                 foreach(ICollider other in nearbyColliders)
@@ -180,11 +190,13 @@ namespace Sprint4
                     List<ICollider> key = new List<ICollider> { colliders[i], other };
 
 
+                    
+
                     if (!colliders[i].Equals(other) && colliders[i].layer.CollidesWith(other) && ColliderOverlap(colliders[i], other)) //collision exists
                     {
                         collision = CalculateSide(colliders[i], other);
 
-                        numCol++;
+                       
 
                         if (collisions.Contains(key))   //collision was already happneing
                         {
@@ -221,7 +233,6 @@ namespace Sprint4
             while(removedColliders.Count > 0)
             {
                 colliders.Remove(removedColliders.Dequeue());
-                
             }
             
 
@@ -231,8 +242,7 @@ namespace Sprint4
 
         private bool ColliderOverlap(ICollider col1, ICollider col2)
         {
-
-            return col1.Bounds().Intersects(col2.Bounds());
+                return col1.Bounds().Intersects(col2.Bounds());
         }
 
 
