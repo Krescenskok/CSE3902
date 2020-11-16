@@ -111,6 +111,23 @@ namespace Sprint4
             if (sound != null) sound.Play();
         }
 
+        public void PlayDodongoRoar()
+        {
+            SoundEffectInstance sound = Get("DodongoRoar");
+            if (sound != null) sound.Play();
+        }
+
+        public void PlayAquamentusRoar()
+        {
+            SoundEffectInstance sound = Get("AquamentusRoar");
+            if (sound != null) sound.Play();
+        }
+
+        public void PlayBossScream()
+        {
+            SoundEffectInstance sound = Get("BossScream3");
+            if (sound != null) sound.Play();
+        }
         #endregion
 
 
