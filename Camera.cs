@@ -159,6 +159,22 @@ namespace Sprint4
 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
+                if (game1.LinkPlayer.state is MoveRight)
+                {
+                    game1.LinkPlayer.currentLocation.X += 110;
+                }
+                else if (game1.LinkPlayer.state is MoveLeft)
+                {
+                    game1.LinkPlayer.currentLocation.X -= 110;
+                }
+                else if (game1.LinkPlayer.state is MoveUp)
+                {
+                    game1.LinkPlayer.currentLocation.Y -= 110;
+                }
+                else if (game1.LinkPlayer.state is MoveDown)
+                {
+                    game1.LinkPlayer.currentLocation.Y += 110;
+                }
             }
 
             location.X = transform.M41;
