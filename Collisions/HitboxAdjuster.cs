@@ -25,31 +25,48 @@ namespace Sprint4
         private int outputLocX;
         private int outputLocY;
 
+
+        private int xDiff;
+        private int yDiff;
+
+        private Point inputSize;
+        private Point inputLocation;
+
+        private Point outputSize;
+        private Point outputLocation;
+
+
         private Rectangle adjusted;
         private double coefficient;
 
         private HitboxAdjuster()
         {
-            inputX = 0;
-            inputY = 0;
-            outputX = 0;
-            outputY = 0;
-            adjusted = new Rectangle();
-            coefficient = 0;
         }
 
         public Rectangle AdjustHitbox(Rectangle input, float coefficient)
         {
-            Rectangle adjusted = new Rectangle();
-            Point inputSize = input.Size;
-            Point inputLocation = input.Location;
+            inputSize = input.Size;
+            inputLocation = input.Location;
+
+            inputLocX = inputLocation.X;
+            inputLocY = inputLocation.Y;
+
             inputSizeX = inputSize.X;
             inputSizeY = inputSize.Y;
 
-            outputSizeX = (int) ((float)inputX * coefficient);
-            outputSizeY = (int)((float)inputY * coefficient);
-            Point outputSize = new Point(outputX, outputY);
-            adjusted = new Rectangle();
+            outputSizeX = (int) ((float)inputSizeX * coefficient);
+            outputSizeY = (int)((float)inputSizeY * coefficient);
+
+            xDiff = (int)((inputSizeX - outputSizeX) / 2.0);
+            yDiff = (int)((inputSizeY - outputSizeY) / 2.0);
+
+            outputLocX = inputLocX + xDiff;
+            outputLocY = inputLocY + yDiff;
+
+            Point outputLocation = new Point(outputLocX, outputLocY);
+            Point outputSize = new Point(outputSizeX, outputSizeY);
+
+            adjusted = new Rectangle(outputLocation, outputSize);
 
             return adjusted;
         }
