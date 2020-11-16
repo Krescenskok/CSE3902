@@ -39,6 +39,7 @@ namespace Sprint4
         private ISprite mapInvSprite;
         private ISprite fullInvSprite;
         private ISprite drawnSprite;
+        private IItems prevItem = null;
         private SecondaryItem secondSlotItem;
         private Dictionary<SecondaryItem, IItems> secondItems = new Dictionary<SecondaryItem, IItems>();
         private Dictionary<SecondaryItem, Boolean> secondInInventory = new Dictionary<SecondaryItem, Boolean>();
@@ -128,7 +129,7 @@ namespace Sprint4
             item.X += CURSOR_GAP;
             firstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            secondInInventory.Add(SecondaryItem.Boomerang, false);
+            secondInInventory.Add(SecondaryItem.Boomerang, true);
             secondInInventory.Add(SecondaryItem.Bomb, true);
             secondInInventory.Add(SecondaryItem.Arrow, true);
             secondInInventory.Add(SecondaryItem.Bow, false);
@@ -231,6 +232,11 @@ namespace Sprint4
 
         public void PickUpItem(IItems item, LinkPlayer link)
         {
+            if (!(prevItem is null) && prevItem.Equals(item))
+            {
+                return;
+            }
+
             if (item is BoomerangObject)
             {
                 secondInInventory[SecondaryItem.Boomerang] = true;
@@ -272,6 +278,7 @@ namespace Sprint4
             {
                 HUDMap.Instance.HasCompass = true;
             }
+            prevItem = item;
         }
 
         public void ConsumeItem(LinkPlayer link)
@@ -420,10 +427,29 @@ namespace Sprint4
                 }
             }
 
-            if (secondInInventory[secondSlotItem])
+            foreach (KeyValuePair<PrimaryItem, Boolean> pair in firstInInventory)
             {
-                currentSecondItems[secondSlotItem].Draw(spriteBatch);
+                if (pair.Value)
+                {
+                    firstItems[pair.Key].Draw(spriteBatch);
+                }
             }
+
+            if (cursorPosition < CURSORMAX / 2)
+            {
+                if (secondInInventory[secondSlotItem])
+                {
+                    currentSecondItems[secondSlotItem].Draw(spriteBatch);
+                }
+
+            }
+            else
+            {
+                if (firstInInventory[firstSlotItem])
+                {
+                    currentFirstItems[firstSlotItem].Draw(spriteBatch);
+                }
+            }            
 
             cursorLocation[cursorPosition].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
 

@@ -98,8 +98,12 @@ namespace Sprint4
 
         public void StartUnlock()
         {
-            unlocked = true;
-            unlockClock = unlockTime;
+            if (LinkInventory.Instance.KeyCount > 0)
+            {
+                unlocked = true;
+                unlockClock = unlockTime;
+                LinkInventory.Instance.KeyCount--;
+            }
         }
 
         public void Update()
