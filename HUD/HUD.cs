@@ -49,22 +49,22 @@ namespace Sprint4
         int keyCount = 0; 
         int bombCount = 0;
 
-        private const int BBUFFER = 9;
-        private const int ABUFFER = 83;
         private const int THIRD = 3;
         private const int FIVE = 5;
-        private const int INVENTORY_GAP = 40;
+        private const int TEN = 10;
+        private const int BBUFFER = 5;
+        private const int ABUFFER = 60;
+        private const int INVENTORY_GAP = 30;
         private const int HEART_GAP = 30;
         private const int FULL_HEART = 20;
         private const int HALF_HEART = 10;
+        private const int HEARTLOCX = 7;
+        private const int HEARTLOCY = 9;
         private const string FULL = "Full";
         private const string HALF = "Half";
         private const string EMPTY = "Empty";
         private const string TOP = "Top";
         private const string BOTTOM = "Bottom";
-        private const int HEARTLOCX = 7;
-        private const int HEARTLOCY = 9;
-        private const int HUD_HEIGHT = 159;
         private int bottomAdjust;
 
 
@@ -85,23 +85,23 @@ namespace Sprint4
             Point drawSize = Camera.Instance.HUDArea.Size;
             HUDMap.Instance.LoadHUDMap(game, drawSize);
             sprite = new HUDSprite(HUDTexture, drawSize);
-            bottomAdjust = game.Window.ClientBounds.Height - HUD_HEIGHT;
+            bottomAdjust = game.Window.ClientBounds.Height - drawSize.Y;
             HUDfont = game.Content.Load<SpriteFont>("HUDandInv/HUDText");
 
-            rupeeCountLocation = new Vector2(drawSize.X / THIRD + (ABUFFER/ 2), game.Window.ClientBounds.Height / (FIVE + THIRD));
-            rupeeCountBottomLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + bottomAdjust + 10);
+            rupeeCountLocation = new Vector2(drawSize.X / THIRD + INVENTORY_GAP, drawSize.Y / THIRD);
+            rupeeCountBottomLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + bottomAdjust + TEN);
             keyCountLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + INVENTORY_GAP);
-            keyCountBottomLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + bottomAdjust + 10);
-            bombCountLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + (INVENTORY_GAP / 2));
-            bombCountBottomLocation = new Vector2(bombCountLocation.X, bombCountLocation.Y + bottomAdjust + 10);
+            keyCountBottomLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + bottomAdjust + TEN);
+            bombCountLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + (INVENTORY_GAP * 2 / THIRD));
+            bombCountBottomLocation = new Vector2(bombCountLocation.X, bombCountLocation.Y + bottomAdjust + TEN);
 
-            bSlotLocation = new Vector2(drawSize.X / 2 + BBUFFER, drawSize.Y * THIRD / FIVE);
+            bSlotLocation = new Vector2(drawSize.X / 2 + BBUFFER, drawSize.Y * THIRD / FIVE - BBUFFER);
             bSlotBottomLocation = new Vector2(bSlotLocation.X, bSlotLocation.Y + bottomAdjust);
-            aSlotLocation = new Vector2(drawSize.X / 2 + ABUFFER, drawSize.Y * THIRD / FIVE);
-            aSlotBottomLocation = new Vector2(aSlotLocation.X, aSlotLocation.Y + bottomAdjust);
+            aSlotLocation = new Vector2(bSlotLocation.X + ABUFFER, bSlotLocation.Y);
+            aSlotBottomLocation = new Vector2(aSlotLocation.X, bSlotBottomLocation.Y);
             InitializeSlotItems();
 
-            firstHeartLoc = new Vector2(game.Window.ClientBounds.Width * FIVE / HEARTLOCX, game.Window.ClientBounds.Height * 2 / HEARTLOCY);
+            firstHeartLoc = new Vector2(drawSize.X * FIVE / HEARTLOCX, drawSize.Y / 2);
             firstBottomHeartLoc = new Vector2(firstHeartLoc.X, firstHeartLoc.Y + bottomAdjust);
             InitializeHearts();
 

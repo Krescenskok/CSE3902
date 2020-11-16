@@ -241,8 +241,8 @@ namespace Sprint4
             {
                 if(((IItems) value) is Sprint4.Items.TriforcePiece || ((IItems)value) is Sprint4.Items.Bow)
                     linkPlayer.IsPickingUpItem = true;
-                
-                LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
+
+                LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
             }
             if (msg == "Heal")
             {
