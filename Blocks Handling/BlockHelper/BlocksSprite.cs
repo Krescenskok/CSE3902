@@ -28,8 +28,6 @@ namespace Sprint4.Blocks
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            Rectangle sourceRectangle;
-            Rectangle destinationRectangle;
 
 
 
@@ -49,13 +47,13 @@ namespace Sprint4.Blocks
         public void Draw(SpriteBatch spriteBatch, Vector2 spriteLocation, int drawnFrame)
         {
             int width = texture.Width / columns;
-            int drawnWidth = AdjustWidth(width, drawnFrame);
+          
 
             int height = texture.Height / rows;
             int row = (int)((float)drawnFrame / (float)columns);
             int column = drawnFrame % columns;
 
-            sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
+            sourceRectangle = new Rectangle(width * column, height * row, width, height);
             destinationRectangle = new Rectangle((int)spriteLocation.X , (int)spriteLocation.Y , blockDimensionX, blockDimensionY);
 
             

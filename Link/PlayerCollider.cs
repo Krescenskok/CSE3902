@@ -12,9 +12,14 @@ namespace Sprint4
     {
         //private Rectangle bounds;
         LinkPlayer linkPlayer;
+        const int FULL_HEART = 20;
+        const int THREE_QUARTERS_HEART = 15;
+        const int HALF_HEART = 10;
+        const int QUARTER_HEART = 5;
+        const int DISPLACEMENT = 100;
         //String Key;
 
-        bool done = false;
+       
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
@@ -28,7 +33,10 @@ namespace Sprint4
 
         public Rectangle Bounds()
         {
-             return linkPlayer.Bounds;
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Location);
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Size);
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.Bounds);
+            return linkPlayer.Bounds;
         }
 
         public bool CompareTag(string tag)
@@ -84,15 +92,15 @@ namespace Sprint4
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
                             }
                         }
                     }
@@ -103,15 +111,15 @@ namespace Sprint4
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
                             }
                         }
                     }
@@ -122,15 +130,15 @@ namespace Sprint4
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
                             }
                         }
                     }
@@ -141,15 +149,15 @@ namespace Sprint4
                         {
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 5);
+                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
-                                col.SendMessage("EnemyTakeDamage", 10);
+                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
-                                col.SendMessage("EnemyTakeDamage", 15);
+                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
                             }
                         }
                     }
@@ -169,7 +177,7 @@ namespace Sprint4
         {
         }
 
-        public void SendMessage(string msg, object value)
+         public void SendMessage(string msg, object value)
         {
             if(!linkPlayer.IsDamaged)
             {
@@ -191,8 +199,9 @@ namespace Sprint4
                             linkPlayer.Health -= (int)value;
                         }
 
-
                         linkPlayer.currentLocation.X += 100;
+
+
 
                     }
                 }
@@ -276,24 +285,27 @@ namespace Sprint4
             }
             if (msg == "Heal")
             {
-                linkPlayer.Health += (float)value;
+                if (value is Sprint4.Items.Heart)
+                {
+                    linkPlayer.Health += FULL_HEART;
+                }
+                else if (value is Sprint4.Items.Fairy)
+                {
+                    linkPlayer.Health += HALF_HEART;
+                }
+
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
                 {
-                    linkPlayer.Health = 30;
+                    linkPlayer.Health = linkPlayer.FullHealth;
                 }
                 HUD.Instance.UpdateHearts(linkPlayer);
             }
-            if (msg == "Heartcontainer")
+            if (msg == "HeartContainer")
             {
-                linkPlayer.FullHealth += 10;
-                linkPlayer.Health = linkPlayer.FullHealth;
                 HUD.Instance.IncreaseMaxHeartNumber();
+                linkPlayer.FullHealth += FULL_HEART;
+                linkPlayer.Health = linkPlayer.FullHealth;
                 HUD.Instance.UpdateHearts(linkPlayer);
-            }
-
-            if (msg == "Rupee")
-            {
-                LinkInventory.Instance.RupeeCount++;
             }
 
             if (msg == "Hand")
@@ -314,7 +326,7 @@ namespace Sprint4
 
         public void Update()
         {
-            //Debug.WriteLine(Bounds());
+
             if (Bounds() != null && !done)
             {
 
@@ -323,6 +335,7 @@ namespace Sprint4
 
                 
             }
+
         }
     }
 }

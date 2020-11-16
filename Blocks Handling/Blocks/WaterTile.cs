@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint4.Blocks
 {
-    public class DarkerBlueTile : IBlock
+    public class WaterTile : IBlock
     {
         private Vector2 spriteLocation;
         private BlocksSprite block;
@@ -16,7 +16,7 @@ namespace Sprint4.Blocks
         private int drawnFrame; 
         private BlockCollider collider;
 
-        public DarkerBlueTile(BlocksSprite block, Vector2 location)
+        public WaterTile(BlocksSprite block, Vector2 location)
         {
             spriteLocation = location;
             this.block = block;

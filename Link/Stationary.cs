@@ -16,9 +16,9 @@ namespace Sprint4
         int PICKUP = 300;
 
 
-        public Stationary(LinkPlayer link) : base(link)
+        public Stationary(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
@@ -82,10 +82,6 @@ namespace Sprint4
             else
             {
 
-                if (linkSprite == null)
-                {
-                    linkSprite = SpriteFactory.Instance.CreateLinkSprite();
-                }
                 if (link.UseRing)
                 {
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
@@ -306,7 +302,12 @@ namespace Sprint4
         public override Rectangle Bounds()
         {
 
-            return new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y + 4, 2 * 14, 2 * 14);
+
+            //return new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y + 4, 2 * 14, 2 * 14);
+
+            return link.hitbox;
+            // new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y, , );
+
 
         }
     }

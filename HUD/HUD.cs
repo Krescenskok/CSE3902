@@ -45,9 +45,6 @@ namespace Sprint4
         int emptyCount = 0;
         int fullCount = 0;
         int halfCount = 0;
-        int rupeeCount = 0;
-        int keyCount = 0; 
-        int bombCount = 0;
 
         private const int THIRD = 3;
         private const int FIVE = 5;
@@ -83,25 +80,26 @@ namespace Sprint4
         {
             HUDTexture = game.Content.Load<Texture2D>("HUDandInv/FullInventory");
             Point drawSize = Camera.Instance.HUDArea.Size;
+            drawSize.Y /= 3;
             HUDMap.Instance.LoadHUDMap(game, drawSize);
             sprite = new HUDSprite(HUDTexture, drawSize);
             bottomAdjust = game.Window.ClientBounds.Height - drawSize.Y;
             HUDfont = game.Content.Load<SpriteFont>("HUDandInv/HUDText");
 
-            rupeeCountLocation = new Vector2(drawSize.X / THIRD + INVENTORY_GAP, drawSize.Y / THIRD);
+            rupeeCountLocation = new Vector2(drawSize.X / THIRD + INVENTORY_GAP, drawSize.Y / THIRD + TEN);
             rupeeCountBottomLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + bottomAdjust + TEN);
             keyCountLocation = new Vector2(rupeeCountLocation.X, rupeeCountLocation.Y + INVENTORY_GAP);
             keyCountBottomLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + bottomAdjust + TEN);
             bombCountLocation = new Vector2(keyCountLocation.X, keyCountLocation.Y + (INVENTORY_GAP * 2 / THIRD));
             bombCountBottomLocation = new Vector2(bombCountLocation.X, bombCountLocation.Y + bottomAdjust + TEN);
 
-            bSlotLocation = new Vector2(drawSize.X / 2 + BBUFFER, drawSize.Y * THIRD / FIVE - BBUFFER);
+            bSlotLocation = new Vector2(drawSize.X / 2 + BBUFFER, drawSize.Y * THIRD / FIVE + FIVE);
             bSlotBottomLocation = new Vector2(bSlotLocation.X, bSlotLocation.Y + bottomAdjust);
             aSlotLocation = new Vector2(bSlotLocation.X + ABUFFER, bSlotLocation.Y);
             aSlotBottomLocation = new Vector2(aSlotLocation.X, bSlotBottomLocation.Y);
             InitializeSlotItems();
 
-            firstHeartLoc = new Vector2(drawSize.X * FIVE / HEARTLOCX, drawSize.Y / 2);
+            firstHeartLoc = new Vector2(drawSize.X * FIVE / HEARTLOCX, drawSize.Y * 2 / THIRD);
             firstBottomHeartLoc = new Vector2(firstHeartLoc.X, firstHeartLoc.Y + bottomAdjust);
             InitializeHearts();
 
@@ -176,7 +174,7 @@ namespace Sprint4
             emptyCount = 0;
             halfCount = 0;
             int healthLost = (int)(link.FullHealth - link.Health);
-            if (healthLost > 0)
+            if (healthLost != 0)
             {
                 if (healthLost % FULL_HEART == 0)
                 {
@@ -219,6 +217,7 @@ namespace Sprint4
                     emptyCount--;
                 }
             }
+            prevHealth = (int) link.Health;
 
         }
 
@@ -321,13 +320,6 @@ namespace Sprint4
         }
 
 
-        public void UpdateInventoryCounts(int rupeeCount, int keyCount, int bombCount)
-        {
-            this.rupeeCount = rupeeCount;
-            this.keyCount = keyCount;
-            this.bombCount = bombCount;
-        }
-
         public void DrawTop(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
@@ -337,9 +329,9 @@ namespace Sprint4
                 bSlotItems[bSlot].Draw(spriteBatch);
             }
             aSlotItems[aSlot].Draw(spriteBatch);
-            spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.RupeeCount, rupeeCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.KeyCount, keyCountLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.BombCount, bombCountLocation, Color.White);
             foreach (IItems heart in drawnHearts)
             {
                 heart.Draw(spriteBatch);
@@ -354,9 +346,9 @@ namespace Sprint4
                 bSlotItemsBottom[bSlot].Draw(spriteBatch);
             }
             aSlotItemsBottom[aSlot].Draw(spriteBatch); ;
-            spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountBottomLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountBottomLocation, Color.White);
-            spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.RupeeCount, rupeeCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.KeyCount, keyCountBottomLocation, Color.White);
+            spriteBatch.DrawString(HUDfont, "X" + LinkInventory.Instance.BombCount, bombCountBottomLocation, Color.White);
             foreach (IItems heart in drawnHeartsBottom)
             {
                 heart.Draw(spriteBatch);
@@ -366,8 +358,6 @@ namespace Sprint4
 
         public void Reset()
         {
-            UpdateInventoryCounts(0, 0, 0);
-
             aSlotItems.Clear();
             bSlotItems.Clear();
             aSlotItemsBottom.Clear();

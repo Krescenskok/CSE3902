@@ -22,6 +22,7 @@ namespace Sprint4
         public Layer layer { get; set; }
 
         PlayerCollider player;
+        EnemyCollider enemyCol;
 
         public TestCollider(Point location, Point size, Game game, int attack)
         {
@@ -32,9 +33,10 @@ namespace Sprint4
             this.attack = attack;
         }
 
-        public TestCollider(Rectangle rect, Game game)
+        public TestCollider(Rectangle rect, Game game, EnemyCollider col)
         {
-            bounds = rect;
+            enemyCol = col;
+            bounds = col.Bounds();
             visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
             this.location = rect.Location.ToVector2();
             attack = 0;
@@ -116,6 +118,15 @@ namespace Sprint4
             {
                 bounds = player.Bounds();
                 location = bounds.Location.ToVector2();
+
+
+              
+            }
+            if (enemyCol != null)
+            {
+                bounds = enemyCol.Bounds();
+                location = bounds.Location.ToVector2();
+
             }
 
             

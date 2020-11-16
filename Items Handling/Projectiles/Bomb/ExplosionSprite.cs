@@ -22,7 +22,7 @@ namespace Sprint4.Items
         {
             this.texture = texture;
             sheetSize = ItemsFactory.Instance.GetExplosionSheetSize();
-
+            
             int width = texture.Width / (int)sheetSize.Y;
 
             int height = texture.Height;

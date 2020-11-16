@@ -64,15 +64,16 @@ namespace Sprint4
 
             if (col.CompareTag("Player"))
             {
-                if (this.name.Equals("Heart"))
+                if (this.name.Equals("Heart") || this.name.Equals("Fairy"))
                 {
                     col.SendMessage("Heal", this.item);
                 }
                 else if (this.name.Equals("HeartContainer"))
                 {
-                    col.SendMessage("HealContainer", this.item);
+                    col.SendMessage("HeartContainer", this.item);
                 }
 
+                this.item.State.Expire();
                 col.SendMessage("Item", this.item);
             }
 

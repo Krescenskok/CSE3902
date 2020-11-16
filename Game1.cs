@@ -36,7 +36,9 @@ namespace Sprint4
 
 
 
-        LinkPlayer linkPlayer = new LinkPlayer();
+
+
+        LinkPlayer linkPlayer;
         public bool isPaused = false;
         public LinkPlayer LinkPlayer { get => linkPlayer; }
         public SpriteFont Font { get => font; }
@@ -74,8 +76,12 @@ namespace Sprint4
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            linkPlayer = new LinkPlayer();
+
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
+
+
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
             ProjectilePersistent = ProjectilesCommand.Instance;
@@ -105,8 +111,7 @@ namespace Sprint4
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
-
-
+            RoomEnemies.Instance.AddTestCollider(linkPlayer.collider);
         }
 
         protected override void Update(GameTime gameTime)
@@ -148,13 +153,14 @@ namespace Sprint4
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
-                HUD.Instance.UpdateInventoryCounts(LinkInventory.Instance.RupeeCount, LinkInventory.Instance.KeyCount, LinkInventory.Instance.BombCount);
                 base.Update(gameTime);
 
             }
 
             camera.Update();
+            
         }
+
 
 
         void PrepareToDraw()
@@ -165,9 +171,14 @@ namespace Sprint4
         }
 
 
+            //draw game area from camera POV
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+
 
         protected override void Draw(GameTime gameTime)
         {
+
 
             if (activeCommand != null)
             {
@@ -204,33 +215,28 @@ namespace Sprint4
                     PrepareToDraw();
             }
 
+
             if (!IsGameOver)
             {
-                if (!LinkInventory.Instance.ShowInventory)
-                {
-                    RoomSpawner.Instance.Draw(_spriteBatch);
-                    LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                    RoomEnemies.Instance.DrawTests(_spriteBatch);
-                    RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
-                    ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                    base.Draw(gameTime);
-                    _spriteBatch.End();
+                RoomSpawner.Instance.Draw(_spriteBatch);
+            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            base.Draw(gameTime);
+            RoomEnemies.Instance.DrawTests(_spriteBatch);
+
+            _spriteBatch.End();
 
 
-                    _spriteBatch.Begin();
-                    GraphicsDevice.Viewport = camera.HUDView;
-                    HUD.Instance.DrawTop(_spriteBatch);
-                    _spriteBatch.End();
-                }
-                else
-                {
-                    _spriteBatch.End();
+            //Draw HUD in separate viewport
+            _spriteBatch.Begin();
 
-                    _spriteBatch.Begin();
-                    LinkInventory.Instance.Draw(_spriteBatch);
-                    HUD.Instance.DrawBottom(_spriteBatch);
-                    _spriteBatch.End();
-                }
+            GraphicsDevice.Viewport = camera.HUDView;
+            HUD.Instance.DrawTop(_spriteBatch);
+            LinkInventory.Instance.Draw(_spriteBatch);
+            HUD.Instance.DrawBottom(_spriteBatch);
+
+            _spriteBatch.End();
             }
             else
             {

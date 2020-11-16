@@ -6,13 +6,15 @@ using System.Text;
 
 namespace Sprint4
 {
-    public class ChangeSecondItemCommand : ICommand
+    public class ChangeItemCommand : ICommand
     {
         bool right;
+        LinkPlayer link;
 
-        public ChangeSecondItemCommand(bool goingRight)
+        public ChangeItemCommand(bool goingRight, LinkPlayer link)
         {
             right = goingRight;
+            this.link = link;
         }
 
 
@@ -31,6 +33,7 @@ namespace Sprint4
             if (LinkInventory.Instance.ShowInventory)
             {
                 LinkInventory.Instance.MoveCursor(right);
+                LinkInventory.Instance.UpdateLinkWeapons(link);
             }
         }
     }

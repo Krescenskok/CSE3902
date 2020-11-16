@@ -16,9 +16,9 @@ namespace Sprint4
         int X_LOCATION = 660;
 
 
-        public MoveRight(LinkPlayer link) : base(link)
+        public MoveRight(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
 
@@ -273,6 +273,8 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
                 return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2*13, 2*13);
@@ -290,7 +292,12 @@ namespace Sprint4
                 return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 10, 2*24, 2*16);
             }
 
+
             return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2 * 13, 2 * 13);
+
+            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
+
         }
 
     }
