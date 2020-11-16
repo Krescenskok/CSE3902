@@ -131,7 +131,7 @@ namespace Sprint4
         }
 
 
-        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
+        private ItemForLink currentWeapon = ItemForLink.Shield;
 
 
         public ItemForLink CurrentWeapon
