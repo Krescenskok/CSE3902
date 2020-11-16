@@ -284,7 +284,6 @@ namespace Sprint4
 
         public void Update()
         {
-            Debug.WriteLine(Bounds());
             if (Bounds() != null && !done)
             {
 
