@@ -36,7 +36,7 @@ namespace Sprint4
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            if (!StartAgain)
+            if (StartAgain)
             {
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);

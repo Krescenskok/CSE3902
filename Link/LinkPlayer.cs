@@ -45,6 +45,7 @@ namespace Sprint4
         private bool clock = false;
         private bool largeShield = false;
         private bool drawShield = true;
+        private bool isDead = false;
 
         private PlayerCollider collider;
 
@@ -74,6 +75,12 @@ namespace Sprint4
             {
                 return state.Bounds();
             }
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
         }
 
         public float Health

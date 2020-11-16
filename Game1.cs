@@ -111,9 +111,9 @@ namespace Sprint4
 
         protected override void Update(GameTime gameTime)
         {
-            if(linkPlayer.Health == 0)
+            if(linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
-
+                linkPlayer.IsDead = true;
                 activeCommand = new ResetCommand(linkPlayer, false);
                 activeCommand.Update(gameTime);
             }

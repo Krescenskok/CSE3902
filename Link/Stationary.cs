@@ -45,7 +45,7 @@ namespace Sprint4
                     if (link.IsDamaged)
                     {
                         col = colors[i];
-
+                       
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == colors.Length - 1)
