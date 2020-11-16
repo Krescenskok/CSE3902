@@ -29,7 +29,8 @@ namespace Sprint4
 
         public void Expire()
         {
-            arrow.expired = true;
+            arrow.IsExpired = true;
+
             arrow.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

@@ -21,6 +21,8 @@ namespace Sprint4
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             RoomItems.Instance.Destroy(item);
 
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());

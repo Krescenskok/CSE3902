@@ -12,7 +12,6 @@ namespace Sprint4
         private Vector2 location;
         private int runTime;
         private const int maxTime = 50;
-        public bool isExpired = false;
 
         public BoomerangImpactState(BoomerangImpact item, Vector2 location)
         {
@@ -32,7 +31,7 @@ namespace Sprint4
 
         public void Expire()
         {
-            isExpired = true;
+            item.IsExpired = true;
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
 

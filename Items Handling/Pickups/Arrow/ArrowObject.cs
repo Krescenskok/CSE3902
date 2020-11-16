@@ -18,6 +18,12 @@ namespace Sprint4
         private ISprite item;
         private int drawnFrame = 0;
         private IItemsState state;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -29,7 +35,7 @@ namespace Sprint4
         {
             this.location = location;
             state = new ArrowState(this);
-            collider = new ItemCollider((item as ArrowSprite).Hitbox,this, this.state);
+            collider = new ItemCollider((item as ArrowUpSprite).Hitbox, this, this.state);
         }
         public ArrowObject(ISprite item, Vector2 location, XElement xml)
         {
@@ -67,6 +73,8 @@ namespace Sprint4
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (item is null)
+                item = ItemsFactory.Instance.CreateArrowSprite("Up");
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
         }
         

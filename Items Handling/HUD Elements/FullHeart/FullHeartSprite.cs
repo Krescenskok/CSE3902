@@ -14,6 +14,8 @@ namespace Sprint4.Items
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
         private int sheetLocation = 0;
+        const int triple = 3;
+        const int quadruple = 4;
 
         public FullHeartSprite(Texture2D texture)
         {
@@ -31,7 +33,7 @@ namespace Sprint4.Items
             int column = (sheetLocation + currentFrame) % (int)sheetSize.Y;
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2 * drawnWidth, 2 * height);
+            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, quadruple * drawnWidth, triple * height);
 
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

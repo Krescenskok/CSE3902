@@ -155,7 +155,7 @@ namespace Sprint4
 
             
 
-            if (col.CompareTag("item"))
+            if (col.CompareTag("Item"))
             {
                 col.SendMessage("Disappear", null);
             }
@@ -232,8 +232,10 @@ namespace Sprint4
 
             if (msg == "Item")
             {
-                linkPlayer.IsPickingUpItem = true;
-                linkPlayer.itemsPickedUp.Add((IItems)value);
+                if(((IItems) value) is Sprint4.Items.TriforcePiece || ((IItems)value) is Sprint4.Items.Bow)
+                    linkPlayer.IsPickingUpItem = true;
+                
+                LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
             }
             if (msg == "Heal")
             {
@@ -242,16 +244,19 @@ namespace Sprint4
                 {
                     linkPlayer.Health = 30;
                 }
+                HUD.Instance.UpdateHearts(linkPlayer);
             }
             if (msg == "Heartcontainer")
             {
                 linkPlayer.FullHealth += 10;
                 linkPlayer.Health = linkPlayer.FullHealth;
+                HUD.Instance.IncreaseMaxHeartNumber();
+                HUD.Instance.UpdateHearts(linkPlayer);
             }
 
             if (msg == "Rupee")
             {
-                linkPlayer.NumOfRupee++;
+                LinkInventory.Instance.RupeeCount++;
             }
 
             if (msg == "Hand")
