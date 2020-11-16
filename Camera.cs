@@ -34,9 +34,12 @@ namespace Sprint4
         public Viewport gameView;
         public Rectangle playArea;
 
+        public Viewport HUDView;
+        public Rectangle HUDArea;
+
         private Direction currentDirection;
 
-        private LinkPlayer player;
+       
 
         public void Load(Game game)
         {
@@ -49,16 +52,22 @@ namespace Sprint4
             transform = Matrix.Identity;
 
             
+           
             
 
             Point topLeftCorner = new Point(screenWidth / 10, screenHeight / 4);
             Point size = new Point(screenWidth - topLeftCorner.X * 2, screenHeight - topLeftCorner.Y);
 
-
+            Point HUDPoint = new Point(topLeftCorner.X, 0);
+            Point HUDSize = new Point(size.X , screenHeight - size.Y );
+           
 
 
             playArea = new Rectangle(topLeftCorner, size);
             gameView = new Viewport(playArea);
+
+            HUDArea = new Rectangle(HUDPoint, HUDSize);
+            HUDView = new Viewport(HUDArea);
 
             transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
 

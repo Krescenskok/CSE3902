@@ -81,14 +81,13 @@ namespace Sprint4
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             DoorSpriteFactory.Instance.LoadAllTextures(this);
 
-            HUD.Instance.LoadHUD(this);
-            LinkInventory.Instance.InitializeInventory(this);
-
-
             //do not move//
             camera = Camera.Instance;
             camera.Load(this);
             //do not move//
+
+            HUD.Instance.LoadHUD(this);
+            LinkInventory.Instance.InitializeInventory(this);
 
             CollisionHandler.Instance.Initialize(this);
 
@@ -180,6 +179,7 @@ namespace Sprint4
                 _spriteBatch.End();
 
                 _spriteBatch.Begin();
+                GraphicsDevice.Viewport = camera.HUDView;
                 HUD.Instance.DrawTop(_spriteBatch);
                 _spriteBatch.End();
             }

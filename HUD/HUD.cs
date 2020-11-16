@@ -82,7 +82,7 @@ namespace Sprint4
         public void LoadHUD(Game1 game)
         {
             HUDTexture = game.Content.Load<Texture2D>("HUDandInv/FullInventory");
-            Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height / THIRD);
+            Point drawSize = Camera.Instance.HUDArea.Size;
             HUDMap.Instance.LoadHUDMap(game, drawSize);
             sprite = new HUDSprite(HUDTexture, drawSize);
             bottomAdjust = game.Window.ClientBounds.Height - HUD_HEIGHT;
