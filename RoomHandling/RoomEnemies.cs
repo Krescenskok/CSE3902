@@ -153,7 +153,10 @@ namespace Sprint4
             testObjects.Add(new TestCollider(rect, game));
         }
 
-
+        public void AddTestCollider(PlayerCollider player)
+        {
+            testObjects.Add(new TestCollider(game,player));
+        }
 
 
         public void Update()
@@ -175,10 +178,7 @@ namespace Sprint4
 
         public void Draw(SpriteBatch batch)
         {
-            foreach (TestCollider col in testObjects)
-            {
-                col.Draw(batch);
-            }
+            
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Draw(batch);
@@ -189,6 +189,14 @@ namespace Sprint4
             for(int i = 0; i < deaths.Count; i++)
             {
                 deaths[i].Draw(batch);
+            }
+        }
+
+        public void DrawTests(SpriteBatch batch)
+        {
+            foreach (TestCollider col in testObjects)
+            {
+                col.Draw(batch);
             }
         }
 

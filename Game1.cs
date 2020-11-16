@@ -174,6 +174,7 @@ namespace Sprint4
             {
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                RoomEnemies.Instance.DrawTests(_spriteBatch);
                 RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
                 ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 base.Draw(gameTime);

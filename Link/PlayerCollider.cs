@@ -14,11 +14,13 @@ namespace Sprint4
         LinkPlayer linkPlayer;
         //String Key;
 
-
+        bool done = false;
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
+
+           
         }
 
         public string Name { get => "Player"; }
@@ -282,7 +284,15 @@ namespace Sprint4
 
         public void Update()
         {
-            //put here to update collider location
+            Debug.WriteLine(Bounds());
+            if (Bounds() != null && !done)
+            {
+
+                RoomEnemies.Instance.AddTestCollider(this);
+                if (Bounds().X > 1000) done = true;
+
+                
+            }
         }
     }
 }

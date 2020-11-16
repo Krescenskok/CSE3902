@@ -149,7 +149,7 @@ namespace Sprint4
 
         public void Update()
         {
-            //!transform.Translation.Equals(Target)
+            
             if (!DoneScrolling())
             {
                 Vector3 newPos = Transform.Translation + direction  * 10;
