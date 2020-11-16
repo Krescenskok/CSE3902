@@ -17,9 +17,7 @@ namespace Sprint4.Link
         protected int currentFrame;
 
         int i = 0;
-        int X_LOCATION = 780;
-        int Y_LOCATION = 445;
-        int ZERO = 0;
+   
 
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -141,69 +139,65 @@ namespace Sprint4.Link
 
             if (link.IsStopped)
             {
+
                 return location;
             }
             if (link.IsAttacking)
             {
-                if (link.IsSecondAttack)
-                {
-                    if (link.SecondaryWeapon == ItemForLink.ArrowBow)
-                    {
-                        if (LinkInventory.Instance.HasBow)
-                        {
-                            ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
-                            return HandleArrowBow(gameTime, location);
-                        }
-                        return HandleShield(gameTime, location); //no bow, can't shoot
-                    }
-                    else if (link.SecondaryWeapon == ItemForLink.Boomerang)
-                    {
-                        ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
-                        return HandleArrowBow(gameTime, location);
-                    }
-                    else if (link.SecondaryWeapon == ItemForLink.BlueCandle)
-                    {
-                        ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
-                        return HandleArrowBow(gameTime, location);
-                    }
-                    else if (link.SecondaryWeapon == ItemForLink.Bomb)
-                    {
-                        if (LinkInventory.Instance.BombCount > 0)
-                        {
-                            ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
-                            return HandleArrowBow(gameTime, location);
-                        }
-                        return HandleShield(gameTime, location);
-                    }
-                    else if (link.LargeShield)
-                    {
-                        return HandleShield(gameTime, location);
-                    }
-                }
-                else
-                {
-                    if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
-                    {
-                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
-                        return HandleWoodenSword(gameTime, location);
-                    }
-                    else if (link.CurrentWeapon == ItemForLink.Sword)
-                    {
-                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
-                        return HandleSword(gameTime, location);
-                    }
-                    else if (link.CurrentWeapon == ItemForLink.MagicalRod)
-                    {
-                        delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
-                        return HandleMagicalRod(gameTime, location);
-                    }
-                    else if (link.LargeShield)
-                    {
-                        return HandleShield(gameTime, location);
-                    }
 
-                }               
-                
+                if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
+                {
+                    delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
+                    return HandleWoodenSword(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Sword)
+                {
+                    delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
+                    return HandleSword(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+                {
+                    delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
+                    return HandleMagicalRod(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.ArrowBow)
+                {
+                    ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.BlueRing)
+                {
+                    link.UseRing = true;
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Boomerang)
+                {
+                    ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.BlueCandle)
+                {
+                    ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Bomb)
+                {
+                    ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
+                    //animation to throw is same as bow
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.CurrentWeapon == ItemForLink.Clock)
+                {
+                    link.Clock = true;
+                    RoomEnemies.Instance.StunAllEnemies();
+                    return HandleArrowBow(gameTime, location);
+                }
+                else if (link.LargeShield)
+                {
+                    return HandleShield(gameTime, location);
+                }
 
             }
             if (link.IsPickingUpItem)
