@@ -29,6 +29,7 @@ namespace Sprint4
             state = (WallMasterMoveState)wallMaster.State;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
+            
         }
 
 
@@ -46,13 +47,15 @@ namespace Sprint4
 
         public bool Equals(ICollider col)
         {
-            return col == this;
+            return this == col;
         }
 
         public void HandleCollision(ICollider col, Collision collision)
         {
 
             if (col.CompareTag("Player") ) state.LockOnToPlayerPosition(collision);
+
+
 
         }
 

@@ -15,14 +15,16 @@ namespace Sprint4
         private static readonly RoomDoors instance = new RoomDoors();
 
         private List<Door> doors;
-        private Dictionary<int,DoorSprite> doorWaySprites;
+        private List<DoorTriggerCollider> triggers;
+        
+
+        private Dictionary<int,DoorSprite> lockedDoorSprites;
+        private Dictionary<int, Door> lockedDoors;
         public List<ICollider> Doors => doors.ConvertAll(x => x as ICollider);
 
         private Point doorSizeMiddle;
         private Point doorSizeSide;
-        private Point middleDoorSize;
-        private Point sideDoorHalfSize;
-        private Point middleDoorHalf;
+
 
         private List<Point> locations;
         private GridGenerator generator;
@@ -32,6 +34,8 @@ namespace Sprint4
         private Camera cam = Camera.Instance;
 
         private int curRoom;
+
+        
 
         public static RoomDoors Instance
         {
@@ -47,35 +51,42 @@ namespace Sprint4
 
             locations = new List<Point>();
 
-            doorWaySprites = new Dictionary<int, DoorSprite>();
-            
+            lockedDoorSprites = new Dictionary<int, DoorSprite>();
+            lockedDoors = new Dictionary<int, Door>();
+            triggers = new List<DoorTriggerCollider>();
         }
 
         private void LoadSpecialDoors()
         {
-            doorWaySprites.Add(1, DoorSpriteFactory.Instance.CreateDoor(1));
-            doorWaySprites.Add(6, DoorSpriteFactory.Instance.CreateDoor(6));
-            doorWaySprites.Add(8, DoorSpriteFactory.Instance.CreateDoor(8));
-            doorWaySprites.Add(9, DoorSpriteFactory.Instance.CreateDoor(9));
-            doorWaySprites.Add(13, DoorSpriteFactory.Instance.CreateDoor(13));
-            doorWaySprites.Add(14, DoorSpriteFactory.Instance.CreateDoor(14));
-            doorWaySprites.Add(16, DoorSpriteFactory.Instance.CreateDoor(16));
+            lockedDoorSprites.Add(1, DoorSpriteFactory.Instance.CreateDoor(1));
+            lockedDoorSprites.Add(6, DoorSpriteFactory.Instance.CreateDoor(6));
+            lockedDoorSprites.Add(8, DoorSpriteFactory.Instance.CreateDoor(8));
+            lockedDoorSprites.Add(9, DoorSpriteFactory.Instance.CreateDoor(9));
+            lockedDoorSprites.Add(13, DoorSpriteFactory.Instance.CreateDoor(13));
+            lockedDoorSprites.Add(14, DoorSpriteFactory.Instance.CreateDoor(14));
+            lockedDoorSprites.Add(16, DoorSpriteFactory.Instance.CreateDoor(16));
 
-            foreach(KeyValuePair<int,DoorSprite> pair in doorWaySprites)
+            foreach(KeyValuePair<int,DoorSprite> pair in lockedDoorSprites)
             {
                 pair.Value.shouldDraw = false;
             }
-            doorWaySprites[6].shouldDraw = true;
+            lockedDoorSprites[6].shouldDraw = true;
             
         }
 
         public void OpenDoor(int doorNum)
         {
-            doorWaySprites[doorNum].shouldDraw = true;
+            if (lockedDoorSprites.ContainsKey(doorNum)) lockedDoorSprites[doorNum].shouldDraw = true;
+            if(lockedDoors.ContainsKey(doorNum)) lockedDoors[doorNum].Open();
+        }
+        public void ShowDoorSprite(int doorNum)
+        {
+            if(lockedDoorSprites.ContainsKey(doorNum)) lockedDoorSprites[doorNum].shouldDraw = true;
         }
         public void CloseDoor(int doorNum)
         {
-            doorWaySprites[doorNum].shouldDraw = false;
+            if (lockedDoorSprites.ContainsKey(doorNum)) lockedDoorSprites[doorNum].shouldDraw = false;
+            if(lockedDoors.ContainsKey(doorNum)) lockedDoors[doorNum].Close();
         }
 
 
@@ -87,76 +98,52 @@ namespace Sprint4
             curRoom = int.Parse(room.Attribute("id").Value);
             generator = GridGenerator.Instance;
 
-            if (locations.Count == 0) CalculateDoorDrawLocations();
-            if (doorWaySprites.Count == 0) LoadSpecialDoors();
+            CalculateDoorDrawLocations();
+            if (lockedDoorSprites.Count == 0) LoadSpecialDoors();
+            lockedDoors.Clear();
 
             List<XElement> items = room.Elements("Item").ToList();
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
                 XElement nameTag = item.Element("ObjectName");
-                XElement lockTag = item.Element("Locked");
                 
 
                 string objType = typeTag.Value;
                 string objName = nameTag.Value;
                 
 
-                bool unlocked = lockTag == null || lockTag.Value.Equals("false");
-
-
-
-
-                if (objType.Equals("Door") && unlocked)
+                if (objType.Equals("Door"))
                 {
 
-                    XElement roomTag = item.Element("RoomNum");
-                    int roomNumber = int.Parse(roomTag.Value);
-
-                    Point camOffset = cam.Location.ToPoint();
-
-                    if (objName.Equals("Left"))
-                    {
-                        doors.Add(new Door(game, locations[0] - camOffset, doorSizeSide, roomNumber, 'L', false, item,locations[4] - camOffset, curRoom));
-                    }
-                    else if (objName.Equals("Right"))
-                    {
-                        doors.Add(new Door(game, locations[1] - camOffset, doorSizeSide, roomNumber, 'R', false, item, locations[5] - camOffset, curRoom));
-                    }
-                    else if (objName.Equals("Up"))
-                    {
-                        doors.Add(new Door(game, locations[2] - camOffset, doorSizeMiddle, roomNumber, 'T', false, item, locations[6] - camOffset, curRoom));
-                    }
-                    else if (objName.Equals("Down"))
-                    {
-                        doors.Add(new Door(game, locations[3] - camOffset, doorSizeMiddle, roomNumber, 'B', false, item, locations[7] - camOffset, curRoom));
-                    }
-                    
-
-                } else if (objType.Equals("Door") && !unlocked)
-                {
                     XElement roomTag = item.Element("RoomNum");
                     int nextRoom = int.Parse(roomTag.Value);
-                    
 
-                    Point camOffset = cam.Location.ToPoint();
+                    XElement doorTypeTag = item.Element("Type");
+
+                    DoorType thisType = GetDoorType(doorTypeTag.Value);
+
+                    
 
                     if (objName.Equals("Left"))
                     {
-                        doors.Add(new Door(game, locations[0] - camOffset, doorSizeMiddle, nextRoom, 'L', true, item, locations[4] - camOffset,curRoom));
+                        doors.Add(new Door(game, locations[0], doorSizeSide, nextRoom, 'L', thisType, item,locations[4], curRoom));
                     }
                     else if (objName.Equals("Right"))
                     {
-                        doors.Add(new Door(game, locations[1] - camOffset, doorSizeMiddle, nextRoom, 'R', true, item, locations[5] - camOffset, curRoom));
+                        doors.Add(new Door(game, locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
+                        if (curRoom == 6) triggers.Add(new DoorTriggerCollider(locations[5],doorSizeSide, 6, () => !RoomEnemies.Instance.allDead));
                     }
                     else if (objName.Equals("Up"))
                     {
-                        doors.Add(new Door(game, locations[2] - camOffset, doorSizeMiddle, nextRoom, 'T', true, item, locations[6] - camOffset, curRoom));
+                        doors.Add(new Door(game, locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
                     }
                     else if (objName.Equals("Down"))
                     {
-                        doors.Add(new Door(game, locations[3] - camOffset, doorSizeMiddle, nextRoom, 'B', true, item, locations[7] - camOffset, curRoom));
+                        doors.Add(new Door(game, locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
                     }
+
+                    if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
 
                 }
             }
@@ -166,11 +153,8 @@ namespace Sprint4
 
         public void Draw(SpriteBatch batch)
         {
-            foreach(Door door in doors)
-            {
-                door.Draw(batch);
-            }
-            foreach(KeyValuePair<int,DoorSprite> pair in doorWaySprites)
+          
+            foreach(KeyValuePair<int,DoorSprite> pair in lockedDoorSprites)
             {
                 pair.Value.Draw(batch);
             }
@@ -180,26 +164,39 @@ namespace Sprint4
 
         private void CalculateDoorDrawLocations()
         {
+
+            locations.Clear();
+
             int tileWidth = generator.GetTileSize().X;
             int tileHeight = generator.GetTileSize().Y;
 
+            Point camOffset = cam.Location.ToPoint();
+
             //unlocked door points
-            locations.Add(new Point(0, tileHeight*5));
-            locations.Add(new Point(tileWidth * 15, tileHeight * 5));
-            locations.Add(new Point(tileWidth * 7,0));
-            locations.Add(new Point(tileWidth * 7, tileHeight * 10));
+            locations.Add(new Point(0, tileHeight*5) - camOffset) ;
+            locations.Add(new Point(tileWidth * 15, tileHeight * 5) - camOffset);
+            locations.Add(new Point(tileWidth * 7,0) - camOffset);
+            locations.Add(new Point(tileWidth * 7, tileHeight * 10) - camOffset);
 
             //locked door points
-            locations.Add(new Point(tileWidth * 2, tileHeight * 5));
-            locations.Add(new Point(tileWidth * 14, tileHeight * 5));
-            locations.Add(new Point(tileWidth * 7, tileHeight*2));
-            locations.Add(new Point(tileWidth * 7, tileHeight * 9));
+            locations.Add(new Point(tileWidth * 2, tileHeight * 5) - camOffset);
+            locations.Add(new Point(tileWidth * 14, tileHeight * 5) - camOffset);
+            locations.Add(new Point(tileWidth * 7, tileHeight*2) - camOffset);
+            locations.Add(new Point(tileWidth * 7, tileHeight * 9) - camOffset);
 
 
-            doorSizeMiddle = new Point(tileWidth*2, 1);
-            doorSizeSide = new Point(1, tileHeight);
+            doorSizeMiddle = new Point(tileWidth*2, 10);
+            doorSizeSide = new Point(10, tileHeight);
 
             
+        }
+
+        private DoorType GetDoorType(string str)
+        {
+            if (str.Equals("locked")) return DoorType.locked;
+            else if(str.Equals("normal")) return DoorType.normal;
+            else if (str.Equals("special_closed")) return DoorType.special_closed;
+            else return DoorType.special_open;
         }
 
 
@@ -222,12 +219,9 @@ namespace Sprint4
             }
 
 
-          if(curRoom == 6 && RoomEnemies.Instance.EnemyCount == 0 && doorWaySprites[6].shouldDraw == false)
+          if(curRoom == 6 && RoomEnemies.Instance.EnemyCount == 0 && lockedDoorSprites[6].shouldDraw == false)
             {
-                foreach (Door door in doors)
-                {
-                    door.Unlock();
-                }
+                OpenDoor(6);
             }
         }
 

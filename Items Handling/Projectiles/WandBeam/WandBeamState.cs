@@ -15,7 +15,7 @@ namespace Sprint4.Items
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 250;
+        private const int maxTime = 400;
 
         public WandBeamState(WandBeam item, Vector2 initPos, string direction)
         {

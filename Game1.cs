@@ -38,8 +38,8 @@ namespace Sprint4
 
         LinkPlayer linkPlayer = new LinkPlayer();
         public bool isPaused = false;
-
         public LinkPlayer LinkPlayer { get => linkPlayer; }
+
 
         public Game1()
         {
@@ -53,7 +53,8 @@ namespace Sprint4
         protected override void Initialize()
         {
             base.Initialize();
-            CollisionHandler.Instance.Initialize(this);
+
+
 
         }
 
@@ -71,12 +72,12 @@ namespace Sprint4
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            controllers.Add(new KeyboardController(LinkPlayer, this, _spriteBatch));
+            controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
-            LinkPersistent = new LinkCommand(LinkPlayer, "");
+            LinkPersistent = new LinkCommand(linkPlayer, "");
             ProjectilePersistent = ProjectilesCommand.Instance;
-            ProjectilePersistent.Link = LinkPlayer;
+            ProjectilePersistent.Link = linkPlayer;
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             DoorSpriteFactory.Instance.LoadAllTextures(this);
@@ -85,8 +86,12 @@ namespace Sprint4
             LinkInventory.Instance.InitializeInventory(this);
 
 
+            //do not move//
             camera = Camera.Instance;
             camera.Load(this);
+            //do not move//
+
+            CollisionHandler.Instance.Initialize(this);
 
 
             //set up grid where everything is spawned
@@ -105,10 +110,10 @@ namespace Sprint4
 
         protected override void Update(GameTime gameTime)
         {
-            if(LinkPlayer.Health == 0)
+            if(linkPlayer.Health == 0)
             {
 
-                activeCommand = new ResetCommand(LinkPlayer);
+                activeCommand = new ResetCommand(linkPlayer);
                 activeCommand.Update(gameTime);
             }
             else
@@ -141,7 +146,7 @@ namespace Sprint4
                 ProjectilePersistent.Update(gameTime);
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
-                HUD.Instance.UpdateHearts(LinkPlayer);
+                HUD.Instance.UpdateHearts(linkPlayer);
                 HUD.Instance.UpdateInventoryCounts(LinkInventory.Instance.RupeeCount, LinkInventory.Instance.KeyCount, LinkInventory.Instance.BombCount);
                 base.Update(gameTime);
 
@@ -152,7 +157,13 @@ namespace Sprint4
 
         protected override void Draw(GameTime gameTime)
         {
+
+            
             _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+
+            GraphicsDevice.Viewport = camera.gameView;
+
 
             GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)
@@ -164,12 +175,13 @@ namespace Sprint4
             {
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                HUD.Instance.DrawTop(_spriteBatch);
+                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 base.Draw(gameTime);
                 _spriteBatch.End();
 
                 _spriteBatch.Begin();
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                HUD.Instance.DrawTop(_spriteBatch);
                 _spriteBatch.End();
             }
             else
@@ -178,7 +190,7 @@ namespace Sprint4
 
                 _spriteBatch.Begin();
                 LinkInventory.Instance.Draw(_spriteBatch);
-                //HUD.Instance.DrawBottom(_spriteBatch);
+                HUD.Instance.DrawBottom(_spriteBatch);
                 _spriteBatch.End();
             }
         }

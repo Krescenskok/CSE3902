@@ -39,7 +39,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "DoorEntrance" || tag == "Door";
+            return tag == "Doorway";
         }
 
         public bool Equals(ICollider col)
@@ -56,7 +56,7 @@ namespace Sprint4
         {
             if (col.CompareTag("Player") && trigger && RoomEnemies.Instance.EnemyCount > 0)
             {
-                door.Lock();
+                RoomDoors.Instance.CloseDoor(6);
             }
         }
 

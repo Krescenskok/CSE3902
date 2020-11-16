@@ -41,7 +41,7 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
                 {
 
                     linkPlayer.isWalkingInPlace = true;
@@ -55,7 +55,7 @@ namespace Sprint4
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("LockedDoor"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
             {
 
                 linkPlayer.isWalkingInPlace = true;
@@ -155,7 +155,7 @@ namespace Sprint4
 
             
 
-            if (col.CompareTag("item"))
+            if (col.CompareTag("Item"))
             {
                 col.SendMessage("Disappear", null);
             }
@@ -169,60 +169,65 @@ namespace Sprint4
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "TakeDamageRight")
+            if(!linkPlayer.IsDamaged)
             {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
+                if (msg == "TakeDamageRight")
                 {
-                    linkPlayer.Health -= ((int)value) / 2;
-                }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.X += 100;
-            }
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
 
-            else if (msg == "TakeDamageLeft")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
-                {
-                    linkPlayer.Health -= ((int)value) / 2;
-                }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.X -= 100;
-            }
+                    linkPlayer.currentLocation.X += 100;
 
-            else if (msg == "TakeDamageUp")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
-                {
-                    linkPlayer.Health -= ((int)value) / 2;
                 }
-                else
-                {
-                    linkPlayer.Health -= (int)value;
-                }
-                linkPlayer.currentLocation.Y -= 100;
-            }
 
-            else if (msg == "TakeDamageDown")
-            {
-                linkPlayer.IsDamaged = true;
-                if (linkPlayer.UseRing)
+                else if (msg == "TakeDamageLeft")
                 {
-                    linkPlayer.Health -= ((int)value) / 2;
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+                    linkPlayer.currentLocation.X -= 100;
                 }
-                else
+
+                else if (msg == "TakeDamageUp")
                 {
-                    linkPlayer.Health -= (int)value;
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+                    linkPlayer.currentLocation.Y -= 100;
                 }
-                linkPlayer.currentLocation.Y += 100;
+
+                else if (msg == "TakeDamageDown")
+                {
+                    linkPlayer.IsDamaged = true;
+                    if (linkPlayer.UseRing)
+                    {
+                        linkPlayer.Health -= ((int)value) / 2;
+                    }
+                    else
+                    {
+                        linkPlayer.Health -= (int)value;
+                    }
+                    linkPlayer.currentLocation.Y += 100;
+                }
             }
 
             if (msg == "WalkInPlace")
@@ -232,8 +237,10 @@ namespace Sprint4
 
             if (msg == "Item")
             {
-                linkPlayer.IsPickingUpItem = true;
-                LinkInventory.Instance.PickUpItem((IItems)value);
+                if(((IItems) value) is Sprint4.Items.TriforcePiece || ((IItems)value) is Sprint4.Items.Bow)
+                    linkPlayer.IsPickingUpItem = true;
+                
+                LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
             }
             if (msg == "Heal")
             {
@@ -242,16 +249,19 @@ namespace Sprint4
                 {
                     linkPlayer.Health = 30;
                 }
+                HUD.Instance.UpdateHearts(linkPlayer);
             }
             if (msg == "Heartcontainer")
             {
                 linkPlayer.FullHealth += 10;
                 linkPlayer.Health = linkPlayer.FullHealth;
+                HUD.Instance.IncreaseMaxHeartNumber();
+                HUD.Instance.UpdateHearts(linkPlayer);
             }
 
             if (msg == "Rupee")
             {
-                linkPlayer.NumOfRupee++;
+                LinkInventory.Instance.RupeeCount++;
             }
 
             if (msg == "Hand")

@@ -15,7 +15,7 @@ namespace Sprint4
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 250;
+        private const int maxTime = 400;
 
         public SwordBeamState(SwordBeam item, Vector2 location, string direction)
         {

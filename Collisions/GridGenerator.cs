@@ -24,7 +24,11 @@ namespace Sprint4
         public Point Offset { get => wallOffset; }
 
         private Point playArea;
-        
+
+        private const float OFFSET_MULT_X = 1f / 8f;
+        private const float OFFSET_MULT_Y = 9f / 48f;
+        private const float OFFSET_MULT_Y_BOTTOM = 17f / 120f;
+
         public static GridGenerator Instance
         {
             get
@@ -50,14 +54,24 @@ namespace Sprint4
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
 
-            int screenWidth = game.Window.ClientBounds.Width;
-            int screenHeight = game.Window.ClientBounds.Height;
+            float screenWidth = game.Window.ClientBounds.Width;
+            float screenHeight = game.Window.ClientBounds.Height;
+
+            screenWidth = Camera.Instance.playArea.Width;
+            screenHeight = Camera.Instance.playArea.Height;
 
             //pixel values measured in paint
-            wallOffset = new Point(100, 90); 
-            int playAreaWidth = 600;
-            int playAreaHeight = 322;
             
+
+            int offsetX = (int) (screenWidth * OFFSET_MULT_X);
+            int offsetY = (int)(screenHeight * OFFSET_MULT_Y);
+            int offsetYBottom = (int)(screenHeight * OFFSET_MULT_Y_BOTTOM);
+            wallOffset = new Point(offsetX, offsetY);
+
+            int playAreaWidth = (int)screenWidth - offsetX * 2;
+            int playAreaHeight = (int)screenHeight - offsetY - offsetYBottom;
+
+
             int tileWidth = playAreaWidth / tileColumns;
             int tileHeight = playAreaHeight / tileRows;
             Point tileSize = new Point(tileWidth, tileHeight);
@@ -72,7 +86,7 @@ namespace Sprint4
 
                 for (int j = 0; j < tileColumns; j++)
                 {
-                   Point position = new Point(j * tileWidth, i * tileHeight) + wallOffset ;
+                   Point position = new Point(j * tileWidth, i * tileHeight) + wallOffset - Camera.Instance.Location.ToPoint();
 
                     gridTiles[i].Add(new Rectangle(position, tileSize));
 
@@ -169,12 +183,14 @@ namespace Sprint4
 
         public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)
         {
+            int camOffsetX = (int)Camera.Instance.Location.X;
+            int camOffsetY = (int)Camera.Instance.Location.Y;
 
-            int startX = start.X - wallOffset.X;
-            int startY = start.Y - wallOffset.Y;
-            int endX = end.X - wallOffset.X;
-            int endY = end.Y - wallOffset.Y;
-            
+            int startX = start.X - wallOffset.X + camOffsetX;
+            int startY = start.Y - wallOffset.Y + camOffsetY;
+            int endX = end.X - wallOffset.X + camOffsetX;
+            int endY = end.Y - wallOffset.Y + camOffsetY;
+
             bool vertical = startX == endX;
             
 
@@ -231,12 +247,12 @@ namespace Sprint4
 
         public int GetColumn(int xPosition)
         {
-            return (xPosition - wallOffset.X) / tileSize.X;
+            return (xPosition - wallOffset.X + (int)Camera.Instance.Location.X) / tileSize.X;
         }
 
         public int GetRow(int yPosition)
         {
-            return (yPosition - wallOffset.Y) / tileSize.Y;
+            return (yPosition - wallOffset.Y + (int)Camera.Instance.Location.Y) / tileSize.Y;
         }
     }
 }

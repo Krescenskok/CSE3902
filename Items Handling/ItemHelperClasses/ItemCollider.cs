@@ -69,7 +69,11 @@ namespace Sprint4
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
+            if (col.CompareTag("Player"))
+            {
+                col.SendMessage("Item", this.item);
+                this.item.State.Expire();
+            }
 
         }
 
@@ -82,6 +86,7 @@ namespace Sprint4
         {
             if (msg == "Dissapear")
             {
+                this.item.Expire();
                 this.item.State.Expire();
             }
             

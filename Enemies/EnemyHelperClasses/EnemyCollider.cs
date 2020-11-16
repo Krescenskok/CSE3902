@@ -68,13 +68,13 @@ namespace Sprint4
         public void HandleCollision(ICollider col, Collision collision)
         {
             
-            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("Trap") || col.CompareTag("Door"))
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") ||col.CompareTag("Trap") || col.CompareTag("Doorway"))
             {
                 enemy.ObstacleCollision(collision);
                 
             }
 
-            WallMaster master = enemy.State as WallMaster;
+            WallMaster master = enemy as WallMaster;
             if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
         }
 
@@ -89,7 +89,7 @@ namespace Sprint4
             direction = char.ToUpper(direction[0]) + direction.Substring(1);
 
 
-            WallMaster master = enemy.State as WallMaster;
+            WallMaster master = enemy as WallMaster;
             if (col.CompareTag("Player")) col.SendMessage("TakeDamage" + direction, damageAmount);
             if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
             else if (col.CompareTag("Item")) col.SendMessage("Impact", 0);

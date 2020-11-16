@@ -23,13 +23,13 @@ namespace Sprint4
         private Point Size;
 
 
-        private int unlockTime = 60;
+        private int unlockTime = 20;
         private int unlockClock = 0;
         private bool unlocked = false;
 
-        private DoorSprite sprite;
+        
 
-        public Door(Game game, Point innerLocation, Point size, int nextRoom, char heading, bool locked, XElement item, Point outerLocation, int currentRoom)
+        public Door(Game game, Point innerLocation, Point size, int nextRoom, char heading, DoorType type, XElement item, Point outerLocation, int currentRoom)
         {
             this.innerLocation = innerLocation;
             this.outerLocation = outerLocation;
@@ -40,19 +40,21 @@ namespace Sprint4
             Size = size;
             saveInfo = item;
             
-            if (locked)
+            if (type == DoorType.locked)
             {
                 outerCollider = new LockedDoorCollider(this, outerLocation, size, heading, true);
-            } else
+            } else if(type == DoorType.normal)
             {
-                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, currentRoom == 6); //special case for room six
-            }
+                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, false); 
 
-            
+            } else if(type == DoorType.special_open)
+            {
+                outerCollider = new SpecialDoorCollider(this,outerLocation,size);
+            }
 
             innerCollider = new UnlockedDoorCollider(this, innerLocation, size, heading);
 
-            RoomEnemies.Instance.AddTestCollider(new Rectangle(innerLocation, size));
+            RoomEnemies.Instance.AddTestCollider(new Rectangle(outerLocation, size));
 
         }
 
@@ -67,25 +69,32 @@ namespace Sprint4
 
         }
 
+        //for doors that open on special conditions
+        public void Open()
+        {
+            CollisionHandler.Instance.RemoveCollider(outerCollider);
+            saveInfo.SetElementValue("Type", "normal");
+            outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading, CurrentRoom == 6);
+        }
+
+        public void Close()
+        {
+            CollisionHandler.Instance.RemoveCollider(outerCollider);
+            saveInfo.SetElementValue("Type", "locked");
+            outerCollider = new SpecialDoorCollider(this, outerLocation, Size);
+        }
+
+        //doors that open with a key
         public void Unlock()
         {
             CollisionHandler.Instance.RemoveCollider(outerCollider);
-            saveInfo.SetElementValue("Locked", "false");
+            saveInfo.SetElementValue("Type", "normal");
 
             
             outerCollider = new DoorEntranceCollider(this, outerLocation, this.Size, this.Heading, false);
-            RoomDoors.Instance.OpenDoor(CurrentRoom);
+            RoomDoors.Instance.ShowDoorSprite(CurrentRoom);
         }
 
-        public void Lock()
-        {
-            
-            CollisionHandler.Instance.RemoveCollider(outerCollider);
-            RoomDoors.Instance.CloseDoor(CurrentRoom);
-
-            saveInfo.SetElementValue("Locked", "true");
-            outerCollider = new LockedDoorCollider(this, outerLocation, this.Size, this.Heading, false);
-        }
 
         public void StartUnlock()
         {
@@ -106,15 +115,7 @@ namespace Sprint4
             
         }
 
-        public void Draw(SpriteBatch batch)
-        {
-            if (sprite != null) sprite.Draw(batch);
-        }
 
-        void Timer()
-        {
-
-        }
 
     }
 }

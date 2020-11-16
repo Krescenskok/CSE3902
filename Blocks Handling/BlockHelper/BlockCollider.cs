@@ -12,7 +12,7 @@ namespace Sprint4.Blocks
         private Rectangle bounds;
         private IBlock block;
 
-        public string Name => throw new NotImplementedException();
+        public string Name => "Block";
 
         bool yes = false;
         public Layer layer { get; set; }
@@ -54,6 +54,11 @@ namespace Sprint4.Blocks
         {
 
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void SendMessage(string msg, object value)
         {

@@ -53,6 +53,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            IsExpired = true;
             state.Expire();
         }
 

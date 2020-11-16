@@ -42,7 +42,7 @@ namespace Sprint4
 
         XElement xml;
 
-        int currentRoom;
+        int currentRoom = 1;
         public int CurrentRoom
         {
             get { return currentRoom; }
@@ -78,9 +78,7 @@ namespace Sprint4
 
     
         public void LoadRoom(Game game, int roomNumber)
-
-        {
-            
+        {            
             XElement room = roomXMLs[roomNumber];
             //currentRoomSprite = roomSprites[roomNumber - 1];
             //currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
@@ -89,6 +87,8 @@ namespace Sprint4
             RoomBlocks.Instance.LoadRoom(game, room);
             RoomWalls.Instance.LoadRoom(game, room);
             RoomDoors.Instance.LoadRoom(game, room);
+            
+            CurrentRoom = roomNumber;
         }
         public void Update()
         {
@@ -105,7 +105,6 @@ namespace Sprint4
             Hashtable numConnect = (Hashtable)roomConnections[roomNumber];
             int destinationRoom = (int)numConnect[heading];
             CollisionHandler.Instance.RoomChange();
-            LoadRoom(game, destinationRoom);
             
         }
 
