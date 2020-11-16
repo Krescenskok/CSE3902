@@ -33,7 +33,7 @@ namespace Sprint4
         ICommand activeCommand;
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
-       
+
 
 
         LinkPlayer linkPlayer = new LinkPlayer();
@@ -49,7 +49,7 @@ namespace Sprint4
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            
+
         }
 
         protected override void Initialize()
@@ -100,7 +100,7 @@ namespace Sprint4
 
             //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
-            
+
             RoomSpawner.Instance.LoadRoom(this, 1);
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
@@ -111,7 +111,7 @@ namespace Sprint4
 
         protected override void Update(GameTime gameTime)
         {
-            if(linkPlayer.Health == 0 && !linkPlayer.IsDead)
+            if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
                 linkPlayer.IsDead = true;
                 activeCommand = new ResetCommand(linkPlayer, false);
@@ -173,7 +173,7 @@ namespace Sprint4
             {
                 if (activeCommand is ResetCommand)
                 {
-                   
+
                     IsGameOver = !((ResetCommand)activeCommand).StartAgain;
 
                     if (IsGameOver)
@@ -234,16 +234,21 @@ namespace Sprint4
             }
             else
             {
-                
+
                 GraphicsDevice.Clear(Color.Black);
-                _spriteBatch.DrawString(font, "Credits", new Vector2(0, 0), Color.White);
+                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 50), Color.White);
+                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(230, 75), Color.White);
+                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 100), Color.White);
+
+
+
 
                 base.Draw(gameTime);
 
                 _spriteBatch.End();
             }
 
-            
+
         }
     }
 }
