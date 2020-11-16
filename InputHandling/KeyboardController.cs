@@ -28,8 +28,15 @@ namespace Sprint4
 
             var state = Keyboard.GetState();
             commandsList.Add(Keys.Q, new QuitCommand());
+
             commandsList.Add(Keys.A, new LinkCommand(player, "A"));
             commandsList.Add(Keys.Left, new LinkCommand(player, "Left"));
+
+            commandsList.Add(Keys.P, new ResetCommand(player, true));
+     
+
+
+
             commandsList.Add(Keys.D, new LinkCommand(player, "D"));
             commandsList.Add(Keys.Right, new LinkCommand(player, "Right"));
             commandsList.Add(Keys.W, new LinkCommand(player, "W"));
@@ -59,7 +66,7 @@ namespace Sprint4
             commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
             commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
-            commandsList.Add(Keys.R, new ResetCommand(player));
+            commandsList.Add(Keys.R, new ResetCommand(player, false));
             commandsList.Add(Keys.Space, new ShowInventoryCommand());
             commandsList.Add(Keys.I, new ChangeSecondItemCommand(true));
             commandsList.Add(Keys.U, new ChangeSecondItemCommand(false));
@@ -81,6 +88,8 @@ namespace Sprint4
 
         public ICommand HandleInput(Game1 game)
         {
+
+           
 
             ICommand activeCommand= null;
 
@@ -113,6 +122,8 @@ namespace Sprint4
                         }
                     }
 
+
+
                 }
               
             }
@@ -120,6 +131,20 @@ namespace Sprint4
                 delay--;
 
             prevState = kstate;
+
+
+
+            if (game.IsGameOver)
+            {
+                if (!(activeCommand is ResetCommand))
+                {
+                    return null;
+                }
+
+                
+            }
+
+                
 
             return activeCommand;
         }
