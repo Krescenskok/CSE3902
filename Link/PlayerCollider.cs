@@ -177,67 +177,97 @@ namespace Sprint4
         {
         }
 
-        public void SendMessage(string msg, object value)
+         public void SendMessage(string msg, object value)
         {
             if(!linkPlayer.IsDamaged)
             {
-                if (msg == "TakeDamageRight")
+                if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
+                    //do nothing
+                }
+                else
+                {
+                    if (msg == "TakeDamageRight")
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
 
-                    linkPlayer.currentLocation.X += DISPLACEMENT;
 
+                        linkPlayer.currentLocation.X += 100;
+
+                    }
                 }
 
-                else if (msg == "TakeDamageLeft")
+                if (linkPlayer.IsAttacking && linkPlayer.state is MoveRight)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
+                    //do nothing
+                }
+                else
+                {
+                    if (msg == "TakeDamageLeft")
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.X -= 100;
                     }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-                    linkPlayer.currentLocation.X -= DISPLACEMENT;
                 }
 
-                else if (msg == "TakeDamageUp")
+                if (linkPlayer.IsAttacking && linkPlayer.state is MoveDown)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
+                    //do nothing
+                }
+                else
+                {
+                    if (msg == "TakeDamageUp")
                     {
-                        linkPlayer.Health -= ((int)value) / 2;
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.Y -= 100;
                     }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-                    linkPlayer.currentLocation.Y -= DISPLACEMENT;
                 }
 
-                else if (msg == "TakeDamageDown")
+                if (linkPlayer.IsAttacking && linkPlayer.state is MoveUp)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                    {
-                        linkPlayer.Health -= ((int)value) / 2;
-                    }
-                    else
-                    {
-                        linkPlayer.Health -= (int)value;
-                    }
-                    linkPlayer.currentLocation.Y += DISPLACEMENT;
+                    //do nothing
                 }
+                else
+                {
+                    if (msg == "TakeDamageDown")
+                    {
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.Y += 100;
+                    }
+                }
+              
             }
 
             if (msg == "WalkInPlace")
