@@ -24,8 +24,8 @@ namespace Sprint4
         Point bossMarkerLocationBottom;
         private ISprite bossLocation;
         private int linkRoom;
-        private bool drawMap = false;
-        private bool drawBossLocation = false;
+        private bool drawMap = true;
+        private bool drawBossLocation = true;
         private int ROOM_BUFFER = 40;
         private const int FORTH = 4;
         private const int TWO = 2;
