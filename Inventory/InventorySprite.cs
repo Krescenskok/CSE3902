@@ -20,7 +20,7 @@ namespace Sprint4
         public InventorySprite(Texture2D texture, Point size)
         {
             this.texture = texture;
-            this.size = size;
+            this.size = Camera.Instance.HUDArea.Size;
         }
 
 

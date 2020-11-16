@@ -116,7 +116,7 @@ namespace Sprint4
             {
                 bounds = player.Bounds();
                 location = bounds.Location.ToVector2();
-                Debug.WriteLine(player.Bounds());
+              
             }
 
             

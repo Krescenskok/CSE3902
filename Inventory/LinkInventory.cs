@@ -85,6 +85,7 @@ namespace Sprint4
             cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
 
             Point dimensions = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
+            dimensions = Camera.Instance.playArea.Size;
             defaultInvSprite = new InventorySprite(emptyBG, dimensions);
             compassInvSprite = new InventorySprite(compBG, dimensions);
             mapInvSprite = new InventorySprite(mapBG, dimensions);

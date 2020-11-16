@@ -157,43 +157,41 @@ namespace Sprint4
         protected override void Draw(GameTime gameTime)
         {
 
-            
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            GraphicsDevice.Clear(Color.Black);
 
+            //draw game area from camera POV
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             GraphicsDevice.Viewport = camera.gameView;
 
-
-            GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)
             {
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
 
-            if (!LinkInventory.Instance.ShowInventory)
-            {
-                RoomSpawner.Instance.Draw(_spriteBatch);
-                LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                RoomEnemies.Instance.DrawTests(_spriteBatch);
-                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                base.Draw(gameTime);
-                _spriteBatch.End();
+            RoomSpawner.Instance.Draw(_spriteBatch);
+            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            RoomEnemies.Instance.DrawTests(_spriteBatch);
+            RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            base.Draw(gameTime);
 
-                _spriteBatch.Begin();
-                GraphicsDevice.Viewport = camera.HUDView;
-                HUD.Instance.DrawTop(_spriteBatch);
-                _spriteBatch.End();
-            }
-            else
-            {
-                _spriteBatch.End();
+            _spriteBatch.End();
 
-                _spriteBatch.Begin();
-                LinkInventory.Instance.Draw(_spriteBatch);
-                HUD.Instance.DrawBottom(_spriteBatch);
-                _spriteBatch.End();
-            }
+
+            //Draw HUD in separate viewport
+            _spriteBatch.Begin();
+
+            GraphicsDevice.Viewport = camera.HUDView;
+            HUD.Instance.DrawTop(_spriteBatch);
+            LinkInventory.Instance.Draw(_spriteBatch);
+            HUD.Instance.DrawBottom(_spriteBatch);
+
+            _spriteBatch.End();
+          
+
+
+
         }
     }
 }

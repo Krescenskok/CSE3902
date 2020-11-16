@@ -39,7 +39,12 @@ namespace Sprint4
 
         private Direction currentDirection;
 
-       
+        private Rectangle targetGameView;
+        private Rectangle targetHUDLocation;
+
+        private bool inventoryOpen = false;
+
+        private const int scrollSpeed = 10;
 
         public void Load(Game game)
         {
@@ -58,8 +63,8 @@ namespace Sprint4
             Point topLeftCorner = new Point(screenWidth / 10, screenHeight / 4);
             Point size = new Point(screenWidth - topLeftCorner.X * 2, screenHeight - topLeftCorner.Y);
 
-            Point HUDPoint = new Point(topLeftCorner.X, 0);
-            Point HUDSize = new Point(size.X , screenHeight - size.Y );
+            Point HUDPoint = new Point(topLeftCorner.X, topLeftCorner.Y - screenHeight);
+            Point HUDSize = new Point(size.X , screenHeight);
            
 
 
@@ -68,6 +73,9 @@ namespace Sprint4
 
             HUDArea = new Rectangle(HUDPoint, HUDSize);
             HUDView = new Viewport(HUDArea);
+
+            targetGameView = playArea;
+            targetHUDLocation = HUDArea;
 
             transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
 
@@ -79,10 +87,39 @@ namespace Sprint4
         {
         }
 
-        public void OpenMenu()
+        //code for extending menu view
+        public void OpenCloseInventory()
         {
-            //code for extending menu view
+            if (ViewportAdjustmentFinished())
+            {
+                if (!inventoryOpen)
+                {
+                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight);
+                    targetHUDLocation.Location = newHUDLocation;
+
+                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y);
+                    targetGameView.Location = newGameViewLocation;
+
+                    inventoryOpen = true;
+                }
+                else
+                {
+                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y - screenHeight);
+                    targetHUDLocation.Location = newHUDLocation;
+
+                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y - playArea.Size.Y);
+                    targetGameView.Location = newGameViewLocation;
+
+                    inventoryOpen = false;
+                }
+
+              
+            }
+           
+            
         }
+
+
 
         public void ScrollUp(int roomNum)
         {
@@ -147,12 +184,43 @@ namespace Sprint4
                 || transform.Translation.Equals(Target);
         }
 
+        private bool ViewportAdjustmentFinished()
+        {
+            return playArea.Size.Equals(targetGameView.Size) && playArea.Location.Equals(targetGameView.Location)
+                && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
+        }
+
+        private void MoveViewports()
+        {
+            Vector2 currentLoc = playArea.Location.ToVector2();
+            Vector2 moveAmount = targetGameView.Location.ToVector2() - currentLoc;
+            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
+            currentLoc = Vector2.Add(currentLoc, moveAmount);
+            playArea.Location = currentLoc.ToPoint();
+            gameView.Bounds = playArea;
+
+            
+
+            currentLoc = HUDArea.Location.ToVector2();
+            moveAmount = targetHUDLocation.Location.ToVector2() - currentLoc;
+            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
+            currentLoc = Vector2.Add(currentLoc, moveAmount);
+            HUDArea.Location = currentLoc.ToPoint();
+            HUDView.Bounds = HUDArea;
+        }
+
         public void Update()
         {
-            
+
+            if (!ViewportAdjustmentFinished())
+            {
+                MoveViewports();
+                
+            }
+
             if (!DoneScrolling())
             {
-                Vector3 newPos = Transform.Translation + direction  * 10;
+                Vector3 newPos = Transform.Translation + direction  * scrollSpeed;
                 Matrix.CreateTranslation(ref newPos, out transform);
 
                 
