@@ -33,7 +33,10 @@ namespace Sprint4
 
         public Rectangle Bounds()
         {
-             return linkPlayer.Bounds;
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Location);
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Size);
+            //System.Diagnostics.Debug.WriteLine(linkPlayer.Bounds);
+            return linkPlayer.Bounds;
         }
 
         public bool CompareTag(string tag)

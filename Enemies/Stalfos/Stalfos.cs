@@ -39,7 +39,6 @@ namespace Sprint4
             this.location = location;
             state = new EnemySpawnState(this, game);
             collider = new EnemyCollider();
-
             saveInfo = xml;
         }
 

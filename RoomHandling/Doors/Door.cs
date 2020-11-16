@@ -54,8 +54,6 @@ namespace Sprint4
 
             innerCollider = new UnlockedDoorCollider(this, innerLocation, size, heading);
 
-            RoomEnemies.Instance.AddTestCollider(new Rectangle(outerLocation, size));
-
         }
 
      

@@ -11,7 +11,7 @@ namespace Sprint4.Link
         protected LinkPlayer link;
 
 
-        protected ISprite linkSprite;
+        protected LinkSprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
         protected int currentFrame;

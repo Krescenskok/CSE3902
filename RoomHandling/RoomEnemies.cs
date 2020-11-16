@@ -44,6 +44,7 @@ namespace Sprint4
 
         private RoomEnemies()
         {
+           
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
@@ -53,11 +54,10 @@ namespace Sprint4
     
         public void LoadRoom(Game game, XElement room)
         {
-            
 
+            this.game = game;
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
-            this.game = game;
             currentRoom = int.Parse(room.Attribute("id").Value);
 
             List<XElement> items = room.Elements("Item").ToList();
@@ -148,9 +148,10 @@ namespace Sprint4
 
 
 
-        public void AddTestCollider(Rectangle rect)
+        public void AddTestCollider(Rectangle rect, EnemyCollider enemyCol)
         {
-            testObjects.Add(new TestCollider(rect, game));
+            testObjects.Add(new TestCollider(rect, game, enemyCol));
+            
         }
 
         public void AddTestCollider(PlayerCollider player)

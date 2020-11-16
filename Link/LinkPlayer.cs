@@ -45,8 +45,10 @@ namespace Sprint4
         private bool clock = false;
         private bool largeShield = false;
         private bool drawShield = true;
+        public LinkSprite sprite;
+        public Rectangle hitbox;
 
-        private PlayerCollider collider;
+        public PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -153,10 +155,6 @@ namespace Sprint4
             set { isWalkingInPlace = value; }
         }
 
-        public void HandleObstacle(Collision col)
-        {
-            possibleDirections.Remove(col.From);
-        }
 
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
@@ -174,56 +172,65 @@ namespace Sprint4
         public LinkPlayer()
         {
 
-            state = new Stationary(this);
+            sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            hitbox = sprite.hitbox;
+            state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+            
 
         }
         public void Update(GameTime gameTime)
         {
-
+            hitbox = sprite.hitbox;
+            int sizeX = hitbox.Size.X;
+            int sizeY = hitbox.Size.Y;
             CurrentLocation = state.Update(gameTime, CurrentLocation);
+            hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
             delay--;
 
 
             possibleDirections = Directions.Default();
         }
-
+        public void HandleObstacle(Collision col)
+        {
+            possibleDirections.Remove(col.From);
+        }
         public void MovingLeft()
         {
             if (!(state is MoveLeft))
-                state = new MoveLeft(this);
+                state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
         }
 
         public void MovingRight()
         {
             if (!(state is MoveRight))
-                state = new MoveRight(this);
+                state = new MoveRight(this, sprite);
             LinkDirection = "Right";
         }
 
         public void MovingUp()
         {
             if (!(state is MoveUp))
-                state = new MoveUp(this);
+                state = new MoveUp(this, sprite);
             LinkDirection = "Up";
         }
 
         public void MovingDown()
         {
             if (!(state is MoveDown))
-                state = new MoveDown(this);
+                state = new MoveDown(this, sprite);
             LinkDirection = "Down";
         }
 
         public void Stationary()
         {
-            state = new Stationary(this);
+            state = new Stationary(this, sprite);
         }
 
         public void Reset()
         {
-            state = new Stationary(this);
+            state = new Stationary(this, sprite);
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;

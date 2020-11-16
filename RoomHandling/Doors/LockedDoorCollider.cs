@@ -27,7 +27,6 @@ namespace Sprint4
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
 
-            RoomEnemies.Instance.AddTestCollider(new Rectangle(location, size));
         }
 
         public Rectangle Bounds()
