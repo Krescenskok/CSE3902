@@ -39,7 +39,6 @@ namespace Sprint4.Link
         private float health = HEALTH;
         public bool isWalkingInPlace = false;
         private bool isPickingUpItem = false;
-        private int numOfRupee = NUM_OF_RUPEE;
         private bool useRing = false;
         private float fullHealth = HEALTH;
         private int delay;
@@ -150,8 +149,6 @@ namespace Sprint4.Link
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
 
-        public int NumOfRupee { get => numOfRupee; set => numOfRupee = value; }
-
         public bool UseRing { get => useRing; set => useRing = value; }
 
         public float FullHealth { get => fullHealth; set => fullHealth = value; }
@@ -223,7 +220,6 @@ namespace Sprint4.Link
             LargeShield = false;
             UseRing = false;
             Health = HEALTH;
-            NumOfRupee = NUM_OF_RUPEE;
             FullHealth = HEALTH;
             Delay = 0;
             clock = false;

@@ -210,6 +210,7 @@ namespace Sprint4
                             currentFrame = 11;
                             link.IsAttacking = false;
                             link.IsStopped = true;
+                            link.IsPickingUpItem = false;
                             break;
                     }
                 }
@@ -224,12 +225,12 @@ namespace Sprint4
                             currentFrame = 0;
                             link.IsAttacking = false;
                             link.IsStopped = true;
+                            link.IsPickingUpItem = false;
                             break;
                     }
                 }
 
             }
-
             return location;
         }
 

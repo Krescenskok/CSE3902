@@ -17,8 +17,7 @@ namespace Sprint4
         private Texture2D HUDTexture;
         private ISprite sprite;
         private SpriteFont HUDfont;
-        private IItems aSlot;
-        private IItems aSlotBottom;
+        private LinkInventory.PrimaryItem aSlot;
         private LinkInventory.SecondaryItem bSlot;
         private Vector2 bSlotLocation;
         private Vector2 aSlotLocation;
@@ -33,8 +32,8 @@ namespace Sprint4
         private Vector2 bottomCorner;
         private Dictionary<LinkInventory.SecondaryItem, IItems> bSlotItems = new Dictionary<LinkInventory.SecondaryItem, IItems>();
         private Dictionary<LinkInventory.SecondaryItem, IItems> bSlotItemsBottom = new Dictionary<LinkInventory.SecondaryItem, IItems>();
-        private List<IItems> aSlotItems = new List<IItems>();
-        private List<IItems> aSlotItemsBottom = new List<IItems>();
+        private Dictionary<LinkInventory.PrimaryItem, IItems> aSlotItems = new Dictionary<LinkInventory.PrimaryItem, IItems>();
+        private Dictionary<LinkInventory.PrimaryItem, IItems> aSlotItemsBottom = new Dictionary<LinkInventory.PrimaryItem, IItems>();
         private const string direction = "Up";
         private Dictionary<String, IItems> hearts = new Dictionary<String, IItems>();
         private List<IItems> drawnHearts = new List<IItems>();
@@ -147,13 +146,13 @@ namespace Sprint4
         }
         private void InitializeSlotItems()
         {
-            aSlotItems.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), aSlotLocation));
-            aSlotItemsBottom.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), aSlotBottomLocation));
-            aSlot = aSlotItems.ElementAt(0);
-            aSlotBottom = aSlotItemsBottom.ElementAt(0);
+            aSlot = LinkInventory.PrimaryItem.WoodenSword;
+            aSlotItems.Add(aSlot, CreateAItem(aSlot, TOP));
+            aSlotItemsBottom.Add(aSlot, CreateAItem(aSlot, BOTTOM));
 
             bSlot = LinkInventory.SecondaryItem.Arrow;
             bSlotItems.Add(bSlot, CreateBItem(bSlot, TOP));
+            bSlotItemsBottom.Add(bSlot, CreateBItem(bSlot, BOTTOM));
         }
 
         public void IncreaseMaxHeartNumber()
@@ -278,20 +277,49 @@ namespace Sprint4
             }
         }
 
-        public void SetASlotItem(IItems item)
-        {
-            if (!aSlotItems.Contains(item))
+        public void SetASlotItem(LinkInventory.PrimaryItem item)
+        {          
+            
+            if (!aSlotItems.ContainsKey(item))
             {
-                aSlotItems.Add(item);
+                aSlotItems.Add(item, CreateAItem(item, TOP));
             }
-            if (!aSlotItemsBottom.Contains(item))
+            if (!aSlotItemsBottom.ContainsKey(item))
             {
-                aSlotItemsBottom.Add(item);
+                aSlotItemsBottom.Add(item, CreateAItem(item, BOTTOM));
             }
 
-            aSlot = aSlotItems.ElementAt(aSlotItems.IndexOf(item));
-            aSlotBottom = aSlotItemsBottom.ElementAt(aSlotItemsBottom.IndexOf(item));
+            aSlot = item;
         }
+
+        private IItems CreateAItem(LinkInventory.PrimaryItem item, string place)
+        {
+            Vector2 loc;
+            if (place is TOP)
+            {
+                loc = aSlotLocation;
+            }
+            else
+            {
+                loc = aSlotBottomLocation;
+            }
+
+            switch (item)
+            {
+                case LinkInventory.PrimaryItem.WoodenSword:
+                    return new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), loc);
+                    break;
+
+                case LinkInventory.PrimaryItem.SilverSword:
+                    return new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), loc);
+                    break;
+
+                default: //wand
+                    return new Wand(ItemsFactory.Instance.CreateWandSprite(), loc);
+                    break;
+            }
+        }
+
 
         public void UpdateInventoryCounts(int rupeeCount, int keyCount, int bombCount)
         {
@@ -308,7 +336,7 @@ namespace Sprint4
             {
                 bSlotItems[bSlot].Draw(spriteBatch);
             }
-            aSlot.Draw(spriteBatch);
+            aSlotItems[aSlot].Draw(spriteBatch);
             spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountLocation, Color.White);
@@ -325,7 +353,7 @@ namespace Sprint4
             {
                 bSlotItemsBottom[bSlot].Draw(spriteBatch);
             }
-            aSlotBottom.Draw(spriteBatch);
+            aSlotItemsBottom[aSlot].Draw(spriteBatch); ;
             spriteBatch.DrawString(HUDfont, "X" + rupeeCount, rupeeCountBottomLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + keyCount, keyCountBottomLocation, Color.White);
             spriteBatch.DrawString(HUDfont, "X" + bombCount, bombCountBottomLocation, Color.White);
