@@ -225,6 +225,11 @@ namespace Sprint4
             set { potionCount = value; }
         }
 
+        public bool HasBow
+        {
+            get { return secondInInventory[SecondaryItem.Bow]; }
+        }
+
         public IItems GetSecondItem
         {
             get { return secondItems[secondSlotItem]; }
@@ -277,6 +282,15 @@ namespace Sprint4
             else if (item is Compass)
             {
                 HUDMap.Instance.HasCompass = true;
+            }
+            else if (item is Clock)
+            {
+                link.Clock = true;
+                RoomEnemies.Instance.StunAllEnemies();
+            }
+            else if (item is BlueRing)
+            {
+                link.UseRing = true;
             }
             prevItem = item;
         }
@@ -390,6 +404,41 @@ namespace Sprint4
 
         }
 
+        public void UpdateLinkWeapons(LinkPlayer link)
+        {
+            switch(secondSlotItem)
+            {
+                case SecondaryItem.Arrow:
+                case SecondaryItem.Bow:
+                    link.SecondaryWeapon = ItemForLink.ArrowBow;
+                    break;
+                case SecondaryItem.Boomerang:
+                    link.SecondaryWeapon = ItemForLink.Boomerang;
+                    break;
+                case SecondaryItem.Candle:
+                    link.SecondaryWeapon = ItemForLink.BlueCandle;
+                    break;
+                case SecondaryItem.Bomb:
+                    link.SecondaryWeapon = ItemForLink.Bomb;
+                    break;
+                default: //potion - do nothing
+                    break;
+            }
+
+            switch (firstSlotItem)
+            {
+                case PrimaryItem.WoodenSword:
+                    link.CurrentWeapon = ItemForLink.WoodenSword;
+                    break;
+                case PrimaryItem.SilverSword:
+                    link.CurrentWeapon = ItemForLink.Sword;
+                    break;
+                default: //wand
+                    link.CurrentWeapon = ItemForLink.MagicalRod;
+                    break;
+            }
+        }
+
 
         private void UpdateBGSprite()
         {
@@ -435,13 +484,12 @@ namespace Sprint4
                 }
             }
 
-            if (cursorPosition < CURSORMAX / 2)
+            if (cursorPosition < CURSORMAX / 2 + 1)
             {
                 if (secondInInventory[secondSlotItem])
                 {
                     currentSecondItems[secondSlotItem].Draw(spriteBatch);
                 }
-
             }
             else
             {

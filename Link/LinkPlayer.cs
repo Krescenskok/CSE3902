@@ -113,6 +113,12 @@ namespace Sprint4
             set { isAttacking = value; }
         }
 
+        private bool secondAttack = false;
+        public bool IsSecondAttack
+        {
+            get { return secondAttack; }
+            set { secondAttack = value; }
+        }
 
         private bool isStopped = false;
 
@@ -132,6 +138,13 @@ namespace Sprint4
             get { return currentWeapon; }
             set { currentWeapon = value; }
 
+        }
+
+        private ItemForLink secondWeapon = ItemForLink.ArrowBow;
+        public ItemForLink SecondaryWeapon
+        {
+            get { return secondWeapon; }
+            set { secondWeapon = value; }
         }
 
         public bool IsWalkingInPlace
