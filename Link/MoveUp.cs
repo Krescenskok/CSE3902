@@ -14,9 +14,9 @@ namespace Sprint4
         int Y_LOCATION = 75;
 
 
-        public MoveUp(LinkPlayer link) : base(link)
+        public MoveUp(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
@@ -164,6 +164,8 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
                 return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 13, 15);
@@ -182,6 +184,7 @@ namespace Sprint4
             }
 
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
         }
 
     }

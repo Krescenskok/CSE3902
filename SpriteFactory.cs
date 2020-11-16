@@ -34,7 +34,7 @@ namespace Sprint4
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
         }
         
-        public ISprite CreateLinkSprite()
+        public LinkSprite CreateLinkSprite()
 		{
             
             return new LinkSprite(linkSpriteSheet);

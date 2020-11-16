@@ -14,9 +14,9 @@ namespace Sprint4
         int Y_LOCATION = 375;
         int PICKUP = 300;
 
-        public MoveDown(LinkPlayer link) : base(link)
+        public MoveDown(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
 
@@ -274,6 +274,8 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
                 return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 13, 13);
@@ -292,6 +294,7 @@ namespace Sprint4
             }
 
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
         }
 
     }

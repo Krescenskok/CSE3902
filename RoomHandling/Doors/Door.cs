@@ -57,8 +57,6 @@ namespace Sprint4
 
             innerCollider = new UnlockedDoorCollider(this, innerLocation, size, heading);
 
-            
-
         }
 
      

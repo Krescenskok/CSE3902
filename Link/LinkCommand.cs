@@ -12,6 +12,7 @@ namespace Sprint4.Link
     {
 
         LinkPlayer linkPlayer;
+        IItems item;
         String Key;
 
         public LinkCommand(LinkPlayer linkPlayer, String key)
@@ -37,28 +38,50 @@ namespace Sprint4.Link
             {
                 linkPlayer.Reset();
             }
-            if (!linkPlayer.IsAttacking)
+
+            else if (Key.Equals("E"))
             {
 
-                if (Key.Equals("N"))
+                linkPlayer.IsDamaged = true;
+
+            }
+            else if (Key.Equals("D9") || Key.Equals("NumPad9"))
+            {
+                linkPlayer.LargeShield = true;
+            }
+            if (!linkPlayer.IsAttacking)
+            {
+                if (linkPlayer.itemsPlacedByLink.Count == 0)
                 {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsSecondAttack = false;
+                    if ((Key.Equals("N") || (Key.Equals("Z"))))
+                    {
+                        System.Diagnostics.Debug.WriteLine("N");
+
+                        linkPlayer.IsAttacking = true;
+                        linkPlayer.IsStopped = false;
+                    }
+                }
+                else
+                {
+                    foreach (IItems item in linkPlayer.itemsPlacedByLink)
+                    {
+                        if (item.IsExpired)
+                        {
+                            if ((Key.Equals("N") || (Key.Equals("Z"))))
+                            {
+                                linkPlayer.IsAttacking = true;
+                                linkPlayer.IsStopped = false;
+                            }
+                        }
+                    }
+
                 }
 
-                else if (Key.Equals("B"))
-                {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsSecondAttack = true;
-                }
 
-                else if ((Key.Equals("A")) || (Key.Equals("Left")))
+                if ((Key.Equals("A")) || (Key.Equals("Left")))
                 {
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
-                    linkPlayer.IsSecondAttack = false;
                     linkPlayer.MovingLeft();
 
                 }
@@ -66,7 +89,6 @@ namespace Sprint4.Link
                 {
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
-                    linkPlayer.IsSecondAttack = false;
                     linkPlayer.MovingRight();
 
                 }
@@ -74,7 +96,6 @@ namespace Sprint4.Link
                 {
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
-                    linkPlayer.IsSecondAttack = false;
                     linkPlayer.MovingUp();
 
                 }
@@ -82,10 +103,52 @@ namespace Sprint4.Link
                 {
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
-                    linkPlayer.IsSecondAttack = false;
                     linkPlayer.MovingDown();
                 }
-                              
+                else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Shield;
+                }
+
+                else if ((Key.Equals("D1")) || (Key.Equals("NumPad1")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Sword;
+                }
+
+                else if ((Key.Equals("D2")) || (Key.Equals("NumPad2")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.MagicalRod;
+                }
+
+                else if ((Key.Equals("D3")) || (Key.Equals("NumPad3")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.ArrowBow;
+                }
+
+                else if ((Key.Equals("D4")) || (Key.Equals("NumPad4")))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueRing;
+                }
+
+                else if (Key.Equals("D5") || Key.Equals("NumPad5"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Boomerang;
+                }
+
+                else if (Key.Equals("D6") || Key.Equals("NumPad6"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.BlueCandle;
+                }
+
+                else if (Key.Equals("D7") || Key.Equals("NumPad7"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Bomb;
+                }
+                else if (Key.Equals("D8") || Key.Equals("NumPad8"))
+                {
+                    linkPlayer.CurrentWeapon = ItemForLink.Clock;
+                }
+               
 
 
             }

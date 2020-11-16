@@ -11,10 +11,18 @@ namespace Sprint4.Link
         Texture2D texture;
         int TOTAL_ROWS = 7;
         int TOTAL_COLS = 20;
+        public Rectangle hitbox;
 
         public LinkSprite(Texture2D texture)
         {
             this.texture = texture;
+
+
+            int width = texture.Width / TOTAL_COLS;
+
+            int height = texture.Height / TOTAL_ROWS;
+
+            hitbox = new Rectangle(0, 0, width, height);
         }
 
         public void Draw(SpriteBatch spriteBatch,   Vector2 location, int currentFrame, Color color)
