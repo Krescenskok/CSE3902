@@ -38,6 +38,7 @@ namespace Sprint4
 
         LinkPlayer linkPlayer = new LinkPlayer();
         public bool isPaused = false;
+        public LinkPlayer LinkPlayer { get => linkPlayer; }
 
 
         public Game1()
