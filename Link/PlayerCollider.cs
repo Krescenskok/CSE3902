@@ -199,8 +199,9 @@ namespace Sprint4
                             linkPlayer.Health -= (int)value;
                         }
 
-
                         linkPlayer.currentLocation.X += 100;
+
+
 
                     }
                 }
@@ -325,7 +326,16 @@ namespace Sprint4
 
         public void Update()
         {
-           
+
+            if (Bounds() != null && !done)
+            {
+
+                RoomEnemies.Instance.AddTestCollider(this);
+                if (Bounds().X > 1000) done = true;
+
+                
+            }
+
         }
     }
 }

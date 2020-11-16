@@ -36,18 +36,22 @@ namespace Sprint4
 
 
 
+
+
         LinkPlayer linkPlayer;
         public bool isPaused = false;
         public LinkPlayer LinkPlayer { get => linkPlayer; }
+        public SpriteFont Font { get => font; }
+        public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
-
+        private bool isGameOver = false;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            
+
         }
 
         protected override void Initialize()
@@ -102,7 +106,7 @@ namespace Sprint4
 
             //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
-            
+
             RoomSpawner.Instance.LoadRoom(this, 1);
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
@@ -112,10 +116,10 @@ namespace Sprint4
 
         protected override void Update(GameTime gameTime)
         {
-            if(linkPlayer.Health == 0)
+            if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
-
-                activeCommand = new ResetCommand(linkPlayer);
+                linkPlayer.IsDead = true;
+                activeCommand = new ResetCommand(linkPlayer, false);
                 activeCommand.Update(gameTime);
             }
             else
@@ -157,22 +161,64 @@ namespace Sprint4
             
         }
 
-        protected override void Draw(GameTime gameTime)
-        {
 
+
+        void PrepareToDraw()
+        {
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            GraphicsDevice.Viewport = camera.gameView;
             GraphicsDevice.Clear(Color.Black);
+        }
+
 
             //draw game area from camera POV
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            GraphicsDevice.Viewport = camera.gameView;
+
+
+        protected override void Draw(GameTime gameTime)
+        {
+
 
             if (activeCommand != null)
             {
+                if (activeCommand is ResetCommand)
+                {
+
+                    IsGameOver = !((ResetCommand)activeCommand).StartAgain;
+
+                    if (IsGameOver)
+                    {
+                        _spriteBatch.Begin();
+                    }
+
+                    else
+                    {
+                        PrepareToDraw();
+                    }
+                }
+                else
+                {
+                    PrepareToDraw();
+                    IsGameOver = false;
+                }
+
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
+            else
+            {
+                if (IsGameOver)
+                {
+                    _spriteBatch.Begin();
+                }
+                else
+                    PrepareToDraw();
+            }
 
-            RoomSpawner.Instance.Draw(_spriteBatch);
+
+            if (!IsGameOver)
+            {
+                RoomSpawner.Instance.Draw(_spriteBatch);
             LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
             RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
             ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
@@ -191,8 +237,22 @@ namespace Sprint4
             HUD.Instance.DrawBottom(_spriteBatch);
 
             _spriteBatch.End();
-          
+            }
+            else
+            {
 
+                GraphicsDevice.Clear(Color.Black);
+                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 50), Color.White);
+                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(230, 75), Color.White);
+                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 100), Color.White);
+
+
+
+
+                base.Draw(gameTime);
+
+                _spriteBatch.End();
+            }
 
 
         }

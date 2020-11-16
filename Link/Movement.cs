@@ -67,6 +67,7 @@ namespace Sprint4.Link
                 {
                     if (link.IsDamaged)
                     {
+                        link.Health -= 1;
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);

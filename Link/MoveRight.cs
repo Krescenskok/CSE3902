@@ -51,8 +51,6 @@ namespace Sprint4
                     else
                         currentFrame = 2;
                 }
-                //if (location.X >= X_LOCATION)
-                //    location.X = X_LOCATION;
 
             }
             link.IsAttacking = false;
@@ -279,23 +277,27 @@ namespace Sprint4
             /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 10, 14, 15);
+                return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2*13, 2*13);
             }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword)
+            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 8, 27, 16);
+                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 8, 2*24, 2*16);
             }
-            else if (link.CurrentWeapon == ItemForLink.Sword)
+            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 5, 28, 16);
+                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 5, 2*26, 2*16);
             }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 10, 26, 16);
+                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 10, 2*24, 2*16);
             }
+
+
+            return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2 * 13, 2 * 13);
 
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
             */
+
         }
 
     }

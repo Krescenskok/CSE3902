@@ -30,7 +30,7 @@ namespace Sprint4
         {
             Color col;
 
-            if(link.LargeShield && link.DrawShield)
+            if (link.LargeShield && link.DrawShield)
             {
                 currentFrame = 10;
                 link.DrawShield = false;
@@ -44,6 +44,7 @@ namespace Sprint4
                 {
                     if (link.IsDamaged)
                     {
+                        link.Health -= 1;
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
@@ -77,7 +78,7 @@ namespace Sprint4
                 }
 
             }
-        
+
             else
             {
 
@@ -300,8 +301,13 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+
+
+            //return new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y + 4, 2 * 14, 2 * 14);
+
             return link.hitbox;
             // new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y, , );
+
 
         }
     }

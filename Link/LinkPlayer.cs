@@ -45,8 +45,12 @@ namespace Sprint4
         private bool clock = false;
         private bool largeShield = false;
         private bool drawShield = true;
+
+        private bool isDead = false;
+
         public LinkSprite sprite;
         public Rectangle hitbox;
+
 
         public PlayerCollider collider;
 
@@ -76,6 +80,12 @@ namespace Sprint4
             {
                 return state.Bounds();
             }
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
         }
 
         public float Health
@@ -132,7 +142,7 @@ namespace Sprint4
         }
 
 
-        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
+        private ItemForLink currentWeapon = ItemForLink.Shield;
 
 
         public ItemForLink CurrentWeapon
