@@ -90,9 +90,9 @@ namespace Sprint4
                 item.State.Expire();
             }
 
-            if (col.CompareTag("Wall"))
+            if (col.CompareTag("Wall") || col.CompareTag("Door"))
             {
-                item.State.Expire();
+                item.Expire();
             }
         }
 

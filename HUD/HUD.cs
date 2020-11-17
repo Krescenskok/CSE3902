@@ -252,27 +252,21 @@ namespace Sprint4
             {
                 case LinkInventory.SecondaryItem.Candle:
                     return new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), loc);
-                    break;
 
                 case LinkInventory.SecondaryItem.Arrow:
                     return new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(direction), loc);
-                    break;
 
                 case LinkInventory.SecondaryItem.Bomb:
                     return new BombObject(ItemsFactory.Instance.CreateBombSprite(), loc);
-                    break;
 
                 case LinkInventory.SecondaryItem.Boomerang:
                     return new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), loc);
-                    break;
 
                 case LinkInventory.SecondaryItem.Bow:
                     return new Bow(ItemsFactory.Instance.CreateBowSprite(), loc);
-                    break;
 
                 default: //potion
                     return new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), loc);
-                    break;
             }
         }
 
@@ -307,15 +301,12 @@ namespace Sprint4
             {
                 case LinkInventory.PrimaryItem.WoodenSword:
                     return new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), loc);
-                    break;
 
                 case LinkInventory.PrimaryItem.SilverSword:
                     return new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), loc);
-                    break;
 
                 default: //wand
                     return new Wand(ItemsFactory.Instance.CreateWandSprite(), loc);
-                    break;
             }
         }
 
