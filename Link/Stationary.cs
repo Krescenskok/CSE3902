@@ -182,7 +182,6 @@ namespace Sprint4
             }
             link.IsAttacking = false;
             link.IsStopped = true;
-
             return location;
         }
 

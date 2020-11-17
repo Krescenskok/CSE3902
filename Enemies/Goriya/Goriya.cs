@@ -41,6 +41,9 @@ namespace Sprint4
 
         private XElement saveData;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public void SetSprite(ISprite sprite)
         {
 
@@ -81,7 +84,12 @@ namespace Sprint4
         {
             state = new GoriyaMoveState(this, location);
             gorSprite = (GoriyaWalkSprite)sprite;
-            collider = new EnemyCollider(gorSprite.GetRectangle(), this, HPAmount.HalfHeart, "Goriya");
+
+            spriteSize = gorSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
+
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Goriya");
+
         }
 
 

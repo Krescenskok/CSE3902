@@ -13,6 +13,7 @@ namespace Sprint4
         private IEnemy enemy;
         private int damageAmount;
         public string name;
+        private Point hitboxOffset;
 
         public string Name { get => name; }
         public Layer layer { get; set; }
@@ -21,22 +22,29 @@ namespace Sprint4
         {
             bounds = rect;
 
+            hitboxOffset = (rect.Location - enemy.Location.ToPoint());
+
             this.enemy = enemy;
 
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this,Layers.Enemy);
-
+            RoomEnemies.Instance.AddTestCollider(rect, this);
             name = "Enemy";
         }
 
         public EnemyCollider(Rectangle rect, IEnemy enemy, int strength, string name)
         {
             bounds = rect;
-
+            hitboxOffset = (rect.Location - enemy.Location.ToPoint());
             this.enemy = enemy;
             this.name = name;
+
             damageAmount = strength;
+            Debug.WriteLine(name);
+            Debug.WriteLine(rect.Location.ToString());
+            Debug.WriteLine(enemy.Location.ToString());
+            Debug.WriteLine(hitboxOffset);
 
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
             RoomEnemies.Instance.AddTestCollider(rect, this);
@@ -120,7 +128,14 @@ namespace Sprint4
 
         public void Update()
         {
-            bounds.Location = enemy.Location.ToPoint();
+            if (name == "gel")
+            {
+                bounds.Location = (enemy.Location.ToPoint() + hitboxOffset+ (enemy as Gel).gSprite.centerOffset);
+            } else
+            {
+                bounds.Location = (enemy.Location.ToPoint() + hitboxOffset);
+            }
+            //bounds.Location = (enemy.Location.ToPoint() );
         }
     }
 }

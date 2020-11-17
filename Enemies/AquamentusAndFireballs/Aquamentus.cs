@@ -27,12 +27,15 @@ namespace Sprint4
         private int aquamentusHP;
         private static int AttackStrength = HPAmount.OneHeart;
         private static int RangeAttackStrength = HPAmount.OneHeart;
+
         private static int UpdatePerSec = 120;
         private float attackPerSec = 1;
+
         private float directionChangPerSec = (float)0.2;
         private float moveSpeedPerSec = 15;
         private float speed;
         private int directionIndex = -1;
+        private bool tryAttack = true;
 
         public Vector2 Location { get => aquamentusPos; }
 
