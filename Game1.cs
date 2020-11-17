@@ -171,13 +171,13 @@ namespace Sprint4
         }
 
 
-            //draw game area from camera POV
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
-
-
 
         protected override void Draw(GameTime gameTime)
         {
+
+
+            //draw game area from camera POV
+            //_spriteBatch.Begin(transformMatrix: camera.Transform);
 
 
             if (activeCommand != null)
