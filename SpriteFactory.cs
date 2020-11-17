@@ -35,10 +35,15 @@ namespace Sprint4
         }
         
         public LinkSprite CreateLinkSprite()
-		{
-            
+        {
+
             return new LinkSprite(linkSpriteSheet);
-		}
+        }
+
+        public LinkSprite CreateBlueLinkSprite()
+        {
+            return new LinkSprite(linkBlueSpriteSheet);
+        }
         
 		
         //public ISprite CreateItemsSprite()
