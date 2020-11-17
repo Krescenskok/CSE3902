@@ -172,7 +172,7 @@ namespace Sprint4
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
 
-        public bool UseRing { get => useRing; set => useRing = value; }
+        public bool UseRing { get => useRing; set {useRing = value; sprite = null; } }
 
         public float FullHealth { get => fullHealth; set => fullHealth = value; }
 
@@ -195,15 +195,18 @@ namespace Sprint4
         }
         public void Update(GameTime gameTime)
         {
-            hitbox = sprite.hitbox;
-            int sizeX = hitbox.Size.X;
-            int sizeY = hitbox.Size.Y;
-            CurrentLocation = state.Update(gameTime, CurrentLocation);
-            hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-            delay--;
+            if (sprite != null)
+            { 
+                hitbox = sprite.hitbox;
+                int sizeX = hitbox.Size.X;
+                int sizeY = hitbox.Size.Y;
+                CurrentLocation = state.Update(gameTime, CurrentLocation);
+                hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                delay--;
 
 
-            possibleDirections = Directions.Default();
+                possibleDirections = Directions.Default();
+            }
         }
         public void HandleObstacle(Collision col)
         {

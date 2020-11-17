@@ -36,8 +36,24 @@ namespace Sprint4.Link
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
         {
             Color col;
-            if (linkSprite == null)
-                linkSprite = SpriteFactory.Instance.CreateLinkSprite();
+            if (link.sprite == null)
+            {
+                if (link.UseRing)
+                {
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
+                   
+
+                }
+                else
+                {
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+
+
+              
+                }
+                linkSprite = link.sprite;
+            }
+                
 
             if (link.LargeShield && link.DrawShield)
             {
@@ -100,18 +116,10 @@ namespace Sprint4.Link
                 }
 
             }
-
-     
-
             else
             {
-                if (link.UseRing)
-                {
-                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
-
-                }
-                    
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
+                 
+                  linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
 
             }
 

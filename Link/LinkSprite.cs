@@ -36,7 +36,7 @@ namespace Sprint4.Link
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, 2*width, 2*height);
 
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.Blue);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, color);
         }
 
 

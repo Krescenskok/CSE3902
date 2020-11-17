@@ -25,7 +25,7 @@ namespace Sprint4
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
 
         int i = 0;
-
+        /*
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
         {
             Color col;
@@ -44,7 +44,7 @@ namespace Sprint4
                 {
                     if (link.IsDamaged)
                     {
-                        link.Health -= 1;
+           
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
@@ -85,13 +85,15 @@ namespace Sprint4
                 if (link.UseRing)
                 {
                     link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
+                    linkSprite = SpriteFactory.Instance.CreateBlueLinkSprite();
+
                 }
-              
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
+
+                linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
 
             }
 
-        }
+        }*/
 
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
