@@ -1,4 +1,4 @@
-Author of the code review: Andrew Sanchez
+Author of the code review: Yuan Hong
 Date of the code review: 11/16/20
 Sprint number: 4
 Name of the .cs file being reviewed: Game.cs (game over section)
@@ -11,7 +11,7 @@ The vector coordinates are magic numbers, so they are not as readable as they co
 In addition, having a separate line for each message assists in reading the spacing of the messages as they would
 appear in game. The code is concise and clear with no confusingly named variables.
 
-Author of the code review: Andrew Sanchez
+Author of the code review: Yuan Hong
 Date of the code review: 11/16/20
 Sprint number: 4
 Name of the .cs file being reviewed: PauseCommand.cs (game over section)
