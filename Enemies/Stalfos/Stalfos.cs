@@ -26,6 +26,9 @@ namespace Sprint4
 
         private int HP = HPAmount.EnemyLevel2;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
@@ -38,7 +41,6 @@ namespace Sprint4
             
             this.location = location;
             state = new EnemySpawnState(this, game);
-            collider = new EnemyCollider();
             saveInfo = xml;
         }
 
@@ -46,7 +48,10 @@ namespace Sprint4
         {
             state = new StalfosWalkingState(this, location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), this, HPAmount.HalfHeart, "Stalfos");
+
+            spriteSize = stalfosSprite.GetRectangle().Size;
+            rect = new Rectangle(this.location.ToPoint(), spriteSize);
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 
@@ -54,6 +59,7 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveInfo.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
 

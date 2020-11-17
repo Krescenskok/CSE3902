@@ -45,6 +45,7 @@ namespace Sprint4
 
         public Rectangle AdjustHitbox(Rectangle input, float coefficient)
         {
+           
             inputSize = input.Size;
             inputLocation = input.Location;
 
@@ -67,6 +68,7 @@ namespace Sprint4
             Point outputSize = new Point(outputSizeX, outputSizeY);
 
             adjusted = new Rectangle(outputLocation, outputSize);
+          
 
             return adjusted;
         }

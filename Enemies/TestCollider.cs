@@ -18,11 +18,11 @@ namespace Sprint4
 
         private int attack;
 
-        public string Name { get => "wall"; }
+        public string Name { get; set; }
         public Layer layer { get; set; }
 
         PlayerCollider player;
-        EnemyCollider enemyCol;
+        private EnemyCollider enemyCol;
 
         public TestCollider(Point location, Point size, Game game, int attack)
         {
@@ -37,9 +37,10 @@ namespace Sprint4
         {
             enemyCol = col;
             bounds = col.Bounds();
-            visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
-            this.location = rect.Location.ToVector2();
+            visual = new ColliderVisualSprite(game, col.Bounds().Size.ToVector2());
+            this.location = col.Bounds().Location.ToVector2();
             attack = 0;
+            this.Name = col.Name;
 
             CollisionHandler.Instance.AddCollider(this,Layers.Trigger);
         }
@@ -50,6 +51,8 @@ namespace Sprint4
             visual = new ColliderVisualSprite(game, player.Bounds().Size.ToVector2());
             this.location = player.Bounds().Location.ToVector2();
             attack = 0;
+            this.Name = "player";
+            
 
             this.player = player;
 
@@ -118,12 +121,15 @@ namespace Sprint4
             {
                 bounds = player.Bounds();
                 location = bounds.Location.ToVector2();
+
+
               
             }
             if (enemyCol != null)
             {
                 bounds = enemyCol.Bounds();
                 location = bounds.Location.ToVector2();
+
             }
 
             

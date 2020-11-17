@@ -53,7 +53,7 @@ namespace Sprint4
 
         public void Stun()
         {
-            //im guessing does nothing
+            //do nothing
         }
 
         public void TakeDamage(int amount)

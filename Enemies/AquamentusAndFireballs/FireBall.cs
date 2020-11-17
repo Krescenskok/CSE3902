@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint4.Enemies.EnemyHelperClasses;
 using Sprint4.EnemyAndNPC.AquamentusAndFireballs;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace Sprint4
         private FireBallSprite fireBallSprite;
         private FireBallState fireBallState;
         private Vector2 fireBallPos;
-        private EnemyCollider fireBallCollider;
+        private LinkPlayer link;
+        private FireballCollider fireBallCollider;
 
         public Vector2 Location { get => fireBallPos; }
 
@@ -24,12 +26,13 @@ namespace Sprint4
 
         public List<ICollider> Colliders { get => new List<ICollider> { fireBallCollider }; }
 
-        public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength)
+        public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength, LinkPlayer link)
         {
             fireBallState = new FireBallState(this,aquamentus, initialPos, targetPos);
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
             fireBallSprite = (FireBallSprite)sprite;
-            fireBallCollider = new EnemyCollider(fireBallSprite.GetRectangle(initialPos),this,attackStrength, "fireball");
+            this.link = link;
+            fireBallCollider = new FireballCollider(fireBallSprite.GetRectangle(initialPos),this,attackStrength, "fireball", this.link);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -65,10 +68,6 @@ namespace Sprint4
            
         }
 
-        public void TakeDamage(Direction dir, int amount)
-        {
-            State.TakeDamage(amount);
-        }
 
         public void ObstacleCollision(Collision collision)
         {
@@ -77,7 +76,12 @@ namespace Sprint4
 
         public void Stun()
         {
-            State.Stun();
+            //not affected
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            //do nothing
         }
     }
 }

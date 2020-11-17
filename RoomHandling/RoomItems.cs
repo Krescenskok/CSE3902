@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -156,6 +157,31 @@ namespace Sprint4
             }
 
         }
+
+        public void DropItem(string itemName, Vector2 location)
+        {
+            if (itemName.Equals("Rupee")) roomItems.Add(new Rupee(ItemsFactory.Instance.CreateRupeeSprite(), location));
+            else if (itemName.Equals("Heart")) roomItems.Add(new Heart(ItemsFactory.Instance.CreateHeartSprite(), location));
+            else if (itemName.Equals("Boomerang")) roomItems.Add(new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), location));
+            else if (itemName.Equals("Fairy")) roomItems.Add(new Fairy(ItemsFactory.Instance.CreateFairySprite(), location));
+            else if (itemName.Equals("Clock")) roomItems.Add(new Clock(ItemsFactory.Instance.CreateClockSprite(), location));
+            else if (itemName.Equals("HeartContainer")) roomItems.Add(new HeartContainer(ItemsFactory.Instance.CreateHeartContainerSprite(), location));
+        }
+
+        public void DropRandom(Vector2 location)
+        {
+            Random rand = new Random();
+            int num = rand.Next(0, 5);
+            if (num == 0) DropItem("Heart", location);
+            else if (num == 1) DropItem("Rupee", location);
+            else if (num == 2) DropItem("Fairy", location);
+            else if (num == 3) DropItem("Clock", location);
+        }
+        public void DropHeartContainer(Vector2 location)
+        {
+            DropItem("HeartContainer", location);
+        }
+
         public void Update()
         {
             for(int i = 0; i < roomItems.Count; i++)

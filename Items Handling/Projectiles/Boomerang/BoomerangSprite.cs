@@ -29,7 +29,7 @@ namespace Sprint4.Items
 
             int height = texture.Height / (int)sheetSize.X;
 
-            hitbox = new Rectangle(0, 0, width * 2, height * 2);
+            hitbox = new Rectangle(0, 0, width * 2 / 3, height * 2 / 3);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

@@ -29,8 +29,9 @@ namespace Sprint4
 
         public void Attack()
         {
+            Sounds.Instance.PlayAquamentusRoar();
             Vector2 targetPos = link.CurrentLocation;
-            Vector2 attackPos = new Vector2(aquamentusPos.X, aquamentusPos.Y + attackPosYValueAdjust);
+            Vector2 attackPos = new Vector2(aquamentus.Location.X, aquamentus.Location.Y + attackPosYValueAdjust);
             aquamentus.SpawnFireBall(attackPos, targetPos);
         }
 
@@ -77,7 +78,7 @@ namespace Sprint4
 
         public void Stun()
         {
-            //stun implement
+            //not affected
         }
     }
 }

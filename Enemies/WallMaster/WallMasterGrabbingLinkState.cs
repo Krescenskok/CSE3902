@@ -60,7 +60,7 @@ namespace Sprint4
             {
 
 
-                //RoomSpawner.Instance.RoomChange(game, 1);
+                RoomSpawner.Instance.RoomChange(game, 1);
 
             }
             else

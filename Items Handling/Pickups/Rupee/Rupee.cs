@@ -65,7 +65,10 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false");
+            state.Expire();
+            LinkInventory.Instance.RupeeCount++;
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

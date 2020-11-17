@@ -15,7 +15,7 @@ namespace Sprint4
         private static readonly RoomDoors instance = new RoomDoors();
 
         private List<Door> doors;
-        private List<DoorTriggerCollider> triggers;
+        
         
 
         private Dictionary<int,DoorSprite> lockedDoorSprites;
@@ -53,7 +53,7 @@ namespace Sprint4
 
             lockedDoorSprites = new Dictionary<int, DoorSprite>();
             lockedDoors = new Dictionary<int, Door>();
-            triggers = new List<DoorTriggerCollider>();
+            
         }
 
         private void LoadSpecialDoors()
@@ -121,7 +121,7 @@ namespace Sprint4
 
                     XElement doorTypeTag = item.Element("Type");
 
-                    DoorType thisType = GetDoorType(doorTypeTag.Value);
+                    DoorType thisType = Parse(doorTypeTag.Value);
 
                     
 
@@ -153,6 +153,10 @@ namespace Sprint4
                     else if (objName.Equals("Down"))
                     {
                         doors.Add(new Door(game, locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
+                    }
+                    else if (objName.Equals("Center"))
+                    {
+                        doors.Add(new Door(game, locations[8], doorSizeMiddle, nextRoom, 'C', thisType, item, locations[7], curRoom));
                     }
 
                     if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
@@ -198,6 +202,7 @@ namespace Sprint4
             locations.Add(new Point(tileWidth * 14, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight*2) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight * 9) - camOffset);
+            locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
 
             //stair point
             locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
@@ -212,7 +217,7 @@ namespace Sprint4
             
         }
 
-        private DoorType GetDoorType(string str)
+        private DoorType Parse(string str)
         {
             if (str.Equals("locked")) return DoorType.locked;
             else if(str.Equals("normal")) return DoorType.normal;
@@ -222,25 +227,15 @@ namespace Sprint4
 
 
 
-        public void Destroy(Door door)
-        {
-            
-            CollisionHandler.Instance.RemoveCollider(door.innerCollider);
-            doors.Remove(door);
-
-        }
-
-
-
         public void Update()
         {
-          foreach(Door door in doors)
+            foreach(Door door in doors)
             {
                 door.Update();
             }
 
 
-          if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
+            if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
             {
                 OpenDoor(6);
             }else if(curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)

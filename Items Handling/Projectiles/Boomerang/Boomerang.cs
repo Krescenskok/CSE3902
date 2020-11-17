@@ -17,6 +17,7 @@ namespace Sprint4.Items
         private IItemsState state;
         private bool throwing;
         private bool returning;
+        private string direction;
         private LinkPlayer link;
         private List<IItems> impactList = new List<IItems>();
         private bool isExpired = false;
@@ -37,6 +38,7 @@ namespace Sprint4.Items
             this.location = location;
             this.item = item;
             this.link = link;
+            this.direction = direction;
             drawnFrame = 0;
             state = new ThrownBoomerangState(this, location, direction, link);
             throwing = true;
@@ -73,7 +75,7 @@ namespace Sprint4.Items
 
         public void Impact()
         {
-            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location));
+            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location, this.direction, returning, link));
         }
 
         public void ReturnedToLink()
@@ -95,11 +97,15 @@ namespace Sprint4.Items
             foreach (IItems hit in impactList)
             {
                 hit.Update();
+            }
 
-                if (hit.IsExpired)
-                {
-                    impactList.Remove(hit);
-                }
+            int i;
+            for (i=0; i<impactList.Count; i++)
+            {
+                if (impactList[i].IsExpired)
+                    {
+                        impactList.RemoveAt(i);
+                    }
             }
 
             collider.Update(this, this.state);

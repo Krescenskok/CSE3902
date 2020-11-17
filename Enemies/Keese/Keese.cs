@@ -25,6 +25,9 @@ namespace Sprint4
 
         private int HP = HPAmount.EnemyLevel1;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
@@ -48,7 +51,10 @@ namespace Sprint4
             
             state = new KeeseMoveState(this, location);
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
-            collider = new EnemyCollider(kSprite.GetRectangle(), this,HPAmount.HalfHeart,"Keese");
+            spriteSize = kSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
+
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Keese");
 
         }
         public void SetSprite(ISprite sprite)
@@ -66,6 +72,7 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
     
