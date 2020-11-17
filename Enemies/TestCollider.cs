@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint4
@@ -20,6 +21,9 @@ namespace Sprint4
         public string Name { get => "wall"; }
         public Layer layer { get; set; }
 
+        PlayerCollider player;
+        EnemyCollider enemyCol;
+
         public TestCollider(Point location, Point size, Game game, int attack)
         {
             bounds = new Rectangle(location, size);
@@ -29,14 +33,28 @@ namespace Sprint4
             this.attack = attack;
         }
 
-        public TestCollider(Rectangle rect, Game game)
+        public TestCollider(Rectangle rect, Game game, EnemyCollider col)
         {
-            bounds = rect;
+            enemyCol = col;
+            bounds = col.Bounds();
             visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
             this.location = rect.Location.ToVector2();
             attack = 0;
 
             CollisionHandler.Instance.AddCollider(this,Layers.Trigger);
+        }
+
+        public TestCollider(Game game, PlayerCollider player)
+        {
+            bounds = player.Bounds();
+            visual = new ColliderVisualSprite(game, player.Bounds().Size.ToVector2());
+            this.location = player.Bounds().Location.ToVector2();
+            attack = 0;
+
+            this.player = player;
+
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
+
         }
 
         public TestCollider()
@@ -96,7 +114,22 @@ namespace Sprint4
 
         public void Update()
         {
-           //nothing
+            if (player != null)
+            {
+                bounds = player.Bounds();
+                location = bounds.Location.ToVector2();
+
+
+              
+            }
+            if (enemyCol != null)
+            {
+                bounds = enemyCol.Bounds();
+                location = bounds.Location.ToVector2();
+
+            }
+
+            
         }
     }
 }

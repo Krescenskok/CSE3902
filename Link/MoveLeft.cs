@@ -13,9 +13,9 @@ namespace Sprint4
         int X_LOCATION = 90;
         int PICKUP = 300;
 
-        public MoveLeft(LinkPlayer link) : base(link)
+        public MoveLeft(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
 
@@ -273,24 +273,32 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
-                return new Rectangle((int)link.currentLocation.X + 10, (int)link.currentLocation.Y + 10, 16, 16);
+                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2*13, 2*16);
             }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword)
+            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 24, 16);
+                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 2*24, 2*16);
             }
-            else if (link.CurrentWeapon == ItemForLink.Sword)
+            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 16, 25);
+                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 2*15, 2*25);
             }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 10, 28, 16);
+                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 10, 2*26, 2*16);
             }
 
+
+            return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2 * 13, 2 * 16);
+
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
+
         }
 
     }

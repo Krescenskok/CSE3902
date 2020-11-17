@@ -28,8 +28,15 @@ namespace Sprint4
 
             var state = Keyboard.GetState();
             commandsList.Add(Keys.Q, new QuitCommand());
+
             commandsList.Add(Keys.A, new LinkCommand(player, "A"));
             commandsList.Add(Keys.Left, new LinkCommand(player, "Left"));
+
+            commandsList.Add(Keys.P, new ResetCommand(player, true));
+     
+
+
+
             commandsList.Add(Keys.D, new LinkCommand(player, "D"));
             commandsList.Add(Keys.Right, new LinkCommand(player, "Right"));
             commandsList.Add(Keys.W, new LinkCommand(player, "W"));
@@ -37,8 +44,10 @@ namespace Sprint4
             commandsList.Add(Keys.S, new LinkCommand(player, "S"));
             commandsList.Add(Keys.Down, new LinkCommand(player, "Down"));
             commandsList.Add(Keys.N, new LinkCommand(player, "N"));
+            commandsList.Add(Keys.B, new LinkCommand(player, "B"));
             commandsList.Add(Keys.Z, new LinkCommand(player, "Z"));
             commandsList.Add(Keys.E, new LinkCommand(player, "E"));
+
             commandsList.Add(Keys.D0, new LinkCommand(player, "D0"));
             commandsList.Add(Keys.NumPad0, new LinkCommand(player, "NumPad0"));
             commandsList.Add(Keys.D1, new LinkCommand(player, "D1"));
@@ -59,10 +68,12 @@ namespace Sprint4
             commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
             commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
-            commandsList.Add(Keys.R, new ResetCommand(player));
+            commandsList.Add(Keys.R, new ResetCommand(player, false));
+
+
             commandsList.Add(Keys.Space, new ShowInventoryCommand());
-            commandsList.Add(Keys.I, new ChangeSecondItemCommand(true));
-            commandsList.Add(Keys.U, new ChangeSecondItemCommand(false));
+            commandsList.Add(Keys.I, new ChangeItemCommand(true, player));
+            commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
             commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
             commandsList.Add(Keys.G, new PauseCommand());
 
@@ -81,6 +92,8 @@ namespace Sprint4
 
         public ICommand HandleInput(Game1 game)
         {
+
+           
 
             ICommand activeCommand= null;
 
@@ -113,6 +126,8 @@ namespace Sprint4
                         }
                     }
 
+
+
                 }
               
             }
@@ -120,6 +135,20 @@ namespace Sprint4
                 delay--;
 
             prevState = kstate;
+
+
+
+            if (game.IsGameOver)
+            {
+                if (!(activeCommand is ResetCommand) && !(activeCommand is QuitCommand))
+                {
+                    return null;
+                }
+
+                
+            }
+
+                
 
             return activeCommand;
         }

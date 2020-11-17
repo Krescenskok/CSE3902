@@ -12,6 +12,7 @@ namespace Sprint4.Link
     {
 
         LinkPlayer linkPlayer;
+        IItems item;
         String Key;
 
         public LinkCommand(LinkPlayer linkPlayer, String key)
@@ -50,14 +51,34 @@ namespace Sprint4.Link
             }
             if (!linkPlayer.IsAttacking)
             {
-
-                if ((Key.Equals("N") || (Key.Equals("Z"))))
+                if (linkPlayer.itemsPlacedByLink.Count == 0)
                 {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
+                    if ((Key.Equals("N") || (Key.Equals("Z"))))
+                    {
+                        System.Diagnostics.Debug.WriteLine("N");
+
+                        linkPlayer.IsAttacking = true;
+                        linkPlayer.IsStopped = false;
+                    }
+                }
+                else
+                {
+                    foreach (IItems item in linkPlayer.itemsPlacedByLink)
+                    {
+                        if (item.IsExpired)
+                        {
+                            if ((Key.Equals("N") || (Key.Equals("Z"))))
+                            {
+                                linkPlayer.IsAttacking = true;
+                                linkPlayer.IsStopped = false;
+                            }
+                        }
+                    }
+
                 }
 
-                else if ((Key.Equals("A")) || (Key.Equals("Left")))
+
+                if ((Key.Equals("A")) || (Key.Equals("Left")))
                 {
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;

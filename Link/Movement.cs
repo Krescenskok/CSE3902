@@ -11,15 +11,13 @@ namespace Sprint4.Link
         protected LinkPlayer link;
 
 
-        protected ISprite linkSprite;
+        protected LinkSprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
         protected int currentFrame;
 
         int i = 0;
-        int X_LOCATION = 780;
-        int Y_LOCATION = 445;
-        int ZERO = 0;
+   
 
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -69,6 +67,7 @@ namespace Sprint4.Link
                 {
                     if (link.IsDamaged)
                     {
+                        link.Health -= 1;
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
@@ -141,15 +140,6 @@ namespace Sprint4.Link
 
             if (link.IsStopped)
             {
-                //unnecessary with wall colliders
-                //if (location.X <= ZERO)
-                //    location.X = ZERO;
-                //else if (location.X >= X_LOCATION)
-                //    location.X = X_LOCATION;
-                //else if (location.Y <= ZERO)
-                //    location.Y = ZERO;
-                //else if (location.Y >= Y_LOCATION)
-                //    location.Y = Y_LOCATION;
 
                 return location;
             }

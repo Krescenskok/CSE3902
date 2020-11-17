@@ -132,7 +132,11 @@ namespace Sprint4
                     else if (objName.Equals("Right"))
                     {
                         doors.Add(new Door(game, locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
-                        if (curRoom == 6) triggers.Add(new DoorTriggerCollider(locations[5],doorSizeSide, 6, () => !RoomEnemies.Instance.allDead));
+                        if (curRoom == 6)
+                        {
+                            lockedDoors[6] = (doors[doors.Count - 1]);
+                        }
+                        
                     }
                     else if (objName.Equals("Up"))
                     {
@@ -148,6 +152,8 @@ namespace Sprint4
                 }
             }
 
+
+            
         }
 
 
@@ -185,8 +191,8 @@ namespace Sprint4
             locations.Add(new Point(tileWidth * 7, tileHeight * 9) - camOffset);
 
 
-            doorSizeMiddle = new Point(tileWidth*2, 10);
-            doorSizeSide = new Point(10, tileHeight);
+            doorSizeMiddle = new Point(tileWidth*2, 2);
+            doorSizeSide = new Point(2, tileHeight);
 
             
         }
@@ -219,9 +225,12 @@ namespace Sprint4
             }
 
 
-          if(curRoom == 6 && RoomEnemies.Instance.EnemyCount == 0 && lockedDoorSprites[6].shouldDraw == false)
+          if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
             {
                 OpenDoor(6);
+            }else if(curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)
+            {
+                CloseDoor(6);
             }
         }
 

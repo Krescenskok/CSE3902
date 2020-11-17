@@ -188,6 +188,7 @@ namespace Sprint4.Link
             Vector2 loc = link.CurrentLocation;
             if (!bombMade)
             {
+                LinkInventory.Instance.BombCount--;
                 bombMade = true;
                 loc.X += 10;
                 if (direction.Equals("Up"))

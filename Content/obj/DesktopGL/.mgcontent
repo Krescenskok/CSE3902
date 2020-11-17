@@ -4,6 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/DungeonTheme.wav</File>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/DoorUnlock.wav</File>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/EnemyDie.wav</File>
     <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/BossSpriteSheet.png</File>
     <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/EnemySpriteSheet.png</File>
     <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/File.spritefont</File>
@@ -14,13 +17,6 @@
     <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

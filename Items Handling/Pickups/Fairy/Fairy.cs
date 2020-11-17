@@ -11,7 +11,7 @@ namespace Sprint4.Items
     {
         private Vector2 location;
         private XElement saveInfo;
-        private ItemCollider collider;
+        private HealthCollider collider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
@@ -33,7 +33,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new FairyState(this, location);
-            collider = new ItemCollider((item as FairySprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as FairySprite).Hitbox, this, this.state, "Fairy");
         }
 
         public Fairy(ISprite item, Vector2 location, XElement xml)
@@ -42,7 +42,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new FairyState(this, location);
-            collider = new ItemCollider((item as FairySprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as FairySprite).Hitbox, this, this.state, "Fairy");
             saveInfo = xml;
         }
 

@@ -34,31 +34,52 @@ namespace Sprint4
         public Viewport gameView;
         public Rectangle playArea;
 
+        public Viewport HUDView;
+        public Rectangle HUDArea;
+
         private Direction currentDirection;
 
+        private Rectangle targetGameView;
+        private Rectangle targetHUDLocation;
+
+        private bool inventoryOpen = false;
+
+        private const int scrollSpeed = 10;
+
+        private bool linkHasEntered = false;
+        private Vector2 linkEnterPosition;
+        private const int linkEnterSpeed = -2;
+
         private LinkPlayer player;
+
+       
 
         public void Load(Game game)
         {
             this.game = game;
             screenHeight = game.Window.ClientBounds.Height;
             screenWidth = game.Window.ClientBounds.Width;
-
+            player = (game as Game1).LinkPlayer;
             
 
             transform = Matrix.Identity;
 
-            
-            
-
             Point topLeftCorner = new Point(screenWidth / 10, screenHeight / 4);
             Point size = new Point(screenWidth - topLeftCorner.X * 2, screenHeight - topLeftCorner.Y);
 
-
+            Point HUDPoint = new Point(topLeftCorner.X, topLeftCorner.Y - screenHeight);
+            Point HUDSize = new Point(size.X , screenHeight);
+           
 
 
             playArea = new Rectangle(topLeftCorner, size);
             gameView = new Viewport(playArea);
+
+            HUDArea = new Rectangle(HUDPoint, HUDSize);
+            HUDView = new Viewport(HUDArea);
+
+            targetGameView = playArea;
+            targetHUDLocation = HUDArea;
 
             transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
 
@@ -70,10 +91,39 @@ namespace Sprint4
         {
         }
 
-        public void OpenMenu()
+        //code for extending menu view
+        public void OpenCloseInventory()
         {
-            //code for extending menu view
+            if (HUDOpenCloseFinished())
+            {
+                if (!inventoryOpen)
+                {
+                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight);
+                    targetHUDLocation.Location = newHUDLocation;
+
+                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y);
+                    targetGameView.Location = newGameViewLocation;
+
+                    inventoryOpen = true;
+                }
+                else
+                {
+                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y - screenHeight);
+                    targetHUDLocation.Location = newHUDLocation;
+
+                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y - playArea.Size.Y);
+                    targetGameView.Location = newGameViewLocation;
+
+                    inventoryOpen = false;
+                }
+
+              
+            }
+           
+            
         }
+
+
 
         public void ScrollUp(int roomNum)
         {
@@ -83,8 +133,8 @@ namespace Sprint4
 
             nextRoom = roomNum;
 
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.up;
         }
@@ -97,8 +147,7 @@ namespace Sprint4
 
             nextRoom = roomNum;
 
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.down;
         }
@@ -109,9 +158,7 @@ namespace Sprint4
 
             direction = Vector3.Left;
             nextRoom = roomNum;
-
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.right;
         }
@@ -122,9 +169,7 @@ namespace Sprint4
 
             direction = Vector3.Right;
             nextRoom = roomNum;
-
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.left;
         }
@@ -138,43 +183,78 @@ namespace Sprint4
                 || transform.Translation.Equals(Target);
         }
 
+        private bool HUDOpenCloseFinished()
+        {
+            return playArea.Size.Equals(targetGameView.Size) && playArea.Location.Equals(targetGameView.Location)
+                && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
+        }
+
+        private void MoveViewports()
+        {
+            Vector2 currentLoc = playArea.Location.ToVector2();
+            Vector2 moveAmount = targetGameView.Location.ToVector2() - currentLoc;
+            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
+            currentLoc = Vector2.Add(currentLoc, moveAmount);
+            playArea.Location = currentLoc.ToPoint();
+            gameView.Bounds = playArea;
+
+            
+
+            currentLoc = HUDArea.Location.ToVector2();
+            moveAmount = targetHUDLocation.Location.ToVector2() - currentLoc;
+            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
+            currentLoc = Vector2.Add(currentLoc, moveAmount);
+            HUDArea.Location = currentLoc.ToPoint();
+            HUDView.Bounds = HUDArea;
+        }
+
+        
+
         public void Update()
         {
-            //!transform.Translation.Equals(Target)
+
+            if (!HUDOpenCloseFinished())
+            {
+                MoveViewports();
+                
+            }else if(inventoryOpen && !(game as Game1).isPaused)
+            {
+                (game as Game1).isPaused = true;
+            }else if(!inventoryOpen && (game as Game1).isPaused)
+            {
+                (game as Game1).isPaused = false;
+            }
+
+           
+
             if (!DoneScrolling())
             {
-                Vector3 newPos = Transform.Translation + direction  * 10;
+                Vector3 newPos = Transform.Translation + direction  * scrollSpeed;
                 Matrix.CreateTranslation(ref newPos, out transform);
 
-                
+                int yOffset = direction.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
+                int xOffset = GridGenerator.Instance.Offset.X;
+              
 
                 loadNextRoom = true;
-            }else if (loadNextRoom)
+                linkHasEntered = false;
+                linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+
+            }else if (loadNextRoom && !linkHasEntered)
             {
 
+                Vector2 direction2D = new Vector2(direction.X, direction.Y) * linkEnterSpeed;
+                player.currentLocation += direction2D;
+
+                linkHasEntered = Vector2.Distance(player.currentLocation,linkEnterPosition) <= 1;
+                
+
+            }else if (loadNextRoom)
+            {
                 Game1 game1 = game as Game1;
-
                 game1.isPaused = false;
-
-
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
-                if (game1.LinkPlayer.state is MoveRight)
-                {
-                    game1.LinkPlayer.currentLocation.X += 110;
-                }
-                else if (game1.LinkPlayer.state is MoveLeft)
-                {
-                    game1.LinkPlayer.currentLocation.X -= 110;
-                }
-                else if (game1.LinkPlayer.state is MoveUp)
-                {
-                    game1.LinkPlayer.currentLocation.Y -= 110;
-                }
-                else if (game1.LinkPlayer.state is MoveDown)
-                {
-                    game1.LinkPlayer.currentLocation.Y += 110;
-                }
             }
 
             location.X = transform.M41;

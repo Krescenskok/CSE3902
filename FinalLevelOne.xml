@@ -311,7 +311,7 @@
 			<Item>
 				<ObjectType>Door</ObjectType>
 				<ObjectName>Up</ObjectName>
-				<Type>locked</Type>
+				<Type>normal</Type>
 				<RoomNum>9</RoomNum>
 			</Item>
 			

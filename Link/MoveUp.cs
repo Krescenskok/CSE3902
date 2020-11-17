@@ -14,9 +14,9 @@ namespace Sprint4
         int Y_LOCATION = 75;
 
 
-        public MoveUp(LinkPlayer link) : base(link)
+        public MoveUp(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
@@ -36,8 +36,7 @@ namespace Sprint4
                 }
                 else
                     currentFrame = 6;
-                //if (location.Y <= Y_LOCATION)
-                //    location.Y = Y_LOCATION;
+
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -164,24 +163,31 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
-                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 13, 15);
+                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2*13, 2*15);
             }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword)
+            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 17, 28);
+                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*16, 2*28);
             }
-            else if (link.CurrentWeapon == ItemForLink.Sword)
+            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 18, 28);
+                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*17, 2*28);
             }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 19, 28);
+                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*18, 2*28);
             }
 
+
+            return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2 * 13, 2 * 15);
+
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
+
         }
 
     }

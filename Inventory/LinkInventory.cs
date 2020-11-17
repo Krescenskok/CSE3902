@@ -39,6 +39,7 @@ namespace Sprint4
         private ISprite mapInvSprite;
         private ISprite fullInvSprite;
         private ISprite drawnSprite;
+        private IItems prevItem = null;
         private SecondaryItem secondSlotItem;
         private Dictionary<SecondaryItem, IItems> secondItems = new Dictionary<SecondaryItem, IItems>();
         private Dictionary<SecondaryItem, Boolean> secondInInventory = new Dictionary<SecondaryItem, Boolean>();
@@ -54,13 +55,18 @@ namespace Sprint4
         private const int CURSORMAX = 8;
 
         private const string DIRECTION = "Up";
-        private const int ITEMS_GAP = 80;
+        private const int THREE = 3;
+        private const int FIFTY = 50;
+        private const int ITEMS_GAP = 60;
         private const int CURSOR_GAP = 75;
         private const int CURSOR_ADJUST = 30;
         private const int ITEM_ADJUST_X = 20;
         private const int ITEM_ADJUST_Y = 60/4;
         private const int TWO = 2;
-        private const int CURSOR_SIZE = 50;
+        private const int FIVE = 5;
+        private const int CURSOR_SIZE = 40;
+        private const int BOMB = 5;
+        private const int KEY = 1;
 
         private static readonly LinkInventory instance = new LinkInventory();
 
@@ -84,6 +90,7 @@ namespace Sprint4
             cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
 
             Point dimensions = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
+            dimensions = Camera.Instance.playArea.Size;
             defaultInvSprite = new InventorySprite(emptyBG, dimensions);
             compassInvSprite = new InventorySprite(compBG, dimensions);
             mapInvSprite = new InventorySprite(mapBG, dimensions);
@@ -101,34 +108,34 @@ namespace Sprint4
 
         private void InitializeItems(Point bgSize)
         {
-            Vector2 row1 = new Vector2(bgSize.X / 2 + ITEMS_GAP, bgSize.Y / 3 + (CURSOR_ADJUST));
-            Vector2 row2 = new Vector2(bgSize.X / 2 + ITEMS_GAP, row1.Y + ITEM_ADJUST_X * 2);
-            Point cursor = new Point((int)row1.X - ITEMS_GAP, (int)row1.Y - ITEMS_GAP);
+            Vector2 row1 = new Vector2(bgSize.X / 2 - THREE + FIFTY, bgSize.Y / FIVE + FIVE*TWO + TWO);
+            Point cursor = new Point((int)row1.X - FIFTY, (int)row1.Y - CURSOR_ADJUST);
 
-            InitializeCursor(cursor, row2, bgSize);
+            InitializeCursor(cursor, bgSize);
 
-            Vector2 item = new Vector2((float)cursor.X + (ITEM_ADJUST_X), (float)cursor.Y + (ITEM_ADJUST_Y));
-            Vector2 currentItemLoc = new Vector2(row1.X / 2 - ITEM_ADJUST_X, item.Y);
+            Vector2 item = new Vector2((float) cursor.X + (CURSOR_SIZE / 2), (float) cursor.Y + FIVE * TWO);
+            float startX = item.X;
+            Vector2 currentItemLoc = new Vector2(row1.X / 2 - (ITEM_ADJUST_X / 2) + TWO, item.Y + FIVE);
 
             secondItems.Add(SecondaryItem.Boomerang, new BoomerangObject(ItemsFactory.Instance.CreateBoomerangSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Bomb, new BombObject(ItemsFactory.Instance.CreateBombSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Candle, new BlueCandle(ItemsFactory.Instance.CreateBlueCandleSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             secondItems.Add(SecondaryItem.Arrow, new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(DIRECTION), item));
             secondItems.Add(SecondaryItem.Bow, new Bow(ItemsFactory.Instance.CreateBowSprite(), item));
-            item.X = row2.X - ITEMS_GAP + ITEM_ADJUST_X;
-            item.Y = row2.Y - ITEMS_GAP + ITEM_ADJUST_X;
+            item.X = startX;
+            item.Y += CURSOR_SIZE ;
             secondItems.Add(SecondaryItem.Potion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), item));
-            item.X += CURSOR_GAP;
+            item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            secondInInventory.Add(SecondaryItem.Boomerang, false);
+            secondInInventory.Add(SecondaryItem.Boomerang, true);
             secondInInventory.Add(SecondaryItem.Bomb, true);
             secondInInventory.Add(SecondaryItem.Arrow, true);
             secondInInventory.Add(SecondaryItem.Bow, false);
@@ -148,34 +155,40 @@ namespace Sprint4
             currentFirstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), currentItemLoc));
             currentFirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), currentItemLoc));
 
-            HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
+            HUD.Instance.SetBSlotItem(SecondaryItem.Boomerang);
+
+            secondSlotItem = SecondaryItem.Boomerang;
+            firstSlotItem = PrimaryItem.WoodenSword;
         }
 
-        private void InitializeCursor(Point cursor, Vector2 row2, Point inventoryBG)
+        private void InitializeCursor(Point cursor, Point inventoryBG)
         {
             Point cursorSize = new Point(CURSOR_SIZE, CURSOR_SIZE);
+            cursor.X += FIVE;
+            cursor.Y += TWO;
+            int startX = cursor.X;
             int i;
             for (i=0; i < CURSORMAX/2; i++)
             {
                 cursorLocation.Add(i, new CursorSprite(cursorTexture, cursorSize, cursor));
-                cursor.X += CURSOR_GAP;
+                cursor.X += ITEMS_GAP;
             }
 
-            cursor.X = (int)row2.X - ITEMS_GAP;
-            cursor.Y = (int)row2.Y - CURSOR_GAP;
+            cursor.X = startX;
+            cursor.Y += CURSOR_SIZE;
             for (i = CURSORMAX/2; i <= CURSORMAX; i++)
             {
                 cursorLocation.Add(i, new CursorSprite(cursorTexture, cursorSize, cursor));
-                cursor.X += CURSOR_GAP;
+                cursor.X += ITEMS_GAP;
             }
         }
 
         private void InitializeCounts()
         {
             RupeeCount = 0;
-            BombCount = 5;
-            KeyCount = 1;
-            PotionCount = 1;
+            BombCount = BOMB;
+            KeyCount = KEY;
+            PotionCount = KEY;
 
         }
 
@@ -188,10 +201,8 @@ namespace Sprint4
                 secondInInventory[item.Key] = false;
             }
 
-            secondSlotItem = SecondaryItem.Arrow;
+            secondSlotItem = SecondaryItem.Boomerang;
             firstSlotItem = PrimaryItem.WoodenSword;
-
-
         }
 
         public bool ShowInventory
@@ -224,6 +235,11 @@ namespace Sprint4
             set { potionCount = value; }
         }
 
+        public bool HasBow
+        {
+            get { return secondInInventory[SecondaryItem.Bow]; }
+        }
+
         public IItems GetSecondItem
         {
             get { return secondItems[secondSlotItem]; }
@@ -231,6 +247,11 @@ namespace Sprint4
 
         public void PickUpItem(IItems item, LinkPlayer link)
         {
+            if (!(prevItem is null) && prevItem.Equals(item))
+            {
+                return;
+            }
+
             if (item is BoomerangObject)
             {
                 secondInInventory[SecondaryItem.Boomerang] = true;
@@ -256,6 +277,10 @@ namespace Sprint4
             {
                 secondInInventory[SecondaryItem.Arrow] = true;
             }
+            else if (item is Rupee)
+            {
+                RupeeCount++;
+            }
             else if (item is BombObject)
             {
                 BombCount++;
@@ -272,6 +297,16 @@ namespace Sprint4
             {
                 HUDMap.Instance.HasCompass = true;
             }
+            else if (item is Clock)
+            {
+                link.Clock = true;
+                RoomEnemies.Instance.StunAllEnemies();
+            }
+            else if (item is BlueRing)
+            {
+                link.UseRing = true;
+            }
+            prevItem = item;
         }
 
         public void ConsumeItem(LinkPlayer link)
@@ -383,6 +418,41 @@ namespace Sprint4
 
         }
 
+        public void UpdateLinkWeapons(LinkPlayer link)
+        {
+            switch(secondSlotItem)
+            {
+                case SecondaryItem.Arrow:
+                case SecondaryItem.Bow:
+                    link.SecondaryWeapon = ItemForLink.ArrowBow;
+                    break;
+                case SecondaryItem.Boomerang:
+                    link.SecondaryWeapon = ItemForLink.Boomerang;
+                    break;
+                case SecondaryItem.Candle:
+                    link.SecondaryWeapon = ItemForLink.BlueCandle;
+                    break;
+                case SecondaryItem.Bomb:
+                    link.SecondaryWeapon = ItemForLink.Bomb;
+                    break;
+                default: //potion - do nothing
+                    break;
+            }
+
+            switch (firstSlotItem)
+            {
+                case PrimaryItem.WoodenSword:
+                    link.CurrentWeapon = ItemForLink.WoodenSword;
+                    break;
+                case PrimaryItem.SilverSword:
+                    link.CurrentWeapon = ItemForLink.Sword;
+                    break;
+                default: //wand
+                    link.CurrentWeapon = ItemForLink.MagicalRod;
+                    break;
+            }
+        }
+
 
         private void UpdateBGSprite()
         {
@@ -420,10 +490,28 @@ namespace Sprint4
                 }
             }
 
-            if (secondInInventory[secondSlotItem])
+            foreach (KeyValuePair<PrimaryItem, Boolean> pair in firstInInventory)
             {
-                currentSecondItems[secondSlotItem].Draw(spriteBatch);
+                if (pair.Value)
+                {
+                    firstItems[pair.Key].Draw(spriteBatch);
+                }
             }
+
+            if (cursorPosition < CURSORMAX / 2 + 1)
+            {
+                if (secondInInventory[secondSlotItem])
+                {
+                    currentSecondItems[secondSlotItem].Draw(spriteBatch);
+                }
+            }
+            else
+            {
+                if (firstInInventory[firstSlotItem])
+                {
+                    currentFirstItems[firstSlotItem].Draw(spriteBatch);
+                }
+            }            
 
             cursorLocation[cursorPosition].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
 

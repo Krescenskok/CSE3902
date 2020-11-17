@@ -179,9 +179,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/krescenskok/Documents/GitHub/CSE3902/Sprint3.csproj",
-      "projectName": "Sprint3",
-      "projectPath": "/Users/krescenskok/Documents/GitHub/CSE3902/Sprint3.csproj",
+      "projectUniqueName": "/Users/krescenskok/Documents/GitHub/CSE3902/Sprint4.csproj",
+      "projectName": "Sprint4",
+      "projectPath": "/Users/krescenskok/Documents/GitHub/CSE3902/Sprint4.csproj",
       "packagesPath": "/Users/krescenskok/.nuget/packages/",
       "outputPath": "/Users/krescenskok/Documents/GitHub/CSE3902/obj/",
       "projectStyle": "PackageReference",
@@ -232,7 +232,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -44,6 +44,7 @@ namespace Sprint4
 
         private RoomEnemies()
         {
+           
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
@@ -53,11 +54,10 @@ namespace Sprint4
     
         public void LoadRoom(Game game, XElement room)
         {
-            
 
+            this.game = game;
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
-            this.game = game;
             currentRoom = int.Parse(room.Attribute("id").Value);
 
             List<XElement> items = room.Elements("Item").ToList();
@@ -111,9 +111,9 @@ namespace Sprint4
                         {
                             enemies.Add(new Gel(game, location, item));
                         }
-                        else if (objName.Equals("Dodongo"))
+                        else if (objName.Equals("Aquamentus"))
                         {
-                            enemies.Add(new Dodongo(game, location, item));
+                            enemies.Add(new Aquamentus(game, location, item,(game as Game1).LinkPlayer));
 
                         }
                         else if (objName.Equals("Trap"))
@@ -137,8 +137,9 @@ namespace Sprint4
                 }
             }
 
+            
             allDead = enemies.Count == 0;
-
+            
         }
 
            
@@ -148,12 +149,16 @@ namespace Sprint4
 
 
 
-        public void AddTestCollider(Rectangle rect)
+        public void AddTestCollider(Rectangle rect, EnemyCollider enemyCol)
         {
-            testObjects.Add(new TestCollider(rect, game));
+            testObjects.Add(new TestCollider(rect, game, enemyCol));
+            
         }
 
-
+        public void AddTestCollider(PlayerCollider player)
+        {
+            testObjects.Add(new TestCollider(game,player));
+        }
 
 
         public void Update()
@@ -175,10 +180,7 @@ namespace Sprint4
 
         public void Draw(SpriteBatch batch)
         {
-            foreach (TestCollider col in testObjects)
-            {
-                col.Draw(batch);
-            }
+            
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Draw(batch);
@@ -192,6 +194,14 @@ namespace Sprint4
             }
         }
 
+        public void DrawTests(SpriteBatch batch)
+        {
+            foreach (TestCollider col in testObjects)
+            {
+                col.Draw(batch);
+            }
+        }
+
         public void Destroy(IEnemy enemy, Vector2 location)
         {
             deaths.Add(new EnemyDeath(location));
@@ -200,7 +210,6 @@ namespace Sprint4
             Sounds.Instance.PlayEnemyDie();
 
             allDead = enemies.Count == 0;
-            Debug.WriteLine(allDead);
         }
 
         public void Destroy(IEnemy enemy)

@@ -24,8 +24,8 @@ namespace Sprint4
         Point bossMarkerLocationBottom;
         private ISprite bossLocation;
         private int linkRoom;
-        private bool drawMap = false;
-        private bool drawBossLocation = false;
+        private bool drawMap = true;
+        private bool drawBossLocation = true;
         private int ROOM_BUFFER = 40;
         private const int FORTH = 4;
         private const int TWO = 2;
@@ -65,7 +65,7 @@ namespace Sprint4
             mapMarkerTexture = game.Content.Load<Texture2D>("HUDandInv/CompassSpot");
 
             Point mapSize = new Point(HUDSize.X / FORTH, HUDSize.Y / 2);
-            mapTopLoc = new Point(HUDSize.X / (FORTH * FORTH), game.Window.ClientBounds.Height / (FORTH*TWO));
+            mapTopLoc = new Point(HUDSize.X / (FORTH * FORTH), game.Window.ClientBounds.Height / 9);
             mapBottomLoc = new Point(mapTopLoc.X, mapTopLoc.Y + game.Window.ClientBounds.Height - HUDSize.Y);
             InitializeMap(mapSize);
 

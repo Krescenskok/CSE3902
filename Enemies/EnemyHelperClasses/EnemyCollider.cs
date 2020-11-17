@@ -39,6 +39,7 @@ namespace Sprint4
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
+            RoomEnemies.Instance.AddTestCollider(rect, this);
         }
 
 

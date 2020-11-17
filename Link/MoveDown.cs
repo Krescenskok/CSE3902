@@ -14,9 +14,9 @@ namespace Sprint4
         int Y_LOCATION = 375;
         int PICKUP = 300;
 
-        public MoveDown(LinkPlayer link) : base(link)
+        public MoveDown(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
 
 
@@ -50,8 +50,6 @@ namespace Sprint4
                         currentFrame = 0;
                 }
 
-                //if (location.Y >= Y_LOCATION)
-                //    location.Y = Y_LOCATION;
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -274,24 +272,28 @@ namespace Sprint4
 
         public override Rectangle Bounds()
         {
+            return link.hitbox;
+            /*
             if (link.CurrentWeapon == ItemForLink.Shield)
             {
-                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 8, 13, 13);
+                return new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y + 4, 2*14, 2*14);
             }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword)
+            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 6, (int)link.currentLocation.Y + 2, 18, 24);
+                return new Rectangle((int)link.currentLocation.X + 6, (int)link.currentLocation.Y + 2, 2*17, 2*24);
             }
-            else if (link.CurrentWeapon == ItemForLink.Sword)
+            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 4, 16, 25);
+                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 4, 2*15, 2*25);
             }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
             {
-                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 4, 16, 23);
+                return new Rectangle((int)link.currentLocation.X + 8, (int)link.currentLocation.Y + 4, 2*15, 2*23);
             }
 
             return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
+            */
+
         }
 
     }

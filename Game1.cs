@@ -33,21 +33,25 @@ namespace Sprint4
         ICommand activeCommand;
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
-       
 
 
-        LinkPlayer linkPlayer = new LinkPlayer();
+
+
+
+        LinkPlayer linkPlayer;
         public bool isPaused = false;
         public LinkPlayer LinkPlayer { get => linkPlayer; }
+        public SpriteFont Font { get => font; }
+        public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
-
+        private bool isGameOver = false;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            
+
         }
 
         protected override void Initialize()
@@ -72,8 +76,12 @@ namespace Sprint4
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            linkPlayer = new LinkPlayer();
+
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
+
+
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
             ProjectilePersistent = ProjectilesCommand.Instance;
@@ -82,14 +90,13 @@ namespace Sprint4
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             DoorSpriteFactory.Instance.LoadAllTextures(this);
 
-            HUD.Instance.LoadHUD(this);
-            LinkInventory.Instance.InitializeInventory(this);
-
-
             //do not move//
             camera = Camera.Instance;
             camera.Load(this);
             //do not move//
+
+            HUD.Instance.LoadHUD(this);
+            LinkInventory.Instance.InitializeInventory(this);
 
             CollisionHandler.Instance.Initialize(this);
 
@@ -99,21 +106,20 @@ namespace Sprint4
 
             //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
-            
+
             RoomSpawner.Instance.LoadRoom(this, 1);
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
-
-
+            RoomEnemies.Instance.AddTestCollider(linkPlayer.collider);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if(linkPlayer.Health == 0)
+            if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
-
-                activeCommand = new ResetCommand(linkPlayer);
+                linkPlayer.IsDead = true;
+                activeCommand = new ResetCommand(linkPlayer, false);
                 activeCommand.Update(gameTime);
             }
             else
@@ -147,52 +153,107 @@ namespace Sprint4
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
-                HUD.Instance.UpdateInventoryCounts(LinkInventory.Instance.RupeeCount, LinkInventory.Instance.KeyCount, LinkInventory.Instance.BombCount);
                 base.Update(gameTime);
 
             }
 
             camera.Update();
+            
         }
+
+
+
+        void PrepareToDraw()
+        {
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            GraphicsDevice.Viewport = camera.gameView;
+            GraphicsDevice.Clear(Color.Black);
+        }
+
+
+            //draw game area from camera POV
+
+
 
         protected override void Draw(GameTime gameTime)
         {
 
-            
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-
-            GraphicsDevice.Viewport = camera.gameView;
-
-
-            GraphicsDevice.Clear(Color.Black);
             if (activeCommand != null)
             {
+                if (activeCommand is ResetCommand)
+                {
+
+                    IsGameOver = !((ResetCommand)activeCommand).StartAgain;
+
+                    if (IsGameOver)
+                    {
+                        _spriteBatch.Begin();
+                    }
+
+                    else
+                    {
+                        PrepareToDraw();
+                    }
+                }
+                else
+                {
+                    PrepareToDraw();
+                    IsGameOver = false;
+                }
+
                 activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
-            }
-
-            if (!LinkInventory.Instance.ShowInventory)
-            {
-                RoomSpawner.Instance.Draw(_spriteBatch);
-                LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                base.Draw(gameTime);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin();
-                HUD.Instance.DrawTop(_spriteBatch);
-                _spriteBatch.End();
             }
             else
             {
-                _spriteBatch.End();
+                if (IsGameOver)
+                {
+                    _spriteBatch.Begin();
+                }
+                else
+                    PrepareToDraw();
+            }
 
-                _spriteBatch.Begin();
-                LinkInventory.Instance.Draw(_spriteBatch);
-                HUD.Instance.DrawBottom(_spriteBatch);
+
+            if (!IsGameOver)
+            {
+                RoomSpawner.Instance.Draw(_spriteBatch);
+            LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+            ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+            base.Draw(gameTime);
+            RoomEnemies.Instance.DrawTests(_spriteBatch);
+
+            _spriteBatch.End();
+
+
+            //Draw HUD in separate viewport
+            _spriteBatch.Begin();
+
+            GraphicsDevice.Viewport = camera.HUDView;
+            HUD.Instance.DrawTop(_spriteBatch);
+            LinkInventory.Instance.Draw(_spriteBatch);
+            HUD.Instance.DrawBottom(_spriteBatch);
+
+            _spriteBatch.End();
+            }
+            else
+            {
+
+                GraphicsDevice.Clear(Color.Black);
+                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 50), Color.White);
+                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(230, 75), Color.White);
+                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 100), Color.White);
+
+
+
+
+                base.Draw(gameTime);
+
                 _spriteBatch.End();
             }
+
+
         }
     }
 }
