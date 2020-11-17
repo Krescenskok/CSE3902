@@ -15,7 +15,7 @@ namespace Sprint4
         private static readonly RoomDoors instance = new RoomDoors();
 
         private List<Door> doors;
-        private List<DoorTriggerCollider> triggers;
+        
         
 
         private Dictionary<int,DoorSprite> lockedDoorSprites;
@@ -53,7 +53,7 @@ namespace Sprint4
 
             lockedDoorSprites = new Dictionary<int, DoorSprite>();
             lockedDoors = new Dictionary<int, Door>();
-            triggers = new List<DoorTriggerCollider>();
+            
         }
 
         private void LoadSpecialDoors()
@@ -121,7 +121,7 @@ namespace Sprint4
 
                     XElement doorTypeTag = item.Element("Type");
 
-                    DoorType thisType = GetDoorType(doorTypeTag.Value);
+                    DoorType thisType = Parse(doorTypeTag.Value);
 
                     
 
@@ -197,7 +197,7 @@ namespace Sprint4
             
         }
 
-        private DoorType GetDoorType(string str)
+        private DoorType Parse(string str)
         {
             if (str.Equals("locked")) return DoorType.locked;
             else if(str.Equals("normal")) return DoorType.normal;
@@ -207,25 +207,15 @@ namespace Sprint4
 
 
 
-        public void Destroy(Door door)
-        {
-            
-            CollisionHandler.Instance.RemoveCollider(door.innerCollider);
-            doors.Remove(door);
-
-        }
-
-
-
         public void Update()
         {
-          foreach(Door door in doors)
+            foreach(Door door in doors)
             {
                 door.Update();
             }
 
 
-          if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
+            if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
             {
                 OpenDoor(6);
             }else if(curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)

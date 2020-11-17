@@ -92,6 +92,10 @@ namespace Sprint4
 
         #region //sound effects
 
+        public void PlaySoundEffect(string name)
+        {
+
+        }
         public void PlayEnemyHit()
         {
             SoundEffectInstance sound = Get("EnemyHit");

@@ -32,7 +32,7 @@ namespace Sprint4.Items
 
             CollisionHandler.Instance.RemoveCollider(item.Collider);
 
-            item.Expire();
+            
         }
 
         public void Collected()

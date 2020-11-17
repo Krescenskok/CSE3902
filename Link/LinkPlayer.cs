@@ -58,6 +58,8 @@ namespace Sprint4
 
         public List<Direction> possibleDirections = Directions.Default();
 
+        public bool isPaused = false;
+
         public void RemovePlacedItem(IItems item)
         {
             if (itemsPlacedByLink.Contains(item) && item.IsExpired)

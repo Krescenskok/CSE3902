@@ -19,7 +19,7 @@ namespace Sprint4
         const int DISPLACEMENT = 100;
         //String Key;
 
-       
+        bool done = false;
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;

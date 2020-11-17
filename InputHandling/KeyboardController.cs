@@ -120,8 +120,9 @@ namespace Sprint4
                     {
                         if (delay == 0)
                         {
-                            ((PauseCommand)activeCommand).IsPause = !((PauseCommand)activeCommand).IsPause;
-
+                            game.isPaused = !game.isPaused;
+                            player.isPaused = !player.isPaused;
+                            
                             delay = 20;
                         }
                     }
