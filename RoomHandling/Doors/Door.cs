@@ -68,8 +68,10 @@ namespace Sprint4
         public void ChangeRoom()
         {
             if (Heading == 'L') Camera.Instance.ScrollLeft(NextRoom);
-            else if(Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
-            else if(Heading == 'T') Camera.Instance.ScrollUp(NextRoom);
+            else if (Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
+            else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom);
+            else if (Heading == 'T') Camera.Instance.ScrollUp(NextRoom);
+            else if (Heading == 'S') Camera.Instance.ScrollUp(NextRoom);
             else if (Heading == 'B') Camera.Instance.ScrollDown(NextRoom);
             else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom); //Something Special
 

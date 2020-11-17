@@ -62,7 +62,7 @@ namespace Sprint4.Blocks
             if (moveable && compare.Equals("down"))
             {
                 moveable = false;
-                shift = this.block.blockDimensionX;
+                shift = this.block.blockDimensionY;
             }
         }
 

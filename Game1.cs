@@ -109,6 +109,7 @@ namespace Sprint4
 
             RoomSpawner.Instance.LoadRoom(this, 1);
 
+
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
             RoomEnemies.Instance.AddTestCollider(linkPlayer.collider);

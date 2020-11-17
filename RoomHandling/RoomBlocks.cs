@@ -85,8 +85,11 @@ namespace Sprint4
                         }
                         else if (objName.Equals("Water"))
                         {
-
                             roomBlocks.Add(new WaterTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("Stairs"))
+                        {
+                            roomBlocks.Add(new Stairs(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                         }
                         else if (objName.Equals("Column"))
                         {
