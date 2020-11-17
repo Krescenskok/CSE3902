@@ -11,7 +11,7 @@ Variable names are very descriptive and state their purpose. Method names are al
 Author of the code review: Ann Yan
 Date of the code review: 11/16/2020
 Sprint number: 4
-Name of the .cs file being reviewed: MoveUp.cs
+Name of the .cs file being reviewed: Stairs.cs
 Author of the .cs file being reviewed: Noah Fabec
 Specific comments on code quality: 
 Has magic numbers lying around everywhere. 
