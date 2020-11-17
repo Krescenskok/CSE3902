@@ -31,8 +31,8 @@ namespace Sprint4
             fireBallState = new FireBallState(this,aquamentus, initialPos, targetPos);
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
             fireBallSprite = (FireBallSprite)sprite;
-            link = this.link;
-            fireBallCollider = new FireballCollider(fireBallSprite.GetRectangle(initialPos),this,attackStrength, "fireball", link);
+            this.link = link;
+            fireBallCollider = new FireballCollider(fireBallSprite.GetRectangle(initialPos),this,attackStrength, "fireball", this.link);
         }
 
         public void Draw(SpriteBatch spriteBatch)

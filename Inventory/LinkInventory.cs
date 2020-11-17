@@ -126,7 +126,7 @@ namespace Sprint4
             secondItems.Add(SecondaryItem.Arrow, new ArrowObject(ItemsFactory.Instance.CreateArrowSprite(DIRECTION), item));
             secondItems.Add(SecondaryItem.Bow, new Bow(ItemsFactory.Instance.CreateBowSprite(), item));
             item.X = startX;
-            item.Y += CURSOR_SIZE ;
+            item.Y += CURSOR_SIZE;
             secondItems.Add(SecondaryItem.Potion, new BluePotion(ItemsFactory.Instance.CreateBluePotionSprite(), item));
             item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.WoodenSword, new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), item));
@@ -135,7 +135,7 @@ namespace Sprint4
             item.X += ITEMS_GAP;
             firstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            secondInInventory.Add(SecondaryItem.Boomerang, true);
+            secondInInventory.Add(SecondaryItem.Boomerang, false);
             secondInInventory.Add(SecondaryItem.Bomb, true);
             secondInInventory.Add(SecondaryItem.Arrow, true);
             secondInInventory.Add(SecondaryItem.Bow, false);
@@ -155,9 +155,9 @@ namespace Sprint4
             currentFirstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), currentItemLoc));
             currentFirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), currentItemLoc));
 
-            HUD.Instance.SetBSlotItem(SecondaryItem.Boomerang);
+            HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
 
-            secondSlotItem = SecondaryItem.Boomerang;
+            secondSlotItem = SecondaryItem.Bomb;
             firstSlotItem = PrimaryItem.WoodenSword;
         }
 
@@ -411,6 +411,7 @@ namespace Sprint4
             {
                 HUD.Instance.SetBSlotItem(secondSlotItem);
             }
+
             if (firstInInventory[firstSlotItem])
             {
                 HUD.Instance.SetASlotItem(firstSlotItem);

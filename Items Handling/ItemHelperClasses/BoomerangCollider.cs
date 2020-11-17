@@ -65,7 +65,16 @@ namespace Sprint4
                 col.SendMessage("Stun", null);
                 ((Sprint4.Items.Boomerang)this.item).Impact();
             }
-            
+            else if (col.CompareTag("Player"))
+            {
+                ((Sprint4.Items.Boomerang)this.item).Expire();
+            }
+            else if (col.CompareTag("Wall") || col.CompareTag("Door"))
+            {
+                ((Sprint4.Items.Boomerang)this.item).Returning();
+            }
+
+
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)

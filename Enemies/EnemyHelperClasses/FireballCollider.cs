@@ -19,9 +19,9 @@ namespace Sprint4.Enemies.EnemyHelperClasses
         {
             damageAmount = strength;
             bounds = rect;
-            enemy = this.enemy;
-            name = this.name;
-            link = this.link;
+            this.enemy = enemy;
+            this.name = name;
+            this.link = link;
             CollisionHandler.Instance.AddCollider(this, Layers.Projectile);
         }
 
