@@ -27,8 +27,10 @@ namespace Sprint4
         private int aquamentusHP;
         private static int AttackStrength = HPAmount.OneHeart;
         private static int RangeAttackStrength = HPAmount.OneHeart;
-        private static int UpdatePerSec = 60;
-        private float attackPerSec = 3;
+
+        private static int UpdatePerSec = 120;
+        private float attackPerSec = 1;
+
         private float directionChangPerSec = (float)0.2;
         private float moveSpeedPerSec = 15;
         private float speed;
@@ -79,7 +81,9 @@ namespace Sprint4
 
         public void Die()
         {
-            
+            Sounds.Instance.PlayBossScream();
+            RoomItems.Instance.DropHeartContainer(Location);
+            CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
         }
@@ -114,7 +118,7 @@ namespace Sprint4
 
         public void SpawnFireBall(Vector2 spawnPos, Vector2 targetPos)
         {
-            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength));
+            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength, link));
         }
 
         public void RemoveFireBall(FireBall fb)
@@ -153,7 +157,7 @@ namespace Sprint4
 
         public void TakeDamage(Direction dir, int amount)
         {
-            LostHP(amount);
+            state.TakeDamage(amount);
         }
 
         public void ObstacleCollision(Collision collision)
@@ -163,7 +167,7 @@ namespace Sprint4
 
         public void Stun()
         {
-           //stun implementation
+           //not affected
         }
 
     }

@@ -23,6 +23,8 @@ namespace Sprint4
         private Point wallOffset;
         public Point Offset { get => wallOffset; }
 
+        public int offsetYBottom;
+
         private Point playArea;
 
         private const float OFFSET_MULT_X = 1f / 8f;
@@ -65,7 +67,7 @@ namespace Sprint4
 
             int offsetX = (int) (screenWidth * OFFSET_MULT_X);
             int offsetY = (int)(screenHeight * OFFSET_MULT_Y);
-            int offsetYBottom = (int)(screenHeight * OFFSET_MULT_Y_BOTTOM);
+            offsetYBottom = (int)(screenHeight * OFFSET_MULT_Y_BOTTOM);
             wallOffset = new Point(offsetX, offsetY);
 
             int playAreaWidth = (int)screenWidth - offsetX * 2;

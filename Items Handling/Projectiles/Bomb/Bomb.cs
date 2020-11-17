@@ -53,6 +53,8 @@ namespace Sprint4.Items
             state = new BombExplosionState(this);
             collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
             Update();
+
+            Sounds.Instance.PlaySoundEffect("BombExplode");
         }
 
         public void Update()

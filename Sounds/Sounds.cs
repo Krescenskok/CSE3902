@@ -41,7 +41,7 @@ namespace Sprint4
 
             BGM = Get("DungeonTheme");
             BGM.IsLooped = true;
-            BGM.Play();
+            //BGM.Play();
         }
 
         public void Update()
@@ -92,6 +92,12 @@ namespace Sprint4
 
         #region //sound effects
 
+        public void PlaySoundEffect(string name)
+        {
+            SoundEffectInstance sound = Get(name);
+
+            if (sound != null) sound.Play();
+        }
         public void PlayEnemyHit()
         {
             SoundEffectInstance sound = Get("EnemyHit");

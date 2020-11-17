@@ -121,12 +121,15 @@ namespace Sprint4
             {
                 bounds = player.Bounds();
                 location = bounds.Location.ToVector2();
+
+
               
             }
             if (enemyCol != null)
             {
                 bounds = enemyCol.Bounds();
                 location = bounds.Location.ToVector2();
+
             }
 
             

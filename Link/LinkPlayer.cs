@@ -45,14 +45,20 @@ namespace Sprint4
         private bool clock = false;
         private bool largeShield = false;
         private bool drawShield = true;
+
+        private bool isDead = false;
+
         public LinkSprite sprite;
         public Rectangle hitbox;
+
 
         public PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
 
         public List<Direction> possibleDirections = Directions.Default();
+
+        public bool isPaused = false;
 
         public void RemovePlacedItem(IItems item)
         {
@@ -76,6 +82,12 @@ namespace Sprint4
             {
                 return state.Bounds();
             }
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
         }
 
         public float Health
@@ -132,7 +144,7 @@ namespace Sprint4
         }
 
 
-        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
+        private ItemForLink currentWeapon = ItemForLink.Shield;
 
 
         public ItemForLink CurrentWeapon
@@ -142,7 +154,7 @@ namespace Sprint4
 
         }
 
-        private ItemForLink secondWeapon = ItemForLink.Boomerang;
+        private ItemForLink secondWeapon = ItemForLink.ArrowBow;
         public ItemForLink SecondaryWeapon
         {
             get { return secondWeapon; }
@@ -182,15 +194,18 @@ namespace Sprint4
         }
         public void Update(GameTime gameTime)
         {
-            hitbox = sprite.hitbox;
-            int sizeX = hitbox.Size.X;
-            int sizeY = hitbox.Size.Y;
-            CurrentLocation = state.Update(gameTime, CurrentLocation);
-            hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-            delay--;
+            if (sprite != null)
+            { 
+                hitbox = sprite.hitbox;
+                int sizeX = hitbox.Size.X;
+                int sizeY = hitbox.Size.Y;
+                CurrentLocation = state.Update(gameTime, CurrentLocation);
+                hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                delay--;
 
 
-            possibleDirections = Directions.Default();
+                possibleDirections = Directions.Default();
+            }
         }
         public void HandleObstacle(Collision col)
         {

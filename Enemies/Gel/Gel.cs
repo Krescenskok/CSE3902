@@ -81,6 +81,7 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
         public void Draw(SpriteBatch batch)

@@ -10,6 +10,7 @@ namespace Sprint4
         public bool CollidesWith(ICollider other)
         {
             return other.layer is PlayerLayer
+                || other.layer is PlayerWeaponLayer
                 || other.layer is DefaultLayer;
         }
     }

@@ -311,7 +311,7 @@
 			<Item>
 				<ObjectType>Door</ObjectType>
 				<ObjectName>Up</ObjectName>
-				<Type>locked</Type>
+				<Type>normal</Type>
 				<RoomNum>9</RoomNum>
 			</Item>
 			
@@ -1290,7 +1290,7 @@
 			<Item>
 				<ObjectType>Item</ObjectType>
 				<ObjectName>TriforcePiece</ObjectName>
-				<Location>3 4</Location>
+				<Location>3 6</Location>
 				<Alive>true</Alive>
 			</Item>
 
@@ -2289,12 +2289,6 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Aquamentus</ObjectName>
 				<Location>3 8</Location>
-				<Alive>true</Alive>
-			</Item>
-			<Item>
-				<ObjectType>Item</ObjectType>
-				<ObjectName>HeartContainer</ObjectName>
-				<Location>3 10</Location>
 				<Alive>true</Alive>
 			</Item>
 		</Room>

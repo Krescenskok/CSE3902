@@ -15,7 +15,7 @@ namespace Sprint4
         private static readonly RoomDoors instance = new RoomDoors();
 
         private List<Door> doors;
-        private List<DoorTriggerCollider> triggers;
+        
         
 
         private Dictionary<int,DoorSprite> lockedDoorSprites;
@@ -53,7 +53,7 @@ namespace Sprint4
 
             lockedDoorSprites = new Dictionary<int, DoorSprite>();
             lockedDoors = new Dictionary<int, Door>();
-            triggers = new List<DoorTriggerCollider>();
+            
         }
 
         private void LoadSpecialDoors()
@@ -121,7 +121,7 @@ namespace Sprint4
 
                     XElement doorTypeTag = item.Element("Type");
 
-                    DoorType thisType = GetDoorType(doorTypeTag.Value);
+                    DoorType thisType = Parse(doorTypeTag.Value);
 
                     
 
@@ -132,7 +132,11 @@ namespace Sprint4
                     else if (objName.Equals("Right"))
                     {
                         doors.Add(new Door(game, locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
-                        if (curRoom == 6) triggers.Add(new DoorTriggerCollider(locations[5],doorSizeSide, 6, () => !RoomEnemies.Instance.allDead));
+                        if (curRoom == 6)
+                        {
+                            lockedDoors[6] = (doors[doors.Count - 1]);
+                        }
+                        
                     }
                     else if (objName.Equals("Up"))
                     {
@@ -152,6 +156,8 @@ namespace Sprint4
                 }
             }
 
+
+            
         }
 
 
@@ -190,13 +196,13 @@ namespace Sprint4
             locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
 
 
-            doorSizeMiddle = new Point(tileWidth*2, 10);
-            doorSizeSide = new Point(10, tileHeight);
+            doorSizeMiddle = new Point(tileWidth*2, 2);
+            doorSizeSide = new Point(2, tileHeight);
 
             
         }
 
-        private DoorType GetDoorType(string str)
+        private DoorType Parse(string str)
         {
             if (str.Equals("locked")) return DoorType.locked;
             else if(str.Equals("normal")) return DoorType.normal;
@@ -206,27 +212,20 @@ namespace Sprint4
 
 
 
-        public void Destroy(Door door)
-        {
-            
-            CollisionHandler.Instance.RemoveCollider(door.innerCollider);
-            doors.Remove(door);
-
-        }
-
-
-
         public void Update()
         {
-          foreach(Door door in doors)
+            foreach(Door door in doors)
             {
                 door.Update();
             }
 
 
-          if(curRoom == 6 && RoomEnemies.Instance.EnemyCount == 0 && lockedDoorSprites[6].shouldDraw == false)
+            if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
             {
                 OpenDoor(6);
+            }else if(curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)
+            {
+                CloseDoor(6);
             }
         }
 

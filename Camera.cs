@@ -42,23 +42,27 @@ namespace Sprint4
         private Rectangle targetGameView;
         private Rectangle targetHUDLocation;
 
-        private bool inventoryOpen = false;
+        private bool inventoryOpen = false, inventoryStillMoving = false;
 
         private const int scrollSpeed = 10;
+
+        private bool linkHasEntered = false;
+        private Vector2 linkEnterPosition;
+        private const int linkEnterSpeed = -2;
+
+        private LinkPlayer player;
+
+       
 
         public void Load(Game game)
         {
             this.game = game;
             screenHeight = game.Window.ClientBounds.Height;
             screenWidth = game.Window.ClientBounds.Width;
-
+            player = (game as Game1).LinkPlayer;
             
 
             transform = Matrix.Identity;
-
-            
-           
-            
 
             Point topLeftCorner = new Point(screenWidth / 10, screenHeight / 4);
             Point size = new Point(screenWidth - topLeftCorner.X * 2, screenHeight - topLeftCorner.Y);
@@ -90,7 +94,7 @@ namespace Sprint4
         //code for extending menu view
         public void OpenCloseInventory()
         {
-            if (ViewportAdjustmentFinished())
+            if (HUDOpenCloseFinished())
             {
                 if (!inventoryOpen)
                 {
@@ -129,8 +133,9 @@ namespace Sprint4
 
             nextRoom = roomNum;
 
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            
+            (game as Game1).isPaused = true;
+            
 
             currentDirection = Direction.up;
         }
@@ -143,8 +148,7 @@ namespace Sprint4
 
             nextRoom = roomNum;
 
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.down;
         }
@@ -155,9 +159,7 @@ namespace Sprint4
 
             direction = Vector3.Left;
             nextRoom = roomNum;
-
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.right;
         }
@@ -168,9 +170,7 @@ namespace Sprint4
 
             direction = Vector3.Right;
             nextRoom = roomNum;
-
-            Game1 game1 = game as Game1;
-            game1.isPaused = true;
+            (game as Game1).isPaused = true;
 
             currentDirection = Direction.left;
         }
@@ -184,7 +184,7 @@ namespace Sprint4
                 || transform.Translation.Equals(Target);
         }
 
-        private bool ViewportAdjustmentFinished()
+        private bool HUDOpenCloseFinished()
         {
             return playArea.Size.Equals(targetGameView.Size) && playArea.Location.Equals(targetGameView.Location)
                 && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
@@ -209,49 +209,56 @@ namespace Sprint4
             HUDView.Bounds = HUDArea;
         }
 
+        
+
         public void Update()
         {
 
-            if (!ViewportAdjustmentFinished())
+            if (!HUDOpenCloseFinished())
             {
                 MoveViewports();
+                inventoryStillMoving = true;
                 
+            }else if(inventoryOpen && !(game as Game1).isPaused)
+            {
+                (game as Game1).isPaused = true;
+            }else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+            {
+                (game as Game1).isPaused = false;
+                inventoryStillMoving = false;
             }
+
+           
 
             if (!DoneScrolling())
             {
                 Vector3 newPos = Transform.Translation + direction  * scrollSpeed;
                 Matrix.CreateTranslation(ref newPos, out transform);
 
-                
+                int yOffset = direction.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
+                int xOffset = GridGenerator.Instance.Offset.X;
+              
 
                 loadNextRoom = true;
-            }else if (loadNextRoom)
+                linkHasEntered = false;
+                linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+
+            }else if (loadNextRoom && !linkHasEntered)
             {
 
+                Vector2 direction2D = new Vector2(direction.X, direction.Y) * linkEnterSpeed;
+                player.currentLocation += direction2D;
+
+                linkHasEntered = Vector2.Distance(player.currentLocation,linkEnterPosition) <= 1;
+                
+
+            }else if (loadNextRoom)
+            {
                 Game1 game1 = game as Game1;
-
                 game1.isPaused = false;
-
-
+                
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
-                if (game1.LinkPlayer.state is MoveRight)
-                {
-                    game1.LinkPlayer.currentLocation.X += 110;
-                }
-                else if (game1.LinkPlayer.state is MoveLeft)
-                {
-                    game1.LinkPlayer.currentLocation.X -= 110;
-                }
-                else if (game1.LinkPlayer.state is MoveUp)
-                {
-                    game1.LinkPlayer.currentLocation.Y -= 110;
-                }
-                else if (game1.LinkPlayer.state is MoveDown)
-                {
-                    game1.LinkPlayer.currentLocation.Y += 110;
-                }
             }
 
             location.X = transform.M41;
