@@ -189,19 +189,23 @@ namespace Sprint4
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
             
+            
 
         }
         public void Update(GameTime gameTime)
         {
-            hitbox = sprite.hitbox;
-            int sizeX = hitbox.Size.X;
-            int sizeY = hitbox.Size.Y;
-            CurrentLocation = state.Update(gameTime, CurrentLocation);
-            hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-            delay--;
+            if (sprite != null)
+            { 
+                hitbox = sprite.hitbox;
+                int sizeX = hitbox.Size.X;
+                int sizeY = hitbox.Size.Y;
+                CurrentLocation = state.Update(gameTime, CurrentLocation);
+                hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                delay--;
 
 
-            possibleDirections = Directions.Default();
+                possibleDirections = Directions.Default();
+            }
         }
         public void HandleObstacle(Collision col)
         {
