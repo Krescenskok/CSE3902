@@ -178,45 +178,31 @@ namespace Sprint4
             //_spriteBatch.Begin(transformMatrix: camera.Transform);
 
 
-            if (activeCommand != null)
+             if (activeCommand != null)
             {
                 if (activeCommand is ResetCommand)
                 {
 
                     IsGameOver = !((ResetCommand)activeCommand).StartAgain;
 
-                    if (IsGameOver)
-                    {
-                        _spriteBatch.Begin();
-                    }
-
-                    else
-                    {
-                        PrepareToDraw();
-                    }
                 }
                 else
                 {
-                    PrepareToDraw();
                     IsGameOver = false;
                 }
-
-                activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
             }
-            else
-            {
-                if (IsGameOver)
-                {
-                    _spriteBatch.Begin();
-                }
-                else
-                    PrepareToDraw();
-            }
+           
 
 
-            if (!IsGameOver)
+              if (!IsGameOver)
             {
-                    
+                _spriteBatch.Begin(transformMatrix: camera.Transform);
+                GraphicsDevice.Viewport = camera.gameView;
+                GraphicsDevice.Clear(Color.Black);
+
+                if (activeCommand != null)
+                    activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
@@ -227,7 +213,7 @@ namespace Sprint4
                 _spriteBatch.End();
 
 
-                //Draw HUD in separate viewport
+                 //Draw HUD in separate viewport
                 _spriteBatch.Begin();
 
                 GraphicsDevice.Viewport = camera.HUDView;
@@ -240,12 +226,16 @@ namespace Sprint4
             else
             {
 
+                _spriteBatch.Begin();
+
+                if (activeCommand != null)
+                    activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+
+                GraphicsDevice.Viewport = camera.gameView;
                 GraphicsDevice.Clear(Color.Black);
-                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 50), Color.White);
-                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(230, 75), Color.White);
-                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 100), Color.White);
-
-
+                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 95), Color.White);
+                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(225, 145), Color.White);
+                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 175), Color.White);
 
 
                 base.Draw(gameTime);
