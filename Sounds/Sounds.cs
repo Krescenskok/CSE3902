@@ -41,7 +41,7 @@ namespace Sprint4
 
             BGM = Get("DungeonTheme");
             BGM.IsLooped = true;
-            //BGM.Play();
+            BGM.Play();
         }
 
         public void Update()
