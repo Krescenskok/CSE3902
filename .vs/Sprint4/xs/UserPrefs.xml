@@ -1,22 +1,22 @@
 ﻿<Properties StartupConfiguration="{141C53F7-9057-415F-A98F-B6635BE04E22}|Default">
   <MonoDevelop.Ide.ItemProperties.Sprint4 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Items Handling/Projectiles/SwordBeam/SwordBeam.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Game1.cs">
     <Files>
       <File FileName="Link/MoveUp.cs" Line="1" Column="1" />
       <File FileName="BlueLinkSpriteSheet.cs" />
       <File FileName="Link/LinkSprite.cs" />
-      <File FileName="SpriteFactory.cs" Line="39" Column="26" />
-      <File FileName="Link/Stationary.cs" Line="96" Column="12" />
-      <File FileName="Link/Movement.cs" Line="51" Column="1" />
-      <File FileName="Link/MoveRight.cs" Line="22" Column="12" />
+      <File FileName="SpriteFactory.cs" />
+      <File FileName="Link/Stationary.cs" />
+      <File FileName="Link/Movement.cs" />
+      <File FileName="Link/MoveRight.cs" />
       <File FileName="Link/LinkCommand.cs" />
       <File FileName="Link/MoveDown.cs" />
       <File FileName="Link/Projectiles.cs" />
       <File FileName="Link/MoveLeft.cs" />
-      <File FileName="Link/LinkPlayer.cs" Line="250" Column="50" />
+      <File FileName="Link/LinkPlayer.cs" />
       <File FileName="Game1.cs" Line="164" Column="1" />
       <File FileName="InputHandling/KeyboardController.cs" />
-      <File FileName="Game Commands/ResetCommand.cs" Line="1" Column="1" />
+      <File FileName="Game Commands/ResetCommand.cs" />
       <File FileName="Items Handling/Projectiles/SwordBeam/SwordBeam.cs" Line="49" Column="1" />
     </Files>
     <Pads>
@@ -26,12 +26,11 @@
             <Node name="Sprint4" expanded="True">
               <Node name="Items Handling" expanded="True">
                 <Node name="Projectiles" expanded="True">
-                  <Node name="SwordBeam" expanded="True">
-                    <Node name="SwordBeam.cs" selected="True" />
-                  </Node>
+                  <Node name="SwordBeam" expanded="True" />
                 </Node>
               </Node>
               <Node name="Link" expanded="True" />
+              <Node name="Game1.cs" selected="True" />
             </Node>
           </Node>
         </State>

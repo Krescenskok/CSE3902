@@ -25,75 +25,7 @@ namespace Sprint4
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
 
         int i = 0;
-        /*
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
-        {
-            Color col;
-
-            if (link.LargeShield && link.DrawShield)
-            {
-                currentFrame = 10;
-                link.DrawShield = false;
-            }
-            if (link.IsDamaged || link.Clock)
-            {
-
-                if (link.DamageStartTime == 0)
-                    link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < TIME_THOU)
-                {
-                    if (link.IsDamaged)
-                    {
-           
-                        col = colors[i];
-
-                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
-                        i++;
-                        if (i == colors.Length - 1)
-                        {
-                            i = 0;
-                        }
-
-                    }
-                    else if (link.Clock)
-                    {
-                        col = clockColors[i];
-                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
-                        i++;
-                        if (i == clockColors.Length - 1)
-                        {
-                            i = 0;
-                        }
-
-                    }
-
-
-
-                }
-                else
-                {
-                    link.IsDamaged = false;
-                    link.Clock = false;
-
-                }
-
-            }
-
-            else
-            {
-
-                if (link.UseRing)
-                {
-                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
-                    linkSprite = SpriteFactory.Instance.CreateBlueLinkSprite();
-
-                }
-
-                linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-
-            }
-
-        }*/
+       
 
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
