@@ -221,10 +221,10 @@ namespace Sprint4
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
                 GraphicsDevice.Viewport = camera.gameView;
-                GraphicsDevice.Clear(Color.Blue);
-                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(0, 0), Color.White);
-                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(230, 75), Color.White);
-                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 100), Color.White);
+                GraphicsDevice.Clear(Color.Black);
+                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 95), Color.White);
+                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(225, 145), Color.White);
+                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 175), Color.White);
 
 
                 base.Draw(gameTime);
