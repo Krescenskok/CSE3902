@@ -19,6 +19,7 @@ namespace Sprint4
         public MoveRight(LinkPlayer link, LinkSprite sprite) : base(link)
         {
             linkSprite = sprite;
+           
         }
 
 

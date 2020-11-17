@@ -84,7 +84,9 @@ namespace Sprint4
 
                 if (link.UseRing)
                 {
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
+                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
+                    //linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
                 }
                 else
                 {

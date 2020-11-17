@@ -49,6 +49,8 @@ namespace Sprint4
         private bool isDead = false;
 
         public LinkSprite sprite;
+        public LinkSprite blueSprite;
+
         public Rectangle hitbox;
 
 
@@ -183,6 +185,8 @@ namespace Sprint4
         {
 
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            
+
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
