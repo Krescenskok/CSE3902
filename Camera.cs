@@ -81,7 +81,7 @@ namespace Sprint4
             targetGameView = playArea;
             targetHUDLocation = HUDArea;
 
-            transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
+            transform.Translation = new Vector3(-size.X * 2, -size.Y * 0, 0);
 
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);

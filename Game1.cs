@@ -103,7 +103,7 @@ namespace Sprint4
             //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
             
-            RoomSpawner.Instance.LoadRoom(this, 1);
+            RoomSpawner.Instance.LoadRoom(this, 16);
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);

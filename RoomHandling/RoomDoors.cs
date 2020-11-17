@@ -141,6 +141,14 @@ namespace Sprint4
                     else if (objName.Equals("Up"))
                     {
                         doors.Add(new Door(game, locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
+                    } 
+                    else if (objName.Equals("Center"))
+                    {
+                        doors.Add(new Door(game, locations[8], doorSizeMiddle, nextRoom, 'C', thisType, item, locations[7], curRoom));
+                    }
+                    else if (objName.Equals("secret"))
+                    {
+                        doors.Add(new Door(game, locations[9], doorSizeMiddle, nextRoom, 'S', thisType, item, locations[6], curRoom));
                     }
                     else if (objName.Equals("Down"))
                     {
@@ -184,11 +192,18 @@ namespace Sprint4
             locations.Add(new Point(tileWidth * 7,0) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight * 10) - camOffset);
 
+
             //locked door points
             locations.Add(new Point(tileWidth * 2, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 14, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight*2) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight * 9) - camOffset);
+
+            //stair point
+            locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
+
+            //secret door point
+            locations.Add(new Point(tileWidth *4, 0) - camOffset);
 
 
             doorSizeMiddle = new Point(tileWidth*2, 2);

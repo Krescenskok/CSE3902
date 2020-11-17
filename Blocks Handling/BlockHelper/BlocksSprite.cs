@@ -14,7 +14,7 @@ namespace Sprint4.Blocks
         private int columns = 4;
         private int rows = 3;
         public int blockDimensionX;
-        private int blockDimensionY;
+        public int blockDimensionY;
 
         public BlocksSprite(Texture2D texture)
         {
