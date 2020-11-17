@@ -10,11 +10,11 @@ All of the variables use a good naming convention and are sorted by their type. 
 and a dictionary is used for the map location sprites, which makes accessing each sprite easy to understand. Some of 
 the logic in the Draw method is hard to understand because it uses a lot of if else and loops without function names.
 
-Author of the code review
-Date of the code review
-Sprint number
-Name of the .cs file being reviewed
-Author of the .cs file being reviewed
+Author of the code review: JT Thrash
+Date of the code review: 11/16/2020
+Sprint number 4
+Name of the .cs file being reviewed: InventoryMap.cs
+Author of the .cs file being reviewed: Ann Yan
 Specific comments on code quality:
 
 Each method is relatively short. The logic in InitializeMap is split up into short and simple for loops, and
