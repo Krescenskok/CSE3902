@@ -67,7 +67,7 @@ namespace Sprint4.Link
                 {
                     if (link.IsDamaged)
                     {
-                        link.Health -= 1;
+       
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
@@ -107,20 +107,12 @@ namespace Sprint4.Link
             {
                 if (link.UseRing)
                 {
-                    System.Diagnostics.Debug.WriteLine("Swap Before");
                     link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
 
-                    //linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
                 }
                     
                     linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-                    System.Diagnostics.Debug.WriteLine("Swap After");
 
-
-                //else
-                //{
-                //    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-                //}
             }
 
             foreach (IItems projectile in link.itemsPlacedByLink)

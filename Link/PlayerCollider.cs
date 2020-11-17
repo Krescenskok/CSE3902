@@ -328,14 +328,14 @@ namespace Sprint4
         public void Update()
         {
 
-            if (Bounds() != null && !done)
-            {
+            //if (Bounds() != null && !done)
+            //{
 
-                RoomEnemies.Instance.AddTestCollider(this);
-                if (Bounds().X > 1000) done = true;
+            //    RoomEnemies.Instance.AddTestCollider(this);
+            //    if (Bounds().X > 1000) done = true;
 
                 
-            }
+            //}
 
         }
     }
