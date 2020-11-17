@@ -33,11 +33,27 @@ namespace Sprint4.Link
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
+       public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
         {
             Color col;
-            if (linkSprite == null)
-                linkSprite = SpriteFactory.Instance.CreateLinkSprite();
+            if (link.sprite == null)
+            {
+                if (link.UseRing)
+                {
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
+                   
+
+                }
+                else
+                {
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+
+
+              
+                }
+                linkSprite = link.sprite;
+            }
+                
 
             if (link.LargeShield && link.DrawShield)
             {
@@ -67,6 +83,7 @@ namespace Sprint4.Link
                 {
                     if (link.IsDamaged)
                     {
+       
                         col = colors[i];
 
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
@@ -99,20 +116,11 @@ namespace Sprint4.Link
                 }
 
             }
-
-
-
             else
             {
-                if (link.UseRing)
-                {
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
-                }
+                 
+                  linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
 
-                else
-                {
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-                }
             }
 
             foreach (IItems projectile in link.itemsPlacedByLink)
