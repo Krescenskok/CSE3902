@@ -1,11 +1,14 @@
 ﻿<Properties StartupConfiguration="{141C53F7-9057-415F-A98F-B6635BE04E22}|Default">
   <MonoDevelop.Ide.ItemProperties.Sprint4 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Game1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SpriteFactory.cs">
     <Files>
       <File FileName="Link/MoveUp.cs" Line="1" Column="1" />
       <File FileName="Game1.cs" Line="75" Column="13" />
       <File FileName="Link/PlayerCollider.cs" Line="22" Column="27" />
       <File FileName="Link/LinkPlayer.cs" Line="1" Column="1" />
+      <File FileName="BlueLinkSpriteSheet.cs" Line="4" Column="15" />
+      <File FileName="Link/LinkSprite.cs" Line="1" Column="1" />
+      <File FileName="SpriteFactory.cs" Line="33" Column="43" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +16,7 @@
           <Node name="Sprint4" expanded="True">
             <Node name="Sprint4" expanded="True">
               <Node name="Link" expanded="True" />
-              <Node name="Game1.cs" selected="True" />
+              <Node name="SpriteFactory.cs" selected="True" />
             </Node>
           </Node>
         </State>

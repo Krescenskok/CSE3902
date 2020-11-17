@@ -18,6 +18,7 @@
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/File.spritefont</File>
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/itemSprites.png</File>
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/LinkSpriteSheet.png</File>
+    <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/LinkSpriteSheetBlueRing.png</File>
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/marioOneDirection.png</File>
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/NPCSpriteSheet.png</File>
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/particles.png</File>
@@ -56,6 +57,7 @@
     <File>/Users/krescenskok/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

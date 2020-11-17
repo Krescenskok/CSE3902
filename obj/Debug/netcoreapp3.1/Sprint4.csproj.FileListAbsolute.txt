@@ -85,3 +85,4 @@
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint4.dll
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint4.pdb
 /Users/krescenskok/Documents/GitHub/CSE3902/obj/Debug/netcoreapp3.1/Sprint4.genruntimeconfig.cache
+/Users/krescenskok/Documents/GitHub/CSE3902/bin/Debug/netcoreapp3.1/Content/LinkSpriteSheetBlueRing.xnb
