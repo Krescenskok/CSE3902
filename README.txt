@@ -22,7 +22,8 @@ Code Analysis on Link (Done by Krescens)
 
 
 Code Analysis on HUD (done by Ann)
-0 errors, 0 warnings
+0 errors, 1 warnings
+- Unused fields: just need to remove them
 
 
 Code Analysis on Inventory (done by Ann)
@@ -30,5 +31,22 @@ Code Analysis on Inventory (done by Ann)
 
 
 Code Analysis on Items (done by Ann)
+0 errors, 1 warnings
+- Unused fields: just need to remove them
+
+
+Code Analysis on Enemies (done by Yuan)
 0 errors, 0 warnings
+
+
+Code Analysis on Camera and Rooms(done by JT)
+0 errors, 7 warnings
+- Unused fields: must remove
+- Unassigned fields: either remove or assign a value
+
+
+Code Analysis on Blocks (done by Noah)
+0 errors, 0 warnings
+
+
 
