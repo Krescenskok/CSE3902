@@ -79,3 +79,4 @@ bin/Debug/netcoreapp3.1/Content/beamImpact.xnb
 .vs/Sprint4/xs/UserPrefs.xml
 .vs/Sprint4/xs/project-cache/Sprint4-Debug.json
 .DS_Store
+Link/Movement.cs
