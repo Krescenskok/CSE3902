@@ -141,7 +141,7 @@ namespace Sprint4.Link
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsAttacking = false;
                     linkPlayer.MovingDown();
-                }              
+                }
 
 
 
@@ -149,7 +149,7 @@ namespace Sprint4.Link
 
                 linkPlayer.Update(gameTime);
             }
-            
+
 
         }
     }
