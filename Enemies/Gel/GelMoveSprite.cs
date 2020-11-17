@@ -30,10 +30,12 @@ namespace Sprint4
 
         private Point spriteSize;
         private Point drawSize;
-        private Point centerOffset;
+        public Point centerOffset;
+        public Vector2 centerLocation;
 
         public GelMoveSprite(Texture2D texture)
         {
+            centerLocation = new Vector2();
 
             currentAnimatedFrame = 0;
             currentFrame = 0;
@@ -67,7 +69,7 @@ namespace Sprint4
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
-            Vector2 centerLocation = location + centerOffset.ToVector2();
+            centerLocation = location + centerOffset.ToVector2();
 
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)centerLocation.X, (int)centerLocation.Y, drawSize.X, drawSize.Y);

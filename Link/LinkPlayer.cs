@@ -177,6 +177,7 @@ namespace Sprint4
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
             
+            
 
         }
         public void Update(GameTime gameTime)

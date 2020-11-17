@@ -64,6 +64,7 @@ namespace Sprint4
             else if(Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
             else if(Heading == 'T') Camera.Instance.ScrollUp(NextRoom);
             else if (Heading == 'B') Camera.Instance.ScrollDown(NextRoom);
+            else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom); //Something Special
 
         }
 

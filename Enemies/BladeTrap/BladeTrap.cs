@@ -56,8 +56,7 @@ namespace Sprint4
             bladeSprite = (BladeTrapSprite)sprite;
             Rectangle objectSize = bladeSprite.GetRectangle();
             objectSize.Location = location.ToPoint();
-
-            collider = new EnemyCollider(objectSize, this, HPAmount.HalfHeart, "Trap");
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(objectSize, .6f), this, HPAmount.HalfHeart, "Trap");
 
 
             int horizontalAttackRange = GridGenerator.Instance.GetGridWidth();

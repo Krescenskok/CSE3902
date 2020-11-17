@@ -30,7 +30,5 @@ namespace Sprint4
 
         IEnemyState State { get; }
 
-        
-        
     }
 }

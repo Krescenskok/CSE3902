@@ -17,12 +17,15 @@ namespace Sprint4
         private Game game;
         private Vector2 location;
         public IEnemyState state;
-        private ISprite sprite;
-        private GelMoveSprite gSprite;
+        public ISprite sprite;
+        public GelMoveSprite gSprite;
 
         private EnemyCollider innerCollider;
         private GelBlockCollider outsideCollider;
         private int HP = HPAmount.EnemyLevel1;
+
+        private Point spriteSize;
+        private Rectangle rect;
 
         public Vector2 Location { get => location; }
 
@@ -47,10 +50,14 @@ namespace Sprint4
         {
             state = new GelMoveState(this, location, game);
             gSprite = (GelMoveSprite)sprite;
-            innerCollider = new EnemyCollider(gSprite.GetRectangle(), this, HPAmount.HalfHeart, "gel");
             
             outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state, this);
-            
+
+            spriteSize = gSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
+
+            innerCollider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .3f), this, HPAmount.HalfHeart, "gel");
+
         }
 
         public void SetSprite(ISprite sprite)
@@ -105,9 +112,9 @@ namespace Sprint4
             state.Stun();
         }
 
-        public void Attack()
+        public Vector2 Attack()
         {
-            //does nothing
+            return gSprite.centerLocation;
         }
     }
 }

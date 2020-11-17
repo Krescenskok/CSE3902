@@ -142,6 +142,10 @@ namespace Sprint4
                     {
                         doors.Add(new Door(game, locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
                     }
+                    else if (objName.Equals("Center"))
+                    {
+                        doors.Add(new Door(game, locations[8], doorSizeMiddle, nextRoom, 'C', thisType, item, locations[7], curRoom));
+                    }
 
                     if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
 
@@ -183,6 +187,7 @@ namespace Sprint4
             locations.Add(new Point(tileWidth * 14, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight*2) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight * 9) - camOffset);
+            locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
 
 
             doorSizeMiddle = new Point(tileWidth*2, 10);

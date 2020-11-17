@@ -197,6 +197,7 @@ namespace Sprint4
         {
             foreach (TestCollider col in testObjects)
             {
+               
                 col.Draw(batch);
             }
         }
