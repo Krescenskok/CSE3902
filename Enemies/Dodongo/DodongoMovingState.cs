@@ -98,9 +98,9 @@ namespace Sprint4
         {
             if (amount == -1)
             {
-                dodongo.LostHP();
                 dodongo.dodongoState = new DodongoDamagedState(dodongo, dodongoPos);
                 dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDodongoSprite(direction));
+                dodongo.LostHP();
             }
         }
 
