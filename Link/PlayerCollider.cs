@@ -10,14 +10,12 @@ namespace Sprint4
 {
     public class PlayerCollider : ICollider
     {
-        //private Rectangle bounds;
         LinkPlayer linkPlayer;
         const int FULL_HEART = 20;
         const int THREE_QUARTERS_HEART = 15;
         const int HALF_HEART = 10;
         const int QUARTER_HEART = 5;
         const int DISPLACEMENT = 100;
-        //String Key;
 
         bool done = false;
         public PlayerCollider(LinkPlayer linkPlayer)
@@ -33,9 +31,6 @@ namespace Sprint4
 
         public Rectangle Bounds()
         {
-            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Location);
-            //System.Diagnostics.Debug.WriteLine(linkPlayer.hitbox.Size);
-            //System.Diagnostics.Debug.WriteLine(linkPlayer.Bounds);
             return linkPlayer.Bounds;
         }
 
@@ -184,7 +179,7 @@ namespace Sprint4
             {
                 if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
-                    //do nothing
+
                 }
                 else
                 {
@@ -209,7 +204,7 @@ namespace Sprint4
 
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveRight)
                 {
-                    //do nothing
+
                 }
                 else
                 {
@@ -230,7 +225,7 @@ namespace Sprint4
 
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveDown)
                 {
-                    //do nothing
+
                 }
                 else
                 {
@@ -251,7 +246,7 @@ namespace Sprint4
 
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveUp)
                 {
-                    //do nothing
+
                 }
                 else
                 {

@@ -41,13 +41,8 @@ namespace Sprint4
             this.name = name;
 
             damageAmount = strength;
-            Debug.WriteLine(name);
-            Debug.WriteLine(rect.Location.ToString());
-            Debug.WriteLine(enemy.Location.ToString());
-            Debug.WriteLine(hitboxOffset);
 
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
-            RoomEnemies.Instance.AddTestCollider(rect, this);
         }
 
 
@@ -135,7 +130,6 @@ namespace Sprint4
             {
                 bounds.Location = (enemy.Location.ToPoint() + hitboxOffset);
             }
-            //bounds.Location = (enemy.Location.ToPoint() );
         }
     }
 }
