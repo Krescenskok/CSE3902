@@ -1,0 +1,27 @@
+Author of the code review: JT Thrash
+Date of the code review: 11/16/2020
+Sprint number: 4
+Name of the .cs file being reviewed: HUDMap.cs
+Author of the .cs file being reviewed: Ann Yan
+Number of minutes taken to complete the review: 10
+Specific comments on what is readable and what is not:
+
+All of the variables use a good naming convention and are sorted by their type. The method names are descriptive,
+and a dictionary is used for the map location sprites, which makes accessing each sprite easy to understand. Some of 
+the logic in the Draw method is hard to understand because it uses a lot of if else and loops without function names.
+
+Author of the code review: JT Thrash
+Date of the code review: 11/16/2020
+Sprint number 4
+Name of the .cs file being reviewed: InventoryMap.cs
+Author of the .cs file being reviewed: Ann Yan
+Specific comments on code quality:
+
+Each method is relatively short. The logic in InitializeMap is split up into short and simple for loops, and
+there is a low use of magic numbers. The use of a Dictionary allows for lower time complexity when drawing each of the individualRoomSprites.
+
+
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change:
+
+A hypothetical change would be adding another dungeon. It would be hard to support that change because this code is based on only one map. Another method would need
+to be added for initializing the map for each dungeon, and also make another InventoryMapSprite or allow for it to be constructed with a different texture.
