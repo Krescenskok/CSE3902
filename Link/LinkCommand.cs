@@ -33,16 +33,19 @@ namespace Sprint4.Link
 
         public void Update(GameTime gameTime)
         {
-            ProjectilesCommand.Instance.Update(gameTime);
-            if (Key.Equals("R"))
+            if(!linkPlayer.isPaused)
             {
-                linkPlayer.Reset();
-            }
+                ProjectilesCommand.Instance.Update(gameTime);
+                if (Key.Equals("R"))
+                {
+                    linkPlayer.Reset();
+                }
 
-            else if (Key.Equals("E"))
-            {
+                else if (Key.Equals("E"))
+                {
 
-                linkPlayer.IsDamaged = true;
+                    linkPlayer.IsDamaged = true;
+
 
             }
             else if (Key.Equals("D9") || Key.Equals("NumPad9"))
@@ -60,53 +63,79 @@ namespace Sprint4.Link
                 }
 
                 else if (linkPlayer.itemsPlacedByLink.Count == 0)
+
                 {
-                    if ((Key.Equals("N") || (Key.Equals("Z"))))
+                    linkPlayer.LargeShield = true;
+                }
+                if (!linkPlayer.IsAttacking)
+                {
+                    if (linkPlayer.itemsPlacedByLink.Count == 0)
                     {
-                        System.Diagnostics.Debug.WriteLine("N");
+                        if ((Key.Equals("N") || (Key.Equals("Z"))))
+                        {
+                            System.Diagnostics.Debug.WriteLine("N");
+
+                        
 
                         linkPlayer.IsAttacking = true;
                         linkPlayer.IsStopped = false;
                         linkPlayer.IsSecondAttack = false;
+
                     }
-                }
-                else
-                {
-                    foreach (IItems item in linkPlayer.itemsPlacedByLink)
+                    else
                     {
-                        if (item.IsExpired)
+                        foreach (IItems item in linkPlayer.itemsPlacedByLink)
                         {
-                            if ((Key.Equals("N") || (Key.Equals("Z"))))
+                            if (item.IsExpired)
                             {
+
+                                if ((Key.Equals("N") || (Key.Equals("Z"))))
+                                {
+
+
                                 linkPlayer.IsAttacking = true;
                                 linkPlayer.IsStopped = false;
                                 linkPlayer.IsSecondAttack = false;
+                                }
+
                             }
                         }
+
                     }
 
-                }
 
+                    if ((Key.Equals("A")) || (Key.Equals("Left")))
+                    {
+                        linkPlayer.IsStopped = false;
+                        linkPlayer.IsAttacking = false;
+                        linkPlayer.MovingLeft();
 
-                if ((Key.Equals("A")) || (Key.Equals("Left")))
-                {
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsAttacking = false;
-                    linkPlayer.MovingLeft();
+                    }
+                    else if ((Key.Equals("D")) || (Key.Equals("Right")))
+                    {
+                        linkPlayer.IsStopped = false;
+                        linkPlayer.IsAttacking = false;
+                        linkPlayer.MovingRight();
 
-                }
-                else if ((Key.Equals("D")) || (Key.Equals("Right")))
-                {
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsAttacking = false;
-                    linkPlayer.MovingRight();
+                    }
+                    else if ((Key.Equals("W")) || (Key.Equals("Up")))
+                    {
+                        linkPlayer.IsStopped = false;
+                        linkPlayer.IsAttacking = false;
+                        linkPlayer.MovingUp();
 
-                }
-                else if ((Key.Equals("W")) || (Key.Equals("Up")))
-                {
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsAttacking = false;
-                    linkPlayer.MovingUp();
+                    }
+                    else if ((Key.Equals("S")) || (Key.Equals("Down")))
+                    {
+                        linkPlayer.IsStopped = false;
+                        linkPlayer.IsAttacking = false;
+                        linkPlayer.MovingDown();
+                    }
+                    else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                    {
+                        linkPlayer.CurrentWeapon = ItemForLink.Shield;
+                    }
+
 
                 }
                 else if ((Key.Equals("S")) || (Key.Equals("Down")))
@@ -117,9 +146,12 @@ namespace Sprint4.Link
                 }              
 
 
-            }
 
-            linkPlayer.Update(gameTime);
+                }
+
+                linkPlayer.Update(gameTime);
+            }
+            
 
         }
     }

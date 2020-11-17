@@ -82,6 +82,7 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, Location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
 

@@ -42,7 +42,7 @@ namespace Sprint4
         private Rectangle targetGameView;
         private Rectangle targetHUDLocation;
 
-        private bool inventoryOpen = false;
+        private bool inventoryOpen = false, inventoryStillMoving = false;
 
         private const int scrollSpeed = 10;
 
@@ -135,6 +135,7 @@ namespace Sprint4
 
             
             (game as Game1).isPaused = true;
+            
 
             currentDirection = Direction.up;
         }
@@ -216,13 +217,15 @@ namespace Sprint4
             if (!HUDOpenCloseFinished())
             {
                 MoveViewports();
+                inventoryStillMoving = true;
                 
             }else if(inventoryOpen && !(game as Game1).isPaused)
             {
                 (game as Game1).isPaused = true;
-            }else if(!inventoryOpen && (game as Game1).isPaused)
+            }else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
             {
                 (game as Game1).isPaused = false;
+                inventoryStillMoving = false;
             }
 
            
@@ -253,6 +256,7 @@ namespace Sprint4
             {
                 Game1 game1 = game as Game1;
                 game1.isPaused = false;
+                
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
             }
