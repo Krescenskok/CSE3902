@@ -23,6 +23,8 @@ namespace Sprint4
         private XElement dodongoInfo;
         private Point faceColliderSize = new Point(6, 6);
         private DodongoFaceCollider faceCollider;
+        private string deathSoundFile = "BossScreams";
+        private string damagedSoundFile = "DodongoRoar";
 
         public Vector2 Location { get => dodongoPos; }
 
@@ -33,7 +35,7 @@ namespace Sprint4
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
-            dodongoHP = 2;
+            dodongoHP = 3;
             direction = "Right";
             dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
@@ -96,6 +98,7 @@ namespace Sprint4
         public void LostHP()
         {
             dodongoHP--;
+            Sounds.Instance.PlaySoundEffect(damagedSoundFile);
         }
 
         public Boolean checkAlive()
@@ -105,6 +108,7 @@ namespace Sprint4
 
         public void Die()
         {
+            Sounds.Instance.PlaySoundEffect(deathSoundFile);
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             CollisionHandler.Instance.RemoveCollider(faceCollider);
             RoomEnemies.Instance.Destroy(this, dodongoPos);
