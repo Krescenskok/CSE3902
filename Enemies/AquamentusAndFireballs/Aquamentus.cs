@@ -78,7 +78,8 @@ namespace Sprint4
 
         public void Die()
         {
-            
+            Sounds.Instance.PlayBossScream();
+            CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
         }
@@ -113,7 +114,7 @@ namespace Sprint4
 
         public void SpawnFireBall(Vector2 spawnPos, Vector2 targetPos)
         {
-            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength));
+            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength, link));
         }
 
         public void RemoveFireBall(FireBall fb)
@@ -162,7 +163,7 @@ namespace Sprint4
 
         public void Stun()
         {
-           //stun implementation
+           //not affected
         }
 
     }
