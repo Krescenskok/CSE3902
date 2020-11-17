@@ -94,7 +94,9 @@ namespace Sprint4
 
         public void PlaySoundEffect(string name)
         {
+            SoundEffectInstance sound = Get(name);
 
+            if (sound != null) sound.Play();
         }
         public void PlayEnemyHit()
         {

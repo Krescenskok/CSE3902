@@ -68,7 +68,7 @@ namespace Sprint4.Items
             //saveInfo.SetElementValue("Alive", "false");
             state.Expire();
             LinkInventory.Instance.RupeeCount++;
-            Sounds.Instance.PlaySoundEffect("GetRupee");
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

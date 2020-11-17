@@ -168,6 +168,7 @@ namespace Sprint4
             if (col.CompareTag("Item"))
             {
                 col.SendMessage("Disappear", null);
+                
             }
 
         }

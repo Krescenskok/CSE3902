@@ -25,7 +25,7 @@ namespace Sprint4
 
         private int unlockTime = 20;
         private int unlockClock = 0;
-        private bool unlocked = false;
+        private bool unlocked = false, unlocking = false;
 
         public bool open;
 
@@ -53,6 +53,10 @@ namespace Sprint4
             {
                 outerCollider = new SpecialDoorCollider(this,outerLocation,size);
                 open = true;
+            }else if (type == DoorType.special_closed)
+            {
+                outerCollider = new SpecialDoorCollider(this, outerLocation, size);
+                open = false;
             }
 
             innerCollider = new UnlockedDoorCollider(this, innerLocation, size, heading);
@@ -77,6 +81,7 @@ namespace Sprint4
             saveInfo.SetElementValue("Type", "normal");
             outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading, CurrentRoom == 6);
             open = true;
+            Sounds.Instance.PlaySoundEffect("DoorUnlock");
         }
 
         public void Close()
@@ -85,6 +90,7 @@ namespace Sprint4
             saveInfo.SetElementValue("Type", "locked");
             outerCollider = new SpecialDoorCollider(this, outerLocation, Size);
             open = false;
+            Sounds.Instance.PlaySoundEffect("DoorUnlock");
         }
 
         //doors that open with a key
@@ -96,13 +102,14 @@ namespace Sprint4
             
             outerCollider = new DoorEntranceCollider(this, outerLocation, this.Size, this.Heading, false);
             RoomDoors.Instance.ShowDoorSprite(CurrentRoom);
+            Sounds.Instance.PlaySoundEffect("DoorUnlock");
         }
 
 
         public void StartUnlock()
         {
 
-            unlocked = true;
+            unlocking = true;
             unlockClock = unlockTime;
    
 
@@ -110,12 +117,13 @@ namespace Sprint4
 
         public void Update()
         {
-            if(unlocked && unlockClock > 0)
+            if(unlocking && unlockClock > 0)
             {
                 unlockClock--;
-            }else if (unlocked)
+            }else if (unlocking && !unlocked)
             {
                 Unlock();
+                unlocked = true;
             }
 
             

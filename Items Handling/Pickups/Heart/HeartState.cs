@@ -46,7 +46,7 @@ namespace Sprint4.Items
 
             CollisionHandler.Instance.RemoveCollider(item.Collider);
 
-            
+            Sounds.Instance.PlaySoundEffect("GetHeart");
         }
 
         public void Collected()
