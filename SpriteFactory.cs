@@ -30,6 +30,7 @@ namespace Sprint4
         public void LoadAllTextures(ContentManager content)
         {
             linkSpriteSheet = content.Load<Texture2D>("LinkSpriteSheet");
+            linkBlueSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
         }
