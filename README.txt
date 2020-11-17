@@ -7,6 +7,13 @@ Known Bugs:
 - The sword beam expires when it hits the wall, but the animation does not play (it works fine on doors though)
 - Link's boomerang draws an impact sprite when it collides with an enemy, but the sprite is both off center and sometimes draws way more impact sprites than necessary
 - The game may crash if you spam projectiles a lot
+- Link getting thrown from enemies doesn't work when there's a wall
+- Lag
+- Resetting issues
+- Sound is not fully functional
+- Room 18 doesn't work
+- Link needs attacking hitboxes
+- Link is stuck until bomb goes off
 
 
 Code Analysis on Link (Done by Krescens)
