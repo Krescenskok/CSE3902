@@ -73,10 +73,7 @@ namespace Sprint4.Link
                         {
                             if ((Key.Equals("N") || (Key.Equals("Z"))))
                             {
-                                System.Diagnostics.Debug.WriteLine("N");
-
-
-
+      
                                 linkPlayer.IsAttacking = true;
                                 linkPlayer.IsStopped = false;
                                 linkPlayer.IsSecondAttack = false;
