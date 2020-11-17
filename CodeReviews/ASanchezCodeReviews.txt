@@ -1,0 +1,29 @@
+Author of the code review: Andrew Sanchez
+Date of the code review: 11/16/20
+Sprint number: 4
+Name of the .cs file being reviewed: Game.cs (game over section)
+Author of the .cs file being reviewed: Krescens Kok
+Number of minutes taken to complete the review: 5
+Specific comments on what is readable and what is not:
+
+It's very clear what each message printed to the screen is meant to inform the user of. 
+The vector coordinates are magic numbers, so they are not as readable as they could be, however.
+In addition, having a separate line for each message assists in reading the spacing of the messages as they would
+appear in game. The code is concise and clear with no confusingly named variables.
+
+Author of the code review: Andrew Sanchez
+Date of the code review: 11/16/20
+Sprint number: 4
+Name of the .cs file being reviewed: PauseCommand.cs (game over section)
+Author of the .cs file being reviewed: Krescens Kok
+Number of minutes taken to complete the review: 5
+Specific comments on code quality:
+
+Very clear and obvious what the code is doing, clearly named variables and good whitespace distribution.
+Additionally, there's little uneccessary code or bulk, has a specific, single purpose.
+
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change
+
+You could put the changing of the isPause variable within the executeCommand method instead of in the fields. Additionally, there are unecessary methods
+that aren't being used
+
