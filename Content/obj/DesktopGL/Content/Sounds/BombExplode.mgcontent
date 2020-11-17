@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/BombExplode.wav</SourceFile>
-  <SourceTime>2020-11-11T20:02:42-05:00</SourceTime>
-  <DestFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/Sounds/BombExplode.xnb</DestFile>
-  <DestTime>2020-11-11T22:33:31.7028358-05:00</DestTime>
+  <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Sounds/BombExplode.wav</SourceFile>
+  <SourceTime>2020-11-16T17:21:11.7978594-05:00</SourceTime>
+  <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Sounds/BombExplode.xnb</DestFile>
+  <DestTime>2020-11-16T22:26:21.4302131-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
