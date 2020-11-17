@@ -27,7 +27,7 @@ namespace Sprint4
         private int aquamentusHP;
         private static int AttackStrength = HPAmount.OneHeart;
         private static int RangeAttackStrength = HPAmount.OneHeart;
-        private static int UpdatePerSec = 30;
+        private static int UpdatePerSec = 120;
         private float attackPerSec = 1;
         private float directionChangPerSec = (float)0.2;
         private float moveSpeedPerSec = 15;
@@ -153,7 +153,7 @@ namespace Sprint4
 
         public void TakeDamage(Direction dir, int amount)
         {
-            LostHP(amount);
+            state.TakeDamage(amount);
         }
 
         public void ObstacleCollision(Collision collision)

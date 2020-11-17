@@ -1290,7 +1290,7 @@
 			<Item>
 				<ObjectType>Item</ObjectType>
 				<ObjectName>TriforcePiece</ObjectName>
-				<Location>3 4</Location>
+				<Location>3 6</Location>
 				<Alive>true</Alive>
 			</Item>
 
