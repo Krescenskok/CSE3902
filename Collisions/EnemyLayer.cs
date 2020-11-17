@@ -8,8 +8,9 @@ namespace Sprint4
     {
         public bool CollidesWith(ICollider other)
         {
-            return 
+            return
                 other.layer is ObstacleLayer
+                || other.layer is PlayerLayer
                 || other.layer is DefaultLayer;
         }
     }

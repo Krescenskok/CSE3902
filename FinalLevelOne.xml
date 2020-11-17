@@ -2291,12 +2291,6 @@
 				<Location>3 8</Location>
 				<Alive>true</Alive>
 			</Item>
-			<Item>
-				<ObjectType>Item</ObjectType>
-				<ObjectName>HeartContainer</ObjectName>
-				<Location>3 10</Location>
-				<Alive>true</Alive>
-			</Item>
 		</Room>
 		
 		<!-- 16th Room Content-->

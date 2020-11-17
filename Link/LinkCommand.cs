@@ -101,7 +101,6 @@ namespace Sprint4.Link
 
                             }
 
-
                             if ((Key.Equals("A")) || (Key.Equals("Left")))
                             {
                                 linkPlayer.IsStopped = false;

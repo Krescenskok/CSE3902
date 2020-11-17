@@ -79,6 +79,7 @@ namespace Sprint4
         public void Die()
         {
             Sounds.Instance.PlayBossScream();
+            RoomItems.Instance.DropHeartContainer(Location);
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");

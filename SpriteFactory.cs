@@ -12,6 +12,7 @@ namespace Sprint4
         private Texture2D linkSpriteSheet;
         private Texture2D itemsSpriteSheet;
         private Texture2D blocksSpriteSheet;
+        private Texture2D linkBlueSpriteSheet;
 
         private static SpriteFactory instance = new SpriteFactory();
 
@@ -34,7 +35,7 @@ namespace Sprint4
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
         }
-        
+
         public LinkSprite CreateLinkSprite()
         {
 
@@ -45,8 +46,8 @@ namespace Sprint4
         {
             return new LinkSprite(linkBlueSpriteSheet);
         }
-        
-		
+
+
         //public ISprite CreateItemsSprite()
         //{
         //    return new ItemsSprite(itemsSpriteSheet);
