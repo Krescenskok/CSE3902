@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Enemies
+namespace Sprint5.Enemies
 {
     public class GoriyaBoomerangCollider : ICollider
     {

@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class TrapCollider : ICollider
     {

@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong

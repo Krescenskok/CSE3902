@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Link
+namespace Sprint5.Link
 
 {
     public interface ILinkState

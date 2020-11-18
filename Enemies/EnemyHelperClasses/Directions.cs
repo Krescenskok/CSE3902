@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public static class Directions
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4;
+using Sprint5;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4Final.Items_Handling.ItemHelperClasses
+namespace Sprint5Final.Items_Handling.ItemHelperClasses
 {
     public class ProjectileImpactSprite : ISprite
     {

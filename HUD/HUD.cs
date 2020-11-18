@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
-using Sprint4.Link;
+using Sprint5.Items;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class HUD
     {

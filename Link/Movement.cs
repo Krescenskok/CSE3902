@@ -4,7 +4,7 @@ using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Link
+namespace Sprint5.Link
 {
     public abstract class Movement : ILinkState
     {
