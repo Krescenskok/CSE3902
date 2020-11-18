@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint4.Enemies;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint4
@@ -17,26 +18,46 @@ namespace Sprint4
 
         private int attack;
 
-        public string Name { get => "wall"; }
+        public string Name { get; set; }
         public Layer layer { get; set; }
+
+        PlayerCollider player;
+        private EnemyCollider enemyCol;
 
         public TestCollider(Point location, Point size, Game game, int attack)
         {
             bounds = new Rectangle(location, size);
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.Default);
             visual = new ColliderVisualSprite(game, size.ToVector2());
             this.location = location.ToVector2();
             this.attack = attack;
         }
 
-        public TestCollider(Rectangle rect, Game game)
+        public TestCollider(Rectangle rect, Game game, EnemyCollider col)
         {
-            bounds = rect;
-            visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
-            this.location = rect.Location.ToVector2();
+            enemyCol = col;
+            bounds = col.Bounds();
+            visual = new ColliderVisualSprite(game, col.Bounds().Size.ToVector2());
+            this.location = col.Bounds().Location.ToVector2();
             attack = 0;
+            this.Name = col.Name;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.Trigger);
+        }
+
+        public TestCollider(Game game, PlayerCollider player)
+        {
+            bounds = player.Bounds();
+            visual = new ColliderVisualSprite(game, player.Bounds().Size.ToVector2());
+            this.location = player.Bounds().Location.ToVector2();
+            attack = 0;
+            this.Name = "player";
+            
+
+            this.player = player;
+
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
+
         }
 
         public TestCollider()
@@ -61,7 +82,7 @@ namespace Sprint4
 
         public bool CompareTag(string tag)
         {
-            return tag == "Wal" || tag == "wal";
+            return tag == "Wall" || tag == "wal";
         }
 
         
@@ -87,6 +108,31 @@ namespace Sprint4
             {
                 col.SendMessage("TakeDamage", attack);
             }
+        }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
+        public void Update()
+        {
+            if (player != null)
+            {
+                bounds = player.Bounds();
+                location = bounds.Location.ToVector2();
+
+
+              
+            }
+            if (enemyCol != null)
+            {
+                bounds = enemyCol.Bounds();
+                location = bounds.Location.ToVector2();
+
+            }
+
+            
         }
     }
 }

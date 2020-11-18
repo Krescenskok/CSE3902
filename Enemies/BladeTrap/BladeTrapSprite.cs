@@ -40,7 +40,7 @@ namespace Sprint4
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
-
+            
         }
 
         public void Load(Game game)

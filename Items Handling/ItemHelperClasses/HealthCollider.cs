@@ -28,7 +28,7 @@ namespace Sprint4
 
             this.name = name;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Item);
         }
 
         public void ChangeState(IItemsState state)
@@ -64,20 +64,26 @@ namespace Sprint4
 
             if (col.CompareTag("Player"))
             {
-                if (this.name.Equals("Heart"))
+                if (this.name.Equals("Heart") || this.name.Equals("Fairy"))
                 {
                     col.SendMessage("Heal", this.item);
                 }
                 else if (this.name.Equals("HeartContainer"))
                 {
-                    col.SendMessage("HealContainer", this.item);
+                    col.SendMessage("HeartContainer", this.item);
                 }
 
+                this.item.State.Expire();
                 col.SendMessage("Item", this.item);
             }
 
 
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void SendMessage(string msg, object value)
         {
@@ -88,11 +94,17 @@ namespace Sprint4
             
         }
 
-
+        //can probably be deleted//
         public void Update(IItems itemObj)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

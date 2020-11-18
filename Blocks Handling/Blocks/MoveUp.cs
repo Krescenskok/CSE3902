@@ -11,7 +11,7 @@ namespace Sprint4.Blocks
         private Vector2 spriteLocation;
         private Vector2 newLocation;
         private BlocksSprite block;
-        private int SHEET_LOCATION = 0;
+        private int SHEET_LOCATION = 1;
         private int currentFrame;
         private Boolean moveable;
         private int drawnFrame;
@@ -62,7 +62,7 @@ namespace Sprint4.Blocks
             if (moveable && compare.Equals("down"))
             {
                 moveable = false;
-                shift = this.block.blockDimensionX;
+                shift = this.block.blockDimensionY;
             }
         }
 

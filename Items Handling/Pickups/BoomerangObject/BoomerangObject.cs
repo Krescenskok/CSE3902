@@ -18,8 +18,13 @@ namespace Sprint4.Items
         private IItemsState state;
         private bool throwing;
         private bool returning;
-        private LinkPlayer link;
         private string direction;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -36,7 +41,7 @@ namespace Sprint4.Items
             throwing = true;
 
             returning = false;
-            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
         }
         public BoomerangObject(ISprite item, Vector2 location, XElement xml)
         {
@@ -62,7 +67,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false");
+            state.Expire();
         }
 
         public void Collect()

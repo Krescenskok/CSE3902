@@ -77,7 +77,7 @@ namespace Sprint4
 
         public void Stun()
         {
-            //stun implement
+            //not affected
         }
     }
 }

@@ -37,8 +37,12 @@ namespace Sprint4
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
         private XElement saveData;
+
+        private Point spriteSize;
+        private Rectangle rect;
 
         public void SetSprite(ISprite sprite)
         {
@@ -58,10 +62,7 @@ namespace Sprint4
             return boomy;
         }
 
-        public EnemyCollider Collider()
-        {
-            return collider;
-        }
+      
 
         public void UpdateLocation(Vector2 location)
         {
@@ -83,7 +84,12 @@ namespace Sprint4
         {
             state = new GoriyaMoveState(this, location);
             gorSprite = (GoriyaWalkSprite)sprite;
-            collider = new EnemyCollider(gorSprite.GetRectangle(), state, HPAmount.HalfHeart, "Goriya");
+
+            spriteSize = gorSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
+
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Goriya");
+
         }
 
 
@@ -91,14 +97,12 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this,location);
             saveData.SetElementValue("Alive", "false");
+
+            RoomItems.Instance.DropRandom(location);
+            if (RoomEnemies.Instance.allDead) RoomItems.Instance.DropItem("Boomerang", Location);
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-            
-        }
+    
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -110,13 +114,35 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            
             if (boomy != null) boomy.Update();
         }
 
         public EnemyCollider GetCollider()
         {
             return collider;
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+            else state = new GoriyaDamagedState(dir, this, location, 2);
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            state.Stun();
+        }
+
+        public void Attack()
+        {
+            state.Attack();
         }
     }
 }

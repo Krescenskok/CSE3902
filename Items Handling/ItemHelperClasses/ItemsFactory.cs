@@ -177,6 +177,10 @@ namespace Sprint4
         {
             return new EmptyHeartSprite(itemsSpriteSheet);
         }
+        public ISprite CreateFullHeartSprite()
+        {
+            return new FullHeartSprite(itemsSpriteSheet);
+        }
 
         public ISprite CreateFairySprite()
         {

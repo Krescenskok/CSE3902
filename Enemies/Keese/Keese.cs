@@ -25,9 +25,13 @@ namespace Sprint4
 
         private int HP = HPAmount.EnemyLevel1;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
         private XElement saveData;
 
@@ -47,9 +51,11 @@ namespace Sprint4
             
             state = new KeeseMoveState(this, location);
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
-            collider = new EnemyCollider(kSprite.GetRectangle(), state,HPAmount.HalfHeart,"Keese");
+            spriteSize = kSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
 
-            Debug.Write(kSprite.GetRectangle().Width + ", " + kSprite.GetRectangle().Height);
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Keese");
+
         }
         public void SetSprite(ISprite sprite)
         {
@@ -66,13 +72,10 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-        }
+    
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -83,12 +86,25 @@ namespace Sprint4
         {
             
             state.Update();
-            collider.Update(this);
+            
         }
 
-        public EnemyCollider GetCollider()
+  
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return collider;
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            Die();
         }
     }
 }

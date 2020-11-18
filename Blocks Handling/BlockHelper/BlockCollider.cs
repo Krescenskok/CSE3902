@@ -12,9 +12,9 @@ namespace Sprint4.Blocks
         private Rectangle bounds;
         private IBlock block;
 
-        public string Name => throw new NotImplementedException();
+        public string Name => "Block";
 
-        
+        bool yes = false;
         public Layer layer { get; set; }
 
         public BlockCollider(Rectangle rect, IBlock block)
@@ -45,7 +45,7 @@ namespace Sprint4.Blocks
         {
             if (col.CompareTag("Player") && block.GetMoveable())
             {
-                block.move(collision.From().ToString());
+                block.move(collision.From.ToString());
                 col.SendMessage("Special Block", null);
             }
         }
@@ -55,6 +55,11 @@ namespace Sprint4.Blocks
 
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void SendMessage(string msg, object value)
         {
             
@@ -63,6 +68,8 @@ namespace Sprint4.Blocks
         public void Update()
         {
             bounds = block.getDestination();
+           
+            
         }
     }
 }

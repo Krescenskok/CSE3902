@@ -41,6 +41,7 @@ namespace Sprint4
                     currentRoomNum--;
                 }
                 changeCommand = new ChangeRoomCommand(currentRoomNum);
+                //Camera.Instance.ScrollDown(2); //for testing, can remove
             }
             else if (currentState.RightButton == ButtonState.Pressed && prevState.RightButton != currentState.RightButton)
             {
@@ -53,6 +54,7 @@ namespace Sprint4
                     currentRoomNum++;
                 }
                 changeCommand = new ChangeRoomCommand(currentRoomNum);
+                //Camera.Instance.ScrollUp(3); //for testing, can remove
             }
             prevState = currentState;
 

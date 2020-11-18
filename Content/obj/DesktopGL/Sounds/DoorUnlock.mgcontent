@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/DoorUnlock.wav</SourceFile>
+  <SourceTime>2020-11-11T20:04:38-05:00</SourceTime>
+  <DestFile>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Sounds/DoorUnlock.xnb</DestFile>
+  <DestTime>2020-11-12T10:54:13.2419623-05:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

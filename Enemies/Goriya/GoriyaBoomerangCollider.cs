@@ -25,7 +25,7 @@ namespace Sprint4.Enemies
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
         }
 
        
@@ -52,10 +52,13 @@ namespace Sprint4.Enemies
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From.ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
+
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("PlayerTakeDamage", damageAmount);
-            }
+                    col.SendMessage("TakeDamage" + direction, damageAmount);
+                }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
                 boomerang.BounceOff(collision);
@@ -65,14 +68,19 @@ namespace Sprint4.Enemies
 
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void SendMessage(string msg, object value)
         {
            //nothing
         }
 
-        public void Update(Point point)
+        public void Update()
         {
-            bounds.Location = point;
+            bounds.Location = boomerang.Location;
         }
     }
 }

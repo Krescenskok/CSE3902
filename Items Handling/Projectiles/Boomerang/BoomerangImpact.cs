@@ -9,10 +9,22 @@ namespace Sprint4.Items
 {
     public class BoomerangImpact : IItems
     {
+        private const int ADJUST = 20;
+        private bool returning;
+        private Vector2 linkLocation;
+        private Vector2 loc;
         public Vector2 location
         {
-            get { return location; }
-            set { location = value; }
+            get { return loc; }
+            set { loc = value; }
+        }
+
+
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
         }
 
         public Vector2 Location => throw new NotImplementedException();
@@ -24,17 +36,61 @@ namespace Sprint4.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-        private bool throwing;
-        private bool returning;
-        private LinkPlayer link;
-        private string direction;
-        public bool isExpired = false;
-        public BoomerangImpact(ISprite item, Vector2 location)
+
+        public BoomerangImpact(ISprite item, Vector2 location, string direction, bool returnState, LinkPlayer link)
         {
+            linkLocation = link.CurrentLocation;
             this.location = location;
+            AdjustLocation(direction);
             this.item = item;
+            returning = returnState;
             drawnFrame = 0;
-            state = new BoomerangImpactState(this, location);
+            state = new BoomerangImpactState(this, this.location);
+        }
+
+        private void AdjustLocation(string direction)
+        {
+            if (returning)
+            {
+                AdjustReturnLocation();
+                return;
+            }
+            if (direction is "Up")
+            {
+                loc.Y -= ADJUST;
+            }
+            else if (direction is "Down")
+            {
+                loc.Y += ADJUST;
+            }
+            else if (direction is "Right")
+            {
+                loc.X += ADJUST;
+            }
+            else
+            {
+                loc.X -= ADJUST;
+            }
+        }
+        private void AdjustReturnLocation()
+        {
+            if (location.X < linkLocation.X)
+            {
+                loc.X += ADJUST;
+            }
+            else
+            {
+                loc.X -= ADJUST;
+            }
+
+            if (location.Y < linkLocation.Y)
+            {
+                loc.Y += ADJUST;
+            }
+            else
+            {
+                loc.Y -= ADJUST;
+            }
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -45,12 +101,12 @@ namespace Sprint4.Items
         public void Update()
         {
             state.Update();
-            isExpired = ((BoomerangImpactState) state).isExpired;
         }
 
         public void Expire()
         {
-
+            IsExpired = true;
+            state.Expire();
         }
 
         public void Collect()

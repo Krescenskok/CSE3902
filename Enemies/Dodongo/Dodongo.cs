@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies.Dodongo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,21 +23,25 @@ namespace Sprint4
         private XElement dodongoInfo;
         private Point faceColliderSize = new Point(6, 6);
         private DodongoFaceCollider faceCollider;
+        private string deathSoundFile = "BossScreams";
+        private string damagedSoundFile = "DodongoRoar";
 
         public Vector2 Location { get => dodongoPos; }
 
         public IEnemyState State { get => dodongoState; }
 
+        public List<ICollider> Colliders { get => new List<ICollider> { dodongoCollider, faceCollider }; }
+
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
-            dodongoHP = 2;
+            dodongoHP = 3;
             direction = "Right";
             dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
-            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),dodongoState, AttackStrength);
-            faceCollider = new DodongoFaceCollider(new Rectangle(0,0,6,6),dodongoState);
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(initialPos),this, AttackStrength);
+            faceCollider = new DodongoFaceCollider(new Rectangle(0,0,6,6),dodongoState,this);
         }
 
         public string GetDirection()
@@ -77,15 +80,13 @@ namespace Sprint4
             direction = newDirection;
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
-            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(dodongoPos), dodongoState, AttackStrength);
-            CollisionHandler.Instance.AddCollider(dodongoCollider);
+            dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(dodongoPos), this, AttackStrength);
+            CollisionHandler.Instance.AddCollider(dodongoCollider, Layers.Enemy);
         }
 
         public void Update()
         {
             dodongoState.Update();
-            dodongoCollider.Update(this);
-            faceCollider.Update(UpdateFacePos());
         }
 
         public void UpdatePos(Vector2 newPos)
@@ -97,6 +98,7 @@ namespace Sprint4
         public void LostHP()
         {
             dodongoHP--;
+            Sounds.Instance.PlaySoundEffect(damagedSoundFile);
         }
 
         public Boolean checkAlive()
@@ -106,6 +108,7 @@ namespace Sprint4
 
         public void Die()
         {
+            Sounds.Instance.PlaySoundEffect(deathSoundFile);
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             CollisionHandler.Instance.RemoveCollider(faceCollider);
             RoomEnemies.Instance.Destroy(this, dodongoPos);
@@ -126,9 +129,21 @@ namespace Sprint4
         {
         }
 
-        public EnemyCollider GetCollider()
+      
+        public void TakeDamage(Direction dir, int amount)
         {
-            return dodongoCollider;
+            dodongoState.TakeDamage(amount);
         }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            dodongoState.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            dodongoState.Stun();
+        }
+
     }
 }

@@ -25,7 +25,6 @@ namespace Sprint4
 
         Random RandomNumber;
 
-        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
         List<Direction> possibleDirections;
         Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
         Direction currentDirection;
@@ -81,7 +80,7 @@ namespace Sprint4
             if (currentDirection.Equals(left)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("left"));
             if (currentDirection.Equals(right)) rope.SetSprite(EnemySpriteFactory.Instance.CreateRopeMoveSprite("right"));
 
-            rope.UpdateDirection(currentDirection.ToString());
+            rope.UpdateDirection(currentDirection);
         }
 
         private Direction RandomDirection(List<Direction> directions)
@@ -92,14 +91,9 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
 
-            if (collision.Left()) possibleDirections.Remove(Direction.left);
-            if (collision.Right()) possibleDirections.Remove(Direction.right);
-            if (collision.Up()) possibleDirections.Remove(Direction.up);
-            if (collision.Down()) possibleDirections.Remove(Direction.down);
-
-            
+            possibleDirections.Remove(collision.From);
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
 
@@ -147,7 +141,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            rope.SubtractHP(amount);
+            //
         }
 
         public void Stun()

@@ -13,9 +13,14 @@ namespace Sprint4
     public class ResetCommand : ICommand
     {
         LinkPlayer Player;
-        public  ResetCommand(LinkPlayer player)
+        bool start;
+
+        public bool StartAgain { get => start; set => start = value; }
+
+        public  ResetCommand(LinkPlayer player, bool bStart)
         {
             this.Player = player;
+            this.StartAgain = bStart;
         }
 
         public void DoInit(Game game)
@@ -30,13 +35,15 @@ namespace Sprint4
         }
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
-
         {
-            LinkCommand linkReset = new LinkCommand(Player, "R");
-            Debug.WriteLine("resetting");
-            linkReset.Update(Gametime);
-
-            RoomSpawner.Instance.Reset();
+            if (StartAgain)
+            {
+                LinkCommand linkReset = new LinkCommand(Player, "R");
+                linkReset.Update(Gametime);
+                RoomSpawner.Instance.Reset();
+            }
+           
+           
 
         }
     }

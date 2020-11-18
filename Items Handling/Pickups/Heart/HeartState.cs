@@ -38,13 +38,15 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             RoomItems.Instance.Destroy(item);
 
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
 
             CollisionHandler.Instance.RemoveCollider(item.Collider);
 
-            item.Expire();
+            Sounds.Instance.PlaySoundEffect("GetHeart");
         }
 
         public void Collected()

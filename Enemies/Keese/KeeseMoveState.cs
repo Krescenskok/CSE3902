@@ -79,7 +79,7 @@ namespace Sprint4
         {
             possibleDirections = new List<Direction> { left, right, up, down };
 
-            Direction dir = (Direction)collision.From();
+            Direction dir = (Direction)collision.From;
             possibleDirections.Remove(dir);
 
            
@@ -131,7 +131,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            bat.TakeDamage(amount);
+            
         }
 
         public void Stun()

@@ -12,19 +12,14 @@ namespace Sprint4
         private Vector2 location;
         private ProjectileCollider collider;
         private bool isExpired = false;
-        public bool expired
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
         private ISprite item;
-        private string direction;
         private int drawnFrame;
         private IItemsState state;
-
-        private float xPos;
-        private float yPos;
-        private float initialY;
 
         public Vector2 Location { get => location; }
 
@@ -35,12 +30,8 @@ namespace Sprint4
         public SwordBeam(ISprite item, Vector2 location, string direction)
         {
             this.location = location;
-            xPos = location.X;
-            yPos = location.Y;
-            initialY = yPos;
             this.item = item;
             state = new SwordBeamState(this, location, direction);
-            this.direction = direction;
 
             if (direction == "Down")
             {

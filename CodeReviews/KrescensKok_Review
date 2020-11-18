@@ -1,0 +1,20 @@
+Author of the code review: Krescens Kok
+Date of the code review: November 16th
+Sprint number: 4
+Name of the .cs file being reviewed: RoomDoors.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Number of minutes taken to complete the review: 10 minutes
+Specific comments on what is readable and what is not: Easy to read, the doors are created and added associated to a specific number. Shows when a door is open/closed
+and when the door is shown. The rooms are loaded, and then depending on where the door is located, that's where it's drawn. The door locations were then calculated
+to see where the actual door sprites were supposed to be drawn. 
+
+
+
+Author of the code review: Krescens Kok
+Date of the code review: November 16th
+Sprint number: 4
+Name of the .cs file being reviewed: HitboxAdjuster.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Specific comments on code quality: Very organized, clear to understand what is going on. White space is good, and the variable names are well named.
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change:
+Get rid of the magic numbers 

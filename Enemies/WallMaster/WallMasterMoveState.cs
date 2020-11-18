@@ -103,7 +103,7 @@ namespace Sprint4
             //top wall
             for (int i = 0; i < tileColumns; i++)
             {
-                position = new Point(gridTiles[0][i].X, gridTiles[0][i].Y - tileSize.Y);
+                position = new Point(gridTiles[0][i].X, gridTiles[0][i].Y - tileSize.Y * 2);
 
                 
                 wallRect = new Rectangle(position, tileSize);
@@ -117,7 +117,7 @@ namespace Sprint4
             //right wall
             for (int i = 0; i < tileRows; i++)
             {
-                position = new Point(gridTiles[i][tileColumns - 1].X + tileSize.X, gridTiles[i][tileColumns - 1].Y);
+                position = new Point(gridTiles[i][tileColumns - 1].X + tileSize.X * 2, gridTiles[i][tileColumns - 1].Y);
                 wallRect = new Rectangle(position, tileSize);
                 insideRect = gridTiles[i][tileColumns - 1];
                 RightOffset(spriteSize, ref wallRect, ref insideRect);
@@ -128,7 +128,7 @@ namespace Sprint4
             //bottom wall
             for (int i = 0; i < tileColumns; i++)
             {
-                position = new Point(gridTiles[tileRows - 1][i].X, gridTiles[tileRows - 1][i].Y + tileSize.Y);
+                position = new Point(gridTiles[tileRows - 1][i].X, gridTiles[tileRows - 1][i].Y + tileSize.Y * 2);
                 wallRect = new Rectangle(position, tileSize);
                 
                 insideRect = gridTiles[tileRows - 1][i];
@@ -142,7 +142,7 @@ namespace Sprint4
             //left wall
             for (int i = 0; i < tileRows; i++)
             {
-                position = new Point(gridTiles[i][0].X - tileSize.X, gridTiles[i][0].Y);
+                position = new Point(gridTiles[i][0].X - tileSize.X * 2, gridTiles[i][0].Y);
                 wallRect = new Rectangle(position, tileSize);
                 insideRect = gridTiles[i][0];
                 LeftOffset(spriteSize, ref wallRect, ref insideRect);
@@ -205,8 +205,12 @@ namespace Sprint4
 
         public void Attack()
         {
-            targetSpace = NearestSpace(location, outsideArea);
-            master.state = new WallMasterGrabbingLinkState(location, master, targetSpace, currentWall.ToString(), game);
+            if (!inWall)
+            {
+                targetSpace = NearestSpace(location, outsideArea);
+                master.state = new WallMasterGrabbingLinkState(location, master, targetSpace, currentWall.ToString(), game);
+            }
+            
         }
 
         public void Update()
@@ -388,7 +392,7 @@ namespace Sprint4
 
         public void TakeDamage(int amount)
         {
-            master.TakeDamage(amount);
+            
         }
 
         public void Stun()

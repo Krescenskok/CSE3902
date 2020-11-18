@@ -26,7 +26,7 @@ namespace Sprint4
 
             this.state = item.State;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Item);
         }
 
         public void ChangeState(IItemsState state)
@@ -62,30 +62,47 @@ namespace Sprint4
             }
 
 
+
+
         }
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
 
-                if (col.CompareTag("Player")) col.SendMessage("Item", this.item);
-  
+            if (col.CompareTag("Player"))
+            {
+                col.SendMessage("Item", this.item);
+                this.item.State.Expire();
+            }
 
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void SendMessage(string msg, object value)
         {
             if (msg == "Dissapear")
             {
+                this.item.Expire();
                 this.item.State.Expire();
             }
             
         }
 
-
+        //can probably be deleted//
         public void Update(IItems itemObj)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

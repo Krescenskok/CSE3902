@@ -25,7 +25,7 @@ namespace Sprint4
         private static readonly RoomNPCs instance = new RoomNPCs();
 
         private List<INPC> NPCs;
-        
+        private Camera cam = Camera.Instance;
 
        
 

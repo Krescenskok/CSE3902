@@ -17,16 +17,21 @@ namespace Sprint4
         private Game game;
         private Vector2 location;
         public IEnemyState state;
-        private ISprite sprite;
-        private GelMoveSprite gSprite;
+        public ISprite sprite;
+        public GelMoveSprite gSprite;
 
         private EnemyCollider innerCollider;
         private GelBlockCollider outsideCollider;
         private int HP = HPAmount.EnemyLevel1;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+
+        public List<ICollider> Colliders { get => new List<ICollider> { innerCollider,outsideCollider }; }
 
         private XElement saveData;
 
@@ -45,10 +50,14 @@ namespace Sprint4
         {
             state = new GelMoveState(this, location, game);
             gSprite = (GelMoveSprite)sprite;
-            innerCollider = new EnemyCollider(gSprite.GetRectangle(), state, HPAmount.HalfHeart, "gel");
             
-            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state);
-            
+            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state, this);
+
+            spriteSize = gSprite.GetRectangle().Size;
+            rect = new Rectangle(location.ToPoint(), spriteSize);
+
+            innerCollider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .3f), this, HPAmount.HalfHeart, "gel");
+
         }
 
         public void SetSprite(ISprite sprite)
@@ -65,23 +74,14 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            innerCollider.Update(this);
-
-            if(gSprite != null)outsideCollider.Update(gSprite.OuterColliderLocation(location));
-           
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-        }
 
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this, location);
-            CollisionHandler.Instance.RemoveCollider(outsideCollider);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
         public void Draw(SpriteBatch batch)
@@ -91,12 +91,31 @@ namespace Sprint4
             
         }
 
-        
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
+        }
 
         public EnemyCollider GetCollider()
         {
             return innerCollider;
 
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            HP -= amount;
+            if (HP <= 0) Die();
+        }
+
+        public void Stun()
+        {
+            state.Stun();
+        }
+
+        public Vector2 Attack()
+        {
+            return gSprite.centerLocation;
         }
     }
 }

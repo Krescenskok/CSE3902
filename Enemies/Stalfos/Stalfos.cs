@@ -26,26 +26,32 @@ namespace Sprint4
 
         private int HP = HPAmount.EnemyLevel2;
 
+        private Point spriteSize;
+        private Rectangle rect;
+
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+
+        
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
             this.location = location;
             state = new EnemySpawnState(this, game);
-            collider = new EnemyCollider();
-
             saveInfo = xml;
-
         }
 
         public void Spawn()
         {
             state = new StalfosWalkingState(this, location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, HPAmount.HalfHeart, "Stalfos");
+
+            spriteSize = stalfosSprite.GetRectangle().Size;
+            rect = new Rectangle(this.location.ToPoint(), spriteSize);
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 
@@ -53,19 +59,29 @@ namespace Sprint4
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveInfo.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(location);
         }
 
 
         
-        /// <returns>true when stalfos HP is > 0</returns>
-        public bool SubtractHP(int amount)
+      
+        public void TakeDamage(Direction dir, int amount)
         {
             HP -= amount;
 
+            if (HP <= HPAmount.Zero) { Die(); //Sounds.Instance.PlayEnemyDie(); 
+            }
+            else 
+            { 
+                state = new StalfosDamagedState(dir, this, location);
+                //Sounds.Instance.PlayEnemyHit();
+            }
             
-            if (HP <= 0) { Die(); }
+        }
 
-            return HP > 0;
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -76,7 +92,7 @@ namespace Sprint4
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            
         }
 
         public void SetSprite(ISprite sprite)
@@ -91,9 +107,11 @@ namespace Sprint4
             this.location = location;
         }
 
-        public EnemyCollider GetCollider()
+
+
+        public void Stun()
         {
-            return collider;
+            state.Stun();
         }
     }
 }

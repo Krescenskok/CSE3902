@@ -56,7 +56,7 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            if(collision.From().ToString() == "right" && direction == "Left")
+            if(collision.From.ToString() == "right" && direction == "Left")
             {
                 dodongoPos.X -= 3;
                 dodongo.UpdatePos(dodongoPos);
@@ -98,9 +98,9 @@ namespace Sprint4
         {
             if (amount == -1)
             {
-                dodongo.LostHP();
                 dodongo.dodongoState = new DodongoDamagedState(dodongo, dodongoPos);
                 dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDodongoSprite(direction));
+                dodongo.LostHP();
             }
         }
 

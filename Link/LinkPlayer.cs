@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
+using Sprint4;
+using Sprint4.Link;
 
-namespace Sprint4.Link
+namespace Sprint4
 {
     public enum ItemForLink
     {
@@ -21,35 +23,49 @@ namespace Sprint4.Link
     }
 
 
+
     public class LinkPlayer
     {
         public ILinkState state;
+        const float HEALTH = 60;
+        const int NUM_OF_RUPEE = 0;
+
 
         bool loc = false;
         public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
-        private float health = 60;
-        public bool isWalkingInPlace = false;
+        private float health = HEALTH;
+        public bool isWalkingInPlace;
         private bool isPickingUpItem = false;
-        private int numOfRupee = 0;
         private bool useRing = false;
-        private int fullHealth = 60;
-        private int delay = 2;
+        private float fullHealth = HEALTH;
+        private int delay;
         private bool clock = false;
-        public List<IItems> itemsPickedUp;
+        private bool largeShield = false;
+        private bool drawShield = true;
 
-        private PlayerCollider collider;
+        private bool isDead = false;
+
+        public LinkSprite sprite;
+        public Rectangle hitbox;
+
+
+        public PlayerCollider collider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
+
+        public List<Direction> possibleDirections = Directions.Default();
+
+        public bool isPaused = false;
+
         public void RemovePlacedItem(IItems item)
         {
-            if (itemsPlacedByLink.Contains(item))
+            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
             {
                 itemsPlacedByLink.Remove(item);
             }
-            
         }
 
 
@@ -64,10 +80,14 @@ namespace Sprint4.Link
         {
             get
             {
-
-                Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
-                return t;
+                return state.Bounds();
             }
+        }
+
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
         }
 
         public float Health
@@ -107,6 +127,12 @@ namespace Sprint4.Link
             set { isAttacking = value; }
         }
 
+        private bool secondAttack = false;
+        public bool IsSecondAttack
+        {
+            get { return secondAttack; }
+            set { secondAttack = value; }
+        }
 
         private bool isStopped = false;
 
@@ -118,7 +144,7 @@ namespace Sprint4.Link
         }
 
 
-        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
+        private ItemForLink currentWeapon = ItemForLink.Shield;
 
 
         public ItemForLink CurrentWeapon
@@ -128,85 +154,112 @@ namespace Sprint4.Link
 
         }
 
+        private ItemForLink secondWeapon = ItemForLink.ArrowBow;
+        public ItemForLink SecondaryWeapon
+        {
+            get { return secondWeapon; }
+            set { secondWeapon = value; }
+        }
+
         public bool IsWalkingInPlace
         {
             get { return isWalkingInPlace; }
             set { isWalkingInPlace = value; }
         }
 
+
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
 
-        public int NumOfRupee { get => numOfRupee; set => numOfRupee = value; }
-
         public bool UseRing { get => useRing; set => useRing = value; }
 
-        public int FullHealth { get => fullHealth; set => fullHealth = value; }
+        public float FullHealth { get => fullHealth; set => fullHealth = value; }
 
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
+        public bool LargeShield { get => largeShield; set => largeShield = value; }
+        public bool DrawShield { get => drawShield; set => drawShield = value; }
 
         public LinkPlayer()
         {
 
-            state = new Stationary(this);
+            sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            hitbox = sprite.hitbox;
+            state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+            
+            
 
         }
         public void Update(GameTime gameTime)
         {
+            if (sprite != null)
+            { 
+                hitbox = sprite.hitbox;
+                int sizeX = hitbox.Size.X;
+                int sizeY = hitbox.Size.Y;
+                CurrentLocation = state.Update(gameTime, CurrentLocation);
+                hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                delay--;
 
-            CurrentLocation = state.Update(gameTime, CurrentLocation);
-            delay--;
 
+                possibleDirections = Directions.Default();
+            }
         }
-
+        public void HandleObstacle(Collision col)
+        {
+            possibleDirections.Remove(col.From);
+        }
         public void MovingLeft()
         {
             if (!(state is MoveLeft))
-                state = new MoveLeft(this);
+                state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
         }
 
         public void MovingRight()
         {
             if (!(state is MoveRight))
-                state = new MoveRight(this);
+                state = new MoveRight(this, sprite);
             LinkDirection = "Right";
         }
 
         public void MovingUp()
         {
             if (!(state is MoveUp))
-                state = new MoveUp(this);
+                state = new MoveUp(this, sprite);
             LinkDirection = "Up";
         }
 
         public void MovingDown()
         {
             if (!(state is MoveDown))
-                state = new MoveDown(this);
+                state = new MoveDown(this, sprite);
             LinkDirection = "Down";
         }
 
         public void Stationary()
         {
-            state = new Stationary(this);
+            state = new Stationary(this, sprite);
         }
 
         public void Reset()
         {
-            state = new Stationary(this);
-            Health = 100;
-
+            state = new Stationary(this, sprite);
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;
             IsStopped = false;
             IsWalkingInPlace = false;
             IsPickingUpItem = false;
-
+            LargeShield = false;
+            UseRing = false;
+            Health = HEALTH;
+            FullHealth = HEALTH;
+            Delay = 0;
+            clock = false;
+            DrawShield = true;
 
         }
 
@@ -216,7 +269,7 @@ namespace Sprint4.Link
             if (loc == false)
             {
                 loc = true;
-                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2) - Camera.Instance.Location;
             }
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
