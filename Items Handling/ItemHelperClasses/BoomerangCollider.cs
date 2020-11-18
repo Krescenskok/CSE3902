@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4;
+using Sprint5;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class BoomerangCollider : ICollider
     {
@@ -63,15 +63,15 @@ namespace Sprint4
             if (col.CompareTag("Enemy"))
             {
                 col.SendMessage("Stun", null);
-                ((Sprint4.Items.Boomerang)this.item).Impact();
+                ((Sprint5.Items.Boomerang)this.item).Impact();
             }
             else if (col.CompareTag("Player"))
             {
-                ((Sprint4.Items.Boomerang)this.item).Expire();
+                ((Sprint5.Items.Boomerang)this.item).Expire();
             }
             else if (col.CompareTag("Wall") || col.CompareTag("Door"))
             {
-                ((Sprint4.Items.Boomerang)this.item).Returning();
+                ((Sprint5.Items.Boomerang)this.item).Returning();
             }
 
 

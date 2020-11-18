@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.EnemyAndNPC.OldMan
+namespace Sprint5.EnemyAndNPC.OldMan
 {
     /// <summary>
     /// Author: Yuan Hong

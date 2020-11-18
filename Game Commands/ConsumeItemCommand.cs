@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class ConsumeItemCommand : ICommand
     {

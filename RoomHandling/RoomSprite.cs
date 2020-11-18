@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class RoomSprite : ISprite
     {

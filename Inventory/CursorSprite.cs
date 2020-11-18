@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Inventory
+namespace Sprint5.Inventory
 {
     public class CursorSprite : ISprite
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies;
+using Sprint5.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash

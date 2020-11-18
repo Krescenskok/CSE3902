@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies;
+using Sprint5.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.EnemyAndNPC.OldMan
+namespace Sprint5.EnemyAndNPC.OldMan
 {
     /// <summary>
     /// Author: Yuan Hong

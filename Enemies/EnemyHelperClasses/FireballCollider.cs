@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Enemies.EnemyHelperClasses
+namespace Sprint5.Enemies.EnemyHelperClasses
 {
     class FireballCollider : ICollider
     {

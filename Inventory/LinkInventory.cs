@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Inventory;
-using Sprint4.Items;
-using Sprint4.Link;
+using Sprint5.Inventory;
+using Sprint5.Items;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class LinkInventory
     {

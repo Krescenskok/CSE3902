@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Door8.png</SourceFile>
-  <SourceTime>2020-11-16T17:21:11.7354887-05:00</SourceTime>
-  <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Door8.xnb</DestFile>
-  <DestTime>2020-11-16T22:26:13.952332-05:00</DestTime>
+  <SourceFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/Door8.png</SourceFile>
+  <SourceTime>2020-11-16T11:08:56-05:00</SourceTime>
+  <DestFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/Door8.xnb</DestFile>
+  <DestTime>2020-11-18T14:54:36.1183142-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

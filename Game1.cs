@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
-using Sprint4.Link;
-using Sprint4;
-using Sprint4.Enemies;
-using Sprint4.Blocks;
+using Sprint5.Items;
+using Sprint5.Link;
+using Sprint5;
+using Sprint5.Enemies;
+using Sprint5.Blocks;
 using System.Xml.Linq;
 using System.Xml;
 using System.Xml.Schema;
@@ -13,7 +13,7 @@ using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 
-namespace Sprint4
+namespace Sprint5
 {
 
     public class Game1 : Game
@@ -112,7 +112,6 @@ namespace Sprint4
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
-            RoomEnemies.Instance.AddTestCollider(linkPlayer.collider);
         }
 
         protected override void Update(GameTime gameTime)
@@ -231,8 +230,6 @@ namespace Sprint4
 
                 if (activeCommand != null)
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
-
-                
 
                 GraphicsDevice.Viewport = camera.gameView;
                 GraphicsDevice.Clear(Color.Black);
