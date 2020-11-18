@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint5;
-using Sprint5.Items;
+using Sprint4;
+using Sprint4.Items;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     public class BombCollider : ICollider
     {

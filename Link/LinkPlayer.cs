@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5;
-using Sprint5.Link;
+using Sprint4;
+using Sprint4.Link;
 
-namespace Sprint5
+namespace Sprint4
 {
     public enum ItemForLink
     {

@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Enemies.EnemyHelperClasses;
-using Sprint5.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint4.Enemies.EnemyHelperClasses;
+using Sprint4.EnemyAndNPC.AquamentusAndFireballs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     /// <summary>
     /// Author: Yuan Hong

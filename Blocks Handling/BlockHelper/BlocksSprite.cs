@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5;
+using Sprint4;
 
-namespace Sprint5.Blocks
+namespace Sprint4.Blocks
 
 {
     public class BlocksSprite : ISprite

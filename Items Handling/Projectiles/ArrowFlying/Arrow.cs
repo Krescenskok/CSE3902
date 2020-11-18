@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint5
+namespace Sprint4
 {
     //class for the arrow that link shoots, AKA the moving arrow
     public class Arrow : IItems

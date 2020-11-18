@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint5;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     public class EnemyCollider : ICollider
     {
@@ -29,7 +29,6 @@ namespace Sprint5
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this,Layers.Enemy);
-            RoomEnemies.Instance.AddTestCollider(rect, this);
             name = "Enemy";
         }
 

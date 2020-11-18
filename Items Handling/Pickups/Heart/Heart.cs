@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Linq;
 
-namespace Sprint5.Items
+namespace Sprint4.Items
 {
     //this is the heart that link can collect to replenish hearts
     public class Heart : IItems

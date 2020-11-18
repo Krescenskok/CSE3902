@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
-using Sprint5;
+using Sprint4;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5.Blocks
+namespace Sprint4.Blocks
 {
     public class BlockCollider : ICollider
     {

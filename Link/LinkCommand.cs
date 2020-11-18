@@ -3,10 +3,10 @@ using System.Windows.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint5.Items;
-using Sprint5.Link;
+using Sprint4.Items;
+using Sprint4.Link;
 
-namespace Sprint5.Link
+namespace Sprint4.Link
 {
     public class LinkCommand : ICommand
     {

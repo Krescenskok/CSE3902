@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Enemies;
-using Sprint5.Enemies.Zol;
-using Sprint5.EnemyAndNPC.AquamentusAndFireballs;
-using Sprint5.EnemyAndNPC.Merchant;
-using Sprint5.EnemyAndNPC.OldMan;
+using Sprint4.Enemies;
+using Sprint4.Enemies.Zol;
+using Sprint4.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint4.EnemyAndNPC.Merchant;
+using Sprint4.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Sprint5
+namespace Sprint4
 {
     /// <summary>
     /// <para>Factory for generating Enemy and NPC sprites</para>

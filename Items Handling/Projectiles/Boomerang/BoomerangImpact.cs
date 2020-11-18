@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Link;
+using Sprint4.Link;
 
-namespace Sprint5.Items
+namespace Sprint4.Items
 {
     public class BoomerangImpact : IItems
     {

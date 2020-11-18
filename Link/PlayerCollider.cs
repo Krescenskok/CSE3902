@@ -1,12 +1,12 @@
 using Microsoft.Xna.Framework;
-using Sprint5;
-using Sprint5.Link;
+using Sprint4;
+using Sprint4.Link;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     public class PlayerCollider : ICollider
     {
@@ -274,18 +274,18 @@ namespace Sprint5
 
             if (msg == "Item")
             {
-                if(((IItems) value) is Sprint5.Items.TriforcePiece || ((IItems)value) is Sprint5.Items.Bow)
+                if(((IItems) value) is Sprint4.Items.TriforcePiece || ((IItems)value) is Sprint4.Items.Bow)
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
             }
             if (msg == "Heal")
             {
-                if (value is Sprint5.Items.Heart)
+                if (value is Sprint4.Items.Heart)
                 {
                     linkPlayer.Health += FULL_HEART;
                 }
-                else if (value is Sprint5.Items.Fairy)
+                else if (value is Sprint4.Items.Fairy)
                 {
                     linkPlayer.Health += HALF_HEART;
                 }

@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint5.Items
+namespace Sprint4.Items
 {
     //this is the full heart for link's lives, not the collectable object
     public class FullHeart : IItems

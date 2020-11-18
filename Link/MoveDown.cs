@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Link;
+using Sprint4.Link;
 
-namespace Sprint5
+namespace Sprint4
 {
     public class MoveDown : Movement
     {

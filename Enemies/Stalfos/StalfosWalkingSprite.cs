@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     /// <summary>
     /// Sprite class for when stalfos (skeleton) is walking normally

@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Sprint5.Items;
-using Sprint5.Blocks;
+using Sprint4.Items;
+using Sprint4.Blocks;
 using System.Linq.Expressions;
 using System.Collections;
 
 
-namespace Sprint5
+namespace Sprint4
 {
 
     /// <summary>
@@ -82,6 +82,7 @@ namespace Sprint5
             XElement room = roomXMLs[roomNumber];
             //currentRoomSprite = roomSprites[roomNumber - 1];
             //currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
+            Debug.WriteLine(room);
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);

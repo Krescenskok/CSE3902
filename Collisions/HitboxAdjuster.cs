@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint4
 {
     /// <summary>
     /// takes coefficient to reduce hitbox size by (to get from grid to closer matching the sprite's size) and returns new hitbox
