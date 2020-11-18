@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
-using Sprint4.Link;
-using Sprint4.Blocks;
+using Sprint5.Items;
+using Sprint5.Link;
+using Sprint5.Blocks;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class SpriteFactory
     {

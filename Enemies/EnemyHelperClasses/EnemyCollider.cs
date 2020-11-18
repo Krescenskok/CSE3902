@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4;
+using Sprint5;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class EnemyCollider : ICollider
     {

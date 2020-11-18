@@ -4,9 +4,9 @@ using System.Text;
 using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BoomerangObject : IItems
     {
