@@ -232,6 +232,8 @@ namespace Sprint4
                 if (activeCommand != null)
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
+                
+
                 GraphicsDevice.Viewport = camera.gameView;
                 GraphicsDevice.Clear(Color.Black);
                 _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 95), Color.White);
