@@ -75,21 +75,21 @@ namespace Sprint5.Link
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                if (direction.Equals("Down") || link.state is Stationary)
+                if (direction.Equals(DOWN) || link.state is Stationary)
                 {
                     itemLocation.X += 14;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
                     itemLocation.Y += 5;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
-                else if (direction.Equals("Left"))
+                else if (direction.Equals(LEFT))
                 {
                     itemLocation.Y += 7;
 
@@ -160,15 +160,15 @@ namespace Sprint5.Link
             {
                 candleMade = true;
                 loc.X += 10;
-                if (direction.Equals("Up"))
+                if (direction.Equals(UP))
                 {
                     loc.Y -= buffer;
                 }
-                else if (direction.Equals("Down"))
+                else if (direction.Equals(DOWN))
                 {
                     loc.Y += buffer;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
                     loc.X += buffer;
                 }
@@ -190,24 +190,24 @@ namespace Sprint5.Link
             {
                 LinkInventory.Instance.BombCount--;
                 bombMade = true;
-                loc.X += 10;
-                if (direction.Equals("Up"))
+                if (direction.Equals(LEFT))
                 {
                     loc.Y -= buffer;
+                    loc.X -= buffer;
                 }
-                if (direction.Equals("Down") || link.state is Stationary)
+                if (direction.Equals(DOWN) || link.state is Stationary)
                 {
                     loc.Y += buffer;
                 }
-                else if (direction.Equals("Right"))
+                else if (direction.Equals(RIGHT))
                 {
                     loc.X += buffer;
                 }
                 else
                 {
-                    loc.X -= buffer;
+                    //loc.X += buffer * 2;
+                    loc.Y -= buffer;
                 }
-
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
             }

@@ -66,6 +66,7 @@ namespace Sprint5
             {
                 itemsPlacedByLink.Remove(item);
             }
+            this.IsShootingProjectile = false;
         }
 
 
@@ -74,6 +75,13 @@ namespace Sprint5
         {
             get { return direction; }
             set { direction = value; }
+        }
+
+        private bool shotProjectile = false;
+        public bool IsShootingProjectile
+        {
+            get { return shotProjectile; }
+            set { shotProjectile = value; }
         }
 
         public Rectangle Bounds
