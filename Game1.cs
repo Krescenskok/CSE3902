@@ -100,13 +100,8 @@ namespace Sprint5
 
             CollisionHandler.Instance.Initialize(this);
 
-
-            //set up grid where everything is spawned
             GridGenerator.Instance.GetGrid(this, 12, 7);
-
-            //create list of rooms
             RoomSpawner.Instance.LoadAllRooms(this);
-
             RoomSpawner.Instance.LoadRoom(this, 1);
 
 
@@ -148,12 +143,8 @@ namespace Sprint5
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
-                base.Update(gameTime);
-
-                
-            }
-
-            
+                base.Update(gameTime);                
+            }            
 
             camera.Update();
             
@@ -172,13 +163,7 @@ namespace Sprint5
 
         protected override void Draw(GameTime gameTime)
         {
-
-
-            //draw game area from camera POV
-            //_spriteBatch.Begin(transformMatrix: camera.Transform);
-
-
-             if (activeCommand != null)
+            if (activeCommand != null)
             {
                 if (activeCommand is ResetCommand)
                 {
@@ -190,11 +175,10 @@ namespace Sprint5
                 {
                     IsGameOver = false;
                 }
-            }
-           
+            }           
 
 
-              if (!IsGameOver)
+            if (!IsGameOver)
             {
                 _spriteBatch.Begin(transformMatrix: camera.Transform);
                 GraphicsDevice.Viewport = camera.gameView;
@@ -213,7 +197,7 @@ namespace Sprint5
                 _spriteBatch.End();
 
 
-                 //Draw HUD in separate viewport
+                //Draw HUD in separate viewport
                 _spriteBatch.Begin();
 
                 GraphicsDevice.Viewport = camera.HUDView;
@@ -222,10 +206,10 @@ namespace Sprint5
                 HUD.Instance.DrawBottom(_spriteBatch);
 
                 _spriteBatch.End();
+
             }
             else
             {
-
                 _spriteBatch.Begin();
 
                 if (activeCommand != null)
@@ -236,7 +220,6 @@ namespace Sprint5
                 _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 95), Color.White);
                 _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(225, 145), Color.White);
                 _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 175), Color.White);
-
 
                 base.Draw(gameTime);
 

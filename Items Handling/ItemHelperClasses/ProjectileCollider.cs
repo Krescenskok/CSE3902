@@ -57,10 +57,7 @@ namespace Sprint5
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Wall"))
-            {
-                item.State.Expire();
-            }
+
         }
 
 
@@ -89,11 +86,6 @@ namespace Sprint5
                 }
                 item.State.Expire();
             }
-
-            if (col.CompareTag("Wall") || col.CompareTag("Door"))
-            {
-                item.Expire();
-            }
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
@@ -102,8 +94,8 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
+            if (msg == "Impact") item.Expire();
 
-            
         }
 
         //can probably be deleted//

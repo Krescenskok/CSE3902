@@ -95,7 +95,7 @@ namespace Sprint5
             WallMaster master = enemy as WallMaster;
             if (col.CompareTag("Player")) col.SendMessage("TakeDamage" + direction, damageAmount);
             if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
-            else if (col.CompareTag("Item")) col.SendMessage("Impact", 0);
+            else if (col.CompareTag("Item") || col.CompareTag("Projectile")) col.SendMessage("Impact", 0);
         }
 
         public void SendMessage(string msg, object value)
@@ -110,7 +110,6 @@ namespace Sprint5
                 enemy.TakeDamage(dir, (int)value);
 
                 Sounds.Instance.PlayEnemyHit();
-                Sounds.Instance.StartLowHealthLoop();
             }
 
           

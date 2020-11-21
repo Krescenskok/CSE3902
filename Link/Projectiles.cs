@@ -192,10 +192,9 @@ namespace Sprint5.Link
                 bombMade = true;
                 if (direction.Equals(LEFT))
                 {
-                    loc.Y -= buffer;
                     loc.X -= buffer;
                 }
-                if (direction.Equals(DOWN) || link.state is Stationary)
+                else if (direction.Equals(DOWN) || link.state is Stationary)
                 {
                     loc.Y += buffer;
                 }
@@ -205,7 +204,6 @@ namespace Sprint5.Link
                 }
                 else
                 {
-                    //loc.X += buffer * 2;
                     loc.Y -= buffer;
                 }
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
