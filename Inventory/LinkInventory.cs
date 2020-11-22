@@ -240,6 +240,17 @@ namespace Sprint5
             get { return secondInInventory[SecondaryItem.Bow]; }
         }
 
+        public bool HasCandle
+        {
+            get { return secondInInventory[SecondaryItem.Candle]; }
+        }
+
+
+        public bool HasBoomerang
+        {
+            get { return secondInInventory[SecondaryItem.Boomerang]; }
+        }
+
         public IItems GetSecondItem
         {
             get { return secondItems[secondSlotItem]; }

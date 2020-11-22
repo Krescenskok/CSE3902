@@ -45,7 +45,10 @@ namespace Sprint5
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            //no action
+            if (col.CompareTag("Projectile"))
+            {
+                col.SendMessage("Impact", 0);
+            }
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
@@ -54,9 +57,7 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
-            if(msg == "Bomb") { 
-                //open hole in wall?
-            }
+            
         }
 
         public void Update()
