@@ -11,9 +11,7 @@ namespace Sprint5
         int MOVEMENT = -10;
         int TIME = 100;
         int PICKUP = 300;
-        int Y_LOCATION = 75;
-
-
+  
         public MoveUp(LinkPlayer link, LinkSprite sprite) : base(link)
         {
             linkSprite = sprite;
@@ -164,30 +162,6 @@ namespace Sprint5
         public override Rectangle Bounds()
         {
             return link.hitbox;
-            /*
-            if (link.CurrentWeapon == ItemForLink.Shield)
-            {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2*13, 2*15);
-            }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*16, 2*28);
-            }
-            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*17, 2*28);
-            }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 9, (int)link.currentLocation.Y + 2, 2*18, 2*28);
-            }
-
-
-            return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2 * 13, 2 * 15);
-
-            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
-            */
-
         }
 
     }

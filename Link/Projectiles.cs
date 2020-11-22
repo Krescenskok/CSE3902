@@ -27,11 +27,7 @@ namespace Sprint5.Link
         private readonly string RIGHT = "Right";
 
         private const int DISPLACEMENT = 10;
-
-
         private Vector2 itemLocation;
-
-
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
         public LinkPlayer Link
@@ -78,28 +74,24 @@ namespace Sprint5.Link
                 if (direction.Equals("Down") || link.state is Stationary)
                 {
                     itemLocation.X += 14;
-
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Right"))
                 {
                     itemLocation.Y += 5;
-
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Left"))
                 {
                     itemLocation.Y += 7;
-
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else
                 {
                     itemLocation.X += 8;
-
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
@@ -161,21 +153,13 @@ namespace Sprint5.Link
                 candleMade = true;
                 loc.X += 10;
                 if (direction.Equals("Up"))
-                {
                     loc.Y -= buffer;
-                }
                 else if (direction.Equals("Down"))
-                {
                     loc.Y += buffer;
-                }
                 else if (direction.Equals("Right"))
-                {
                     loc.X += buffer;
-                }
                 else
-                {
                     loc.X -= buffer;
-                }
 
                 item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
@@ -192,21 +176,13 @@ namespace Sprint5.Link
                 bombMade = true;
                 loc.X += 10;
                 if (direction.Equals("Up"))
-                {
                     loc.Y -= buffer;
-                }
                 if (direction.Equals("Down") || link.state is Stationary)
-                {
                     loc.Y += buffer;
-                }
                 else if (direction.Equals("Right"))
-                {
                     loc.X += buffer;
-                }
                 else
-                {
                     loc.X -= buffer;
-                }
 
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
@@ -267,8 +243,6 @@ namespace Sprint5.Link
             }
 
         }
-
-
         public void Update(GameTime gameTime)
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)

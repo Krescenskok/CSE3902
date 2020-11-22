@@ -68,5 +68,7 @@
     <Compile Remove="Items Handling\States\HalfHeart.cs" />
     <Compile Remove="Items Handling\States\Letter.cs" />
     <Compile Remove="Items Handling\States\Compass.cs" />
+    <Compile Remove="Link\LinkReset.cs" />
+    <Compile Remove="Link\MoveLeftShield.cs" />
   </ItemGroup>
 </Project>

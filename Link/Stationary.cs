@@ -9,12 +9,9 @@ namespace Sprint5
     {
 
         private double lastTime;
-        int TIME_THOU = 1000;
         int TIME_HUN = 100;
-        int TIME_THREE = 300;
         int TIME = 100;
         int PICKUP = 300;
-
 
         public Stationary(LinkPlayer link, LinkSprite sprite) : base(link)
         {
@@ -26,10 +23,8 @@ namespace Sprint5
 
         int i = 0;
        
-
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
-
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
@@ -65,12 +60,8 @@ namespace Sprint5
                             link.IsStopped = true;
                             break;
                     }
-
                 }
-
             }
-
-
             return location;
         }
 
@@ -112,12 +103,9 @@ namespace Sprint5
                             break;
                     }
                 }
-
             }
-
             return location;
         }
-
 
         public override Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location)
         {
@@ -157,9 +145,7 @@ namespace Sprint5
                             break;
                     }
                 }
-
             }
-
             return location;
         }
 
@@ -167,18 +153,12 @@ namespace Sprint5
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > TIME_HUN)
             {
-
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-
-
                 if (currentFrame == 0)
-                {
                     currentFrame = 1;
-                }
                 else
                     currentFrame = 0;
-
             }
             link.IsAttacking = false;
             link.IsStopped = true;
@@ -190,8 +170,6 @@ namespace Sprint5
             if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > PICKUP)
             {
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;
-
-
                 if (link.LargeShield)
                 {
                     switch (currentFrame)
@@ -223,7 +201,6 @@ namespace Sprint5
             return location;
         }
 
-
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
             throw new NotImplementedException();
@@ -231,13 +208,7 @@ namespace Sprint5
 
         public override Rectangle Bounds()
         {
-
-
-            //return new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y + 4, 2 * 14, 2 * 14);
-
             return link.hitbox;
-            // new Rectangle((int)link.currentLocation.X, (int)link.currentLocation.Y, , );
-
 
         }
     }

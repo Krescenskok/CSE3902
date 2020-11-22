@@ -57,19 +57,12 @@ namespace Sprint5.Link
 
             if (link.LargeShield && link.DrawShield)
             {
-
                 if (link.state is MoveDown)
-                {
                     currentFrame = 10;
-                }
                 else if (link.state is MoveLeft)
-                {
                     currentFrame = 14;
-                }
                 else if (link.state is MoveRight)
-                {
                     currentFrame = 12;
-                }
                 link.DrawShield = false;
             }
 
@@ -83,17 +76,12 @@ namespace Sprint5.Link
                 {
                     if (link.IsDamaged)
                     {
-       
                         col = colors[i];
-
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == colors.Length - 1)
-                        {
                             i = 0;
-                        }
                         link.currentLocation = location;
-
                     }
                     else if (link.Clock)
                     {
@@ -101,10 +89,7 @@ namespace Sprint5.Link
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         i++;
                         if (i == clockColors.Length - 1)
-                        {
                             i = 0;
-                        }
-
                     }
 
                 }
@@ -112,16 +97,11 @@ namespace Sprint5.Link
                 {
                     link.IsDamaged = false;
                     link.Clock = false;
-
                 }
 
             }
             else
-            {
-                 
-                  linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-
-            }
+               linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
 
             foreach (IItems projectile in link.itemsPlacedByLink)
             {
@@ -129,7 +109,6 @@ namespace Sprint5.Link
             }
 
         }
-
 
         public void delayExecute(double interval, ElapsedEventHandler handler)
         {
@@ -140,16 +119,12 @@ namespace Sprint5.Link
             t.Start();
         }
 
-
         public virtual Vector2 Update(GameTime gameTime, Vector2 location)
         {
             ProjectilesCommand.Instance.Update(gameTime);
 
             if (link.IsStopped)
-            {
-
                 return location;
-            }
             if (link.IsAttacking)
             {
                 if (link.IsSecondAttack)
@@ -157,21 +132,17 @@ namespace Sprint5.Link
                     if (link.SecondaryWeapon == ItemForLink.Boomerang)
                     {
                         ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
-                        //animation to throw is same as bow
                         return HandleArrowBow(gameTime, location);
                     }
                     else if (link.SecondaryWeapon == ItemForLink.BlueCandle)
                     {
                         ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
-                        //animation to throw is same as bow
                         return HandleArrowBow(gameTime, location);
                     }
                     else if (link.SecondaryWeapon == ItemForLink.Bomb)
                     {
                         if (LinkInventory.Instance.BombCount > 0)
-                        {
                             ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
-                        }
                         return HandleShield(gameTime, location);
                     }
                     else if (link.SecondaryWeapon == ItemForLink.ArrowBow)
@@ -219,13 +190,9 @@ namespace Sprint5.Link
                     }
                 }
 
-
-
             }
             if (link.IsPickingUpItem)
-            {
                 return HandlePickUpItem(gameTime, location);
-            }
 
             return HandleShield(gameTime, location);
         }
@@ -236,13 +203,10 @@ namespace Sprint5.Link
         public abstract Vector2 HandleShield(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
-
+        public abstract Rectangle Bounds();
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
         }
-
-        public abstract Rectangle Bounds();
-
     }
 }

@@ -43,10 +43,7 @@ namespace Sprint5.Link
 
                 else if (Key.Equals("E"))
                 {
-
                     linkPlayer.IsDamaged = true;
-
-
             }
             else if (Key.Equals("D9") || Key.Equals("NumPad9"))
             {
@@ -73,14 +70,9 @@ namespace Sprint5.Link
                         {
                             if ((Key.Equals("N") || (Key.Equals("Z"))))
                             {
-
-
-
-
                                 linkPlayer.IsAttacking = true;
                                 linkPlayer.IsStopped = false;
                                 linkPlayer.IsSecondAttack = false;
-
                             }
                             else
                             {
@@ -133,8 +125,6 @@ namespace Sprint5.Link
                                 linkPlayer.CurrentWeapon = ItemForLink.Shield;
                             }
                         }
-
-
                 }
                 else if ((Key.Equals("S")) || (Key.Equals("Down")))
                 {
@@ -143,13 +133,10 @@ namespace Sprint5.Link
                     linkPlayer.MovingDown();
                 }
 
-
-
                 }
 
                 linkPlayer.Update(gameTime);
             }
-
 
         }
     }

@@ -22,15 +22,11 @@ namespace Sprint5
         Clock
     }
 
-
-
     public class LinkPlayer
     {
         public ILinkState state;
         const float HEALTH = 60;
         const int NUM_OF_RUPEE = 0;
-
-
         bool loc = false;
         public Vector2 currentLocation;
         private bool isAttacking = false;
@@ -45,12 +41,10 @@ namespace Sprint5
         private bool clock = false;
         private bool largeShield = false;
         private bool drawShield = true;
-
         private bool isDead = false;
 
         public LinkSprite sprite;
         public Rectangle hitbox;
-
 
         public PlayerCollider collider;
 
@@ -68,44 +62,18 @@ namespace Sprint5
             }
         }
 
-
-        string direction = "Down";
-        public string LinkDirection
-        {
-            get { return direction; }
-            set { direction = value; }
-        }
-
-        public Rectangle Bounds
-        {
-            get
-            {
-                return state.Bounds();
-            }
-        }
-
-        public bool IsDead
-        {
-            get { return isDead; }
-            set { isDead = value; }
-        }
+        public Rectangle Bounds { get => state.Bounds(); }
+        //{
+        //    get
+        //    {
+        //        return state.Bounds();
+        //    }
+        //}
 
         public float Health
         {
             get { return health; }
             set { health = value; if (health <= 0) health = 0; }
-        }
-
-        public Boolean LocationInitialized
-        {
-            get { return loc; }
-            set { loc = value; }
-        }
-
-        public double DamageStartTime
-        {
-            get { return damageStartTime; }
-            set { damageStartTime = value; }
         }
 
         public bool IsDamaged
@@ -121,61 +89,26 @@ namespace Sprint5
             }
         }
 
-        public bool IsAttacking
-        {
-            get { return isAttacking; }
-            set { isAttacking = value; }
-        }
-
+        string direction = "Down";
         private bool secondAttack = false;
-        public bool IsSecondAttack
-        {
-            get { return secondAttack; }
-            set { secondAttack = value; }
-        }
-
         private bool isStopped = false;
-
-
-        public bool IsStopped
-        {
-            get { return isStopped; }
-            set { isStopped = value; }
-        }
-
-
         private ItemForLink currentWeapon = ItemForLink.Shield;
 
-
-        public ItemForLink CurrentWeapon
-        {
-            get { return currentWeapon; }
-            set { currentWeapon = value; }
-
-        }
-
+        public string LinkDirection { get => direction; set => direction = value; }
+        public bool IsDead { get => isDead; set => isDead = value; }
+        public Boolean LocationInitialized { get => loc; set => loc = value; }
+        public double DamageStartTime { get => damageStartTime; set => damageStartTime = value; }
+        public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
+        public bool IsSecondAttack { get => secondAttack; set => secondAttack = value; }
+        public bool IsStopped { get => isStopped; set => isStopped = value; }
+        public ItemForLink CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
         private ItemForLink secondWeapon = ItemForLink.ArrowBow;
-        public ItemForLink SecondaryWeapon
-        {
-            get { return secondWeapon; }
-            set { secondWeapon = value; }
-        }
-
-        public bool IsWalkingInPlace
-        {
-            get { return isWalkingInPlace; }
-            set { isWalkingInPlace = value; }
-        }
-
-
+        public ItemForLink SecondaryWeapon { get => secondWeapon; set => secondWeapon = value; }
+        public bool IsWalkingInPlace { get => isWalkingInPlace; set => isWalkingInPlace = value; }
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
-
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
-
         public bool UseRing { get => useRing; set => useRing = value; }
-
         public float FullHealth { get => fullHealth; set => fullHealth = value; }
-
         public int Delay { get => delay; set => delay = value; }
         public bool Clock { get => clock; set => clock = value; }
         public bool LargeShield { get => largeShield; set => largeShield = value; }
@@ -183,14 +116,10 @@ namespace Sprint5
 
         public LinkPlayer()
         {
-
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-            
-            
-
         }
         public void Update(GameTime gameTime)
         {
@@ -274,10 +203,5 @@ namespace Sprint5
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
-
-
-
-
-
     }
 }

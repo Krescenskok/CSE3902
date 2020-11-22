@@ -47,8 +47,6 @@ namespace Sprint5
                         currentFrame = 4;
                 }
 
-                //if (location.X <= X_LOCATION)
-                //    location.X = X_LOCATION;
             }
 
 
@@ -274,32 +272,6 @@ namespace Sprint5
         public override Rectangle Bounds()
         {
             return link.hitbox;
-
-            /*
-            if (link.CurrentWeapon == ItemForLink.Shield)
-            {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2*13, 2*16);
-            }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 2*24, 2*16);
-            }
-            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 4, (int)link.currentLocation.Y + 6, 2*15, 2*25);
-            }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 10, 2*26, 2*16);
-            }
-
-
-            return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 4, 2 * 13, 2 * 16);
-
-            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
-            */
-
         }
-
     }
 }

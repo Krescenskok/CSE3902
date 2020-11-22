@@ -13,15 +13,11 @@ namespace Sprint5
         int MOVEMENT = 10;
         int TIME = 100;
         int PICKUP = 300;
-        int X_LOCATION = 660;
-
 
         public MoveRight(LinkPlayer link, LinkSprite sprite) : base(link)
         {
             linkSprite = sprite;
         }
-
-
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
@@ -274,30 +270,6 @@ namespace Sprint5
         public override Rectangle Bounds()
         {
             return link.hitbox;
-            /*
-            if (link.CurrentWeapon == ItemForLink.Shield)
-            {
-                return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2*13, 2*13);
-            }
-            else if (link.CurrentWeapon == ItemForLink.WoodenSword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 8, 2*24, 2*16);
-            }
-            else if (link.CurrentWeapon == ItemForLink.Sword && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 3, (int)link.currentLocation.Y + 5, 2*26, 2*16);
-            }
-            else if (link.CurrentWeapon == ItemForLink.MagicalRod && link.IsAttacking)
-            {
-                return new Rectangle((int)link.currentLocation.X + 2, (int)link.currentLocation.Y + 10, 2*24, 2*16);
-            }
-
-
-            return new Rectangle((int)link.currentLocation.X + 5, (int)link.currentLocation.Y + 5, 2 * 13, 2 * 13);
-
-            return new Rectangle((int)link.CurrentLocation.X, (int)link.CurrentLocation.Y, 32, 32);
-            */
-
         }
 
     }
