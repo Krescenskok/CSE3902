@@ -102,7 +102,7 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
-
+            if (msg == "Impact") item.Expire();
             
         }
 
