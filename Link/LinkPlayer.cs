@@ -54,7 +54,12 @@ namespace Sprint5
 
         public PlayerCollider collider;
 
-        public List<IItems> itemsPlacedByLink = new List<IItems>();
+        private List<IItems> itemsPlaced = new List<IItems>();
+        public List<IItems> itemsPlacedByLink
+        {
+            get { return itemsPlaced; }
+            set { itemsPlaced = value; }
+        }
 
         public List<Direction> possibleDirections = Directions.Default();
 
@@ -154,7 +159,6 @@ namespace Sprint5
 
         private ItemForLink currentWeapon = ItemForLink.Shield;
 
-
         public ItemForLink CurrentWeapon
         {
             get { return currentWeapon; }
@@ -175,7 +179,6 @@ namespace Sprint5
             set { isWalkingInPlace = value; }
         }
 
-
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
@@ -195,8 +198,7 @@ namespace Sprint5
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
-            collider = new PlayerCollider(this);
-            
+            collider = new PlayerCollider(this);           
             
 
         }

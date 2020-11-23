@@ -4,8 +4,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.Items;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class SwordBeam : IItems
     {

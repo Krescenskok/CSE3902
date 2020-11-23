@@ -152,7 +152,7 @@ namespace Sprint5.Link
             }
             if (link.IsAttacking)
             {
-                if (link.IsSecondAttack && !link.IsShootingProjectile)
+                if (link.IsSecondAttack )//&& !link.IsShootingProjectile)
                 {
                     if (link.SecondaryWeapon == ItemForLink.Boomerang)
                     {
@@ -189,19 +189,19 @@ namespace Sprint5.Link
                 }
                 else
                 {
-                    if ((link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield) && !link.IsShootingProjectile)
+                    if ((link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield))// && !link.IsShootingProjectile)
                     {
                         delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;
                         return HandleWoodenSword(gameTime, location);
                     }
-                    else if (link.CurrentWeapon == ItemForLink.Sword && !link.IsShootingProjectile)
+                    else if (link.CurrentWeapon == ItemForLink.Sword)// && !link.IsShootingProjectile)
                     {
                         delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;
                         return HandleSword(gameTime, location);
                     }
-                    else if (link.CurrentWeapon == ItemForLink.MagicalRod && !link.IsShootingProjectile)
+                    else if (link.CurrentWeapon == ItemForLink.MagicalRod)// && !link.IsShootingProjectile)
                     {
                         delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;

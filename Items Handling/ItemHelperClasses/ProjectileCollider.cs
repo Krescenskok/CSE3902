@@ -6,7 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class ProjectileCollider : ICollider
     {

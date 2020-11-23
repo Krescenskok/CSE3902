@@ -55,18 +55,6 @@ namespace Sprint5.Link
 
             if (!linkPlayer.IsAttacking)
             {
-                if (Key.Equals("B"))
-                {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsSecondAttack = true;
-                }
-
-                else if (linkPlayer.itemsPlacedByLink.Count == 0)
-
-                {
-                    linkPlayer.LargeShield = true;
-                }
                 if (!linkPlayer.IsAttacking)
                 {
                         if (Key.Equals("N"))
@@ -81,7 +69,6 @@ namespace Sprint5.Link
                             linkPlayer.IsStopped = false;
                             linkPlayer.IsSecondAttack = true;
                         }
-
 
                         if ((Key.Equals("A")) || (Key.Equals("Left")))
                         {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Inventory;
 using Sprint5.Items;
 using Sprint5.Link;
+using Sprint5.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
