@@ -12,7 +12,7 @@ namespace Sprint5.Blocks
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private int columns = 4;
-        private int offset = 3;
+        private int offset = 2;
         private int rows = 3;
         public int blockDimensionX;
         public int blockDimensionY;
