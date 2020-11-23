@@ -12,6 +12,7 @@ namespace Sprint5.Blocks
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private int columns = 4;
+        private int offset = 3;
         private int rows = 3;
         public int blockDimensionX;
         public int blockDimensionY;
@@ -31,13 +32,13 @@ namespace Sprint5.Blocks
 
 
 
-        int width = texture.Width / columns;
+            int width = texture.Width / columns;
             int height = texture.Height / rows;
             int row = (int)((float)currentFrame / (float)columns);
             int column = currentFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            destinationRectangle = new Rectangle((int)location.X, (int)location.Y, blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)location.X, (int)location.Y+offset, blockDimensionX, blockDimensionY);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -54,7 +55,7 @@ namespace Sprint5.Blocks
             int column = drawnFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            destinationRectangle = new Rectangle((int)spriteLocation.X , (int)spriteLocation.Y , blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)spriteLocation.X , (int)spriteLocation.Y+offset , blockDimensionX, blockDimensionY);
 
             
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
