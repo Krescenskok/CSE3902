@@ -22,17 +22,30 @@ namespace Sprint5
         Clock
     }
 
+    public enum damageMove
+    {
+        up,
+        down,
+        left,
+        right,
+        none
+    }
+
 
 
     public class LinkPlayer
     {
         public ILinkState state;
-        const int moveCount = 100;
+        const int max = 50;
+        const int increment = 5;
+        const int min = 0;
         const float HEALTH = 60;
         const int NUM_OF_RUPEE = 0;
 
 
         bool loc = false;
+        private damageMove damDir = damageMove.none;
+        private int counter;
         public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
@@ -203,7 +216,8 @@ namespace Sprint5
                 hitbox = sprite.hitbox;
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
-                
+
+                if (damDir != damageMove.none) this.push(damDir);
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
                 delay--;
@@ -282,15 +296,57 @@ namespace Sprint5
 
         public void knockback(bool up, bool down, bool left, bool right)
         {
+            if (up)
+            {
+                damDir = damageMove.up;
+            }
+            else if (down)
+            {
+                damDir = damageMove.down;
+            }
+            else if (left)
+            {
+                damDir = damageMove.left;
+            }
+            else
+            {
+                damDir = damageMove.right;
+            }
 
+            counter = max;
         }
 
         public void stopKnockback()
         {
-            
+            damDir = damageMove.none;
+            counter = min;
         }
 
+        public void push(damageMove direction)
+        {
 
+            switch (direction)
+            {
+                case damageMove.right:
+                    currentLocation.X += increment;
+                    break;
+                case damageMove.left:
+                    currentLocation.X -= increment;
+                    break;
+                case damageMove.up:
+                    currentLocation.Y -= increment;
+                    break;
+                case damageMove.down:
+                    currentLocation.Y += increment;
+                    break;
+            }
 
+            counter -= increment;
+
+            if (counter <= min) 
+            {
+                this.stopKnockback();
+            }
+        }
     }
 }
