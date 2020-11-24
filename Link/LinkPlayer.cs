@@ -27,6 +27,7 @@ namespace Sprint5
     public class LinkPlayer
     {
         public ILinkState state;
+        const int moveCount = 100;
         const float HEALTH = 60;
         const int NUM_OF_RUPEE = 0;
 
@@ -37,6 +38,8 @@ namespace Sprint5
         private bool isDamaged = false;
         private double damageStartTime;
         private float health = HEALTH;
+        private int moveHorizontal;
+        private int moveVertical;
         public bool isWalkingInPlace;
         private bool isPickingUpItem = false;
         private bool useRing = false;
@@ -180,6 +183,7 @@ namespace Sprint5
         public bool Clock { get => clock; set => clock = value; }
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
+        public bool moveFromDamage { get => moveFromDamage; set => moveFromDamage = value; }
 
         public LinkPlayer()
         {
@@ -199,6 +203,7 @@ namespace Sprint5
                 hitbox = sprite.hitbox;
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
+                
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
                 delay--;
@@ -275,7 +280,15 @@ namespace Sprint5
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
+        public void knockback(bool up, bool down, bool left, bool right)
+        {
 
+        }
+
+        public void stopKnockback()
+        {
+            
+        }
 
 
 

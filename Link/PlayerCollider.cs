@@ -65,6 +65,7 @@ namespace Sprint5
 
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
+                linkPlayer.stopKnockback();
 
 
             }
@@ -195,7 +196,7 @@ namespace Sprint5
                             linkPlayer.Health -= (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
+                        linkPlayer.knockback(false, false, false, true);
 
 
 
@@ -219,7 +220,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.X -= 100;
+                        linkPlayer.knockback(false, false, true, false);
                     }
                 }
 
@@ -240,7 +241,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.Y -= 100;
+                        linkPlayer.knockback(true, false, false, false);
                     }
                 }
 
@@ -261,7 +262,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.Y += 100;
+                        linkPlayer.knockback(false, true, false, false);
                     }
                 }
               
