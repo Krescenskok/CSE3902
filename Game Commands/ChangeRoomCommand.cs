@@ -27,7 +27,9 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            RoomSpawner.Instance.RoomChange(game, roomNumber);
+            Camera.Instance.MoveToRoom(roomNumber);
+           
+           
         }
     }
 }
