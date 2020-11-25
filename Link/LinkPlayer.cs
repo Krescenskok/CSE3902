@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Sprint5;
 using Sprint5.Link;
 using Sprint5.DifficultyHandling;
+using Sprint5.Menus;
 
 namespace Sprint5
 {

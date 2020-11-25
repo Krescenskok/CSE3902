@@ -76,7 +76,7 @@ namespace Sprint5
             commandsList.Add(Keys.I, new ChangeItemCommand(true, player));
             commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
             commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
-            commandsList.Add(Keys.G, new PauseCommand());
+            commandsList.Add(Keys.G, new PauseCommand(game, "NotDoor"));
 
             commandsList.Add(Keys.K, new ChangeDifficultyCommand("Up", game));
             commandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", game));

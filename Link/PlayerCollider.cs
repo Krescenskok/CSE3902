@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -88,14 +89,17 @@ namespace Sprint5
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                                GameOverScreen.Instance.DamageGiven += QUARTER_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                                GameOverScreen.Instance.DamageGiven += HALF_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                                GameOverScreen.Instance.DamageGiven += THREE_QUARTERS_HEART;
                             }
                         }
                     }
@@ -107,14 +111,17 @@ namespace Sprint5
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                                GameOverScreen.Instance.DamageGiven += QUARTER_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                                GameOverScreen.Instance.DamageGiven += HALF_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                                GameOverScreen.Instance.DamageGiven += THREE_QUARTERS_HEART;
                             }
                         }
                     }
@@ -126,14 +133,17 @@ namespace Sprint5
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                                GameOverScreen.Instance.DamageGiven += QUARTER_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                                GameOverScreen.Instance.DamageGiven += HALF_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                                GameOverScreen.Instance.DamageGiven += THREE_QUARTERS_HEART;
                             }
                         }
                     }
@@ -145,14 +155,17 @@ namespace Sprint5
                             if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                             {
                                 col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                                 GameOverScreen.Instance.DamageGiven += QUARTER_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                             {
                                 col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                                GameOverScreen.Instance.DamageGiven += HALF_HEART;
                             }
                             else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                             {
                                 col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                                GameOverScreen.Instance.DamageGiven += THREE_QUARTERS_HEART;
                             }
                         }
                     }
@@ -177,6 +190,7 @@ namespace Sprint5
         {
             if(!linkPlayer.IsDamaged)
             {
+                
                 if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
 
@@ -185,17 +199,22 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageRight")
                     {
+                       
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
+
                             linkPlayer.Health -= ((int)value) / 2;
+                            GameOverScreen.Instance.DamageTaken += (int)value /2;
                         }
                         else
                         {
                             linkPlayer.Health -= (int)value;
+                            GameOverScreen.Instance.DamageTaken += (int)value;
                         }
 
                         linkPlayer.currentLocation.X += 100;
+                        GameOverScreen.Instance.DistanceTravelled += 100;
 
 
 
@@ -213,13 +232,18 @@ namespace Sprint5
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
+
                             linkPlayer.Health -= ((int)value) / 2;
+                            GameOverScreen.Instance.DamageTaken += (int)value / 2;
                         }
                         else
                         {
                             linkPlayer.Health -= (int)value;
+                            GameOverScreen.Instance.DamageTaken += (int)value;
                         }
-                        linkPlayer.currentLocation.X -= 100;
+
+                        linkPlayer.currentLocation.X += 100;
+                        GameOverScreen.Instance.DistanceTravelled += 100;
                     }
                 }
 
@@ -234,13 +258,18 @@ namespace Sprint5
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
+
                             linkPlayer.Health -= ((int)value) / 2;
+                            GameOverScreen.Instance.DamageTaken += (int)value / 2;
                         }
                         else
                         {
                             linkPlayer.Health -= (int)value;
+                            GameOverScreen.Instance.DamageTaken += (int)value;
                         }
-                        linkPlayer.currentLocation.Y -= 100;
+
+                        linkPlayer.currentLocation.X += 100;
+                        GameOverScreen.Instance.DistanceTravelled += 100;
                     }
                 }
 
@@ -255,13 +284,18 @@ namespace Sprint5
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
+
                             linkPlayer.Health -= ((int)value) / 2;
+                            GameOverScreen.Instance.DamageTaken += (int)value / 2;
                         }
                         else
                         {
                             linkPlayer.Health -= (int)value;
+                            GameOverScreen.Instance.DamageTaken += (int)value;
                         }
-                        linkPlayer.currentLocation.Y += 100;
+
+                        linkPlayer.currentLocation.X += 100;
+                        GameOverScreen.Instance.DistanceTravelled += 100;
                     }
                 }
               
@@ -278,15 +312,18 @@ namespace Sprint5
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
+                GameOverScreen.Instance.PickupCount++;
             }
             if (msg == "Heal")
             {
                 if (value is Sprint5.Items.Heart)
                 {
+                    GameOverScreen.Instance.AmountHealed += FULL_HEART;
                     linkPlayer.Health += FULL_HEART;
                 }
                 else if (value is Sprint5.Items.Fairy)
                 {
+                    GameOverScreen.Instance.AmountHealed += HALF_HEART;
                     linkPlayer.Health += HALF_HEART;
                 }
 
@@ -298,8 +335,10 @@ namespace Sprint5
             }
             if (msg == "HeartContainer")
             {
+                
                 HUD.Instance.IncreaseMaxHeartNumber();
                 linkPlayer.FullHealth += FULL_HEART;
+                GameOverScreen.Instance.AmountHealed += (int)(linkPlayer.FullHealth - linkPlayer.Health);
                 linkPlayer.Health = linkPlayer.FullHealth;
                 HUD.Instance.UpdateHearts(linkPlayer);
             }

@@ -4,6 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.Items;
+using Sprint5.Menus;
 
 namespace Sprint5.Link
 {
@@ -63,6 +64,7 @@ namespace Sprint5.Link
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += 10;
                 item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
+                GameOverScreen.Instance.ProjectileCount++;
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -74,6 +76,7 @@ namespace Sprint5.Link
 
             if (link.Health == link.FullHealth && !beamMade)
             {
+                GameOverScreen.Instance.ProjectileCount++;
                 beamMade = true;
                 if (direction.Equals("Down") || link.state is Stationary)
                 {
@@ -135,6 +138,7 @@ namespace Sprint5.Link
                 }
                 wandMade = true;
                 item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+                GameOverScreen.Instance.ProjectileCount++;
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -147,6 +151,7 @@ namespace Sprint5.Link
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += 10;
                 boomerangMade = true;
+                GameOverScreen.Instance.ProjectileCount++;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 link.itemsPlacedByLink.Add(item);
             }
@@ -178,6 +183,7 @@ namespace Sprint5.Link
                 }
 
                 item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
+                GameOverScreen.Instance.ProjectileCount++;
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -209,6 +215,7 @@ namespace Sprint5.Link
                 }
 
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
+                GameOverScreen.Instance.ProjectileCount++;
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();

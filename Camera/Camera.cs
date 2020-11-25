@@ -146,7 +146,8 @@ namespace Sprint5
 
             
             (game as Game1).isPaused = true;
-            
+            (game as Game1).DoorPause = true;
+
 
             currentDirection = Direction.up;
         }
@@ -160,6 +161,7 @@ namespace Sprint5
             nextRoom = roomNum;
 
             (game as Game1).isPaused = true;
+            (game as Game1).DoorPause = true;
 
             currentDirection = Direction.down;
         }
@@ -171,7 +173,7 @@ namespace Sprint5
             direction = Vector3.Left;
             nextRoom = roomNum;
             (game as Game1).isPaused = true;
-
+            (game as Game1).DoorPause = true;
             currentDirection = Direction.right;
         }
 
@@ -182,7 +184,7 @@ namespace Sprint5
             direction = Vector3.Right;
             nextRoom = roomNum;
             (game as Game1).isPaused = true;
-
+            (game as Game1).DoorPause = true;
             currentDirection = Direction.left;
         }
 
@@ -232,10 +234,13 @@ namespace Sprint5
                 
             }else if(inventoryOpen && !(game as Game1).isPaused)
             {
-                (game as Game1).isPaused = true;
-            }else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+                (game as Game1).isPaused = false;
+                (game as Game1).DoorPause = true;
+            }
+            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
             {
                 (game as Game1).isPaused = false;
+                (game as Game1).DoorPause = false;
                 inventoryStillMoving = false;
             }
 
@@ -267,6 +272,7 @@ namespace Sprint5
             {
                 Game1 game1 = game as Game1;
                 game1.isPaused = false;
+                game1.DoorPause = false;
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;

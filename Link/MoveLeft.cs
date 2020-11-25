@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.Link;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -25,6 +26,7 @@ namespace Sprint5
             {
                 if (link.possibleDirections.Contains(Direction.left))
                 {
+                    GameOverScreen.Instance.DistanceTravelled += link.MovementAmount;
                     location.X -= link.MovementAmount;
                 }
 

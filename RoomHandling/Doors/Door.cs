@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -67,6 +68,7 @@ namespace Sprint5
 
         public void ChangeRoom()
         {
+            GameOverScreen.Instance.RoomsEntered++;
             if (Heading == 'L') Camera.Instance.ScrollLeft(NextRoom);
             else if (Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
             else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom);

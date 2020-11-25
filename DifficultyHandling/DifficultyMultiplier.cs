@@ -13,6 +13,7 @@ namespace Sprint5.DifficultyHandling
         private Dictionary<String, int> linkHPValues;
         private Dictionary<String, int> linkMAXHPValues;
         private Dictionary<String, int> enemyHPValues;
+        private Dictionary<String, String> gameOverMessages;
         private String difficulty;
         private LinkPlayer player;
 
@@ -52,12 +53,23 @@ namespace Sprint5.DifficultyHandling
             enemyHPValues.Add("Tough", 2); //2x hp
             enemyHPValues.Add("Link's Nightmare", 4); //4x hp
 
+            gameOverMessages = new Dictionary<string, String>();
+            gameOverMessages.Add("Navice", "Game Over"); 
+            gameOverMessages.Add("Normal", "GAME OVER"); 
+            gameOverMessages.Add("Tough", "YOU DIED"); 
+            gameOverMessages.Add("Link's Nightmare", "NICE TRY"); 
+
         }
 
         //set at game start
         public void SetDifficulty(Game1 game)
         {
             this.difficulty = game.Difficulty;
+        }
+
+        public string DetermineGameOverMessage()
+        {
+            return gameOverMessages[difficulty];
         }
 
         //manually switching between difficulties

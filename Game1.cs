@@ -38,6 +38,10 @@ namespace Sprint5
 
         private string difficulty;
 
+        private bool doorPause;
+
+        public bool DoorPause { get => doorPause; set => doorPause = value; }
+
         public string Difficulty { get => difficulty; set => difficulty = value; }
 
         LinkPlayer linkPlayer;
@@ -217,7 +221,10 @@ namespace Sprint5
 
                 if (isPaused)
                 {
+                    if (!DoorPause)
+                    {
                     PauseScreen.Instance.Draw(_spriteBatch, this, font);
+                    }
                 }
                 else
                 {

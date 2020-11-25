@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -107,6 +108,7 @@ namespace Sprint5
             {
                 Direction dir = Directions.Parse(msg.Substring(15));
 
+                GameOverScreen.Instance.DamageGiven += (int)value;
                 enemy.TakeDamage(dir, (int)value);
 
                 Sounds.Instance.PlayEnemyHit();
