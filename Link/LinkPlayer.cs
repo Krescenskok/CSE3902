@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5;
 using Sprint5.Link;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -48,6 +49,11 @@ namespace Sprint5
 
         private bool isDead = false;
 
+        private int movementAmount = 10;
+        private int sprintAmount = 20;
+        private int sprintTimer = -1;
+        private int rechargeTimer = 0;
+
         public LinkSprite sprite;
         public Rectangle hitbox;
 
@@ -59,6 +65,11 @@ namespace Sprint5
         public List<Direction> possibleDirections = Directions.Default();
 
         public bool isPaused = false;
+
+        public int SprintTimer { get => sprintTimer; set => sprintTimer = value; }
+        public int RechargeTimer { get => rechargeTimer; set => rechargeTimer = value; }
+        public int MovementAmount { get => movementAmount; set => movementAmount = value; }
+        public int SprintAmount { get => sprintAmount; set => sprintAmount = value; }
 
         public void RemovePlacedItem(IItems item)
         {
@@ -188,8 +199,9 @@ namespace Sprint5
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-            
-            
+
+            DifficultyMultiplier.Instance.DetermineLinkHP(this);
+
 
         }
         public void Update(GameTime gameTime)
@@ -202,11 +214,25 @@ namespace Sprint5
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
                 delay--;
-
-
+                if (SprintTimer > 0)
+                {
+                    SprintTimer--;
+                } else if (SprintTimer == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("Times up");
+                    MovementAmount = 10;
+                    RechargeTimer = 360;
+                    SprintTimer = -1;
+                }
+                if (RechargeTimer > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("Recharging");
+                    RechargeTimer--;
+                }
                 possibleDirections = Directions.Default();
             }
         }
+
         public void HandleObstacle(Collision col)
         {
             possibleDirections.Remove(col.From);

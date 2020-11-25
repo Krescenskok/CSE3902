@@ -12,6 +12,7 @@ using System.Xml.Schema;
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -34,9 +35,9 @@ namespace Sprint5
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
 
+        private string difficulty;
 
-
-
+        public string Difficulty { get => difficulty; set => difficulty = value; }
 
         LinkPlayer linkPlayer;
         public bool isPaused;
@@ -65,6 +66,8 @@ namespace Sprint5
         protected override void LoadContent()
         {
 
+            Difficulty = "Normal";
+            DifficultyMultiplier.Instance.SetDifficulty(this);
 
             font = Content.Load<SpriteFont>("File");
 

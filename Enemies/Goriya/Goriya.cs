@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -79,6 +80,8 @@ namespace Sprint5
             
             collider = new EnemyCollider();
             saveData = xml;
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
+
         }
         public void Spawn()
         {

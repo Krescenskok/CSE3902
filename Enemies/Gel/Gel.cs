@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -44,6 +45,8 @@ namespace Sprint5
             outsideCollider = new GelBlockCollider();
 
             saveData = xlm;
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
+
         }
 
         public void Spawn()

@@ -52,6 +52,23 @@ namespace Sprint5.Link
             {
                 linkPlayer.LargeShield = true;
             }
+                if (Key.Equals("Shift"))
+                {
+                        if (linkPlayer.MovementAmount == linkPlayer.SprintAmount)
+                        {
+                            linkPlayer.MovementAmount = 10;
+                            linkPlayer.RechargeTimer = 180 - linkPlayer.SprintTimer;
+                        }
+                        else
+                        {
+                            if (linkPlayer.RechargeTimer < 1)
+                            {
+                                linkPlayer.MovementAmount = linkPlayer.SprintAmount;
+                                linkPlayer.SprintTimer = 180;
+                            }
+                        }
+                    
+                }
 
             if (!linkPlayer.IsAttacking)
             {

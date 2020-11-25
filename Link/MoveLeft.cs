@@ -25,7 +25,7 @@ namespace Sprint5
             {
                 if (link.possibleDirections.Contains(Direction.left))
                 {
-                    location.X += MOVEMENT;
+                    location.X -= link.MovementAmount;
                 }
 
                 lastTime = gameTime.TotalGameTime.TotalMilliseconds;

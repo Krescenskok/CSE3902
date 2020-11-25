@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -57,6 +58,8 @@ namespace Sprint5
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
             speed = moveSpeedPerSec / UpdatePerSec;
+            aquamentusHP = DifficultyMultiplier.Instance.DetermineEnemyHP(aquamentusHP);
+
         }
 
         public void Spawn()

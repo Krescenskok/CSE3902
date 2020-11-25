@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
+
 
 namespace Sprint5
 {
@@ -47,8 +49,10 @@ namespace Sprint5
             finderCollider = new RopePlayerFinderCollider(this);
 
             saveInfo = xml;
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
-            
+
+
         }
 
         public void Spawn()

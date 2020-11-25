@@ -68,6 +68,7 @@ namespace Sprint5
             commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
             commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
+            commandsList.Add(Keys.LeftShift, new LinkCommand(player, "Shift"));
             commandsList.Add(Keys.R, new ResetCommand(player, false));
 
 
@@ -76,6 +77,9 @@ namespace Sprint5
             commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
             commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
             commandsList.Add(Keys.G, new PauseCommand());
+
+            commandsList.Add(Keys.K, new ChangeDifficultyCommand("Up", game));
+            commandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", game));
 
             movementKeys.Add(Keys.W);
             movementKeys.Add(Keys.A);
