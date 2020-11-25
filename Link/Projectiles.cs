@@ -30,7 +30,20 @@ namespace Sprint5.Link
 
 
         private Vector2 itemLocation;
-
+        private List<IItems> itemsPlaced = new List<IItems>();
+        public List<IItems> itemsPlacedByLink
+        {
+            get { return itemsPlaced; }
+            set { itemsPlaced = value; }
+        }
+        private void RemovePlacedItem(IItems item)
+        {
+            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
+            {
+                itemsPlacedByLink.Remove(item);
+            }
+            Link.IsShootingProjectile = false;
+        }
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -57,15 +70,18 @@ namespace Sprint5.Link
 
         public void ArrowBow(string direction)
         {
-            if (!arrowMade)
+            if (!arrowMade && LinkInventory.Instance.HasBow)
             {
                 arrowMade = true;
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += 10;
                 item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
-                link.itemsPlacedByLink.Add(item);
+                itemsPlacedByLink.Add(item);
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void SwordBeam(string direction)
@@ -80,83 +96,97 @@ namespace Sprint5.Link
                     itemLocation.X += 14;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
-                    link.itemsPlacedByLink.Add(item);
+                    itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals(RIGHT))
                 {
                     itemLocation.Y += 5;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
-                    link.itemsPlacedByLink.Add(item);
+                    itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals(LEFT))
                 {
                     itemLocation.Y += 7;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
-                    link.itemsPlacedByLink.Add(item);
+                    itemsPlacedByLink.Add(item);
                 }
                 else
                 {
                     itemLocation.X += 8;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
-                    link.itemsPlacedByLink.Add(item);
+                    itemsPlacedByLink.Add(item);
                 }
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void WandBeam(string direction)
         {
             itemLocation = link.CurrentLocation;
-
             if (!wandMade)
             {
+                wandMade = true;
                 if (direction.Equals(DOWN) || link.state is Stationary)
                 {
                     itemLocation.Y += DISPLACEMENT;
                     itemLocation.X += DISPLACEMENT;
+                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+                    itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals(LEFT))
                 {
                     itemLocation.Y += DISPLACEMENT;
                     itemLocation.X -= DISPLACEMENT;
+                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+                    itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals(RIGHT))
                 {
                     itemLocation.Y += DISPLACEMENT;
                     itemLocation.X += DISPLACEMENT;
+                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+                    itemsPlacedByLink.Add(item);
                 }
                 else
                 {
                     itemLocation.Y -= DISPLACEMENT;
                     itemLocation.X += 6;
+                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+                    itemsPlacedByLink.Add(item);
                 }
-                wandMade = true;
-                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
-                link.itemsPlacedByLink.Add(item);
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void BoomerangThrow(string direction)
         {
-            if (!boomerangMade)
+            if (!boomerangMade && LinkInventory.Instance.HasBoomerang)
             {
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += 10;
                 boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
-                link.itemsPlacedByLink.Add(item);
+                itemsPlacedByLink.Add(item);
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void CandleBurn(string direction)
         {
             Vector2 loc = link.CurrentLocation;
-            if (!candleMade)
+            if (!candleMade && LinkInventory.Instance.HasCandle)
             {
                 candleMade = true;
                 loc.X += 10;
@@ -178,15 +208,18 @@ namespace Sprint5.Link
                 }
 
                 item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
-                link.itemsPlacedByLink.Add(item);
+                itemsPlacedByLink.Add(item);
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void SpawnBomb(string direction)
         {
             Vector2 loc = link.CurrentLocation;
-            if (!bombMade)
+            if (!bombMade && LinkInventory.Instance.BombCount > 0)
             {
                 LinkInventory.Instance.BombCount--;
                 bombMade = true;
@@ -207,15 +240,18 @@ namespace Sprint5.Link
                     loc.Y -= buffer;
                 }
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
-                link.itemsPlacedByLink.Add(item);
+                itemsPlacedByLink.Add(item);
             }
-            ExpireCheck();
+            else
+            {
+                Link.IsShootingProjectile = false;
+            }
         }
 
         public void ExpireCheck()
         {
             List<IItems> list = new List<IItems>();
-            foreach (IItems item in link.itemsPlacedByLink)
+            foreach (IItems item in itemsPlacedByLink)
             {
                 if (item is SwordBeam && item.IsExpired)
                 {
@@ -251,14 +287,14 @@ namespace Sprint5.Link
 
             foreach (IItems item in list)
             {
-                link.RemovePlacedItem(item);
+                RemovePlacedItem(item);
             }
 
         }
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            placedItems = link.itemsPlacedByLink;
+            placedItems = itemsPlacedByLink;
             foreach (IItems projectile in placedItems)
             {
                 projectile.Draw(spriteBatch);
@@ -271,7 +307,7 @@ namespace Sprint5.Link
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)
             {
-                placedItems = link.itemsPlacedByLink;
+                placedItems = itemsPlacedByLink;
                 foreach (IItems projectile in placedItems)
                 {
                     projectile.Update();

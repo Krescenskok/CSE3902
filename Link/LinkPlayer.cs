@@ -54,39 +54,22 @@ namespace Sprint5
 
         public PlayerCollider collider;
 
-        private List<IItems> itemsPlaced = new List<IItems>();
-        public List<IItems> itemsPlacedByLink
-        {
-            get { return itemsPlaced; }
-            set { itemsPlaced = value; }
-        }
-
         public List<Direction> possibleDirections = Directions.Default();
 
         public bool isPaused = false;
 
-        public void RemovePlacedItem(IItems item)
+        private bool isShooting = false;
+        public bool IsShootingProjectile
         {
-            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
-            {
-                itemsPlacedByLink.Remove(item);
-            }
-            this.IsShootingProjectile = false;
+            get => isShooting;
+            set => isShooting = value;
         }
-
 
         string direction = "Down";
         public string LinkDirection
         {
             get { return direction; }
             set { direction = value; }
-        }
-
-        private bool shotProjectile = false;
-        public bool IsShootingProjectile
-        {
-            get { return shotProjectile; }
-            set { shotProjectile = value; }
         }
 
         public Rectangle Bounds
@@ -198,10 +181,11 @@ namespace Sprint5
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
-            collider = new PlayerCollider(this);           
-            
+            collider = new PlayerCollider(this);
 
         }
+
+
         public void Update(GameTime gameTime)
         {
             if (sprite != null)

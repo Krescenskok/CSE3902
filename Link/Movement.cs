@@ -25,7 +25,6 @@ namespace Sprint5.Link
         {
             this.link = link;
             link.isWalkingInPlace = false;
-            itemsPlacedByLink = link.itemsPlacedByLink;
             if (link.Delay <= 0)
             {
                 link.isWalkingInPlace = false;
@@ -123,10 +122,6 @@ namespace Sprint5.Link
 
             }
 
-            foreach (IItems projectile in link.itemsPlacedByLink)
-            {
-                projectile.Draw(spriteBatch);
-            }
 
         }
 
@@ -152,35 +147,32 @@ namespace Sprint5.Link
             }
             if (link.IsAttacking)
             {
-                if (link.IsSecondAttack )//&& !link.IsShootingProjectile)
+                if (link.IsSecondAttack && !link.IsShootingProjectile)
                 {
-                    if (link.SecondaryWeapon == ItemForLink.Boomerang)
+                    if (link.SecondaryWeapon == ItemForLink.Boomerang && !link.IsShootingProjectile)
                     {
+                        link.IsShootingProjectile = true;
                         ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
-                        link.IsShootingProjectile = true;
                         return HandleArrowBow(gameTime, location);
                     }
-                    else if (link.SecondaryWeapon == ItemForLink.BlueCandle)
+                    else if (link.SecondaryWeapon == ItemForLink.BlueCandle && !link.IsShootingProjectile)
                     {
+                        link.IsShootingProjectile = true;
                         ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
-                        link.IsShootingProjectile = true;
                         return HandleArrowBow(gameTime, location);
                     }
-                    else if (link.SecondaryWeapon == ItemForLink.Bomb)
+                    else if (link.SecondaryWeapon == ItemForLink.Bomb && !link.IsShootingProjectile)
                     {
-                        if (LinkInventory.Instance.BombCount > 0)
-                        {
-                            ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
-                            link.IsShootingProjectile = true;
-                        }
+                        link.IsShootingProjectile = true;
+                        ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
                         return HandleShield(gameTime, location);
                     }
-                    else if (link.SecondaryWeapon == ItemForLink.ArrowBow)
+                    else if (link.SecondaryWeapon == ItemForLink.ArrowBow && !link.IsShootingProjectile)
                     {
                         if (LinkInventory.Instance.HasBow)
                         {
-                            ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
                             link.IsShootingProjectile = true;
+                            ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
                             return HandleArrowBow(gameTime, location);
                         }
                         return HandleShield(gameTime, location);
@@ -189,22 +181,22 @@ namespace Sprint5.Link
                 }
                 else
                 {
-                    if ((link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield))// && !link.IsShootingProjectile)
+                    if ((link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield) && !link.IsShootingProjectile)
                     {
-                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;
+                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         return HandleWoodenSword(gameTime, location);
                     }
-                    else if (link.CurrentWeapon == ItemForLink.Sword)// && !link.IsShootingProjectile)
+                    else if (link.CurrentWeapon == ItemForLink.Sword && !link.IsShootingProjectile)
                     {
-                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;
+                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         return HandleSword(gameTime, location);
                     }
-                    else if (link.CurrentWeapon == ItemForLink.MagicalRod)// && !link.IsShootingProjectile)
+                    else if (link.CurrentWeapon == ItemForLink.MagicalRod && !link.IsShootingProjectile)
                     {
-                        delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
                         link.IsShootingProjectile = true;
+                        delayExecute(250, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
                         return HandleMagicalRod(gameTime, location);
                     }
                     else if (link.CurrentWeapon == ItemForLink.BlueRing)
