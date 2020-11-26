@@ -63,12 +63,7 @@ namespace Sprint5
         }
 
         public Rectangle Bounds { get => state.Bounds(); }
-        //{
-        //    get
-        //    {
-        //        return state.Bounds();
-        //    }
-        //}
+
 
         public float Health
         {

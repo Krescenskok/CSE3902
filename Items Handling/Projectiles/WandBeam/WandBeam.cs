@@ -27,6 +27,10 @@ namespace Sprint5.Items
 
         public IItemsState State { get => state; }
 
+
+       
+
+
         public WandBeam(ISprite itemSprite, Vector2 location, string direction)
         {
             this.location = location;

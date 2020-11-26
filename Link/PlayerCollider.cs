@@ -22,6 +22,8 @@ namespace Sprint5
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
+
+
         }
 
         public string Name { get => "Player"; }
@@ -44,136 +46,254 @@ namespace Sprint5
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-                if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
-                {
-                    linkPlayer.isWalkingInPlace = true;
-                    linkPlayer.HandleObstacle(collision);
-                }
+            if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
+            {
+
+                linkPlayer.isWalkingInPlace = true;
+                linkPlayer.HandleObstacle(collision);
+
+
+            }
+
+
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
             {
+
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
+
+
             }
-            
-           if (col.CompareTag("enemy"))
+
+            if (col.CompareTag("enemy"))
                 col.SendMessage("Dissapear", null);
 
             if (col.CompareTag("LockedDoor")) //and link has key!
+            {
                 col.SendMessage("Unlock", null);
+            }
 
-                if (linkPlayer.IsAttacking)
+
+
+            if (linkPlayer.IsAttacking)
+            {
+                if (collision.Left)
                 {
-                    if (collision.Left)
+                    if (linkPlayer.state is MoveLeft)
                     {
-                        if (linkPlayer.state is MoveLeft)
+                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
                         {
-                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
                         }
-                    }
-
-                    else if (collision.Right)
-                    {
-                        if (linkPlayer.state is MoveRight)
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
                         {
-                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
                         }
-                    }
-
-                    else if (collision.Up)
-                    {
-                        if (linkPlayer.state is MoveUp)
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
                         {
-                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
-                        }
-                    }
-
-                    else if (collision.Down)
-                    {
-                        if (linkPlayer.state is MoveDown)
-                        {
-                            if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                                col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                                col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                            else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                                col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
                         }
                     }
                 }
+
+                else if (collision.Right)
+                {
+                    if (linkPlayer.state is MoveRight)
+                    {
+                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
+                        {
+                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                        }
+                    }
+                }
+
+                else if (collision.Up)
+                {
+                    if (linkPlayer.state is MoveUp)
+                    {
+                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
+                        {
+                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                        }
+                    }
+                }
+
+                else if (collision.Down)
+                {
+                    if (linkPlayer.state is MoveDown)
+                    {
+                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
+                        {
+                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
+                        }
+                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
+                        {
+                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
+                        }
+                    }
+                }
+            }
+
+
+
             if (col.CompareTag("Item"))
+            {
                 col.SendMessage("Disappear", null);
+
+            }
+
         }
+
+
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
         }
 
-         public void SendMessage(string msg, object value)
-         {
-            if(!linkPlayer.IsDamaged)
+        public void SendMessage(string msg, object value)
+        {
+            if (!linkPlayer.IsDamaged)
             {
-                if((msg == "TakeDamageRight") || (msg == "TakeDamageLeft") || (msg == "TakeDamageUp") || (msg == "TakeDamageDown"))
+                if (linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
-                    linkPlayer.IsDamaged = true;
-                    if (linkPlayer.UseRing)
-                        linkPlayer.Health -= ((int)value) / 2;
-                    else
-                        linkPlayer.Health -= (int)value;
+
                 }
-                if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
-                {}
                 else
-                    linkPlayer.currentLocation.X += 100;
+                {
+                    if (msg == "TakeDamageRight")
+                    {
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+
+                        linkPlayer.currentLocation.X += 100;
+
+
+
+                    }
+                }
+
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveRight)
-                {}
+                {
+
+                }
                 else
-                    linkPlayer.currentLocation.X -= 100;
+                {
+                    if (msg == "TakeDamageLeft")
+                    {
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.X -= 100;
+                    }
+                }
+
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveDown)
-                {}
+                {
+
+                }
                 else
-                    linkPlayer.currentLocation.Y -= 100;
+                {
+                    if (msg == "TakeDamageUp")
+                    {
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.Y -= 100;
+                    }
+                }
+
                 if (linkPlayer.IsAttacking && linkPlayer.state is MoveUp)
-                {}
+                {
+
+                }
                 else
-                    linkPlayer.currentLocation.Y += 100;
+                {
+                    if (msg == "TakeDamageDown")
+                    {
+                        linkPlayer.IsDamaged = true;
+                        if (linkPlayer.UseRing)
+                        {
+                            linkPlayer.Health -= ((int)value) / 2;
+                        }
+                        else
+                        {
+                            linkPlayer.Health -= (int)value;
+                        }
+                        linkPlayer.currentLocation.Y += 100;
+                    }
+                }
+
             }
 
             if (msg == "WalkInPlace")
+            {
                 linkPlayer.isWalkingInPlace = true;
-         
+            }
+
             if (msg == "Item")
             {
-                if(((IItems) value) is Sprint5.Items.TriforcePiece || ((IItems)value) is Sprint5.Items.Bow)
+                if (((IItems)value) is Sprint5.Items.TriforcePiece || ((IItems)value) is Sprint5.Items.Bow)
                     linkPlayer.IsPickingUpItem = true;
-                LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
+
+                LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
             }
             if (msg == "Heal")
             {
                 if (value is Sprint5.Items.Heart)
+                {
                     linkPlayer.Health += FULL_HEART;
+                }
                 else if (value is Sprint5.Items.Fairy)
+                {
                     linkPlayer.Health += HALF_HEART;
+                }
 
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
+                {
                     linkPlayer.Health = linkPlayer.FullHealth;
+                }
                 HUD.Instance.UpdateHearts(linkPlayer);
             }
             if (msg == "HeartContainer")
@@ -185,13 +305,18 @@ namespace Sprint5
             }
 
             if (msg == "Hand")
-                 linkPlayer.currentLocation = (Vector2)value;
+            {
+                linkPlayer.currentLocation = (Vector2)value;
+            }
 
             if (msg == "Special Block")
             {
                 linkPlayer.isWalkingInPlace = true;
                 if (linkPlayer.Delay <= 0)
+
+                {
                     linkPlayer.isWalkingInPlace = false;
+                }
             }
         }
 

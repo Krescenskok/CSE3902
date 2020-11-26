@@ -59,12 +59,12 @@ namespace Sprint5.Link
                     linkPlayer.IsSecondAttack = true;
                 }
 
-                else if (linkPlayer.itemsPlacedByLink.Count == 0)
+                    //else if (linkPlayer.itemsPlacedByLink.Count == 0)
 
-                {
-                    linkPlayer.LargeShield = true;
-                }
-                if (!linkPlayer.IsAttacking)
+                    //{
+                    //    linkPlayer.LargeShield = true;
+                    //}
+                    if (!linkPlayer.IsAttacking)
                 {
                         if (linkPlayer.itemsPlacedByLink.Count == 0)
                         {

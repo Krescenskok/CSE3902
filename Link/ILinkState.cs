@@ -7,7 +7,6 @@ namespace Sprint5.Link
 {
     public interface ILinkState
     {
-
         public Vector2 Update(GameTime gameTime, Vector2 location);
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location);
         public Rectangle Bounds();

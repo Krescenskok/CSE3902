@@ -126,9 +126,6 @@ namespace Sprint5
                             delay = 20;
                         }
                     }
-
-
-
                 }
               
             }
@@ -136,8 +133,6 @@ namespace Sprint5
                 delay--;
 
             prevState = kstate;
-
-
 
             if (game.IsGameOver)
             {
@@ -148,9 +143,6 @@ namespace Sprint5
 
                 
             }
-
-                
-
             return activeCommand;
         }
     }

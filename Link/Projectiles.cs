@@ -16,17 +16,13 @@ namespace Sprint5.Link
         private List<IItems> placedItems = new List<IItems>();
         private bool beamMade = false;
         private bool arrowMade = false;
-        private bool wandMade = false;
+ 
         private bool boomerangMade = false;
         private bool candleMade = false;
         private bool bombMade = false;
 
-        private readonly string UP = "Up";
-        private readonly string DOWN = "Down";
-        private readonly string LEFT = "Left";
-        private readonly string RIGHT = "Right";
 
-        private const int DISPLACEMENT = 10;
+  
         private Vector2 itemLocation;
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
@@ -66,7 +62,15 @@ namespace Sprint5.Link
 
         public void SwordBeam(string direction)
         {
-            itemLocation = link.CurrentLocation;
+            //itemLocation = link.CurrentLocation;
+            //bool canAdd = !link.itemsPlacedByLink.Exists(v => v is SwordBeam);
+
+            //if (canAdd)
+            //{
+            //    item = ProjectilesFactory.CreateSwordBeam(direction, link);
+            //    link.itemsPlacedByLink.Add(item);
+            //}
+            //ExpireCheck();
 
             if (link.Health == link.FullHealth && !beamMade)
             {
@@ -103,30 +107,11 @@ namespace Sprint5.Link
         {
             itemLocation = link.CurrentLocation;
 
-            if (!wandMade)
-            {
-                if (direction.Equals(DOWN) || link.state is Stationary)
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X += DISPLACEMENT;
-                }
-                else if (direction.Equals(LEFT))
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X -= DISPLACEMENT;
-                }
-                else if (direction.Equals(RIGHT))
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X += DISPLACEMENT;
-                }
-                else
-                {
-                    itemLocation.Y -= DISPLACEMENT;
-                    itemLocation.X += 6;
-                }
-                wandMade = true;
-                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+            bool canAdd =  !link.itemsPlacedByLink.Exists(v => v is WandBeam);
+
+            if (canAdd)
+            { 
+                item = ProjectilesFactory.CreateWandBeam(direction, link);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -207,7 +192,6 @@ namespace Sprint5.Link
                 }
                 else if (item is WandBeam && item.IsExpired)
                 {
-                    wandMade = false;
                     list.Add(item);
                 }
                 else if (item is Boomerang && item.IsExpired)
