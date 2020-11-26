@@ -16,14 +16,22 @@ namespace Sprint5.Link
         private List<IItems> placedItems = new List<IItems>();
         private bool beamMade = false;
         private bool arrowMade = false;
- 
+        private bool wandMade = false;
         private bool boomerangMade = false;
         private bool candleMade = false;
         private bool bombMade = false;
 
+        private readonly string UP = "Up";
+        private readonly string DOWN = "Down";
+        private readonly string LEFT = "Left";
+        private readonly string RIGHT = "Right";
 
-  
+        private const int DISPLACEMENT = 10;
+
+
         private Vector2 itemLocation;
+
+
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
         public LinkPlayer Link
@@ -62,15 +70,7 @@ namespace Sprint5.Link
 
         public void SwordBeam(string direction)
         {
-            //itemLocation = link.CurrentLocation;
-            //bool canAdd = !link.itemsPlacedByLink.Exists(v => v is SwordBeam);
-
-            //if (canAdd)
-            //{
-            //    item = ProjectilesFactory.CreateSwordBeam(direction, link);
-            //    link.itemsPlacedByLink.Add(item);
-            //}
-            //ExpireCheck();
+            itemLocation = link.CurrentLocation;
 
             if (link.Health == link.FullHealth && !beamMade)
             {
@@ -78,24 +78,28 @@ namespace Sprint5.Link
                 if (direction.Equals("Down") || link.state is Stationary)
                 {
                     itemLocation.X += 14;
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Right"))
                 {
                     itemLocation.Y += 5;
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals("Left"))
                 {
                     itemLocation.Y += 7;
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
                 else
                 {
                     itemLocation.X += 8;
+
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     link.itemsPlacedByLink.Add(item);
                 }
@@ -107,11 +111,30 @@ namespace Sprint5.Link
         {
             itemLocation = link.CurrentLocation;
 
-            bool canAdd =  !link.itemsPlacedByLink.Exists(v => v is WandBeam);
-
-            if (canAdd)
-            { 
-                item = ProjectilesFactory.CreateWandBeam(direction, link);
+            if (!wandMade)
+            {
+                if (direction.Equals(DOWN) || link.state is Stationary)
+                {
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X += DISPLACEMENT;
+                }
+                else if (direction.Equals(LEFT))
+                {
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X -= DISPLACEMENT;
+                }
+                else if (direction.Equals(RIGHT))
+                {
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X += DISPLACEMENT;
+                }
+                else
+                {
+                    itemLocation.Y -= DISPLACEMENT;
+                    itemLocation.X += 6;
+                }
+                wandMade = true;
+                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
                 link.itemsPlacedByLink.Add(item);
             }
             ExpireCheck();
@@ -138,13 +161,21 @@ namespace Sprint5.Link
                 candleMade = true;
                 loc.X += 10;
                 if (direction.Equals("Up"))
+                {
                     loc.Y -= buffer;
+                }
                 else if (direction.Equals("Down"))
+                {
                     loc.Y += buffer;
+                }
                 else if (direction.Equals("Right"))
+                {
                     loc.X += buffer;
+                }
                 else
+                {
                     loc.X -= buffer;
+                }
 
                 item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
@@ -161,13 +192,21 @@ namespace Sprint5.Link
                 bombMade = true;
                 loc.X += 10;
                 if (direction.Equals("Up"))
+                {
                     loc.Y -= buffer;
+                }
                 if (direction.Equals("Down") || link.state is Stationary)
+                {
                     loc.Y += buffer;
+                }
                 else if (direction.Equals("Right"))
+                {
                     loc.X += buffer;
+                }
                 else
+                {
                     loc.X -= buffer;
+                }
 
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
                 link.itemsPlacedByLink.Add(item);
@@ -192,6 +231,7 @@ namespace Sprint5.Link
                 }
                 else if (item is WandBeam && item.IsExpired)
                 {
+                    wandMade = false;
                     list.Add(item);
                 }
                 else if (item is Boomerang && item.IsExpired)
@@ -208,7 +248,7 @@ namespace Sprint5.Link
                 {
                     bombMade = false;
                     list.Add(item);
-                }                
+                }
             }
 
             foreach (IItems item in list)
@@ -227,6 +267,8 @@ namespace Sprint5.Link
             }
 
         }
+
+
         public void Update(GameTime gameTime)
         {
             if (gameTime.TotalGameTime.TotalMilliseconds - LastTime > 100)
@@ -235,7 +277,7 @@ namespace Sprint5.Link
                 foreach (IItems projectile in placedItems)
                 {
                     projectile.Update();
-                }               
+                }
             }
 
             ExpireCheck();
