@@ -31,7 +31,13 @@ namespace Sprint5
         public void LoadAllTextures(ContentManager content)
         {
             linkSpriteSheet = content.Load<Texture2D>("LinkSpriteSheet");
-            linkBlueSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
+            blueLinkSpriteSheet = content.Load<Texture2D>("BlueLinkSpriteSheet");
+            pinkLinkSpriteSheet = content.Load<Texture2D>("PinkLinkSpriteSheet");
+            redLinkSpriteSheet = content.Load<Texture2D>("RedLinkSpriteSheet");
+            tealLinkSpriteSheet = content.Load<Texture2D>("TealLinkSpriteSheet");
+            yellowLinkSpriteSheet = content.Load<Texture2D>("YellowLinkSpriteSheet");
+
+            linkBlueRingSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
         }
@@ -42,16 +48,24 @@ namespace Sprint5
             return new LinkSprite(linkSpriteSheet);
         }
 
-        public LinkSprite CreateBlueLinkSprite()
+        public LinkSprite CreateBlueRingLinkSprite()
         {
-            return new LinkSprite(linkBlueSpriteSheet);
+            return new LinkSprite(linkBlueRingSpriteSheet);
         }
 
-
-        //public ISprite CreateItemsSprite()
+        //public LinkSprite CreateBlueLinkSprite()
         //{
-        //    return new ItemsSprite(itemsSpriteSheet);
+        //    return new LinkSprite(linkBlueSpriteSheet);
         //}
+        //public LinkSprite CreateBlueLinkSprite()
+        //{
+        //    return new LinkSprite(linkBlueSpriteSheet);
+        //}
+        //public LinkSprite CreateBlueLinkSprite()
+        //{
+        //    return new LinkSprite(linkBlueSpriteSheet);
+        //}
+
         public ISprite CreateBlocksSprite()
         {
             return new BlocksSprite(blocksSpriteSheet);

@@ -48,7 +48,7 @@ namespace Sprint5.Link
             if (link.sprite == null)
             {
                 if (link.UseRing)
-                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueLinkSprite();
+                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueRingLinkSprite();
                 else
                     link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
                 linkSprite = link.sprite;
