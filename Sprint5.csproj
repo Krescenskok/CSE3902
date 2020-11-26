@@ -14,7 +14,6 @@
     <None Remove="Icon.bmp" />
     <None Remove="Content\marioOneDirection.png" />
     <None Remove="TESTTEXTFILE.txt" />
-    <None Remove="Content\LinkSpriteSheetBlueRing.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -69,7 +68,5 @@
     <Compile Remove="Items Handling\States\HalfHeart.cs" />
     <Compile Remove="Items Handling\States\Letter.cs" />
     <Compile Remove="Items Handling\States\Compass.cs" />
-    <Compile Remove="Link\LinkReset.cs" />
-    <Compile Remove="Link\MoveLeftShield.cs" />
   </ItemGroup>
 </Project>

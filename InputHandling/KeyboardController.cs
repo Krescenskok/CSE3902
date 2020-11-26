@@ -70,7 +70,6 @@ namespace Sprint5
             commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
             commandsList.Add(Keys.R, new ResetCommand(player, false));
 
-
             commandsList.Add(Keys.Space, new ShowInventoryCommand());
             commandsList.Add(Keys.I, new ChangeItemCommand(true, player));
             commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
@@ -126,6 +125,9 @@ namespace Sprint5
                             delay = 20;
                         }
                     }
+
+
+
                 }
               
             }
@@ -133,6 +135,8 @@ namespace Sprint5
                 delay--;
 
             prevState = kstate;
+
+
 
             if (game.IsGameOver)
             {
@@ -143,6 +147,9 @@ namespace Sprint5
 
                 
             }
+
+                
+
             return activeCommand;
         }
     }

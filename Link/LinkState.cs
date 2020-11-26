@@ -53,6 +53,8 @@ namespace Sprint5.Link
                     link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
                 linkSprite = link.sprite;
             }
+            //Will this effect the other code?
+            linkSprite = link.sprite;
 
             if (link.LargeShield && link.DrawShield)
             {

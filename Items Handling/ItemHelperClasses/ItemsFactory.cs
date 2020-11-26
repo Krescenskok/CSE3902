@@ -94,7 +94,6 @@ namespace Sprint5
             return new BeamImpactSprite(swordBeamImpactSheet);
         }
 
-
         public ISprite CreateWandBeamSprite(string direction)
         {
             if (direction.Equals("Right"))

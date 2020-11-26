@@ -12,7 +12,15 @@ namespace Sprint5
         private Texture2D linkSpriteSheet;
         private Texture2D itemsSpriteSheet;
         private Texture2D blocksSpriteSheet;
-        private Texture2D linkBlueSpriteSheet;
+        private Texture2D linkBlueRingSpriteSheet;
+        private Texture2D blueLinkSpriteSheet;
+        private Texture2D redLinkSpriteSheet;
+        private Texture2D tealLinkSpriteSheet;
+        private Texture2D yellowLinkSpriteSheet;
+        private Texture2D pinkLinkSpriteSheet;
+
+
+
 
         private static SpriteFactory instance = new SpriteFactory();
 
@@ -52,20 +60,32 @@ namespace Sprint5
         {
             return new LinkSprite(linkBlueRingSpriteSheet);
         }
+        public LinkSprite CreateBlueLinkSprite()
+        {
+            return new LinkSprite(blueLinkSpriteSheet);
+        }
+        public LinkSprite CreatePinkLinkSprite()
+        {
+            return new LinkSprite(pinkLinkSpriteSheet);
+        }
+        public LinkSprite CreateRedLinkSprite()
+        {
+            return new LinkSprite(redLinkSpriteSheet);
+        }
+        public LinkSprite CreateTealLinkSprite()
+        {
+            return new LinkSprite(tealLinkSpriteSheet);
+        }
+        public LinkSprite CreateYellowLinkSprite()
+        {
+            return new LinkSprite(yellowLinkSpriteSheet);
+        }
 
-        //public LinkSprite CreateBlueLinkSprite()
-        //{
-        //    return new LinkSprite(linkBlueSpriteSheet);
-        //}
-        //public LinkSprite CreateBlueLinkSprite()
-        //{
-        //    return new LinkSprite(linkBlueSpriteSheet);
-        //}
-        //public LinkSprite CreateBlueLinkSprite()
-        //{
-        //    return new LinkSprite(linkBlueSpriteSheet);
-        //}
 
+        //public ISprite CreateItemsSprite()
+        //{
+        //    return new ItemsSprite(itemsSpriteSheet);
+        //}
         public ISprite CreateBlocksSprite()
         {
             return new BlocksSprite(blocksSpriteSheet);
