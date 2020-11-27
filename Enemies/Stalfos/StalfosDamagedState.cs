@@ -54,7 +54,7 @@ namespace Sprint5
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            stalfos.state = new StalfosWalkingState(stalfos, location);
+            if(collision.From.Equals(currentDirection)) stalfos.state = new StalfosWalkingState(stalfos, location);
         }
 
         public void TakeDamage(int amount)

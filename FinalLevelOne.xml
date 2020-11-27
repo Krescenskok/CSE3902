@@ -2380,6 +2380,8 @@
 				<Location>1 7</Location>
 				<Alive>true</Alive>
 			</Item>
+			
+			<!-- Water-->
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
@@ -2413,12 +2415,17 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 2</Location>
+				<Location>5 1</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 3</Location>
+				<Location>5 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>5 3</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2453,12 +2460,17 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 9</Location>
+				<Location>5 10</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 8</Location>
+				<Location>5 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>5 8</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2490,6 +2502,8 @@
 				<ObjectName>Water</ObjectName>
 				<Location>3 8</Location>
 			</Item>
+			<!-- Water-->
+			
 		</Room>
 		
 		<!-- 18th Room Content -->

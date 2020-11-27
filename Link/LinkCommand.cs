@@ -81,6 +81,8 @@ namespace Sprint5.Link
                                 linkPlayer.IsStopped = false;
                                 linkPlayer.IsSecondAttack = false;
 
+                                
+                                 linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
                             }
                             else
                             {
@@ -98,6 +100,8 @@ namespace Sprint5.Link
 
                                     }
                                 }
+
+                                linkPlayer.weaponCollider.TurnOff();
 
                             }
 

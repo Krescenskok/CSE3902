@@ -76,7 +76,7 @@ namespace Sprint5
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            linkPlayer = new LinkPlayer();
+            linkPlayer = new LinkPlayer(this);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));

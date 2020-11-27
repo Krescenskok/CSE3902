@@ -18,12 +18,16 @@ namespace Sprint5
         const int DISPLACEMENT = 100;
 
         bool done = false;
+
+        private Rectangle bounds;
+
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
 
-           
+            bounds = linkPlayer.hitbox;
+            
         }
 
         public string Name { get => "Player"; }
@@ -31,7 +35,7 @@ namespace Sprint5
 
         public Rectangle Bounds()
         {
-            return linkPlayer.Bounds;
+            return bounds;
         }
 
         public bool CompareTag(string tag)
@@ -52,7 +56,7 @@ namespace Sprint5
                     linkPlayer.isWalkingInPlace = true;
                     linkPlayer.HandleObstacle(collision);
 
-
+                
                 }
 
 
@@ -322,6 +326,9 @@ namespace Sprint5
 
         public void Update()
         {
+
+           
+            bounds.Location = linkPlayer.currentLocation.ToPoint();
         }
     }
 }

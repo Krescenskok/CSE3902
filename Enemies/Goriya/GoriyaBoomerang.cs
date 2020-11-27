@@ -71,7 +71,7 @@ namespace Sprint5
             else if (boomerangDone)
             {
                 finished = true;
-                
+                CollisionHandler.Instance.RemoveCollider(collider);
             }
 
 
