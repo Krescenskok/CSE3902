@@ -39,7 +39,9 @@ namespace Sprint5
 
             state = new WallMasterMoveState(location, game, this);
             masterSprite = (WallMasterSprite)sprite;
-            collider = new EnemyCollider(masterSprite.GetRectangle(), this, HPAmount.HalfHeart, "WallMaster");
+            Rectangle rect = new Rectangle(this.location.ToPoint(), masterSprite.GetRectangle().Size);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "WallMaster");
+           
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
 

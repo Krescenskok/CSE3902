@@ -30,6 +30,8 @@ namespace Sprint5
 
             CollisionHandler.Instance.AddCollider(this,Layers.Enemy);
             name = "Enemy";
+
+
         }
 
         public EnemyCollider(Rectangle rect, IEnemy enemy, int strength, string name)
@@ -42,6 +44,10 @@ namespace Sprint5
             damageAmount = strength;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
+
+            //RoomEnemies.Instance.AddTestCollider(bounds, this);
+
+           
         }
 
 
@@ -78,7 +84,10 @@ namespace Sprint5
             }
 
             WallMaster master = enemy as WallMaster;
-            if (name.Equals("WallMaster") && col.CompareTag("Player")) { master.Attack(); col.SendMessage("Hand", master.Location); }
+            if (name.Equals("WallMaster") && col.CompareTag("Player")) { 
+                master.Attack(); col.SendMessage("Hand", master.Location);
+            }
+
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
@@ -129,6 +138,8 @@ namespace Sprint5
             {
                 bounds.Location = (enemy.Location.ToPoint() + hitboxOffset);
             }
+
+           
         }
     }
 }

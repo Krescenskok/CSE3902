@@ -25,6 +25,7 @@ namespace Sprint5
         private int nextRoom;
         
         private bool loadNextRoom = false;
+        private bool wallmasterSetBack = false;
 
         private Game game;
 
@@ -91,33 +92,22 @@ namespace Sprint5
         {
         }
 
-        //code for extending menu view
+        //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
             if (HUDOpenCloseFinished())
             {
-                if (!inventoryOpen)
-                {
-                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight);
-                    targetHUDLocation.Location = newHUDLocation;
 
-                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y);
-                    targetGameView.Location = newGameViewLocation;
+                int moveDirection = inventoryOpen ? -1 : 1;
 
-                    inventoryOpen = true;
-                }
-                else
-                {
-                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y - screenHeight);
-                    targetHUDLocation.Location = newHUDLocation;
+                Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight * moveDirection);
+                targetHUDLocation.Location = newHUDLocation;
 
-                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y - playArea.Size.Y);
-                    targetGameView.Location = newGameViewLocation;
+                Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y * moveDirection);
+                targetGameView.Location = newGameViewLocation;
 
-                    inventoryOpen = false;
-                }
-
-              
+                inventoryOpen = moveDirection == 1;
+               
             }
            
             
@@ -132,6 +122,16 @@ namespace Sprint5
             player.currentLocation = new Vector2(game.Window.ClientBounds.X / 2, game.Window.ClientBounds.Y / 2) - location;
             RoomSpawner.Instance.RoomChange(game, roomNum);
            
+        }
+
+        public void BackToSquareOne()
+        {
+            MoveToRoom(1);
+            player.currentLocation = RoomDoors.Instance.LinkStartLocation;
+            player.state = new MoveUp(player, player.sprite);
+            direction = Vector3.Up;
+            wallmasterSetBack = true;
+            nextRoom = 1;
         }
 
 
@@ -201,25 +201,28 @@ namespace Sprint5
                 && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
         }
 
-        private void MoveViewports()
+        private void MoveViewports(ref Rectangle area, Rectangle targetArea, ref Viewport newPort)
         {
-            Vector2 currentLoc = playArea.Location.ToVector2();
-            Vector2 moveAmount = targetGameView.Location.ToVector2() - currentLoc;
+            Vector2 currentLoc = area.Location.ToVector2();
+            Vector2 moveAmount = targetArea.Location.ToVector2() - currentLoc;
             moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
             currentLoc = Vector2.Add(currentLoc, moveAmount);
-            playArea.Location = currentLoc.ToPoint();
-            gameView.Bounds = playArea;
-
-            
-
-            currentLoc = HUDArea.Location.ToVector2();
-            moveAmount = targetHUDLocation.Location.ToVector2() - currentLoc;
-            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
-            currentLoc = Vector2.Add(currentLoc, moveAmount);
-            HUDArea.Location = currentLoc.ToPoint();
-            HUDView.Bounds = HUDArea;
+            area.Location = currentLoc.ToPoint();
+            newPort.Bounds = area;
         }
 
+        private void GetLinkEnterPosition(Vector3 dir)
+        {
+            int yOffset = dir.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
+            int xOffset = GridGenerator.Instance.Offset.X;
+            linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+        }
+
+        private void Move()
+        {
+            Vector3 newPos = Transform.Translation + direction * scrollSpeed;
+            Matrix.CreateTranslation(ref newPos, out transform);
+        }
         
 
         public void Update()
@@ -227,7 +230,8 @@ namespace Sprint5
 
             if (!HUDOpenCloseFinished())
             {
-                MoveViewports();
+                MoveViewports(ref playArea,targetGameView,ref gameView);
+                MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
             }else if(inventoryOpen && !(game as Game1).isPaused)
@@ -239,20 +243,20 @@ namespace Sprint5
                 inventoryStillMoving = false;
             }
 
-           
 
-            if (!DoneScrolling())
+            bool doneScrolling = DoneScrolling();
+
+            if (wallmasterSetBack || !doneScrolling)
             {
-                Vector3 newPos = Transform.Translation + direction  * scrollSpeed;
-                Matrix.CreateTranslation(ref newPos, out transform);
-
-                int yOffset = direction.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
-                int xOffset = GridGenerator.Instance.Offset.X;
-              
-
+                GetLinkEnterPosition(direction);
                 loadNextRoom = true;
                 linkHasEntered = false;
-                linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+                wallmasterSetBack = false;
+            }
+
+            if (!doneScrolling)
+            {
+                Move();
 
             }else if (loadNextRoom && !linkHasEntered)
             {
@@ -265,8 +269,8 @@ namespace Sprint5
 
             }else if (loadNextRoom)
             {
-                Game1 game1 = game as Game1;
-                game1.isPaused = false;
+                
+                (game as Game1).isPaused = false;
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;

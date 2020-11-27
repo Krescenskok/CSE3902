@@ -38,8 +38,6 @@ namespace Sprint5
 
 
 
-            this.location = currentSpace.Location.ToVector2();
-            this.master.UpdateLocation(this.location);
 
         }
 
@@ -60,7 +58,7 @@ namespace Sprint5
             {
 
 
-                RoomSpawner.Instance.RoomChange(game, 1);
+                Camera.Instance.BackToSquareOne();
 
             }
             else
@@ -92,7 +90,7 @@ namespace Sprint5
 
         private bool Arrived(Rectangle position, Rectangle target)
         {
-            float dist = Vector2.Distance(position.Center.ToVector2(), target.Center.ToVector2());
+            float dist = Vector2.Distance(position.Location.ToVector2(), target.Location.ToVector2());
 
 
             return dist <= 1;

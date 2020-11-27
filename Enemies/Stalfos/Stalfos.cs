@@ -51,7 +51,7 @@ namespace Sprint5
 
             spriteSize = stalfosSprite.GetRectangle().Size;
             rect = new Rectangle(this.location.ToPoint(), spriteSize);
-            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Stalfos");
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 

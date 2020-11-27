@@ -53,10 +53,12 @@ namespace Sprint5
 
 
         public PlayerCollider collider;
+        public WeaponCollider weaponCollider;
 
         public List<IItems> itemsPlacedByLink = new List<IItems>();
 
         public List<Direction> possibleDirections = Directions.Default();
+        public Direction currentDirection;
 
         public bool isPaused = false;
 
@@ -181,15 +183,19 @@ namespace Sprint5
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
 
-        public LinkPlayer()
+        public LinkPlayer(Game game)
         {
 
-            sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            sprite = SpriteFactory.Instance.CreateLinkSprite();
+            
             hitbox = sprite.hitbox;
+            hitbox.Location = currentLocation.ToPoint();
+            hitbox = HitboxAdjuster.Instance.AdjustHitbox(hitbox, .9f);
+
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-            
-            
+
+            weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
 
         }
         public void Update(GameTime gameTime)
@@ -201,10 +207,12 @@ namespace Sprint5
                 int sizeY = hitbox.Size.Y;
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                
                 delay--;
 
 
                 possibleDirections = Directions.Default();
+                currentDirection = Directions.Parse(LinkDirection);
             }
         }
         public void HandleObstacle(Collision col)
@@ -216,6 +224,7 @@ namespace Sprint5
             if (!(state is MoveLeft))
                 state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
+           
         }
 
         public void MovingRight()
