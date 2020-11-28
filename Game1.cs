@@ -39,6 +39,7 @@ namespace Sprint5
 
 
         LinkPlayer linkPlayer;
+
         public bool isPaused;
         public LinkPlayer LinkPlayer { get => linkPlayer; }
         public SpriteFont Font { get => font; }
@@ -130,7 +131,6 @@ namespace Sprint5
 
                 }
             }
-
             
             if (!isPaused && !LinkInventory.Instance.ShowInventory)
             {
@@ -143,14 +143,13 @@ namespace Sprint5
                 CollisionHandler.Instance.Update();
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
+
                 base.Update(gameTime);                
             }            
 
             camera.Update();
             
         }
-
-
 
         void PrepareToDraw()
         {
@@ -159,7 +158,12 @@ namespace Sprint5
             GraphicsDevice.Clear(Color.Black);
         }
 
-
+        public void switchScreen()
+        {
+            if (_graphics.IsFullScreen) _graphics.IsFullScreen = false;
+            else _graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
+        }
 
         protected override void Draw(GameTime gameTime)
         {
@@ -225,8 +229,6 @@ namespace Sprint5
 
                 _spriteBatch.End();
             }
-
-
         }
     }
 }

@@ -999,7 +999,7 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>5 0</Location>
+				<Location>5 2</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2413,12 +2413,17 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 2</Location>
+				<Location>5 1</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 3</Location>
+				<Location>5 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>5 3</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2453,12 +2458,17 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 9</Location>
+				<Location>5 10</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
-				<Location>4 8</Location>
+				<Location>5 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>5 8</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2505,7 +2515,7 @@
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
-				<Location>2 0</Location>
+				<Location>2 1</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
@@ -2531,6 +2541,141 @@
 				<ObjectName>Bow</ObjectName>
 				<Location>2 7</Location>
 				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>1 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>2 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>3 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>0 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>1 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>2 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>3 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 11</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>6 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>5 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>4 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>3 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>2 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>1 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>0 12</Location>
 			</Item>
 		</Room>
 		

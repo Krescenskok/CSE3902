@@ -95,6 +95,10 @@ namespace Sprint5
                         {
                             roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                         }
+                        else if (objName.Equals("Bricks"))
+                        {
+                            roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
                         else if (objName.Equals("MoveableColumnRight"))
                         {
                             roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
