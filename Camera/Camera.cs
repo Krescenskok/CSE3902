@@ -123,6 +123,17 @@ namespace Sprint5
             
         }
 
+        public void MoveToRoom(int roomNum)
+        {
+            Target = RoomCoordinate.position(roomNum, playArea.Width,playArea.Height);
+            transform.Translation = Target;
+            location.X = transform.M41;
+            location.Y = transform.M42;
+            player.currentLocation = new Vector2(game.Window.ClientBounds.X / 2, game.Window.ClientBounds.Y / 2) - location;
+            RoomSpawner.Instance.RoomChange(game, roomNum);
+           
+        }
+
 
 
         public void ScrollUp(int roomNum)
