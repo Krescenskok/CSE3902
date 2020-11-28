@@ -38,7 +38,7 @@ namespace Sprint5.Items
 
             if (runTime >= maxTime)
             {
-                item.Expire();
+                Expire();
             }
         }
 

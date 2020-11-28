@@ -65,10 +65,6 @@ namespace Sprint5
                 trigger = true;
 
             }
-            else if (col.CompareTag("Projectile"))
-            {
-                col.SendMessage("Impact", 0);
-            }
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)

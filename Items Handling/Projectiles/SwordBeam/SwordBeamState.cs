@@ -15,7 +15,8 @@ namespace Sprint5.Items
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 400;
+        private const int maxTime = 400; //failsafe
+        private const int frameUpdate = 5;
 
         public SwordBeamState(SwordBeam item, Vector2 location, string direction)
         {
@@ -48,7 +49,7 @@ namespace Sprint5.Items
             item.UpdateLocation(location);
             runTime++;
 
-            if (runTime % 5 == 0)
+            if (runTime % frameUpdate == 0)
             {
                 frame++;
                 item.UpdateFrame(frame % 2);
@@ -70,9 +71,7 @@ namespace Sprint5.Items
 
         public void Collected()
         {
-            //enemy gets damaged
-            Expire();
-           
+
         }
     }
 }

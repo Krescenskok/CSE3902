@@ -40,23 +40,15 @@ namespace Sprint5
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            //no action
+
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Projectile"))
-            {
-                col.SendMessage("Impact", 0);
-            }
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Projectile"))
-            {
-                col.SendMessage("Impact", 0);
-            }
         }
 
         public void SendMessage(string msg, object value)
