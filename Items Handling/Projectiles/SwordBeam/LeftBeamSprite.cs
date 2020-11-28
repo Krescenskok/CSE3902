@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class LeftBeamSprite : ISprite
     {
@@ -14,10 +14,8 @@ namespace Sprint5
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
         private const int sheetLocation = 88;
-
-
+        private const int hitboxWidthFactor = 4;
         private Rectangle hitbox;
-
         public Rectangle Hitbox { get => hitbox; }
 
         public LeftBeamSprite(Texture2D texture)
@@ -29,7 +27,7 @@ namespace Sprint5
 
             int height = texture.Height / (int)sheetSize.X;
 
-            hitbox = new Rectangle(0, 0, width * 2, height * 2);
+            hitbox = new Rectangle(0, 0, width * hitboxWidthFactor, height);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

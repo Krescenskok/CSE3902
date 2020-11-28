@@ -82,7 +82,6 @@ namespace Sprint5
             XElement room = roomXMLs[roomNumber];
             //currentRoomSprite = roomSprites[roomNumber - 1];
             //currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
-            Debug.WriteLine(room);
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);

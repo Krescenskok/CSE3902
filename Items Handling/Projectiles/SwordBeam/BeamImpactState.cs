@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class BeamImpactState : IItemsState
     {
@@ -38,7 +38,7 @@ namespace Sprint5
 
             if (runTime >= maxTime)
             {
-                item.Expire();
+                Expire();
             }
         }
 
