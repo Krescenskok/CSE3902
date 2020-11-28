@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class ArrowLeftSprite : ISprite
     {

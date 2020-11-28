@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Inventory;
 using Sprint5.Items;
 using Sprint5.Link;
+using Sprint5.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -238,6 +238,17 @@ namespace Sprint5
         public bool HasBow
         {
             get { return secondInInventory[SecondaryItem.Bow]; }
+        }
+
+        public bool HasCandle
+        {
+            get { return secondInInventory[SecondaryItem.Candle]; }
+        }
+
+
+        public bool HasBoomerang
+        {
+            get { return secondInInventory[SecondaryItem.Boomerang]; }
         }
 
         public IItems GetSecondItem

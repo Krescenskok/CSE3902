@@ -62,7 +62,8 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            if (saveInfo != null)
+                saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

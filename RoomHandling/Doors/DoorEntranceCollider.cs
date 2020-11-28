@@ -62,7 +62,7 @@ namespace Sprint5
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            
+
         }
 
         public void SendMessage(string msg, object value)

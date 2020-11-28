@@ -54,20 +54,16 @@ namespace Sprint5
 
         public PlayerCollider collider;
 
-        public List<IItems> itemsPlacedByLink = new List<IItems>();
-
         public List<Direction> possibleDirections = Directions.Default();
 
         public bool isPaused = false;
 
-        public void RemovePlacedItem(IItems item)
+        private bool isShooting = false;
+        public bool IsShootingProjectile
         {
-            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
-            {
-                itemsPlacedByLink.Remove(item);
-            }
+            get => isShooting;
+            set => isShooting = value;
         }
-
 
         string direction = "Down";
         public string LinkDirection
@@ -146,7 +142,6 @@ namespace Sprint5
 
         private ItemForLink currentWeapon = ItemForLink.Shield;
 
-
         public ItemForLink CurrentWeapon
         {
             get { return currentWeapon; }
@@ -166,7 +161,6 @@ namespace Sprint5
             get { return isWalkingInPlace; }
             set { isWalkingInPlace = value; }
         }
-
 
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
@@ -188,10 +182,10 @@ namespace Sprint5
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-            
-            
 
         }
+
+
         public void Update(GameTime gameTime)
         {
             if (sprite != null)

@@ -226,7 +226,8 @@ namespace Sprint5
 
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return location;
         }
 
         public override Rectangle Bounds()

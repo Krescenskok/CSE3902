@@ -90,18 +90,16 @@ namespace Sprint5
                     else if (objName.Equals("LeftTop"))
                     {
                         walls.Add(new WallCollider(locations[0] - camOffset, sideWallHalfSize));
-                    }else if (objName.Equals("LeftBottom"))
+                    }
+                    else if (objName.Equals("LeftBottom"))
                     {
                         walls.Add(new WallCollider(locations[6] - camOffset, sideWallHalfSize));
-                    }else if (objName.Equals("TopLeft"))
+                    }
+                    else if (objName.Equals("TopLeft"))
                     {
                         walls.Add(new WallCollider(locations[0] - camOffset, middleWallHalf));
-
-                        
-
-                        
-                        
-                    }else if (objName.Equals("TopRight"))
+                    }
+                    else if (objName.Equals("TopRight"))
                     {
                         walls.Add(new WallCollider(locations[1] - camOffset, middleWallHalf));
                     }
