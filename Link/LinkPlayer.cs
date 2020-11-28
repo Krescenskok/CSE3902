@@ -137,6 +137,7 @@ namespace Sprint5
             }
         }
 
+        public damageMove DamDir { get => damDir; set => damDir = value; }
         public bool IsAttacking
         {
             get { return isAttacking; }
@@ -294,25 +295,9 @@ namespace Sprint5
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
-        public void knockback(bool up, bool down, bool left, bool right)
+        public void knockback(damageMove collideDir)
         {
-            if (up)
-            {
-                damDir = damageMove.up;
-            }
-            else if (down)
-            {
-                damDir = damageMove.down;
-            }
-            else if (left)
-            {
-                damDir = damageMove.left;
-            }
-            else
-            {
-                damDir = damageMove.right;
-            }
-
+            damDir = collideDir;
             counter = max;
         }
 
@@ -324,21 +309,22 @@ namespace Sprint5
 
         public void push(damageMove direction)
         {
-
-            switch (direction)
-            {
-                case damageMove.right:
-                    currentLocation.X += increment;
-                    break;
-                case damageMove.left:
-                    currentLocation.X -= increment;
-                    break;
-                case damageMove.up:
-                    currentLocation.Y -= increment;
-                    break;
-                case damageMove.down:
-                    currentLocation.Y += increment;
-                    break;
+            if (counter != max) {
+                switch (direction)
+                {
+                    case damageMove.right:
+                        currentLocation.X += increment;
+                        break;
+                    case damageMove.left:
+                        currentLocation.X -= increment;
+                        break;
+                    case damageMove.up:
+                        currentLocation.Y -= increment;
+                        break;
+                    case damageMove.down:
+                        currentLocation.Y += increment;
+                        break;
+                }
             }
 
             counter -= increment;
