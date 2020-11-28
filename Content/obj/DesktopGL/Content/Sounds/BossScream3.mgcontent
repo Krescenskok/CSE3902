@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Sounds/BossScream3.wav</SourceFile>
   <SourceTime>2020-11-23T14:14:32.6263212-05:00</SourceTime>
   <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Sounds/BossScream3.xnb</DestFile>
-  <DestTime>2020-11-23T18:22:58.0061308-05:00</DestTime>
+  <DestTime>2020-11-28T13:27:28.9867629-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

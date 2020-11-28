@@ -217,9 +217,9 @@ namespace Sprint5
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
 
-                if (damDir != damageMove.none) this.push(damDir);
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                if (damDir != damageMove.none) this.push(damDir);
                 delay--;
 
 

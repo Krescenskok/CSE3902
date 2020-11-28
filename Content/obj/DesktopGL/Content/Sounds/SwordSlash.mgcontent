@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Sounds/SwordSlash.wav</SourceFile>
   <SourceTime>2020-11-23T14:14:32.690054-05:00</SourceTime>
   <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Sounds/SwordSlash.xnb</DestFile>
-  <DestTime>2020-11-23T18:23:01.0923361-05:00</DestTime>
+  <DestTime>2020-11-28T13:27:31.6790797-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

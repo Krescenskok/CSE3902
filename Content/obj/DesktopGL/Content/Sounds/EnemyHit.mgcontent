@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Sounds/EnemyHit.wav</SourceFile>
   <SourceTime>2020-11-23T14:14:32.6820742-05:00</SourceTime>
   <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Sounds/EnemyHit.xnb</DestFile>
-  <DestTime>2020-11-23T18:22:58.7643633-05:00</DestTime>
+  <DestTime>2020-11-28T13:27:29.7456509-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
