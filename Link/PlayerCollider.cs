@@ -181,6 +181,11 @@ namespace Sprint5
         {
             if(!linkPlayer.IsDamaged)
             {
+                if (msg.Contains("TakeDamage"))
+                {
+                    Sounds.Instance.PlaySoundEffect("LinkHurt");
+                }
+
                 if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
 
@@ -278,18 +283,18 @@ namespace Sprint5
 
             if (msg == "Item")
             {
-                if(((IItems) value) is Sprint5.Items.TriforcePiece || ((IItems)value) is Sprint5.Items.Bow)
+                if(((IItems) value) is Items.TriforcePiece || ((IItems)value) is Items.Bow)
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
             }
             if (msg == "Heal")
             {
-                if (value is Sprint5.Items.Heart)
+                if (value is Items.Heart)
                 {
                     linkPlayer.Health += FULL_HEART;
                 }
-                else if (value is Sprint5.Items.Fairy)
+                else if (value is Items.Fairy)
                 {
                     linkPlayer.Health += HALF_HEART;
                 }

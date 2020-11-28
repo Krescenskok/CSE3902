@@ -144,10 +144,10 @@ namespace Sprint5
             //
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             moveSpeed = 0;
-            stunClock = stunTime;
+            stunClock = permanent ? int.MaxValue : stunTime;
 
         }
 

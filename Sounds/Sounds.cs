@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -14,13 +15,16 @@ namespace Sprint5
         public static Sounds Instance { get; } = new Sounds();
         private Sounds()
         {
-
+            
         }
 
-        private Dictionary<string, SoundEffectInstance> sounds;
+        private Dictionary<string, SoundEffect> sounds;
+        private List<SoundEffectInstance> soundInstances;
 
         private SoundEffectInstance lowHealth;
         private SoundEffectInstance BGM;
+
+        private Dictionary<string, SoundEffectInstance> loopedSounds;
 
         private Game game;
         public bool Muted { get; private set; }
@@ -31,26 +35,44 @@ namespace Sprint5
 
         public void LoadSounds(Game game)
         {
-            this.game = game;
-            sounds = SoundContent.LoadContent(game.Content, "Sounds");
 
             
+            this.game = game;
+            sounds = SoundContent.LoadContent(game.Content, "Sounds");
+            soundInstances = new List<SoundEffectInstance>();
+            loopedSounds = new Dictionary<string, SoundEffectInstance>();
 
-            lowHealth = Get("LowHealth");
-            lowHealth.IsLooped = true;
+            lowHealth = AddLoop("LowHealth");
 
-            BGM = Get("DungeonTheme");
-            BGM.IsLooped = true;
+            BGM = AddLoop("DungeonTheme");
             BGM.Play();
+
+            
         }
 
         public void Update()
         {
             state = Keyboard.GetState();
-
             if (state.IsKeyDown(Keys.M) && !prevState.IsKeyDown(Keys.M)) ToggleMute();
-
             prevState = state;
+
+
+        }
+
+        public void RoomChange(int num)
+        {
+
+            for (int i = 0; i < soundInstances.Count; i++)
+            {
+                if(NonPersistentSound(soundInstances[i])) soundInstances[i].Stop(); soundInstances.RemoveAt(i);
+            }
+        
+            
+        }
+
+        private bool NonPersistentSound(SoundEffectInstance sound)
+        {
+            return !sound.Equals(BGM) && !sound.Equals(lowHealth);
         }
 
         private void ToggleMute()
@@ -59,13 +81,22 @@ namespace Sprint5
             else Mute();
         }
 
+        public void TogglePause()
+        {
+            foreach(SoundEffectInstance sound in soundInstances)
+            {
+                if (!sound.Equals(BGM) && sound.State is SoundState.Playing) sound.Pause();
+                else if (!sound.Equals(BGM) && sound.State is SoundState.Paused) sound.Play();
+            }
+        }
+
         private void Mute()
         {
-            
-            
-            foreach(KeyValuePair<string,SoundEffectInstance> pair in sounds)
+
+
+            foreach (SoundEffectInstance instance in soundInstances)
             {
-                pair.Value.Volume = 0;
+                instance.Volume = 0;
             }
             Muted = true;
             
@@ -74,9 +105,9 @@ namespace Sprint5
 
         private void UnMute()
         {
-            foreach (KeyValuePair<string, SoundEffectInstance> pair in sounds)
+            foreach (SoundEffectInstance instance in soundInstances)
             {
-                pair.Value.Volume = 1;
+                instance.Volume = 1;
             }
             Muted = false;
         }
@@ -84,49 +115,46 @@ namespace Sprint5
 
         private SoundEffectInstance Get(string name)
         {
-            if (sounds.ContainsKey(name)) return sounds[name];
+            SoundEffectInstance instance = null;
+            if (sounds.ContainsKey(name))
+            {
+                instance = sounds[name].CreateInstance();
+                soundInstances.Add(instance);
+            } 
+            return instance;
+        }
+
+        private SoundEffectInstance AddLoop(string name)
+        {
+            if (sounds.ContainsKey(name)) {
+                SoundEffectInstance instance = sounds[name].CreateInstance();
+                instance.IsLooped = true;
+                soundInstances.Add(instance);
+                return instance;
+            }
             return null;
         }
 
-     
+        private void Play(SoundEffectInstance instance)
+        {
+            if (Muted) instance.Volume = 0;
+            if(instance != null) instance.Play();
+        }
 
         #region //sound effects
 
         public void PlaySoundEffect(string name)
         {
             SoundEffectInstance sound = Get(name);
-
-            if (sound != null) sound.Play();
-        }
-        public void PlayEnemyHit()
-        {
-            SoundEffectInstance sound = Get("EnemyHit");
-            
-            if (sound != null) sound.Play();
+            Play(sound);
         }
 
-        public void PlayEnemyDie()
+        public void LinkDeath()
         {
-            SoundEffectInstance sound = Get("EnemyDie");
-            if (sound != null) sound.Play();
-        }
-
-        public void PlayLinkHurt()
-        {
-            SoundEffectInstance sound = Get("LinkHurt");
-            if (sound != null) sound.Play();
-        }
-
-        public void PlayDodongoRoar()
-        {
-            SoundEffectInstance sound = Get("DodongoRoar");
-            if (sound != null) sound.Play();
-        }
-
-        public void PlayAquamentusRoar()
-        {
-            SoundEffectInstance sound = Get("AquamentusRoar");
-            if (sound != null) sound.Play();
+            SoundEffectInstance linkDie = Get("LinkDie");
+            Play(linkDie);
+            BGM.Stop();
+            lowHealth.Stop();
         }
 
         public void PlayBossScream()
@@ -140,15 +168,40 @@ namespace Sprint5
         #region // looped sounds
         public void StartLowHealthLoop()
         {
-            lowHealth.Play();
+            if(lowHealth.State != SoundState.Playing) lowHealth.Play();
         }
 
         public void StopLowHealthLoop()
         {
-            lowHealth.Stop();
+            if(lowHealth.State == SoundState.Playing) lowHealth.Stop();
         }
+
+
+        public void AddLoopedSound(string name, string key)
+        {
+            SoundEffectInstance newLoop = AddLoop(name);
+
+            if (newLoop != null)
+            {
+                loopedSounds.Add(key, newLoop);
+                Play(loopedSounds[key]);
+            }
+           
+        }
+
+        public void StopLoopedSound(string key)
+        {
+            if (loopedSounds.ContainsKey(key))
+            {
+                SoundEffectInstance instance = loopedSounds[key];
+                instance.Stop();
+                soundInstances.Remove(instance);
+                loopedSounds.Remove(key);
+            }
+        }
+
         #endregion
 
-
+        
     }
 }

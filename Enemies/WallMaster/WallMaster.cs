@@ -84,7 +84,7 @@ namespace Sprint5
         {
             RoomEnemies.Instance.Destroy(this, Location);
             saveData.SetElementValue("Alive", "false");
-            RoomItems.Instance.DropRandom(location);
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
 
@@ -101,7 +101,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
     }
 }

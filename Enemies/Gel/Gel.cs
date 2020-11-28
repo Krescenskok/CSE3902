@@ -17,7 +17,7 @@ namespace Sprint5
         private Game game;
         private Vector2 location;
         public IEnemyState state;
-        public ISprite sprite;
+        public EnemySprite sprite;
         public GelMoveSprite gSprite;
 
         private EnemyCollider innerCollider;
@@ -62,7 +62,7 @@ namespace Sprint5
 
         public void SetSprite(ISprite sprite)
         {
-            this.sprite = sprite;
+            this.sprite = (EnemySprite)sprite;
         }
 
         public void UpdateLocation(Vector2 location)
@@ -74,6 +74,7 @@ namespace Sprint5
         public void Update()
         {
             state.Update();
+            sprite.Update();
         }
 
 
@@ -81,7 +82,7 @@ namespace Sprint5
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveData.SetElementValue("Alive", "false");
-            RoomItems.Instance.DropRandom(location);
+            RoomItems.Instance.DropRandom(innerCollider.Center);
         }
 
         public void Draw(SpriteBatch batch)
@@ -110,7 +111,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
 
         public Vector2 Attack()

@@ -217,7 +217,7 @@ namespace Sprint5
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlayEnemyDie();
+            Sounds.Instance.PlaySoundEffect("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -226,7 +226,7 @@ namespace Sprint5
         {
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlayEnemyDie();
+            Sounds.Instance.PlaySoundEffect("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -247,7 +247,7 @@ namespace Sprint5
         {
             for(int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].State.Stun();
+                enemies[i].State.Stun(true);
             }
         }
 

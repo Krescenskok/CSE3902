@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class GoriyaDamagedSprite : ISprite
+    public class GoriyaDamagedSprite : EnemySprite
     {
 
         public Texture2D texture { get; set; }
@@ -49,12 +49,8 @@ namespace Sprint5
             startColumn = EnemySpriteFactory.GetColumn(sheetID);
         }
 
-
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-
-
-            
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             if (currentAnimatedFrame != previousAnimatedFrame) currentOffset++;
             if (currentOffset > frameOffsets) currentOffset = 0;
@@ -67,8 +63,9 @@ namespace Sprint5
             {
                 currentFrame = 0;
             }
-            
-
+        }
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
 

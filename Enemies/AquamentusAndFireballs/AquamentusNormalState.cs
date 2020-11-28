@@ -65,5 +65,10 @@ namespace Sprint5
         {
             //stun implement
         }
+
+        public void Stun(bool permanent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

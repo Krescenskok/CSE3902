@@ -10,7 +10,7 @@ namespace Sprint5
     /// <summary>
     /// Sprite class for when stalfos (skeleton) is walking normally
     /// </summary>
-    class StalfosWalkingSprite : ISprite
+    class StalfosWalkingSprite : EnemySprite
     {
 
 
@@ -59,7 +59,17 @@ namespace Sprint5
         }
 
 
-        
+        public void Update()
+        {
+            currentFrame++;
+            if (currentFrame == trueFrameCount)
+            {
+                currentFrame = 0;
+
+            }
+            currentAnimatedFrame = currentFrame / (originalRate / frameRate);
+            currentAnimatedFrame += startColumn;
+        }
 
         public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
         {
@@ -70,14 +80,7 @@ namespace Sprint5
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
-            currentFrame++;
-            if (currentFrame == trueFrameCount)
-            {
-                currentFrame = 0;
-
-            }
-            currentAnimatedFrame = currentFrame / (originalRate / frameRate);
-            currentAnimatedFrame += startColumn;
+            
         }
 
 

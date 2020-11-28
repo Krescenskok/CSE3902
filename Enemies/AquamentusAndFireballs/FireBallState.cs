@@ -51,7 +51,7 @@ namespace Sprint5
             Die();
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             //do nothing
         }

@@ -142,7 +142,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            dodongoState.Stun();
+            dodongoState.Stun(false);
         }
 
     }
