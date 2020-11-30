@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -169,6 +170,7 @@ namespace Sprint5
         }
 
 
+
         public void Update()
         {
            
@@ -214,6 +216,7 @@ namespace Sprint5
 
         public void Destroy(IEnemy enemy, Vector2 location)
         {
+            GameOverScreen.Instance.KillCount++;
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
@@ -224,6 +227,7 @@ namespace Sprint5
 
         public void Destroy(IEnemy enemy)
         {
+            GameOverScreen.Instance.KillCount++;
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
             Sounds.Instance.PlaySoundEffect("EnemyDie");

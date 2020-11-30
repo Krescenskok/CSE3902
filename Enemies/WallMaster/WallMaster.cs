@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -44,8 +45,8 @@ namespace Sprint5
            
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
-            
 
             saveData = xml;
         }
@@ -103,5 +104,6 @@ namespace Sprint5
         {
             state.Stun(false);
         }
+
     }
 }

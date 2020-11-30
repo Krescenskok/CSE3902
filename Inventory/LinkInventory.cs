@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Text;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -268,6 +269,7 @@ namespace Sprint5
 
         public void PickUpItem(IItems item, LinkPlayer link)
         {
+
             if (!(prevItem is null) && prevItem.Equals(item))
             {
                 return;
@@ -362,6 +364,7 @@ namespace Sprint5
                     link.Health = link.FullHealth;
                     HUD.Instance.UpdateHearts(link);
                     PotionCount--;
+                    GameOverScreen.Instance.ItemsConsumed++;
 
                     if (PotionCount == 0)
                     {
@@ -374,13 +377,16 @@ namespace Sprint5
 
         public void UseItem(IItems item)
         {
+            
             if (item is Key)
             {
                 KeyCount--;
+                GameOverScreen.Instance.ItemsConsumed++;
             }
             if (item is BombObject)
             {
                 BombCount--;
+                GameOverScreen.Instance.ItemsConsumed++;
             }
         }
 

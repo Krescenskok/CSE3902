@@ -144,9 +144,14 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
+            
+            (game as Game1).DoorPause = true;
+
+
 
             Pause();
             
+
 
             currentDirection = Direction.up;
         }
@@ -158,6 +163,7 @@ namespace Sprint5
             direction = Vector3.Down;
 
             nextRoom = roomNum;
+            (game as Game1).DoorPause = true;
 
             Pause();
 
@@ -170,6 +176,9 @@ namespace Sprint5
 
             direction = Vector3.Left;
             nextRoom = roomNum;
+
+            (game as Game1).DoorPause = true;
+
             Pause();
 
             currentDirection = Direction.right;
@@ -181,8 +190,8 @@ namespace Sprint5
 
             direction = Vector3.Right;
             nextRoom = roomNum;
+            (game as Game1).DoorPause = true;
             Pause();
-
             currentDirection = Direction.left;
         }
 
@@ -234,10 +243,15 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(!inventoryOpen && game.isPaused && inventoryStillMoving)
+            }else if(inventoryOpen && !(game as Game1).isPaused)
             {
+                (game as Game1).DoorPause = true;
+            }
+            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+            {
+                (game as Game1).DoorPause = false;
+               game.Pause(wasPaused);
 
-                game.Pause(wasPaused);
                 inventoryStillMoving = false;
             }
 
@@ -267,8 +281,11 @@ namespace Sprint5
 
             }else if (loadNextRoom)
             {
+                Game1 game1 = game as Game1;
+                game1.DoorPause = false;
 
                 UnPause();
+
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;

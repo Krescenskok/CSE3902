@@ -4,6 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.Items;
+using Sprint5.Menus;
 
 namespace Sprint5.Link
 {
@@ -68,6 +69,7 @@ namespace Sprint5.Link
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += 10;
                 item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
+                GameOverScreen.Instance.ProjectileCount++;
                 itemsPlacedByLink.Add(item);
             }
             else
@@ -82,6 +84,7 @@ namespace Sprint5.Link
 
             if (link.Health == link.FullHealth && !beamMade)
             {
+                GameOverScreen.Instance.ProjectileCount++;
                 beamMade = true;
                 if (direction.Equals(DOWN) || link.state is Stationary)
                 {
@@ -152,6 +155,13 @@ namespace Sprint5.Link
                     item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
+
+                wandMade = true;
+                item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
+              
+                GameOverScreen.Instance.ProjectileCount++;
+
+
             }
             else
             {
@@ -166,6 +176,7 @@ namespace Sprint5.Link
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += DISPLACEMENT;
                 boomerangMade = true;
+                GameOverScreen.Instance.ProjectileCount++;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 itemsPlacedByLink.Add(item);
             }
@@ -200,6 +211,7 @@ namespace Sprint5.Link
                 }
 
                 item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
+                GameOverScreen.Instance.ProjectileCount++;
                 itemsPlacedByLink.Add(item);
             }
             else
@@ -232,6 +244,7 @@ namespace Sprint5.Link
                     loc.Y -= buffer;
                 }
                 item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
+                GameOverScreen.Instance.ProjectileCount++;
                 itemsPlacedByLink.Add(item);
             }
             else
