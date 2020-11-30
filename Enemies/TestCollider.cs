@@ -23,6 +23,7 @@ namespace Sprint5
 
         PlayerCollider player;
         private EnemyCollider enemyCol;
+        private ICollider followCol;
 
         public TestCollider(Point location, Point size, Game game, int attack)
         {
@@ -56,8 +57,27 @@ namespace Sprint5
 
             this.player = player;
 
+            CollisionHandler.Instance.AddCollider(this, Layers.Player);
+
+        }
+
+        public TestCollider(Game game, Rectangle rect)
+        {
+            bounds = rect;
+            visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
+            location = bounds.Location.ToVector2();
             CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
 
+        }
+
+        public TestCollider(Game game, Rectangle rect, ICollider col)
+        {
+            bounds = rect;
+            visual = new ColliderVisualSprite(game, rect.Size.ToVector2());
+            location = bounds.Location.ToVector2();
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
+
+            followCol = col;
         }
 
         public TestCollider()
@@ -132,7 +152,11 @@ namespace Sprint5
 
             }
 
-            
+            if(followCol != null)
+            {
+                bounds = followCol.Bounds();
+                location = bounds.Location.ToVector2();
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Sprint5
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class KeeseMoveSprite : ISprite
+    public class KeeseMoveSprite : EnemySprite
     {
         public Texture2D texture { get; set; }
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
@@ -60,17 +60,8 @@ namespace Sprint5
 
 
 
-
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-  
-
-            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
-
-            batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
-            
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
@@ -79,9 +70,17 @@ namespace Sprint5
             {
                 currentFrame = 0;
                 RandomizeFrameRate();
-
-
             }
+        }
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
+  
+
+            Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
+
+            batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+   
         }
 
         public void RandomizeFrameRate()

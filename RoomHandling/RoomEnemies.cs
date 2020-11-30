@@ -27,6 +27,7 @@ namespace Sprint5
         private List<EnemyDeath> deaths;
 
         private List<TestCollider> testObjects;
+        private TestCollider linkTestCollider;
 
         private Game game;
 
@@ -157,7 +158,14 @@ namespace Sprint5
 
         public void AddTestCollider(PlayerCollider player)
         {
-            testObjects.Add(new TestCollider(game,player));
+            linkTestCollider = new TestCollider(game,player);
+        }
+
+        public TestCollider AddTestCollider(Rectangle rect, ICollider col)
+        {
+            TestCollider t = new TestCollider(game, rect,col);
+            testObjects.Add(t);
+            return t;
         }
 
 
@@ -201,6 +209,7 @@ namespace Sprint5
                
                 col.Draw(batch);
             }
+            if(linkTestCollider != null) linkTestCollider.Draw(batch);
         }
 
         public void Destroy(IEnemy enemy, Vector2 location)
@@ -208,7 +217,7 @@ namespace Sprint5
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlayEnemyDie();
+            Sounds.Instance.PlaySoundEffect("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -217,7 +226,7 @@ namespace Sprint5
         {
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlayEnemyDie();
+            Sounds.Instance.PlaySoundEffect("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -229,11 +238,16 @@ namespace Sprint5
             
         }
 
+        public void RemoveTest(TestCollider col)
+        {
+            testObjects.Remove(col);
+        }
+
         public void StunAllEnemies()
         {
             for(int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].State.Stun();
+                enemies[i].State.Stun(true);
             }
         }
 

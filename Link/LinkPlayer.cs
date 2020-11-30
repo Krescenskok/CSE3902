@@ -69,8 +69,10 @@ namespace Sprint5
 
 
         public PlayerCollider collider;
+        public WeaponCollider weaponCollider;
 
         public List<Direction> possibleDirections = Directions.Default();
+        public Direction currentDirection;
 
         public bool isPaused = false;
 
@@ -105,7 +107,12 @@ namespace Sprint5
         public float Health
         {
             get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
+            set { 
+                health = value;
+                if (health <= 0) { health = 0; Sounds.Instance.LinkDeath(); }
+                else if (health <= HPAmount.OneHeart) Sounds.Instance.StartLowHealthLoop();
+                else Sounds.Instance.StopLowHealthLoop();
+            }
         }
 
         public Boolean LocationInitialized
@@ -193,13 +200,21 @@ namespace Sprint5
         public bool DrawShield { get => drawShield; set => drawShield = value; }
         public bool moveFromDamage { get => moveFromDamage; set => moveFromDamage = value; }
 
-        public LinkPlayer()
+        public LinkPlayer(Game game)
         {
 
-            sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            sprite = SpriteFactory.Instance.CreateLinkSprite();
+            
             hitbox = sprite.hitbox;
+            hitbox.Location = currentLocation.ToPoint();
+            hitbox = HitboxAdjuster.Instance.AdjustHitbox(hitbox, .9f);
+
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+
+
+            weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
+
 
         }
 
@@ -214,11 +229,13 @@ namespace Sprint5
 
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+
                 if (damDir != damageMove.none) this.push(damDir);
                 delay--;
 
 
                 possibleDirections = Directions.Default();
+                currentDirection = Directions.Parse(LinkDirection);
             }
         }
         public void HandleObstacle(Collision col)
@@ -230,6 +247,7 @@ namespace Sprint5
             if (!(state is MoveLeft))
                 state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
+           
         }
 
         public void MovingRight()

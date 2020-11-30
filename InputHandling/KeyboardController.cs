@@ -123,7 +123,8 @@ namespace Sprint5
                         {
                             game.isPaused = !game.isPaused;
                             player.isPaused = !player.isPaused;
-                            
+                            Sounds.Instance.TogglePause();
+
                             delay = 20;
                         }
                     }

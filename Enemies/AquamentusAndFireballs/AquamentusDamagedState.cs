@@ -79,5 +79,10 @@ namespace Sprint5
         {
             //not affected
         }
+
+        public void Stun(bool permanent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

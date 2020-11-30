@@ -9,13 +9,13 @@ namespace Sprint5
 {
     public static class SoundContent
     {
-        public static Dictionary<string, SoundEffectInstance> LoadContent(ContentManager contentManager, string contentFolder)
+        public static Dictionary<string, SoundEffect> LoadContent(ContentManager contentManager, string contentFolder)
         {
             DirectoryInfo dir = new DirectoryInfo(contentManager.RootDirectory + "/" + contentFolder);
             if (!dir.Exists) throw new DirectoryNotFoundException();
 
 
-            Dictionary<string, SoundEffectInstance> result = new Dictionary<string, SoundEffectInstance>();
+            Dictionary<string, SoundEffect> result = new Dictionary<string, SoundEffect>();
 
             FileInfo[] files = dir.GetFiles("*.*");
             foreach (FileInfo file in files)
@@ -23,7 +23,7 @@ namespace Sprint5
                 string key = Path.GetFileNameWithoutExtension(file.Name);
 
                 SoundEffect sound = contentManager.Load<SoundEffect>(contentFolder + "/" + key);
-                result[key] = sound.CreateInstance();
+                result[key] = sound;
             }
             return result;
         }

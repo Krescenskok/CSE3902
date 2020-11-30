@@ -276,57 +276,74 @@ namespace Sprint5
             if (item is BoomerangObject)
             {
                 secondInInventory[SecondaryItem.Boomerang] = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BombObject)
             {
                 secondInInventory[SecondaryItem.Bomb] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Bow)
             {
                 secondInInventory[SecondaryItem.Bow] = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BluePotion)
             {
                 secondInInventory[SecondaryItem.Potion] = true;
                 PotionCount++;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is BlueCandle)
             {
                 secondInInventory[SecondaryItem.Candle] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is ArrowObject)
             {
                 secondInInventory[SecondaryItem.Arrow] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Rupee)
             {
                 RupeeCount++;
+                Sounds.Instance.PlaySoundEffect("GetRupee");
             }
             else if (item is BombObject)
             {
                 BombCount++;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Key)
             {
                 KeyCount++;
+                Sounds.Instance.PlaySoundEffect("GetHeart");
             }
             else if (item is Map)
             {
                 HUDMap.Instance.HasMap = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is Compass)
             {
                 HUDMap.Instance.HasCompass = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is Clock)
             {
                 link.Clock = true;
                 RoomEnemies.Instance.StunAllEnemies();
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BlueRing)
             {
                 link.UseRing = true;
-                ShowBlueRing = true;
+                 ShowBlueRing = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
+            }
+            else if (item is Fairy)
+            {
+                Sounds.Instance.PlaySoundEffect("GetHeart");
             }
             prevItem = item;
         }

@@ -22,7 +22,9 @@ namespace Sprint5
 
         private Stalfos stalfos;
 
-        public StalfosDamagedState(Direction dir, Stalfos stalfos, Vector2 location)
+        private bool stunned;
+
+        public StalfosDamagedState(Direction dir, Stalfos stalfos, Vector2 location, bool stunned)
         {
             currentDirection = dir;
 
@@ -33,6 +35,7 @@ namespace Sprint5
             this.location = location;
 
             this.stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosDamagedSprite());
+            this.stunned = stunned;
         }
 
       
@@ -54,7 +57,7 @@ namespace Sprint5
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            stalfos.state = new StalfosWalkingState(stalfos, location);
+            if(collision.From.Equals(currentDirection)) stalfos.state = new StalfosWalkingState(stalfos, location);
         }
 
         public void TakeDamage(int amount)
@@ -67,7 +70,11 @@ namespace Sprint5
             MoveOneUnit();
             moveSpeed -= 0.1f;
             
-            if (moveSpeed <= 0) stalfos.state = new StalfosWalkingState(stalfos, location);
+            if (moveSpeed <= 0) { 
+                stalfos.state = new StalfosWalkingState(stalfos, location);
+                if (stunned) stalfos.state.Stun(true);
+            }
+                
 
 
         }
@@ -79,9 +86,11 @@ namespace Sprint5
             stalfos.UpdateLocation(location);
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
-           //can't be stunned while taking damage
+            if (permanent) stunned = true;
+            
+            
         }
     }
 }

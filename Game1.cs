@@ -77,7 +77,7 @@ namespace Sprint5
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            linkPlayer = new LinkPlayer();
+            linkPlayer = new LinkPlayer(this);
 
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
@@ -110,6 +110,8 @@ namespace Sprint5
             _graphics.GraphicsDevice.Viewport.Height / 2);
         }
 
+        
+
         protected override void Update(GameTime gameTime)
         {
             if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
@@ -132,7 +134,7 @@ namespace Sprint5
                 }
             }
             
-            if (!isPaused && !LinkInventory.Instance.ShowInventory)
+            if (!isPaused )
             {
                 if (activeCommand != null)
                     activeCommand.Update(gameTime);
@@ -230,5 +232,7 @@ namespace Sprint5
                 _spriteBatch.End();
             }
         }
+
+        public void Pause(bool pause) { if (pause != isPaused) { Sounds.Instance.TogglePause(); } isPaused = pause; }
     }
 }
