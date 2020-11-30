@@ -24,6 +24,8 @@ namespace Sprint5
 
         private int nextRoom;
         
+        private int currentRoom;
+        
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
 
@@ -86,6 +88,8 @@ namespace Sprint5
 
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
+             
+            currentRoom = 1;
         }
 
         private Camera()
@@ -288,6 +292,9 @@ namespace Sprint5
 
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
+                if (nextRoom == 18) { player.moveCentral(); }
+                if (currentRoom == 18 && nextRoom == 17) { player.moveSecret(); }
+                currentRoom = nextRoom;
                 loadNextRoom = false;
             }
 
