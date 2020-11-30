@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/DungeonTheme.wav</File>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/DoorUnlock.wav</File>
+    <File>C:/Users/Jordan/Documents/GitHub/CSE3902/Content/Sounds/EnemyDie.wav</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/BossSpriteSheet.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/EnemySpriteSheet.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/File.spritefont</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/itemSprites.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/LinkSpriteSheet.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/marioOneDirection.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/NPCSpriteSheet.png</File>
+    <File>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/zelda_tiles_focused.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
