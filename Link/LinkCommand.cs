@@ -69,11 +69,7 @@ namespace Sprint5.Link
                     linkPlayer.IsStopped = false;
                     linkPlayer.IsSecondAttack = true;
                 }
-                    //else if (linkPlayer.itemsPlacedByLink.Count == 0)
-
-                    //{
-                    //    linkPlayer.LargeShield = true;
-                    //}
+                  
                     if (!linkPlayer.IsAttacking)
                     {
                         if (linkPlayer.itemsPlacedByLink.Count == 0)
