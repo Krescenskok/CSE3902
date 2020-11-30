@@ -10,6 +10,14 @@ using Sprint5.DifficultyHandling;
 namespace Sprint5
 {
 
+    public enum damageMove
+    {
+        up,
+        down,
+        left,
+        right,
+        none
+    }
 
     public class LinkPlayer : LinkPlayerParent
     {
@@ -20,6 +28,9 @@ namespace Sprint5
 
         private float fullHealth = HEALTH;
 
+        const int max = 50;
+        const int increment = 5;
+        const int min = 0;
 
         private PlayerCollider collider;
 
@@ -41,6 +52,7 @@ namespace Sprint5
             }
         }
 
+        public damageMove DamDir { get => damDir; set => damDir = value; }
         public Rectangle Bounds { get => state.Bounds(); }
         public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
         public bool isPaused { get => IsPaused; set => IsPaused = value; }
@@ -53,6 +65,7 @@ namespace Sprint5
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
             Game = game;
+            damDir = damageMove.none;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
         public void Update(GameTime gameTime)
@@ -64,6 +77,7 @@ namespace Sprint5
                 int sizeY = hitbox.Size.Y;
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+                if (damDir != damageMove.none) this.push(damDir);
                 Delay--;
 
 
