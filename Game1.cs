@@ -209,12 +209,11 @@ namespace Sprint5
 
                 _spriteBatch.End();
 
-                if (isPaused)
+                if (isPaused && !DoorPause)
                 {
-                    if (!DoorPause)
-                    {
+
                     PauseScreen.Instance.Draw(_spriteBatch, this, font);
-                    }
+                    
                 }
                 else
                 {

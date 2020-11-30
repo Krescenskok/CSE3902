@@ -82,7 +82,6 @@ namespace Sprint5
             commandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", game));
             
             commandsList.Add(Keys.F, new FullScreenCommand());
-            commandsList.Add(Keys.G, new PauseCommand());
 
             movementKeys.Add(Keys.W);
             movementKeys.Add(Keys.A);

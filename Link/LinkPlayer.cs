@@ -89,7 +89,6 @@ namespace Sprint5
         public int MovementAmount { get => movementAmount; set => movementAmount = value; }
         public int SprintAmount { get => sprintAmount; set => sprintAmount = value; }
 
-        public void RemovePlacedItem(IItems item)
 
         private bool isShooting = false;
         public bool IsShootingProjectile

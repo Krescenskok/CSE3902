@@ -107,7 +107,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { wasPaused = game.isPaused;  Pause();}
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused;  Pause();}
             }
            
             
