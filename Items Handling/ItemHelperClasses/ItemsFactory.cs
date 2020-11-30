@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.Items;
-using Sprint5Final.Items_Handling.ItemHelperClasses;
+using Sprint5.Items;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class ItemsFactory
     {

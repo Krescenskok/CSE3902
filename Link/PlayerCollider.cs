@@ -55,8 +55,9 @@ namespace Sprint5
 
                     linkPlayer.isWalkingInPlace = true;
                     linkPlayer.HandleObstacle(collision);
+                    this.testKnockback(collision);
 
-                
+
                 }
 
 
@@ -69,8 +70,7 @@ namespace Sprint5
 
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
-
-
+                this.testKnockback(collision);
             }
             
            if (col.CompareTag("enemy"))
@@ -204,7 +204,7 @@ namespace Sprint5
                             linkPlayer.Health -= (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
+                        linkPlayer.knockback(damageMove.right);
 
 
 
@@ -228,7 +228,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.X -= 100;
+                        linkPlayer.knockback(damageMove.left);
                     }
                 }
 
@@ -249,7 +249,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.Y -= 100;
+                        linkPlayer.knockback(damageMove.up);
                     }
                 }
 
@@ -270,7 +270,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.currentLocation.Y += 100;
+                        linkPlayer.knockback(damageMove.down);
                     }
                 }
               
@@ -329,6 +329,13 @@ namespace Sprint5
             }
         }
 
+        public void testKnockback(Collision collision)
+        {
+            if (collision.Right && linkPlayer.DamDir == damageMove.right) linkPlayer.stopKnockback();
+            if (collision.Left && linkPlayer.DamDir == damageMove.left) linkPlayer.stopKnockback();
+            if (collision.Down && linkPlayer.DamDir == damageMove.down) linkPlayer.stopKnockback();
+            if (collision.Up && linkPlayer.DamDir == damageMove.up) linkPlayer.stopKnockback();
+        }
         public void Update()
         {
 

@@ -75,6 +75,7 @@ namespace Sprint5
             commandsList.Add(Keys.I, new ChangeItemCommand(true, player));
             commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
             commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
+            commandsList.Add(Keys.F, new FullScreenCommand());
             commandsList.Add(Keys.G, new PauseCommand());
 
             movementKeys.Add(Keys.W);
@@ -128,8 +129,10 @@ namespace Sprint5
                         }
                     }
 
-
-
+                    if (activeCommand is FullScreenCommand)
+                    {
+                        game.switchScreen();
+                    }
                 }
               
             }

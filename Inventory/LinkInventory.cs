@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Inventory;
 using Sprint5.Items;
 using Sprint5.Link;
+using Sprint5.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,11 +25,13 @@ namespace Sprint5
         }
 
         private bool showInventory = false;
+        private bool showBlueRing = false;
         private Texture2D emptyBG;
         private Texture2D compBG;
         private Texture2D mapBG;
         private Texture2D fullBG;
         private Texture2D cursorTexture;
+        private Texture2D ringTexture;
         private int rupeeCount;
         private int bombCount;
         private int keyCount;
@@ -39,6 +41,7 @@ namespace Sprint5
         private ISprite mapInvSprite;
         private ISprite fullInvSprite;
         private ISprite drawnSprite;
+        private ISprite blueRingSprite;
         private IItems prevItem = null;
         private SecondaryItem secondSlotItem;
         private Dictionary<SecondaryItem, IItems> secondItems = new Dictionary<SecondaryItem, IItems>();
@@ -51,10 +54,10 @@ namespace Sprint5
         private Dictionary<PrimaryItem, IItems> currentFirstItems = new Dictionary<PrimaryItem, IItems>();
 
         private Dictionary<int, ISprite> cursorLocation = new Dictionary<int, ISprite>();
-        private int cursorPosition = 0;
-        private const int CURSORMAX = 8;
 
         private const string DIRECTION = "Up";
+        private int cursorPosition = 0;
+        private const int CURSORMAX = 8;
         private const int THREE = 3;
         private const int FIFTY = 50;
         private const int ITEMS_GAP = 60;
@@ -78,7 +81,6 @@ namespace Sprint5
 
         public LinkInventory()
         {
-
         }
 
         public void InitializeInventory(Game1 game)
@@ -88,6 +90,7 @@ namespace Sprint5
             mapBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_Map"); ;
             fullBG = game.Content.Load<Texture2D>("HUDandInv/FullInv_CompMap"); ;
             cursorTexture = game.Content.Load<Texture2D>("HUDandInv/cursor");
+            ringTexture = game.Content.Load<Texture2D>("HUDandInv/InventoryBlueRing");
 
             Point dimensions = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
             dimensions = Camera.Instance.playArea.Size;
@@ -96,6 +99,7 @@ namespace Sprint5
             mapInvSprite = new InventorySprite(mapBG, dimensions);
             fullInvSprite = new InventorySprite(fullBG, dimensions);
             drawnSprite = defaultInvSprite;
+            blueRingSprite = new InventorySprite(ringTexture, dimensions);
 
             Point bgSize = ((InventorySprite)defaultInvSprite).InventorySize;
 
@@ -211,6 +215,12 @@ namespace Sprint5
             set { showInventory = value; }
         }
 
+        public bool ShowBlueRing
+        {
+            get { return showBlueRing; }
+            set { showBlueRing = value; }
+        }
+
         public int RupeeCount
         {
             get { return rupeeCount; }
@@ -238,6 +248,17 @@ namespace Sprint5
         public bool HasBow
         {
             get { return secondInInventory[SecondaryItem.Bow]; }
+        }
+
+        public bool HasCandle
+        {
+            get { return secondInInventory[SecondaryItem.Candle]; }
+        }
+
+
+        public bool HasBoomerang
+        {
+            get { return secondInInventory[SecondaryItem.Boomerang]; }
         }
 
         public IItems GetSecondItem
@@ -317,6 +338,7 @@ namespace Sprint5
             else if (item is BlueRing)
             {
                 link.UseRing = true;
+                 ShowBlueRing = true;
                 Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is Fairy)
@@ -532,6 +554,11 @@ namespace Sprint5
             }            
 
             cursorLocation[cursorPosition].Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+            
+            if (ShowBlueRing)
+            {
+                blueRingSprite.Draw(spriteBatch, Vector2.Zero, 0, Color.White);
+            }
 
         }
 
