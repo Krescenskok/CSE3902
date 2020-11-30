@@ -10,7 +10,7 @@ namespace Sprint5
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    class GoriyaWalkSprite : ISprite
+    class GoriyaWalkSprite : EnemySprite
     {
         public Texture2D texture { get; set; }
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
@@ -49,11 +49,8 @@ namespace Sprint5
             startColumn = EnemySpriteFactory.GetColumn(sheetID);
         }
 
-
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-            
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -62,6 +59,10 @@ namespace Sprint5
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
 
             currentAnimatedFrame += startColumn;
+        }
+
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
 
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame,spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X , drawSize.Y );

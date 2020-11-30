@@ -221,7 +221,8 @@ namespace Sprint5
                 inWall = !insideArea.Contains(targetSpace);
                 if (inWall) ChangeDirection();
                 if (!inWall && playerSpace == targetSpace) { Hide(); attacking = false; }
-                
+
+                ToggleCollider(!inWall);
 
             } else {
                 
@@ -232,6 +233,13 @@ namespace Sprint5
             else if (stunClock <= 0 && moveSpeed == 0) moveSpeed = normalMovingSpeed;
 
             if (attacking) MoveToPlayer();
+        }
+
+        private void ToggleCollider(bool on) {
+            if (on)
+                CollisionHandler.Instance.AddCollider(master.Colliders[0], Layers.Enemy);
+            else
+                CollisionHandler.Instance.RemoveCollider(master.Colliders[0]);
         }
 
         public void Hide()
@@ -395,10 +403,10 @@ namespace Sprint5
             
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             moveSpeed = 0;
-            stunClock = stunTime;
+            stunClock = permanent ? int.MaxValue : stunTime;
 
         }
     }

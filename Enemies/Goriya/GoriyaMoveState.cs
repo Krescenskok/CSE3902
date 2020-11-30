@@ -35,7 +35,7 @@ namespace Sprint5
 
         private const int stunTime = 120;
         private int stunClock = 0;
-
+        public bool permaStun = false;
         public GoriyaMoveState(Goriya goriya, Vector2 location)
         {
             this.goriya = goriya;
@@ -144,17 +144,17 @@ namespace Sprint5
         public void TakeDamage(int amount)
         {
             
-            goriya.state = new GoriyaDamagedState(currentDirection, goriya, location, moveSpeed);
+            goriya.state = new GoriyaDamagedState(currentDirection, goriya, location, moveSpeed, permaStun);
             
         }
 
 
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             currentMoveSpeed = 0;
-            stunClock = stunTime;
-
+            stunClock = permanent ? int.MaxValue : stunTime;
+            permaStun = permanent ? true : permaStun;
         }
 
         public bool NotStunned()

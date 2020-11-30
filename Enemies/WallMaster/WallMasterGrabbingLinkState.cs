@@ -103,7 +103,7 @@ namespace Sprint5
            //do nothing
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             //do nothing
 

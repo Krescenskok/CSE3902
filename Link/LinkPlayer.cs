@@ -95,7 +95,12 @@ namespace Sprint5
         public float Health
         {
             get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
+            set { 
+                health = value;
+                if (health <= 0) { health = 0; Sounds.Instance.LinkDeath(); }
+                else if (health <= HPAmount.OneHeart) Sounds.Instance.StartLowHealthLoop();
+                else Sounds.Instance.StopLowHealthLoop();
+            }
         }
 
         public Boolean LocationInitialized

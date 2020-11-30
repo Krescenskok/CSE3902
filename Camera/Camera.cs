@@ -27,7 +27,7 @@ namespace Sprint5
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
 
-        private Game game;
+        private Game1 game;
 
         public  Vector2 Location { get => location; }
         private Vector2 location;
@@ -53,14 +53,14 @@ namespace Sprint5
 
         private LinkPlayer player;
 
-       
+        private bool wasPaused;
 
         public void Load(Game game)
         {
-            this.game = game;
+            this.game = game as Game1;
             screenHeight = game.Window.ClientBounds.Height;
             screenWidth = game.Window.ClientBounds.Width;
-            player = (game as Game1).LinkPlayer;
+            player = this.game.LinkPlayer;
             
 
             transform = Matrix.Identity;
@@ -97,7 +97,7 @@ namespace Sprint5
         {
             if (HUDOpenCloseFinished())
             {
-
+                
                 int moveDirection = inventoryOpen ? -1 : 1;
 
                 Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight * moveDirection);
@@ -107,7 +107,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-               
+                if (inventoryOpen) { wasPaused = game.isPaused;  Pause();}
             }
            
             
@@ -144,8 +144,8 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
-            
-            (game as Game1).isPaused = true;
+
+            Pause();
             
 
             currentDirection = Direction.up;
@@ -159,7 +159,7 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
-            (game as Game1).isPaused = true;
+            Pause();
 
             currentDirection = Direction.down;
         }
@@ -170,7 +170,7 @@ namespace Sprint5
 
             direction = Vector3.Left;
             nextRoom = roomNum;
-            (game as Game1).isPaused = true;
+            Pause();
 
             currentDirection = Direction.right;
         }
@@ -181,7 +181,7 @@ namespace Sprint5
 
             direction = Vector3.Right;
             nextRoom = roomNum;
-            (game as Game1).isPaused = true;
+            Pause();
 
             currentDirection = Direction.left;
         }
@@ -234,12 +234,10 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(inventoryOpen && !(game as Game1).isPaused)
+            }else if(!inventoryOpen && game.isPaused && inventoryStillMoving)
             {
-                (game as Game1).isPaused = true;
-            }else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
-            {
-                (game as Game1).isPaused = false;
+
+                game.Pause(wasPaused);
                 inventoryStillMoving = false;
             }
 
@@ -269,8 +267,8 @@ namespace Sprint5
 
             }else if (loadNextRoom)
             {
-                
-                (game as Game1).isPaused = false;
+
+                UnPause();
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 loadNextRoom = false;
@@ -283,6 +281,9 @@ namespace Sprint5
 
 
         }
+
+        private void Pause() { game.Pause(true); }
+        private void UnPause() { game.Pause(false); }
 
 
     }

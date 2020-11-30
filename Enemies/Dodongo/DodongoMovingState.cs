@@ -104,7 +104,7 @@ namespace Sprint5
             }
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             //wont get stuned
         }

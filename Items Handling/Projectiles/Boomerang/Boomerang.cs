@@ -21,6 +21,8 @@ namespace Sprint5.Items
         private LinkPlayer link;
         private List<IItems> impactList = new List<IItems>();
         private bool isExpired = false;
+
+        
         public bool IsExpired
         {
             get { return isExpired; }
@@ -45,6 +47,8 @@ namespace Sprint5.Items
             returning = false;
 
             collider = new BoomerangCollider((item as BoomerangSprite).Hitbox, this, this.state);
+
+            Sounds.Instance.AddLoopedSound("ArrowBoomerang", GetHashCode().ToString());
         }
 
         public void UpdateLocation(Vector2 location)
@@ -84,6 +88,7 @@ namespace Sprint5.Items
             {
                 returned = true;
                 state.Expire();
+                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
         }
 

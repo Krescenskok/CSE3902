@@ -15,6 +15,8 @@ namespace Sprint5
         public string name;
         private Point hitboxOffset;
 
+        public Vector2 Center => bounds.Center.ToVector2();
+
         public string Name { get => name; }
         public Layer layer { get; set; }
 
@@ -118,8 +120,8 @@ namespace Sprint5
 
                 enemy.TakeDamage(dir, (int)value);
 
-                Sounds.Instance.PlayEnemyHit();
-                Sounds.Instance.StartLowHealthLoop();
+                Sounds.Instance.PlaySoundEffect("EnemyHit");
+                
             }
 
           

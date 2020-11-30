@@ -54,7 +54,7 @@ namespace Sprint5
             throw new NotImplementedException();
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             throw new NotImplementedException();
         }
