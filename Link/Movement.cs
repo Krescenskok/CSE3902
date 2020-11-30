@@ -202,6 +202,7 @@ namespace Sprint5.Link
                     else if (link.CurrentWeapon == ItemForLink.BlueRing)
                     {
                         link.UseRing = true;
+                        LinkInventory.Instance.ShowBlueRing = true;
                         return HandleArrowBow(gameTime, location);
                     }
                     else if (link.CurrentWeapon == ItemForLink.Clock)
