@@ -40,6 +40,7 @@ namespace Sprint5
         private bool largeShield = false;
         private bool drawShield = true;
         private bool isDead = false;
+        private bool isShooting = false;
 
         public LinkSprite sprite;
         public Rectangle hitbox;
@@ -88,7 +89,7 @@ namespace Sprint5
         public bool Clock { get => clock; set => clock = value; }
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
-
+        public bool IsShootingProjectile { get => isShooting; set => isShooting = value; }
 
         public LinkPlayerParent()
         {
