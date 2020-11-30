@@ -26,6 +26,9 @@ namespace Sprint5
 
         private List<IBlock> roomBlocks;
         private Camera cam = Camera.Instance;
+
+        public Boolean movedRight;
+        public Boolean movedUp;
        
 
         public static RoomBlocks Instance
@@ -39,7 +42,9 @@ namespace Sprint5
         private RoomBlocks()
         {
             roomBlocks = new List<IBlock>();
-           
+
+            movedRight = false;
+            movedUp = false;
         }
         public void LoadRoom(Game game, XElement room)
         {
@@ -99,13 +104,17 @@ namespace Sprint5
                         {
                             roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                         }
+                        else if (objName.Equals("BlackTile"))
+                        {
+                            roomBlocks.Add(new BlackTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
                         else if (objName.Equals("MoveableColumnRight"))
                         {
-                            roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                            roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, movedRight));
                         }
                         else if (objName.Equals("MoveableColumnUp"))
                         {
-                            roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                            roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, movedUp));
                         }
                     }
                     

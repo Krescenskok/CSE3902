@@ -289,6 +289,15 @@ namespace Sprint5
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
+        public void moveCentral() {
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 3, GridGenerator.Instance.GetTileSize().Y * 2) - Camera.Instance.Location; 
+        }
+
+        public void moveSecret() { 
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 7, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
+            System.Diagnostics.Debug.WriteLine(currentLocation);
+        }
+
         public void knockback(damageMove collideDir)
         {
             damDir = collideDir;

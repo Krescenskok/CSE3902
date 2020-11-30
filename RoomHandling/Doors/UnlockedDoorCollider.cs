@@ -19,15 +19,19 @@ namespace Sprint5
 
         private bool trigger = false;
 
+        private char type;
+
         public UnlockedDoorCollider(Door door, Point location, Point size, char orient)
         {
             bounds.Location = location;
             bounds.Size = size;
 
-            if (orient == 'L' || orient == 'C') entrySide = Direction.left;
-            else if (orient == 'R') entrySide = Direction.right;
-            else if (orient == 'T') entrySide = Direction.up;
-            else if (orient == 'B' || orient == 'S') entrySide = Direction.down;
+            type = orient;
+
+            if (orient == 'L') entrySide = Direction.left;
+            else if (orient == 'R' || orient == 'C') entrySide = Direction.right;
+            else if (orient == 'T' || orient == 'S') entrySide = Direction.up;
+            else if (orient == 'B') entrySide = Direction.down;
             
             this.door = door;
 
@@ -69,8 +73,7 @@ namespace Sprint5
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-
-
+            
         }
 
 

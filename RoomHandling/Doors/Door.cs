@@ -73,8 +73,6 @@ namespace Sprint5
             else if (Heading == 'T') Camera.Instance.ScrollUp(NextRoom);
             else if (Heading == 'S') Camera.Instance.ScrollUp(NextRoom);
             else if (Heading == 'B') Camera.Instance.ScrollDown(NextRoom);
-            else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom); //Something Special
-
         }
 
         //for doors that open on special conditions
