@@ -137,5 +137,54 @@ namespace Sprint5
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
+        
+        public void moveCentral() {
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 3, GridGenerator.Instance.GetTileSize().Y * 2) - Camera.Instance.Location; 
+        }
+
+        public void moveSecret() { 
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 7, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
+            System.Diagnostics.Debug.WriteLine(currentLocation);
+        }
+
+        public void knockback(damageMove collideDir)
+        {
+            damDir = collideDir;
+            counter = max;
+        }
+
+        public void stopKnockback()
+        {
+            damDir = damageMove.none;
+            counter = min;
+        }
+
+        public void push(damageMove direction)
+        {
+            if (counter != max) {
+                switch (direction)
+                {
+                    case damageMove.right:
+                        currentLocation.X += increment;
+                        break;
+                    case damageMove.left:
+                        currentLocation.X -= increment;
+                        break;
+                    case damageMove.up:
+                        currentLocation.Y -= increment;
+                        break;
+                    case damageMove.down:
+                        currentLocation.Y += increment;
+                        break;
+                }
+            }
+
+            counter -= increment;
+
+            if (counter <= min) 
+            {
+                this.stopKnockback();
+            }
+        }
     }
 }
