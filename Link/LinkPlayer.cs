@@ -44,7 +44,6 @@ namespace Sprint5
             }
         }
 
-        public damageMove DamDir { get => damDir; set => damDir = value; }
         public Rectangle Bounds { get => state.Bounds(); }
         public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
         public bool isPaused { get => IsPaused; set => IsPaused = value; }
@@ -58,7 +57,6 @@ namespace Sprint5
             collider = new PlayerCollider(this);
             counter = min;
             Game = game;
-            damDir = damageMove.none;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
         public void Update(GameTime gameTime)
