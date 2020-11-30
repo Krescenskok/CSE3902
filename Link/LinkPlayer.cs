@@ -55,7 +55,7 @@ namespace Sprint5
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-            counter = min;
+            Counter = min;
             Game = game;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
@@ -68,7 +68,7 @@ namespace Sprint5
                 int sizeY = hitbox.Size.Y;
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-                if (damDir != damageMove.none) this.push(damDir);
+                if (DamDir != damageMove.none) this.push(DamDir);
                 Delay--;
 
 
@@ -149,24 +149,23 @@ namespace Sprint5
 
         public void moveSecret() { 
             currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 7, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
-            System.Diagnostics.Debug.WriteLine(currentLocation);
         }
 
         public void knockback(damageMove collideDir)
         {
-            damDir = collideDir;
-            counter = max;
+            DamDir = collideDir;
+            Counter = max;
         }
 
         public void stopKnockback()
         {
-            damDir = damageMove.none;
-            counter = min;
+            DamDir = damageMove.none;
+            Counter = min;
         }
 
         public void push(damageMove direction)
         {
-            if (counter != max) {
+            if (Counter != max) {
                 switch (direction)
                 {
                     case damageMove.right:
@@ -184,12 +183,13 @@ namespace Sprint5
                 }
             }
 
-            counter -= increment;
+            Counter -= increment;
 
-            if (counter <= min) 
+            if (Counter <= min) 
             {
                 this.stopKnockback();
             }
         }
     }
 }
+
