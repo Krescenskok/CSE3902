@@ -12,7 +12,15 @@ namespace Sprint5
         private Texture2D linkSpriteSheet;
         private Texture2D itemsSpriteSheet;
         private Texture2D blocksSpriteSheet;
-        private Texture2D linkBlueSpriteSheet;
+        private Texture2D linkBlueRingSpriteSheet;
+        private Texture2D blueLinkSpriteSheet;
+        private Texture2D redLinkSpriteSheet;
+        private Texture2D tealLinkSpriteSheet;
+        private Texture2D yellowLinkSpriteSheet;
+        private Texture2D pinkLinkSpriteSheet;
+
+
+
 
         private static SpriteFactory instance = new SpriteFactory();
 
@@ -31,7 +39,13 @@ namespace Sprint5
         public void LoadAllTextures(ContentManager content)
         {
             linkSpriteSheet = content.Load<Texture2D>("LinkSpriteSheet");
-            linkBlueSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
+            blueLinkSpriteSheet = content.Load<Texture2D>("BlueLinkSpriteSheet");
+            pinkLinkSpriteSheet = content.Load<Texture2D>("PinkLinkSpriteSheet");
+            redLinkSpriteSheet = content.Load<Texture2D>("RedLinkSpriteSheet");
+            tealLinkSpriteSheet = content.Load<Texture2D>("TealLinkSpriteSheet");
+            yellowLinkSpriteSheet = content.Load<Texture2D>("YellowLinkSpriteSheet");
+
+            linkBlueRingSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
         }
@@ -42,9 +56,29 @@ namespace Sprint5
             return new LinkSprite(linkSpriteSheet);
         }
 
+        public LinkSprite CreateBlueRingLinkSprite()
+        {
+            return new LinkSprite(linkBlueRingSpriteSheet);
+        }
         public LinkSprite CreateBlueLinkSprite()
         {
-            return new LinkSprite(linkBlueSpriteSheet);
+            return new LinkSprite(blueLinkSpriteSheet);
+        }
+        public LinkSprite CreatePinkLinkSprite()
+        {
+            return new LinkSprite(pinkLinkSpriteSheet);
+        }
+        public LinkSprite CreateRedLinkSprite()
+        {
+            return new LinkSprite(redLinkSpriteSheet);
+        }
+        public LinkSprite CreateTealLinkSprite()
+        {
+            return new LinkSprite(tealLinkSpriteSheet);
+        }
+        public LinkSprite CreateYellowLinkSprite()
+        {
+            return new LinkSprite(yellowLinkSpriteSheet);
         }
 
 

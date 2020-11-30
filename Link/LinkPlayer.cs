@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5;
 using Sprint5.Link;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -13,20 +14,24 @@ namespace Sprint5
     public class LinkPlayer : LinkPlayerParent
     {
  
-        const float HEALTH = 60;
+        private const float HEALTH = 60;
 
-        const int NUM_OF_RUPEE = 0;
+        private const int NUM_OF_RUPEE = 0;
 
         private float fullHealth = HEALTH;
 
 
-        public PlayerCollider collider;
+        private PlayerCollider collider;
 
-        public List<IItems> itemsPlacedByLink = new List<IItems>();
+        private Game1 Game;
 
-        public List<Direction> possibleDirections = Directions.Default();
+        private List<IItems> ItemsPlacedByLink = new List<IItems>();
 
-        public bool isPaused = false;
+       
+
+        private List<Direction> PossibleDirections = Directions.Default();
+
+        private bool IsPaused = false;
 
         public void RemovePlacedItem(IItems item)
         {
@@ -37,14 +42,18 @@ namespace Sprint5
         }
 
         public Rectangle Bounds { get => state.Bounds(); }
+        public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
+        public bool isPaused { get => IsPaused; set => IsPaused = value; }
+        public List<Direction> possibleDirections { get => PossibleDirections; set => PossibleDirections = value; }
 
-
-        public LinkPlayer()
+        public LinkPlayer(Game1 game)
         {
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+            Game = game;
+            DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
         public void Update(GameTime gameTime)
         {
@@ -58,12 +67,12 @@ namespace Sprint5
                 Delay--;
 
 
-                possibleDirections = Directions.Default();
+                PossibleDirections = Directions.Default();
             }
         }
         public void HandleObstacle(Collision col)
         {
-            possibleDirections.Remove(col.From);
+            PossibleDirections.Remove(col.From);
         }
         public void MovingLeft()
         {
