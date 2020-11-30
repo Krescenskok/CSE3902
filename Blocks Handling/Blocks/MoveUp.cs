@@ -28,6 +28,18 @@ namespace Sprint5.Blocks
             drawnFrame = SHEET_LOCATION;
             collider = new BlockCollider(block.getDestination(location), this);
         }
+        
+        public MoveableUp(BlocksSprite block, Vector2 location, Boolean moved)
+        {
+            spriteLocation = location;
+            this.block = block;
+            moveable = !moved;
+            if (moved) spriteLocation = new Vector2(spriteLocation.X, spriteLocation.Y - this.block.blockDimensionY);
+            shift = 0;
+            currentFrame = 0;
+            drawnFrame = SHEET_LOCATION;
+            collider = new BlockCollider(block.getDestination(location), this);
+        }
 
         public void Update()
         {
@@ -63,6 +75,7 @@ namespace Sprint5.Blocks
             {
                 moveable = false;
                 shift = this.block.blockDimensionY;
+                RoomBlocks.Instance.movedUp = true;
             }
         }
 
