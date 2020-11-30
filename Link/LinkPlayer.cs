@@ -10,14 +10,6 @@ using Sprint5.DifficultyHandling;
 namespace Sprint5
 {
 
-    public enum damageMove
-    {
-        up,
-        down,
-        left,
-        right,
-        none
-    }
 
     public class LinkPlayer : LinkPlayerParent
     {
@@ -28,9 +20,9 @@ namespace Sprint5
 
         private float fullHealth = HEALTH;
 
-        const int max = 50;
-        const int increment = 5;
-        const int min = 0;
+        private const int max = 50;
+        private const int increment = 5;
+        private const int min = 0;
 
         private PlayerCollider collider;
 
@@ -64,6 +56,7 @@ namespace Sprint5
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+            counter = min;
             Game = game;
             damDir = damageMove.none;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
