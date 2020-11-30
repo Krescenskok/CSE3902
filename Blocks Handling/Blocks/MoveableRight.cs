@@ -69,6 +69,7 @@ namespace Sprint5.Blocks
             {
                 moveable = false;
                 shift = this.block.blockDimensionX;
+                RoomBlocks.Instance.movedRight = true;
             }
         }
 
