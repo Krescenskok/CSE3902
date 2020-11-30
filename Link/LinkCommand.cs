@@ -72,84 +72,59 @@ namespace Sprint5.Link
 
             if (!linkPlayer.IsAttacking)
             {
-                if (Key.Equals("B"))
-                {
-                    linkPlayer.IsAttacking = true;
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsSecondAttack = true;
-                }
-
-                else if (linkPlayer.itemsPlacedByLink.Count == 0)
-
-                {
-                    linkPlayer.LargeShield = true;
-                }
                 if (!linkPlayer.IsAttacking)
                 {
-                        if (linkPlayer.itemsPlacedByLink.Count == 0)
+                        if (Key.Equals("N"))
                         {
-                            if ((Key.Equals("N") || (Key.Equals("Z"))))
-                            {
-
-
-
-
-                                linkPlayer.IsAttacking = true;
-                                linkPlayer.IsStopped = false;
-                                linkPlayer.IsSecondAttack = false;
-
-                            }
-                            else
-                            {
-                                foreach (IItems item in linkPlayer.itemsPlacedByLink)
-                                {
-                                    if (item.IsExpired)
-                                    {
-
-                                        if ((Key.Equals("N") || (Key.Equals("Z"))))
-                                        {
-                                            linkPlayer.IsAttacking = true;
-                                            linkPlayer.IsStopped = false;
-                                            linkPlayer.IsSecondAttack = false;
-                                        }
-
-                                    }
-                                }
-
-                            }
-
-                            if ((Key.Equals("A")) || (Key.Equals("Left")))
-                            {
-                                linkPlayer.IsStopped = false;
-                                linkPlayer.IsAttacking = false;
-                                linkPlayer.MovingLeft();
-
-                            }
-                            else if ((Key.Equals("D")) || (Key.Equals("Right")))
-                            {
-                                linkPlayer.IsStopped = false;
-                                linkPlayer.IsAttacking = false;
-                                linkPlayer.MovingRight();
-
-                            }
-                            else if ((Key.Equals("W")) || (Key.Equals("Up")))
-                            {
-                                linkPlayer.IsStopped = false;
-                                linkPlayer.IsAttacking = false;
-                                linkPlayer.MovingUp();
-
-                            }
-                            else if ((Key.Equals("S")) || (Key.Equals("Down")))
-                            {
-                                linkPlayer.IsStopped = false;
-                                linkPlayer.IsAttacking = false;
-                                linkPlayer.MovingDown();
-                            }
-                            else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
-                            {
-                                linkPlayer.CurrentWeapon = ItemForLink.Shield;
-                            }
+                            linkPlayer.IsAttacking = true;
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsSecondAttack = false;
+                            linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
                         }
+                        else if (Key.Equals("B"))
+                        {
+                            linkPlayer.IsAttacking = true;
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsSecondAttack = true;
+                            linkPlayer.weaponCollider.TurnOff();
+                        }else{
+                            linkPlayer.weaponCollider.TurnOff();
+                        }
+
+                        if ((Key.Equals("A")) || (Key.Equals("Left")))
+                        {
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsAttacking = false;
+                            linkPlayer.MovingLeft();
+
+                        }
+                        else if ((Key.Equals("D")) || (Key.Equals("Right")))
+                        {
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsAttacking = false;
+                            linkPlayer.MovingRight();
+
+                        }
+                        else if ((Key.Equals("W")) || (Key.Equals("Up")))
+                        {
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsAttacking = false;
+                            linkPlayer.MovingUp();
+
+                        }
+                        else if ((Key.Equals("S")) || (Key.Equals("Down")))
+                        {
+                            linkPlayer.IsStopped = false;
+                            linkPlayer.IsAttacking = false;
+                            linkPlayer.MovingDown();
+                        }
+                        else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
+                        {
+
+                            linkPlayer.CurrentWeapon = ItemForLink.Shield;
+
+                        }
+                        
 
 
                 }

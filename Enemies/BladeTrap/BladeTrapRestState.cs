@@ -67,7 +67,7 @@ namespace Sprint5
            //cannot be damaged
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             //can't be stunned
         }

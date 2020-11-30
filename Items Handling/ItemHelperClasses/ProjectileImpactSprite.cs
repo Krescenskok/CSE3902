@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5Final.Items_Handling.ItemHelperClasses
+namespace Sprint5.Items
 {
     public class ProjectileImpactSprite : ISprite
     {

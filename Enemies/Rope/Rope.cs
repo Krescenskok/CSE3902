@@ -117,7 +117,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
     }
 }

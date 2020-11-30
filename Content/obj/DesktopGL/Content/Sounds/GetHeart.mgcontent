@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/Sounds/GetHeart.wav</SourceFile>
-  <SourceTime>2020-11-16T11:08:56-05:00</SourceTime>
-  <DestFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/bin/DesktopGL/Content/Sounds/GetHeart.xnb</DestFile>
-  <DestTime>2020-11-18T14:54:10.0481176-05:00</DestTime>
+  <SourceFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/Sounds/GetHeart.wav</SourceFile>
+  <SourceTime>2020-11-23T14:14:32.6830719-05:00</SourceTime>
+  <DestFile>C:/Users/Noah Fabec/Source/Repos/Krescenskok/CSE3902/Content/bin/DesktopGL/Content/Sounds/GetHeart.xnb</DestFile>
+  <DestTime>2020-11-28T16:29:48.2642194-05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

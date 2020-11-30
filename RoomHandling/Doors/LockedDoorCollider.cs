@@ -52,7 +52,7 @@ namespace Sprint5
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-
+            
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)

@@ -80,6 +80,9 @@ namespace Sprint5
 
             commandsList.Add(Keys.K, new ChangeDifficultyCommand("Up", game));
             commandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", game));
+            
+            commandsList.Add(Keys.F, new FullScreenCommand());
+            commandsList.Add(Keys.G, new PauseCommand());
 
             movementKeys.Add(Keys.W);
             movementKeys.Add(Keys.A);
@@ -126,13 +129,16 @@ namespace Sprint5
                         {
                             game.isPaused = !game.isPaused;
                             player.isPaused = !player.isPaused;
-                            
+                            Sounds.Instance.TogglePause();
+
                             delay = 20;
                         }
                     }
 
-
-
+                    if (activeCommand is FullScreenCommand)
+                    {
+                        game.switchScreen();
+                    }
                 }
               
             }

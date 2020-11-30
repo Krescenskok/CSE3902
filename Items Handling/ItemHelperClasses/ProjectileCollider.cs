@@ -6,15 +6,15 @@ using System.Data;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.Items
 {
     public class ProjectileCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
-        private int damageAmount;
         public string name;
+        private const int ADJUST = 10;
 
         public string Name { get => name; }
         public Layer layer { get; set; }
@@ -22,15 +22,10 @@ namespace Sprint5
         public ProjectileCollider(Rectangle rect, IItems item, IItemsState state, String name)
         {
             bounds = rect;
-
             this.item = item;
-
             this.state = state;
-
             this.name = name;
-
             CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
-
         }
 
 
@@ -41,8 +36,7 @@ namespace Sprint5
 
         public Rectangle Bounds()
         {
-            return bounds;
-            
+            return bounds;            
         }
 
         public bool CompareTag(string tag)
@@ -57,12 +51,8 @@ namespace Sprint5
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Wall"))
-            {
-                item.State.Expire();
-            }
-        }
 
+        }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
@@ -87,36 +77,47 @@ namespace Sprint5
                 {
                     col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
                 }
-                item.State.Expire();
+                item.Expire();
             }
-
-            if (col.CompareTag("Wall") || col.CompareTag("Door"))
+            else if (col.CompareTag("Wall") || col.CompareTag("wall"))
             {
                 item.Expire();
             }
+            else if (col.CompareTag("Door") || col.CompareTag("Doorway") 
+                || col.CompareTag("UnlockedDoor") || col.CompareTag("LockedDoor"))
+            {
+                item.Expire();
+            }
+
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
+            
         }
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Impact") item.Expire();
-            
+
         }
 
         //can probably be deleted//
         public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
-            bounds.Location = itemObj.Location.ToPoint();
+            Point curr = itemObj.Location.ToPoint();
+            curr.X -= ADJUST;
+            curr.Y -= ADJUST;
+            bounds.Location = curr;
         }
 
         public void Update()
         {
             state = item.State;
-            bounds.Location = item.Location.ToPoint();
+            Point curr = item.Location.ToPoint();
+            curr.X -= ADJUST;
+            curr.Y -= ADJUST;
+            bounds.Location = curr;
         }
     }
 }

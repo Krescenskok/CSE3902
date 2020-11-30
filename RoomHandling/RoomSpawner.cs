@@ -82,7 +82,6 @@ namespace Sprint5
             XElement room = roomXMLs[roomNumber];
             //currentRoomSprite = roomSprites[roomNumber - 1];
             //currentRoomSpriteTopLayer = roomSpritesTopLayer[roomNumber - 1];
-           
             RoomEnemies.Instance.LoadRoom(game, room);
             RoomItems.Instance.LoadRoom(game, room);
             RoomBlocks.Instance.LoadRoom(game, room);
@@ -114,6 +113,7 @@ namespace Sprint5
             GridGenerator.Instance.GetGrid(game, 12, 7);
             CollisionHandler.Instance.RoomChange();
             LoadRoom(game, roomNumber);
+            Sounds.Instance.RoomChange(roomNumber);
         }
 
         public void Draw(SpriteBatch batch)

@@ -40,9 +40,9 @@ namespace Sprint5
             //wont move in DamagedState
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
-            //wont be stuned
+           //not stunned
         }
 
         public void TakeDamage(int amount)

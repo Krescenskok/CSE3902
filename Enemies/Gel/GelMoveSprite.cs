@@ -9,7 +9,7 @@ namespace Sprint5
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class GelMoveSprite : ISprite
+    public class GelMoveSprite : EnemySprite
     {
 
         private Texture2D texture;
@@ -54,13 +54,8 @@ namespace Sprint5
         }
 
 
-
-
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -69,8 +64,15 @@ namespace Sprint5
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
-            centerLocation = location + centerOffset.ToVector2();
+            
+        }
 
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
+
+
+
+            centerLocation = location + centerOffset.ToVector2();
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)centerLocation.X, (int)centerLocation.Y, drawSize.X, drawSize.Y);
 

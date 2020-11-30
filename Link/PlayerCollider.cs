@@ -19,12 +19,16 @@ namespace Sprint5
         const int DISPLACEMENT = 100;
 
         bool done = false;
+
+        private Rectangle bounds;
+
         public PlayerCollider(LinkPlayer linkPlayer)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
 
-           
+            bounds = linkPlayer.hitbox;
+            
         }
 
         public string Name { get => "Player"; }
@@ -32,7 +36,7 @@ namespace Sprint5
 
         public Rectangle Bounds()
         {
-            return linkPlayer.Bounds;
+            return bounds;
         }
 
         public bool CompareTag(string tag)
@@ -52,6 +56,7 @@ namespace Sprint5
 
                     linkPlayer.isWalkingInPlace = true;
                     linkPlayer.HandleObstacle(collision);
+                    this.testKnockback(collision);
 
 
                 }
@@ -66,8 +71,7 @@ namespace Sprint5
 
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
-
-
+                this.testKnockback(collision);
             }
             
            if (col.CompareTag("enemy"))
@@ -190,7 +194,13 @@ namespace Sprint5
         {
             if(!linkPlayer.IsDamaged)
             {
-                
+
+                if (msg.Contains("TakeDamage"))
+                {
+                    Sounds.Instance.PlaySoundEffect("LinkHurt");
+                }
+
+
                 if(linkPlayer.IsAttacking && linkPlayer.state is MoveLeft)
                 {
 
@@ -213,8 +223,11 @@ namespace Sprint5
                             GameOverScreen.Instance.DamageTaken += (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
+
                         GameOverScreen.Instance.DistanceTravelled += 100;
+
+                        linkPlayer.knockback(damageMove.right);
+
 
 
 
@@ -242,8 +255,10 @@ namespace Sprint5
                             GameOverScreen.Instance.DamageTaken += (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
                         GameOverScreen.Instance.DistanceTravelled += 100;
+
+                        linkPlayer.knockback(damageMove.left);
+
                     }
                 }
 
@@ -268,8 +283,10 @@ namespace Sprint5
                             GameOverScreen.Instance.DamageTaken += (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
                         GameOverScreen.Instance.DistanceTravelled += 100;
+
+                        linkPlayer.knockback(damageMove.up);
+
                     }
                 }
 
@@ -294,8 +311,8 @@ namespace Sprint5
                             GameOverScreen.Instance.DamageTaken += (int)value;
                         }
 
-                        linkPlayer.currentLocation.X += 100;
                         GameOverScreen.Instance.DistanceTravelled += 100;
+                        linkPlayer.knockback(damageMove.down);
                     }
                 }
               
@@ -308,7 +325,7 @@ namespace Sprint5
 
             if (msg == "Item")
             {
-                if(((IItems) value) is Sprint5.Items.TriforcePiece || ((IItems)value) is Sprint5.Items.Bow)
+                if(((IItems) value) is Items.TriforcePiece || ((IItems)value) is Items.Bow)
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems) value, linkPlayer);
@@ -316,12 +333,12 @@ namespace Sprint5
             }
             if (msg == "Heal")
             {
-                if (value is Sprint5.Items.Heart)
+                if (value is Items.Heart)
                 {
                     GameOverScreen.Instance.AmountHealed += FULL_HEART;
                     linkPlayer.Health += FULL_HEART;
                 }
-                else if (value is Sprint5.Items.Fairy)
+                else if (value is Items.Fairy)
                 {
                     GameOverScreen.Instance.AmountHealed += HALF_HEART;
                     linkPlayer.Health += HALF_HEART;
@@ -359,8 +376,18 @@ namespace Sprint5
             }
         }
 
+        public void testKnockback(Collision collision)
+        {
+            if (collision.Right && linkPlayer.DamDir == damageMove.right) linkPlayer.stopKnockback();
+            if (collision.Left && linkPlayer.DamDir == damageMove.left) linkPlayer.stopKnockback();
+            if (collision.Down && linkPlayer.DamDir == damageMove.down) linkPlayer.stopKnockback();
+            if (collision.Up && linkPlayer.DamDir == damageMove.up) linkPlayer.stopKnockback();
+        }
         public void Update()
         {
+
+           
+            bounds.Location = linkPlayer.currentLocation.ToPoint();
         }
     }
 }

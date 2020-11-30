@@ -24,21 +24,37 @@ namespace Sprint5
         Clock
     }
 
+    public enum damageMove
+    {
+        up,
+        down,
+        left,
+        right,
+        none
+    }
+
 
 
     public class LinkPlayer
     {
         public ILinkState state;
+        const int max = 50;
+        const int increment = 5;
+        const int min = 0;
         const float HEALTH = 60;
         const int NUM_OF_RUPEE = 0;
 
 
         bool loc = false;
+        private damageMove damDir = damageMove.none;
+        private int counter;
         public Vector2 currentLocation;
         private bool isAttacking = false;
         private bool isDamaged = false;
         private double damageStartTime;
         private float health = HEALTH;
+        private int moveHorizontal;
+        private int moveVertical;
         public bool isWalkingInPlace;
         private bool isPickingUpItem = false;
         private bool useRing = false;
@@ -60,12 +76,13 @@ namespace Sprint5
 
 
         public PlayerCollider collider;
-
-        public List<IItems> itemsPlacedByLink = new List<IItems>();
+        public WeaponCollider weaponCollider;
 
         public List<Direction> possibleDirections = Directions.Default();
+        public Direction currentDirection;
 
         public bool isPaused = false;
+
 
         public int SprintTimer { get => sprintTimer; set => sprintTimer = value; }
         public int RechargeTimer { get => rechargeTimer; set => rechargeTimer = value; }
@@ -73,13 +90,14 @@ namespace Sprint5
         public int SprintAmount { get => sprintAmount; set => sprintAmount = value; }
 
         public void RemovePlacedItem(IItems item)
-        {
-            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
-            {
-                itemsPlacedByLink.Remove(item);
-            }
-        }
 
+        private bool isShooting = false;
+        public bool IsShootingProjectile
+
+        {
+            get => isShooting;
+            set => isShooting = value;
+        }
 
         string direction = "Down";
         public string LinkDirection
@@ -105,7 +123,12 @@ namespace Sprint5
         public float Health
         {
             get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
+            set { 
+                health = value;
+                if (health <= 0) { health = 0; Sounds.Instance.LinkDeath(); }
+                else if (health <= HPAmount.OneHeart) Sounds.Instance.StartLowHealthLoop();
+                else Sounds.Instance.StopLowHealthLoop();
+            }
         }
 
         public Boolean LocationInitialized
@@ -133,6 +156,7 @@ namespace Sprint5
             }
         }
 
+        public damageMove DamDir { get => damDir; set => damDir = value; }
         public bool IsAttacking
         {
             get { return isAttacking; }
@@ -158,7 +182,6 @@ namespace Sprint5
 
         private ItemForLink currentWeapon = ItemForLink.Shield;
 
-
         public ItemForLink CurrentWeapon
         {
             get { return currentWeapon; }
@@ -179,7 +202,6 @@ namespace Sprint5
             set { isWalkingInPlace = value; }
         }
 
-
         public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
 
         public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
@@ -192,19 +214,28 @@ namespace Sprint5
         public bool Clock { get => clock; set => clock = value; }
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
+        public bool moveFromDamage { get => moveFromDamage; set => moveFromDamage = value; }
 
-        public LinkPlayer()
+        public LinkPlayer(Game game)
         {
 
-            sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
+            sprite = SpriteFactory.Instance.CreateLinkSprite();
+            
             hitbox = sprite.hitbox;
+            hitbox.Location = currentLocation.ToPoint();
+            hitbox = HitboxAdjuster.Instance.AdjustHitbox(hitbox, .9f);
+
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
 
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
 
+            weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
+
 
         }
+
+
         public void Update(GameTime gameTime)
         {
             if (sprite != null)
@@ -212,8 +243,11 @@ namespace Sprint5
                 hitbox = sprite.hitbox;
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
+
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
+
+                if (damDir != damageMove.none) this.push(damDir);
                 delay--;
                 if (SprintTimer > 0)
                 {
@@ -231,6 +265,7 @@ namespace Sprint5
                     RechargeTimer--;
                 }
                 possibleDirections = Directions.Default();
+                currentDirection = Directions.Parse(LinkDirection);
             }
         }
 
@@ -243,6 +278,7 @@ namespace Sprint5
             if (!(state is MoveLeft))
                 state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
+           
         }
 
         public void MovingRight()
@@ -302,9 +338,44 @@ namespace Sprint5
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
+        public void knockback(damageMove collideDir)
+        {
+            damDir = collideDir;
+            counter = max;
+        }
 
+        public void stopKnockback()
+        {
+            damDir = damageMove.none;
+            counter = min;
+        }
 
+        public void push(damageMove direction)
+        {
+            if (counter != max) {
+                switch (direction)
+                {
+                    case damageMove.right:
+                        currentLocation.X += increment;
+                        break;
+                    case damageMove.left:
+                        currentLocation.X -= increment;
+                        break;
+                    case damageMove.up:
+                        currentLocation.Y -= increment;
+                        break;
+                    case damageMove.down:
+                        currentLocation.Y += increment;
+                        break;
+                }
+            }
 
+            counter -= increment;
 
+            if (counter <= min) 
+            {
+                this.stopKnockback();
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Sprint5
         public IEnemyState state;
 
         private Vector2 location;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private StalfosWalkingSprite stalfosSprite;
         private EnemyCollider collider;
 
@@ -54,7 +54,7 @@ namespace Sprint5
 
             spriteSize = stalfosSprite.GetRectangle().Size;
             rect = new Rectangle(this.location.ToPoint(), spriteSize);
-            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Stalfos");
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Stalfos");
         }
 
 
@@ -62,7 +62,7 @@ namespace Sprint5
         {
             RoomEnemies.Instance.Destroy(this, location);
             saveInfo.SetElementValue("Alive", "false");
-            RoomItems.Instance.DropRandom(location);
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
 
@@ -72,12 +72,12 @@ namespace Sprint5
         {
             HP -= amount;
 
-            if (HP <= HPAmount.Zero) { Die(); //Sounds.Instance.PlayEnemyDie(); 
+            if (HP <= HPAmount.Zero) { Die(); 
             }
             else 
-            { 
-                state = new StalfosDamagedState(dir, this, location);
-                //Sounds.Instance.PlayEnemyHit();
+            {
+                bool stunned = (state as StalfosWalkingState).permaStun;
+                state = new StalfosDamagedState(dir, this, location,stunned);
             }
             
         }
@@ -95,13 +95,13 @@ namespace Sprint5
         public void Update()
         {
             state.Update();
-            
+            sprite.Update();
         }
 
         public void SetSprite(ISprite sprite)
         {
 
-            this.sprite = sprite;
+            this.sprite = (EnemySprite)sprite;
 
         }
 
@@ -114,7 +114,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
     }
 }

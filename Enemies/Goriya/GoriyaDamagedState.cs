@@ -23,8 +23,8 @@ namespace Sprint5
 
 
         private Goriya goriya;
-
-        public GoriyaDamagedState(Direction dir, Goriya goriya, Vector2 location, int moveSpeed)
+        private bool stunned;
+        public GoriyaDamagedState(Direction dir, Goriya goriya, Vector2 location, int moveSpeed, bool stunned)
         {
             currentDirection = dir;
 
@@ -37,6 +37,7 @@ namespace Sprint5
 
             
             goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir.ToString()));
+            this.stunned = stunned;
         }
 
       
@@ -75,7 +76,12 @@ namespace Sprint5
             MoveOneUnit();
             damagedTime++;
 
-            if (damagedTime >= totalDamagedTime) goriya.state = new GoriyaMoveState(goriya, location);
+            if (damagedTime >= totalDamagedTime)
+            {
+
+                goriya.state = new GoriyaMoveState(goriya, location);
+                if (stunned) goriya.state.Stun(true);
+            }
         }
 
         public void MoveOneUnit()
@@ -85,9 +91,9 @@ namespace Sprint5
             goriya.UpdateLocation(location);
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
-            //do nothing
+            if (permanent) stunned = true;
         }
     }
 }
