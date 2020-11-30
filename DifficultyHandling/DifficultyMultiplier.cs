@@ -13,6 +13,7 @@ namespace Sprint5.DifficultyHandling
         private Dictionary<String, int> linkHPValues;
         private Dictionary<String, int> linkMAXHPValues;
         private Dictionary<String, int> enemyHPValues;
+        private Dictionary<String, int> enemyDropRate;
         private Dictionary<String, String> gameOverMessages;
         private String difficulty;
         private LinkPlayer player;
@@ -53,6 +54,13 @@ namespace Sprint5.DifficultyHandling
             enemyHPValues.Add("Tough", 2); //2x hp
             enemyHPValues.Add("Link's Nightmare", 4); //4x hp
 
+            //these are HP MULTIPLIERS, multiplied to default HP
+            enemyDropRate = new Dictionary<string, int>();
+            enemyDropRate.Add("Navice", 5);
+            enemyDropRate.Add("Normal", 5); 
+            enemyDropRate.Add("Tough", 10); //1/2 drop rate of items
+            enemyDropRate.Add("Link's Nightmare", 20); //1/4 drop rate of items
+
             gameOverMessages = new Dictionary<string, String>();
             gameOverMessages.Add("Navice", "Game Over"); 
             gameOverMessages.Add("Normal", "GAME OVER"); 
@@ -70,6 +78,10 @@ namespace Sprint5.DifficultyHandling
         public string DetermineGameOverMessage()
         {
             return gameOverMessages[difficulty];
+        }
+        public int DetermineDropChance()
+        {
+            return enemyDropRate[difficulty];
         }
 
         //manually switching between difficulties
