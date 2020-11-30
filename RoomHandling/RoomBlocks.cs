@@ -110,11 +110,11 @@ namespace Sprint5
                         }
                         else if (objName.Equals("MoveableColumnRight"))
                         {
-                            roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                            roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, movedRight));
                         }
                         else if (objName.Equals("MoveableColumnUp"))
                         {
-                            roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                            roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, movedUp));
                         }
                     }
                     
