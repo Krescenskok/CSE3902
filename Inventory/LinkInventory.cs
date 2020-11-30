@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Text;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -268,6 +269,7 @@ namespace Sprint5
 
         public void PickUpItem(IItems item, LinkPlayer link)
         {
+
             if (!(prevItem is null) && prevItem.Equals(item))
             {
                 return;
@@ -276,57 +278,74 @@ namespace Sprint5
             if (item is BoomerangObject)
             {
                 secondInInventory[SecondaryItem.Boomerang] = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BombObject)
             {
                 secondInInventory[SecondaryItem.Bomb] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Bow)
             {
                 secondInInventory[SecondaryItem.Bow] = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BluePotion)
             {
                 secondInInventory[SecondaryItem.Potion] = true;
                 PotionCount++;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is BlueCandle)
             {
                 secondInInventory[SecondaryItem.Candle] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is ArrowObject)
             {
                 secondInInventory[SecondaryItem.Arrow] = true;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Rupee)
             {
                 RupeeCount++;
+                Sounds.Instance.PlaySoundEffect("GetRupee");
             }
             else if (item is BombObject)
             {
                 BombCount++;
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             else if (item is Key)
             {
                 KeyCount++;
+                Sounds.Instance.PlaySoundEffect("GetHeart");
             }
             else if (item is Map)
             {
                 HUDMap.Instance.HasMap = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is Compass)
             {
                 HUDMap.Instance.HasCompass = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is Clock)
             {
                 link.Clock = true;
                 RoomEnemies.Instance.StunAllEnemies();
+                Sounds.Instance.PlaySoundEffect("Fanfare");
             }
             else if (item is BlueRing)
             {
                 link.UseRing = true;
-                ShowBlueRing = true;
+                 ShowBlueRing = true;
+                Sounds.Instance.PlaySoundEffect("Fanfare");
+            }
+            else if (item is Fairy)
+            {
+                Sounds.Instance.PlaySoundEffect("GetHeart");
             }
             prevItem = item;
         }
@@ -345,6 +364,7 @@ namespace Sprint5
                     link.Health = link.FullHealth;
                     HUD.Instance.UpdateHearts(link);
                     PotionCount--;
+                    GameOverScreen.Instance.ItemsConsumed++;
 
                     if (PotionCount == 0)
                     {
@@ -357,13 +377,16 @@ namespace Sprint5
 
         public void UseItem(IItems item)
         {
+            
             if (item is Key)
             {
                 KeyCount--;
+                GameOverScreen.Instance.ItemsConsumed++;
             }
             if (item is BombObject)
             {
                 BombCount--;
+                GameOverScreen.Instance.ItemsConsumed++;
             }
         }
 

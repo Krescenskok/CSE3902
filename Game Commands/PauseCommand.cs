@@ -12,8 +12,15 @@ namespace Sprint5
 
         public bool IsPause { get => isPause; set => isPause = value; }
 
-        public PauseCommand()
+        public PauseCommand(Game1 game, String doorOrScreen)
         {
+            if (doorOrScreen == "NotDoor")
+            {
+                game.DoorPause = false;
+            } else
+            {
+                game.DoorPause = true;
+            }
         }
 
 

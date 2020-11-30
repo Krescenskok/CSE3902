@@ -24,6 +24,8 @@ namespace Sprint5
         private bool finished;
 
         private GoriyaBoomerangCollider collider;
+
+        
         public GoriyaBoomerang(Vector2 location, string direction, int goriyaSpeed)
         {
             this.location = location;
@@ -40,6 +42,8 @@ namespace Sprint5
 
             timeSinceThrown = 0;
             returning = false;
+
+            Sounds.Instance.AddLoopedSound("ArrowBoomerang", GetHashCode().ToString());
         }
 
         public void Update()
@@ -71,10 +75,11 @@ namespace Sprint5
             else if (boomerangDone)
             {
                 finished = true;
-                
+                CollisionHandler.Instance.RemoveCollider(collider);
+                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
 
-
+            sprite.Update();
            
         }
 

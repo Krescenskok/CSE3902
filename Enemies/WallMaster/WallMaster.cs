@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -39,11 +40,13 @@ namespace Sprint5
 
             state = new WallMasterMoveState(location, game, this);
             masterSprite = (WallMasterSprite)sprite;
-            collider = new EnemyCollider(masterSprite.GetRectangle(), this, HPAmount.HalfHeart, "WallMaster");
+            Rectangle rect = new Rectangle(this.location.ToPoint(), masterSprite.GetRectangle().Size);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "WallMaster");
+           
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
-            
 
             saveData = xml;
         }
@@ -82,7 +85,7 @@ namespace Sprint5
         {
             RoomEnemies.Instance.Destroy(this, Location);
             saveData.SetElementValue("Alive", "false");
-            RoomItems.Instance.DropRandom(location);
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
 
@@ -99,7 +102,8 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
+
     }
 }

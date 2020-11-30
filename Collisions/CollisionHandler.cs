@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -40,12 +41,13 @@ namespace Sprint5
         {
             colliders = new List<ICollider>();
             
+            
             removedColliders = new Queue<ICollider>();
             
             ListComparer<ICollider> listComparer = new ListComparer<ICollider>();
           
             collisions = new HashSet<List<ICollider>>(listComparer);
-
+            
         }
 
 
@@ -311,5 +313,7 @@ namespace Sprint5
                 return 0;
             }
         }
+
+        
     }
 }

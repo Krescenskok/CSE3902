@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -46,8 +47,10 @@ namespace Sprint5
                 open = false;
             } else if(type == DoorType.normal)
             {
-                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, false);
+                outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading);
                 open = true;
+
+                if(currentRoom == 6) outerCollider = new DoorEntranceCollider(this, outerLocation, size, heading, "sixer");
 
             } else if(type == DoorType.special_open)
             {
@@ -67,6 +70,7 @@ namespace Sprint5
 
         public void ChangeRoom()
         {
+            GameOverScreen.Instance.RoomsEntered++;
             if (Heading == 'L') Camera.Instance.ScrollLeft(NextRoom);
             else if (Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
             else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom);
@@ -80,7 +84,7 @@ namespace Sprint5
         {
             CollisionHandler.Instance.RemoveCollider(outerCollider);
             saveInfo.SetElementValue("Type", "normal");
-            outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading, CurrentRoom == 6);
+            outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading);
             open = true;
             Sounds.Instance.PlaySoundEffect("DoorUnlock");
         }
@@ -101,7 +105,7 @@ namespace Sprint5
             saveInfo.SetElementValue("Type", "normal");
 
             
-            outerCollider = new DoorEntranceCollider(this, outerLocation, this.Size, this.Heading, false);
+            outerCollider = new DoorEntranceCollider(this, outerLocation, this.Size, this.Heading);
             RoomDoors.Instance.ShowDoorSprite(CurrentRoom);
             Sounds.Instance.PlaySoundEffect("DoorUnlock");
         }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -21,7 +22,7 @@ namespace Sprint5
        
 
         public IEnemyState state;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private GoriyaWalkSprite gorSprite;
         
 
@@ -47,7 +48,7 @@ namespace Sprint5
         public void SetSprite(ISprite sprite)
         {
 
-            this.sprite = sprite;
+            this.sprite = (EnemySprite)sprite;
 
         }
 
@@ -79,6 +80,8 @@ namespace Sprint5
             
             collider = new EnemyCollider();
             saveData = xml;
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
+
         }
         public void Spawn()
         {
@@ -98,8 +101,8 @@ namespace Sprint5
             RoomEnemies.Instance.Destroy(this,location);
             saveData.SetElementValue("Alive", "false");
 
-            RoomItems.Instance.DropRandom(location);
-            if (RoomEnemies.Instance.allDead) RoomItems.Instance.DropItem("Boomerang", Location);
+            RoomItems.Instance.DropRandom(collider.Center);
+            if (RoomEnemies.Instance.allDead) RoomItems.Instance.DropItem("Boomerang", collider.Center);
         }
 
     
@@ -114,7 +117,7 @@ namespace Sprint5
         public void Update()
         {
             state.Update();
-            
+            sprite.Update();
             if (boomy != null) boomy.Update();
         }
 
@@ -127,7 +130,11 @@ namespace Sprint5
         {
             HP -= amount;
             if (HP <= 0) Die();
-            else state = new GoriyaDamagedState(dir, this, location, 2);
+            else
+            {
+                bool stunned = (state as GoriyaMoveState).permaStun;
+                state = new GoriyaDamagedState(dir, this, location, 2,stunned);
+            }
         }
 
         public void ObstacleCollision(Collision collision)
@@ -137,7 +144,7 @@ namespace Sprint5
 
         public void Stun()
         {
-            state.Stun();
+            state.Stun(false);
         }
 
         public void Attack()

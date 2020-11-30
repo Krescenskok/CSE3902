@@ -16,7 +16,7 @@ namespace Sprint5
 
         public void Update();
 
-        public void Stun();
+        public void Stun(bool permanent);
 
     }
 }

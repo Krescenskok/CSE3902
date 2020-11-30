@@ -35,7 +35,7 @@ namespace Sprint5
 
         private int curRoom;
 
-        
+        public Vector2 LinkStartLocation { get; private set; }
 
         public static RoomDoors Instance
         {
@@ -132,10 +132,7 @@ namespace Sprint5
                     else if (objName.Equals("Right"))
                     {
                         doors.Add(new Door(game, locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
-                        if (curRoom == 6)
-                        {
-                            lockedDoors[6] = (doors[doors.Count - 1]);
-                        }
+                        
                         
                     }
                     else if (objName.Equals("Up"))
@@ -160,8 +157,11 @@ namespace Sprint5
                 }
             }
 
+            if (curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)
+            {
+                CloseDoor(6);
+            }
 
-            
         }
 
 
@@ -186,14 +186,14 @@ namespace Sprint5
 
             Point camOffset = cam.Location.ToPoint();
 
-            //unlocked door points
+            //inner door points
             locations.Add(new Point(0, tileHeight*5) - camOffset) ;
             locations.Add(new Point(tileWidth * 15, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 7,0) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight * 10) - camOffset);
 
 
-            //locked door points
+            //outer door points
             locations.Add(new Point(tileWidth * 2, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 14, tileHeight * 5) - camOffset);
             locations.Add(new Point(tileWidth * 7, tileHeight*2) - camOffset);
@@ -210,7 +210,10 @@ namespace Sprint5
             doorSizeMiddle = new Point(tileWidth*2, 2);
             doorSizeSide = new Point(2, tileHeight);
 
-            
+            //find location to send link to when wallmaster brings him to room 1
+            LinkStartLocation = new Rectangle(locations[3],new Point(tileWidth,tileHeight)).Center.ToVector2();
+
+
         }
 
         private DoorType Parse(string str)
@@ -231,13 +234,13 @@ namespace Sprint5
             }
 
 
-            if(curRoom == 6 && RoomEnemies.Instance.allDead && !lockedDoors[6].open)
+            if (curRoom == 6 && RoomEnemies.Instance.allDead && lockedDoors.ContainsKey(6))
             {
                 OpenDoor(6);
-            }else if(curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)
-            {
-                CloseDoor(6);
             }
+
+
+            
         }
 
 

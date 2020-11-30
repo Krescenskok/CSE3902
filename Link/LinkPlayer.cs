@@ -5,205 +5,56 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5;
 using Sprint5.Link;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
-    public enum ItemForLink
+
+
+    public class LinkPlayer : LinkPlayerParent
     {
-        Shield,
-        WoodenSword,
-        Sword,
-        MagicalRod,
-        ArrowBow,
-        BlueRing,
-        Boomerang,
-        BlueCandle,
-        Bomb,
-        Clock
-    }
+ 
+        private const float HEALTH = 60;
 
-    public enum damageMove
-    {
-        up,
-        down,
-        left,
-        right,
-        none
-    }
+        private const int NUM_OF_RUPEE = 0;
 
-
-
-    public class LinkPlayer
-    {
-        public ILinkState state;
-        const int max = 50;
-        const int increment = 5;
-        const int min = 0;
-        const float HEALTH = 60;
-        const int NUM_OF_RUPEE = 0;
-
-
-        bool loc = false;
-        private damageMove damDir = damageMove.none;
-        private int counter;
-        public Vector2 currentLocation;
-        private bool isAttacking = false;
-        private bool isDamaged = false;
-        private double damageStartTime;
-        private float health = HEALTH;
-        private int moveHorizontal;
-        private int moveVertical;
-        public bool isWalkingInPlace;
-        private bool isPickingUpItem = false;
-        private bool useRing = false;
         private float fullHealth = HEALTH;
-        private int delay;
-        private bool clock = false;
-        private bool largeShield = false;
-        private bool drawShield = true;
-
-        private bool isDead = false;
-
-        public LinkSprite sprite;
-        public Rectangle hitbox;
 
 
-        public PlayerCollider collider;
+        private PlayerCollider collider;
 
-        public List<Direction> possibleDirections = Directions.Default();
+        private Game1 Game;
 
-        public bool isPaused = false;
+        private List<IItems> ItemsPlacedByLink = new List<IItems>();
 
-        private bool isShooting = false;
-        public bool IsShootingProjectile
+       
+
+        private List<Direction> PossibleDirections = Directions.Default();
+
+        private bool IsPaused = false;
+
+        public void RemovePlacedItem(IItems item)
         {
-            get => isShooting;
-            set => isShooting = value;
-        }
-
-        string direction = "Down";
-        public string LinkDirection
-        {
-            get { return direction; }
-            set { direction = value; }
-        }
-
-        public Rectangle Bounds
-        {
-            get
+            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
             {
-                return state.Bounds();
+                itemsPlacedByLink.Remove(item);
             }
         }
 
-        public bool IsDead
+        public Rectangle Bounds { get => state.Bounds(); }
+        public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
+        public bool isPaused { get => IsPaused; set => IsPaused = value; }
+        public List<Direction> possibleDirections { get => PossibleDirections; set => PossibleDirections = value; }
+
+        public LinkPlayer(Game1 game)
         {
-            get { return isDead; }
-            set { isDead = value; }
-        }
-
-        public float Health
-        {
-            get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
-        }
-
-        public Boolean LocationInitialized
-        {
-            get { return loc; }
-            set { loc = value; }
-        }
-
-        public double DamageStartTime
-        {
-            get { return damageStartTime; }
-            set { damageStartTime = value; }
-        }
-
-        public bool IsDamaged
-        {
-            get { return isDamaged; }
-            set
-            {
-                isDamaged = value;
-                if (value == false)
-                {
-                    DamageStartTime = 0;
-                }
-            }
-        }
-
-        public damageMove DamDir { get => damDir; set => damDir = value; }
-        public bool IsAttacking
-        {
-            get { return isAttacking; }
-            set { isAttacking = value; }
-        }
-
-        private bool secondAttack = false;
-        public bool IsSecondAttack
-        {
-            get { return secondAttack; }
-            set { secondAttack = value; }
-        }
-
-        private bool isStopped = false;
-
-
-        public bool IsStopped
-        {
-            get { return isStopped; }
-            set { isStopped = value; }
-        }
-
-
-        private ItemForLink currentWeapon = ItemForLink.Shield;
-
-        public ItemForLink CurrentWeapon
-        {
-            get { return currentWeapon; }
-            set { currentWeapon = value; }
-
-        }
-
-        private ItemForLink secondWeapon = ItemForLink.ArrowBow;
-        public ItemForLink SecondaryWeapon
-        {
-            get { return secondWeapon; }
-            set { secondWeapon = value; }
-        }
-
-        public bool IsWalkingInPlace
-        {
-            get { return isWalkingInPlace; }
-            set { isWalkingInPlace = value; }
-        }
-
-        public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
-
-        public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
-
-        public bool UseRing { get => useRing; set => useRing = value; }
-
-        public float FullHealth { get => fullHealth; set => fullHealth = value; }
-
-        public int Delay { get => delay; set => delay = value; }
-        public bool Clock { get => clock; set => clock = value; }
-        public bool LargeShield { get => largeShield; set => largeShield = value; }
-        public bool DrawShield { get => drawShield; set => drawShield = value; }
-        public bool moveFromDamage { get => moveFromDamage; set => moveFromDamage = value; }
-
-        public LinkPlayer()
-        {
-
             sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
-
+            Game = game;
+            DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
-
-
         public void Update(GameTime gameTime)
         {
             if (sprite != null)
@@ -211,19 +62,17 @@ namespace Sprint5
                 hitbox = sprite.hitbox;
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
-
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-                if (damDir != damageMove.none) this.push(damDir);
-                delay--;
+                Delay--;
 
 
-                possibleDirections = Directions.Default();
+                PossibleDirections = Directions.Default();
             }
         }
         public void HandleObstacle(Collision col)
         {
-            possibleDirections.Remove(col.From);
+            PossibleDirections.Remove(col.From);
         }
         public void MovingLeft()
         {
@@ -272,7 +121,7 @@ namespace Sprint5
             Health = HEALTH;
             FullHealth = HEALTH;
             Delay = 0;
-            clock = false;
+            Clock = false;
             DrawShield = true;
 
         }
@@ -280,15 +129,15 @@ namespace Sprint5
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
 
-            if (loc == false)
+            if (LocationInitialized == false)
             {
-                loc = true;
+                LocationInitialized = true;
                 CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2) - Camera.Instance.Location;
             }
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
-
+        
         public void moveCentral() {
             currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 3, GridGenerator.Instance.GetTileSize().Y * 2) - Camera.Instance.Location; 
         }

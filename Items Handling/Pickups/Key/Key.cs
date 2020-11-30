@@ -60,7 +60,7 @@ namespace Sprint5.Items
         public void Expire()
         {
             saveInfo.SetElementValue("Alive", "false");
-            Sounds.Instance.PlaySoundEffect("GetItem");
+            
         }
 
 

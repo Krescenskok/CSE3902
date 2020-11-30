@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -155,7 +156,17 @@ namespace Sprint5
 
         public void IncreaseMaxHeartNumber()
         {
-            maxHearts++;
+            if (maxHearts < DifficultyMultiplier.Instance.DetermineLinkMaxHP())
+            {
+                maxHearts++;
+            }
+        }
+
+        public void ChangeDifficulty(int hp, int max)
+        {
+            //sets new max and prev to current so itll calculate normally
+            maxHearts = max / 20;
+            prevHealth = 1;
         }
 
         public void UpdateHearts(LinkPlayer link)
@@ -173,21 +184,23 @@ namespace Sprint5
             fullCount = 0;
             emptyCount = 0;
             halfCount = 0;
-            int healthLost = (int)(link.FullHealth - link.Health);
-            if (healthLost != 0)
-            {
-                if (healthLost % FULL_HEART == 0)
-                {
-                    emptyCount = healthLost / FULL_HEART;
-                }
-                else if (healthLost % HALF_HEART == 0)
-                {
-                    halfCount = (healthLost / HALF_HEART) % 2;
-                    emptyCount = (healthLost - HALF_HEART) / FULL_HEART;
-                }
-            }
-            fullCount = maxHearts - halfCount - emptyCount;
 
+            int healthLost = (int)(link.FullHealth - link.Health);
+                if (healthLost != 0)
+                {
+                    if (healthLost % FULL_HEART == 0)
+                    {
+                        emptyCount = healthLost / FULL_HEART;
+                    }
+                    else if (healthLost % HALF_HEART == 0)
+                    {
+                        halfCount = (healthLost / HALF_HEART) % 2;
+                        emptyCount = (healthLost - HALF_HEART) / FULL_HEART;
+                    }
+                System.Diagnostics.Debug.WriteLine("I shouldn't be here, I didnt lose health");
+                }
+
+                fullCount = maxHearts - halfCount - emptyCount;
             foreach (IItems item in drawnHearts)
             {
                 item.Expire();

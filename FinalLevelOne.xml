@@ -2380,6 +2380,8 @@
 				<Location>1 7</Location>
 				<Alive>true</Alive>
 			</Item>
+			
+			<!-- Water-->
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Water</ObjectName>
@@ -2500,6 +2502,8 @@
 				<ObjectName>Water</ObjectName>
 				<Location>3 8</Location>
 			</Item>
+			<!-- Water-->
+			
 		</Room>
 		
 		<!-- 18th Room Content -->

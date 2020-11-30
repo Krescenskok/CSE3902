@@ -25,10 +25,11 @@ namespace Sprint5
         private int nextRoom;
 
         private int currentRoom;
-        
-        public bool loadNextRoom = false;
+       
+        private bool loadNextRoom = false;
+        private bool wallmasterSetBack = false;
 
-        private Game game;
+        private Game1 game;
 
         public  Vector2 Location { get => location; }
         private Vector2 location;
@@ -54,14 +55,14 @@ namespace Sprint5
 
         private LinkPlayer player;
 
-       
+        private bool wasPaused;
 
         public void Load(Game game)
         {
-            this.game = game;
+            this.game = game as Game1;
             screenHeight = game.Window.ClientBounds.Height;
             screenWidth = game.Window.ClientBounds.Width;
-            player = (game as Game1).LinkPlayer;
+            player = this.game.LinkPlayer;
             
 
             transform = Matrix.Identity;
@@ -95,33 +96,22 @@ namespace Sprint5
         {
         }
 
-        //code for extending menu view
+        //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
             if (HUDOpenCloseFinished())
             {
-                if (!inventoryOpen)
-                {
-                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight);
-                    targetHUDLocation.Location = newHUDLocation;
+                
+                int moveDirection = inventoryOpen ? -1 : 1;
 
-                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y);
-                    targetGameView.Location = newGameViewLocation;
+                Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight * moveDirection);
+                targetHUDLocation.Location = newHUDLocation;
 
-                    inventoryOpen = true;
-                }
-                else
-                {
-                    Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y - screenHeight);
-                    targetHUDLocation.Location = newHUDLocation;
+                Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y * moveDirection);
+                targetGameView.Location = newGameViewLocation;
 
-                    Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y - playArea.Size.Y);
-                    targetGameView.Location = newGameViewLocation;
-
-                    inventoryOpen = false;
-                }
-
-              
+                inventoryOpen = moveDirection == 1;
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused;  Pause();}
             }
            
             
@@ -138,6 +128,16 @@ namespace Sprint5
            
         }
 
+        public void BackToSquareOne()
+        {
+            MoveToRoom(1);
+            player.currentLocation = RoomDoors.Instance.LinkStartLocation;
+            player.state = new MoveUp(player, player.sprite);
+            direction = Vector3.Up;
+            wallmasterSetBack = true;
+            nextRoom = 1;
+        }
+
 
 
         public void ScrollUp(int roomNum)
@@ -149,8 +149,13 @@ namespace Sprint5
             nextRoom = roomNum;
 
             
-            (game as Game1).isPaused = true;
+            (game as Game1).DoorPause = true;
+
+
+
+            Pause();
             
+
 
             currentDirection = Direction.up;
         }
@@ -162,8 +167,9 @@ namespace Sprint5
             direction = Vector3.Down;
 
             nextRoom = roomNum;
+            (game as Game1).DoorPause = true;
 
-            (game as Game1).isPaused = true;
+            Pause();
 
             currentDirection = Direction.down;
         }
@@ -174,7 +180,10 @@ namespace Sprint5
 
             direction = Vector3.Left;
             nextRoom = roomNum;
-            (game as Game1).isPaused = true;
+
+            (game as Game1).DoorPause = true;
+
+            Pause();
 
             currentDirection = Direction.right;
         }
@@ -185,8 +194,8 @@ namespace Sprint5
 
             direction = Vector3.Right;
             nextRoom = roomNum;
-            (game as Game1).isPaused = true;
-
+            (game as Game1).DoorPause = true;
+            Pause();
             currentDirection = Direction.left;
         }
 
@@ -205,25 +214,28 @@ namespace Sprint5
                 && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
         }
 
-        private void MoveViewports()
+        private void MoveViewports(ref Rectangle area, Rectangle targetArea, ref Viewport newPort)
         {
-            Vector2 currentLoc = playArea.Location.ToVector2();
-            Vector2 moveAmount = targetGameView.Location.ToVector2() - currentLoc;
+            Vector2 currentLoc = area.Location.ToVector2();
+            Vector2 moveAmount = targetArea.Location.ToVector2() - currentLoc;
             moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
             currentLoc = Vector2.Add(currentLoc, moveAmount);
-            playArea.Location = currentLoc.ToPoint();
-            gameView.Bounds = playArea;
-
-            
-
-            currentLoc = HUDArea.Location.ToVector2();
-            moveAmount = targetHUDLocation.Location.ToVector2() - currentLoc;
-            moveAmount = Vector2.Normalize(moveAmount) * scrollSpeed;
-            currentLoc = Vector2.Add(currentLoc, moveAmount);
-            HUDArea.Location = currentLoc.ToPoint();
-            HUDView.Bounds = HUDArea;
+            area.Location = currentLoc.ToPoint();
+            newPort.Bounds = area;
         }
 
+        private void GetLinkEnterPosition(Vector3 dir)
+        {
+            int yOffset = dir.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
+            int xOffset = GridGenerator.Instance.Offset.X;
+            linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+        }
+
+        private void Move()
+        {
+            Vector3 newPos = Transform.Translation + direction * scrollSpeed;
+            Matrix.CreateTranslation(ref newPos, out transform);
+        }
         
 
         public void Update()
@@ -231,32 +243,36 @@ namespace Sprint5
 
             if (!HUDOpenCloseFinished())
             {
-                MoveViewports();
+                MoveViewports(ref playArea,targetGameView,ref gameView);
+                MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
             }else if(inventoryOpen && !(game as Game1).isPaused)
             {
-                (game as Game1).isPaused = true;
-            }else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+                (game as Game1).DoorPause = true;
+            }
+            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
             {
-                (game as Game1).isPaused = false;
+                (game as Game1).DoorPause = false;
+               game.Pause(wasPaused);
+
                 inventoryStillMoving = false;
             }
 
-           
 
-            if (!DoneScrolling())
+            bool doneScrolling = DoneScrolling();
+
+            if (wallmasterSetBack || !doneScrolling)
             {
-                Vector3 newPos = Transform.Translation + direction  * scrollSpeed;
-                Matrix.CreateTranslation(ref newPos, out transform);
-
-                int yOffset = direction.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
-                int xOffset = GridGenerator.Instance.Offset.X;
-              
-
+                GetLinkEnterPosition(direction);
                 loadNextRoom = true;
                 linkHasEntered = false;
-                linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+                wallmasterSetBack = false;
+            }
+
+            if (!doneScrolling)
+            {
+                Move();
 
             }else if (loadNextRoom && !linkHasEntered)
             {
@@ -270,7 +286,10 @@ namespace Sprint5
             }else if (loadNextRoom)
             {
                 Game1 game1 = game as Game1;
-                game1.isPaused = false;
+                game1.DoorPause = false;
+
+                UnPause();
+
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
                 if (nextRoom == 18) { player.moveCentral(); }
@@ -287,6 +306,9 @@ namespace Sprint5
 
 
         }
+
+        private void Pause() { game.Pause(true); }
+        private void UnPause() { game.Pause(false); }
 
 
     }

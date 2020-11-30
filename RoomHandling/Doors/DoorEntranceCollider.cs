@@ -14,24 +14,34 @@ namespace Sprint5
         public char orientation;
         public Door door;
 
-        public string Name { get => "DoorEntrance"; }
+        public string Name { get => name; }
         public Layer layer { get; set; }
 
-        private bool trigger;
-        private int doorTrigger;
+        
 
-        public DoorEntranceCollider(Door door, Point location, Point size, char orient, bool trigger)
+        public DoorEntranceCollider(Door door, Point location, Point size, char orient, string name)
         {
             bounds.Location = location;
             bounds.Size = size;
             orientation = orient;
             this.door = door;
-            this.trigger = trigger;
+            this.name = name;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
         }
 
-     
+        public DoorEntranceCollider(Door door, Point location, Point size, char orient)
+        {
+            bounds.Location = location;
+            bounds.Size = size;
+            orientation = orient;
+            this.door = door;
+            name = "DoorEntrance";
+
+            CollisionHandler.Instance.AddCollider(this, Layers.Door);
+        }
+
+
         public Rectangle Bounds()
         {
             return bounds;
@@ -54,10 +64,7 @@ namespace Sprint5
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") && trigger && RoomEnemies.Instance.EnemyCount > 0)
-            {
-                RoomDoors.Instance.CloseDoor(6);
-            }
+
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)

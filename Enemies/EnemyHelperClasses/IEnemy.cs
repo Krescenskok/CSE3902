@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -15,6 +16,7 @@ namespace Sprint5
         void SetSprite(ISprite sprite);
 
         void Spawn();
+
 
         
         void TakeDamage(Direction dir, int amount);
