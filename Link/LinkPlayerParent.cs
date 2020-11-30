@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Sprint5.Link;
 
@@ -51,7 +51,7 @@ namespace Sprint5
         private bool isDead = false;
         private bool isShooting = false;
         private damageMove damDir = damageMove.none;
-        private int counter = 0;
+        private int counter;
         
 
         public LinkSprite sprite;
@@ -110,3 +110,4 @@ namespace Sprint5
         }
     }
 }
+
