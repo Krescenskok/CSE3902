@@ -2648,38 +2648,123 @@
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
-				<ObjectName>Bricks</ObjectName>
-				<Location>6 12</Location>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>4 11</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BlackTile</ObjectName>
+				<Location>1 11</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>5 12</Location>
+				<Location>2 4</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>4 12</Location>
+				<Location>3 5</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>3 12</Location>
+				<Location>3 6</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>2 12</Location>
+				<Location>3 7</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>1 12</Location>
+				<Location>3 8</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>0 12</Location>
+				<Location>3 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Bricks</ObjectName>
+				<Location>3 11</Location>
 			</Item>
 		</Room>
 		
