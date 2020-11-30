@@ -141,10 +141,6 @@ namespace Sprint5
                     } 
                     else if (objName.Equals("Center"))
                     {
-                        doors.Add(new Door(game, locations[8], doorSizeMiddle, nextRoom, 'C', thisType, item, locations[7], curRoom));
-                    }
-                    else if (objName.Equals("Center"))
-                    {
                         doors.Add(new Door(game, locations[9], doorSizeSide, nextRoom, 'C', thisType, item, locations[9], curRoom));
                     }
                     else if (objName.Equals("secret"))
