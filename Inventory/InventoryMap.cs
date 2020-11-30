@@ -93,7 +93,7 @@ namespace Sprint5.Inventory
             {
                 foreach (KeyValuePair<int, Boolean> pair in visitedRoom)
                 {
-                    if (pair.Value)
+                    if (pair.Value is true)
                     {
                         individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
                     }
@@ -104,7 +104,6 @@ namespace Sprint5.Inventory
 
         }
 
-
         public void Reset()
         {
             visitedRoom.Clear();
@@ -113,9 +112,9 @@ namespace Sprint5.Inventory
             {
                 visitedRoom.Add(i, false);
             }
+            GetLinkLocation();
+            visitedRoom[linkRoom] = true;
         }
-
-
 
     }
 }
