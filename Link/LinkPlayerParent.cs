@@ -18,6 +18,15 @@ namespace Sprint5
         Bomb,
         Clock
     }
+    
+        public enum damageMove
+    {
+        up,
+        down,
+        left,
+        right,
+        none
+    }
 
 
     public class LinkPlayerParent
@@ -41,6 +50,9 @@ namespace Sprint5
         private bool drawShield = true;
         private bool isDead = false;
         private bool isShooting = false;
+        private damageMove damDir = damageMove.none;
+        private int counter = 0;
+        
 
         public LinkSprite sprite;
         public Rectangle hitbox;
@@ -70,6 +82,8 @@ namespace Sprint5
         private bool isStopped = false;
         private ItemForLink currentWeapon = ItemForLink.MagicalRod;
 
+        public int Counter { get => counter; set => counter = value; }
+        public damageMove DamDir{ get => damDir; set => damDir = value; }
         public string LinkDirection { get => direction; set => direction = value; }
         public bool IsDead { get => isDead; set => isDead = value; }
         public Boolean LocationInitialized { get => loc; set => loc = value; }
