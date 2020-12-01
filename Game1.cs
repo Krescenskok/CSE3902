@@ -224,7 +224,6 @@ namespace Sprint5
                     _spriteBatch.Begin();
 
                     GraphicsDevice.Viewport = camera.HUDView;
-                    HUD.Instance.DrawTop(_spriteBatch);
                     LinkInventory.Instance.Draw(_spriteBatch);
                     HUD.Instance.DrawBottom(_spriteBatch);
 
