@@ -344,6 +344,12 @@ namespace Sprint5
             else if (item is Fairy)
             {
                 Sounds.Instance.PlaySoundEffect("GetHeart");
+            }else if(item is HeartContainer)
+            {
+                Sounds.Instance.PlaySoundEffect("KeyAppear");
+            }else if(item is TriforcePiece)
+            {
+                Sounds.Instance.PlaySoundEffect("GetItem");
             }
             prevItem = item;
         }

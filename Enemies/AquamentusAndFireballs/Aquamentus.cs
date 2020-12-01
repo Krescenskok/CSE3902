@@ -53,7 +53,7 @@ namespace Sprint5
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
             state = new AquamentusNormalState(this, aquamentusPos, link);
-            fireBallList = new List<FireBall>(); //added by JT
+            fireBallList = new List<FireBall>(); 
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
             speed = moveSpeedPerSec / UpdatePerSec;
@@ -86,6 +86,14 @@ namespace Sprint5
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
+            RoomDoors.Instance.OpenDoor(14);
+            
+            while(fireBallList.Count > 0)
+            {
+                fireBallList[fireBallList.Count-1].State.Die();
+            }
+
+            Sounds.Instance.PlaySoundEffect("GetItem");
         }
 
         public Boolean TryAttack()

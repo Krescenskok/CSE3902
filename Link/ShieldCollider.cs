@@ -6,49 +6,36 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class WeaponCollider : ICollider
+    public class ShieldCollider : ICollider
     {
-        private string name;
-        private int damageAmount;
+
+        private int strength;
         private Rectangle bounds;
-
         private Vector2 localPosition;
-
-        
-
         private int linkSize;
-        private int weaponLength;
-       
+        private int shieldWidth;
 
         private LinkPlayer link;
         private Direction currentDirection;
 
         private Dictionary<Direction, Vector2> directionOffset;
-        public string Name { get => "Sword"; }
+        public string Name { get => "Shield"; }
 
         public Layer layer { get; set; }
 
         private TestCollider testCol;
-
-        private int turnOffClock = 0;
-        private const int TIME = 30;
-
-        public WeaponCollider(int attack, LinkPlayer link)
+        public ShieldCollider(LinkPlayer link, int strength)
         {
             this.link = link;
-            damageAmount = attack;
-            
-
-            
+            this.strength = strength;
             linkSize = link.hitbox.Width;
-            weaponLength = (int)(linkSize * 1.5);
+            shieldWidth = linkSize / 4;
 
-            bounds = new Rectangle(link.currentLocation.ToPoint(), new Point(linkSize, linkSize));
-            
+            bounds = new Rectangle(link.currentLocation.ToPoint(), new Point(linkSize, shieldWidth));
 
             localPosition = Vector2.Zero;
 
-            float posOffset = weaponLength / linkSize;
+            float posOffset = shieldWidth / linkSize;
             directionOffset = new Dictionary<Direction, Vector2>()
             {
                 {Direction.left, new Vector2(-1 * posOffset,0) },
@@ -57,12 +44,11 @@ namespace Sprint5
                 {Direction.down, new Vector2(0,1) }
             };
 
-            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
+            CollisionHandler.Instance.AddCollider(this, Layers.Shield);
         }
 
-        private void CalculateBounds(Direction dir)
+        public void ChangeDirection(Direction dir)
         {
-
 
             if (!dir.Equals(currentDirection))
             {
@@ -70,31 +56,29 @@ namespace Sprint5
                 localPosition.X *= linkSize;
                 localPosition.Y *= linkSize;
 
-                if (dir.Equals(Direction.left) || dir.Equals(Direction.right)) bounds.Size = new Point(weaponLength, linkSize);
-                else bounds.Size = new Point(linkSize, weaponLength);
+                if (dir.Equals(Direction.left) || dir.Equals(Direction.right)) bounds.Size = new Point(shieldWidth, linkSize);
+                else bounds.Size = new Point(linkSize, shieldWidth);
 
                 currentDirection = dir;
 
-
+                
             }
 
         }
 
         public void TurnOn(Direction dir)
         {
-            CalculateBounds(dir);
-            
-            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
-            
+            ChangeDirection(dir);
 
-            turnOffClock = TIME;
+            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
+            testCol = RoomEnemies.Instance.AddTestCollider(bounds,this);
         }
 
         public void TurnOff()
         {
-            
+
             CollisionHandler.Instance.RemoveCollider(this);
-           
+            RoomEnemies.Instance.RemoveTest(testCol);
         }
 
         public Rectangle Bounds()
@@ -104,7 +88,7 @@ namespace Sprint5
 
         public bool CompareTag(string tag)
         {
-            return tag == "Sword";
+            return tag == "Shield";
         }
 
         public bool Equals(ICollider col)
@@ -114,32 +98,46 @@ namespace Sprint5
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            
+
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            string dir = collision.From.ToString();
-
-            if (col.CompareTag("Enemy")) col.SendMessage("EnemyTakeDamage" + dir, damageAmount);
+            
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-            
+
         }
 
         public void SendMessage(string msg, object value)
         {
-           
+            Direction from = Directions.Parse(msg.Substring(10));
+            from = Directions.Opposite(from);
+            bool hit = from.Equals(link.currentDirection);
+
+            if (msg.Contains("TakeDamage") && hit)
+            {
+                int damage = link.UseRing ? (int)value / 2 : (int)value;
+                damage = Math.Max(damage - strength, 0);
+                if(damage > 0)
+                {
+                    link.IsDamaged = true;
+                    link.Health -= damage;
+                    link.knockback(from);
+                }
+                else
+                {
+                    Sounds.Instance.PlaySoundEffect("Shield");
+                }
+            }
         }
 
         public void Update()
         {
-            bounds.Location = link.currentLocation.ToPoint() + localPosition.ToPoint(); ;
-
-            if (turnOffClock > 1) turnOffClock--;
-            else if (turnOffClock == 1) { turnOffClock--; TurnOff(); }
+            bounds.Location = link.currentLocation.ToPoint() + localPosition.ToPoint();
+           
         }
     }
 }

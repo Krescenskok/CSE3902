@@ -44,7 +44,7 @@ namespace Sprint5
 
 
         bool loc = false;
-        private damageMove damDir = damageMove.none;
+        private Direction damDir = Direction.none;
         private int counter;
         public Vector2 currentLocation;
         private bool isAttacking = false;
@@ -70,6 +70,8 @@ namespace Sprint5
 
         public PlayerCollider collider;
         public WeaponCollider weaponCollider;
+        private ShieldCollider shieldCollider;
+        public ShieldCollider ShieldCollider { get => shieldCollider; set => shieldCollider = value; }
 
         public List<Direction> possibleDirections = Directions.Default();
         public Direction currentDirection;
@@ -140,7 +142,7 @@ namespace Sprint5
             }
         }
 
-        public damageMove DamDir { get => damDir; set => damDir = value; }
+        public Direction DamDir { get => damDir; set => damDir = value; }
         public bool IsAttacking
         {
             get { return isAttacking; }
@@ -214,7 +216,7 @@ namespace Sprint5
 
 
             weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
-
+            shieldCollider = new ShieldCollider(this,HPAmount.OneHeart);
 
         }
 
@@ -230,12 +232,14 @@ namespace Sprint5
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
 
-                if (damDir != damageMove.none) this.push(damDir);
+                if (damDir != Direction.none) this.push(damDir);
                 delay--;
 
 
                 possibleDirections = Directions.Default();
-                currentDirection = Directions.Parse(LinkDirection);
+                Direction newDir = Directions.Parse(LinkDirection);
+                if (newDir.Equals(currentDirection)) shieldCollider.ChangeDirection(newDir);
+                currentDirection = newDir;
             }
         }
         public void HandleObstacle(Collision col)
@@ -247,7 +251,7 @@ namespace Sprint5
             if (!(state is MoveLeft))
                 state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
-           
+            
         }
 
         public void MovingRight()
@@ -307,7 +311,7 @@ namespace Sprint5
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
-        public void knockback(damageMove collideDir)
+        public void knockback(Direction collideDir)
         {
             damDir = collideDir;
             counter = max;
@@ -315,25 +319,25 @@ namespace Sprint5
 
         public void stopKnockback()
         {
-            damDir = damageMove.none;
+            damDir = Direction.none;
             counter = min;
         }
 
-        public void push(damageMove direction)
+        public void push(Direction direction)
         {
             if (counter != max) {
                 switch (direction)
                 {
-                    case damageMove.right:
+                    case Direction.right:
                         currentLocation.X += increment;
                         break;
-                    case damageMove.left:
+                    case Direction.left:
                         currentLocation.X -= increment;
                         break;
-                    case damageMove.up:
+                    case Direction.up:
                         currentLocation.Y -= increment;
                         break;
-                    case damageMove.down:
+                    case Direction.down:
                         currentLocation.Y += increment;
                         break;
                 }

@@ -15,6 +15,8 @@ namespace Sprint5.Link
         IItems item;
         String Key;
 
+        bool previouslyAttacking;
+
         public LinkCommand(LinkPlayer linkPlayer, String key)
         {
             this.linkPlayer = linkPlayer;
@@ -33,6 +35,18 @@ namespace Sprint5.Link
 
         public void Update(GameTime gameTime)
         {
+
+            if(linkPlayer.IsAttacking && !previouslyAttacking)
+            {
+                linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
+                previouslyAttacking = true;
+            }
+            else if(!linkPlayer.IsAttacking && previouslyAttacking)
+            {
+                
+                previouslyAttacking = false;
+            }
+
             if(!linkPlayer.isPaused)
             {
                 ProjectilesCommand.Instance.Update(gameTime);
@@ -62,16 +76,14 @@ namespace Sprint5.Link
                             linkPlayer.IsAttacking = true;
                             linkPlayer.IsStopped = false;
                             linkPlayer.IsSecondAttack = false;
-                            linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
+                            
                         }
                         else if (Key.Equals("B"))
                         {
                             linkPlayer.IsAttacking = true;
                             linkPlayer.IsStopped = false;
                             linkPlayer.IsSecondAttack = true;
-                            linkPlayer.weaponCollider.TurnOff();
-                        }else{
-                            linkPlayer.weaponCollider.TurnOff();
+                            
                         }
 
                         if ((Key.Equals("A")) || (Key.Equals("Left")))

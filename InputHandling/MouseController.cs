@@ -30,6 +30,7 @@ namespace Sprint5
         {
             ICommand changeCommand = null;
             MouseState currentState = Mouse.GetState();
+            currentRoomNum = RoomSpawner.Instance.CurrentRoom;
             if (currentState.LeftButton == ButtonState.Pressed && prevState.LeftButton != currentState.LeftButton)
             {
                 if (currentRoomNum == minRoomNum)

@@ -74,9 +74,10 @@ namespace Sprint5
             }
             else if (boomerangDone)
             {
-                finished = true;
                 CollisionHandler.Instance.RemoveCollider(collider);
                 Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
+                finished = true;
+                
             }
 
             sprite.Update();
@@ -96,6 +97,11 @@ namespace Sprint5
         public void BounceOff(Collision collision)
         {
             if(collision.From.ToString().Equals(directionStr))
+                returning = true;
+        }
+        public void BounceOff(Direction dir)
+        {
+            if (dir.ToString().Equals(directionStr))
                 returning = true;
         }
     }

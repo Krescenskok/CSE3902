@@ -23,7 +23,7 @@ namespace Sprint5
         public List<ICollider> Colliders { get => new List<ICollider> { collider,playerFinder }; }
 
         public IEnemyState state;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private WallMasterSprite masterSprite;
 
         private EnemyCollider collider;
@@ -41,7 +41,8 @@ namespace Sprint5
             masterSprite = (WallMasterSprite)sprite;
             Rectangle rect = new Rectangle(this.location.ToPoint(), masterSprite.GetRectangle().Size);
             collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "WallMaster");
-           
+            CollisionHandler.Instance.RemoveCollider(collider); //starts in wall shouldn't collide
+
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
 
@@ -57,7 +58,7 @@ namespace Sprint5
 
         public void SetSprite(ISprite sprite)
         {
-            this.sprite = sprite;
+            this.sprite = (EnemySprite) sprite;
         }
         public void UpdateLocation(Vector2 location)
         {
@@ -77,7 +78,7 @@ namespace Sprint5
         public void Update()
         {
             state.Update();
-            
+            sprite.Update();
         }
      
         public void Die()
