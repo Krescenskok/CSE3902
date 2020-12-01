@@ -196,7 +196,7 @@ namespace Sprint5
                             linkPlayer.Health -= (int)value;
                         }
 
-                        linkPlayer.knockback(damageMove.right);
+                        linkPlayer.knockback(Direction.right);
 
 
 
@@ -220,7 +220,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.left);
+                        linkPlayer.knockback(Direction.left);
                     }
                 }
 
@@ -241,7 +241,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.up);
+                        linkPlayer.knockback(Direction.up);
                     }
                 }
 
@@ -262,7 +262,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.down);
+                        linkPlayer.knockback(Direction.down);
                     }
                 }
               
@@ -323,10 +323,10 @@ namespace Sprint5
         
         public void testKnockback(Collision collision)
         {
-            if (collision.Right && linkPlayer.DamDir == damageMove.right) linkPlayer.stopKnockback();
-            if (collision.Left && linkPlayer.DamDir == damageMove.left) linkPlayer.stopKnockback();
-            if (collision.Down && linkPlayer.DamDir == damageMove.down) linkPlayer.stopKnockback();
-            if (collision.Up && linkPlayer.DamDir == damageMove.up) linkPlayer.stopKnockback();
+            if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
+            if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
+            if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
+            if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
         }
 
         public void Update()

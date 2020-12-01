@@ -7,6 +7,7 @@ namespace Sprint5
     public interface Layer
     {
         bool CollidesWith(ICollider col);
-       
+
+        bool AttachedToPlayer { get; }
     }
 }

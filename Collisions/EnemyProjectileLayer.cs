@@ -4,12 +4,15 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class NPC_Layer : Layer
+    public class EnemyProjectileLayer : Layer
     {
         public bool AttachedToPlayer => false;
+
         public bool CollidesWith(ICollider col)
         {
-            return col.layer is DefaultLayer;
+            return col.layer is PlayerLayer
+                || col.layer is ObstacleLayer
+                || col.layer is ShieldLayer;
         }
     }
 }

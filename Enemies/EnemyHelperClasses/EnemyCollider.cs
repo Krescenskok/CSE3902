@@ -114,7 +114,7 @@ namespace Sprint5
         {
 
 
-            if (msg == "Stun") enemy.Stun();
+            if (msg == "Stun") { enemy.Stun(); Sounds.Instance.PlaySoundEffect("EnemyHit"); }
             else if (msg.Contains("EnemyTakeDamage"))
             {
                 Direction dir = Directions.Parse(msg.Substring(15));
@@ -123,7 +123,7 @@ namespace Sprint5
                 enemy.TakeDamage(dir, (int)value);
 
                 Sounds.Instance.PlaySoundEffect("EnemyHit");
-                
+
 
             }
 

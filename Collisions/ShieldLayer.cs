@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class DefaultLayer : Layer
+    public class ShieldLayer : Layer
     {
-        public bool AttachedToPlayer => false;
-
+        public bool AttachedToPlayer => true;
         public bool CollidesWith(ICollider other)
         {
-            return true;
+            return other.layer is EnemyProjectileLayer;
         }
     }
 }

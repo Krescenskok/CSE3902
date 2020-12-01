@@ -98,7 +98,9 @@ namespace Sprint5
 
         public void PickUpItem(IItems item, LinkPlayer link)
         {
+
             linkItemManagement.PickUpItem(item, link);
+
         }
 
         public void ConsumeItem(LinkPlayer link)

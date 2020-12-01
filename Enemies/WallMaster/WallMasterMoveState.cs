@@ -41,6 +41,7 @@ namespace Sprint5
 
         private const int stunTime = 120;
         private int stunClock = 0;
+        private bool permaStun = false;
 
         Random RandomNumber;
 
@@ -53,7 +54,7 @@ namespace Sprint5
         private Dictionary<Wall, List<Rectangle>> insideMap;
 
         private bool inWall = true;
-
+        private bool colliderOn;
 
         private Vector2 playerPosition;
         private Rectangle playerSpace;
@@ -215,7 +216,9 @@ namespace Sprint5
 
         public void Update()
         {
-            
+            if (inWall && colliderOn) ToggleCollider(false);
+          
+
             if (Arrived(currentSpace,targetSpace)) {
 
                 inWall = !insideArea.Contains(targetSpace);
@@ -240,6 +243,8 @@ namespace Sprint5
                 CollisionHandler.Instance.AddCollider(master.Colliders[0], Layers.Enemy);
             else
                 CollisionHandler.Instance.RemoveCollider(master.Colliders[0]);
+
+            colliderOn = on;
         }
 
         public void Hide()
@@ -406,8 +411,8 @@ namespace Sprint5
         public void Stun(bool permanent)
         {
             moveSpeed = 0;
-            stunClock = permanent ? int.MaxValue : stunTime;
-
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
+            permaStun = permaStun ? true : permaStun;
         }
     }
 }

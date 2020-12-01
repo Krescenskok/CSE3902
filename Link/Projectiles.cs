@@ -111,6 +111,8 @@ namespace Sprint5.Link
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
+
+                Sounds.Instance.PlaySoundEffect("SwordShoot");
             }
             else
             {

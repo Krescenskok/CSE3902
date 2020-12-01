@@ -25,7 +25,7 @@ namespace Sprint5.Enemies
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
+            CollisionHandler.Instance.AddCollider(this, Layers.EnemyProjectile);
         }
 
        
@@ -63,6 +63,10 @@ namespace Sprint5.Enemies
             {
                 boomerang.BounceOff(collision);
 
+            }else if (col.CompareTag("Shield"))
+            {
+                boomerang.BounceOff(collision);
+                col.SendMessage("TakeDamage" + direction, damageAmount);
             }
 
 
@@ -75,7 +79,7 @@ namespace Sprint5.Enemies
 
         public void SendMessage(string msg, object value)
         {
-           //nothing
+            if (msg == "Bounce") boomerang.BounceOff((Direction)value);
         }
 
         public void Update()
