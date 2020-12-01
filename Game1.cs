@@ -12,6 +12,8 @@ using System.Xml.Schema;
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using Sprint5.DifficultyHandling;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -34,9 +36,13 @@ namespace Sprint5
         LinkCommand LinkPersistent;
         ProjectilesCommand ProjectilePersistent;
 
+        private string difficulty;
 
+        private bool doorPause;
 
+        public bool DoorPause { get => doorPause; set => doorPause = value; }
 
+        public string Difficulty { get => difficulty; set => difficulty = value; }
 
         LinkPlayer linkPlayer;
 
@@ -66,6 +72,8 @@ namespace Sprint5
         protected override void LoadContent()
         {
 
+            Difficulty = "Normal";
+            DifficultyMultiplier.Instance.SetDifficulty(this);
 
             font = Content.Load<SpriteFont>("File");
 
@@ -192,7 +200,6 @@ namespace Sprint5
 
                 if (activeCommand != null)
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
-
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
@@ -202,16 +209,27 @@ namespace Sprint5
 
                 _spriteBatch.End();
 
+                if (isPaused && !DoorPause)
+                {
 
-                //Draw HUD in separate viewport
-                _spriteBatch.Begin();
+                    PauseScreen.Instance.Draw(_spriteBatch, this, font);
+                    
+                }
+                else
+                {
 
-                GraphicsDevice.Viewport = camera.HUDView;
-                HUD.Instance.DrawTop(_spriteBatch);
-                LinkInventory.Instance.Draw(_spriteBatch);
-                HUD.Instance.DrawBottom(_spriteBatch);
 
-                _spriteBatch.End();
+
+                    //Draw HUD in separate viewport
+                    _spriteBatch.Begin();
+
+                    GraphicsDevice.Viewport = camera.HUDView;
+                    LinkInventory.Instance.Draw(_spriteBatch);
+                    HUD.Instance.DrawBottom(_spriteBatch);
+
+
+                    _spriteBatch.End();
+                }
 
             }
             else
@@ -221,11 +239,8 @@ namespace Sprint5
                 if (activeCommand != null)
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
-                GraphicsDevice.Viewport = camera.gameView;
-                GraphicsDevice.Clear(Color.Black);
-                _spriteBatch.DrawString(font, "GAME OVER", new Vector2(260, 95), Color.White);
-                _spriteBatch.DrawString(font, "Press 'P' to Play Again", new Vector2(225, 145), Color.White);
-                _spriteBatch.DrawString(font, "Press 'Q' to Quit", new Vector2(250, 175), Color.White);
+                GameOverScreen.Instance.Draw(_spriteBatch, this, font);
+
 
                 base.Draw(gameTime);
 

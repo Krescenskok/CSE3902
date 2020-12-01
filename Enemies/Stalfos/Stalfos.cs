@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -42,6 +43,8 @@ namespace Sprint5
             this.location = location;
             state = new EnemySpawnState(this, game);
             saveInfo = xml;
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
+
         }
 
         public void Spawn()

@@ -24,6 +24,8 @@ namespace Sprint5
 
         private int nextRoom;
         
+        private int currentRoom;
+        
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
 
@@ -86,6 +88,8 @@ namespace Sprint5
 
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
+             
+            currentRoom = 1;
         }
 
         private Camera()
@@ -107,7 +111,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { wasPaused = game.isPaused;  Pause();}
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused;  Pause();}
             }
            
             
@@ -144,9 +148,14 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
+            
+            (game as Game1).DoorPause = true;
+
+
 
             Pause();
             
+
 
             currentDirection = Direction.up;
         }
@@ -158,6 +167,7 @@ namespace Sprint5
             direction = Vector3.Down;
 
             nextRoom = roomNum;
+            (game as Game1).DoorPause = true;
 
             Pause();
 
@@ -170,6 +180,9 @@ namespace Sprint5
 
             direction = Vector3.Left;
             nextRoom = roomNum;
+
+            (game as Game1).DoorPause = true;
+
             Pause();
 
             currentDirection = Direction.right;
@@ -181,8 +194,8 @@ namespace Sprint5
 
             direction = Vector3.Right;
             nextRoom = roomNum;
+            (game as Game1).DoorPause = true;
             Pause();
-
             currentDirection = Direction.left;
         }
 
@@ -234,10 +247,15 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(!inventoryOpen && game.isPaused && inventoryStillMoving)
+            }else if(inventoryOpen && !(game as Game1).isPaused)
             {
+                (game as Game1).DoorPause = true;
+            }
+            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+            {
+                (game as Game1).DoorPause = false;
+               game.Pause(wasPaused);
 
-                game.Pause(wasPaused);
                 inventoryStillMoving = false;
             }
 
@@ -267,10 +285,16 @@ namespace Sprint5
 
             }else if (loadNextRoom)
             {
+                Game1 game1 = game as Game1;
+                game1.DoorPause = false;
 
                 UnPause();
+
                 
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
+                if (nextRoom == 18) { player.moveCentral(); }
+                if (currentRoom == 18 && nextRoom == 17) { player.moveSecret(); }
+                currentRoom = nextRoom;
                 loadNextRoom = false;
             }
 

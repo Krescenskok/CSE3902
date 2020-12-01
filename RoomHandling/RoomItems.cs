@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
@@ -20,6 +21,7 @@ namespace Sprint5
 
         private List<IItems> roomItems;
         private Camera cam = Camera.Instance;
+        private int max;
 
         private List<TestCollider> testObjects;
         public static RoomItems Instance
@@ -170,8 +172,9 @@ namespace Sprint5
 
         public void DropRandom(Vector2 location)
         {
+            max = DifficultyMultiplier.Instance.DetermineDropChance(); 
             Random rand = new Random();
-            int num = rand.Next(0, 5);
+            int num = rand.Next(0, max);
             if (num == 0) DropItem("Heart", location);
             else if (num == 1) DropItem("Rupee", location);
             else if (num == 2) DropItem("Fairy", location);

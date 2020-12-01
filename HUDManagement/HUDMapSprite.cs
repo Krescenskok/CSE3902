@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5
+namespace Sprint5.HUDManagement
 {
     public class HUDMapSprite : ISprite
     {

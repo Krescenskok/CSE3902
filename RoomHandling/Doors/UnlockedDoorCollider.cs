@@ -24,10 +24,10 @@ namespace Sprint5
             bounds.Location = location;
             bounds.Size = size;
 
-            if (orient == 'L' || orient == 'C') entrySide = Direction.left;
-            else if (orient == 'R') entrySide = Direction.right;
-            else if (orient == 'T') entrySide = Direction.up;
-            else if (orient == 'B' || orient == 'S') entrySide = Direction.down;
+            if (orient == 'L') entrySide = Direction.left;
+            else if (orient == 'R' || orient == 'C') entrySide = Direction.right;
+            else if (orient == 'T' || orient == 'S') entrySide = Direction.up;
+            else if (orient == 'B') entrySide = Direction.down;
             
             this.door = door;
 

@@ -76,14 +76,14 @@ namespace Sprint5.Link
                             linkPlayer.IsAttacking = true;
                             linkPlayer.IsStopped = false;
                             linkPlayer.IsSecondAttack = false;
-                            
+
                         }
                         else if (Key.Equals("B"))
                         {
                             linkPlayer.IsAttacking = true;
                             linkPlayer.IsStopped = false;
                             linkPlayer.IsSecondAttack = true;
-                            
+
                         }
 
                         if ((Key.Equals("A")) || (Key.Equals("Left")))
@@ -115,9 +115,7 @@ namespace Sprint5.Link
                         }
                         else if ((Key.Equals("D0")) || (Key.Equals("NumPad0")))
                         {
-
                             linkPlayer.CurrentWeapon = ItemForLink.Shield;
-
                         }
                         
 
