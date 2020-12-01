@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using Sprint5.HUDManagement;
 using System.Text;
 
 namespace Sprint5.Inventory
@@ -93,15 +94,10 @@ namespace Sprint5.Inventory
             {
                 foreach (KeyValuePair<int, Boolean> pair in visitedRoom)
                 {
-                    if (pair.Value is true)
-                    {
-                        individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
-                    }
+                    if (pair.Value is true) individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
                 }
             }
-
             currentMapLocationSprites[linkRoom].Draw(spriteBatch, mapLocation, 0, Color.White);
-
         }
 
         public void Reset()

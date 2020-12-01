@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Text;
+using Sprint5.HUDManagement;
 
 namespace Sprint5
 {
@@ -122,22 +123,10 @@ namespace Sprint5
 
         private void UpdateBGSprite()
         {
-            if (HUDMap.Instance.HasCompass && HUDMap.Instance.HasMap)
-            {
-                drawnSprite = fullInvSprite;
-            }
-            else if (HUDMap.Instance.HasCompass)
-            {
-                drawnSprite = compassInvSprite;
-            }
-            else if (HUDMap.Instance.HasMap)
-            {
-                drawnSprite = mapInvSprite;
-            }
-            else
-            {
-                drawnSprite = defaultInvSprite;
-            }
+            if (HUDMap.Instance.HasCompass && HUDMap.Instance.HasMap) drawnSprite = fullInvSprite; 
+            else if (HUDMap.Instance.HasCompass) drawnSprite = compassInvSprite; 
+            else if (HUDMap.Instance.HasMap) drawnSprite = mapInvSprite; 
+            else  drawnSprite = defaultInvSprite; 
         }
 
         public void Draw(SpriteBatch spriteBatch)

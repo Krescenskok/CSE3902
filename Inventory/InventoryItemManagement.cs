@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Sprint5.LinkInventory;
+using Sprint5.HUDManagement;
 
 namespace Sprint5.Inventory
 {
