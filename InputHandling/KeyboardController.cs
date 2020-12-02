@@ -31,7 +31,7 @@ namespace Sprint5
             CommandsList.Add(Keys.A, new LinkCommand(Player, "A"));
             CommandsList.Add(Keys.Left, new LinkCommand(Player, "Left"));
 
-            CommandsList.Add(Keys.P, new ResetCommand(Player, true));
+            CommandsList.Add(Keys.P, new ResetCommand(Player));
      
             CommandsList.Add(Keys.D, new LinkCommand(Player, "D"));
             CommandsList.Add(Keys.Right, new LinkCommand(Player, "Right"));
@@ -65,7 +65,7 @@ namespace Sprint5
             CommandsList.Add(Keys.D9, new LinkCommand(Player, "D9"));
             CommandsList.Add(Keys.NumPad9, new LinkCommand(Player, "NumPad9"));
             CommandsList.Add(Keys.LeftShift, new LinkCommand(Player, "Shift"));
-            CommandsList.Add(Keys.R, new ResetCommand(Player, false));
+            CommandsList.Add(Keys.R, new ResetCommand(Player));
 
             CommandsList.Add(Keys.Space, new ShowInventoryCommand());
             CommandsList.Add(Keys.I, new ChangeItemCommand(true, Player));

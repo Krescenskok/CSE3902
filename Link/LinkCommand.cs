@@ -47,7 +47,7 @@ namespace Sprint5.Link
                 previouslyAttacking = false;
             }
 
-            if(!linkPlayer.Paused)
+            if(!linkPlayer.isPaused)
             {
                 ProjectilesCommand.Instance.Update(gameTime);
                 if (Key.Equals("R"))

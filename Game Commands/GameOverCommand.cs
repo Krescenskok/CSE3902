@@ -10,12 +10,12 @@ using System.Diagnostics;
 namespace Sprint5
 {
 
-    public class ResetCommand : ICommand
+    public class GameOverCommand : ICommand
     {
         private LinkPlayer Player;
 
 
-        public  ResetCommand(LinkPlayer player)
+        public  GameOverCommand(LinkPlayer player)
         {
             this.Player = player;
         }
@@ -31,12 +31,9 @@ namespace Sprint5
 
         }
 
-        public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
+        public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-                (game as Game1).IsGameOver = false;
-                LinkCommand linkReset = new LinkCommand(Player, "R");
-                linkReset.Update(Gametime);
-                RoomSpawner.Instance.Reset();
+            (game as Game1).IsGameOver = true;
         }
     }
 }

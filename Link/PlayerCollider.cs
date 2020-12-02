@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Sprint5.GamePadVibration;
 
 namespace Sprint5
 {
@@ -195,7 +196,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-
+                        GamePadVibrate.Instance.TakeDamage("Right");
                         linkPlayer.knockback(Direction.right);
 
 
@@ -220,6 +221,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Left");
                         linkPlayer.knockback(Direction.left);
                     }
                 }
@@ -241,6 +243,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Up");
                         linkPlayer.knockback(Direction.up);
                     }
                 }
@@ -262,6 +265,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Down");
                         linkPlayer.knockback(Direction.down);
                     }
                 }

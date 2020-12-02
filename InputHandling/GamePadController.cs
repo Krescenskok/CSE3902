@@ -54,6 +54,9 @@ namespace Sprint5
             CommandsList.Add(Buttons.A, new LinkCommand(Player, "N"));
             CommandsList.Add(Buttons.B, new LinkCommand(Player, "B"));
 
+            CommandsList.Add(Buttons.RightTrigger, new LinkCommand(Player, "N"));
+            CommandsList.Add(Buttons.LeftTrigger, new LinkCommand(Player, "B"));
+
             CommandsList.Add(Buttons.DPadRight, new ChangeItemCommand(true, Player));
             CommandsList.Add(Buttons.DPadLeft, new ChangeItemCommand(false, Player));
 
@@ -66,8 +69,10 @@ namespace Sprint5
 
             CommandsList.Add(Buttons.Back, new PauseCommand(Game, Player,  "NotDoor"));
 
-            CommandsList.Add(Buttons.RightTrigger, new ChangeDifficultyCommand("Up", Game));
-            CommandsList.Add(Buttons.LeftTrigger, new ChangeDifficultyCommand("Down", Game));
+            CommandsList.Add(Buttons.BigButton, new ResetCommand(Player));
+
+            CommandsList.Add(Buttons.DPadUp, new ChangeDifficultyCommand("Up", Game));
+            CommandsList.Add(Buttons.DPadDown, new ChangeDifficultyCommand("Down", Game));
 
             MovementButtons.Add(Buttons.LeftThumbstickDown);
             MovementButtons.Add(Buttons.LeftThumbstickLeft);

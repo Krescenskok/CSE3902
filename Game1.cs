@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using Sprint5.DifficultyHandling;
 using Sprint5.Menus;
+using Sprint5.GamePadVibration;
 
 namespace Sprint5
 {
@@ -69,8 +70,6 @@ namespace Sprint5
         {
             base.Initialize();
 
-
-
         }
 
         protected override void LoadContent()
@@ -95,9 +94,7 @@ namespace Sprint5
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
-
-
-            LinkPersistent = new LinkCommand(linkPlayer, "");
+            LinkPersistent = new LinkCommand(linkPlayer,  "");
             ProjectilePersistent = ProjectilesCommand.Instance;
             ProjectilePersistent.Link = linkPlayer;
 
@@ -123,16 +120,12 @@ namespace Sprint5
             _graphics.GraphicsDevice.Viewport.Height / 2);
         }
 
-        
-
         protected override void Update(GameTime gameTime)
         {
-            System.Diagnostics.Debug.WriteLine("Still updating");
             if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
                 linkPlayer.IsDead = true;
-                activeCommand = new ResetCommand(linkPlayer, false);
-                activeCommand.Update(gameTime);
+                activeCommand = new GameOverCommand(linkPlayer);
             }
             else
             {
@@ -147,7 +140,9 @@ namespace Sprint5
 
                 }
             }
-            
+
+            GamePadVibrate.Instance.Update(this);
+
             if (!Paused )
             {
                 if (activeCommand != null)
@@ -183,21 +178,6 @@ namespace Sprint5
 
         protected override void Draw(GameTime gameTime)
         {
-            if (activeCommand != null)
-            {
-                if (activeCommand is ResetCommand)
-                {
-
-                    IsGameOver = !((ResetCommand)activeCommand).StartAgain;
-
-                }
-                else
-                {
-                    IsGameOver = false;
-                }
-            }           
-
-
             if (!IsGameOver)
             {
                 _spriteBatch.Begin(transformMatrix: this.Camera.Transform);
@@ -206,6 +186,7 @@ namespace Sprint5
 
                 if (activeCommand != null)
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+
                 RoomSpawner.Instance.Draw(_spriteBatch);
                 LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
@@ -217,23 +198,16 @@ namespace Sprint5
 
                 if (Paused && !DoorPause)
                 {
-
                     PauseScreen.Instance.Draw(_spriteBatch, this, font);
-                    
                 }
                 else
                 {
-
-
-
                     //Draw HUD in separate viewport
                     _spriteBatch.Begin();
 
                     GraphicsDevice.Viewport = this.Camera.HUDView;
                     LinkInventory.Instance.Draw(_spriteBatch);
                     HUD.Instance.DrawBottom(_spriteBatch);
-
-
                     _spriteBatch.End();
                 }
 
@@ -246,7 +220,6 @@ namespace Sprint5
                     activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
                 GameOverScreen.Instance.Draw(_spriteBatch, this, font);
-
 
                 base.Draw(gameTime);
 
