@@ -22,7 +22,7 @@ namespace Sprint5.Items
         private List<IItems> impactList = new List<IItems>();
         private bool isExpired = false;
 
-        
+
         public bool IsExpired
         {
             get { return isExpired; }
@@ -84,7 +84,7 @@ namespace Sprint5.Items
 
         public void ReturnedToLink()
         {
-            if (throwing && returning) 
+            if (throwing && returning)
             {
                 returned = true;
                 state.Expire();
@@ -105,12 +105,12 @@ namespace Sprint5.Items
             }
 
             int i;
-            for (i=0; i<impactList.Count; i++)
+            for (i = 0; i < impactList.Count; i++)
             {
                 if (impactList[i].IsExpired)
-                    {
-                        impactList.RemoveAt(i);
-                    }
+                {
+                    impactList.RemoveAt(i);
+                }
             }
 
             collider.Update(this, this.state);
@@ -118,7 +118,8 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            state.Expire();
+            if (returned)
+                state.Expire();
         }
 
         public void Collect()
