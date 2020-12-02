@@ -11,9 +11,9 @@ namespace Sprint5.Link
 
         private double lastTime;
 
-        public Movement(LinkPlayer linkPlayer) :base(linkPlayer)
+        public Movement(LinkPlayer linkPlayer) : base(linkPlayer)
         {
-            
+
         }
 
         public override Vector2 Update(GameTime gameTime, Vector2 location)
@@ -33,10 +33,13 @@ namespace Sprint5.Link
                 {
                     if (link.SecondaryWeapon == ItemForLink.Boomerang)
                     {
-                        if (!link.IsShootingProjectile)
+                        if (LinkInventory.Instance.HasBoomerang)
                         {
-                            link.IsShootingProjectile = true;
-                            ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                            if (!link.IsShootingProjectile)
+                            {
+                                link.IsShootingProjectile = true;
+                                ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                            }
                         }
                         return HandleArrowBow(gameTime, location);
                     }
