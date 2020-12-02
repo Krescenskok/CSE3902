@@ -37,7 +37,7 @@ namespace Sprint5.Menus
             texture = new Texture2D(game.GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.Black });
 
-            game.GraphicsDevice.Viewport = game.camera.gameView;
+            game.GraphicsDevice.Viewport = game.GameCamera.gameView;
 
             batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White * opacity);
 

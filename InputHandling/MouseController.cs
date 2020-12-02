@@ -13,53 +13,52 @@ namespace Sprint5
 {
     public class MouseController : IController
     {
-        const int maxRoomNum = 18;
-        const int minRoomNum = 1;
-        int currentRoomNum;
-        MouseState prevState;
-        IDictionary<int, ICommand> commandsList = new Dictionary<int, ICommand>();
+        private const int MaxRoomNum = 18;
+        private const int MinRoomNum = 1;
+        private int CurrentRoomNum;
+        private MouseState PrevState;
 
         public MouseController(Game1 game)
         {
-            currentRoomNum = minRoomNum;
-            prevState = Mouse.GetState();
+            CurrentRoomNum = MinRoomNum;
+            PrevState = Mouse.GetState();
 
         }
 
         public ICommand HandleInput(Game1 game)
         {
-            ICommand changeCommand = null;
-            MouseState currentState = Mouse.GetState();
-            currentRoomNum = RoomSpawner.Instance.CurrentRoom;
-            if (currentState.LeftButton == ButtonState.Pressed && prevState.LeftButton != currentState.LeftButton)
+            ICommand ChangeCommand = null;
+            MouseState CurrentState = Mouse.GetState();
+            CurrentRoomNum = RoomSpawner.Instance.CurrentRoom;
+            if (CurrentState.LeftButton == ButtonState.Pressed && PrevState.LeftButton != CurrentState.LeftButton)
             {
-                if (currentRoomNum == minRoomNum)
+                if (CurrentRoomNum == MinRoomNum)
                 {
-                    currentRoomNum = maxRoomNum;
+                    CurrentRoomNum = MaxRoomNum;
                 }
                 else
                 {
-                    currentRoomNum--;
+                    CurrentRoomNum--;
                 }
-                changeCommand = new ChangeRoomCommand(currentRoomNum);
+                ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
                 //Camera.Instance.ScrollDown(2); //for testing, can remove
             }
-            else if (currentState.RightButton == ButtonState.Pressed && prevState.RightButton != currentState.RightButton)
+            else if (CurrentState.RightButton == ButtonState.Pressed && PrevState.RightButton != CurrentState.RightButton)
             {
-                if (currentRoomNum == maxRoomNum)
+                if (CurrentRoomNum == MaxRoomNum)
                 {
-                    currentRoomNum = minRoomNum;
+                    CurrentRoomNum = MinRoomNum;
                 }
                 else
                 {
-                    currentRoomNum++;
+                    CurrentRoomNum++;
                 }
-                changeCommand = new ChangeRoomCommand(currentRoomNum);
+                ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
                 //Camera.Instance.ScrollUp(3); //for testing, can remove
             }
-            prevState = currentState;
+            PrevState = CurrentState;
 
-            return changeCommand;
+            return ChangeCommand;
         }
     }
 }
