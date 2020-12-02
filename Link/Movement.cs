@@ -33,10 +33,13 @@ namespace Sprint5.Link
                 {
                     if (link.SecondaryWeapon == ItemForLink.Boomerang)
                     {
-                        if (!link.IsShootingProjectile)
+                        if (LinkInventory.Instance.HasBoomerang)
                         {
-                            link.IsShootingProjectile = true;
-                            ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                            if (!link.IsShootingProjectile)
+                            {
+                                link.IsShootingProjectile = true;
+                                ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                            }
                         }
                         return HandleArrowBow(gameTime, location);
                     }

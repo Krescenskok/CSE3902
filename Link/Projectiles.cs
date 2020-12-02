@@ -165,9 +165,9 @@ namespace Sprint5.Link
         {
             if (!boomerangMade && LinkInventory.Instance.HasBoomerang)
             {
+                boomerangMade = true;
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += DISPLACEMENT;
-                boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 itemsPlacedByLink.Add(item);
             }
@@ -276,7 +276,7 @@ namespace Sprint5.Link
                 {
                     bombMade = false;
                     list.Add(item);
-                }                
+                }
             }
 
             foreach (IItems item in list)
