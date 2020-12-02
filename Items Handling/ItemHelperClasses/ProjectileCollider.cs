@@ -81,12 +81,11 @@ namespace Sprint5.Items
             }
             else if (col.CompareTag("Wall") || col.CompareTag("wall"))
             {
-                item.Expire();
+                if (!item.IsExpired) item.Expire();
             }
-            else if (col.CompareTag("Door") || col.CompareTag("Doorway") 
-                || col.CompareTag("UnlockedDoor") || col.CompareTag("LockedDoor"))
+            else if (col.CompareTag("Door") || col.CompareTag("Doorway")  || col.CompareTag("UnlockedDoor") || col.CompareTag("LockedDoor"))
             {
-                item.Expire();
+                if (!item.IsExpired) item.Expire();
             }
 
         }

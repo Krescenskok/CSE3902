@@ -21,6 +21,7 @@ namespace Sprint5.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
+        private string direction;
 
         public Vector2 Location { get => location; }
 
@@ -32,22 +33,24 @@ namespace Sprint5.Items
         {
             this.location = location;
             this.item = item;
+            this.direction = direction;
             state = new SwordBeamState(this, location, direction);
 
             if (direction == "Down")
             {
                 collider = new ProjectileCollider((item as DownBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
-            else if (direction == "Up")
-            {
-                collider = new ProjectileCollider((item as UpBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            }
             else if (direction == "Left")
             {
                 collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            } else if (direction == "Right")
+            } 
+            else if (direction == "Right")
             {
                 collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            }
+            else if (direction == "Up")
+            {
+                collider = new ProjectileCollider((item as UpBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
 
         }
@@ -75,7 +78,7 @@ namespace Sprint5.Items
 
         public void SwordImpact()
         {
-            state = new BeamImpactState(this);
+            state = new BeamImpactState(this, direction);
             Update();
         }
 

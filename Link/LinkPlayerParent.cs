@@ -19,7 +19,7 @@ namespace Sprint5
         Clock
     }
     
-        public enum damageMove
+    public enum damageMove
     {
         up,
         down,
@@ -80,7 +80,7 @@ namespace Sprint5
         string direction = "Down";
         private bool secondAttack = false;
         private bool isStopped = false;
-        private ItemForLink currentWeapon = ItemForLink.MagicalRod;
+        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
 
         public int Counter { get => counter; set => counter = value; }
         public damageMove DamDir{ get => damDir; set => damDir = value; }
