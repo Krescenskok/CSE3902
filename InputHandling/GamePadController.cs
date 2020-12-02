@@ -17,10 +17,6 @@ namespace Sprint5
         private GamePadState State;
         private Game1 Game;
 
-        private int delay = 0;
-
-        //LinkItems item;
-
         private IDictionary<Buttons, ICommand> CommandsList = new Dictionary<Buttons, ICommand>();
         private List<Buttons> MovementButtons = new List<Buttons>();
 
@@ -38,13 +34,6 @@ namespace Sprint5
                 State = GamePad.GetState(PlayerIndex.One);
                 PrevState = GamePad.GetState(PlayerIndex.One);
             }
-
-            /*
-            CommandsList.Add(Buttons.DPadRight, new LinkCommand(Player, "Right"));
-            CommandsList.Add(Buttons.DPadUp, new LinkCommand(Player, "Up"));
-            CommandsList.Add(Buttons.DPadDown, new LinkCommand(Player, "Down"));
-            CommandsList.Add(Buttons.DPadLeft, new LinkCommand(Player, "Left"));
-            */
 
             CommandsList.Add(Buttons.LeftThumbstickUp, new LinkCommand(Player, "W"));
             CommandsList.Add(Buttons.LeftThumbstickLeft, new LinkCommand(Player, "A"));
