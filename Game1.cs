@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,27 +27,30 @@ namespace Sprint5
 
         private Vector2 spritePos;
 
-        List<IController> controllers = new List<IController>();
+        private List<IController> controllers = new List<IController>();
 
-        public Camera camera;
+        private Camera Camera;
 
         private const int offset = 160;
 
-        ICommand activeCommand;
-        LinkCommand LinkPersistent;
-        ProjectilesCommand ProjectilePersistent;
+        private ICommand activeCommand;
+        private LinkCommand LinkPersistent;
+        private ProjectilesCommand ProjectilePersistent;
 
         private string difficulty;
-
         private bool doorPause;
+
+        public Camera GameCamera { get => this.Camera; set => this.Camera = value; }
 
         public bool DoorPause { get => doorPause; set => doorPause = value; }
 
         public string Difficulty { get => difficulty; set => difficulty = value; }
 
-        LinkPlayer linkPlayer;
+        private LinkPlayer linkPlayer;
 
-        public bool isPaused;
+        private bool Paused;
+        public bool IsPaused { get => Paused; set => Paused = value; }
+
         public LinkPlayer LinkPlayer { get => linkPlayer; }
         public SpriteFont Font { get => font; }
         public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
@@ -58,7 +62,7 @@ namespace Sprint5
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            isPaused = false;
+            Paused = false;
         }
 
         protected override void Initialize()
@@ -87,6 +91,7 @@ namespace Sprint5
 
             linkPlayer = new LinkPlayer(this);
 
+            controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
@@ -100,8 +105,8 @@ namespace Sprint5
             DoorSpriteFactory.Instance.LoadAllTextures(this);
 
             //do not move//
-            camera = Camera.Instance;
-            camera.Load(this);
+            this.Camera = Camera.Instance;
+            this.Camera.Load(this);
             //do not move//
 
             HUD.Instance.LoadHUD(this);
@@ -122,6 +127,7 @@ namespace Sprint5
 
         protected override void Update(GameTime gameTime)
         {
+            System.Diagnostics.Debug.WriteLine("Still updating");
             if (linkPlayer.Health == 0 && !linkPlayer.IsDead)
             {
                 linkPlayer.IsDead = true;
@@ -142,7 +148,7 @@ namespace Sprint5
                 }
             }
             
-            if (!isPaused )
+            if (!Paused )
             {
                 if (activeCommand != null)
                     activeCommand.Update(gameTime);
@@ -157,14 +163,14 @@ namespace Sprint5
                 base.Update(gameTime);                
             }            
 
-            camera.Update();
+            this.Camera.Update();
             
         }
 
         void PrepareToDraw()
         {
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
-            GraphicsDevice.Viewport = camera.gameView;
+            _spriteBatch.Begin(transformMatrix: this.Camera.Transform);
+            GraphicsDevice.Viewport = this.Camera.gameView;
             GraphicsDevice.Clear(Color.Black);
         }
 
@@ -194,8 +200,8 @@ namespace Sprint5
 
             if (!IsGameOver)
             {
-                _spriteBatch.Begin(transformMatrix: camera.Transform);
-                GraphicsDevice.Viewport = camera.gameView;
+                _spriteBatch.Begin(transformMatrix: this.Camera.Transform);
+                GraphicsDevice.Viewport = this.Camera.gameView;
                 GraphicsDevice.Clear(Color.Black);
 
                 if (activeCommand != null)
@@ -209,7 +215,7 @@ namespace Sprint5
 
                 _spriteBatch.End();
 
-                if (isPaused && !DoorPause)
+                if (Paused && !DoorPause)
                 {
 
                     PauseScreen.Instance.Draw(_spriteBatch, this, font);
@@ -223,7 +229,7 @@ namespace Sprint5
                     //Draw HUD in separate viewport
                     _spriteBatch.Begin();
 
-                    GraphicsDevice.Viewport = camera.HUDView;
+                    GraphicsDevice.Viewport = this.Camera.HUDView;
                     LinkInventory.Instance.Draw(_spriteBatch);
                     HUD.Instance.DrawBottom(_spriteBatch);
 
@@ -248,6 +254,6 @@ namespace Sprint5
             }
         }
 
-        public void Pause(bool pause) { if (pause != isPaused) { Sounds.Instance.TogglePause(); } isPaused = pause; }
+        public void Pause(bool pause) { if (pause != Paused) { Sounds.Instance.TogglePause(); } Paused = pause; }
     }
 }

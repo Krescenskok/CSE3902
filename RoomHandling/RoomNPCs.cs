@@ -27,7 +27,7 @@ namespace Sprint5
         private List<INPC> NPCs;
         private Camera cam = Camera.Instance;
 
-       
+
 
 
 

@@ -113,11 +113,11 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
-            Direction from = Directions.Parse(msg.Substring(10));
-            from = Directions.Opposite(from);
-            bool hit = from.Equals(link.currentDirection);
+            //Direction from = Directions.Parse(msg.Substring(10));
+            //from = Directions.Opposite(from);
+            //bool hit = from.Equals(link.currentDirection);
 
-            if (msg.Contains("TakeDamage") && hit)
+            if (msg.Contains("TakeDamage"))
             {
                 int damage = link.UseRing ? (int)value / 2 : (int)value;
                 damage = Math.Max(damage - strength, 0);
@@ -125,7 +125,7 @@ namespace Sprint5
                 {
                     link.IsDamaged = true;
                     link.Health -= damage;
-                    link.knockback(from);
+                    //link.knockback(from);
                 }
                 else
                 {

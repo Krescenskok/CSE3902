@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class Camera 
+    public class Camera
     {
         public static Camera Instance { get; } = new Camera();
 
@@ -111,7 +111,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused;  Pause();}
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.IsPaused;  Pause();}
             }
            
             
@@ -247,11 +247,11 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(inventoryOpen && !(game as Game1).isPaused)
+            }else if(inventoryOpen && !(game as Game1).IsPaused)
             {
                 (game as Game1).DoorPause = true;
             }
-            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+            else if(!inventoryOpen && (game as Game1).IsPaused && inventoryStillMoving)
             {
                 (game as Game1).DoorPause = false;
                game.Pause(wasPaused);

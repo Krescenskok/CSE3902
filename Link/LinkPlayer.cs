@@ -19,7 +19,6 @@ namespace Sprint5
         private const int NUM_OF_RUPEE = 0;
 
 
-        public PlayerCollider collider;
         public WeaponCollider weaponCollider;
         private ShieldCollider shieldCollider;
         public ShieldCollider ShieldCollider { get => shieldCollider; set => shieldCollider = value; }
@@ -42,6 +41,8 @@ namespace Sprint5
         private List<Direction> PossibleDirections = Directions.Default();
 
         private bool IsPaused = false;
+
+        public bool Paused { get => IsPaused; set => IsPaused = value; }
 
         public void RemovePlacedItem(IItems item)
         {
@@ -86,10 +87,10 @@ namespace Sprint5
                 
                 possibleDirections = Directions.Default();
                 Direction newDir = Directions.Parse(LinkDirection);
-                if (newDir.Equals(currentDirection)) shieldCollider.ChangeDirection(newDir);
-                currentDirection = newDir;
+                //if (newDir.Equals(currentDirection)) shieldCollider.ChangeDirection(newDir);
+                //currentDirection = newDir;
 
-                if (DamDir != damageMove.none) this.push(DamDir);
+                //if (DamDir != damageMove.none) this.push(DamDir);
                 Delay--;
 
 
@@ -175,14 +176,14 @@ namespace Sprint5
 
         public void knockback(Direction collideDir)
         {
-            DamDir = collideDir;
+            //DamDir = collideDir;
             Counter = max;
         }
 
         public void stopKnockback()
         {
 
-            DamDir = Direction.none;
+            //DamDir = Direction.none;
             Counter = min;
         }
 

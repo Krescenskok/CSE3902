@@ -323,10 +323,10 @@ namespace Sprint5
         
         public void testKnockback(Collision collision)
         {
-            if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
-            if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
-            if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
-            if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
+            //if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
+            //if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
+            //if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
+           // if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
         }
 
         public void Update()

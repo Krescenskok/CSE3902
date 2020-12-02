@@ -11,11 +11,11 @@ namespace Sprint5.Link
     public class LinkCommand : ICommand
     {
 
-        LinkPlayer linkPlayer;
-        IItems item;
-        String Key;
+        private LinkPlayer linkPlayer;
+        private IItems item;
+        private String Key;
 
-        bool previouslyAttacking;
+        private bool previouslyAttacking;
 
         public LinkCommand(LinkPlayer linkPlayer, String key)
         {
@@ -38,7 +38,7 @@ namespace Sprint5.Link
 
             if(linkPlayer.IsAttacking && !previouslyAttacking)
             {
-                linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
+                //linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
                 previouslyAttacking = true;
             }
             else if(!linkPlayer.IsAttacking && previouslyAttacking)
@@ -47,7 +47,7 @@ namespace Sprint5.Link
                 previouslyAttacking = false;
             }
 
-            if(!linkPlayer.isPaused)
+            if(!linkPlayer.Paused)
             {
                 ProjectilesCommand.Instance.Update(gameTime);
                 if (Key.Equals("R"))
@@ -69,8 +69,7 @@ namespace Sprint5.Link
 
             if (!linkPlayer.IsAttacking)
             {
-                if (!linkPlayer.IsAttacking)
-                {
+                
                         if (Key.Equals("N"))
                         {
                             linkPlayer.IsAttacking = true;
@@ -117,19 +116,6 @@ namespace Sprint5.Link
                         {
                             linkPlayer.CurrentWeapon = ItemForLink.Shield;
                         }
-                        
-
-
-                }
-                else if ((Key.Equals("S")) || (Key.Equals("Down")))
-                {
-                    linkPlayer.IsStopped = false;
-                    linkPlayer.IsAttacking = false;
-                    linkPlayer.MovingDown();
-                }
-
-
-
                 }
 
                 linkPlayer.Update(gameTime);

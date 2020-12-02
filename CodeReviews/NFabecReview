@@ -12,4 +12,4 @@ Sprint number: 4
 Name of the .cs file being reviewed: Camera.cs
 Author of the .cs file being reviewed: JT Thrash
 Specific comments on code quality: Code is good quality. The code is efficient and not much redundancy 
-A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Done Scrolling method could be taken out to reduce code length and put a little more math into moving the camera
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Done Scrolling method could be taken out to reduce code length and put a little more math into moving the Camera

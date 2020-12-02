@@ -12,155 +12,119 @@ namespace Sprint5
 {
     public class KeyboardController : IController
     {
-        LinkPlayer player;
-        KeyboardState prevState;
+        private LinkPlayer Player;
+        private KeyboardState PrevState;
+        private KeyboardState State;
+        private Game1 Game;
 
-        int delay = 0;
-
-        //LinkItems item;
-
-        IDictionary<Keys, ICommand> commandsList = new Dictionary<Keys, ICommand>();
-        List<Keys> movementKeys = new List<Keys>();
+        private IDictionary<Keys, ICommand> CommandsList = new Dictionary<Keys, ICommand>();
+        private List<Keys> MovementKeys = new List<Keys>();
 
         public KeyboardController(LinkPlayer linkPlayer, Game1 game, SpriteBatch spriteBatch)
         {
-            this.player = linkPlayer;
+            this.Player = linkPlayer;
+            this.Game = game;
 
             var state = Keyboard.GetState();
-            commandsList.Add(Keys.Q, new QuitCommand());
+            CommandsList.Add(Keys.Q, new QuitCommand());
 
-            commandsList.Add(Keys.A, new LinkCommand(player, "A"));
-            commandsList.Add(Keys.Left, new LinkCommand(player, "Left"));
+            CommandsList.Add(Keys.A, new LinkCommand(Player, "A"));
+            CommandsList.Add(Keys.Left, new LinkCommand(Player, "Left"));
 
-            commandsList.Add(Keys.P, new ResetCommand(player, true));
+            CommandsList.Add(Keys.P, new ResetCommand(Player, true));
      
+            CommandsList.Add(Keys.D, new LinkCommand(Player, "D"));
+            CommandsList.Add(Keys.Right, new LinkCommand(Player, "Right"));
+            CommandsList.Add(Keys.W, new LinkCommand(Player, "W"));
+            CommandsList.Add(Keys.Up, new LinkCommand(Player, "Up"));
+            CommandsList.Add(Keys.S, new LinkCommand(Player, "S"));
+            CommandsList.Add(Keys.Down, new LinkCommand(Player, "Down"));
+            CommandsList.Add(Keys.N, new LinkCommand(Player, "N"));
+            CommandsList.Add(Keys.B, new LinkCommand(Player, "B"));
+            CommandsList.Add(Keys.Z, new LinkCommand(Player, "Z"));
+            CommandsList.Add(Keys.E, new LinkCommand(Player, "E"));
 
+            CommandsList.Add(Keys.D0, new LinkCommand(Player, "D0"));
+            CommandsList.Add(Keys.NumPad0, new LinkCommand(Player, "NumPad0"));
+            CommandsList.Add(Keys.D1, new LinkCommand(Player, "D1"));
+            CommandsList.Add(Keys.NumPad1, new LinkCommand(Player, "NumPad1"));
+            CommandsList.Add(Keys.D2, new LinkCommand(Player, "D2"));
+            CommandsList.Add(Keys.NumPad2, new LinkCommand(Player, "NumPad2"));
+            CommandsList.Add(Keys.D3, new LinkCommand(Player, "D3"));
+            CommandsList.Add(Keys.NumPad3, new LinkCommand(Player, "NumPad3"));
+            CommandsList.Add(Keys.D4, new LinkCommand(Player, "D4"));
+            CommandsList.Add(Keys.NumPad4, new LinkCommand(Player, "NumPad4"));
+            CommandsList.Add(Keys.D5, new LinkCommand(Player, "D5"));
+            CommandsList.Add(Keys.NumPad5, new LinkCommand(Player, "NumPad5"));
+            CommandsList.Add(Keys.D6, new LinkCommand(Player, "D6"));
+            CommandsList.Add(Keys.NumPad6, new LinkCommand(Player, "NumPad6"));
+            CommandsList.Add(Keys.D7, new LinkCommand(Player, "D7"));
+            CommandsList.Add(Keys.NumPad7, new LinkCommand(Player, "NumPad7"));
+            CommandsList.Add(Keys.D8, new LinkCommand(Player, "D8"));
+            CommandsList.Add(Keys.NumPad8, new LinkCommand(Player, "NumPad8"));
+            CommandsList.Add(Keys.D9, new LinkCommand(Player, "D9"));
+            CommandsList.Add(Keys.NumPad9, new LinkCommand(Player, "NumPad9"));
+            CommandsList.Add(Keys.LeftShift, new LinkCommand(Player, "Shift"));
+            CommandsList.Add(Keys.R, new ResetCommand(Player, false));
 
+            CommandsList.Add(Keys.Space, new ShowInventoryCommand());
+            CommandsList.Add(Keys.I, new ChangeItemCommand(true, Player));
+            CommandsList.Add(Keys.U, new ChangeItemCommand(false, Player));
+            CommandsList.Add(Keys.Enter, new ConsumeItemCommand(Player));
+            CommandsList.Add(Keys.G, new PauseCommand(Game, Player, "NotDoor"));
 
-            commandsList.Add(Keys.D, new LinkCommand(player, "D"));
-            commandsList.Add(Keys.Right, new LinkCommand(player, "Right"));
-            commandsList.Add(Keys.W, new LinkCommand(player, "W"));
-            commandsList.Add(Keys.Up, new LinkCommand(player, "Up"));
-            commandsList.Add(Keys.S, new LinkCommand(player, "S"));
-            commandsList.Add(Keys.Down, new LinkCommand(player, "Down"));
-            commandsList.Add(Keys.N, new LinkCommand(player, "N"));
-            commandsList.Add(Keys.B, new LinkCommand(player, "B"));
-            commandsList.Add(Keys.Z, new LinkCommand(player, "Z"));
-            commandsList.Add(Keys.E, new LinkCommand(player, "E"));
-
-            commandsList.Add(Keys.D0, new LinkCommand(player, "D0"));
-            commandsList.Add(Keys.NumPad0, new LinkCommand(player, "NumPad0"));
-            commandsList.Add(Keys.D1, new LinkCommand(player, "D1"));
-            commandsList.Add(Keys.NumPad1, new LinkCommand(player, "NumPad1"));
-            commandsList.Add(Keys.D2, new LinkCommand(player, "D2"));
-            commandsList.Add(Keys.NumPad2, new LinkCommand(player, "NumPad2"));
-            commandsList.Add(Keys.D3, new LinkCommand(player, "D3"));
-            commandsList.Add(Keys.NumPad3, new LinkCommand(player, "NumPad3"));
-            commandsList.Add(Keys.D4, new LinkCommand(player, "D4"));
-            commandsList.Add(Keys.NumPad4, new LinkCommand(player, "NumPad4"));
-            commandsList.Add(Keys.D5, new LinkCommand(player, "D5"));
-            commandsList.Add(Keys.NumPad5, new LinkCommand(player, "NumPad5"));
-            commandsList.Add(Keys.D6, new LinkCommand(player, "D6"));
-            commandsList.Add(Keys.NumPad6, new LinkCommand(player, "NumPad6"));
-            commandsList.Add(Keys.D7, new LinkCommand(player, "D7"));
-            commandsList.Add(Keys.NumPad7, new LinkCommand(player, "NumPad7"));
-            commandsList.Add(Keys.D8, new LinkCommand(player, "D8"));
-            commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
-            commandsList.Add(Keys.D9, new LinkCommand(player, "D9"));
-            commandsList.Add(Keys.NumPad9, new LinkCommand(player, "NumPad9"));
-            commandsList.Add(Keys.LeftShift, new LinkCommand(player, "Shift"));
-            commandsList.Add(Keys.R, new ResetCommand(player, false));
-
-
-            commandsList.Add(Keys.Space, new ShowInventoryCommand());
-            commandsList.Add(Keys.I, new ChangeItemCommand(true, player));
-            commandsList.Add(Keys.U, new ChangeItemCommand(false, player));
-            commandsList.Add(Keys.Enter, new ConsumeItemCommand(player));
-            commandsList.Add(Keys.G, new PauseCommand(game, "NotDoor"));
-
-            commandsList.Add(Keys.K, new ChangeDifficultyCommand("Up", game));
-            commandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", game));
+            CommandsList.Add(Keys.K, new ChangeDifficultyCommand("Up", Game));
+            CommandsList.Add(Keys.J, new ChangeDifficultyCommand("Down", Game));
             
-            commandsList.Add(Keys.F, new FullScreenCommand());
+            CommandsList.Add(Keys.F, new FullScreenCommand(Game));
 
-            movementKeys.Add(Keys.W);
-            movementKeys.Add(Keys.A);
-            movementKeys.Add(Keys.S);
-            movementKeys.Add(Keys.D);
-            movementKeys.Add(Keys.Up);
-            movementKeys.Add(Keys.Down);
-            movementKeys.Add(Keys.Right);
-            movementKeys.Add(Keys.Left);
+            MovementKeys.Add(Keys.W);
+            MovementKeys.Add(Keys.A);
+            MovementKeys.Add(Keys.S);
+            MovementKeys.Add(Keys.D);
+            MovementKeys.Add(Keys.Up);
+            MovementKeys.Add(Keys.Down);
+            MovementKeys.Add(Keys.Right);
+            MovementKeys.Add(Keys.Left);
 
-
-            prevState = Keyboard.GetState();
+            PrevState = Keyboard.GetState();
         }
 
         public ICommand HandleInput(Game1 game)
         {
+            ICommand ActiveCommand= null;
 
-           
+            State = Keyboard.GetState();
 
-            ICommand activeCommand= null;
-
-
-            var kstate = Keyboard.GetState();
-            foreach (KeyValuePair<Keys, ICommand> kvp in commandsList)
+            foreach (KeyValuePair<Keys, ICommand> Pair in CommandsList)
             {
-                if (kstate.IsKeyDown(kvp.Key))
+                if (State.IsKeyDown(Pair.Key))
                 {
-                    foreach (Keys k in movementKeys)
+                    foreach (Keys k in MovementKeys)
                     {
-                        if (kstate.IsKeyDown(k))
+                        if (State.IsKeyDown(k))
                         {
-                            activeCommand = kvp.Value;
+                            ActiveCommand = Pair.Value;
                         }
 
                     }
-                    if (kstate.IsKeyDown(kvp.Key) != prevState.IsKeyDown(kvp.Key))
+                    if (State.IsKeyDown(Pair.Key) != PrevState.IsKeyDown(Pair.Key))
                     {
-                        activeCommand = kvp.Value;
-                    }
-
-                    if (activeCommand is PauseCommand)
-                    {
-                        if (delay == 0)
-                        {
-                            game.isPaused = !game.isPaused;
-                            player.isPaused = !player.isPaused;
-                            Sounds.Instance.TogglePause();
-
-                            delay = 20;
-                        }
-                    }
-
-                    if (activeCommand is FullScreenCommand)
-                    {
-                        game.switchScreen();
+                        ActiveCommand = Pair.Value;
                     }
                 }
-              
             }
-            if (delay > 0)
-                delay--;
 
-            prevState = kstate;
+            PrevState = State;
 
-
-
-            if (game.IsGameOver)
+            if (Game.IsGameOver)
             {
-                if (!(activeCommand is ResetCommand) && !(activeCommand is QuitCommand))
+                if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {
-                    return null;
-                }
-
-                
+                    ActiveCommand = null;
+                }  
             }
-
-                
-
-            return activeCommand;
+            return ActiveCommand;
         }
     }
 }
