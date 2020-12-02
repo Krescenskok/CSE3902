@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Sprint5.Items;
 using System;
 using System.Collections.Generic;
