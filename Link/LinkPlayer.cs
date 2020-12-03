@@ -14,7 +14,7 @@ namespace Sprint5
     public class LinkPlayer : LinkPlayerParent
     {
 
- 
+
         private const float HEALTH = 60;
         private const int NUM_OF_RUPEE = 0;
 
@@ -22,7 +22,7 @@ namespace Sprint5
         public PlayerCollider collider { get; set; }
         public WeaponCollider weaponCollider { get; set; }
         public ShieldCollider ShieldCollider { get; set; }
-        
+
 
         private float fullHealth = HEALTH;
 
@@ -37,6 +37,8 @@ namespace Sprint5
 
         private List<IItems> ItemsPlacedByLink = new List<IItems>();
         private bool IsPaused = false;
+
+        public bool Paused { get => IsPaused; set => IsPaused = value; }
 
         public void RemovePlacedItem(IItems item)
         {
@@ -68,18 +70,18 @@ namespace Sprint5
             Game = game;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
 
-            
+
         }
         public void Update(GameTime gameTime)
         {
             if (sprite != null)
-            { 
+            {
                 hitbox = sprite.hitbox;
                 int sizeX = hitbox.Size.X;
                 int sizeY = hitbox.Size.Y;
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-                
+
                 PossibleDirections = Directions.Default();
                 Direction newDir = Directions.Parse(LinkDirection);
                 if (newDir.Equals(CurrentDirection)) ShieldCollider.ChangeDirection(newDir);
@@ -160,27 +162,27 @@ namespace Sprint5
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
-        
+
         public void EnterSecretRoom() {
             currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 3,0) - Camera.Instance.Location;
             state = new MoveDown(this, sprite);
         }
 
-        public void LeaveSecretRoom() { 
+        public void LeaveSecretRoom() {
             currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 8, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
             state = new MoveLeft(this, sprite);
         }
 
         public void knockback(Direction collideDir)
         {
-            DamDir = collideDir;
+            //DamDir = collideDir;
             Counter = max;
         }
 
         public void stopKnockback()
         {
 
-            DamDir = Direction.none;
+            //DamDir = Direction.none;
             Counter = min;
         }
 
@@ -206,11 +208,10 @@ namespace Sprint5
 
             Counter -= increment;
 
-            if (Counter <= min) 
+            if (Counter <= min)
             {
                 this.stopKnockback();
             }
         }
     }
 }
-

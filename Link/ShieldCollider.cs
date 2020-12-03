@@ -61,7 +61,7 @@ namespace Sprint5
 
                 currentDirection = dir;
 
-                
+
             }
 
         }
@@ -103,7 +103,7 @@ namespace Sprint5
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            
+
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
@@ -117,7 +117,7 @@ namespace Sprint5
             from = Directions.Opposite(from);
             bool hit = from.Equals(link.CurrentDirection);
 
-            if (msg.Contains("TakeDamage") && hit)
+            if (hit && msg.Contains("TakeDamage"))
             {
                 int damage = link.UseRing ? (int)value / 2 : (int)value;
                 damage = Math.Max(damage - strength, 0);
@@ -125,7 +125,7 @@ namespace Sprint5
                 {
                     link.IsDamaged = true;
                     link.Health -= damage;
-                    link.knockback(from);
+                    //link.knockback(from);
                 }
                 else
                 {
@@ -137,7 +137,7 @@ namespace Sprint5
         public void Update()
         {
             bounds.Location = link.currentLocation.ToPoint() + localPosition.ToPoint();
-           
+
         }
     }
 }

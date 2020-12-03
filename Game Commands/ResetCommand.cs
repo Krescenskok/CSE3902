@@ -12,15 +12,12 @@ namespace Sprint5
 
     public class ResetCommand : ICommand
     {
-        LinkPlayer Player;
-        bool start;
+        private LinkPlayer Player;
 
-        public bool StartAgain { get => start; set => start = value; }
 
-        public  ResetCommand(LinkPlayer player, bool bStart)
+        public  ResetCommand(LinkPlayer player)
         {
             this.Player = player;
-            this.StartAgain = bStart;
         }
 
         public void DoInit(Game game)
@@ -36,16 +33,15 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            if (StartAgain)
-            {
+                (game as Game1).IsGameOver = false;
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);
                 RoomSpawner.Instance.Reset();
                 Sounds.Instance.LoadSounds(game);
                 Camera.Instance.BackToSquareOne();
-            }
-           
-           
+          
+
+
 
         }
     }

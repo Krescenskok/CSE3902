@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Sprint5
 {
-    public class Camera 
+    public class Camera
     {
         public static Camera Instance { get; } = new Camera();
 
@@ -28,9 +28,9 @@ namespace Sprint5
         private int screenHeight;
 
         private int nextRoom;
-        
+
         private int currentRoom;
-        
+
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
 
@@ -68,7 +68,7 @@ namespace Sprint5
             screenHeight = game.Window.ClientBounds.Height;
             screenWidth = game.Window.ClientBounds.Width;
             player = this.game.LinkPlayer;
-            
+
 
             transform = Matrix.Identity;
 
@@ -77,7 +77,7 @@ namespace Sprint5
 
             Point HUDPoint = new Point(topLeftCorner.X, topLeftCorner.Y - screenHeight);
             Point HUDSize = new Point(size.X , screenHeight);
-           
+
 
 
             playArea = new Rectangle(topLeftCorner, size);
@@ -93,7 +93,7 @@ namespace Sprint5
 
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
-             
+
             currentRoom = 1;
 
             screenFade = SpriteFactory.Instance.CreateBlackScreen();
@@ -103,7 +103,7 @@ namespace Sprint5
         {
         }
 
-        
+
         //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
@@ -119,7 +119,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused; Pause(); }
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.IsPaused;  Pause();}
             }
 
 
@@ -220,7 +220,7 @@ namespace Sprint5
             Vector3 newPos = Transform.Translation + direction * scrollSpeed;
             Matrix.CreateTranslation(ref newPos, out transform);
         }
-        
+
 
         public void Update()
         {
@@ -230,7 +230,7 @@ namespace Sprint5
                 MoveViewports(ref playArea,targetGameView,ref gameView);
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
-                
+
             }else if(inventoryOpen && !game.isPaused)
             {
                 game.DoorPause = true;
@@ -265,14 +265,14 @@ namespace Sprint5
                 player.currentLocation += direction2D;
 
                 linkHasEntered = Vector2.Distance(player.currentLocation,linkEnterPosition) <= 1;
-                
+
 
             }else if (loadNextRoom)
             {
-                
+
                 UnPause();
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
-                
+
                 currentRoom = nextRoom;
                 loadNextRoom = false;
             }

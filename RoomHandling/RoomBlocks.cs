@@ -25,8 +25,9 @@ namespace Sprint5
         private static readonly RoomBlocks instance = new RoomBlocks();
 
         private List<IBlock> roomBlocks;
+
         private Camera cam = Camera.Instance;
-        
+
         public Boolean movedRight;
         public Boolean movedUp; 
 

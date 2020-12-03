@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Sprint5.GamePadVibration;
 
 namespace Sprint5
 {
@@ -20,7 +21,7 @@ namespace Sprint5
 
             this.bounds = bounds;
 
-            
+
         }
 
         public string Name { get => "Player"; }
@@ -64,7 +65,7 @@ namespace Sprint5
                 linkPlayer.HandleObstacle(collision);
                 testKnockback(collision);
 
-                
+
             }
 
             if (col.CompareTag("enemy"))
@@ -86,7 +87,7 @@ namespace Sprint5
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-            
+
         }
 
         public void SendMessage(string msg, object value)
@@ -110,7 +111,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-
+                        GamePadVibrate.Instance.TakeDamage("Right");
                         linkPlayer.knockback(Direction.right);
 
 
@@ -135,6 +136,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Left");
                         linkPlayer.knockback(Direction.left);
                     }
                 }
@@ -156,6 +158,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Up");
                         linkPlayer.knockback(Direction.up);
                     }
                 }
@@ -177,10 +180,11 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        GamePadVibrate.Instance.TakeDamage("Down");
                         linkPlayer.knockback(Direction.down);
                     }
                 }
-              
+
             }
 
             if (msg == "WalkInPlace")
@@ -234,13 +238,13 @@ namespace Sprint5
                 }
             }
         }
-        
+
         public void testKnockback(Collision collision)
         {
-            if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
-            else if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
-            else if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
-            else if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
+            //if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
+            //if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
+            //if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
+           // if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
         }
 
         public void Update()

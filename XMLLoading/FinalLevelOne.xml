@@ -68,16 +68,6 @@
 			</Item>
 			<Item>
 				<ObjectType>Wall</ObjectType>
-				<ObjectName>BottomLeft</ObjectName>
-				<Location>0 0</Location>
-			</Item>
-			<Item>
-				<ObjectType>Wall</ObjectType>
-				<ObjectName>BottomRight</ObjectName>
-				<Location>0 0</Location>
-			</Item>
-			<Item>
-				<ObjectType>Wall</ObjectType>
 				<ObjectName>Bottom</ObjectName>
 				<Location>0 0</Location>
 			</Item>

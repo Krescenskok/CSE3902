@@ -118,7 +118,8 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            state.Expire();
+            if (returned)
+                state.Expire();
         }
 
         public void Collect()

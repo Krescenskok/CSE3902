@@ -416,6 +416,18 @@
 /processorParam:Quality=Best
 /build:Sounds/UseCandle.wav
 
+#begin the-legend-of-zelda-breath-of-wild-game-4k-mi.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:the-legend-of-zelda-breath-of-wild-game-4k-mi.png;MMbackground.png
+
 #begin wandbeam.png
 /importer:TextureImporter
 /processor:TextureProcessor
