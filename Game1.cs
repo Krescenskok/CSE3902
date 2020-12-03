@@ -39,7 +39,6 @@ namespace Sprint5
         private LinkCommand LinkPersistent;
         private ProjectilesCommand ProjectilePersistent;
 
-        private string difficulty;
         private bool doorPause;
 
         public Camera GameCamera { get => this.Camera; set => this.Camera = value; }
@@ -61,26 +60,31 @@ namespace Sprint5
         public SpriteFont Font { get => font; }
         public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
+        private GameState CurrentState;
+        public GameState State { get => this.CurrentState; set => this.CurrentState = value; }
+
         private bool isGameOver = false;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
+            
             Paused = false;
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-
+            State = new GameState();
+            State.Id = IGameStates.Type.MainMenu;
+            State.Difficulty = IDifficulty.Level.Normal;
+            DifficultyMultiplier.Instance.SetDifficulty(this);
         }
 
         protected override void LoadContent()
         {
 
-            Difficulty = "Normal";
             DifficultyMultiplier.Instance.SetDifficulty(this);
 
             font = Content.Load<SpriteFont>("File");
@@ -100,7 +104,6 @@ namespace Sprint5
             controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
-
 
             this.Window.Title = "Legend Of Zelda";
 
