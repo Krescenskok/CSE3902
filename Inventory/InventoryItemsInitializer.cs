@@ -23,6 +23,7 @@ namespace Sprint5.Inventory
 
         private const int BOMB = 5;
         private const int KEY = 1;
+        private const int CURSOR_START = 3;
         private readonly InventoryItemsStorage itemStorage = InventoryItemsStorage.Instance;
 
         private static readonly InventoryItemsInitializer instance = new InventoryItemsInitializer();
@@ -60,7 +61,7 @@ namespace Sprint5.Inventory
             item.X += ITEMS_GAP;
             itemStorage.FirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, false);
+            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bomb, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Arrow, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bow, false);
@@ -80,7 +81,7 @@ namespace Sprint5.Inventory
             itemStorage.CurrentFirstItems.Add(PrimaryItem.SilverSword, new SilverSword(ItemsFactory.Instance.CreateSilverSwordSprite(), currentItemLoc));
             itemStorage.CurrentFirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), currentItemLoc));
 
-            itemStorage.SecondSlotItem = SecondaryItem.Bomb;
+            itemStorage.SecondSlotItem = SecondaryItem.Arrow;
             itemStorage.FirstSlotItem = PrimaryItem.WoodenSword;
             HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
             HUD.Instance.SetASlotItem(PrimaryItem.WoodenSword);
@@ -109,7 +110,7 @@ namespace Sprint5.Inventory
                 cursor.X += ITEMS_GAP;
             }
 
-            itemStorage.CursorPosition = 0;
+            itemStorage.CursorPosition = CURSOR_START;
         }
 
         private void InitializeCounts()
