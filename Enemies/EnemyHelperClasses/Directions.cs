@@ -73,5 +73,13 @@ namespace Sprint5
             int randomCap = (int)(100 / chanceInHundred);
             return random.Next(0, randomCap) == 0;
         }
+
+        public static Direction Opposite(Direction dir)
+        {
+            if (dir.Equals(Left)) return Right;
+            else if (dir.Equals(Right)) return Left;
+            else if (dir.Equals(Up)) return Down;
+            else return Up;
+        }
     }
 }

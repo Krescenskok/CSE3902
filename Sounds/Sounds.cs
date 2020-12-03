@@ -61,10 +61,12 @@ namespace Sprint5
 
         public void RoomChange(int num)
         {
-
-            for (int i = 0; i < soundInstances.Count; i++)
+            int i = soundInstances.Count, index = 0;
+            while (i > 0)
             {
-                if(NonPersistentSound(soundInstances[i])) soundInstances[i].Stop(); soundInstances.RemoveAt(i);
+                if (NonPersistentSound(soundInstances[index])) { soundInstances[index].Stop(); soundInstances.RemoveAt(index--); }
+                i--;
+                index++;
             }
         
             

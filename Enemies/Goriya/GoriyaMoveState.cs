@@ -30,7 +30,7 @@ namespace Sprint5
 
         private Random RandomNumber;
         private const float directionChangeLikelihood = 0.1f;
-        private const float attackLikelihood = 0.01f;
+        private const float attackLikelihood = 0.05f;
 
 
         private const int stunTime = 120;
@@ -153,7 +153,7 @@ namespace Sprint5
         public void Stun(bool permanent)
         {
             currentMoveSpeed = 0;
-            stunClock = permanent ? int.MaxValue : stunTime;
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
             permaStun = permanent ? true : permaStun;
         }
 

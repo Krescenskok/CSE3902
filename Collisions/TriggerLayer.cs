@@ -7,6 +7,7 @@ namespace Sprint5
 {
     public class TriggerLayer : Layer
     {
+        public bool AttachedToPlayer => false;
         public bool CollidesWith(ICollider other)
         {
 

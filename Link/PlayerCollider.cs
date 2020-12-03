@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Sprint5.GamePadVibration;
 
 namespace Sprint5
 {
@@ -195,8 +196,8 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-
-                        linkPlayer.knockback(damageMove.right);
+                        GamePadVibrate.Instance.TakeDamage("Right");
+                        linkPlayer.knockback(Direction.right);
 
 
 
@@ -220,7 +221,8 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.left);
+                        GamePadVibrate.Instance.TakeDamage("Left");
+                        linkPlayer.knockback(Direction.left);
                     }
                 }
 
@@ -241,7 +243,8 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.up);
+                        GamePadVibrate.Instance.TakeDamage("Up");
+                        linkPlayer.knockback(Direction.up);
                     }
                 }
 
@@ -262,7 +265,8 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
-                        linkPlayer.knockback(damageMove.down);
+                        GamePadVibrate.Instance.TakeDamage("Down");
+                        linkPlayer.knockback(Direction.down);
                     }
                 }
               
@@ -323,10 +327,10 @@ namespace Sprint5
         
         public void testKnockback(Collision collision)
         {
-            if (collision.Right && linkPlayer.DamDir == damageMove.right) linkPlayer.stopKnockback();
-            if (collision.Left && linkPlayer.DamDir == damageMove.left) linkPlayer.stopKnockback();
-            if (collision.Down && linkPlayer.DamDir == damageMove.down) linkPlayer.stopKnockback();
-            if (collision.Up && linkPlayer.DamDir == damageMove.up) linkPlayer.stopKnockback();
+            //if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
+            //if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
+            //if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
+           // if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
         }
 
         public void Update()

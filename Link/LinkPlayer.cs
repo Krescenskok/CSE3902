@@ -13,12 +13,18 @@ namespace Sprint5
 
     public class LinkPlayer : LinkPlayerParent
     {
+
  
         private const float HEALTH = 60;
-
         private const int NUM_OF_RUPEE = 0;
 
+
+        public WeaponCollider weaponCollider;
+        private ShieldCollider shieldCollider;
+        public ShieldCollider ShieldCollider { get => shieldCollider; set => shieldCollider = value; }
+
         private float fullHealth = HEALTH;
+
 
         private const int max = 50;
         private const int increment = 5;
@@ -36,6 +42,8 @@ namespace Sprint5
 
         private bool IsPaused = false;
 
+        public bool Paused { get => IsPaused; set => IsPaused = value; }
+
         public void RemovePlacedItem(IItems item)
         {
             if (itemsPlacedByLink.Contains(item) && item.IsExpired)
@@ -43,6 +51,7 @@ namespace Sprint5
                 itemsPlacedByLink.Remove(item);
             }
         }
+
 
         public Rectangle Bounds { get => state.Bounds(); }
         public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
@@ -55,9 +64,16 @@ namespace Sprint5
             hitbox = sprite.hitbox;
             state = new Stationary(this, sprite);
             collider = new PlayerCollider(this);
+
+
+            weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
+            shieldCollider = new ShieldCollider(this,HPAmount.OneHeart);
+
+
             Counter = min;
             Game = game;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
+
         }
         public void Update(GameTime gameTime)
         {
@@ -68,11 +84,18 @@ namespace Sprint5
                 int sizeY = hitbox.Size.Y;
                 CurrentLocation = state.Update(gameTime, CurrentLocation);
                 hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
-                if (DamDir != damageMove.none) this.push(DamDir);
+                
+                possibleDirections = Directions.Default();
+                Direction newDir = Directions.Parse(LinkDirection);
+                //if (newDir.Equals(currentDirection)) shieldCollider.ChangeDirection(newDir);
+                //currentDirection = newDir;
+
+                //if (DamDir != damageMove.none) this.push(DamDir);
                 Delay--;
 
 
                 PossibleDirections = Directions.Default();
+
             }
         }
         public void HandleObstacle(Collision col)
@@ -151,33 +174,34 @@ namespace Sprint5
             currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 7, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
         }
 
-        public void knockback(damageMove collideDir)
+        public void knockback(Direction collideDir)
         {
-            DamDir = collideDir;
+            //DamDir = collideDir;
             Counter = max;
         }
 
         public void stopKnockback()
         {
-            DamDir = damageMove.none;
+
+            //DamDir = Direction.none;
             Counter = min;
         }
 
-        public void push(damageMove direction)
+        public void push(Direction direction)
         {
             if (Counter != max) {
                 switch (direction)
                 {
-                    case damageMove.right:
+                    case Direction.right:
                         currentLocation.X += increment;
                         break;
-                    case damageMove.left:
+                    case Direction.left:
                         currentLocation.X -= increment;
                         break;
-                    case damageMove.up:
+                    case Direction.up:
                         currentLocation.Y -= increment;
                         break;
-                    case damageMove.down:
+                    case Direction.down:
                         currentLocation.Y += increment;
                         break;
                 }

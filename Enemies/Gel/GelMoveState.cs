@@ -44,7 +44,7 @@ namespace Sprint5
         private const int stunTime = 120;
         private int stunClock = 0;
         Random RandomNumber;
-        private bool permaStun;
+        private bool permaStun = false;
 
         public GelMoveState(Gel gel, Vector2 location, Game game)
         {
@@ -277,10 +277,10 @@ namespace Sprint5
 
         public void Stun(bool permanent)
         {
-            stunClock = permanent ? int.MaxValue : stunTime;
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
             if (speed > 0) savedSpeed = speed;
 
-           
+            permaStun = permanent ? true : permaStun;
         }
 
         public bool DoneBeingStunned()

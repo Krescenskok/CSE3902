@@ -7,20 +7,17 @@ namespace Sprint5
     public class PauseCommand : ICommand
 
     {
+        private String DoorPause;
+        private bool isPause = false;
+        private LinkPlayer Player;
 
-        bool isPause = false;
+        private Game1 Game;
 
-        public bool IsPause { get => isPause; set => isPause = value; }
-
-        public PauseCommand(Game1 game, String doorOrScreen)
+        public PauseCommand(Game1 game, LinkPlayer player, String doorOrScreen)
         {
-            if (doorOrScreen == "NotDoor")
-            {
-                game.DoorPause = false;
-            } else
-            {
-                game.DoorPause = true;
-            }
+            this.DoorPause = doorOrScreen;
+            this.Game = game;
+            this.Player = player;
         }
 
 
@@ -37,7 +34,20 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-
+            if (DoorPause == "NotDoor")
+            {
+                this.Game.DoorPause = false;
+                this.Game.IsPaused = !Game.IsPaused;
+                Player.Paused = !Player.Paused;
+                Sounds.Instance.TogglePause();
+            }
+            else
+            {
+                this.Game.DoorPause = true;
+                this.Game.IsPaused = !Game.IsPaused;
+                Player.Paused = !Player.Paused;
+                Sounds.Instance.TogglePause();
+            }
         }
     }
 }

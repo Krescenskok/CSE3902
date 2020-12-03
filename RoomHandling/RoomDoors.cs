@@ -234,7 +234,7 @@ namespace Sprint5
             }
 
 
-            if (curRoom == 6 && RoomEnemies.Instance.allDead && lockedDoors.ContainsKey(6))
+            if (curRoom == 6 && RoomEnemies.Instance.allDead && lockedDoors.ContainsKey(6) && !lockedDoors[6].open)
             {
                 OpenDoor(6);
             }

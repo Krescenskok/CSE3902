@@ -6,6 +6,7 @@ namespace Sprint5
 {
     public class ItemLayer : Layer
     {
+        public bool AttachedToPlayer => false;
         public bool CollidesWith(ICollider other)
         {
             return other.layer is PlayerLayer

@@ -83,7 +83,7 @@ namespace Sprint5.Link
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                if (direction.Equals(DOWN) || link.state is Stationary)
+                if (direction.Equals(DOWN))
                 {
                     itemLocation.X += (DISPLACEMENT + DISPLACEMENT / 2);
 
@@ -104,13 +104,15 @@ namespace Sprint5.Link
                     item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
-                else
+                else if (direction.Equals(UP))
                 {
                     itemLocation.X += DISPLACEMENT;
 
                     item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
+
+                Sounds.Instance.PlaySoundEffect("SwordShoot");
             }
             else
             {
@@ -133,19 +135,19 @@ namespace Sprint5.Link
                 }
                 else if (direction.Equals(LEFT))
                 {
-                    itemLocation.Y += DISPLACEMENT / 2;
-                    itemLocation.X -= (buffer / 2);
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X -= buffer;
                     item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
                 else if (direction.Equals(RIGHT))
                 {
-                    itemLocation.Y += DISPLACEMENT / 2;
-                    itemLocation.X += (buffer / 2);
+                    itemLocation.Y += DISPLACEMENT;
+                    itemLocation.X += buffer;
                     item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
                     itemsPlacedByLink.Add(item);
                 }
-                else
+                else if (direction.Equals(UP))
                 {
                     itemLocation.Y -= DISPLACEMENT;
                     itemLocation.X += DISPLACEMENT / 2;
@@ -163,9 +165,9 @@ namespace Sprint5.Link
         {
             if (!boomerangMade && LinkInventory.Instance.HasBoomerang)
             {
+                boomerangMade = true;
                 itemLocation = link.CurrentLocation;
                 itemLocation.Y += DISPLACEMENT;
-                boomerangMade = true;
                 item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
                 itemsPlacedByLink.Add(item);
             }
@@ -274,7 +276,7 @@ namespace Sprint5.Link
                 {
                     bombMade = false;
                     list.Add(item);
-                }                
+                }
             }
 
             foreach (IItems item in list)

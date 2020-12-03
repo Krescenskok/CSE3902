@@ -57,7 +57,7 @@ namespace Sprint5
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            if(collision.From.Equals(currentDirection)) stalfos.state = new StalfosWalkingState(stalfos, location);
+            if (collision.From.Equals(currentDirection)) BackToNormal();
         }
 
         public void TakeDamage(int amount)
@@ -70,13 +70,18 @@ namespace Sprint5
             MoveOneUnit();
             moveSpeed -= 0.1f;
             
-            if (moveSpeed <= 0) { 
-                stalfos.state = new StalfosWalkingState(stalfos, location);
-                if (stunned) stalfos.state.Stun(true);
+            if (moveSpeed <= 0) {
+                BackToNormal();
             }
                 
 
 
+        }
+
+        private void BackToNormal()
+        {
+            stalfos.state = new StalfosWalkingState(stalfos, location);
+            if (stunned) stalfos.state.Stun(true);
         }
 
         public void MoveOneUnit()

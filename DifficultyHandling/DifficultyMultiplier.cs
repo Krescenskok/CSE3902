@@ -130,7 +130,7 @@ namespace Sprint5.DifficultyHandling
             this.player = player;
             player.Health = linkHPValues[difficulty];
             player.FullHealth = linkHPValues[difficulty];
-            HUD.Instance.ChangeDifficulty((int)player.Health, (int)player.Health);
+            //HUD.Instance.ChangeDifficulty((int)player.Health, (int)player.Health);
             HUD.Instance.UpdateHearts(player);
         }
 

@@ -88,7 +88,8 @@ namespace Sprint5
         {
             for(int i = 0; i < colliders.Count; i++)
             {
-                if(!(colliders[i].layer is PlayerLayer))
+                
+                if(!(colliders[i].layer.AttachedToPlayer))
                 {
                     removedColliders.Enqueue(colliders[i]);
                 }
