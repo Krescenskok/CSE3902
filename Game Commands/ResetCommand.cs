@@ -41,6 +41,8 @@ namespace Sprint5
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);
                 RoomSpawner.Instance.Reset();
+                Sounds.Instance.LoadSounds(game);
+                Camera.Instance.BackToSquareOne();
             }
            
            

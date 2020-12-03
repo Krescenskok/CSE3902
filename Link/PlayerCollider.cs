@@ -11,19 +11,16 @@ namespace Sprint5
     public class PlayerCollider : ICollider
     {
         LinkPlayer linkPlayer;
-        const int FULL_HEART = 20;
-        const int THREE_QUARTERS_HEART = 15;
-        const int HALF_HEART = 10;
-        const int QUARTER_HEART = 5;
-        const int DISPLACEMENT = 100;
+        private Rectangle bounds;
 
-        bool done = false;
-        public PlayerCollider(LinkPlayer linkPlayer)
+        public PlayerCollider(LinkPlayer linkPlayer,Rectangle bounds)
         {
             this.linkPlayer = linkPlayer;
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
 
+            this.bounds = bounds;
 
+            
         }
 
         public string Name { get => "Player"; }
@@ -31,7 +28,7 @@ namespace Sprint5
 
         public Rectangle Bounds()
         {
-            return linkPlayer.Bounds;
+            return bounds;
         }
 
         public bool CompareTag(string tag)
@@ -51,7 +48,7 @@ namespace Sprint5
 
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
-                this.testKnockback(collision);
+                testKnockback(collision);
 
             }
 
@@ -65,101 +62,18 @@ namespace Sprint5
 
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
-                this.testKnockback(collision);
+                testKnockback(collision);
 
-
+                
             }
 
             if (col.CompareTag("enemy"))
                 col.SendMessage("Dissapear", null);
 
-            if (col.CompareTag("LockedDoor")) //and link has key!
+            if (col.CompareTag("LockedDoor"))
             {
                 col.SendMessage("Unlock", null);
             }
-
-
-
-            if (linkPlayer.IsAttacking)
-            {
-                if (collision.Left)
-                {
-                    if (linkPlayer.state is MoveLeft)
-                    {
-                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                        {
-                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
-                        }
-                    }
-                }
-
-                else if (collision.Right)
-                {
-                    if (linkPlayer.state is MoveRight)
-                    {
-                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                        {
-                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
-                        }
-                    }
-                }
-
-                else if (collision.Up)
-                {
-                    if (linkPlayer.state is MoveUp)
-                    {
-                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                        {
-                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
-                        }
-                    }
-                }
-
-                else if (collision.Down)
-                {
-                    if (linkPlayer.state is MoveDown)
-                    {
-                        if (linkPlayer.CurrentWeapon == ItemForLink.WoodenSword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", QUARTER_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.Sword)
-                        {
-                            col.SendMessage("EnemyTakeDamage", HALF_HEART);
-                        }
-                        else if (linkPlayer.CurrentWeapon == ItemForLink.MagicalRod)
-                        {
-                            col.SendMessage("EnemyTakeDamage", THREE_QUARTERS_HEART);
-                        }
-                    }
-                }
-            }
-
-
 
             if (col.CompareTag("Item"))
             {
@@ -172,6 +86,7 @@ namespace Sprint5
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
+            
         }
 
         public void SendMessage(string msg, object value)
@@ -284,11 +199,11 @@ namespace Sprint5
             {
                 if (value is Sprint5.Items.Heart)
                 {
-                    linkPlayer.Health += FULL_HEART;
+                    linkPlayer.Health += HPAmount.Full_Heart;
                 }
                 else if (value is Sprint5.Items.Fairy)
                 {
-                    linkPlayer.Health += HALF_HEART;
+                    linkPlayer.Health += HPAmount.HalfHeart;
                 }
 
                 if (linkPlayer.Health >= linkPlayer.FullHealth)
@@ -300,7 +215,7 @@ namespace Sprint5
             if (msg == "HeartContainer")
             {
                 HUD.Instance.IncreaseMaxHeartNumber();
-                linkPlayer.FullHealth += FULL_HEART;
+                linkPlayer.FullHealth += HPAmount.Full_Heart;
                 linkPlayer.Health = linkPlayer.FullHealth;
                 HUD.Instance.UpdateHearts(linkPlayer);
             }
@@ -314,7 +229,6 @@ namespace Sprint5
             {
                 linkPlayer.isWalkingInPlace = true;
                 if (linkPlayer.Delay <= 0)
-
                 {
                     linkPlayer.isWalkingInPlace = false;
                 }
@@ -324,13 +238,14 @@ namespace Sprint5
         public void testKnockback(Collision collision)
         {
             if (collision.Right && linkPlayer.DamDir == Direction.right) linkPlayer.stopKnockback();
-            if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
-            if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
-            if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
+            else if (collision.Left && linkPlayer.DamDir == Direction.left) linkPlayer.stopKnockback();
+            else if (collision.Down && linkPlayer.DamDir == Direction.down) linkPlayer.stopKnockback();
+            else if (collision.Up && linkPlayer.DamDir == Direction.up) linkPlayer.stopKnockback();
         }
 
         public void Update()
         {
+            bounds.Location = linkPlayer.currentLocation.ToPoint();
         }
     }
 }

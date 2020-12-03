@@ -11,6 +11,8 @@ namespace Sprint5.Link
 
         private double lastTime;
 
+        static int count = 0;
+
         public Movement(LinkPlayer linkPlayer) :base(linkPlayer)
         {
             
@@ -65,21 +67,22 @@ namespace Sprint5.Link
                 {
                     if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield && !link.IsShootingProjectile)
                     {
-                        Sounds.Instance.PlaySoundEffect("SwordSlash");
+                        
+                       
                         link.IsShootingProjectile = true;
                         delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         return HandleWoodenSword(gameTime, location);
                     }
                     else if (link.CurrentWeapon == ItemForLink.Sword && !link.IsShootingProjectile)
                     {
-                        Sounds.Instance.PlaySoundEffect("SwordSlash");
+                        
                         link.IsShootingProjectile = true;
                         delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
                         return HandleSword(gameTime, location);
                     }
                     else if (link.CurrentWeapon == ItemForLink.MagicalRod && !link.IsShootingProjectile)
                     {
-                        Sounds.Instance.PlaySoundEffect("MagicalRod");
+                        Sounds.Instance.Play("MagicalRod");
                         link.IsShootingProjectile = true;
                         delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
                         return HandleMagicalRod(gameTime, location);

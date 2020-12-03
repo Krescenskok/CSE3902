@@ -9,7 +9,7 @@ namespace Sprint5
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class BladeTrapSprite : ISprite
+    public class BladeTrapSprite : EnemySprite
     {
         private Texture2D texture;
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
@@ -41,6 +41,11 @@ namespace Sprint5
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
             
+        }
+
+        public void Update()
+        {
+
         }
 
         public void Load(Game game)

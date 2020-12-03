@@ -80,6 +80,9 @@ namespace Sprint5
 
                         Vector2 location = GridGenerator.Instance.GetLocation(row, column);
 
+                        int width = GridGenerator.Instance.GetTileSize().X;
+                        int height = GridGenerator.Instance.GetTileSize().Y;
+
                         if (objName.Equals("BirdLeft"))
                         {
                             roomBlocks.Add(new BirdLeft(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
@@ -100,9 +103,17 @@ namespace Sprint5
                         {
                             roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
                         }
-                        else if (objName.Equals("Bricks"))
+                        else if (objName.Equals("Brick"))
                         {
+                            location = GridGenerator.Instance.GetOutsideLocation(row, column);
+                            
                             roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }else if (objName.Equals("BrickLong"))
+                        {
+                            location = GridGenerator.Instance.GetOutsideLocation(row, column);
+                            string orientation = item.Element("Orientation").Value;
+                            int length = int.Parse(item.Element("Length").Value);
+                            roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location,orientation,length));
                         }
                         else if (objName.Equals("BlackTile"))
                         {
@@ -115,6 +126,9 @@ namespace Sprint5
                         else if (objName.Equals("MoveableColumnUp"))
                         {
                             roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, movedUp));
+                        }else if (objName.Equals("Plain"))
+                        {
+                            new BlockCollider(location);
                         }
                     }
                     

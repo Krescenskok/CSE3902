@@ -98,6 +98,7 @@ namespace Sprint5
 
         public void Die()
         {
+            if (boomy != null) boomy.Die();
             RoomEnemies.Instance.Destroy(this,location);
             saveData.SetElementValue("Alive", "false");
 

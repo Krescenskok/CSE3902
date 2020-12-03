@@ -35,12 +35,11 @@ namespace Sprint5
             attackLength = length;
 
         }
-
-        #region //unused methods
         public void Attack()
         {
-            trap.state = new BladeTrapAttackState(location,target,trap,attackLength);
+            trap.state = new BladeTrapAttackState(location, target, trap, attackLength);
         }
+        #region //unused methods
 
         public void ChangeDirection()
         {

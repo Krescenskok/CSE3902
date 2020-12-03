@@ -127,6 +127,7 @@ namespace Sprint5
                 linkPlayer.IsDead = true;
                 activeCommand = new ResetCommand(linkPlayer, false);
                 activeCommand.Update(gameTime);
+                Sounds.Instance.LinkDeath();
             }
             else
             {
@@ -206,6 +207,8 @@ namespace Sprint5
                 ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
                 base.Draw(gameTime);
                 RoomEnemies.Instance.DrawTests(_spriteBatch);
+
+                camera.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 

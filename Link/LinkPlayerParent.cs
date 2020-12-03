@@ -50,7 +50,7 @@ namespace Sprint5
         private bool drawShield = true;
         private bool isDead = false;
         private bool isShooting = false;
-        private damageMove damDir = damageMove.none;
+        private Direction damDir = Direction.none;
         private int counter;
         
 
@@ -60,7 +60,10 @@ namespace Sprint5
         public float Health
         {
             get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
+            set { if (value < health) Sounds.Instance.Play("LinkHurt");
+                    health = value;
+                    if (health <= 0) health = 0;
+            }
         }
 
         public bool IsDamaged
@@ -81,9 +84,11 @@ namespace Sprint5
         private bool secondAttack = false;
         private bool isStopped = false;
         private ItemForLink currentWeapon = ItemForLink.MagicalRod;
+        
 
         public int Counter { get => counter; set => counter = value; }
-        public damageMove DamDir{ get => damDir; set => damDir = value; }
+        public Direction DamDir{ get => damDir; set => damDir = value; }
+        public Direction CurrentDirection { get; set; }
         public string LinkDirection { get => direction; set => direction = value; }
         public bool IsDead { get => isDead; set => isDead = value; }
         public Boolean LocationInitialized { get => loc; set => loc = value; }
@@ -104,6 +109,7 @@ namespace Sprint5
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
         public bool IsShootingProjectile { get => isShooting; set => isShooting = value; }
+       
 
         public LinkPlayerParent()
         {

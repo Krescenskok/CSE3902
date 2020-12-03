@@ -71,12 +71,11 @@ namespace Sprint5
         public void ChangeRoom()
         {
             GameOverScreen.Instance.RoomsEntered++;
-            if (Heading == 'L') Camera.Instance.ScrollLeft(NextRoom);
-            else if (Heading == 'R') Camera.Instance.ScrollRight(NextRoom);
-            else if (Heading == 'C') Camera.Instance.ScrollDown(NextRoom);
-            else if (Heading == 'T') Camera.Instance.ScrollUp(NextRoom);
-            else if (Heading == 'S') Camera.Instance.ScrollUp(NextRoom);
-            else if (Heading == 'B') Camera.Instance.ScrollDown(NextRoom);
+            if (Heading == 'L') Camera.Instance.Scroll(NextRoom, "left");
+            else if (Heading == 'R') Camera.Instance.Scroll(NextRoom, "right");
+            else if (Heading == 'T') Camera.Instance.Scroll(NextRoom, "up");
+            else if (Heading == 'S' || Heading == 'C') Camera.Instance.Transition(NextRoom);
+            else if (Heading == 'B') Camera.Instance.Scroll(NextRoom, "down");
 
         }
 
@@ -87,7 +86,7 @@ namespace Sprint5
             saveInfo.SetElementValue("Type", "normal");
             outerCollider = new DoorEntranceCollider(this, outerLocation, Size, Heading);
             open = true;
-            Sounds.Instance.PlaySoundEffect("DoorUnlock");
+            Sounds.Instance.Play("DoorUnlock");
         }
 
         public void Close()
@@ -96,7 +95,7 @@ namespace Sprint5
             saveInfo.SetElementValue("Type", "locked");
             outerCollider = new SpecialDoorCollider(this, outerLocation, Size);
             open = false;
-            Sounds.Instance.PlaySoundEffect("DoorUnlock");
+            Sounds.Instance.Play("DoorUnlock");
         }
 
         //doors that open with a key
@@ -108,7 +107,7 @@ namespace Sprint5
             
             outerCollider = new DoorEntranceCollider(this, outerLocation, this.Size, this.Heading);
             RoomDoors.Instance.ShowDoorSprite(CurrentRoom);
-            Sounds.Instance.PlaySoundEffect("DoorUnlock");
+            Sounds.Instance.Play("DoorUnlock");
         }
 
 

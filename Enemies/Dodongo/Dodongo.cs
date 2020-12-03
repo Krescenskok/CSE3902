@@ -18,7 +18,7 @@ namespace Sprint5
         private int dodongoHP;
         private Vector2 dodongoPos;
         private EnemyCollider dodongoCollider;
-        private const int AttackStrength = HPAmount.OneHeart;
+        private const int AttackStrength = HPAmount.Full_Heart;
         private string direction;
         private XElement dodongoInfo;
         private Point faceColliderSize = new Point(6, 6);
@@ -98,7 +98,7 @@ namespace Sprint5
         public void LostHP()
         {
             dodongoHP--;
-            Sounds.Instance.PlaySoundEffect(damagedSoundFile);
+            Sounds.Instance.Play(damagedSoundFile);
         }
 
         public Boolean checkAlive()
@@ -108,7 +108,7 @@ namespace Sprint5
 
         public void Die()
         {
-            Sounds.Instance.PlaySoundEffect(deathSoundFile);
+            Sounds.Instance.Play(deathSoundFile);
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             CollisionHandler.Instance.RemoveCollider(faceCollider);
             RoomEnemies.Instance.Destroy(this, dodongoPos);

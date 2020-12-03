@@ -115,7 +115,7 @@ namespace Sprint5
         {
             Direction from = Directions.Parse(msg.Substring(10));
             from = Directions.Opposite(from);
-            bool hit = from.Equals(link.currentDirection);
+            bool hit = from.Equals(link.CurrentDirection);
 
             if (msg.Contains("TakeDamage") && hit)
             {
@@ -129,7 +129,7 @@ namespace Sprint5
                 }
                 else
                 {
-                    Sounds.Instance.PlaySoundEffect("Shield");
+                    Sounds.Instance.Play("Shield");
                 }
             }
         }

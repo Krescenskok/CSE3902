@@ -13,6 +13,11 @@ namespace Sprint5
     {
         public static Camera Instance { get; } = new Camera();
 
+        private BlackScreenSprite screenFade;
+        private Color fadeColor = Color.Transparent;
+        private bool fadeFlag = false;
+        private static int fader = 5;
+
         private Matrix transform;
         public  Matrix Transform { get => transform; }
 
@@ -90,18 +95,21 @@ namespace Sprint5
             location = new Vector2(transform.M41, transform.M42);
              
             currentRoom = 1;
+
+            screenFade = SpriteFactory.Instance.CreateBlackScreen();
         }
 
         private Camera()
         {
         }
 
+        
         //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
             if (HUDOpenCloseFinished())
             {
-                
+
                 int moveDirection = inventoryOpen ? -1 : 1;
 
                 Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight * moveDirection);
@@ -111,10 +119,10 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused;  Pause();}
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.isPaused; Pause(); }
             }
-           
-            
+
+
         }
 
         public void MoveToRoom(int roomNum)
@@ -125,79 +133,55 @@ namespace Sprint5
             location.Y = transform.M42;
             player.currentLocation = new Vector2(game.Window.ClientBounds.X / 2, game.Window.ClientBounds.Y / 2) - location;
             RoomSpawner.Instance.RoomChange(game, roomNum);
-           
+            if (nextRoom == 18) { player.EnterSecretRoom(); }
+            else if (currentRoom == 18 && nextRoom == 17) player.LeaveSecretRoom();
+
+            currentRoom = roomNum;
         }
 
         public void BackToSquareOne()
         {
             MoveToRoom(1);
             player.currentLocation = RoomDoors.Instance.LinkStartLocation;
+            player.LocationInitialized = true;
             player.state = new MoveUp(player, player.sprite);
             direction = Vector3.Up;
             wallmasterSetBack = true;
             nextRoom = 1;
+            RoomDoors.Instance.OpenDoor(6);
+        }
+
+        public void BlackScreenTransition()
+        {
+            fadeColor.A = (byte)((fadeColor.A + fader) % 255);
+            fadeFlag = fadeColor.A != 0;
+            if (fadeFlag) fader = fadeColor.A == 254 ? -fader : fader;
+            else { MoveToRoom(nextRoom); UnPause(); }
         }
 
 
 
-        public void ScrollUp(int roomNum)
+        public void Transition(int room) { BlackScreenTransition(); nextRoom = room; Pause(); }
+
+
+        public void Scroll(int roomNum, string dir)
         {
-            Target = Transform.Translation + Vector3.Up * playArea.Height;
-           
-            direction = Vector3.Up;
+            Vector3 scrollDir = Directions.ParseVector(dir);
+            int scrollLength = scrollDir.X == 0 ? playArea.Height : playArea.Width;
+            Target = Transform.Translation + scrollDir * scrollLength;
+
+            direction = scrollDir;
 
             nextRoom = roomNum;
 
-            
-            (game as Game1).DoorPause = true;
-
-
-
-            Pause();
-            
-
-
-            currentDirection = Direction.up;
-        }
-
-        public void ScrollDown(int roomNum)
-        {
-            Target = Transform.Translation + Vector3.Down* playArea.Height;
-
-            direction = Vector3.Down;
-
-            nextRoom = roomNum;
-            (game as Game1).DoorPause = true;
-
             Pause();
 
-            currentDirection = Direction.down;
+
+
+            currentDirection = Directions.Parse(dir);
         }
 
-        public void ScrollRight(int roomNum)
-        {
-            Target = Transform.Translation + Vector3.Left * playArea.Width;
 
-            direction = Vector3.Left;
-            nextRoom = roomNum;
-
-            (game as Game1).DoorPause = true;
-
-            Pause();
-
-            currentDirection = Direction.right;
-        }
-
-        public void ScrollLeft(int roomNum)
-        {
-            Target = Transform.Translation + Vector3.Right * playArea.Width;
-
-            direction = Vector3.Right;
-            nextRoom = roomNum;
-            (game as Game1).DoorPause = true;
-            Pause();
-            currentDirection = Direction.left;
-        }
 
         private bool DoneScrolling()
         {
@@ -247,13 +231,13 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(inventoryOpen && !(game as Game1).isPaused)
+            }else if(inventoryOpen && !game.isPaused)
             {
-                (game as Game1).DoorPause = true;
+                game.DoorPause = true;
             }
-            else if(!inventoryOpen && (game as Game1).isPaused && inventoryStillMoving)
+            else if(!inventoryOpen && game.isPaused && inventoryStillMoving)
             {
-                (game as Game1).DoorPause = false;
+                game.DoorPause = false;
                game.Pause(wasPaused);
 
                 inventoryStillMoving = false;
@@ -285,15 +269,10 @@ namespace Sprint5
 
             }else if (loadNextRoom)
             {
-                Game1 game1 = game as Game1;
-                game1.DoorPause = false;
-
-                UnPause();
-
                 
+                UnPause();
                 RoomSpawner.Instance.RoomChange(game, nextRoom);
-                if (nextRoom == 18) { player.moveCentral(); }
-                if (currentRoom == 18 && nextRoom == 17) { player.moveSecret(); }
+                
                 currentRoom = nextRoom;
                 loadNextRoom = false;
             }
@@ -302,12 +281,20 @@ namespace Sprint5
             location.Y = transform.M42;
 
 
-
+            if (fadeFlag)
+            {
+                BlackScreenTransition();
+            }
 
         }
 
-        private void Pause() { game.Pause(true); }
-        private void UnPause() { game.Pause(false); }
+        public void Draw(SpriteBatch batch)
+        {
+            screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
+        }
+
+        private void Pause() { game.Pause(true); game.DoorPause = true; }
+        private void UnPause() { game.Pause(false); game.DoorPause = false; }
 
 
     }

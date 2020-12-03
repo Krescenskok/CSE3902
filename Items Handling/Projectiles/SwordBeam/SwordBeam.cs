@@ -49,7 +49,7 @@ namespace Sprint5.Items
             {
                 collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
-
+            Sounds.Instance.Play("SwordShoot");
         }
 
         public void UpdateLocation(Vector2 location)

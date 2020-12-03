@@ -157,7 +157,7 @@ namespace Sprint5
             
         }
 
-        public void AddTestCollider(PlayerCollider player)
+        public void AddTestCollider(PlayerCollider player, Game game)
         {
             linkTestCollider = new TestCollider(game,player);
         }
@@ -220,7 +220,7 @@ namespace Sprint5
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlaySoundEffect("EnemyDie");
+            Sounds.Instance.Play("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -230,7 +230,7 @@ namespace Sprint5
             GameOverScreen.Instance.KillCount++;
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
-            Sounds.Instance.PlaySoundEffect("EnemyDie");
+            Sounds.Instance.Play("EnemyDie");
 
             allDead = enemies.Count == 0;
         }
@@ -245,6 +245,7 @@ namespace Sprint5
         public void RemoveTest(TestCollider col)
         {
             testObjects.Remove(col);
+            CollisionHandler.Instance.RemoveCollider(col);
         }
 
         public void StunAllEnemies()

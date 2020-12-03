@@ -83,7 +83,7 @@ namespace Sprint5.Link
             if (link.Health == link.FullHealth && !beamMade)
             {
                 beamMade = true;
-                if (direction.Equals(DOWN) || link.state is Stationary)
+                if (direction.Equals(DOWN))
                 {
                     itemLocation.X += (DISPLACEMENT + DISPLACEMENT / 2);
 
@@ -112,7 +112,7 @@ namespace Sprint5.Link
                     itemsPlacedByLink.Add(item);
                 }
 
-                Sounds.Instance.PlaySoundEffect("SwordShoot");
+                
             }
             else
             {

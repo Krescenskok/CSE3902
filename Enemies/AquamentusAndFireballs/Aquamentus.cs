@@ -26,8 +26,8 @@ namespace Sprint5
         private int attackCountDown;
         private int ChangeDirectionCountDown;
         private int aquamentusHP;
-        private static int AttackStrength = HPAmount.OneHeart;
-        private static int RangeAttackStrength = HPAmount.OneHeart;
+        private static int AttackStrength = HPAmount.Full_Heart;
+        private static int RangeAttackStrength = HPAmount.Full_Heart;
 
         private static int UpdatePerSec = 120;
         private float attackPerSec = 1;
@@ -96,7 +96,7 @@ namespace Sprint5
                 fireBallList[fireBallList.Count-1].State.Die();
             }
 
-            Sounds.Instance.PlaySoundEffect("GetItem");
+            Sounds.Instance.Play("GetItem");
         }
 
         public Boolean TryAttack()

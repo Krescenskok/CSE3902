@@ -38,7 +38,7 @@ namespace Sprint5
             directionStr = direction;
            
             sprite = (GoriyaBoomerangSprite)EnemySpriteFactory.Instance.CreateBoomerangSprite();
-            collider = new GoriyaBoomerangCollider(this,sprite.GetRectangle(), HPAmount.OneHeart);
+            collider = new GoriyaBoomerangCollider(this,sprite.GetRectangle(), HPAmount.Full_Heart);
 
             timeSinceThrown = 0;
             returning = false;
@@ -74,14 +74,19 @@ namespace Sprint5
             }
             else if (boomerangDone)
             {
-                CollisionHandler.Instance.RemoveCollider(collider);
-                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
-                finished = true;
+                Die();
                 
             }
 
             sprite.Update();
            
+        }
+
+        public void Die()
+        {
+            CollisionHandler.Instance.RemoveCollider(collider);
+            Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
+            finished = true;
         }
 
         public void Draw(SpriteBatch batch)

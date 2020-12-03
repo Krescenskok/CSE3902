@@ -140,12 +140,12 @@ namespace Sprint5
         private void Play(SoundEffectInstance instance)
         {
             if (Muted) instance.Volume = 0;
-            if(instance != null) instance.Play();
+            if(instance != null && !(instance.State is SoundState.Playing)) instance.Play();
         }
 
         #region //sound effects
 
-        public void PlaySoundEffect(string name)
+        public void Play(string name)
         {
             SoundEffectInstance sound = Get(name);
             Play(sound);

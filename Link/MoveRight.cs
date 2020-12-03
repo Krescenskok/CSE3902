@@ -22,7 +22,7 @@ namespace Sprint5
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
 
-            if (link.possibleDirections.Contains(Direction.right))
+            if (link.PossibleDirections.Contains(Direction.right))
             {
                 location.X += MOVEMENT;
             }
