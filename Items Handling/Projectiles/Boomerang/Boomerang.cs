@@ -87,8 +87,6 @@ namespace Sprint5.Items
             if (throwing && returning) 
             {
                 returned = true;
-                state.Expire();
-                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
         }
 
@@ -118,8 +116,18 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            if (returned)
+            if (returning)
+            {
+                ReturnedToLink();
                 state.Expire();
+                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
+            }
+
+            if (returned)
+            {
+                state.Expire();
+                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
+            }
         }
 
         public void Collect()
