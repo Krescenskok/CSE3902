@@ -8,13 +8,13 @@ namespace Sprint5
     public class MainMenuCommand : ICommand
     {
 
-        private MainMenu mainScreen;
+        private MainMenu MainScreen;
 
-        public Keys currentKey;
-        public MainMenuCommand(MainMenu menu)
+        private string Action;
+        public MainMenuCommand(MainMenu menu, string action)
         {
-            mainScreen = menu;
-            currentKey = Keys.Zoom;
+            this.MainScreen = menu;
+            this.Action = action;
         }
 
 
@@ -30,45 +30,19 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            /*switch (newKey)
+            if (Action == "Up")
             {
-                case Keys.W:
-                case Keys.Up:
-                    mainScreen.goUp();
-                    currentKey = Keys.Zoom;
-                    break;
-                case Keys.S:
-                case Keys.Down:
-                    mainScreen.goDown();
-                    currentKey = Keys.Zoom;
-                    break;
-                case Keys.Enter:
-                    mainScreen.select();
-                    currentKey = Keys.Zoom;
-                    break;
+                MainScreen.goUp();
             }
-            */
+            else if (Action == "Down")
+            {
+                MainScreen.goDown();
+            }
+            else if (Action == "Enter")
+            {
+                MainScreen.select();
+            }
         }
 
-        public void updateKey(Keys newKey)
-        {
-            switch (newKey)
-            {
-                case Keys.W:
-                case Keys.Up:
-                    mainScreen.goUp();
-                    currentKey = Keys.Zoom;
-                    break;
-                case Keys.S:
-                case Keys.Down:
-                    mainScreen.goDown();
-                    currentKey = Keys.Zoom;
-                    break;
-                case Keys.Enter:
-                    mainScreen.select();
-                    currentKey = Keys.Zoom;
-                    break;
-            }
-        }
     }
 }

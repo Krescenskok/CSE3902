@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Sprint5.InputHandling
 {
-    public class InputCommands
+    public class InventoryCommands
     {
-
-        private static readonly InputCommands instance = new InputCommands();
-        public static InputCommands Instance
+        private static readonly InventoryCommands instance = new InventoryCommands();
+        public static InventoryCommands Instance
         {
             get
             {
@@ -22,12 +21,13 @@ namespace Sprint5.InputHandling
         private List<Buttons> GamePadMovement = new List<Buttons>();
         private List<Keys> KeyboardMovement = new List<Keys>();
 
-        public List<Buttons> MovementButtons { get => GamePadMovement; set => GamePadMovement = value; }
+
+
         public List<Keys> MovementKeys { get => KeyboardMovement; set => KeyboardMovement = value; }
         public IDictionary<Buttons, ICommand> ButtonCommands { get => GamePadCommands; set => GamePadCommands = value; }
-        public IDictionary<Keys, ICommand> Keycommands { get => KeyboardCommands; set => KeyboardCommands = value; }
+        public IDictionary<Keys, ICommand> KeyCommands { get => KeyboardCommands; set => KeyboardCommands = value; }
 
-        private InputCommands()
+        private InventoryCommands()
         {
 
         }

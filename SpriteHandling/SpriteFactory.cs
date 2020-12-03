@@ -93,9 +93,9 @@ namespace Sprint5
             return new BlocksSprite(blocksSpriteSheet);
         }
 
-        public MainMenuTexture createMainMenu()
+        public MainMenuTexture createMainMenu(MainMenu menu)
         {
-            return new MainMenuTexture(mainMenuTexture);
+            return new MainMenuTexture(menu, mainMenuTexture);
         }
     }
 }

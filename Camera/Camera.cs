@@ -57,6 +57,8 @@ namespace Sprint5
 
         private bool wasPaused;
 
+        
+
         public void Load(Game game)
         {
             this.game = game as Game1;
@@ -111,7 +113,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.IsPaused;  Pause();}
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.State.Id == IGameStates.Type.Pause;  Pause();}
             }
            
             
@@ -247,11 +249,11 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
                 
-            }else if(inventoryOpen && !(game as Game1).IsPaused)
+            }else if(inventoryOpen && !((game as Game1).State.Id == IGameStates.Type.Pause))
             {
                 (game as Game1).DoorPause = true;
             }
-            else if(!inventoryOpen && (game as Game1).IsPaused && inventoryStillMoving)
+            else if(!inventoryOpen && (game as Game1).State.Id == IGameStates.Type.Pause && inventoryStillMoving)
             {
                 (game as Game1).DoorPause = false;
                game.Pause(wasPaused);
@@ -306,8 +308,8 @@ namespace Sprint5
 
         }
 
-        private void Pause() { game.Pause(true); }
-        private void UnPause() { game.Pause(false); }
+        private void Pause() { game.State.Id = IGameStates.Type.Pause; }
+        private void UnPause() { game.State.Id = IGameStates.Type.Gameplay; }
 
 
     }
