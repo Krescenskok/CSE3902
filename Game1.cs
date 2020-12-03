@@ -25,6 +25,7 @@ namespace Sprint5
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont font;
+        public MainMenu mainScreen;
 
         private Vector2 spritePos;
 
@@ -51,6 +52,10 @@ namespace Sprint5
 
         private bool Paused;
         public bool IsPaused { get => Paused; set => Paused = value; }
+
+        public bool isPaused;
+
+        public bool mainMenu = true;
 
         public LinkPlayer LinkPlayer { get => linkPlayer; }
         public SpriteFont Font { get => font; }
@@ -86,6 +91,8 @@ namespace Sprint5
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
+            mainScreen = new MainMenu();
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkPlayer = new LinkPlayer(this);
@@ -94,7 +101,11 @@ namespace Sprint5
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
-            LinkPersistent = new LinkCommand(linkPlayer,  "");
+
+            this.Window.Title = "Legend Of Zelda";
+
+            LinkPersistent = new LinkCommand(linkPlayer, "");
+
             ProjectilePersistent = ProjectilesCommand.Instance;
             ProjectilePersistent.Link = linkPlayer;
 
@@ -114,7 +125,6 @@ namespace Sprint5
             GridGenerator.Instance.GetGrid(this, 12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
             RoomSpawner.Instance.LoadRoom(this, 1);
-
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
@@ -180,21 +190,34 @@ namespace Sprint5
         {
             if (!IsGameOver)
             {
-                _spriteBatch.Begin(transformMatrix: this.Camera.Transform);
-                GraphicsDevice.Viewport = this.Camera.gameView;
-                GraphicsDevice.Clear(Color.Black);
+                if (mainMenu) 
+                {
+                    _spriteBatch.Begin();
 
-                if (activeCommand != null)
-                    activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+                    if (activeCommand != null)
+                        activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
-                RoomSpawner.Instance.Draw(_spriteBatch);
-                LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                base.Draw(gameTime);
-                RoomEnemies.Instance.DrawTests(_spriteBatch);
+                    mainScreen.Draw(_spriteBatch, this, font);
+                    base.Draw(gameTime);
 
-                _spriteBatch.End();
+                    _spriteBatch.End();
+                }
+                else
+                {
+                    _spriteBatch.Begin(transformMatrix: camera.Transform);
+                    GraphicsDevice.Viewport = camera.gameView;
+                    GraphicsDevice.Clear(Color.Black);
+
+                    if (activeCommand != null)
+                        activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+                    RoomSpawner.Instance.Draw(_spriteBatch);
+                    LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                    RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+                    ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                    base.Draw(gameTime);
+                    RoomEnemies.Instance.DrawTests(_spriteBatch);
+
+                    _spriteBatch.End();
 
                 if (Paused && !DoorPause)
                 {
@@ -210,7 +233,9 @@ namespace Sprint5
                     HUD.Instance.DrawBottom(_spriteBatch);
                     _spriteBatch.End();
                 }
+                    }
 
+                }
             }
             else
             {
