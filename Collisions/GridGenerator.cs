@@ -17,7 +17,9 @@ namespace Sprint5
 
         private static GridGenerator instance = new GridGenerator();
 
-        private List<List<Rectangle>> savedGrid;
+        private List<List<Rectangle>> playAreaGrid;
+        public List<List<Rectangle>> outsideArea { get; private set; }
+       
         private Point tileSize;
 
         private Point wallOffset;
@@ -25,7 +27,6 @@ namespace Sprint5
 
         public int offsetYBottom;
 
-        private Point playArea;
 
         private const float OFFSET_MULT_X = 1f / 8f;
         private const float OFFSET_MULT_Y = 9f / 48f;
@@ -42,7 +43,7 @@ namespace Sprint5
 
         private GridGenerator()
         {
-            savedGrid = new List<List<Rectangle>>();
+            playAreaGrid = new List<List<Rectangle>>();
             tileSize = new Point();
         }
 
@@ -56,11 +57,9 @@ namespace Sprint5
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
 
-            float screenWidth = game.Window.ClientBounds.Width;
-            float screenHeight = game.Window.ClientBounds.Height;
 
-            screenWidth = Camera.Instance.playArea.Width;
-            screenHeight = Camera.Instance.playArea.Height;
+            float screenWidth = Camera.Instance.playArea.Width;
+            float screenHeight = Camera.Instance.playArea.Height;
 
             //pixel values measured in paint
             
@@ -95,49 +94,50 @@ namespace Sprint5
                 }
             }
 
-            savedGrid = gridTiles;
+            playAreaGrid = gridTiles;
+            FormOutsideArea();
 
-
-
+     
             return gridTiles;
         }
 
 
-
-        public List<Rectangle> CollisionGrid(Game game, int rows, int col)
+        public void FormOutsideArea()
         {
-            List<Rectangle> grid = new List<Rectangle>();
+            Point startPoint = playAreaGrid[0][0].Location - new Point(tileSize.X * 2, tileSize.Y * 2);
+            outsideArea = new List<List<Rectangle>>();
 
-            int cellSizeX = game.Window.ClientBounds.Width / col;
-            int cellSizeY = game.Window.ClientBounds.Height / rows;
+            int width = tileSize.X;
+            int height = tileSize.Y;
+            int numRows = 11, numCol = 16;
 
-            Point cellSize = new Point(cellSizeX, cellSizeY);
-
-            for(int i = 0; i < rows; i++)
+            for (int i = 0; i < numRows; i++)
             {
-                for(int j = 0; j < col; j++)
+                outsideArea.Add(new List<Rectangle>());
+
+                for (int j = 0; j < numCol; j++)
                 {
-                    grid.Add(new Rectangle(new Point(j * cellSizeX, i * cellSizeY), cellSize));
+                    Point position = new Point(j * width, i * height) + startPoint;
+
+                    outsideArea[i].Add(new Rectangle(position, tileSize));
+
                 }
             }
-
-
-            return grid;
         }
 
         public List<List<Rectangle>> GetGrid()
         {
-            return savedGrid;
+            return playAreaGrid;
         }
 
         public int GetGridWidth()
         {
-            return savedGrid[0].Count * tileSize.X;
+            return playAreaGrid[0].Count * tileSize.X;
         }
 
         public int GetGridHeight()
         {
-            return savedGrid.Count * tileSize.Y;
+            return playAreaGrid.Count * tileSize.Y;
         }
 
         /// <summary>
@@ -154,17 +154,17 @@ namespace Sprint5
             Rectangle foundLocation = new Rectangle(position, tileSize);
 
 
-            for (int i = 0; i < savedGrid.Count; i++)
+            for (int i = 0; i < playAreaGrid.Count; i++)
             {
                 
 
-                for (int j = 0; j < savedGrid[0].Count; j++)
+                for (int j = 0; j < playAreaGrid[0].Count; j++)
                 {
 
 
-                    if (savedGrid[i][j].Contains(foundLocation.X, foundLocation.Y))
+                    if (playAreaGrid[i][j].Contains(foundLocation.X, foundLocation.Y))
                     {
-                        foundLocation = savedGrid[i][j];
+                        foundLocation = playAreaGrid[i][j];
                         
                         
                     }
@@ -179,8 +179,13 @@ namespace Sprint5
 
         public Vector2 GetLocation(int row, int col)
         {
-           
-            return savedGrid[row][col].Location.ToVector2();
+            if (row > playAreaGrid.Count-1 || col > playAreaGrid[0].Count-1) return Vector2.Zero;
+            return playAreaGrid[row][col].Location.ToVector2();
+        }
+
+        public Vector2 GetOutsideLocation(int row, int col)
+        {
+            return outsideArea[row][col].Location.ToVector2();
         }
 
         public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)
@@ -211,7 +216,7 @@ namespace Sprint5
 
                 for (int k = startRow; k != endRow + increment; k += increment)
                 {
-                    path.Add(savedGrid[k][col]);
+                    path.Add(playAreaGrid[k][col]);
 
                     
                 }
@@ -227,7 +232,7 @@ namespace Sprint5
 
                 for (int k = startCol; k != endCol + increment; k += increment)
                 {
-                    path.Add(savedGrid[row][k]);
+                    path.Add(playAreaGrid[row][k]);
                     
                 }
             }

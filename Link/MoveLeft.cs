@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.Link;
@@ -7,14 +8,8 @@ namespace Sprint5
 {
     public class MoveLeft : Movement
     {
-        private double lastTime;
+
         int MOVEMENT = -10;
-        int TIME = 100;
-        int X_LOCATION = 90;
-        int PICKUP = 300;
-
-        
-
 
         public MoveLeft(LinkPlayer link, LinkSprite sprite) : base(link)
         {
@@ -24,7 +19,7 @@ namespace Sprint5
 
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if (link.possibleDirections.Contains(Direction.left))
+            if (link.PossibleDirections.Contains(Direction.left))
             {
                 location.X += MOVEMENT;
             }

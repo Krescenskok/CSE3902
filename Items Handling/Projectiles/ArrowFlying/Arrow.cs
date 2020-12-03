@@ -52,7 +52,7 @@ namespace Sprint5.Items
             {
                 collider = new ProjectileCollider((item as ArrowRightSprite).Hitbox, this, this.state, "Arrow");
             }
-            Sounds.Instance.PlaySoundEffect("ArrowBoomerang");
+            Sounds.Instance.Play("ArrowBoomerang");
         }
 
         public void UpdateLocation(Vector2 location)

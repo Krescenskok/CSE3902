@@ -201,10 +201,10 @@ namespace Sprint5
             locations.Add(new Point(tileWidth * 9, tileHeight * 5) - camOffset);
 
             //stair point
-            locations.Add(new Point(tileWidth * 8, tileHeight * 5) - camOffset);
+            locations.Add(new Point((int)(tileWidth * 9.5), tileHeight * 5) - camOffset);
 
             //secret door point
-            locations.Add(new Point(tileWidth *2, tileHeight*2) - camOffset);
+            locations.Add(new Point(tileWidth *2, (int)(tileHeight*-.5f)) - camOffset);
 
 
             doorSizeMiddle = new Point(tileWidth*2, 2);
@@ -212,7 +212,7 @@ namespace Sprint5
 
             //find location to send link to when wallmaster brings him to room 1
             LinkStartLocation = new Rectangle(locations[3],new Point(tileWidth,tileHeight)).Center.ToVector2();
-
+         
 
         }
 

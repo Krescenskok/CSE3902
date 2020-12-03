@@ -134,21 +134,45 @@ namespace Sprint5
             Point topRight = new Point(rect.Right, rect.Top) + camOffset;
             Point bottomLeft = new Point(rect.Left, rect.Bottom) + camOffset;
             Point bottomRight = new Point(rect.Right, rect.Bottom) + camOffset;
+           
 
             AddToList(results, topLeft);
             AddToList(results, topRight);
             AddToList(results, bottomLeft);
             AddToList(results, bottomRight);
+            
+            if(results.Count > 2)
+            {
+                for (int i = results[0] + 1; i < results[1]; i++)
+                {
+                    results.Add(i);
+                }
+            }
+            if(results.Count >= 4)
+            {
+                for (int i = results[0] + col; i < results[2]; i += col)
+                {
+                    results.Add(i);
+                }
+                for (int i = results[1] + col; i < results[3]; i += col)
+                {
+                    results.Add(i);
+                }
+                for (int i = results[2] + 1; i < results[3]; i++)
+                {
+                    results.Add(i);
+                }
+            }
 
-
-            return results;
+           
+            return  results.Distinct().ToList();;
         }
 
         private void AddToList(List<int> list, Point location)
         {
             int spatialPosition = location.X / cellSize.X + (location.Y / cellSize.Y) * width;
             if (spatialPosition >= rows*col || spatialPosition < 0) spatialPosition = rows*col - 1;
-            if (!list.Contains(spatialPosition)) list.Add(spatialPosition);
+            list.Add(spatialPosition);
         }
 
         private List<ICollider> FindNearbyColliders(ICollider col)
@@ -181,11 +205,10 @@ namespace Sprint5
             {
                 if (colliders[i].layer is PlayerLayer && player is null) player = colliders[i];
 
+
                 List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
 
                 
-                nearbyColliders.AddRange(RoomWalls.Instance.Walls); //walls too big for spatial mapping
-                nearbyColliders.Add(player);
 
                 Collision collision = new Collision();
                 foreach(ICollider other in nearbyColliders)

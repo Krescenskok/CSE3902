@@ -31,57 +31,82 @@ namespace Sprint5.Inventory
             if (item is BoomerangObject)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Boomerang] = true;
+                Sounds.Instance.Play("Fanfare");
             }
             else if (item is BombObject)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Bomb] = true;
+                Sounds.Instance.Play("GetItem");
             }
             else if (item is Bow)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Bow] = true;
+                Sounds.Instance.Play("Fanfare");
             }
             else if (item is BluePotion)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Potion] = true;
                 LinkInventory.Instance.PotionCount++;
+                Sounds.Instance.Play("GetItem");
             }
             else if (item is BlueCandle)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Candle] = true;
+                Sounds.Instance.Play("GetItem");
             }
             else if (item is ArrowObject)
             {
                 itemStorage.SecondInInventory[SecondaryItem.Arrow] = true;
+                Sounds.Instance.Play("GetItem");
             }
             else if (item is Rupee)
             {
                 LinkInventory.Instance.RupeeCount++;
+                Sounds.Instance.Play("GetRupee");
             }
             else if (item is BombObject)
             {
                 LinkInventory.Instance.BombCount++;
+                Sounds.Instance.Play("GetItem");
             }
             else if (item is Key)
             {
                 LinkInventory.Instance.KeyCount++;
+                Sounds.Instance.Play("GetHeart");
             }
             else if (item is Map)
             {
                 HUDMap.Instance.HasMap = true;
+                Sounds.Instance.Play("Fanfare");
             }
             else if (item is Compass)
             {
                 HUDMap.Instance.HasCompass = true;
+                Sounds.Instance.Play("Fanfare");
             }
             else if (item is Clock)
             {
                 link.Clock = true;
                 RoomEnemies.Instance.StunAllEnemies();
+                Sounds.Instance.Play("Fanfare");
             }
             else if (item is BlueRing)
             {
                 link.UseRing = true;
                 LinkInventory.Instance.ShowBlueRing = true;
+                Sounds.Instance.Play("Fanfare");
+            }
+            else if (item is Fairy)
+            {
+                Sounds.Instance.Play("GetHeart");
+            }
+            else if (item is HeartContainer)
+            {
+                Sounds.Instance.Play("KeyAppear");
+            }
+            else if (item is TriforcePiece)
+            {
+                Sounds.Instance.Play("GetItem");
             }
             itemStorage.PreviousItem = item;
         }

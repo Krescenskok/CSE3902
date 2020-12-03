@@ -35,6 +35,7 @@ namespace Sprint5.Items
             this.item = item;
             drawnFrame = 0;
             state = new BombState(this, location);
+            Sounds.Instance.Play("BombDrop");
         }
 
         public void UpdateFrame(int frame)
@@ -54,7 +55,7 @@ namespace Sprint5.Items
             collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
             Update();
 
-            Sounds.Instance.PlaySoundEffect("BombExplode");
+            Sounds.Instance.Play("BombExplode");
         }
 
         public void Update()

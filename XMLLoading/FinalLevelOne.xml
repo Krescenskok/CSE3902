@@ -395,31 +395,31 @@
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>2 3</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>3 0</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>4 3</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>5 1</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
 			</Item>
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Keese</ObjectName>
 				<Location>6 8</Location>
-				<Alive>false</Alive>
+				<Alive>true</Alive>
 			</Item>
 		</Room>
 		<!-- Sixth Room Content-->
@@ -1423,6 +1423,17 @@
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Column</ObjectName>
 				<Location>5 6</Location>
+			</Item>
+
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Plain</ObjectName>
+				<Location>2 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Plain</ObjectName>
+				<Location>4 6</Location>
 			</Item>
 			
 			<!--Columns-->
@@ -2536,15 +2547,87 @@
 				<Location>2 7</Location>
 				<Alive>true</Alive>
 			</Item>
+			
+			
 			<Item>
 				<ObjectType>Block</ObjectType>
-				<ObjectName>Bricks</ObjectName>
-				<Location>0 0</Location>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Vertical</Orientation>
+				<Length>7</Length>
+				<Location>0 2</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Vertical</Orientation>
+				<Length>7</Length>
+				<Location>0 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Horizontal</Orientation>
+				<Length>7</Length>
+				<Location>3 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Horizontal</Orientation>
+				<Length>12</Length>
+				<Location>8 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Horizontal</Orientation>
+				<Length>4</Length>
+				<Location>5 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Horizontal</Orientation>
+				<Length>6</Length>
+				<Location>6 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>BrickLong</ObjectName>
+				<Orientation>Vertical</Orientation>
+				<Length>4</Length>
+				<Location>5 13</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Brick</ObjectName>
+				<Location>4 14</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Brick</ObjectName>
+				<Location>4 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Brick</ObjectName>
+				<Location>5 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Brick</ObjectName>
+				<Location>6 12</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Brick</ObjectName>
+				<Location>7 1</Location>
+			</Item>
+			
+			<!--<Item>
+				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
-				<Location>1 0</Location>
+				<Location>0 1</Location>
 			</Item>
 			<Item>
 				<ObjectType>Block</ObjectType>
@@ -2755,7 +2838,7 @@
 				<ObjectType>Block</ObjectType>
 				<ObjectName>Bricks</ObjectName>
 				<Location>3 11</Location>
-			</Item>
+			</Item>-->
 		</Room>
 		
 		

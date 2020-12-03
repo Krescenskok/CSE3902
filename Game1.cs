@@ -136,6 +136,7 @@ namespace Sprint5
             {
                 linkPlayer.IsDead = true;
                 activeCommand = new GameOverCommand(linkPlayer);
+                Sounds.Instance.LinkDeath();
             }
             else
             {
@@ -165,11 +166,11 @@ namespace Sprint5
                 Sounds.Instance.Update();
                 HUD.Instance.UpdateHearts(linkPlayer);
 
-                base.Update(gameTime);                
-            }            
+                base.Update(gameTime);
+            }
 
             this.Camera.Update();
-            
+
         }
 
         void PrepareToDraw()
@@ -190,7 +191,7 @@ namespace Sprint5
         {
             if (!IsGameOver)
             {
-                if (mainMenu) 
+                if (mainMenu)
                 {
                     _spriteBatch.Begin();
 
@@ -217,7 +218,9 @@ namespace Sprint5
                     base.Draw(gameTime);
                     RoomEnemies.Instance.DrawTests(_spriteBatch);
 
-                    _spriteBatch.End();
+                Camera.Instance.Draw(_spriteBatch);
+
+                _spriteBatch.End();
 
                 if (Paused && !DoorPause)
                 {

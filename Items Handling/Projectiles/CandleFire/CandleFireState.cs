@@ -16,7 +16,7 @@ namespace Sprint5.Items
         {
             this.item = item;
             this.position = initPos;
-            Sounds.Instance.PlaySoundEffect("UseCandle");
+            Sounds.Instance.Play("UseCandle");
         }
 
         public void Update()
