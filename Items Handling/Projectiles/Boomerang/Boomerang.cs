@@ -74,7 +74,7 @@ namespace Sprint5.Items
 
         public void Returning()
         {
-            state = new ReturningBoomerangState(this, location, link);
+            state = new ReturningBoomerangState(this, location, link, GetHashCode());
         }
 
         public void Impact()
@@ -84,7 +84,7 @@ namespace Sprint5.Items
 
         public void ReturnedToLink()
         {
-            if (throwing && returning) 
+            if (throwing && returning)
             {
                 returned = true;
             }
@@ -120,13 +120,11 @@ namespace Sprint5.Items
             {
                 ReturnedToLink();
                 state.Expire();
-                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
 
             if (returned)
             {
                 state.Expire();
-                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
         }
 

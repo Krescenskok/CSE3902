@@ -22,13 +22,15 @@ namespace Sprint5.Items
         private const float speedPerSec = 40;
         private const float updatePerSec = 40;
         private float speed;
+        private int soundCode;
 
-        public ReturningBoomerangState(Boomerang item, Vector2 initPos, LinkPlayer link)
+        public ReturningBoomerangState(Boomerang item, Vector2 initPos, LinkPlayer link, int soundCode)
         {
             this.item = item;
             this.position = initPos;
             this.link = link;
             speed = speedPerSec / updatePerSec;
+            this.soundCode = soundCode;
         }
 
         public void Update()
@@ -69,7 +71,7 @@ namespace Sprint5.Items
         public void Expire()
         {
             item.IsExpired = true;
-
+            Sounds.Instance.StopLoopedSound(soundCode.ToString());
             CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }
