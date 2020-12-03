@@ -10,8 +10,10 @@ namespace Sprint5
     {
         start,
         difficulty,
+        color,
         controls,
         sound,
+
         quit
     }
     public class MainMenuTexture
@@ -25,9 +27,10 @@ namespace Sprint5
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 start = new Vector2(20, 185);
         private static Vector2 difficulty = new Vector2(20, 205);
-        private static Vector2 controls = new Vector2(20, 225);
-        private static Vector2 sound = new Vector2(20, 245);
-        private static Vector2 quit = new Vector2(20, 265);
+        private static Vector2 colors = new Vector2(20, 225);
+        private static Vector2 controls = new Vector2(20, 245);
+        private static Vector2 sound = new Vector2(20, 265);
+        private static Vector2 quit = new Vector2(20, 285);
 
         public MainMenuTexture(Texture2D text)
         {
@@ -46,6 +49,9 @@ namespace Sprint5
 
             if (currentItem == selectedMain.difficulty) batch.DrawString(font, "Difficulty", difficulty, Color.Black);
             else batch.DrawString(font, "Difficulty", difficulty, Color.DarkGoldenrod);
+
+            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfit", colors, Color.Black);
+            else batch.DrawString(font, "Link's Outfits", colors, Color.DarkGoldenrod);
 
             if (currentItem == selectedMain.controls) batch.DrawString(font, "Controls", controls, Color.Black);
             else batch.DrawString(font, "Controls", controls, Color.DarkGoldenrod);
@@ -74,6 +80,7 @@ namespace Sprint5
         {
             if (currentItem == selectedMain.start) mainScreen.currentGame.mainMenu = false;
             else if (currentItem == selectedMain.difficulty) mainScreen.state = MenuState.difficulty;
+            else if (currentItem == selectedMain.color) mainScreen.state = MenuState.color;
             else if (currentItem == selectedMain.controls) mainScreen.state = MenuState.controls;
             else if (currentItem == selectedMain.sound) mainScreen.state = MenuState.sound;
             else mainScreen.currentGame.Exit();
