@@ -218,7 +218,7 @@ namespace Sprint5
                     base.Draw(gameTime);
                     RoomEnemies.Instance.DrawTests(_spriteBatch);
 
-                camera.Draw(_spriteBatch);
+                Camera.Instance.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 

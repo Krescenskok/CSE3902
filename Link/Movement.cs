@@ -102,7 +102,7 @@ namespace Sprint5.Link
                     }
                     else if (link.CurrentWeapon == ItemForLink.MagicalRod)
                     {
-                        Sounds.Instance.PlaySoundEffect("MagicalRod");
+                        Sounds.Instance.Play("MagicalRod");
                         if (!link.IsShootingProjectile)
                         {
                             link.IsShootingProjectile = true;
