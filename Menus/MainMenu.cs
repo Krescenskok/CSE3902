@@ -45,7 +45,7 @@ namespace Sprint5
             if (state == MenuState.main) mainScreen.goUp();
             else if (state == MenuState.difficulty) difficultyScreen.goUp();
             else if (state == MenuState.controls) controlsScreen.goUp();
-            else if (state == MenuState.sound) soundScreen.goDown();
+            else if (state == MenuState.sound) soundScreen.goUp();
         }
         public void goDown()
         {

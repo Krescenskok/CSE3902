@@ -204,8 +204,8 @@ namespace Sprint5
                 }
                 else
                 {
-                    _spriteBatch.Begin(transformMatrix: camera.Transform);
-                    GraphicsDevice.Viewport = camera.gameView;
+                    _spriteBatch.Begin(transformMatrix: Camera.Transform);
+                    GraphicsDevice.Viewport = Camera.gameView;
                     GraphicsDevice.Clear(Color.Black);
 
                     if (activeCommand != null)
@@ -233,7 +233,6 @@ namespace Sprint5
                     HUD.Instance.DrawBottom(_spriteBatch);
                     _spriteBatch.End();
                 }
-                    }
 
                 }
             }
