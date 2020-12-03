@@ -12,6 +12,7 @@ namespace Sprint5
 {
     public class KeyboardController : IController
     {
+        MainMenuCommand mainCommand;
         LinkPlayer player;
         KeyboardState prevState;
 
@@ -21,10 +22,12 @@ namespace Sprint5
 
         IDictionary<Keys, ICommand> commandsList = new Dictionary<Keys, ICommand>();
         List<Keys> movementKeys = new List<Keys>();
+        Keys currentKey = Keys.Zoom;
 
         public KeyboardController(LinkPlayer linkPlayer, Game1 game, SpriteBatch spriteBatch)
         {
             this.player = linkPlayer;
+            mainCommand = new MainMenuCommand(game.mainScreen);
 
             var state = Keyboard.GetState();
             commandsList.Add(Keys.Q, new QuitCommand());
@@ -120,6 +123,7 @@ namespace Sprint5
                     if (kstate.IsKeyDown(kvp.Key) != prevState.IsKeyDown(kvp.Key))
                     {
                         activeCommand = kvp.Value;
+                        currentKey = kvp.Key;
                     }
 
                     if (activeCommand is PauseCommand)
@@ -156,6 +160,16 @@ namespace Sprint5
                 }
 
                 
+            }
+
+            if (game.mainMenu)
+            {
+                if (!(activeCommand is QuitCommand) && !(activeCommand is FullScreenCommand))
+                {
+                    mainCommand.updateKey(currentKey);
+                    currentKey = Keys.Zoom;
+                    return null;
+                }
             }
 
                 

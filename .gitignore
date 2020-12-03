@@ -81,3 +81,4 @@ bin/Debug/netcoreapp3.1/Content/beamImpact.xnb
 .DS_Store
 Link/Movement.cs
 Sprites.config
+/Content/obj

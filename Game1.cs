@@ -23,6 +23,7 @@ namespace Sprint5
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont font;
+        public MainMenu mainScreen;
 
         private Vector2 spritePos;
 
@@ -47,6 +48,8 @@ namespace Sprint5
         LinkPlayer linkPlayer;
 
         public bool isPaused;
+
+        public bool mainMenu = true;
         public LinkPlayer LinkPlayer { get => linkPlayer; }
         public SpriteFont Font { get => font; }
         public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
@@ -83,6 +86,8 @@ namespace Sprint5
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
+            mainScreen = new MainMenu();
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkPlayer = new LinkPlayer(this);
@@ -90,7 +95,7 @@ namespace Sprint5
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
             controllers.Add(new MouseController(this));
 
-
+            this.Window.Title = "Legend Of Zelda";
 
             LinkPersistent = new LinkCommand(linkPlayer, "");
             ProjectilePersistent = ProjectilesCommand.Instance;
@@ -112,7 +117,6 @@ namespace Sprint5
             GridGenerator.Instance.GetGrid(this, 12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
             RoomSpawner.Instance.LoadRoom(this, 1);
-
 
             spritePos = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2,
             _graphics.GraphicsDevice.Viewport.Height / 2);
@@ -189,49 +193,65 @@ namespace Sprint5
                 {
                     IsGameOver = false;
                 }
-            }           
+            }
 
 
             if (!IsGameOver)
             {
-                _spriteBatch.Begin(transformMatrix: camera.Transform);
-                GraphicsDevice.Viewport = camera.gameView;
-                GraphicsDevice.Clear(Color.Black);
-
-                if (activeCommand != null)
-                    activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
-                RoomSpawner.Instance.Draw(_spriteBatch);
-                LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
-                ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
-                base.Draw(gameTime);
-                RoomEnemies.Instance.DrawTests(_spriteBatch);
-
-                _spriteBatch.End();
-
-                if (isPaused && !DoorPause)
+                if (mainMenu) 
                 {
-
-                    PauseScreen.Instance.Draw(_spriteBatch, this, font);
-                    
-                }
-                else
-                {
-
-
-
-                    //Draw HUD in separate viewport
                     _spriteBatch.Begin();
 
-                    GraphicsDevice.Viewport = camera.HUDView;
-                    HUD.Instance.DrawTop(_spriteBatch);
-                    LinkInventory.Instance.Draw(_spriteBatch);
-                    HUD.Instance.DrawBottom(_spriteBatch);
+                    if (activeCommand != null)
+                        activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
 
+                    mainScreen.Draw(_spriteBatch, this, font);
+
+                    base.Draw(gameTime);
 
                     _spriteBatch.End();
                 }
+                else
+                {
+                    _spriteBatch.Begin(transformMatrix: camera.Transform);
+                    GraphicsDevice.Viewport = camera.gameView;
+                    GraphicsDevice.Clear(Color.Black);
 
+                    if (activeCommand != null)
+                        activeCommand.ExecuteCommand(this, gameTime, _spriteBatch);
+                    RoomSpawner.Instance.Draw(_spriteBatch);
+                    LinkPersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                    RoomSpawner.Instance.DrawTopLayer(_spriteBatch);
+                    ProjectilePersistent.ExecuteCommand(this, gameTime, _spriteBatch);
+                    base.Draw(gameTime);
+                    RoomEnemies.Instance.DrawTests(_spriteBatch);
+
+                    _spriteBatch.End();
+
+                    if (isPaused && !DoorPause)
+                    {
+
+                        PauseScreen.Instance.Draw(_spriteBatch, this, font);
+
+                    }
+                    else
+                    {
+
+
+
+                        //Draw HUD in separate viewport
+                        _spriteBatch.Begin();
+
+                        GraphicsDevice.Viewport = camera.HUDView;
+                        HUD.Instance.DrawTop(_spriteBatch);
+                        LinkInventory.Instance.Draw(_spriteBatch);
+                        HUD.Instance.DrawBottom(_spriteBatch);
+
+
+                        _spriteBatch.End();
+                    }
+
+                }
             }
             else
             {
