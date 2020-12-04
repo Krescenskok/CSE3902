@@ -70,7 +70,7 @@ namespace Sprint5
 
         public void ChangeRoom()
         {
-            GameOverScreen.Instance.RoomsEntered++;
+            StatsScreen.Instance.RoomsEntered++;
             if (Heading == 'L') Camera.Instance.Scroll(NextRoom, "left");
             else if (Heading == 'R') Camera.Instance.Scroll(NextRoom, "right");
             else if (Heading == 'T') Camera.Instance.Scroll(NextRoom, "up");

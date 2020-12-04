@@ -70,6 +70,7 @@ namespace Sprint5
         {
             if(state is StalfosWalkingState)
             {
+
                 HP = Math.Max(HP - amount, 0);
 
                 if (HP == HPAmount.Zero)
@@ -81,6 +82,7 @@ namespace Sprint5
                     bool stunned = (state as StalfosWalkingState).permaStun;
                     state = new StalfosDamagedState(dir, this, Location, stunned);
                 }
+
             }
 
         }

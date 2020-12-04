@@ -10,11 +10,21 @@ that we were working on and had multiple zoom meetings so that we could help eac
 anything differently. However, if there was another sprint, we would probably choose to keep the same method because it worked out pretty well for us.
 
 For this sprint, these are the tasks that were completed by each member:
-- JT: 
+- JT:
+  - Implementing game states
+  - Finished the sounds
+  - Fixed camera and room switchhing issues
+  - Implemented enemy health bars
   
 - Andrew:
+  - Implementing game states
+  - Implemented difficulty levels
   
 - Ann:
+  - Redid the projectiles implementation to solve fatal bugs/errors
+  - Fixed projectile colliders
+  - Fixed projectile impact animations
+  - Redid the HUD and Inventory implementations to better code quality and shorten file lengths
 
 - Krescens:
   - Fixed multiple file lengths to better code quality
@@ -25,7 +35,10 @@ For this sprint, these are the tasks that were completed by each member:
   - Reflection
   - ReadMe
   - Reset Link
+  
 - Yuan:
+  - Fixed the black room
+  - Fixed things for Aquamentus and fireballs
 
 - Noah:
   - Created main menu (including sound options, color options, control screen, etc...)

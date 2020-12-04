@@ -108,6 +108,7 @@ namespace Sprint5
         public bool LargeShield { get => largeShield; set => largeShield = value; }
         public bool DrawShield { get => drawShield; set => drawShield = value; }
         public bool IsShootingProjectile { get => isShooting; set => isShooting = value; }
+        public bool IsInvincible { get; set; }
 
         public LinkPlayerParent()
         {

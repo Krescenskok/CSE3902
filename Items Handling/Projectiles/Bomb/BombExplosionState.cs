@@ -8,7 +8,6 @@ namespace Sprint5.Items
     public class BombExplosionState : IItemsState
     {
         private Bomb item;
-        private Vector2 position;
         private int runTime;
         private const int maxTime = 240;
         private int frame = 0;
@@ -41,8 +40,6 @@ namespace Sprint5.Items
             item.IsExpired = true;
 
             item.Expire();
-
-            //remove item from room
         }
 
         public void Collected()

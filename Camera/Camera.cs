@@ -43,12 +43,15 @@ namespace Sprint5
         public Viewport gameView;
         public Rectangle playArea;
 
+        public Viewport EntireView { get; set; }
+        public Rectangle EntireArea { get; set; }
+
         public Viewport HUDView;
         public Rectangle HUDArea;
 
         private Direction currentDirection;
 
-        private Rectangle targetGameView;
+        private Rectangle targetgameView;
         private Rectangle targetHUDLocation;
 
         private bool inventoryOpen = false, inventoryStillMoving = false;
@@ -81,6 +84,9 @@ namespace Sprint5
             Point HUDPoint = new Point(topLeftCorner.X, topLeftCorner.Y - screenHeight);
             Point HUDSize = new Point(size.X, screenHeight);
 
+            Point EntirePoint = new Point(0, 0);
+            Point EntireSize = new Point(screenWidth, screenHeight);
+
 
 
             playArea = new Rectangle(topLeftCorner, size);
@@ -89,7 +95,10 @@ namespace Sprint5
             HUDArea = new Rectangle(HUDPoint, HUDSize);
             HUDView = new Viewport(HUDArea);
 
-            targetGameView = playArea;
+            EntireArea = new Rectangle(EntirePoint, EntireSize);
+            EntireView = new Viewport(EntireArea);
+
+            targetgameView = playArea;
             targetHUDLocation = HUDArea;
 
             transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
@@ -120,8 +129,8 @@ namespace Sprint5
                 Point newHUDLocation = new Point(HUDArea.Location.X, HUDArea.Location.Y + screenHeight * moveDirection);
                 targetHUDLocation.Location = newHUDLocation;
 
-                Point newGameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y * moveDirection);
-                targetGameView.Location = newGameViewLocation;
+                Point newgameViewLocation = new Point(playArea.Location.X, playArea.Location.Y + playArea.Size.Y * moveDirection);
+                targetgameView.Location = newgameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
                 if (inventoryOpen) 
@@ -203,7 +212,7 @@ namespace Sprint5
 
         private bool HUDOpenCloseFinished()
         {
-            return playArea.Size.Equals(targetGameView.Size) && playArea.Location.Equals(targetGameView.Location)
+            return playArea.Size.Equals(targetgameView.Size) && playArea.Location.Equals(targetgameView.Location)
                 && HUDArea.Size.Equals(targetHUDLocation.Size) && HUDArea.Location.Equals(HUDArea.Location);
         }
 
@@ -236,7 +245,7 @@ namespace Sprint5
 
             if (!HUDOpenCloseFinished())
             {
-                MoveViewports(ref playArea, targetGameView, ref gameView);
+                MoveViewports(ref playArea, targetgameView, ref gameView);
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
 

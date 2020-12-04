@@ -91,7 +91,7 @@ namespace Sprint5
 
         public void Destroy(IEnemy enemy, Vector2 location)
         {
-            GameOverScreen.Instance.KillCount++;
+            StatsScreen.Instance.KillCount++;
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
             CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
@@ -99,6 +99,7 @@ namespace Sprint5
 
             allDead = enemies.Count == 0;
         }
+
 
 
         public void Destroy(EnemyDeath death)

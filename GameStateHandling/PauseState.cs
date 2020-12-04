@@ -10,6 +10,8 @@ namespace Sprint5.GameStateHandling
     public class PauseState : IGameStates
     {
         private static readonly PauseState instance = new PauseState();
+        public StateId Id { get; } = StateId.Pause;
+        public IGameStates Parent { get; set; }
         public static PauseState Instance
         {
             get

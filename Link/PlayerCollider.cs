@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Sprint5.GamePadVibration;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -13,6 +14,7 @@ namespace Sprint5
     {
         LinkPlayer linkPlayer;
         private Rectangle bounds;
+        private float beforeHP;
 
         public PlayerCollider(LinkPlayer linkPlayer,Rectangle bounds)
         {
@@ -44,30 +46,35 @@ namespace Sprint5
         {
             if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
             {
-
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
                 testKnockback(collision);
-
             }
-
-
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("Door"))
             {
-
                 linkPlayer.isWalkingInPlace = true;
                 linkPlayer.HandleObstacle(collision);
                 testKnockback(collision);
-
-
             }
 
             if (col.CompareTag("enemy"))
-                col.SendMessage("Dissapear", null);
+            {
+                 col.SendMessage("Dissapear", null);
+            }
+
+            if (col.CompareTag("Enemy"))
+            {
+                if (linkPlayer.IsInvincible)
+                {
+                    string direction = collision.From.ToString();
+                    direction = char.ToUpper(direction[0]) + direction.Substring(1);
+                    col.SendMessage("EnemyTakeDamage" + direction, HPAmount.QuarterHeart);
+                }
+            }
 
             if (col.CompareTag("LockedDoor"))
             {
@@ -100,6 +107,8 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageRight")
                     {
+                        if (linkPlayer.IsInvincible) return;
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -109,11 +118,9 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Right");
                         linkPlayer.knockback(Direction.right);
-
-
-
                     }
                 }
 
@@ -125,6 +132,8 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageLeft")
                     {
+                        if (linkPlayer.IsInvincible) return;
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -134,6 +143,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Left");
                         linkPlayer.knockback(Direction.left);
                     }
@@ -147,6 +157,8 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageUp")
                     {
+                        if (linkPlayer.IsInvincible) return;
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -156,6 +168,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Up");
                         linkPlayer.knockback(Direction.up);
                     }
@@ -169,6 +182,8 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageDown")
                     {
+                        if (linkPlayer.IsInvincible) return;
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -178,6 +193,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Down");
                         linkPlayer.knockback(Direction.down);
                     }
@@ -196,6 +212,7 @@ namespace Sprint5
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
+                
             }
             if (msg == "Heal")
             {

@@ -15,23 +15,37 @@ namespace Sprint5
 
         public DifficultyLevel Difficulty { get; set; }
 
-        public GameState(Game1 game, DifficultyLevel difficulty, StateId id)
+        public IGameStates Current { get; set; }
+
+        public IGameStates  Previous { get; set; }
+
+        public GameState(Game1 game, DifficultyLevel difficulty, IGameStates initialState)
         {
             Game = game;
-            Id = id;
-            Difficulty = difficulty;
+            Id = initialState.Id;
+            Current = initialState;
+
+
+        }
+
+        public void Swap(IGameStates swapTo)
+        {
+            System.Diagnostics.Debug.WriteLine(this.Current.Id);
+            this.Current = swapTo;
+            Id = swapTo.Id;
+            System.Diagnostics.Debug.WriteLine(this.Current.Id);
         }
 
         public void Update(GameTime gameTime)
         {
+
             if (Game.LinkPlayer.Health == 0 && !(Game.LinkPlayer.IsDead))
             {
                 Game.LinkPlayer.IsDead = true;
-                Game.ActiveCommand = new GameOverCommand(Game.LinkPlayer);
                 Game.State.Id = StateId.GameOver;
             }
-            else
-            {
+            
+            
                 foreach (var cont in Game.Controllers)
                 {
                     cont.HandleInput(Game);
@@ -42,32 +56,54 @@ namespace Sprint5
                     }
 
                 }
-            }
+            
            
             if (Id == StateId.Gameplay)
             {
                 GameplayState.Instance.Update(Game, gameTime);
+                Current = GameplayState.Instance;
             }
             else if (Id == StateId.Pause)
             {
                 PauseState.Instance.Update(Game, gameTime);
+                Current = PauseState.Instance;
             }
             else if (Id == StateId.Inventory)
             {
                 InventoryState.Instance.Update(Game, gameTime);
+                Current = InventoryState.Instance;
             }
             else if (Id == StateId.GameOver)
             {
                 GameOverState.Instance.Update(Game, gameTime);
+                Current = GameOverState.Instance;
             }
             else if (Id == StateId.MainMenu)
             {
                 MainMenuState.Instance.Update(Game, gameTime);
+                Current = MainMenuState.Instance;
             }
             else if (Id == StateId.Transition)
             {
                 TransitionState.Instance.Update(Game, gameTime);
+                Current = TransitionState.Instance;
             }
+            else if (Id == StateId.Credits)
+            {
+                CreditsState.Instance.Update(Game, gameTime);
+                Current = CreditsState.Instance;
+            }
+            else if (Id == StateId.Stats)
+            {
+                StatsState.Instance.Update(Game, gameTime);
+                Current = StatsState.Instance;
+            }
+            else if (Id == StateId.Win)
+            {
+                WinState.Instance.Update(Game, gameTime);
+                Current = WinState.Instance;
+            }
+            
         }
 
         public void Draw(SpriteFont font, GameTime gameTime)
@@ -91,6 +127,18 @@ namespace Sprint5
             else if (Id == StateId.Transition)
             {
                 TransitionState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Credits)
+            {
+                CreditsState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Stats)
+            {
+                StatsState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Win)
+            {
+                WinState.Instance.Draw(font, Game, gameTime);
             }
         }
     }

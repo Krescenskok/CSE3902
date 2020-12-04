@@ -262,5 +262,10 @@ namespace Sprint5.Items
             return new WoodenSwordSprite(itemsSpriteSheet);
         }
 
+        public ISprite CreateMagicBookSprite()
+        {
+            return new MagicBookSprite(itemsSpriteSheet);
+        }
+
     }
 }
