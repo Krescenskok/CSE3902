@@ -87,6 +87,7 @@ namespace Sprint5
             else if (currentItem == selectedMain.difficulty) mainScreen.State = MenuState.difficulty;
             else if (currentItem == selectedMain.controls) mainScreen.State = MenuState.controls;
             else if (currentItem == selectedMain.sound) mainScreen.State = MenuState.sound;
+            else if (currentItem == selectedMain.color) mainScreen.State = MenuState.color;
             else mainScreen.Game.Exit();
 
         }

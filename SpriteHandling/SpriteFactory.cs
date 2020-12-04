@@ -84,11 +84,6 @@ namespace Sprint5
             return new LinkSprite(yellowLinkSpriteSheet);
         }
 
-
-        //public ISprite CreateItemsSprite()
-        //{
-        //    return new ItemsSprite(itemsSpriteSheet);
-        //}
         public ISprite CreateBlocksSprite()
         {
             return new BlocksSprite(blocksSpriteSheet);
@@ -96,14 +91,13 @@ namespace Sprint5
 
 
         public MainMenuTexture createMainMenu(MainMenu menu)
+        {
+                return new MainMenuTexture(menu, mainMenuTexture);           
+        }
 
         public BlackScreenSprite CreateBlackScreen()
         {
             return new BlackScreenSprite(blackScreen);
-        }
-
-        {
-            return new MainMenuTexture(menu, mainMenuTexture);
         }
         }
     }

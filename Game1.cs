@@ -132,7 +132,7 @@ namespace Sprint5
 
             Spritebatch.Begin();
             base.Draw(gameTime);
-            Camera.Instance.Draw(SpriteBatch);
+            Camera.Instance.Draw(Spritebatch);
 
             Spritebatch.End();
 

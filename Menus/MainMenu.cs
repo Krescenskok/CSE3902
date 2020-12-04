@@ -21,6 +21,7 @@ namespace Sprint5
         private ControlMenuTexture controlsScreen;
         private SoundMenuTexture soundScreen;
         private DifficultyMenuTexture difficultyScreen;
+        private ColorMenuTexture colorScreen;
 
 
         private Game1 CurrentGame;
@@ -37,6 +38,7 @@ namespace Sprint5
             controlsScreen = new ControlMenuTexture(this, mainScreen.Texture);
             soundScreen = new SoundMenuTexture(this, mainScreen.Texture);
             difficultyScreen = new DifficultyMenuTexture(this, mainScreen.Texture);
+            colorScreen = new ColorMenuTexture(mainScreen.Texture);
 
         }
 
