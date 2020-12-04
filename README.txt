@@ -7,19 +7,24 @@ Program Controls:
 - S and Down arrow: Move down
 - D and Right arrow: Move right
 - U and I: Used to switch between items in inventory
-- Space: Brings up HUD and Link's inventory
+- Enter: Consume selected item in inventory (applicable only for the potion)
+- Space: Brings up and closes HUD and Link's inventory
 - N: Primary Attack
 - B: Secondary Attack
 - G: Pause the game
 - Q: Quit the game
 - F: Full Screen
-- M: Mute
+- M: Mute Audio
 
 
 Known Bugs:
 - If the sword beam hits the very edges of the door entrance, it may not show the impact animation, but it will expire.
 - Link does not hold the triforce/bow over his head.
 - Link does not pick up boomerang with one hand.
+
+
+Notes:
+- In the inventory, the bow is intended to be drawing over the arrow once obtained, but only the bow should show up in the slot selection. 
 
 
 
