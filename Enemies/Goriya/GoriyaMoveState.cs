@@ -14,19 +14,19 @@ namespace Sprint5
     public class GoriyaMoveState : IEnemyState
     {
         private Goriya goriya;
-        
+
         private Vector2 location;
         private Vector2 moveDirection;
-        
-        List<Direction> possibleDirections;
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        Direction currentDirection;
+
+        private List<Direction> possibleDirections;
+        private Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        private Direction currentDirection;
 
 
         private const int moveSpeed = 1;
         private int currentMoveSpeed = moveSpeed;
         private bool currentlyThrowing;
-        
+
 
         private Random RandomNumber;
         private const float directionChangeLikelihood = 0.1f;
@@ -35,7 +35,7 @@ namespace Sprint5
 
         private const int stunTime = 120;
         private int stunClock = 0;
-        public bool permaStun = false;
+        public bool permaStun { get; private set;} = false;
         public GoriyaMoveState(Goriya goriya, Vector2 location)
         {
             this.goriya = goriya;
@@ -63,10 +63,10 @@ namespace Sprint5
 
             currentDirection = RandomDirection(possibleDirections);
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CheckDirection(currentDirection, down, up);
+            moveDirection.X = Directions.CheckDirection(currentDirection, right, left);
 
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
 
             string dir = currentDirection.ToString();
 
@@ -83,22 +83,11 @@ namespace Sprint5
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
-
+            possibleDirections = Directions.Default();
             possibleDirections.Remove(collision.From);
-            
-          
+           
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }
-
-
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
-
 
         public void Die()
         {
@@ -145,7 +134,6 @@ namespace Sprint5
         {
             if (stunClock > 0) stunClock--;
             else if (stunClock <= 0 && currentMoveSpeed == 0) currentMoveSpeed = moveSpeed;
-
             return stunClock <= 0;
         }
     }

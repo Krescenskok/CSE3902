@@ -102,8 +102,8 @@ namespace Sprint5
 
         public void TakeDamage(Direction dir, int amount)
         {
-            HP -= amount;
-            if (HP <= 0) Die();
+            HP = Math.Max(HP - amount, HPAmount.Zero);
+            if (HP == HPAmount.Zero) Die();
             else
             {
                 bool stunned = (state as GoriyaMoveState).permaStun;

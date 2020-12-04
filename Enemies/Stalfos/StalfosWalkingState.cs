@@ -18,8 +18,8 @@ namespace Sprint5
         private Vector2 moveDirection;
 
 
-        List<Direction> possibleDirections;
-        Direction currentDirection;
+        private List<Direction> possibleDirections;
+        private Direction currentDirection;
 
 
         private float randomness = 0.1f;
@@ -29,7 +29,7 @@ namespace Sprint5
         private const int stunTime = 120;
         private int stunClock = 0;
 
-        public bool permaStun = false;
+        public bool permaStun { get; private set; } = false;
 
         public StalfosWalkingState(Stalfos stalfos, Vector2 location)
         {
@@ -69,7 +69,6 @@ namespace Sprint5
         public void Update()
         {
             
-
             if (Directions.Chance(randomness)) ChangeDirection();
             MoveOneUnit();
 

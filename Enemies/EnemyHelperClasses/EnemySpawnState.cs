@@ -11,7 +11,6 @@ namespace Sprint5
         private IEnemy enemy;
         private SpawnSprite sprite;
 
-
         public EnemySpawnState(IEnemy enemy, Game game)
         {
           
@@ -21,8 +20,6 @@ namespace Sprint5
 
             sprite = (SpawnSprite)newSprite;
         }
-
-        
 
         public void ChangeDirection()
         {

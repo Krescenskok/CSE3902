@@ -16,9 +16,6 @@ namespace Sprint5
         private static Direction Down { get => Direction.down; }
         private static Direction None { get => Direction.none; }
 
-        
-
-
 
         private static List<Direction> all = new List<Direction> { Left, Right, Up, Down };
         public static List<Direction> Default() { return new List<Direction>(all); }
@@ -32,6 +29,13 @@ namespace Sprint5
             if (dir.Equals(pos)) return 1;
             if (dir.Equals(neg)) return -1;
             
+            return 0;
+        }
+
+        public static int CheckDirection(List<Direction> newDir, Direction pos, Direction neg)
+        {
+            if (newDir.Contains(pos)) return 1;
+            if (newDir.Contains(neg)) return -1;
             return 0;
         }
 
@@ -94,6 +98,11 @@ namespace Sprint5
             else if (dir.Equals(Right)) return Left;
             else if (dir.Equals(Up)) return Down;
             else return Up;
+        }
+
+        public static bool Opposites(Direction dir1, Direction dir2)
+        {
+            return Opposite(dir1).Equals(dir2);
         }
     }
 }
