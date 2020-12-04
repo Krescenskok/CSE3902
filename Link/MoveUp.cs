@@ -51,8 +51,7 @@ namespace Sprint5
         public override Vector2 HandleSword(GameTime gameTime, Vector2 location)
         {
 
-            int[] FRAMES = { 6, 7, 87, 86, 85, 84 };
-
+            int[] FRAMES = { 6, 7, 67, 66, 65, 64 };
             int[] currentFrames = FRAMES;
 
             SwitchFrames(currentFrames);
