@@ -8,7 +8,7 @@ namespace Sprint5.Menus
 {
     public class PauseScreen
     {
-        Texture2D texture;
+        private Texture2D texture;
 
                     private static readonly PauseScreen instance = new PauseScreen();
 
@@ -32,12 +32,11 @@ namespace Sprint5.Menus
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
         {
-            batch.Begin();
 
             texture = new Texture2D(game.GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.Black });
 
-            game.GraphicsDevice.Viewport = game.GameCamera.gameView;
+            game.GraphicsDevice.Viewport = game.Camera.gameView;
 
             batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White * opacity);
 
@@ -45,7 +44,6 @@ namespace Sprint5.Menus
             batch.DrawString(font, "Press 'G' to resume", resume, Color.White);
             batch.DrawString(font, "Press 'Q' to Quit", quit, Color.White);
 
-            batch.End();
         }
     }
 }

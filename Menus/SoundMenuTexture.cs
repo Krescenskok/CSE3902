@@ -16,12 +16,12 @@ namespace Sprint5
     }
     public class SoundMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedSound currentItem = selectedSound.Song1;
-        public selectedSound selectedSong = selectedSound.Song1;
+        private const float size = 2.5f;
+        private selectedSound currentItem = selectedSound.Song1;
+        private selectedSound selectedSong = selectedSound.Song1;
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 S1 = new Vector2(20, 185);
@@ -30,7 +30,7 @@ namespace Sprint5
         private static Vector2 S4 = new Vector2(20, 245);
         private static Vector2 back = new Vector2(20, 265);
 
-        public SoundMenuTexture(Texture2D text)
+        public SoundMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
         }
@@ -97,7 +97,7 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (currentItem != selectedSound.Return) selectedSong = currentItem;
-            else mainScreen.state = MenuState.main;
+            else mainScreen.State = MenuState.main;
         }
         public selectedSound CurrentItem { get => currentItem; set => currentItem = value; }
     }

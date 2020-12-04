@@ -94,14 +94,16 @@ namespace Sprint5
             return new BlocksSprite(blocksSpriteSheet);
         }
 
+
+        public MainMenuTexture createMainMenu(MainMenu menu)
+
         public BlackScreenSprite CreateBlackScreen()
         {
             return new BlackScreenSprite(blackScreen);
         }
 
-        public MainMenuTexture createMainMenu()
         {
-            return new MainMenuTexture(mainMenuTexture);
+            return new MainMenuTexture(menu, mainMenuTexture);
         }
         }
     }
