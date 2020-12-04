@@ -30,7 +30,7 @@ namespace Sprint5
 
         private MenuState state = MenuState.main;
       
-        public MainMenu(Game1 game)
+        public MainMenu(Game1 game, LinkPlayer link)
         {
             CurrentGame = game;
             mainScreen = SpriteFactory.Instance.createMainMenu(this);

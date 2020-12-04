@@ -68,16 +68,11 @@ namespace Sprint5
             LinkPlayer = new LinkPlayer(this);
 
 
-            mainScreen = new MainMenu(linkPlayer);
+            mainScreen = new MainMenu(this, LinkPlayer);
             
             MenuCommands.Instance.LoadCommands(this);
             GamePlayCommands.Instance.LoadCommands(this);
             
-            controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
-            controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
-            controllers.Add(new MouseController(this));
-
-
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));
             Controllers.Add(new KeyboardController(this));
