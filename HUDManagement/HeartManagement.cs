@@ -57,16 +57,6 @@ namespace Sprint5.HUDManagement
 
         public void UpdateHearts(LinkPlayer link)
         {
-            if (storage.PreviousHealth < 0)
-            {
-                storage.PreviousHealth = (int)link.Health;
-            }
-
-            if (storage.PreviousHealth == (int)link.Health)
-            {
-                return;
-            }
-
             int fullCount = 0, emptyCount = 0, halfCount = 0;
             storage.MaxHearts = (int)(link.FullHealth / FULL_HEART);
             storage.PreviousHealth = (int)link.Health;
@@ -118,10 +108,10 @@ namespace Sprint5.HUDManagement
             }
         }
 
-        public void Reset()
+        public void Reset(LinkPlayer link)
         {
-            DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkMaxHP();
-            InitializeHearts();
+            storage.MaxHearts = (int) link.FullHealth;
+            UpdateHearts(link);
         }
 
 

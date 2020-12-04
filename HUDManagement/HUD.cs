@@ -106,9 +106,9 @@ namespace Sprint5
         }
 
 
-        public void Reset()
+        public void Reset(LinkPlayer link)
         {
-            heartManager.Reset();
+            heartManager.Reset(link);
             slotManager.Reset();
             map.Reset();
         }

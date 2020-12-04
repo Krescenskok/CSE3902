@@ -36,14 +36,11 @@ namespace Sprint5
                 (game as Game1).State.Id = StateId.Gameplay;
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);
-                LinkInventory.Instance.Reset();
-                HUD.Instance.Reset();
                 RoomSpawner.Instance.Reset();
                 Sounds.Instance.LoadSounds(game);
-                Camera.Instance.BackToSquareOne();
-                HUD.Instance.Reset();
+                Camera.Instance.BackToSquareOne();          
                 LinkInventory.Instance.Reset();
-          
+                HUD.Instance.Reset(Player);
 
 
 
