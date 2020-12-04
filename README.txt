@@ -45,7 +45,7 @@ Code Analysis on HUD (Done by Ann)
 
 
 Code Analysis on Items (Done by Ann)
-0 errors, 3 warnings
+0 errors, 13 warnings
 - Colliders on Empty, Full, and Half Heart, as well as BombObject, BoomerangObject will always be null. These objects are HUD interface sprites, and thus shouuld never have colliders (the colliders are simply part of the interface so they cannot be removed).
 - Fields are assigned but never used in BombCollider, BoomerangCollider, ItemCollider, BoomerangObject and BombExplosionState. Solved by removing.
 
