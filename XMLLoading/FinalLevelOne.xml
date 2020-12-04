@@ -1926,7 +1926,7 @@
 			<Item>
 				<ObjectType>NPC</ObjectType>
 				<ObjectName>OldMan</ObjectName>
-				<Location>2 5</Location>
+				<Location>2 6</Location>
 				<Alive>true</Alive>
 			</Item>
 			<Item>
@@ -1938,7 +1938,13 @@
 			<Item>
 				<ObjectType>NPC</ObjectType>
 				<ObjectName>Flame</ObjectName>
-				<Location>2 7</Location>
+				<Location>2 9</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>BlueRing</ObjectName>
+				<Location>4 6</Location>
 				<Alive>true</Alive>
 			</Item>
 		</Room>
