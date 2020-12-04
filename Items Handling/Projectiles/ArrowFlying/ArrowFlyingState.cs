@@ -55,7 +55,6 @@ namespace Sprint5.Items
         public void Expire()
         {
             CollisionHandler.Instance.RemoveCollider(item.Collider);
-            //expires only when it hits an enemy or the walls. always leaves an impact when it expires.
             item.Impact();
         }
 

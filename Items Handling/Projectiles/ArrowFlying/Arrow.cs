@@ -17,6 +17,7 @@ namespace Sprint5.Items
         private ISprite item;
         private int drawnFrame = 0;
         private IItemsState state;
+        private string direction;
         private bool isExpired = false;
         public bool IsExpired
         {
@@ -34,6 +35,7 @@ namespace Sprint5.Items
         {
             this.location = location;
             this.item = item;
+            this.direction = direction;
             state = new ArrowFlyingState(this, location, direction);
 
             if (direction == "Down")
@@ -67,7 +69,7 @@ namespace Sprint5.Items
 
         public void Impact()
         {
-            state = new ArrowImpactState(this);
+            state = new ArrowImpactState(this, direction);
         }
 
         public void Update()
