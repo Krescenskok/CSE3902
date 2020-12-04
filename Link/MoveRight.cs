@@ -27,7 +27,6 @@ namespace Sprint5
                 location.X += MOVEMENT;
             }
 
-
             if (link.LargeShield)
                 currentFrame = currentFrame == 12 ? 13 : 12;
             else
@@ -50,7 +49,6 @@ namespace Sprint5
             int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
 
             SwitchFrames(currentFrames);
-
 
             return location;
            
@@ -80,7 +78,6 @@ namespace Sprint5
 
             SwitchFrames(currentFrames);
 
-
             return location;
          
         }
@@ -99,7 +96,6 @@ namespace Sprint5
 
             return location;
 
-           
         }
 
         public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
@@ -115,10 +111,6 @@ namespace Sprint5
 
             return location;
 
-           
         }
-
-        
-
     }
 }

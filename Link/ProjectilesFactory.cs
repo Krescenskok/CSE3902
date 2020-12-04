@@ -13,11 +13,13 @@ namespace Sprint5.Link
 
         private const int buffer = 50;
 
-
         private const int DISPLACEMENT = 10;
+        private const int SIX = 6;
+        private const int TWELVE = 12;
+        private const int FIVE = 5;
+        private const int SEVEN = 7;
 
         private Vector2 itemLocation;
-
 
         public ProjectilesFactory()
         {
@@ -27,10 +29,9 @@ namespace Sprint5.Link
         {
             Vector2 itemLocation = link.CurrentLocation;
 
-            itemLocation.Y += 10;
+            itemLocation.Y += DISPLACEMENT;
             return new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
         }
-
 
         static public WandBeam CreateWandBeam(string direction, LinkPlayer link)
         {
@@ -54,7 +55,7 @@ namespace Sprint5.Link
             else
             {
                 itemLocation.Y -= DISPLACEMENT;
-                itemLocation.X += 6;
+                itemLocation.X += SIX;
             }
 
             return new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
@@ -67,22 +68,22 @@ namespace Sprint5.Link
 
             if (direction.Equals("Down") || link.state is Stationary)
             {
-                itemLocation.X += 12;
+                itemLocation.X += TWELVE;
                 return new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
             }
             else if (direction.Equals("Right"))
             {
-                itemLocation.Y += 5;
+                itemLocation.Y += FIVE;
                 return new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
             }
             else if (direction.Equals("Left"))
             {
-                itemLocation.Y += 7;
+                itemLocation.Y += SEVEN;
                 return new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
 
             }
 
-            itemLocation.X += 10;
+            itemLocation.X += DISPLACEMENT;
             return new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
 
         }
@@ -92,7 +93,7 @@ namespace Sprint5.Link
             Vector2 loc = link.CurrentLocation;
 
 
-            loc.X += 10;
+            loc.X += DISPLACEMENT;
             if (direction.Equals(UP))
             {
                 loc.Y -= buffer;

@@ -12,6 +12,7 @@ namespace Sprint5.Link
     {
         protected LinkPlayer link;
         protected int currentFrame;
+ 
         
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
@@ -45,7 +46,6 @@ namespace Sprint5.Link
             if (link.sprite == null)
             {
                 link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
-                //linkSprite = link.sprite;
             }
             if (link.UseRing)
                 link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueRingLinkSprite();

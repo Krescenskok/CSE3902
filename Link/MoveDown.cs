@@ -110,8 +110,6 @@ namespace Sprint5
             return location;
         }
 
-        
-
     }
 
 }
