@@ -62,14 +62,21 @@ namespace Sprint5
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
-            mainScreen = new MainMenu(this);
-
             Spritebatch = new SpriteBatch(GraphicsDevice);
+
 
             LinkPlayer = new LinkPlayer(this);
 
+
+            mainScreen = new MainMenu(linkPlayer);
+            
             MenuCommands.Instance.LoadCommands(this);
             GamePlayCommands.Instance.LoadCommands(this);
+            
+            controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
+            controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
+            controllers.Add(new MouseController(this));
+
 
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));

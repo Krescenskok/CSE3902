@@ -54,7 +54,7 @@ namespace Sprint5
             if (currentItem == selectedMain.difficulty) batch.DrawString(font, "Difficulty", difficulty, Color.Black);
             else batch.DrawString(font, "Difficulty", difficulty, Color.DarkGoldenrod);
 
-            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfit", colors, Color.Black);
+            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfits", colors, Color.Black);
             else batch.DrawString(font, "Link's Outfits", colors, Color.DarkGoldenrod);
 
             if (currentItem == selectedMain.controls) batch.DrawString(font, "Controls", controls, Color.Black);

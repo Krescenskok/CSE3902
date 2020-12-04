@@ -59,8 +59,6 @@ namespace Sprint5.Link
                 {
 
                     linkPlayer.IsDamaged = true;
-
-
             }
             else if (Key.Equals("D9") || Key.Equals("NumPad9"))
             {
@@ -116,12 +114,15 @@ namespace Sprint5.Link
                         {
                             linkPlayer.CurrentWeapon = ItemForLink.Shield;
                         }
+                        else if ((Key.Equals("D1")))
+                    {
+                        linkPlayer.UseRing = true;
+                        System.Diagnostics.Debug.WriteLine(linkPlayer.UseRing);
+                    }
                 }
 
                 linkPlayer.Update(gameTime);
             }
-
-
         }
     }
 }

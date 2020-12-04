@@ -22,24 +22,22 @@ namespace Sprint5
         private SoundMenuTexture soundScreen;
         private DifficultyMenuTexture difficultyScreen;
         private ColorMenuTexture colorScreen;
-
-
+      
         private Game1 CurrentGame;
 
         public Game1 Game { get => CurrentGame; set => CurrentGame = value; }
         public MenuState State { get => state; set => state = value; }
 
         private MenuState state = MenuState.main;
+      
         public MainMenu(Game1 game)
         {
-
             CurrentGame = game;
             mainScreen = SpriteFactory.Instance.createMainMenu(this);
             controlsScreen = new ControlMenuTexture(this, mainScreen.Texture);
             soundScreen = new SoundMenuTexture(this, mainScreen.Texture);
             difficultyScreen = new DifficultyMenuTexture(this, mainScreen.Texture);
-            colorScreen = new ColorMenuTexture(mainScreen.Texture);
-
+            colorScreen = new ColorMenuTexture(mainScreen.Texture, link);
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
