@@ -61,7 +61,7 @@ namespace Sprint5.Inventory
             item.X += ITEMS_GAP;
             itemStorage.FirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, true);
+            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, false);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bomb, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Arrow, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bow, false);
