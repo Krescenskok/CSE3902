@@ -276,7 +276,7 @@ namespace Sprint5
                 } else if (loadNextRoom)
                 {
 
-                EndTransition();
+                    EndTransition();
                     RoomSpawner.Instance.RoomChange(game, nextRoom);
 
                     currentRoom = nextRoom;
@@ -296,13 +296,14 @@ namespace Sprint5
 
             public void Draw(SpriteBatch batch)
             {
+
                 screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
             private void StartInventory() { game.State.Id = StateId.Inventory; IsInventory = true; }
-        private void StartTransition() { game.State.Id = StateId.Transition; }
-        private void EndInventory() { game.State.Id = StateId.Gameplay; IsInventory = false; }
-        private void EndTransition() { game.State.Id = StateId.Gameplay; }
+            private void StartTransition() { game.State.Id = StateId.Transition; }
+            private void EndInventory() { game.State.Id = StateId.Gameplay; IsInventory = false; }
+            private void EndTransition() { game.State.Id = StateId.Gameplay; }
         
 
 

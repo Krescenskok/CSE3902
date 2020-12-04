@@ -68,16 +68,21 @@ namespace Sprint5
 
         public void TakeDamage(Direction dir, int amount)
         {
-            HP -= amount;
-
-            if (HP <= HPAmount.Zero) { Die(); 
-            }
-            else 
+            if(state is StalfosWalkingState)
             {
-                bool stunned = (state as StalfosWalkingState).permaStun;
-                state = new StalfosDamagedState(dir, this, Location,stunned);
+                HP = Math.Max(HP - amount, 0);
+
+                if (HP == HPAmount.Zero)
+                {
+                    Die();
+                }
+                else
+                {
+                    bool stunned = (state as StalfosWalkingState).permaStun;
+                    state = new StalfosDamagedState(dir, this, Location, stunned);
+                }
             }
-            
+
         }
 
         public void ObstacleCollision(Collision col)

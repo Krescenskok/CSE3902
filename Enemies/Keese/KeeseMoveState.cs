@@ -18,11 +18,10 @@ namespace Sprint5
 
         private Vector2 moveDirection;
 
-        public enum Direction { left, right, up, down };
         
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        List<Direction> possibleDirections;
-        List<Direction> currentDirection;
+        private Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
+        private List<Direction> possibleDirections;
+        private List<Direction> currentDirection;
 
         private const int moveSpeed = 1;
         private int currentMoveSpeed = moveSpeed;
@@ -39,14 +38,11 @@ namespace Sprint5
 
             keese.SetSprite(EnemySpriteFactory.Instance.CreateKeeseMoveSprite());
 
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
             ChangeDirection();
         }
 
-        public void Attack()
-        {
-            //do nothing
-        }
+     
 
         public void ChangeDirection()
         {
@@ -57,7 +53,7 @@ namespace Sprint5
             Direction directionTwo = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
 
             //avoid conflicting movement input ex. moving left and right simultaneously
-            while(OppositeDirections(directionOne,directionTwo))
+            while(Directions.Opposites(directionOne,directionTwo))
             {
                 directionOne = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
                 directionTwo = possibleDirections[RandomNumber.Next(0, possibleDirections.Count)];
@@ -66,48 +62,25 @@ namespace Sprint5
             currentDirection.Add(directionOne);
             currentDirection.Add(directionTwo);
 
-           
+            moveDirection.X = Directions.CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CheckDirection(currentDirection,down, up);
 
-            moveDirection.X = CheckDirection(currentDirection, right, left);
-            moveDirection.Y = CheckDirection(currentDirection,down, up);
-
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
         }
 
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
+            possibleDirections.Remove(collision.From);
 
-            Direction dir = (Direction)collision.From;
-            possibleDirections.Remove(dir);
-
-           
             if (!possibleDirections.Contains(currentDirection[0]) || !possibleDirections.Contains(currentDirection[1])) ChangeDirection();
-            
-        }
-
-
-        private int CheckDirection(List<Direction> newDir, Direction pos, Direction neg)
-        {
-            if (newDir.Contains(pos)) return 1;
-            if (newDir.Contains(neg)) return -1;
-            return 0;
-        }
-
-        private bool OppositeDirections(Direction dir1,Direction dir2)
-        {
-            return dir1.Equals(left) && dir2.Equals(right)
-                    || dir1.Equals(right) && dir2.Equals(left)
-                    || dir1.Equals(up) && dir2.Equals(down)
-                    || dir1.Equals(down) && dir2.Equals(up);
         }
 
 
         public void Die()
         {
             bat.Die();
-            
         }
 
   
@@ -139,6 +112,11 @@ namespace Sprint5
             currentMoveSpeed = 0;
             stunClock = permanent ? int.MaxValue : stunTime;
 
+        }
+
+        public void Attack()
+        {
+            //do nothing
         }
     }
 }

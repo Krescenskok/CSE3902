@@ -9,7 +9,7 @@ namespace Sprint5
 {
     public class GoriyaBoomerang
     {
-        GoriyaBoomerangSprite sprite;
+        private GoriyaBoomerangSprite sprite;
         private Vector2 location;
         private Vector2 direction;
         private string directionStr;

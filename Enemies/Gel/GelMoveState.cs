@@ -28,10 +28,10 @@ namespace Sprint5
         private int currentRow, currentCol;
 
 
-        Direction left = Direction.left,right = Direction.right, up = Direction.up, down = Direction.down;
-        List<Direction> possibleDirections;
+        private Direction left = Direction.left,right = Direction.right, up = Direction.up, down = Direction.down;
+        private List<Direction> possibleDirections;
         
-        Direction currentDirection;
+        private Direction currentDirection;
         private Vector2 moveDirection;
 
         private bool stoppedMoving;
