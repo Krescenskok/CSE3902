@@ -30,13 +30,12 @@ namespace Sprint5
         private static int RangeAttackStrength = HPAmount.Full_Heart;
 
         private static int UpdatePerSec = 120;
-        private float attackPerSec = 1;
+        private float attackPerSec = (float)0.5;
 
-        private float directionChangPerSec = (float)0.2;
+        private float directionChangPerSec = (float)0.4;
         private float moveSpeedPerSec = 15;
         private float speed;
         private int directionIndex = -1;
-        private bool tryAttack = true;
 
         public Vector2 Location { get => aquamentusPos; }
 
@@ -53,11 +52,11 @@ namespace Sprint5
             aquamentusHP = 40;
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
-            state = new AquamentusNormalState(this, aquamentusPos, link);
+            speed = moveSpeedPerSec / UpdatePerSec;
+            state = new AquamentusNormalState(this, aquamentusPos, link, directionIndex, speed);
             fireBallList = new List<FireBall>(); 
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
-            speed = moveSpeedPerSec / UpdatePerSec;
             aquamentusHP = DifficultyMultiplier.Instance.DetermineEnemyHP(aquamentusHP);
 
         }
@@ -71,10 +70,15 @@ namespace Sprint5
             this.sprite = sprite;
         }
 
+        public void UpdatePos(Vector2 pos)
+        {
+            aquamentusPos = pos;
+        }
 
         public void LostHP(int damage)
         {
             aquamentusHP -= damage;
+            
         }
 
         public Boolean checkAlive()
@@ -84,7 +88,6 @@ namespace Sprint5
 
         public void Die()
         {
-            Sounds.Instance.PlayBossScream();
             RoomItems.Instance.DropHeartContainer(Location);
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
@@ -95,8 +98,6 @@ namespace Sprint5
             {
                 fireBallList[fireBallList.Count-1].State.Die();
             }
-
-            Sounds.Instance.Play("GetItem");
         }
 
         public Boolean TryAttack()
@@ -146,10 +147,10 @@ namespace Sprint5
             if (TryAttack())
             {
                 state.Attack();
+                aquamentusSprite.AttackSprite();
+                Sounds.Instance.PlaySoundEffect("AquamentusRoar");
             }
-            aquamentusPos.X += directionIndex * speed;
             state.Update();
-            
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
@@ -163,8 +164,6 @@ namespace Sprint5
                 fb.Draw(spriteBatch);
             }
         }
-
-      
 
         public void TakeDamage(Direction dir, int amount)
         {

@@ -46,7 +46,6 @@ namespace Sprint5
         }
 
 
-
         public void SetSprite(ISprite sprite)
         {
             //wont use
