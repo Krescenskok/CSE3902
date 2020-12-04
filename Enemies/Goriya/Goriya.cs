@@ -17,68 +17,34 @@ namespace Sprint5
     /// </summary>
     public class Goriya : IEnemy
     {
-
-        private Vector2 location;
+        private XElement saveData;
+        
        
 
         public IEnemyState state;
         private EnemySprite sprite;
         private GoriyaWalkSprite gorSprite;
         
-
-        private GoriyaBoomerang boomerang;
-
-        private Game game;
-
-
-        private EnemyCollider collider;
+        public GoriyaBoomerang Boomerang { get; set; }
 
         public int HP { get; private set; } = HPAmount.EnemyLevel3;
-        public EnemyHealthBar HP_BAR { get; private set; }
         private const float barSize = 1.5f;
 
 
-        public Vector2 Location { get => location; }
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
         public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+        private EnemyCollider collider;
 
-        private XElement saveData;
+       
 
         private Point spriteSize;
         private Rectangle rect;
 
-        public void SetSprite(ISprite sprite)
-        {
-
-            this.sprite = (EnemySprite)sprite;
-
-        }
-
-        public void SetBoomerang(GoriyaBoomerang boomerang)
-        {
-            this.boomerang = boomerang;
-            
-        }
-
-        public GoriyaBoomerang GetBoomerang()
-        {
-            return boomerang;
-        }
-
-      
-
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-            
-        }
-
-
         public Goriya(Game game, Vector2 location, XElement xml)
         {
-            this.game = game;
-            this.location = location;
+            this.Location = location;
             state = new EnemySpawnState(this,game);
             
             collider = new EnemyCollider();
@@ -88,22 +54,27 @@ namespace Sprint5
         }
         public void Spawn()
         {
-            state = new GoriyaMoveState(this, location);
+            state = new GoriyaMoveState(this, Location);
             gorSprite = (GoriyaWalkSprite)sprite;
 
             spriteSize = gorSprite.GetRectangle().Size;
-            rect = new Rectangle(location.ToPoint(), spriteSize);
+            rect = new Rectangle(Location.ToPoint(), spriteSize);
             rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .6f);
             collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "Goriya");
 
-            HP_BAR = new EnemyHealthBar(this, rect, game, HP, barSize);
+            HPBarDrawer.AddBar(new EnemyHealthBar(this, rect, barSize));
+        }
+
+        public void SetSprite(ISprite sprite)
+        {
+            this.sprite = (EnemySprite)sprite;
         }
 
 
         public void Die()
         {
-            if (boomerang != null) boomerang.Die();
-            RoomEnemies.Instance.Destroy(this,location);
+            if (Boomerang != null) Boomerang.Die();
+            RoomEnemies.Instance.Destroy(this,Location);
             saveData.SetElementValue("Alive", "false");
 
             RoomItems.Instance.DropRandom(collider.Center);
@@ -114,9 +85,9 @@ namespace Sprint5
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, location, 0, Color.White);
+            sprite.Draw(spriteBatch, Location, 0, Color.White);
             
-            if (boomerang != null) boomerang.Draw(spriteBatch);
+            if (Boomerang != null) Boomerang.Draw(spriteBatch);
 
         }
 
@@ -124,14 +95,10 @@ namespace Sprint5
         {
             state.Update();
             sprite.Update();
-            if (boomerang != null) boomerang.Update();
+            if (Boomerang != null) Boomerang.Update();
 
         }
 
-        public EnemyCollider GetCollider()
-        {
-            return collider;
-        }
 
         public void TakeDamage(Direction dir, int amount)
         {
@@ -140,7 +107,7 @@ namespace Sprint5
             else
             {
                 bool stunned = (state as GoriyaMoveState).permaStun;
-                state = new GoriyaDamagedState(dir, this, location, 2,stunned);
+                state = new GoriyaDamagedState(dir, this, Location, 2,stunned);
             }
         }
 
@@ -154,9 +121,5 @@ namespace Sprint5
             state.Stun(false);
         }
 
-        public void Attack()
-        {
-            state.Attack();
-        }
     }
 }

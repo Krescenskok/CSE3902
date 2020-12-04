@@ -22,30 +22,27 @@ namespace Sprint5
 
         Camera cam = Camera.Instance;
         GridGenerator grid = GridGenerator.Instance;
-        public BossHealthBar(IEnemy enemy, Game game, int maxHP)
+
+        private float num = 1;
+        public BossHealthBar(IEnemy enemy)
         {
             this.enemy = enemy;
-            this.maxHP = maxHP;
+            this.maxHP = enemy.HP;
             currentHP = maxHP;
 
             int width = grid.GetTileSize().X * 12;
             int height = grid.GetTileSize().Y;
 
-            
-
-            sprite = new EnemyHPSprite(game,width,height);
-            HPBarDrawer.AddBar(this);
+            sprite = new EnemyHPSprite(width,height);
         }
 
 
 
         public void Update()
         {
-            
-
+ 
             currentHP = enemy.HP;
             float fill = currentHP / maxHP;
-
             sprite.Update(fill);
 
             if (fill == 0) HPBarDrawer.Remove(this);

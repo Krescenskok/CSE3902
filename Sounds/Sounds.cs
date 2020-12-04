@@ -35,6 +35,8 @@ namespace Sprint5
 
         private float currentVolume = 1;
 
+        private string selectedSong;
+
         public void LoadSounds(Game game)
         {
 
@@ -44,9 +46,13 @@ namespace Sprint5
             soundInstances = new List<SoundEffectInstance>();
             loopedSounds = new Dictionary<string, SoundEffectInstance>();
 
+            if (lowHealth != null) lowHealth.Stop();
             lowHealth = AddLoop("LowHealth");
 
-            BGM = AddLoop("DungeonTheme");
+
+            if (selectedSong == null) selectedSong = "DungeonTheme";
+            if (BGM != null) BGM.Stop();
+            BGM = AddLoop(selectedSong);
             BGM.Play();
 
             
@@ -220,6 +226,7 @@ namespace Sprint5
             soundInstances.Remove(BGM);
             BGM = AddLoop(name);
             BGM.Play();
+            selectedSong = name;
         }
 
         #endregion

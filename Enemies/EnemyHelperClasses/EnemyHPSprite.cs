@@ -20,7 +20,7 @@ namespace Sprint5
 
         
         
-        public EnemyHPSprite(Game game, int width, int height)
+        public EnemyHPSprite(int width, int height)
         {
             this.height = height;
             this.width = width;

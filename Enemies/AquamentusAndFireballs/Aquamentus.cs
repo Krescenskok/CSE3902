@@ -26,8 +26,7 @@ namespace Sprint5
         private int attackCountDown;
         private int ChangeDirectionCountDown;
         public int HP { get; private set; } = HPAmount.EnemyBoss1;
-        public BossHealthBar HP_BAR { get; private set; }
-        private const float barSize = 1.5f;
+     
 
         private static int AttackStrength = HPAmount.Full_Heart;
         private static int RangeAttackStrength = HPAmount.Full_Heart;
@@ -63,7 +62,7 @@ namespace Sprint5
             
             HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
-            HP_BAR = new BossHealthBar(this,  game, HP);
+            HPBarDrawer.AddBar(new BossHealthBar(this));
         }
 
         public void Spawn()
@@ -152,7 +151,7 @@ namespace Sprint5
             {
                 state.Attack();
                 aquamentusSprite.AttackSprite();
-                Sounds.Instance.PlaySoundEffect("AquamentusRoar");
+                Sounds.Instance.Play("AquamentusRoar");
             }
             state.Update();
             foreach (FireBall fb in fireBallList){

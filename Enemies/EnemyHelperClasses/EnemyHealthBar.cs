@@ -16,10 +16,10 @@ namespace Sprint5
 
         private float currentHP;
         private float maxHP;
-        public EnemyHealthBar(IEnemy enemy, Rectangle enemyRect, Game game, int maxHP, float size)
+        public EnemyHealthBar(IEnemy enemy, Rectangle enemyRect,float size)
         {
             this.enemy = enemy;
-            this.maxHP = maxHP;
+            maxHP = enemy.HP;
             currentHP = maxHP;
            
             int width = (int)(enemyRect.Width * size);
@@ -30,25 +30,16 @@ namespace Sprint5
             offset.X = enemyRect.Center.X - initial.Center.X;
             offset.Y = height * -1;
 
-            sprite = new EnemyHPSprite(game,width,height);
+            sprite = new EnemyHPSprite(width,height);
 
-            HPBarDrawer.AddBar(this);
-        }
-
-        public EnemyHealthBar()
-        {
-            sprite = new EnemyHPSprite();
         }
 
         public void Update()
         {
-           
-
             location = enemy.Location + offset;
 
             currentHP = enemy.HP;
             float fill = currentHP / maxHP;
-
             sprite.Update(fill);
 
             if (fill == 0) HPBarDrawer.Remove(this);

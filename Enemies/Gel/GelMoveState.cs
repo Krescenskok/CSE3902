@@ -43,7 +43,7 @@ namespace Sprint5
         private float savedSpeed = moveSpeed;
         private const int stunTime = 120;
         private int stunClock = 0;
-        Random RandomNumber;
+        private Random RandomNumber;
         private bool permaStun = false;
 
         public GelMoveState(Gel gel, Vector2 location, Game game)
@@ -81,25 +81,10 @@ namespace Sprint5
 
             if (DoneBeingStunned()) speed = savedSpeed;
 
-            if (stoppedMoving && DoneWithCoolDown())
-            {
-                ResetCoolDownClock();
-                ChangeDirection();
-                stoppedMoving = false;
-
-            }
-            else if (Arrived())
-            {
-                stoppedMoving = true;
-                coolDownClock = Math.Max(0, coolDownClock - 1);
-               
-            }
-            else
-            {
-                MoveOneUnit();
+            if (stoppedMoving && DoneWithCoolDown()) { ResetCoolDownClock(); ChangeDirection();}
+            else if (Arrived()) { stoppedMoving = true; coolDownClock = Math.Max(0, coolDownClock - 1); }
+            else MoveOneUnit();
                 
-            }
-
             //update location on grid
             currentCol = GridGenerator.Instance.GetColumn(currentSpace.X);
             currentRow = GridGenerator.Instance.GetRow(currentSpace.Y);
@@ -118,17 +103,12 @@ namespace Sprint5
         //Changes direction if block or wall is in the way and gel have finished moving to its next space
         public void CheckIfBlockingPath(ICollider col, Collision collision)
         {
-
             possibleDirections.Remove(collision.From);
             if (!possibleDirections.Contains(currentDirection) && LiesOnPath(col.Bounds()) && lastSpaceOnGrid == currentSpace)
             {
-
                 ChangeDirection();
-                
-                
             }
             possibleDirections = Directions.Default();
-
         }
 
         //choose new tile on current row or column and change movedirection
@@ -232,6 +212,7 @@ namespace Sprint5
         {            
             coolDownClock = coolDownTimes[RandomNumber.Next(0,coolDownTimes.Length)];
             coolDownTime = coolDownClock;
+            stoppedMoving = false;
         }
 
         public bool DoneWithCoolDown()
@@ -244,7 +225,6 @@ namespace Sprint5
 
         public bool LiesOnPath(Rectangle other)
         {
-
             return path.Intersects(other) || path.Contains(other);
         }
         public void FreeToMove()

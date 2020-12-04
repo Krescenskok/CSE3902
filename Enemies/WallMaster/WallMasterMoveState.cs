@@ -176,14 +176,11 @@ namespace Sprint5
             
 
             this.location = currentSpace.Location.ToVector2();
-            this.master.UpdateLocation(this.location);
+            this.master.Location = location;
             
         }
 
-        public void TakeDamage()
-        {
-            //take damage
-        }
+        
 
         public void ChangeDirection()
         {
@@ -192,17 +189,7 @@ namespace Sprint5
 
         }
 
-        public float CompareTwoNums(float num1, float num2)
-        {
-            if (num1 < num2) return -1;
-            if (num1 > num2) return 1;
-            return 0;
-        }
-
-        public void Die()
-        {
-            //die
-        }
+        
 
         public void Attack()
         {
@@ -257,7 +244,7 @@ namespace Sprint5
         {
             location = MoveToward(location, targetSpace.Location.ToVector2());
             currentSpace.Location = location.ToPoint();
-            master.UpdateLocation(location);
+            master.Location = location;
             
         }
 
@@ -274,8 +261,6 @@ namespace Sprint5
         private bool Arrived(Rectangle position, Rectangle target)
         {
             float dist = Vector2.Distance(position.Center.ToVector2(), target.Center.ToVector2());
-            
-            
             return dist <= 1;
         }
 
@@ -296,7 +281,6 @@ namespace Sprint5
                 playerPosition = col.Location;
                 List<Rectangle> insideWall = insideMap[currentWall];
 
-                Rectangle playerPos = NearestSpace(playerPosition, insideWall);
                 playerSpace = NearestSpace(playerPosition, insideWall);
 
                 attacking = true;
@@ -348,14 +332,6 @@ namespace Sprint5
             else return CombineRectangles(bottomInside);
         }
 
-        public Rectangle OutsideArea()
-        {
-            if (currentWall == right) return CombineRectangles(rightWall);
-            else if (currentWall == left) return CombineRectangles(leftWall);
-            else if (currentWall == top) return CombineRectangles(topWall);
-            else return CombineRectangles(bottomWall);
-        }
-
 
         public void LeftOffset(Rectangle rect, ref Rectangle wall, ref Rectangle inside)
         {
@@ -403,16 +379,27 @@ namespace Sprint5
             inside.Location = newLoc.ToPoint();
         }
 
-        public void TakeDamage(int amount)
-        {
-            
-        }
-
         public void Stun(bool permanent)
         {
             moveSpeed = 0;
             stunClock = permanent || permaStun ? int.MaxValue : stunTime;
             permaStun = permaStun ? true : permaStun;
         }
+
+        public void TakeDamage(int amount)
+        {
+            
+        }
+
+        public void TakeDamage()
+        {
+
+        }
+
+        public void Die()
+        {
+
+        }
+
     }
 }

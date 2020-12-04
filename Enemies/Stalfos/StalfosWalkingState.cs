@@ -50,19 +50,11 @@ namespace Sprint5
         {
 
             currentDirection = Directions.RandomDirection(possibleDirections);
-
-            
-
             moveDirection.Y = Directions.CheckDirection(currentDirection, Direction.down, Direction.up);
             moveDirection.X = Directions.CheckDirection(currentDirection, Direction.right, Direction.left);
 
-            possibleDirections = Directions.Default();
-            
+            possibleDirections = Directions.Default(); 
         }
-
-
-
-      
 
         public void MoveAwayFromCollision(Collision collision)
         {
@@ -90,7 +82,7 @@ namespace Sprint5
         {
             location.X += moveDirection.X * currentMoveSpeed;
             location.Y +=  moveDirection.Y * currentMoveSpeed;
-            skeleton.UpdateLocation(location);
+            skeleton.Location = location;
         }
 
         public void Stun(bool permanent)

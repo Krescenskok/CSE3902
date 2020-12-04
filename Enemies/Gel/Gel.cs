@@ -24,20 +24,17 @@ namespace Sprint5
         private EnemyCollider innerCollider;
         private GelBlockCollider outsideCollider;
         
-
         private Point spriteSize;
         private Rectangle rect;
 
-        public int HP { get; private set; } = HPAmount.EnemyLevel1;
-        public EnemyHealthBar HP_BAR { get; private set; }
-        private const float barSize = 1.5f;
         public Vector2 Location { get => location; }
-
         public IEnemyState State { get => state; }
-
         public List<ICollider> Colliders { get => new List<ICollider> { innerCollider,outsideCollider }; }
 
         private XElement saveData;
+
+        public int HP { get; private set; } = HPAmount.EnemyLevel1;
+        private const float barSize = 1.5f;
 
         public Gel(Game game, Vector2 location, XElement xlm)
         {
@@ -57,14 +54,16 @@ namespace Sprint5
             state = new GelMoveState(this, location, game);
             gSprite = (GelMoveSprite)sprite;
             
-            outsideCollider = new GelBlockCollider(gSprite.GetRectangle2(), (GelMoveState)state, this);
+            
 
             spriteSize = gSprite.GetRectangle().Size;
             rect = new Rectangle(location.ToPoint(), spriteSize);
-            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .3f);
-            innerCollider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "gel");
+            innerCollider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .3f), this, HPAmount.HalfHeart, "gel");
 
-            HP_BAR = new EnemyHealthBar(this, rect, game, HP, barSize);
+            outsideCollider = new GelBlockCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, 1.5f), (GelMoveState)state, this);
+
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .7f);
+            HPBarDrawer.AddBar( new EnemyHealthBar(this, rect,barSize));
         }
 
         public void SetSprite(ISprite sprite)
@@ -82,7 +81,6 @@ namespace Sprint5
         {
             state.Update();
             sprite.Update();
-            if(HP_BAR != null) HP_BAR.Update();
         }
 
 
@@ -95,20 +93,12 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch)
         {
-           
             sprite.Draw(batch, location, 0, Color.White);
-            
         }
 
         public void ObstacleCollision(Collision col)
         {
             state.MoveAwayFromCollision(col);
-        }
-
-        public EnemyCollider GetCollider()
-        {
-            return innerCollider;
-
         }
 
         public void TakeDamage(Direction dir, int amount)
@@ -122,9 +112,5 @@ namespace Sprint5
             state.Stun(false);
         }
 
-        public Vector2 Attack()
-        {
-            return gSprite.centerLocation;
-        }
     }
 }

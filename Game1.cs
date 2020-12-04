@@ -120,7 +120,7 @@ namespace Sprint5
             HUD.Instance.LoadHUD(this);
             LinkInventory.Instance.InitializeInventory(this);
 
-            CollisionHandler.Instance.Initialize(this);
+            CollisionHandler.Instance.Initialize();
 
             GridGenerator.Instance.GetGrid(this, 12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);

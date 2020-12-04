@@ -28,7 +28,6 @@ namespace Sprint5
 
         public Layer layer { get; set; }
 
-        private TestCollider testCol;
 
         private int turnOffClock = 0;
         private const int TIME = 10; // by 1/60 of second

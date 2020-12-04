@@ -121,7 +121,7 @@ namespace Sprint5
 
                     XElement doorTypeTag = item.Element("Type");
 
-                    DoorType thisType = Parse(doorTypeTag.Value);
+                    DoorType thisType = DoorTypes.Parse(doorTypeTag.Value);
 
                     
 
@@ -174,7 +174,11 @@ namespace Sprint5
             }
         }
 
-
+        public void Reset()
+        {
+            lockedDoorSprites.Clear();
+            LoadSpecialDoors();
+        }
 
         private void CalculateDoorDrawLocations()
         {
@@ -216,13 +220,7 @@ namespace Sprint5
 
         }
 
-        private DoorType Parse(string str)
-        {
-            if (str.Equals("locked")) return DoorType.locked;
-            else if(str.Equals("normal")) return DoorType.normal;
-            else if (str.Equals("special_closed")) return DoorType.special_closed;
-            else return DoorType.special_open;
-        }
+      
 
 
 

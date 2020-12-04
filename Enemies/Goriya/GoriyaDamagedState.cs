@@ -40,7 +40,37 @@ namespace Sprint5
             this.stunned = stunned;
         }
 
-      
+
+        public void MoveAwayFromCollision(Collision collision)
+        {
+            moveSpeed = collision.From.Equals(currentDirection) ? 0 : moveSpeed;
+        }
+
+
+        public void Update()
+        {
+            MoveOneUnit();
+            damagedTime++;
+
+            if (damagedTime >= totalDamagedTime)
+            {
+                goriya.state = new GoriyaMoveState(goriya, location);
+                if (stunned) goriya.state.Stun(true);
+            }
+        }
+
+        public void MoveOneUnit()
+        {
+            location.X += moveDirection.X * moveSpeed;
+            location.Y += moveDirection.Y * moveSpeed;
+            goriya.Location = location;
+        }
+
+        public void Stun(bool permanent)
+        {
+            if (permanent) stunned = true;
+        }
+
         public void Attack()
         {
             //do nothing
@@ -57,43 +87,9 @@ namespace Sprint5
             //do nothing
         }
 
-        public void MoveAwayFromCollision(Collision collision)
-        {
-            Direction collisionDirection = collision.From;
-            if (collisionDirection.Equals(currentDirection))
-            {
-                moveSpeed = 0;
-            }
-        }
-
         public void TakeDamage(int amount)
         {
             //do nothing
-        }
-
-        public void Update()
-        {
-            MoveOneUnit();
-            damagedTime++;
-
-            if (damagedTime >= totalDamagedTime)
-            {
-
-                goriya.state = new GoriyaMoveState(goriya, location);
-                if (stunned) goriya.state.Stun(true);
-            }
-        }
-
-        public void MoveOneUnit()
-        {
-            location.X += moveDirection.X * moveSpeed;
-            location.Y += moveDirection.Y * moveSpeed;
-            goriya.UpdateLocation(location);
-        }
-
-        public void Stun(bool permanent)
-        {
-            if (permanent) stunned = true;
         }
     }
 }

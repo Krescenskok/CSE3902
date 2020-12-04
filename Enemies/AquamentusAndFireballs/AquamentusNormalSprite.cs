@@ -36,7 +36,6 @@ namespace Sprint5
 
         public void AttackSprite()
         {
-            Debug.Print("Attack");
             attackSpriteCounter = attackSpriteUpdateNum;
         }
 

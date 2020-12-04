@@ -70,6 +70,8 @@ namespace Sprint5
             xml = XElement.Load("../../../XMLLoading/FinalLevelOne.xml").Element("Asset");
             xml.Attribute("Type").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
+
+            RoomDoors.Instance.Reset();
         }
 
     
