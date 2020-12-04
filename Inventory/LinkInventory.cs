@@ -93,7 +93,8 @@ namespace Sprint5
 
         public void Reset()
         {
-            linkItemStart.Reset();            
+            linkItemStart.Reset();
+            InventoryMap.Instance.Reset();
         }
 
         public void PickUpItem(IItems item, LinkPlayer link)

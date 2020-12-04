@@ -133,14 +133,13 @@ namespace Sprint5.Inventory
             itemStorage.SecondInInventory.Add(SecondaryItem.Candle, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Potion, true);
 
-            itemStorage.SecondSlotItem = SecondaryItem.Boomerang;
+            itemStorage.SecondSlotItem = SecondaryItem.Arrow;
             itemStorage.FirstSlotItem = PrimaryItem.WoodenSword;
             HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
             HUD.Instance.SetASlotItem(PrimaryItem.WoodenSword);
 
-            itemStorage.CursorPosition = 0;
+            itemStorage.CursorPosition = CURSOR_START;
 
-            InventoryMap.Instance.Reset();
         }
 
     }
