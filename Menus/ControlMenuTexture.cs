@@ -108,7 +108,7 @@ namespace Sprint5
 
         public void select(MainMenu mainScreen)
         {
-            if (selected == listOptions.Length) mainScreen.state = MenuState.main;
+            if (selected == listOptions.Length) mainScreen.State = MenuState.main;
         }
 
         public void initializeItemList()
