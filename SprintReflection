@@ -1,79 +1,33 @@
-Feel free to also discuss your processes as a whole. Were any changes your made this sprint constructive or detrimental? Do you have any plans for doing things differently next sprint?
+Our team performed really well during this sprint. We met up via zoom when it was assigned and listed all the bugs from the previous sprint as well as the extra
+stuff we wanted to add for the final sprint. We listed as many ideas as we could to see how many things we could complete. For this sprint, we left tasks open ended
+so that each member could experiment with the different ideas and explore new ones if they wished to do so. We used trello for our task board to see what needed to 
+be done first (fixing bugs) and the things that could wait till later.
 
-Our team performed pretty well during this sprint. We met up via zoom when it was assigned and listed out all the bugs from the previous sprint as well as the
-tasks we needed to complete for this sprint. We also figured out when we were all available just in case we needed to meet up again and work together on the project.
-For this sprint, we left the tasks open ended and let each member choose what task they wanted to work on, working to complete all of them. We used trello for our
-task board to see what needed to be done first (fixing bugs from sprint 3) and things that could wait till later. 
-
-It was detrimental to our sprint and group that the hackathon was this past weekend, so some of us were busy and weren't able to work on the project. We didn't
-work together as much until the end, which probably wasn't helpful. It was constructive that we set up a new task board (trello) which was much easier to move, and
-had a better design. We also set up a google docs burndown chart, so we could record our hours each day and see everyone's process through the project. We did have
-a zoom call near the end, and the day of the due date so that we could work together to finish up merging everything and make sure that there were no errors.
+It was detrimental to our sprint and group that all of us had assignments and projects due the same day that this sprint was due, due to it being the last day of
+class. This made all of us extremely busy, along with having to work as well. It was constructive for our group that we kept each other updated with the things
+that we were working on and had multiple zoom meetings so that we could help each other fix the bugs. We planned to have most of the code done by Thursday, December
+3rd, so that we could use the 4th for any last minute fixes and focus on the reflection, analyses, and ReadMe. Since this is the last sprint, we do not plan to do 
+anything differently. However, if there was another sprint, we would probably choose to keep the same method because it worked out pretty well for us.
 
 For this sprint, these are the tasks that were completed by each member:
 - JT: 
-  - Room switching
-  - Link colliding with blocks from all sides
-  - Room change gets rid of colliders from previous rooms
-  - Active command resets so freezing between changes doesn't happen
-  - Camera controller
-  - HUD and inventory drawing
-  - Enemies and Link shouldn't be able to walk on walls
-  - Room transitions
-  - Movable Object for updating collider location at once
-  - Sound
-  - Link and Enemy Hitboxes
-  - Fix the water tiles
-  - NPCs in black Room
-  - Some enemies should drop items when defeated
+  
 - Andrew:
-  - Room switching
-  - Room change gets rid of colliders from previous rooms
-  - Active command resets so freezing between changes doesn't happen
-  - Item collisions need to update location
-  - Sword beam tweaks
-  - Doors
-  - Room transitions
-  - Reset game
-  - Sound
-  - Weird Null exceptions with room switch
-  - Link and Enemy Hitboxes
-  - Link Wall collision math
-  - Projectile Expiration when they hit walls/doors
+  
 - Ann:
-  - Item collisions need to update location
-  - HUD and inventory drawing
-  - Changing keys to use items (removing number and switching to N and B)
-  - Inventory
-  - HUD
-  - Projectiles expire when they hit the walls
-  - Inventory and using items
-  - Projectile Expiration when they hit walls/doors
+
 - Krescens:
-  - Link teleports in the right direction when he takes damage
-  - Changing keys to use items (removing number and switching to N and B)
-  - Taskboard chart
-  - Sprint reflection
+  - Fixed multiple file lengths to better code quality
+  - Fixed the projectiles drawing so it looked like it was on top of the weapon
+  - Created different colors for Link so that the player can choose which color to use
+  - After the main menu was created by Noah, I implemented the code so that the color could be selected from the beginning
+  - Fixed magic numbers in Link folder
+  - Reflection
   - ReadMe
-  - Game Over screen
-  - Pause function
-  - Add delay so Link can't continuously attack
-  - Enemies and Link shouldn't be able to walk on walls
-  - Add to Link's location when he walks through doors
-  - Link's special shield
-  - Link can't be damaged when he's attacking an enemy and they collide (in the direction he's attacking)
-  - Ghosting through enemies when damaged
-  - Reset game
-  - Link and Enemy Hitboxes
-  - Link Wall collision math
-  - Projectile Expiration when they hit walls/doors
 - Yuan:
-  - Enemies and Link shouldn't be able to walk on walls
-  - Sound
-  - Some enemies should drop items when defeated
-  - NPCs in black Room
+
 - Noah:
-  - Link colliding with blocks from all sides
-  - Blocks move
-  - Blocks - fix collision and draw locations
+  - Created main menu (including sound options, color options, control screen, etc...)
+  - Implemented full screen
+
 
