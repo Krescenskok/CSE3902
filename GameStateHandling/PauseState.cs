@@ -36,12 +36,12 @@ namespace Sprint5.GameStateHandling
             game.ProjectilePersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
   
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
-            game.Spritebatch.End();
 
             if (game.State.Id == IGameStates.Type.Pause && !game.DoorPause)
             {
                 PauseScreen.Instance.Draw(game.Spritebatch, game, font);
             }
+            game.Spritebatch.End();
         }
 
         public void Update(Game1 game, GameTime gameTime)
