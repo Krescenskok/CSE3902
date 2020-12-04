@@ -8,11 +8,7 @@ namespace Sprint5
     public class MoveRight : Movement
     {
 
-
-        private double lastTime;
         int MOVEMENT = 10;
-        int TIME = 100;
-        int PICKUP = 300;
 
         public MoveRight(LinkPlayer link, LinkSprite sprite) : base(link)
         {

@@ -10,18 +10,12 @@ namespace Sprint5
 
         private double lastTime;
         int TIME_HUN = 100;
-        int TIME = 100;
-        int PICKUP = 300;
 
         public Stationary(LinkPlayer link, LinkSprite sprite) : base(link)
         {
             linkSprite = sprite;
         }
 
-        Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
-        Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
-
-        int i = 0;
        
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {

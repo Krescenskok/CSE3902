@@ -19,8 +19,6 @@ namespace Sprint5.Link
         private const int FIVE = 5;
         private const int SEVEN = 7;
 
-        private Vector2 itemLocation;
-
         public ProjectilesFactory()
         {
         }

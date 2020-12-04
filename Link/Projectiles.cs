@@ -11,7 +11,7 @@ namespace Sprint5.Link
     {
         private double lastTime;
         LinkPlayer link;
-        IItems item;
+
         private List<IItems> placedItems = new List<IItems>();
         private List<IItems> itemsPlaced = new List<IItems>();
 

@@ -7,10 +7,7 @@ namespace Sprint5
 {
     public class MoveUp : Movement
     {
-        private double lastTime;
         int MOVEMENT = -10;
-        int TIME = 100;
-        int PICKUP = 300;
   
         public MoveUp(LinkPlayer link, LinkSprite sprite) : base(link)
         {

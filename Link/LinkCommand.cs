@@ -12,7 +12,6 @@ namespace Sprint5.Link
     {
 
         private LinkPlayer linkPlayer;
-        private IItems item;
         private String Key;
 
         private bool previouslyAttacking;

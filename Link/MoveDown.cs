@@ -8,11 +8,7 @@ namespace Sprint5
     public class MoveDown : Movement
     {
 
-        private double lastTime;
         int MOVEMENT = 10;
-        int TIME = 100;
-        int Y_LOCATION = 375;
-        int PICKUP = 300;
 
         public MoveDown(LinkPlayer link, LinkSprite sprite) : base(link)
         {
