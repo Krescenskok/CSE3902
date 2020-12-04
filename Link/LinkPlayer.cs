@@ -9,8 +9,6 @@ using Sprint5.DifficultyHandling;
 
 namespace Sprint5
 {
-
-
     public class LinkPlayer : LinkPlayerParent
     {
         private const float HEALTH = 60;
@@ -21,7 +19,6 @@ namespace Sprint5
         public ShieldCollider ShieldCollider { get; set; }
 
         private float fullHealth = HEALTH;
-
         private const int max = 50;
         private const int increment = 5;
         private const int min = 0;
@@ -30,7 +27,6 @@ namespace Sprint5
 
         private List<IItems> ItemsPlacedByLink = new List<IItems>();
         private bool IsPaused = false;
-
         public bool Paused { get => IsPaused; set => IsPaused = value; }
 
         public void RemovePlacedItem(IItems item)
@@ -131,7 +127,9 @@ namespace Sprint5
             Delay = 0;
             Clock = false;
             DrawShield = true;
-
+            IsDead = false;
+            IsShootingProjectile = false;
+            DamDir = Direction.none;
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
@@ -157,14 +155,12 @@ namespace Sprint5
         }
 
         public void knockback(Direction collideDir)
-        {
-            Counter = max;
-        }
+            { Counter = max; }
+        
 
         public void stopKnockback()
-        {
-            Counter = min;
-        }
+            { Counter = min; }
+
 
         public void push(Direction direction)
         {
