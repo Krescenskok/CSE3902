@@ -34,6 +34,21 @@ Code Analysis on Link (Done by Krescens)
 - In MoveUp, currentFrames is stated that it is never used, however it is used so it has been kept.
 
 
+Code Analysis on Inventory (Done by Ann)
+0 Errors, 0 Warnings
+- Use a switch caise. However, a switch case IS being used 
+
+
+Code Analysis on HUD (Done by Ann)
+0 errors, 3 warnings
+- Fields are assigned but never used in HeartManagement. These were resolved by removing them.
+
+
+Code Analysis on Items (Done by Ann)
+0 errors, 3 warnings
+- Colliders on Empty, Full, and Half Heart, as well as BombObject, BoomerangObject will always be null. These objects are HUD interface sprites, and thus shouuld never have colliders (the colliders are simply part of the interface so they cannot be removed).
+- Fields are assigned but never used in BombCollider, BoomerangCollider, ItemCollider, BoomerangObject and BombExplosionState. Solved by removing.
+
 
 
 
