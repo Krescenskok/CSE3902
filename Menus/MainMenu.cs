@@ -25,13 +25,13 @@ namespace Sprint5
         public Game1 currentGame;
 
         public MenuState state = MenuState.main;
-        public MainMenu()
+        public MainMenu(LinkPlayer link)
         {
             mainScreen = SpriteFactory.Instance.createMainMenu();
             controlsScreen = new ControlMenuTexture(mainScreen.Texture);
             soundScreen = new SoundMenuTexture(mainScreen.Texture);
             difficultyScreen = new DifficultyMenuTexture(mainScreen.Texture);
-            colorScreen = new ColorMenuTexture(mainScreen.Texture);
+            colorScreen = new ColorMenuTexture(mainScreen.Texture, link);
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)

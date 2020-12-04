@@ -84,11 +84,6 @@ namespace Sprint5
             return new LinkSprite(yellowLinkSpriteSheet);
         }
 
-
-        //public ISprite CreateItemsSprite()
-        //{
-        //    return new ItemsSprite(itemsSpriteSheet);
-        //}
         public ISprite CreateBlocksSprite()
         {
             return new BlocksSprite(blocksSpriteSheet);

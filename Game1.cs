@@ -91,11 +91,11 @@ namespace Sprint5
 
             SpriteFactory.Instance.LoadAllTextures(Content);
 
-            mainScreen = new MainMenu();
-
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             linkPlayer = new LinkPlayer(this);
+
+            mainScreen = new MainMenu(linkPlayer);
 
             controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
             controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
