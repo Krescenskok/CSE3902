@@ -56,7 +56,6 @@ namespace Sprint5
 
             SwitchFrames(currentFrames);
 
-            link.state = new Stationary(link, linkSprite);
 
             return location;
 
@@ -85,6 +84,7 @@ namespace Sprint5
 
             SwitchFrames(currentFrames);
 
+            link.state = new Stationary(link, linkSprite);
 
             return location;
 
