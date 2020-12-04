@@ -81,6 +81,7 @@ namespace Sprint5
             RoomBlocks.Instance.LoadRoom(game, room);
             RoomWalls.Instance.LoadRoom(game, room);
             RoomDoors.Instance.LoadRoom(game, room);
+            RoomNPCs.Instance.LoadRoom(game, room);
             
             CurrentRoom = roomNumber;
         }
@@ -91,6 +92,7 @@ namespace Sprint5
             RoomBlocks.Instance.Update();
             RoomWalls.Instance.Update();
             RoomDoors.Instance.Update();
+            RoomNPCs.Instance.Update();
         }
 
 
@@ -110,6 +112,7 @@ namespace Sprint5
             RoomBlocks.Instance.Draw(batch);
             RoomEnemies.Instance.Draw(batch);
             RoomItems.Instance.Draw(batch);
+            RoomNPCs.Instance.Draw(batch);
         }
 
         public void DrawTopLayer(SpriteBatch batch)
