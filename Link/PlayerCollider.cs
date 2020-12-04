@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Sprint5.GamePadVibration;
+using Sprint5.Menus;
 
 namespace Sprint5
 {
@@ -13,6 +14,7 @@ namespace Sprint5
     {
         LinkPlayer linkPlayer;
         private Rectangle bounds;
+        private float beforeHP;
 
         public PlayerCollider(LinkPlayer linkPlayer,Rectangle bounds)
         {
@@ -100,6 +102,7 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageRight")
                     {
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -109,6 +112,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Right");
                         linkPlayer.knockback(Direction.right);
 
@@ -125,6 +129,7 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageLeft")
                     {
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -134,6 +139,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Left");
                         linkPlayer.knockback(Direction.left);
                     }
@@ -147,6 +153,7 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageUp")
                     {
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -156,6 +163,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Up");
                         linkPlayer.knockback(Direction.up);
                     }
@@ -169,6 +177,7 @@ namespace Sprint5
                 {
                     if (msg == "TakeDamageDown")
                     {
+                        beforeHP = linkPlayer.Health;
                         linkPlayer.IsDamaged = true;
                         if (linkPlayer.UseRing)
                         {
@@ -178,6 +187,7 @@ namespace Sprint5
                         {
                             linkPlayer.Health -= (int)value;
                         }
+                        StatsScreen.Instance.DamageTaken += (int)(beforeHP - linkPlayer.Health);
                         GamePadVibrate.Instance.TakeDamage("Down");
                         linkPlayer.knockback(Direction.down);
                     }
@@ -196,6 +206,7 @@ namespace Sprint5
                     linkPlayer.IsPickingUpItem = true;
 
                 LinkInventory.Instance.PickUpItem((IItems)value, linkPlayer);
+                
             }
             if (msg == "Heal")
             {

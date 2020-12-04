@@ -39,7 +39,7 @@ namespace Sprint5.Menus
             texture.SetData(new Color[] { Color.Black });
 
             game.GraphicsDevice.Viewport = game.Camera.gameView;
-            batch.Draw(sprite.Texture, new Rectangle(drawBounds, drawBounds, game.Camera.playArea.Width, game.Camera.playArea.Height), Color.White); ; ;
+            batch.Draw(sprite.Texture, new Rectangle(drawBounds, drawBounds, game.Camera.playArea.Width, game.Camera.playArea.Height), Color.White);
 
             game.Spritebatch.End();
         }

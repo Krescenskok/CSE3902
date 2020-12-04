@@ -9,6 +9,9 @@ namespace Sprint5.GameStateHandling
     public class GameplayState : IGameStates
     {
         private static readonly GameplayState instance = new GameplayState();
+
+        public StateId Id { get; } = StateId.Gameplay;
+        public IGameStates Parent { get; set; }
         public static GameplayState Instance
         {
             get

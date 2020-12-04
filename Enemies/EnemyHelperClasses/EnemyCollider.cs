@@ -119,7 +119,8 @@ namespace Sprint5
             {
                 Direction dir = Directions.Parse(msg.Substring(15));
 
-                GameOverScreen.Instance.DamageGiven += (int)value;
+                StatsScreen.Instance.DamageGiven += (int)value;
+
                 enemy.TakeDamage(dir, (int)value);
 
                 Sounds.Instance.Play("EnemyHit");

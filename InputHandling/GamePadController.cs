@@ -59,10 +59,15 @@ namespace Sprint5
                 CommandsList = InventoryCommands.Instance.ButtonCommands;
                 MovementButtons = InventoryCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.GameOver)
+            else if (game.State.Id == StateId.Win || game.State.Id == StateId.GameOver)
             {
-                CommandsList = GamePlayCommands.Instance.ButtonCommands;
-                MovementButtons = GamePlayCommands.Instance.MovementButtons;
+                CommandsList = WinLoseCommands.Instance.ButtonCommands;
+                MovementButtons = WinLoseCommands.Instance.MovementButtons;
+            }
+            else if (game.State.Id == StateId.Stats || game.State.Id == StateId.Credits)
+            {
+                CommandsList = EndMenuCommands.Instance.ButtonCommands;
+                MovementButtons = EndMenuCommands.Instance.MovementButtons;
             }
         }
 
@@ -99,13 +104,7 @@ namespace Sprint5
                 }
                 PrevState = State;
             }
-            if (Game.State.Id == StateId.GameOver)
-            {
-                if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
-                {
-                    ActiveCommand = null;
-                }  
-            }
+
             game.ActiveCommand = ActiveCommand;
         }
     }
