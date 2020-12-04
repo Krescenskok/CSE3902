@@ -12,13 +12,13 @@ namespace Sprint5
         Vector2 aquamentusPos;
         private static int[] spriteSize = { 24, 32 };
         private Vector2 sourcePos;
-        private const int NumUpdatePerSec = 30;
+        private const int NumUpdatePerSec = 60;
         private const int FrameRate = 10;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter = 0;
         private int frameIndex = 3;
         private Point drawSize;
-        private int spriteSizeIndex = 2;
+        private int spriteSizeIndex = 3;
 
         public AquamentusDamagedSprite(Texture2D texture)
         {
@@ -27,6 +27,10 @@ namespace Sprint5
             sourcePos.Y = EnemySpriteFactory.GetRow("Dragon") * spriteSize[1];
             drawSize.X = spriteSize[0] * spriteSizeIndex;
             drawSize.Y = spriteSize[1] * spriteSizeIndex;
+        }
+        public void AttackSprite()
+        {
+            //do nothing;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

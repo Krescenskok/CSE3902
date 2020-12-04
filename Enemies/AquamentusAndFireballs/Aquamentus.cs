@@ -26,20 +26,19 @@ namespace Sprint5
         private int attackCountDown;
         private int ChangeDirectionCountDown;
         public int HP { get; private set; } = HPAmount.EnemyBoss1;
-        public BossHealthBar HP_BAR { get; private set; } 
+        public BossHealthBar HP_BAR { get; private set; }
         private const float barSize = 1.5f;
 
         private static int AttackStrength = HPAmount.Full_Heart;
         private static int RangeAttackStrength = HPAmount.Full_Heart;
 
         private static int UpdatePerSec = 120;
-        private float attackPerSec = 1;
+        private float attackPerSec = (float)0.5;
 
-        private float directionChangPerSec = (float)0.2;
+        private float directionChangPerSec = (float)0.4;
         private float moveSpeedPerSec = 15;
         private float speed;
         private int directionIndex = -1;
-        private bool tryAttack = true;
 
         public Vector2 Location { get => aquamentusPos; }
 
@@ -47,7 +46,7 @@ namespace Sprint5
 
         public List<ICollider> Colliders { get => new List<ICollider> { aquamentusCollider }; }
 
-        
+
 
         public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
         {
@@ -56,18 +55,19 @@ namespace Sprint5
             aquamentusInfo = xml;
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
-            state = new AquamentusNormalState(this, aquamentusPos, link);
-            fireBallList = new List<FireBall>(); 
+            speed = moveSpeedPerSec / UpdatePerSec;
+            state = new AquamentusNormalState(this, aquamentusPos, link, directionIndex, speed);
+            fireBallList = new List<FireBall>();
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
-            speed = moveSpeedPerSec / UpdatePerSec;
+            
             HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
             HP_BAR = new BossHealthBar(this,  game, HP);
         }
 
         public void Spawn()
-        {    
+        {
         }
 
         public void SetSprite(ISprite sprite)
@@ -75,6 +75,10 @@ namespace Sprint5
             this.sprite = sprite;
         }
 
+        public void UpdatePos(Vector2 pos)
+        {
+            aquamentusPos = pos;
+        }
 
         public void LostHP(int damage)
         {
@@ -88,19 +92,16 @@ namespace Sprint5
 
         public void Die()
         {
-            Sounds.Instance.PlayBossScream();
             RoomItems.Instance.DropHeartContainer(Location);
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
             RoomDoors.Instance.OpenDoor(14);
-            
+
             while(fireBallList.Count > 0)
             {
                 fireBallList[fireBallList.Count-1].State.Die();
             }
-
-            Sounds.Instance.Play("GetItem");
         }
 
         public Boolean TryAttack()
@@ -150,10 +151,10 @@ namespace Sprint5
             if (TryAttack())
             {
                 state.Attack();
+                aquamentusSprite.AttackSprite();
+                Sounds.Instance.PlaySoundEffect("AquamentusRoar");
             }
-            aquamentusPos.X += directionIndex * speed;
             state.Update();
-            
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
@@ -170,8 +171,6 @@ namespace Sprint5
             }
 
         }
-
-      
 
         public void TakeDamage(Direction dir, int amount)
         {
