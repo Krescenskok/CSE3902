@@ -8,7 +8,7 @@ namespace Sprint5
 {
     public enum selectedSound
     {
-        Song1,
+        Song1  ,
         Song2,
         Song3,
         Song4,
@@ -16,12 +16,12 @@ namespace Sprint5
     }
     public class SoundMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedSound currentItem = selectedSound.Song1;
-        public selectedSound selectedSong = selectedSound.Song1;
+        private const float size = 2.5f;
+        private selectedSound currentItem = selectedSound.Song1;
+        private selectedSound selectedSong = selectedSound.Song1;
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 S1 = new Vector2(20, 185);
@@ -30,7 +30,17 @@ namespace Sprint5
         private static Vector2 S4 = new Vector2(20, 245);
         private static Vector2 back = new Vector2(20, 265);
 
-        public SoundMenuTexture(Texture2D text)
+
+        private static Dictionary<selectedSound, string> songName = new Dictionary<selectedSound, string>()
+        {
+            {selectedSound.Song1,"DungeonTheme" },
+            {selectedSound.Song2, "TronTheme" },
+            {selectedSound.Song3, "DoomTheme" },
+            {selectedSound.Song4, "SeptemberTheme" }
+        };
+
+        public SoundMenuTexture(MainMenu menu, Texture2D text)
+
         {
             texture = text;
         }
@@ -97,7 +107,11 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (currentItem != selectedSound.Return) selectedSong = currentItem;
-            else mainScreen.state = MenuState.main;
+            else mainScreen.State = MenuState.main;
+
+            if(songName.ContainsKey(currentItem)) Sounds.Instance.ChangeBGM(songName[currentItem]);
+
+
         }
         public selectedSound CurrentItem { get => currentItem; set => currentItem = value; }
     }

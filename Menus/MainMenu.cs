@@ -16,22 +16,28 @@ namespace Sprint5
     }
     public class MainMenu
     {
-        public MainMenuTexture mainScreen;
-        public ControlMenuTexture controlsScreen;
-        public SoundMenuTexture soundScreen;
-        public DifficultyMenuTexture difficultyScreen;
-        public ColorMenuTexture colorScreen;
 
-        public Game1 currentGame;
+        private MainMenuTexture mainScreen;
+        private ControlMenuTexture controlsScreen;
+        private SoundMenuTexture soundScreen;
+        private DifficultyMenuTexture difficultyScreen;
+        private ColorMenuTexture colorScreen;
+      
+        private Game1 CurrentGame;
 
-        public MenuState state = MenuState.main;
-        public MainMenu()
+        public Game1 Game { get => CurrentGame; set => CurrentGame = value; }
+        public MenuState State { get => state; set => state = value; }
+
+        private MenuState state = MenuState.main;
+      
+        public MainMenu(Game1 game, LinkPlayer link)
         {
-            mainScreen = SpriteFactory.Instance.createMainMenu();
-            controlsScreen = new ControlMenuTexture(mainScreen.Texture);
-            soundScreen = new SoundMenuTexture(mainScreen.Texture);
-            difficultyScreen = new DifficultyMenuTexture(mainScreen.Texture);
-            colorScreen = new ColorMenuTexture(mainScreen.Texture);
+            CurrentGame = game;
+            mainScreen = SpriteFactory.Instance.createMainMenu(this);
+            controlsScreen = new ControlMenuTexture(this, mainScreen.Texture);
+            soundScreen = new SoundMenuTexture(this, mainScreen.Texture);
+            difficultyScreen = new DifficultyMenuTexture(this, mainScreen.Texture);
+            colorScreen = new ColorMenuTexture(mainScreen.Texture, link);
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -40,8 +46,10 @@ namespace Sprint5
             else if (state == MenuState.difficulty) difficultyScreen.Draw(batch, game, font);
             else if (state == MenuState.controls) controlsScreen.Draw(batch, game, font);
             else if (state == MenuState.sound) soundScreen.Draw(batch, game, font);
+
+
             else if (state == MenuState.color) colorScreen.Draw(batch, game, font);
-            currentGame = game;
+            CurrentGame = game;
         }
 
         public void goUp()

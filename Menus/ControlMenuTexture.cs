@@ -16,15 +16,17 @@ namespace Sprint5
         const float size = 2.5f;
         private ControlStringList[] listOptions;
         private int selected = 0;
+        private MainMenu Menu;
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 back = new Vector2(20, 385);
 
-        public ControlMenuTexture(Texture2D text)
+        public ControlMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
             end = new Point(260, 320);
             background = SpriteFactory.Instance.CreateBlackScreen();
             initializeItemList();
+            Menu = menu;
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -107,7 +109,6 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (selected == listOptions.Length) mainScreen.state = MenuState.main;
-            //else changeBinding(listOptions, selected);
         }
 
         public void initializeItemList()

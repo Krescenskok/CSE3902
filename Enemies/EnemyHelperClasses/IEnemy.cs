@@ -32,5 +32,7 @@ namespace Sprint5
 
         IEnemyState State { get; }
 
+        int HP { get; }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
+using System.Diagnostics;
 
 namespace Sprint5
 {
@@ -19,7 +20,7 @@ namespace Sprint5
         private static int fader = 5;
 
         private Matrix transform;
-        public  Matrix Transform { get => transform; }
+        public Matrix Transform { get => transform; }
 
         private Vector3 Target;
         private Vector3 direction = Vector3.Up;
@@ -36,7 +37,7 @@ namespace Sprint5
 
         private Game1 game;
 
-        public  Vector2 Location { get => location; }
+        public Vector2 Location { get => location; }
         private Vector2 location;
 
         public Viewport gameView;
@@ -60,7 +61,9 @@ namespace Sprint5
 
         private LinkPlayer player;
 
-        private bool wasPaused;
+        private bool IsInventory;
+
+
 
         public void Load(Game game)
         {
@@ -76,7 +79,7 @@ namespace Sprint5
             Point size = new Point(screenWidth - topLeftCorner.X * 2, screenHeight - topLeftCorner.Y);
 
             Point HUDPoint = new Point(topLeftCorner.X, topLeftCorner.Y - screenHeight);
-            Point HUDSize = new Point(size.X , screenHeight);
+            Point HUDSize = new Point(size.X, screenHeight);
 
 
 
@@ -107,8 +110,10 @@ namespace Sprint5
         //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
+
             if (HUDOpenCloseFinished())
             {
+               
 
                 int moveDirection = inventoryOpen ? -1 : 1;
 
@@ -119,7 +124,11 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.IsPaused;  Pause();}
+                if (inventoryOpen) 
+                {
+                    IsInventory = game.State.Id == StateId.Pause; 
+                    StartInventory();
+                } 
             }
 
 
@@ -127,7 +136,7 @@ namespace Sprint5
 
         public void MoveToRoom(int roomNum)
         {
-            Target = RoomCoordinate.position(roomNum, playArea.Width,playArea.Height);
+            Target = RoomCoordinate.position(roomNum, playArea.Width, playArea.Height);
             transform.Translation = Target;
             location.X = transform.M41;
             location.Y = transform.M42;
@@ -156,12 +165,12 @@ namespace Sprint5
             fadeColor.A = (byte)((fadeColor.A + fader) % 255);
             fadeFlag = fadeColor.A != 0;
             if (fadeFlag) fader = fadeColor.A == 254 ? -fader : fader;
-            else { MoveToRoom(nextRoom); UnPause(); }
+            else { MoveToRoom(nextRoom); EndTransition(); }
         }
 
 
 
-        public void Transition(int room) { BlackScreenTransition(); nextRoom = room; Pause(); }
+        public void Transition(int room) { BlackScreenTransition(); nextRoom = room; StartTransition(); }
 
 
         public void Scroll(int roomNum, string dir)
@@ -174,7 +183,7 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
-            Pause();
+            StartTransition();
 
 
 
@@ -187,7 +196,7 @@ namespace Sprint5
         {
             return currentDirection == Direction.down && transform.Translation.Y < Target.Y
                 || currentDirection == Direction.up && transform.Translation.Y > Target.Y
-                || currentDirection == Direction.left && transform.Translation.X >Target.X
+                || currentDirection == Direction.left && transform.Translation.X > Target.X
                 || currentDirection == Direction.right && transform.Translation.X < Target.X
                 || transform.Translation.Equals(Target);
         }
@@ -227,75 +236,76 @@ namespace Sprint5
 
             if (!HUDOpenCloseFinished())
             {
-                MoveViewports(ref playArea,targetGameView,ref gameView);
+                MoveViewports(ref playArea, targetGameView, ref gameView);
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
 
-            }else if(inventoryOpen && !game.isPaused)
-            {
-                game.DoorPause = true;
             }
-            else if(!inventoryOpen && game.isPaused && inventoryStillMoving)
+
+            else if (!inventoryOpen && game.State.Id == StateId.Inventory && inventoryStillMoving)
             {
-                game.DoorPause = false;
-               game.Pause(wasPaused);
+                EndInventory();
 
                 inventoryStillMoving = false;
             }
 
 
-            bool doneScrolling = DoneScrolling();
+                bool doneScrolling = DoneScrolling();
 
-            if (wallmasterSetBack || !doneScrolling)
-            {
-                GetLinkEnterPosition(direction);
-                loadNextRoom = true;
-                linkHasEntered = false;
-                wallmasterSetBack = false;
+                if (wallmasterSetBack || !doneScrolling)
+                {
+                    GetLinkEnterPosition(direction);
+                    loadNextRoom = true;
+                    linkHasEntered = false;
+                    wallmasterSetBack = false;
+                }
+
+                if (!doneScrolling)
+                {
+                    Move();
+
+                } else if (loadNextRoom && !linkHasEntered)
+                {
+
+                    Vector2 direction2D = new Vector2(direction.X, direction.Y) * linkEnterSpeed;
+                    player.currentLocation += direction2D;
+
+                    linkHasEntered = Vector2.Distance(player.currentLocation, linkEnterPosition) <= 1;
+
+
+                } else if (loadNextRoom)
+                {
+
+                EndTransition();
+                    RoomSpawner.Instance.RoomChange(game, nextRoom);
+
+                    currentRoom = nextRoom;
+                    loadNextRoom = false;
+                }
+
+                location.X = transform.M41;
+                location.Y = transform.M42;
+
+
+                if (fadeFlag)
+                {
+                    BlackScreenTransition();
+                }
+
             }
 
-            if (!doneScrolling)
+            public void Draw(SpriteBatch batch)
             {
-                Move();
-
-            }else if (loadNextRoom && !linkHasEntered)
-            {
-
-                Vector2 direction2D = new Vector2(direction.X, direction.Y) * linkEnterSpeed;
-                player.currentLocation += direction2D;
-
-                linkHasEntered = Vector2.Distance(player.currentLocation,linkEnterPosition) <= 1;
-
-
-            }else if (loadNextRoom)
-            {
-
-                UnPause();
-                RoomSpawner.Instance.RoomChange(game, nextRoom);
-
-                currentRoom = nextRoom;
-                loadNextRoom = false;
+                screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
-            location.X = transform.M41;
-            location.Y = transform.M42;
+            private void StartInventory() { game.State.Id = StateId.Inventory; IsInventory = true; }
+        private void StartTransition() { game.State.Id = StateId.Transition; }
+        private void EndInventory() { game.State.Id = StateId.Gameplay; IsInventory = false; }
+        private void EndTransition() { game.State.Id = StateId.Gameplay; }
+        
 
 
-            if (fadeFlag)
-            {
-                BlackScreenTransition();
-            }
-
-        }
-
-        public void Draw(SpriteBatch batch)
-        {
-            screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
-        }
-
-        private void Pause() { game.Pause(true); game.DoorPause = true; }
-        private void UnPause() { game.Pause(false); game.DoorPause = false; }
-
-
-    }
 }
+    }
+

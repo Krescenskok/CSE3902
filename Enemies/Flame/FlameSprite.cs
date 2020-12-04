@@ -14,8 +14,8 @@ namespace Sprint5
         private Texture2D texture;
         private static int[] SpriteSize = { 16, 16 };
         private Vector2 sourcePos;
-        private const int NumUpdatePerSec = 30;
-        private const int FrameRate = 5;
+        private const int NumUpdatePerSec = 60;
+        private const int FrameRate = 4;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter;
         private int frameIndex = 0;

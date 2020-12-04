@@ -12,7 +12,6 @@ namespace Sprint5.Items
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
-        private int damageAmount;
         public string name;
 
         public string Name { get => name; }
@@ -63,7 +62,7 @@ namespace Sprint5.Items
             if (col.CompareTag("Enemy"))
             {
                 col.SendMessage("Stun", null);
-                ((Sprint5.Items.Boomerang)this.item).Impact();
+                ((Sprint5.Items.Boomerang)this.item).Impact(col.Bounds());
             }
             else if (col.CompareTag("Player"))
             {

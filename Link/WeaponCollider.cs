@@ -11,14 +11,14 @@ namespace Sprint5
         private string name;
         private int damageAmount;
         private Rectangle bounds;
-
         private Vector2 localPosition;
 
-
-
+        private double SIZE = 1.5;
+        private int ZERO = 0;
+        private int ONE = 1;
+        private int NEG_ONE = -1;
         private int linkSize;
         private int weaponLength;
-
 
         private LinkPlayer link;
         private Direction currentDirection;
@@ -27,8 +27,6 @@ namespace Sprint5
         public string Name { get => "Sword"; }
 
         public Layer layer { get; set; }
-
-        private TestCollider testCol;
 
         private int turnOffClock = 0;
         private const int TIME = 10; // by 1/60 of second
@@ -44,24 +42,20 @@ namespace Sprint5
         {
             this.link = link;
             damageAmount = attack;
-            
-
-            
             linkSize = link.hitbox.Width;
-            weaponLength = (int)(linkSize * 1.5);
+            weaponLength = (int)(linkSize * SIZE);
 
             bounds = new Rectangle(link.currentLocation.ToPoint(), new Point(linkSize, linkSize));
-            
 
             localPosition = Vector2.Zero;
 
             float posOffset = weaponLength / linkSize;
             directionOffset = new Dictionary<Direction, Vector2>()
             {
-                {Direction.left, new Vector2(-1 * posOffset,0) },
-                {Direction.right, new Vector2(1,0) },
-                {Direction.up, new Vector2(0,-1 * posOffset) },
-                {Direction.down, new Vector2(0,1) }
+                {Direction.left, new Vector2(NEG_ONE * posOffset,ZERO) },
+                {Direction.right, new Vector2(ONE,ZERO) },
+                {Direction.up, new Vector2(ZERO,NEG_ONE * posOffset) },
+                {Direction.down, new Vector2(ZERO,ONE) }
             };
 
             weaponPower = new Dictionary<ItemForLink, int>()
@@ -76,8 +70,6 @@ namespace Sprint5
 
         private void CalculateBounds(Direction dir)
         {
-
-
             if (!dir.Equals(currentDirection))
             {
                 localPosition = directionOffset[dir];
@@ -86,10 +78,7 @@ namespace Sprint5
 
                 if (dir.Equals(Direction.left) || dir.Equals(Direction.right)) bounds.Size = new Point(weaponLength, linkSize);
                 else bounds.Size = new Point(linkSize, weaponLength);
-
                 currentDirection = dir;
-
-
             }
 
         }
@@ -109,8 +98,6 @@ namespace Sprint5
             }
             
         }
-
-       
         public void TurnOff()
         {
             CollisionHandler.Instance.RemoveCollider(this);
@@ -132,35 +119,28 @@ namespace Sprint5
         }
 
         public void HandleCollision(ICollider col, Collision collision)
-        {
-            
+        { 
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
             string dir = collision.From.ToString();
-
             if (col.CompareTag("Enemy")) col.SendMessage("EnemyTakeDamage" + dir, damageAmount);
         }
 
         public void HandleCollisionExit(ICollider col, Collision collision)
         {
-            
         }
 
         public void SendMessage(string msg, object value)
         {
-           
         }
 
         public void Update()
         {
             bounds.Location = link.currentLocation.ToPoint() + localPosition.ToPoint(); ;
-
             if (turnOffClock > 1) turnOffClock--;
             else if (turnOffClock == 1) { turnOffClock--; TurnOff(); }
-
-           
         }
     }
 }

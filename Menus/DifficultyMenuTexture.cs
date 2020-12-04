@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.DifficultyHandling;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,12 +17,13 @@ namespace Sprint5
     }
     public class DifficultyMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedDiff currentItem = selectedDiff.Navice;
-        public selectedDiff difficulty = selectedDiff.Normal;
+        private const float size = 2.5f;
+        private selectedDiff currentItem = selectedDiff.Navice;
+        private selectedDiff difficulty = selectedDiff.Normal;
+        private MainMenu Menu;
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 navice = new Vector2(20, 185);
@@ -31,9 +33,10 @@ namespace Sprint5
         private static Vector2 back = new Vector2(20, 265);
 
 
-        public DifficultyMenuTexture(Texture2D text)
+        public DifficultyMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
+            this.Menu = menu;
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -97,8 +100,36 @@ namespace Sprint5
 
         public void select(MainMenu mainScreen)
         {
-            if (currentItem != selectedDiff.Return) difficulty = currentItem;
-            else mainScreen.state = MenuState.main;
+            if (currentItem != selectedDiff.Return)
+            {
+                difficulty = currentItem;
+                Menu.Game.State.Difficulty = CurrentToLevel(currentItem);
+                DifficultyMultiplier.Instance.SetDifficulty(Menu.Game);
+
+            }
+            else mainScreen.State = MenuState.main;
+        }
+        private DifficultyLevel CurrentToLevel(selectedDiff current)
+        {
+            DifficultyLevel CurrentLevel = Menu.Game.State.Difficulty;
+            if (current == selectedDiff.Navice)
+            {
+                CurrentLevel = DifficultyLevel.Navice;
+            }
+            else if (current == selectedDiff.Normal)
+            {
+                CurrentLevel = DifficultyLevel.Normal;
+            }
+            else if (current == selectedDiff.Tough)
+            {
+                CurrentLevel = DifficultyLevel.Tough;
+            }
+            else if (current == selectedDiff.Nightmare)
+            {
+                CurrentLevel = DifficultyLevel.Nightmare;
+            }
+            return CurrentLevel;
+                
         }
         public selectedDiff CurrentItem { get => currentItem; set => currentItem = value; }
     }

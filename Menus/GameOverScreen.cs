@@ -51,7 +51,7 @@ namespace Sprint5.Menus
         {
             GenerateStats();
             gameOverMessage = DifficultyMultiplier.Instance.DetermineGameOverMessage();
-            game.GraphicsDevice.Viewport = game.GameCamera.gameView;
+            game.GraphicsDevice.Viewport = game.Camera.gameView;
             game.GraphicsDevice.Clear(Color.Black);
             batch.DrawString(font, gameOverMessage, gameOver, Color.White);
             batch.DrawString(font, "Press 'P' to Play Again", playAgain, Color.White);

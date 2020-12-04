@@ -12,13 +12,13 @@ namespace Sprint5.Link
     {
         protected LinkPlayer link;
         protected int currentFrame;
+ 
         
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
         protected LinkSprite linkSprite;
         Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
         Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
-
 
         int colorIndex = 0;
 
@@ -40,20 +40,15 @@ namespace Sprint5.Link
             return link.hitbox;
         }
 
-
-
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
         {
             Color col;
             if (link.sprite == null)
             {
-                if (link.UseRing)
-                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueRingLinkSprite();
-                else
-                    link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
-                linkSprite = link.sprite;
+                link.sprite = (LinkSprite)SpriteFactory.Instance.CreateLinkSprite();
             }
-            //Will this effect the other code?
+            if (link.UseRing)
+                link.sprite = (LinkSprite)SpriteFactory.Instance.CreateBlueRingLinkSprite();
             linkSprite = link.sprite;
 
             if (link.LargeShield && link.DrawShield)

@@ -1,52 +1,54 @@
 Write up a document with useful information on your project. This might include: program controls, descriptions of known bugs that program has, and details of any tools or processes 
 your team used that aren't explicitly required (for example, calculating and using Code Metrics as part of your design process)
 
+Program Controls:
+- W and Up arrow: Move up
+- A and Left arrow: Move left
+- S and Down arrow: Move down
+- D and Right arrow: Move right
+- U and I: Used to switch between items in inventory
+- Enter: Consume selected item in inventory (applicable only for the potion)
+- Space: Brings up and closes HUD and Link's inventory
+- N: Primary Attack
+- B: Secondary Attack
+- G: Pause the game
+- Q: Quit the game
+- F: Full Screen
+- M: Mute Audio
+
 
 Known Bugs:
-- Sometimes, Projectiles glitch and are drawing multiple times
-- The sword beam expires when it hits the wall, but the animation does not play (it works fine on doors though)
-- Link's boomerang draws an impact sprite when it collides with an enemy, but the sprite is both off center and sometimes draws way more impact sprites than necessary
-- The game may crash if you spam projectiles a lot
-- Link getting thrown from enemies doesn't work when there's a wall
-- Lag
-- Resetting issues
-- Sound is not fully functional
-- Room 18 doesn't work
-- Link needs attacking hitboxes
-- Link is stuck until bomb goes off
+- If the sword beam hits the very edges of the door entrance, it may not show the impact animation, but it will expire.
+- Link does not hold the triforce/bow over his head (but he will hold his hands up).
+- Link does not pick up boomerang with one hand.
+
+
+Notes:
+- In the inventory, the bow is intended to be drawing over the arrow once obtained, but only the bow should show up in the slot selection. 
+
 
 
 Code Analysis on Link (Done by Krescens)
-0 Errors, 8 warnings
-- Fields are assigned but never used in Movement, MoveDown, MoveRight, MoveLeft, and MoveUp: Deleted the field
+0 Errors, 10 warnings
+- Fields are assigned but never used in MoveUp, MoveDown, MoveLeft, MoveRight, Movement, Projectiles, ProjectilesFactory, Stationary. These resolved by removing the variables.
+- In MoveUp, currentFrames is stated that it is never used, however it is used so it has been kept.
 
 
-Code Analysis on HUD (done by Ann)
-0 errors, 1 warnings
-- Unused fields: just need to remove them
+Code Analysis on Inventory (Done by Ann)
+0 Errors, 0 Warnings
+- Use a switch caise. However, a switch case IS being used 
 
 
-Code Analysis on Inventory (done by Ann)
-0 errors, 0 warnings
+Code Analysis on HUD (Done by Ann)
+0 errors, 3 warnings
+- Fields are assigned but never used in HeartManagement. These were resolved by removing them.
 
 
-Code Analysis on Items (done by Ann)
-0 errors, 1 warnings
-- Unused fields: just need to remove them
+Code Analysis on Items (Done by Ann)
+0 errors, 13 warnings
+- Colliders on Empty, Full, and Half Heart, as well as BombObject, BoomerangObject will always be null. These objects are HUD interface sprites, and thus shouuld never have colliders (the colliders are simply part of the interface so they cannot be removed).
+- Fields are assigned but never used in BombCollider, BoomerangCollider, ItemCollider, BoomerangObject and BombExplosionState. Solved by removing.
 
-
-Code Analysis on Enemies (done by Yuan)
-0 errors, 0 warnings
-
-
-Code Analysis on Camera and Rooms(done by JT)
-0 errors, 7 warnings
-- Unused fields: must remove
-- Unassigned fields: either remove or assign a value
-
-
-Code Analysis on Blocks (done by Noah)
-0 errors, 0 warnings
 
 
 

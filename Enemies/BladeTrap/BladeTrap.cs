@@ -16,8 +16,8 @@ namespace Sprint5
 
         private Vector2 location;
         public Vector2 Location { get => location; }
+        public int HP { get; private set; }
 
-        
         private Game game;
         
         public IEnemyState state;

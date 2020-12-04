@@ -17,57 +17,55 @@ namespace Sprint5
     public class Stalfos : IEnemy
     {
 
-        XElement saveInfo;
+        private XElement saveInfo;
         public IEnemyState state;
 
-        private Vector2 location;
         private EnemySprite sprite;
         private StalfosWalkingSprite stalfosSprite;
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; } = HPAmount.EnemyLevel2;
+        private const float barSize = 1.5f;
 
         private Point spriteSize;
         private Rectangle rect;
 
-        public Vector2 Location { get => location; }
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
         public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
-        
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
-            
-            this.location = location;
+            Location = location;
+
             state = new EnemySpawnState(this, game);
             saveInfo = xml;
             HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
-
         }
 
         public void Spawn()
         {
-            state = new StalfosWalkingState(this, location);
+            state = new StalfosWalkingState(this, Location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
 
             spriteSize = stalfosSprite.GetRectangle().Size;
-            rect = new Rectangle(this.location.ToPoint(), spriteSize);
-            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Stalfos");
+            rect = new Rectangle(Location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .5f);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "Stalfos");
+
+            HPBarDrawer.AddBar(new EnemyHealthBar(this, rect, barSize));
         }
 
 
         public void Die()
         {
-            RoomEnemies.Instance.Destroy(this, location);
+            RoomEnemies.Instance.Destroy(this, Location);
             saveInfo.SetElementValue("Alive", "false");
             RoomItems.Instance.DropRandom(collider.Center);
         }
 
-
-        
-      
         public void TakeDamage(Direction dir, int amount)
         {
             HP -= amount;
@@ -77,7 +75,7 @@ namespace Sprint5
             else 
             {
                 bool stunned = (state as StalfosWalkingState).permaStun;
-                state = new StalfosDamagedState(dir, this, location,stunned);
+                state = new StalfosDamagedState(dir, this, Location,stunned);
             }
             
         }
@@ -89,7 +87,8 @@ namespace Sprint5
 
         public void Draw(SpriteBatch spriteBatch)
         {            
-            sprite.Draw(spriteBatch, location, 0, Color.White);
+            sprite.Draw(spriteBatch, Location, 0, Color.White);
+
         }
 
         public void Update()
@@ -100,17 +99,8 @@ namespace Sprint5
 
         public void SetSprite(ISprite sprite)
         {
-
             this.sprite = (EnemySprite)sprite;
-
         }
-
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-        }
-
-
 
         public void Stun()
         {

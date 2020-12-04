@@ -78,8 +78,7 @@ namespace Sprint5.Items
 
         public void Collected()
         {
-            //for enemies only
-            item.Impact();
+
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Sprint5
                 location.X += MOVEMENT;
             }
 
-
             if (link.LargeShield)
                 currentFrame = currentFrame == 14 ? 15 : 14;
             else
@@ -104,6 +103,5 @@ namespace Sprint5
 
         }
 
-       
     }
 }

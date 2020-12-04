@@ -124,7 +124,7 @@ namespace Sprint5
         {
             location.X += moveDirection.X * currentMoveSpeed;
             location.Y += moveDirection.Y * currentMoveSpeed;
-            bat.UpdateLocation(location);
+            bat.Location = location;
         }
 
         

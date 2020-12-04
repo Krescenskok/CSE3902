@@ -61,7 +61,7 @@ namespace Sprint5.Inventory
             item.X += ITEMS_GAP;
             itemStorage.FirstItems.Add(PrimaryItem.Wand, new Wand(ItemsFactory.Instance.CreateWandSprite(), item));
 
-            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, true);
+            itemStorage.SecondInInventory.Add(SecondaryItem.Boomerang, false);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bomb, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Arrow, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Bow, false);
@@ -133,14 +133,13 @@ namespace Sprint5.Inventory
             itemStorage.SecondInInventory.Add(SecondaryItem.Candle, true);
             itemStorage.SecondInInventory.Add(SecondaryItem.Potion, true);
 
-            itemStorage.SecondSlotItem = SecondaryItem.Boomerang;
+            itemStorage.SecondSlotItem = SecondaryItem.Arrow;
             itemStorage.FirstSlotItem = PrimaryItem.WoodenSword;
             HUD.Instance.SetBSlotItem(SecondaryItem.Arrow);
             HUD.Instance.SetASlotItem(PrimaryItem.WoodenSword);
 
-            itemStorage.CursorPosition = 0;
+            itemStorage.CursorPosition = CURSOR_START;
 
-            InventoryMap.Instance.Reset();
         }
 
     }

@@ -17,7 +17,6 @@ namespace Sprint5.HUDManagement
         Dictionary<int, ISprite> individualRoomSprites = new Dictionary<int, ISprite>();
         Dictionary<int,Boolean> visitedRoom;
         private Point mapTopLoc, mapBottomLoc;
-        Point bossMarkerLocation;
         private ISprite bossLocation;
         private int linkRoom;
         private bool drawMap = false, drawBossLocation = false;

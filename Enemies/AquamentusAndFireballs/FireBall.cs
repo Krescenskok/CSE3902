@@ -25,6 +25,7 @@ namespace Sprint5
         public IEnemyState State { get => fireBallState; }
 
         public List<ICollider> Colliders { get => new List<ICollider> { fireBallCollider }; }
+        public int HP { get; private set; }
 
         public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength, LinkPlayer link)
         {
@@ -44,7 +45,6 @@ namespace Sprint5
         {
             fireBallPos = newPos;
         }
-
 
 
         public void SetSprite(ISprite sprite)

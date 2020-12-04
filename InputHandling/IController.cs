@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 
 namespace Sprint5
 {
-    interface IController
+    public interface IController
     {
-        public ICommand HandleInput(Game1 game);
+        public void HandleInput(Game1 game);
 
     }
 }

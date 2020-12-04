@@ -109,14 +109,12 @@ namespace Sprint5.Inventory
 
         public void Reset()
         {
-            visitedRoom.Clear();
             int i;
             for (i = 0; i < LASTROOM; i++)
             {
-                visitedRoom.Add(i, false);
+                visitedRoom[i] = false;
             }
-            GetLinkLocation();
-            visitedRoom[linkRoom] = true;
+            visitedRoom[1] = true;
         }
 
     }

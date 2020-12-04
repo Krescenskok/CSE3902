@@ -77,9 +77,9 @@ namespace Sprint5.Items
             state = new ReturningBoomerangState(this, location, link, GetHashCode());
         }
 
-        public void Impact()
+        public void Impact(Rectangle rectangle)
         {
-            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location, this.direction, returning, link));
+            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location, rectangle));
         }
 
         public void ReturnedToLink()

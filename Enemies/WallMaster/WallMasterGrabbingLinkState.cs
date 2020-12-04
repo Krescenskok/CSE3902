@@ -19,9 +19,6 @@ namespace Sprint5
         private const int normalMovingSpeed = 1;
         private int moveSpeed = normalMovingSpeed;
 
-
-
-
         public Vector2 Location { get => location; }
 
         private Game game;
@@ -33,40 +30,17 @@ namespace Sprint5
             this.game = game;
 
             ISprite sprite = EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(dir);
+            master.SetSprite(sprite);
 
             this.targetSpace = targetSpace;
-
-
-
-
         }
 
-        public void Die()
-        {
-            //does not die
-        }
-
-        public void Attack()
-        {
-            //do nothing
-        }
+    
 
         public void Update()
         {
-
-            if (Arrived(currentSpace, targetSpace))
-            {
-
-
-                Camera.Instance.BackToSquareOne();
-
-            }
-            else
-            {
-
-                MoveOneUnit();
-            }
-
+            if (Arrived(currentSpace, targetSpace)) Camera.Instance.BackToSquareOne();
+            else MoveOneUnit();
         }
 
 
@@ -74,7 +48,7 @@ namespace Sprint5
         {
             location = MoveToward(location, targetSpace.Location.ToVector2());
             currentSpace.Location = location.ToPoint();
-            master.UpdateLocation(location);
+            master.Location = location;
 
         }
 
@@ -91,8 +65,6 @@ namespace Sprint5
         private bool Arrived(Rectangle position, Rectangle target)
         {
             float dist = Vector2.Distance(position.Location.ToVector2(), target.Location.ToVector2());
-
-
             return dist <= 1;
         }
 
@@ -115,6 +87,16 @@ namespace Sprint5
         }
 
         public void MoveAwayFromCollision(Collision collision)
+        {
+            //do nothing
+        }
+
+        public void Die()
+        {
+            //does not die
+        }
+
+        public void Attack()
         {
             //do nothing
         }

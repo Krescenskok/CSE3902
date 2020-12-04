@@ -20,8 +20,6 @@ namespace Sprint5
             CollisionHandler.Instance.AddCollider(this, Layers.Player);
 
             this.bounds = bounds;
-
-
         }
 
         public string Name { get => "Player"; }
