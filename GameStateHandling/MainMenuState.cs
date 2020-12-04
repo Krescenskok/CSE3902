@@ -28,7 +28,6 @@ namespace Sprint5.GameStateHandling
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
 
             game.mainScreen.Draw(game.Spritebatch, game, font);
-            base.Draw(gameTime);
 
             game.Spritebatch.End();
         }

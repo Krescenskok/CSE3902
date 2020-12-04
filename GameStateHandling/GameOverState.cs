@@ -42,7 +42,6 @@ namespace Sprint5.GameStateHandling
 
             GameOverScreen.Instance.Draw(game.Spritebatch, game, font);
 
-            base.Draw(gameTime);
 
             game.Spritebatch.End();
         }

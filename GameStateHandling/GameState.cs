@@ -41,6 +41,7 @@ namespace Sprint5
 
                 }
             }
+
             if (Id == IGameStates.Type.Gameplay)
             {
                 GameplayState.Instance.Update(Game, gameTime);

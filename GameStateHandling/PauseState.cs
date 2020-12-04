@@ -34,9 +34,8 @@ namespace Sprint5.GameStateHandling
             game.LinkPersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
             RoomSpawner.Instance.DrawTopLayer(game.Spritebatch);
             game.ProjectilePersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
-            base.Draw(gameTime);
+  
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
-
             game.Spritebatch.End();
 
             if (game.State.Id == IGameStates.Type.Pause && !game.DoorPause)
@@ -47,7 +46,6 @@ namespace Sprint5.GameStateHandling
 
         public void Update(Game1 game, GameTime gameTime)
         {
-            throw new NotImplementedException();
         }
     }
 }

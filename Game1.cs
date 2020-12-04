@@ -105,9 +105,11 @@ namespace Sprint5
         }
         protected override void Update(GameTime gameTime)
         {
+            System.Diagnostics.Debug.WriteLine(State.Id);
             this.State.Update(gameTime);
-            base.Update(gameTime);
             this.Camera.Update();
+
+            base.Update(gameTime);
         }
         void PrepareToDraw()
         {
@@ -123,8 +125,16 @@ namespace Sprint5
         }
         protected override void Draw(GameTime gameTime)
         {
+
             this.State.Draw(Font, gameTime);
-          
+
+            Spritebatch.Begin();
+            base.Draw(gameTime);
+
+            Spritebatch.End();
+
+
+
         }
         public void Pause(bool pause) { if (pause != (State.Id == IGameStates.Type.Pause)) { Sounds.Instance.TogglePause(); } State.Id = IGameStates.Type.Pause; }
     }

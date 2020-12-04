@@ -248,15 +248,16 @@ namespace Sprint5
                 MoveViewports(ref playArea,targetGameView,ref gameView);
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
-                
-            }else if(inventoryOpen && !((game as Game1).State.Id == IGameStates.Type.Pause))
+                (game as Game1).DoorPause = true;
+            }
+            else if(inventoryOpen && !((game as Game1).State.Id == IGameStates.Type.Pause))
             {
                 (game as Game1).DoorPause = true;
             }
             else if(!inventoryOpen && (game as Game1).State.Id == IGameStates.Type.Pause && inventoryStillMoving)
             {
                 (game as Game1).DoorPause = false;
-               game.Pause(wasPaused);
+                game.Pause(wasPaused);
 
                 inventoryStillMoving = false;
             }
