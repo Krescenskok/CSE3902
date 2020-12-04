@@ -19,6 +19,7 @@ namespace Sprint5
         public Vector2 Location => throw new NotImplementedException();
 
         public IEnemyState State => throw new NotImplementedException();
+        public int HP { get; private set; }
         public List<ICollider> Colliders { get => null; }
 
         public Zol(Game game, Vector2 location)

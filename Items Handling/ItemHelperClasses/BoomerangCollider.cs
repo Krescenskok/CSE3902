@@ -12,7 +12,6 @@ namespace Sprint5.Items
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
-        private int damageAmount;
         public string name;
 
         public string Name { get => name; }

@@ -18,5 +18,11 @@ namespace Sprint5
             Rectangle destination = new Rectangle(location.ToPoint(), new Point(texture.Width, texture.Height));
             spriteBatch.Draw(texture,destination,color);
         }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Point end, Color color)
+        {
+            Rectangle destination = new Rectangle(location.ToPoint(), end);
+            spriteBatch.Draw(texture, destination, color);
+        }
     }
 }

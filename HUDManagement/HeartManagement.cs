@@ -12,12 +12,9 @@ namespace Sprint5.HUDManagement
         private const int HEART_GAP = 30;
         private const int FULL_HEART = 20;
         private const int HALF_HEART = 10;
-        private const int THIRD = 3;
         private const string FULL = "Full";
         private const string HALF = "Half";
         private const string EMPTY = "Empty";
-        private const string TOP = "Top";
-        private const string BOTTOM = "Bottom";
 
         private HUDStorage storage = HUDStorage.Instance;
         private static readonly HeartManagement instance = new HeartManagement();
@@ -30,11 +27,11 @@ namespace Sprint5.HUDManagement
             int i;
             for (i = 0; i < storage.MaxHearts; i++)
             {
-                storage.DrawnHeartsBottom.Add(CreateHeart(FULL, i, BOTTOM));
+                storage.DrawnHeartsBottom.Add(CreateHeart(FULL, i));
             }
         }
 
-        public IItems CreateHeart(string type, int position, string place)
+        public IItems CreateHeart(string type, int position)
         {
             Vector2 location  = new Vector2(storage.FirstBottomHeartLoc.X + position * HEART_GAP, storage.FirstBottomHeartLoc.Y);
 
@@ -48,25 +45,8 @@ namespace Sprint5.HUDManagement
             storage.MaxHearts++;
         }
 
-        public void ChangeDifficulty(int hp, int max)
-        {
-            //sets new max and prev to current so itll calculate normally
-            storage.MaxHearts = max / 20;
-            storage.PreviousHealth = 1;
-        }
-
         public void UpdateHearts(LinkPlayer link)
         {
-            if (storage.PreviousHealth < 0)
-            {
-                storage.PreviousHealth = (int)link.Health;
-            }
-
-            if (storage.PreviousHealth == (int)link.Health)
-            {
-                return;
-            }
-
             int fullCount = 0, emptyCount = 0, halfCount = 0;
             storage.MaxHearts = (int)(link.FullHealth / FULL_HEART);
             storage.PreviousHealth = (int)link.Health;
@@ -90,7 +70,6 @@ namespace Sprint5.HUDManagement
 
         private void RedrawHearts(int fullCount, int halfCount, int emptyCount)
         {
-
             foreach (IItems item in storage.DrawnHeartsBottom)
             {
                 item.Expire();
@@ -102,27 +81,25 @@ namespace Sprint5.HUDManagement
             {
                 if (fullCount > 0)
                 {
-                    storage.DrawnHeartsBottom.Add(CreateHeart(FULL, i, BOTTOM));
+                    storage.DrawnHeartsBottom.Add(CreateHeart(FULL, i));
                     fullCount--;
                 }
                 else if (halfCount > 0)
                 {
-                    storage.DrawnHeartsBottom.Add(CreateHeart(HALF, i, BOTTOM));
+                    storage.DrawnHeartsBottom.Add(CreateHeart(HALF, i));
                     halfCount--;
                 }
                 else
                 {
-                    storage.DrawnHeartsBottom.Add(CreateHeart(EMPTY, i, BOTTOM));
+                    storage.DrawnHeartsBottom.Add(CreateHeart(EMPTY, i));
                     emptyCount--;
                 }
             }
         }
 
-        public void Reset()
+        public void Reset(LinkPlayer link)
         {
-            storage.MaxHearts = DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkMaxHP() / FULL_HEART;
-            storage.DrawnHeartsBottom.Clear();
-            InitializeHearts();
+            UpdateHearts(link);
         }
 
 

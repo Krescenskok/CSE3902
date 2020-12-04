@@ -114,6 +114,8 @@ namespace Sprint5
         public void Reset()
         {
             state = new Stationary(this, sprite);
+            CurrentWeapon = ItemForLink.WoodenSword;
+            SecondaryWeapon = ItemForLink.ArrowBow;
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;
@@ -122,8 +124,7 @@ namespace Sprint5
             IsPickingUpItem = false;
             LargeShield = false;
             UseRing = false;
-            Health = HEALTH;
-            FullHealth = HEALTH;
+            DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkHP(this);
             Delay = 0;
             Clock = false;
             DrawShield = true;

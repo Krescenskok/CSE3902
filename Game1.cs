@@ -101,7 +101,7 @@ namespace Sprint5
             HUD.Instance.LoadHUD(this);
             LinkInventory.Instance.InitializeInventory(this);
 
-            CollisionHandler.Instance.Initialize(this);
+            CollisionHandler.Instance.Initialize();
 
             GridGenerator.Instance.GetGrid(this, 12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
@@ -115,7 +115,9 @@ namespace Sprint5
 
             this.State.Update(gameTime);
             this.Camera.Update();
+            HPBarDrawer.Update();
             base.Update(gameTime);
+
         }
         void PrepareToDraw()
         {
@@ -137,7 +139,9 @@ namespace Sprint5
             base.Draw(gameTime);
             Camera.Instance.Draw(Spritebatch);
 
+
             Spritebatch.End();
+
         }
     }
 }

@@ -16,13 +16,17 @@ namespace Sprint5
         private Vector2 aquamentusPos;
         private LinkPlayer link;
         private int attackPosYValueAdjust = 6;
-        private int recoverCountDown = 20;
+        private int recoverCountDown = 120;
+        private int directionIndex;
+        private float speed;
 
-        public AquamentusDamagedState(Aquamentus aquamentus, Vector2 initalPos, LinkPlayer link)
+        public AquamentusDamagedState(Aquamentus aquamentus, Vector2 initalPos, LinkPlayer link, int directionIndex, float speed)
         {
             this.link = link;
             this.aquamentus = aquamentus;
             aquamentusPos = initalPos;
+            this.directionIndex = directionIndex;
+            this.speed = speed;
             aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDragonSprite());
         }
 
@@ -48,16 +52,14 @@ namespace Sprint5
 
         public void Update()
         {
+            if (!aquamentus.checkAlive())
+            {
+                Die();
+            }
+
             if(recoverCountDown < 0)
             {
-                if (aquamentus.checkAlive())
-                {
-                    aquamentus.state = new AquamentusNormalState(aquamentus, aquamentusPos, link);
-                }
-                else
-                {
-                    Die();
-                }
+               aquamentus.state = new AquamentusNormalState(aquamentus, aquamentusPos, link, directionIndex, speed);
             }
             else
             {
@@ -72,7 +74,7 @@ namespace Sprint5
 
         public void ChangeDirection()
         {
-            //wont use
+            directionIndex *= -1;
         }
 
         public void Stun()
@@ -82,7 +84,7 @@ namespace Sprint5
 
         public void Stun(bool permanent)
         {
-            throw new NotImplementedException();
+            //not affected
         }
     }
 }

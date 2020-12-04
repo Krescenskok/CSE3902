@@ -41,8 +41,6 @@ namespace Sprint5
             this.goriya = goriya;
             this.location = location;
 
-
-
             RandomNumber = new Random();
             possibleDirections = new List<Direction> { left, right, up, down };
             ChangeDirection();
@@ -53,9 +51,8 @@ namespace Sprint5
         {
             if (!currentlyThrowing)
             {
-                
                 currentlyThrowing = true;
-                goriya.SetBoomerang(new GoriyaBoomerang(location, currentDirection.ToString(),moveSpeed));
+                goriya.Boomerang = new GoriyaBoomerang(location, currentDirection.ToString(),moveSpeed);
             }
             
         }
@@ -88,7 +85,7 @@ namespace Sprint5
         {
             possibleDirections = new List<Direction> { left, right, up, down };
 
-            possibleDirections.Remove((Direction)collision.From);
+            possibleDirections.Remove(collision.From);
             
           
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
@@ -110,45 +107,32 @@ namespace Sprint5
 
         public void Update()
         {
-
-
-            
-
-            if ((goriya.GetBoomerang() == null || goriya.GetBoomerang().Finished()) && NotStunned())
+            if ((goriya.Boomerang == null || goriya.Boomerang.Finished()) && NotStunned())
             {
-               
-               
                 currentlyThrowing = false;
-                goriya.SetBoomerang(null);
+                goriya.Boomerang = null;
 
-                
-                
                 if (Directions.Chance(directionChangeLikelihood)) ChangeDirection();
                 MoveOneUnit();
                 if (Directions.Chance(attackLikelihood)) Attack();
             }
             
-
         }
 
         public void MoveOneUnit()
         {
             location.X += moveDirection.X * currentMoveSpeed;
             location.Y += moveDirection.Y * currentMoveSpeed;
-           
-            goriya.UpdateLocation(location);
+
+            goriya.Location = location;
            
         }
 
 
         public void TakeDamage(int amount)
         {
-            
             goriya.state = new GoriyaDamagedState(currentDirection, goriya, location, moveSpeed, permaStun);
-            
         }
-
-
 
         public void Stun(bool permanent)
         {

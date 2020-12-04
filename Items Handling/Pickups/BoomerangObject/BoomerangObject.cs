@@ -16,9 +16,6 @@ namespace Sprint5.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-        private bool throwing;
-        private bool returning;
-        private string direction;
         private bool isExpired = false;
         public bool IsExpired
         {
@@ -38,9 +35,6 @@ namespace Sprint5.Items
             this.item = item;
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
-            throwing = true;
-
-            returning = false;
             collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
         }
         public BoomerangObject(ISprite item, Vector2 location, XElement xml)
@@ -49,8 +43,6 @@ namespace Sprint5.Items
             this.item = item;
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
-            throwing = true;
-            returning = false;
             collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }

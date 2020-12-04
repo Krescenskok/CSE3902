@@ -8,21 +8,14 @@ namespace Sprint5
     public class StalfosDamagedState : IEnemyState
     {
 
-        
-        
-        
-        Direction currentDirection;
-
-        Vector2 moveDirection;
-        Vector2 location;
-
-        private float moveSpeed = 4;
-        
-        
+        private Direction currentDirection;
+        private Vector2 moveDirection;
+        private Vector2 location;
 
         private Stalfos stalfos;
 
         private bool stunned;
+        private float moveSpeed = 4;
 
         public StalfosDamagedState(Direction dir, Stalfos stalfos, Vector2 location, bool stunned)
         {
@@ -38,44 +31,17 @@ namespace Sprint5
             this.stunned = stunned;
         }
 
-      
-        public void Attack()
-        {
-            //do nothing
-        }
-
-        public void ChangeDirection()
-        {
-            //do nothing
-            
-        }
-
-        public void Die()
-        {
-            //do nothing
-        }
 
         public void MoveAwayFromCollision(Collision collision)
         {
             if (collision.From.Equals(currentDirection)) BackToNormal();
         }
 
-        public void TakeDamage(int amount)
-        {
-            //do nothing
-        }
 
         public void Update()
         {
             MoveOneUnit();
-            moveSpeed -= 0.1f;
-            
-            if (moveSpeed <= 0) {
-                BackToNormal();
-            }
-                
-
-
+            if (moveSpeed <= 0) BackToNormal();
         }
 
         private void BackToNormal()
@@ -88,14 +54,35 @@ namespace Sprint5
         {
             location.X += moveDirection.X * moveSpeed;
             location.Y += moveDirection.Y * moveSpeed;
-            stalfos.UpdateLocation(location);
+            moveSpeed -= 0.1f;
+            stalfos.Location = location;
         }
 
         public void Stun(bool permanent)
         {
             if (permanent) stunned = true;
-            
-            
+        }
+
+
+        public void Attack()
+        {
+            //do nothing
+        }
+
+        public void ChangeDirection()
+        {
+            //do nothing
+
+        }
+
+        public void Die()
+        {
+            //do nothing
+        }
+
+        public void TakeDamage(int amount)
+        {
+            //do nothing
         }
     }
 }

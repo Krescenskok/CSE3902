@@ -16,64 +16,25 @@ namespace Sprint5
     {
         public static CollisionHandler Instance { get; } = new CollisionHandler();
 
-
-        /// <summary>
-        /// All colliders currently in game
-        /// </summary>
-        private List<ICollider> colliders;
-
-        private ICollider player;
-
-        private Queue<ICollider> removedColliders;
-
-        
-        /// <summary>
-        /// All collisions that have happened since last Update
-        /// </summary>
+        private List<ICollider> currentColliders;
+        private Queue<ICollider> collidersToBeRemoved;
         private HashSet<List<ICollider>> collisions;
 
         private Dictionary<int, List<ICollider>> spatialMap;
-        int rows = 3, col = 6;
-        Point cellSize;
-        int width;
+        private int rows = 3, col = 6;
+        private Point cellSize;
+        private int width;
 
         private CollisionHandler()
         {
-            colliders = new List<ICollider>();
-            
-            
-            removedColliders = new Queue<ICollider>();
-            
-            ListComparer<ICollider> listComparer = new ListComparer<ICollider>();
-          
-            collisions = new HashSet<List<ICollider>>(listComparer);
-            
+            currentColliders = new List<ICollider>();
+            collidersToBeRemoved = new Queue<ICollider>();
+            collisions = new HashSet<List<ICollider>>(new ListComparer<ICollider>());
         }
 
-
-
-        public void AddCollider(ICollider newCol, Layer layer)
+        public void Initialize()
         {
-            newCol.layer = layer;
-            colliders.Add(newCol);
-        }
-      
 
-        public void RemoveCollider(ICollider col)
-        {
-            removedColliders.Enqueue(col);
-        }
-
-        public void RemoveCollider(List<ICollider> colliders)
-        {
-            foreach (ICollider col in colliders) removedColliders.Enqueue(col);
-        }
-        
-
-
-        public void Initialize(Game game)
-        {
-            
             spatialMap = new Dictionary<int, List<ICollider>>(rows * col);
             for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
 
@@ -84,35 +45,119 @@ namespace Sprint5
             width = screenSize.X / cellSize.X;
         }
 
-        public void RoomChange()
+        public void Update()
         {
-            for(int i = 0; i < colliders.Count; i++)
+
+            for (int i = 0; i < currentColliders.Count; i++)
             {
-                
-                if(!(colliders[i].layer.AttachedToPlayer))
+                currentColliders[i].Update();
+                RegisterCollider(currentColliders[i]);
+            }
+
+
+            for (int i = 0; i < currentColliders.Count; i++)
+            {
+
+                List<ICollider> nearbyColliders = FindNearbyColliders(currentColliders[i]);
+                Collision collision = new Collision();
+
+                foreach (ICollider other in nearbyColliders)
                 {
-                    removedColliders.Enqueue(colliders[i]);
+                    List<ICollider> key = new List<ICollider> { currentColliders[i], other };
+
+                    if (!currentColliders[i].Equals(other) && currentColliders[i].layer.CollidesWith(other) && ColliderOverlap(currentColliders[i], other)) //collision exists
+                    {
+                        collision = CalculateSide(currentColliders[i], other);
+
+                        if (collisions.Contains(key))   //collision was already happneing
+                        {
+
+                            currentColliders[i].HandleCollision(other, collision);
+
+                        }
+                        else  // collision is just starting
+                        {
+
+                            collisions.Add(key);
+
+                            currentColliders[i].HandleCollisionEnter(other, collision);
+                            currentColliders[i].HandleCollision(other, collision);
+                        }
+
+                    }
+                    else if (collisions.Contains(key)) //collision has just ended
+                    {
+                        collisions.Remove(key);
+                        currentColliders[i].HandleCollisionExit(other, collision);
+                    }
+
+
                 }
+
+
             }
 
 
 
-            colliders = colliders.Except(removedColliders).ToList();
-            removedColliders.Clear();
+            while (collidersToBeRemoved.Count > 0)
+            {
+                currentColliders.Remove(collidersToBeRemoved.Dequeue());
+            }
 
-           
+            ResetSpatialMap();
         }
 
-        public void ClearMap()
+        private bool ColliderOverlap(ICollider col1, ICollider col2)
         {
-            spatialMap.Clear();
-            for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
+            return col1.Bounds().Intersects(col2.Bounds());
         }
 
-        public void ResetMap()
+        public void AddCollider(ICollider newCol, Layer layer)
         {
-            ClearMap();
+            newCol.layer = layer;
+            currentColliders.Add(newCol);
+        }
+      
 
+        public void RemoveCollider(ICollider col)
+        {
+            collidersToBeRemoved.Enqueue(col);
+        }
+
+        public void RemoveCollider(List<ICollider> colliders)
+        {
+            foreach (ICollider col in colliders) collidersToBeRemoved.Enqueue(col);
+        }
+
+        
+        public void RoomChange()
+        {
+            for(int i = 0; i < currentColliders.Count; i++)
+            {
+                
+                if(!(currentColliders[i].layer.AttachedToPlayer))
+                {
+                    collidersToBeRemoved.Enqueue(currentColliders[i]);
+                }
+            }
+
+            currentColliders.RemoveAll(collidersToBeRemoved.Contains);
+            collidersToBeRemoved.Clear();
+        }
+
+
+        #region spatial mapping
+        private List<ICollider> FindNearbyColliders(ICollider col)
+        {
+            List<ICollider> colliders = new List<ICollider>();
+            List<int> codes = GetCode(col.Bounds());
+
+            foreach (int id in codes)
+            {
+                colliders.AddRange(spatialMap[id]);
+            }
+
+            return colliders;
         }
 
         private void RegisterCollider(ICollider col)
@@ -175,103 +220,15 @@ namespace Sprint5
             list.Add(spatialPosition);
         }
 
-        private List<ICollider> FindNearbyColliders(ICollider col)
+        public void ResetSpatialMap()
         {
-            List<ICollider> colliders = new List<ICollider>();
-            List<int> codes = GetCode(col.Bounds());
-
-            foreach(int id in codes)
-            {
-                colliders.AddRange(spatialMap[id]);
-            }
-
-            return colliders;
+            spatialMap.Clear();
+            for (int i = 0; i < rows * col; i++) spatialMap.Add(i, new List<ICollider>());
         }
-
-        public void Update()
-        {
-
-            //add each collider to buckets in the spatial map
-            for(int i = 0; i < colliders.Count; i++)
-            {
-                colliders[i].Update();
-                RegisterCollider(colliders[i]);
-            }
-
-            
-
-            //iterate through each collider and check if it collides with nearby colliders
-            for (int i = 0; i < colliders.Count; i++)
-            {
-                if (colliders[i].layer is PlayerLayer && player is null) player = colliders[i];
+        #endregion
 
 
-                List<ICollider> nearbyColliders = FindNearbyColliders(colliders[i]);
-
-                
-
-                Collision collision = new Collision();
-                foreach(ICollider other in nearbyColliders)
-                {
-                    List<ICollider> key = new List<ICollider> { colliders[i], other };
-
-
-                    
-
-                    if (!colliders[i].Equals(other) && colliders[i].layer.CollidesWith(other) && ColliderOverlap(colliders[i], other)) //collision exists
-                    {
-                        collision = CalculateSide(colliders[i], other);
-
-                       
-
-                        if (collisions.Contains(key))   //collision was already happneing
-                        {
-
-                            colliders[i].HandleCollision(other, collision);
-
-                        }
-                        else  // collision is just starting
-                        {
-
-                            collisions.Add(key);
-                            
-                            colliders[i].HandleCollisionEnter(other, collision);
-                            colliders[i].HandleCollision(other, collision);
-                        }
-
-                    }
-                    else if (collisions.Contains(key)) //collision has just ended
-                    {
-                        collisions.Remove(key);
-                        colliders[i].HandleCollisionExit(other,collision);
-                    }
-
-                    
-                }
-
-               
-            }
-
-
-            
-
-            //remove colliders only after all collisions have been checked to prevent for loop error
-            while(removedColliders.Count > 0)
-            {
-                colliders.Remove(removedColliders.Dequeue());
-            }
-            
-
-            //reset spatial map
-            ClearMap();
-        }
-
-        private bool ColliderOverlap(ICollider col1, ICollider col2)
-        {
-                return col1.Bounds().Intersects(col2.Bounds());
-        }
-
-
+        #region calculate direction of collisions
         private Collision CalculateSide(ICollider col1, ICollider col2)
         {
             Rectangle rect1 = col1.Bounds();
@@ -322,9 +279,10 @@ namespace Sprint5
             return new Collision(Direction.down, loc, other);
         }
 
+        #endregion
 
-       
 
+        #region new list equality comparer
         class ListComparer<T> : IEqualityComparer<List<T>>
         {
             public bool Equals(List<T> x, List<T> y)
@@ -337,7 +295,7 @@ namespace Sprint5
                 return 0;
             }
         }
+        #endregion
 
-        
     }
 }

@@ -25,45 +25,48 @@ namespace Sprint5
 
         private int attackCountDown;
         private int ChangeDirectionCountDown;
-        private int aquamentusHP;
+        public int HP { get; private set; } = HPAmount.EnemyBoss1;
+     
+
         private static int AttackStrength = HPAmount.Full_Heart;
         private static int RangeAttackStrength = HPAmount.Full_Heart;
 
         private static int UpdatePerSec = 120;
-        private float attackPerSec = 1;
+        private float attackPerSec = (float)0.5;
 
-        private float directionChangPerSec = (float)0.2;
+        private float directionChangPerSec = (float)0.4;
         private float moveSpeedPerSec = 15;
         private float speed;
         private int directionIndex = -1;
-        private bool tryAttack = true;
 
         public Vector2 Location { get => aquamentusPos; }
 
         public IEnemyState State { get => state; }
 
         public List<ICollider> Colliders { get => new List<ICollider> { aquamentusCollider }; }
-        
+
+
 
         public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
         {
             this.link = link;
             aquamentusPos = initialPos;
             aquamentusInfo = xml;
-            aquamentusHP = 40;
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
-            state = new AquamentusNormalState(this, aquamentusPos, link);
-            fireBallList = new List<FireBall>(); 
+            speed = moveSpeedPerSec / UpdatePerSec;
+            state = new AquamentusNormalState(this, aquamentusPos, link, directionIndex, speed);
+            fireBallList = new List<FireBall>();
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
-            speed = moveSpeedPerSec / UpdatePerSec;
-            aquamentusHP = DifficultyMultiplier.Instance.DetermineEnemyHP(aquamentusHP);
+            
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
+            HPBarDrawer.AddBar(new BossHealthBar(this));
         }
 
         public void Spawn()
-        {    
+        {
         }
 
         public void SetSprite(ISprite sprite)
@@ -71,32 +74,33 @@ namespace Sprint5
             this.sprite = sprite;
         }
 
+        public void UpdatePos(Vector2 pos)
+        {
+            aquamentusPos = pos;
+        }
 
         public void LostHP(int damage)
         {
-            aquamentusHP -= damage;
+            HP -= damage;
         }
 
         public Boolean checkAlive()
         {
-            return aquamentusHP > 0;
+            return HP > 0;
         }
 
         public void Die()
         {
-            Sounds.Instance.PlayBossScream();
             RoomItems.Instance.DropHeartContainer(Location);
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
             RoomDoors.Instance.OpenDoor(14);
-            
+
             while(fireBallList.Count > 0)
             {
                 fireBallList[fireBallList.Count-1].State.Die();
             }
-
-            Sounds.Instance.Play("GetItem");
         }
 
         public Boolean TryAttack()
@@ -146,13 +150,15 @@ namespace Sprint5
             if (TryAttack())
             {
                 state.Attack();
+                aquamentusSprite.AttackSprite();
+                Sounds.Instance.Play("AquamentusRoar");
             }
-            aquamentusPos.X += directionIndex * speed;
             state.Update();
-            
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -162,9 +168,8 @@ namespace Sprint5
             {
                 fb.Draw(spriteBatch);
             }
-        }
 
-      
+        }
 
         public void TakeDamage(Direction dir, int amount)
         {

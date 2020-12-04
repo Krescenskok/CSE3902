@@ -16,9 +16,9 @@ namespace Sprint5
     /// </summary>
     public class WallMaster : IEnemy
     {
-        private Vector2 location;
+   
 
-        public Vector2 Location { get => location; }
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
         public List<ICollider> Colliders { get => new List<ICollider> { collider,playerFinder }; }
@@ -30,24 +30,23 @@ namespace Sprint5
         private EnemyCollider collider;
         private HandPlayerFinderCollider playerFinder;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; } = HPAmount.EnemyLevel2;
 
         private XElement saveData;
 
         public WallMaster(Game game, Vector2 location, XElement xml)
         {
-            this.location = location;
+           Location = location;
 
             state = new WallMasterMoveState(location, game, this);
             masterSprite = (WallMasterSprite)sprite;
-            Rectangle rect = new Rectangle(this.location.ToPoint(), masterSprite.GetRectangle().Size);
+            Rectangle rect = new Rectangle(Location.ToPoint(), masterSprite.GetRectangle().Size);
             collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "WallMaster");
             CollisionHandler.Instance.RemoveCollider(collider); //starts in wall shouldn't collide
 
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
             HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
-
 
             saveData = xml;
         }
@@ -61,14 +60,11 @@ namespace Sprint5
         {
             this.sprite = (EnemySprite) sprite;
         }
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-        }
+
 
         public void Draw(SpriteBatch batch)
         {
-            sprite.Draw(batch, location, 0 , Color.White);
+            sprite.Draw(batch, Location, 0 , Color.White);
         }
 
         internal void Attack()

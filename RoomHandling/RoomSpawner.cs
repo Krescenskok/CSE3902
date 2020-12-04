@@ -70,6 +70,8 @@ namespace Sprint5
             xml = XElement.Load("../../../XMLLoading/FinalLevelOne.xml").Element("Asset");
             xml.Attribute("Type").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
+
+            RoomDoors.Instance.Reset();
         }
 
     
@@ -81,6 +83,7 @@ namespace Sprint5
             RoomBlocks.Instance.LoadRoom(game, room);
             RoomWalls.Instance.LoadRoom(game, room);
             RoomDoors.Instance.LoadRoom(game, room);
+            RoomNPCs.Instance.LoadRoom(game, room);
             
             CurrentRoom = roomNumber;
         }
@@ -91,6 +94,7 @@ namespace Sprint5
             RoomBlocks.Instance.Update();
             RoomWalls.Instance.Update();
             RoomDoors.Instance.Update();
+            RoomNPCs.Instance.Update();
         }
 
 
@@ -98,6 +102,7 @@ namespace Sprint5
         {
             GridGenerator.Instance.GetGrid(game, 12, 7);
             CollisionHandler.Instance.RoomChange();
+            HPBarDrawer.RemoveAll();
             LoadRoom(game, roomNumber);
             Sounds.Instance.RoomChange(roomNumber);
         }
@@ -110,11 +115,13 @@ namespace Sprint5
             RoomBlocks.Instance.Draw(batch);
             RoomEnemies.Instance.Draw(batch);
             RoomItems.Instance.Draw(batch);
+            RoomNPCs.Instance.Draw(batch);
         }
 
         public void DrawTopLayer(SpriteBatch batch)
         {
             topLayer.Draw(batch);
+            HPBarDrawer.Draw(batch);
         }
 
         public void LoadAllRooms(Game game)
