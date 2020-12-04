@@ -12,13 +12,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin 8bitFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:8bitFont.spritefont
-
 #begin beamImpact.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -31,18 +24,6 @@
 /processorParam:TextureFormat=Color
 /build:beamImpact.png
 
-#begin BlackScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BlackScreen.png
-
 #begin BossSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -54,18 +35,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BossSpriteSheet.png
-
-#begin CreditsScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CreditsScreen.png
 
 #begin Door1.png
 /importer:TextureImporter
@@ -182,37 +151,6 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
 
-#begin gameOverScreen.png
-
-#begin HPBackground.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:gameOverScreen.png
-
-#begin gameWinScreen.png
-=======
-/build:HPBackground.png
-
-#begin HPFill.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:gameWinScreen.png
-/build:HPFill.png
-
 #begin itemSprites.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -272,18 +210,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:particles.png
-
-#begin PauseScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PauseScreen.png
 
 #begin RoomMap.png
 /importer:TextureImporter
@@ -356,12 +282,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/DodongoRoar.wav
-
-#begin Sounds/DoomTheme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/DoomTheme.wav
 
 #begin Sounds/DoorUnlock.wav
 /importer:WavImporter
@@ -447,12 +367,6 @@
 /processorParam:Quality=Best
 /build:Sounds/RefillLoop.wav
 
-#begin Sounds/SeptemberTheme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/SeptemberTheme.wav
-
 #begin Sounds/Shield.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -495,41 +409,11 @@
 /processorParam:Quality=Best
 /build:Sounds/TextSlow.wav
 
-#begin Sounds/TronTheme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/TronTheme.wav
-
 #begin Sounds/UseCandle.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/UseCandle.wav
-
-#begin StatsScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:StatsScreen.png
-
-#begin the-legend-of-zelda-breath-of-wild-game-4k-mi.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:the-legend-of-zelda-breath-of-wild-game-4k-mi.png;MMbackground.png
 
 #begin wandbeam.png
 /importer:TextureImporter
