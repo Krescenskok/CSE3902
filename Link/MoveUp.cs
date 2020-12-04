@@ -56,7 +56,6 @@ namespace Sprint5
 
             SwitchFrames(currentFrames);
 
-
             return location;
 
          
