@@ -12,19 +12,21 @@ namespace Sprint5
     }
     public class ControlMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
+        private MainMenu Menu;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedControl currentItem = selectedControl.Return;
+        private const float size = 2.5f;
+        private selectedControl currentItem = selectedControl.Return;
 
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 back = new Vector2(20, 165);
 
-        public ControlMenuTexture(Texture2D text)
+        public ControlMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
+            Menu = menu;
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -59,7 +61,7 @@ namespace Sprint5
 
         public void select(MainMenu mainScreen)
         {
-            mainScreen.state = MenuState.main;
+            mainScreen.State = MenuState.main;
         }
 
         public selectedControl CurrentItem { get => currentItem; set => currentItem = value; }

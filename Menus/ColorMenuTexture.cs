@@ -131,7 +131,7 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (currentItem != selectedColor.Return) chosenColor = currentItem;
-            else mainScreen.state = MenuState.main;
+            else mainScreen.State = MenuState.main;
         }
         public selectedColor CurrentItem { get => currentItem; set => currentItem = value; }
     }

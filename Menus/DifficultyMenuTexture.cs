@@ -16,12 +16,13 @@ namespace Sprint5
     }
     public class DifficultyMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedDiff currentItem = selectedDiff.Navice;
-        public selectedDiff difficulty = selectedDiff.Normal;
+        private const float size = 2.5f;
+        private selectedDiff currentItem = selectedDiff.Navice;
+        private selectedDiff difficulty = selectedDiff.Normal;
+        private MainMenu Menu;
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 navice = new Vector2(20, 185);
@@ -31,9 +32,10 @@ namespace Sprint5
         private static Vector2 back = new Vector2(20, 265);
 
 
-        public DifficultyMenuTexture(Texture2D text)
+        public DifficultyMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
+            this.Menu = menu;
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -97,8 +99,35 @@ namespace Sprint5
 
         public void select(MainMenu mainScreen)
         {
-            if (currentItem != selectedDiff.Return) difficulty = currentItem;
-            else mainScreen.state = MenuState.main;
+            if (currentItem != selectedDiff.Return)
+            {
+                difficulty = currentItem;
+                Menu.Game.State.Difficulty = CurrentToLevel(currentItem);
+
+            }
+            else mainScreen.State = MenuState.main;
+        }
+        private IDifficulty.Level CurrentToLevel(selectedDiff current)
+        {
+            IDifficulty.Level CurrentLevel = Menu.Game.State.Difficulty;
+            if (current == selectedDiff.Navice)
+            {
+                CurrentLevel = IDifficulty.Level.Navice;
+            }
+            else if (current == selectedDiff.Normal)
+            {
+                CurrentLevel = IDifficulty.Level.Normal;
+            }
+            else if (current == selectedDiff.Tough)
+            {
+                CurrentLevel = IDifficulty.Level.Tough;
+            }
+            else if (current == selectedDiff.Nightmare)
+            {
+                CurrentLevel = IDifficulty.Level.LinksNightmare;
+            }
+            return CurrentLevel;
+                
         }
         public selectedDiff CurrentItem { get => currentItem; set => currentItem = value; }
     }

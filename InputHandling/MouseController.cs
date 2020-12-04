@@ -25,7 +25,7 @@ namespace Sprint5
 
         }
 
-        public ICommand HandleInput(Game1 game)
+        public void HandleInput(Game1 game)
         {
             ICommand ChangeCommand = null;
             MouseState CurrentState = Mouse.GetState();
@@ -58,7 +58,7 @@ namespace Sprint5
             }
             PrevState = CurrentState;
 
-            return ChangeCommand;
+            game.ActiveCommand = ChangeCommand;
         }
     }
 }
