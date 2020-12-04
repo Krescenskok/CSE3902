@@ -90,8 +90,7 @@ namespace Sprint5.Items
 
         public void Collected()
         {
-            //if enemy hits it, then enemy takes damage
-            item.Impact();
+
         }
     }
 }

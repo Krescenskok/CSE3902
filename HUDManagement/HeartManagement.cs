@@ -26,6 +26,7 @@ namespace Sprint5.HUDManagement
 
         public void InitializeHearts()
         {
+            storage.DrawnHeartsBottom.Clear();
             int i;
             for (i = 0; i < storage.MaxHearts; i++)
             {
@@ -56,16 +57,6 @@ namespace Sprint5.HUDManagement
 
         public void UpdateHearts(LinkPlayer link)
         {
-            if (storage.PreviousHealth < 0)
-            {
-                storage.PreviousHealth = (int)link.Health;
-            }
-
-            if (storage.PreviousHealth == (int)link.Health)
-            {
-                return;
-            }
-
             int fullCount = 0, emptyCount = 0, halfCount = 0;
             storage.MaxHearts = (int)(link.FullHealth / FULL_HEART);
             storage.PreviousHealth = (int)link.Health;
@@ -89,6 +80,7 @@ namespace Sprint5.HUDManagement
 
         private void RedrawHearts(int fullCount, int halfCount, int emptyCount)
         {
+
             foreach (IItems item in storage.DrawnHeartsBottom)
             {
                 item.Expire();
@@ -116,11 +108,9 @@ namespace Sprint5.HUDManagement
             }
         }
 
-        public void Reset()
+        public void Reset(LinkPlayer link)
         {
-            storage.MaxHearts = THIRD;
-            storage.DrawnHeartsBottom.Clear();
-            InitializeHearts();
+            UpdateHearts(link);
         }
 
 

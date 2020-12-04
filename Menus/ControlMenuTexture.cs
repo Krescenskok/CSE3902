@@ -12,24 +12,25 @@ namespace Sprint5
     }
     public class ControlMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
+        private MainMenu Menu;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedControl currentItem = selectedControl.Return;
+        private const float size = 2.5f;
+        private selectedControl currentItem = selectedControl.Return;
 
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 back = new Vector2(20, 165);
 
-        public ControlMenuTexture(Texture2D text)
+        public ControlMenuTexture(MainMenu menu, Texture2D text)
         {
             texture = text;
+            Menu = menu;
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
         {
-
             batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White);
 
             batch.DrawString(font, "Legend of Zelda", title, Color.Silver, 0, new Vector2(0, 0), size, new SpriteEffects(), 0);
@@ -40,26 +41,24 @@ namespace Sprint5
             batch.DrawString(font, "A and Left - Move Left", new Vector2(20, 205), Color.DarkGoldenrod);
             batch.DrawString(font, "S and Down - Move Down", new Vector2(20, 225), Color.DarkGoldenrod);
             batch.DrawString(font, "D and Right - Move Right", new Vector2(20, 245), Color.DarkGoldenrod);
-            batch.DrawString(font, "Z and X - Attack", new Vector2(20, 265), Color.DarkGoldenrod);
-            batch.DrawString(font, "G - Pause", new Vector2(20, 285), Color.DarkGoldenrod);
-            batch.DrawString(font, "Q - Exit Game", new Vector2(20, 305), Color.DarkGoldenrod);
-            batch.DrawString(font, "F - Full Screen ", new Vector2(20, 325), Color.DarkGoldenrod);
-
-
+            batch.DrawString(font, "N and B - Primary Attack and Secondary Attack", new Vector2(20, 265), Color.DarkGoldenrod);
+            batch.DrawString(font, "Space - Inventory", new Vector2(20, 285), Color.DarkGoldenrod);
+            batch.DrawString(font, "U and I - Change between items in inventory", new Vector2(20, 305), Color.DarkGoldenrod);
+            batch.DrawString(font, "G - Pause", new Vector2(20, 325), Color.DarkGoldenrod);
+            batch.DrawString(font, "Q - Exit Game", new Vector2(20, 345), Color.DarkGoldenrod);
+            batch.DrawString(font, "F - Full Screen ", new Vector2(20, 365), Color.DarkGoldenrod);
         }
         public void goUp()
         {
-            //only implement if you're insane
         }
 
         public void goDown()
         {
-            //only implement if you're insane
         }
 
         public void select(MainMenu mainScreen)
         {
-            mainScreen.state = MenuState.main;
+            mainScreen.State = MenuState.main;
         }
 
         public selectedControl CurrentItem { get => currentItem; set => currentItem = value; }

@@ -15,6 +15,12 @@ namespace Sprint5
         private int linkSize;
         private int shieldWidth;
 
+        private int ZERO = 0;
+        private int NEG_ONE = -1;
+        private int ONE = 1;
+        private int TWO = 2;
+
+
         private LinkPlayer link;
         private Direction currentDirection;
 
@@ -38,10 +44,10 @@ namespace Sprint5
             float posOffset = shieldWidth / linkSize;
             directionOffset = new Dictionary<Direction, Vector2>()
             {
-                {Direction.left, new Vector2(-1 * posOffset,0) },
-                {Direction.right, new Vector2(1,0) },
-                {Direction.up, new Vector2(0,-1 * posOffset) },
-                {Direction.down, new Vector2(0,1) }
+                {Direction.left, new Vector2(NEG_ONE * posOffset,ZERO) },
+                {Direction.right, new Vector2(ONE,ZERO) },
+                {Direction.up, new Vector2(ZERO,NEG_ONE * posOffset) },
+                {Direction.down, new Vector2(ZERO,ONE) }
             };
 
             CollisionHandler.Instance.AddCollider(this, Layers.Shield);
@@ -60,8 +66,6 @@ namespace Sprint5
                 else bounds.Size = new Point(linkSize, shieldWidth);
 
                 currentDirection = dir;
-
-
             }
 
         }
@@ -119,9 +123,9 @@ namespace Sprint5
 
             if (hit && msg.Contains("TakeDamage"))
             {
-                int damage = link.UseRing ? (int)value / 2 : (int)value;
-                damage = Math.Max(damage - strength, 0);
-                if(damage > 0)
+                int damage = link.UseRing ? (int)value / TWO : (int)value;
+                damage = Math.Max(damage - strength, ZERO);
+                if(damage > ZERO)
                 {
                     link.IsDamaged = true;
                     link.Health -= damage;

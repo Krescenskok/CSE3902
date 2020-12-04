@@ -18,11 +18,13 @@ namespace Sprint5
     }
     public class MainMenuTexture
     {
-        Texture2D texture;
+        private Texture2D texture;
 
         private static int drawBounds = 0;
-        const float size = 2.5f;
-        public selectedMain currentItem = selectedMain.start;
+        private const float size = 2.5f;
+        private selectedMain currentItem = selectedMain.start;
+
+        private MainMenu Menu;
 
         private static Vector2 title = new Vector2(225, 10);
         private static Vector2 start = new Vector2(20, 185);
@@ -32,9 +34,11 @@ namespace Sprint5
         private static Vector2 sound = new Vector2(20, 265);
         private static Vector2 quit = new Vector2(20, 285);
 
-        public MainMenuTexture(Texture2D text)
+        public MainMenuTexture(MainMenu menu, Texture2D text)
         {
+            this.Menu = menu;
             texture = text;
+
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
@@ -50,7 +54,7 @@ namespace Sprint5
             if (currentItem == selectedMain.difficulty) batch.DrawString(font, "Difficulty", difficulty, Color.Black);
             else batch.DrawString(font, "Difficulty", difficulty, Color.DarkGoldenrod);
 
-            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfit", colors, Color.Black);
+            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfits", colors, Color.Black);
             else batch.DrawString(font, "Link's Outfits", colors, Color.DarkGoldenrod);
 
             if (currentItem == selectedMain.controls) batch.DrawString(font, "Controls", controls, Color.Black);
@@ -78,12 +82,14 @@ namespace Sprint5
 
         public void select(MainMenu mainScreen)
         {
-            if (currentItem == selectedMain.start) mainScreen.currentGame.mainMenu = false;
-            else if (currentItem == selectedMain.difficulty) mainScreen.state = MenuState.difficulty;
-            else if (currentItem == selectedMain.color) mainScreen.state = MenuState.color;
-            else if (currentItem == selectedMain.controls) mainScreen.state = MenuState.controls;
-            else if (currentItem == selectedMain.sound) mainScreen.state = MenuState.sound;
-            else mainScreen.currentGame.Exit();
+
+            if (currentItem == selectedMain.start) mainScreen.Game.State.Id = StateId.Gameplay;
+            else if (currentItem == selectedMain.difficulty) mainScreen.State = MenuState.difficulty;
+            else if (currentItem == selectedMain.controls) mainScreen.State = MenuState.controls;
+            else if (currentItem == selectedMain.sound) mainScreen.State = MenuState.sound;
+            else if (currentItem == selectedMain.color) mainScreen.State = MenuState.color;
+            else mainScreen.Game.Exit();
+
         }
         public Texture2D Texture { get => texture; set => texture = value; }
         public selectedMain CurrentItem { get => currentItem; set => currentItem = value; }

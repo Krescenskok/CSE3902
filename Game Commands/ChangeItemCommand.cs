@@ -8,12 +8,13 @@ namespace Sprint5
 {
     public class ChangeItemCommand : ICommand
     {
-        bool right;
-        LinkPlayer link;
+        private bool right;
+        private LinkPlayer link;
+        private Direction Direction;
 
-        public ChangeItemCommand(bool goingRight, LinkPlayer link)
+        public ChangeItemCommand(Direction dir, LinkPlayer link)
         {
-            right = goingRight;
+            Direction = dir;
             this.link = link;
         }
 
@@ -32,7 +33,7 @@ namespace Sprint5
         {
             if (LinkInventory.Instance.ShowInventory)
             {
-                LinkInventory.Instance.MoveCursor(right);
+                LinkInventory.Instance.MoveCursor(Direction);
                 LinkInventory.Instance.UpdateLinkWeapons(link);
             }
         }

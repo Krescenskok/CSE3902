@@ -11,8 +11,6 @@ namespace Sprint5.Link
 
         private double lastTime;
 
-        static int count = 0;
-
         public Movement(LinkPlayer linkPlayer) :base(linkPlayer)
         {
 

@@ -11,235 +11,84 @@ namespace Sprint5.Link
     {
         private double lastTime;
         LinkPlayer link;
-        private const int buffer = 50;
-        IItems item;
+
         private List<IItems> placedItems = new List<IItems>();
-        private bool beamMade = false;
-        private bool arrowMade = false;
-        private bool wandMade = false;
-        private bool boomerangMade = false;
-        private bool candleMade = false;
-        private bool bombMade = false;
-
-        private readonly string UP = "Up";
-        private readonly string DOWN = "Down";
-        private readonly string LEFT = "Left";
-        private readonly string RIGHT = "Right";
-
-        private const int DISPLACEMENT = 10;
-        private const int DISP_SWORD_LR = 8;
+        private List<IItems> itemsPlaced = new List<IItems>();
 
         private Vector2 itemLocation;
-        private List<IItems> itemsPlaced = new List<IItems>();
-        public List<IItems> itemsPlacedByLink
-        {
-            get { return itemsPlaced; }
-            set { itemsPlaced = value; }
-        }
 
         private static ProjectilesCommand instance = new ProjectilesCommand();
 
-        public LinkPlayer Link
-        {
-            get { return link; }
-            set { link = value; }
-        }
-
-        public static ProjectilesCommand Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
+        public List<IItems> itemsPlacedByLink { get => itemsPlaced; set => itemsPlaced = value; }
+        public LinkPlayer Link { get => link; set => link = value; }
         public double LastTime { get => lastTime; set => lastTime = value; }
+        public static ProjectilesCommand Instance { get => instance; }
+        public List<IItems> ItemsPlaced { get => itemsPlaced; set => itemsPlaced = value; }
 
         public ProjectilesCommand()
         {
-
         }
 
         public void ArrowBow(string direction)
         {
-            if (!arrowMade && LinkInventory.Instance.HasBow)
-            {
-                arrowMade = true;
-                itemLocation = link.CurrentLocation;
-                itemLocation.Y += 10;
-                item = new Arrow(ItemsFactory.Instance.CreateArrowSprite(direction), itemLocation, direction);
-                itemsPlacedByLink.Add(item);
-            }
+            itemLocation = link.CurrentLocation;
+            var it = itemsPlacedByLink.Find(item => (item is Arrow));
+            if (it == null && LinkInventory.Instance.HasBow)
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateArrowBow(direction, link));
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void SwordBeam(string direction)
         {
             itemLocation = link.CurrentLocation;
-
-            if (link.Health == link.FullHealth && !beamMade)
-            {
-                beamMade = true;
-                if (direction.Equals(DOWN))
-                {
-                    itemLocation.X += (DISPLACEMENT + DISPLACEMENT / 2);
-
-                    item = new SwordBeam(ItemsFactory.Instance.CreateDownBeamSprite(), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(RIGHT))
-                {
-                    itemLocation.Y += DISP_SWORD_LR;
-
-                    item = new SwordBeam(ItemsFactory.Instance.CreateRightBeamSprite(), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(LEFT))
-                {
-                    itemLocation.Y += DISP_SWORD_LR;
-
-                    item = new SwordBeam(ItemsFactory.Instance.CreateLeftBeamSprite(), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(UP))
-                {
-                    itemLocation.X += DISPLACEMENT;
-
-                    item = new SwordBeam(ItemsFactory.Instance.CreateUpBeamSprite(), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-
-                
-            }
+            var it = itemsPlacedByLink.Find(item => (item is SwordBeam));
+            if (it == null && link.Health == link.FullHealth)
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateSwordBeam(direction, link));
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void WandBeam(string direction)
         {
             itemLocation = link.CurrentLocation;
-            if (!wandMade)
-            {
-                wandMade = true;
-                if (direction.Equals(DOWN) || link.state is Stationary)
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X += DISPLACEMENT;
-                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(LEFT))
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X -= buffer;
-                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(RIGHT))
-                {
-                    itemLocation.Y += DISPLACEMENT;
-                    itemLocation.X += buffer;
-                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-                else if (direction.Equals(UP))
-                {
-                    itemLocation.Y -= DISPLACEMENT;
-                    itemLocation.X += DISPLACEMENT / 2;
-                    item = new WandBeam(ItemsFactory.Instance.CreateWandBeamSprite(direction), itemLocation, direction);
-                    itemsPlacedByLink.Add(item);
-                }
-            }
+            var it = itemsPlacedByLink.Find(item => (item is WandBeam));
+            if (it == null)
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateWandBeam(direction, link));
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void BoomerangThrow(string direction)
         {
-            if (!boomerangMade && LinkInventory.Instance.HasBoomerang)
-            {
-                boomerangMade = true;
-                itemLocation = link.CurrentLocation;
-                itemLocation.Y += DISPLACEMENT;
-                item = new Boomerang(ItemsFactory.Instance.CreateBoomerangSprite(), itemLocation, direction, link);
-                itemsPlacedByLink.Add(item);
-            }
+            itemLocation = link.CurrentLocation;
+            var it = itemsPlacedByLink.Find(item => (item is Boomerang));
+            if (it == null && LinkInventory.Instance.HasBoomerang)
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateBoomerangThrow(direction, link));
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void CandleBurn(string direction)
         {
             Vector2 loc = link.CurrentLocation;
-            if (!candleMade && LinkInventory.Instance.HasCandle)
-            {
-                candleMade = true;
-                loc.X += 10;
-                if (direction.Equals(UP))
-                {
-                    loc.Y -= buffer;
-                }
-                else if (direction.Equals(DOWN))
-                {
-                    loc.Y += buffer;
-                }
-                else if (direction.Equals(RIGHT))
-                {
-                    loc.X += buffer;
-                }
-                else
-                {
-                    loc.X -= buffer;
-                }
-
-                item = new CandleFire(ItemsFactory.Instance.CreateCandleFireSprite(), loc);
-                itemsPlacedByLink.Add(item);
-            }
+            var it = itemsPlacedByLink.Find(item => (item is CandleFire));
+            if (it == null && LinkInventory.Instance.HasCandle)
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateCandleFire(direction, link));
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void SpawnBomb(string direction)
         {
             Vector2 loc = link.CurrentLocation;
-            if (!bombMade && LinkInventory.Instance.BombCount > 0)
+            var it = itemsPlacedByLink.Find(item => (item is Bomb));
+            if (it == null && LinkInventory.Instance.BombCount > 0)
             {
-                LinkInventory.Instance.BombCount--;
-                bombMade = true;
-                if (direction.Equals(LEFT))
-                {
-                    loc.X -= buffer;
-                }
-                else if (direction.Equals(DOWN) || link.state is Stationary)
-                {
-                    loc.Y += buffer;
-                }
-                else if (direction.Equals(RIGHT))
-                {
-                    loc.X += buffer;
-                }
-                else
-                {
-                    loc.Y -= buffer;
-                }
-                item = new Bomb(ItemsFactory.Instance.CreateBombSprite(), loc);
-                itemsPlacedByLink.Add(item);
+                itemsPlacedByLink.Add(ProjectilesFactory.CreateSpawnBomb(direction, link));
             }
             else
-            {
                 Link.IsShootingProjectile = false;
-            }
         }
 
         public void ExpireCheck()
@@ -248,50 +97,28 @@ namespace Sprint5.Link
             foreach (IItems item in itemsPlacedByLink)
             {
                 if (item is SwordBeam && item.IsExpired)
-                {
-                    beamMade = false;
                     list.Add(item);
-                }
                 else if (item is Arrow && item.IsExpired)
-                {
-                    arrowMade = false;
                     list.Add(item);
-                }
                 else if (item is WandBeam && item.IsExpired)
-                {
-                    wandMade = false;
                     list.Add(item);
-                }
                 else if (item is Boomerang && item.IsExpired)
-                {
-                    boomerangMade = false;
                     list.Add(item);
-                }
                 else if (item is CandleFire && item.IsExpired)
-                {
-                    candleMade = false;
                     list.Add(item);
-                }
                 else if (item is Bomb && item.IsExpired)
-                {
-                    bombMade = false;
                     list.Add(item);
-                }
             }
-
             foreach (IItems item in list)
             {
                 RemovePlacedItem(item);
             }
-
         }
 
         private void RemovePlacedItem(IItems item)
         {
             if (itemsPlacedByLink.Contains(item) && item.IsExpired)
-            {
                 itemsPlacedByLink.Remove(item);
-            }
             Link.IsShootingProjectile = false;
         }
 

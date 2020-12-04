@@ -33,13 +33,14 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-                (game as Game1).IsGameOver = false;
+                (game as Game1).State.Id = StateId.Gameplay;
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);
                 RoomSpawner.Instance.Reset();
                 Sounds.Instance.LoadSounds(game);
-                Camera.Instance.BackToSquareOne();
-          
+                Camera.Instance.BackToSquareOne();          
+                LinkInventory.Instance.Reset();
+                HUD.Instance.Reset(Player);
 
 
 

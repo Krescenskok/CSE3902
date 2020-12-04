@@ -8,7 +8,7 @@ namespace Sprint5.Menus
 {
     public class PauseScreen
     {
-        Texture2D texture;
+        private Texture2D texture;
 
                     private static readonly PauseScreen instance = new PauseScreen();
 
@@ -18,7 +18,7 @@ namespace Sprint5.Menus
         private static Vector2 pause = new Vector2(285, 95);
         private static Vector2 resume = new Vector2(237, 145);
         private static Vector2 quit = new Vector2(250, 175);
-
+        private PauseSprite sprite;
         public static PauseScreen Instance
         {
             get
@@ -28,24 +28,20 @@ namespace Sprint5.Menus
         }
         private PauseScreen()
         {
+            sprite = SpriteFactory.Instance.CreatePauseSprite();
         }
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
         {
-            batch.Begin();
-
+            game.Spritebatch.Begin();
+           
             texture = new Texture2D(game.GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.Black });
 
-            game.GraphicsDevice.Viewport = game.GameCamera.gameView;
+            game.GraphicsDevice.Viewport = game.Camera.gameView;
+            batch.Draw(sprite.Texture, new Rectangle(drawBounds, drawBounds, game.Camera.playArea.Width, game.Camera.playArea.Height), Color.White); ; ;
 
-            batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White * opacity);
-
-            batch.DrawString(font, "Paused", pause, Color.White);
-            batch.DrawString(font, "Press 'G' to resume", resume, Color.White);
-            batch.DrawString(font, "Press 'Q' to Quit", quit, Color.White);
-
-            batch.End();
+            game.Spritebatch.End();
         }
     }
 }
