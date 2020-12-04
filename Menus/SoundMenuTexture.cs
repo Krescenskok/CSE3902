@@ -107,7 +107,7 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (currentItem != selectedSound.Return) selectedSong = currentItem;
-            else mainScreen.state = MenuState.main;
+            else mainScreen.State = MenuState.main;
 
             if(songName.ContainsKey(currentItem)) Sounds.Instance.ChangeBGM(songName[currentItem]);
 
