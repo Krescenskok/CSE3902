@@ -26,14 +26,17 @@ namespace Sprint5
         private GoriyaWalkSprite gorSprite;
         
 
-        private GoriyaBoomerang boomy;
+        private GoriyaBoomerang boomerang;
 
         private Game game;
 
 
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel3;
+        public int HP { get; private set; } = HPAmount.EnemyLevel3;
+        public EnemyHealthBar HP_BAR { get; private set; }
+        private const float barSize = 1.5f;
+
 
         public Vector2 Location { get => location; }
 
@@ -54,13 +57,13 @@ namespace Sprint5
 
         public void SetBoomerang(GoriyaBoomerang boomerang)
         {
-            boomy = boomerang;
+            this.boomerang = boomerang;
             
         }
 
         public GoriyaBoomerang GetBoomerang()
         {
-            return boomy;
+            return boomerang;
         }
 
       
@@ -90,15 +93,16 @@ namespace Sprint5
 
             spriteSize = gorSprite.GetRectangle().Size;
             rect = new Rectangle(location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .6f);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "Goriya");
 
-            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .6f), this, HPAmount.HalfHeart, "Goriya");
-
+            HP_BAR = new EnemyHealthBar(this, rect, game, HP, barSize);
         }
 
 
         public void Die()
         {
-            if (boomy != null) boomy.Die();
+            if (boomerang != null) boomerang.Die();
             RoomEnemies.Instance.Destroy(this,location);
             saveData.SetElementValue("Alive", "false");
 
@@ -112,14 +116,16 @@ namespace Sprint5
         {
             sprite.Draw(spriteBatch, location, 0, Color.White);
             
-            if (boomy != null) boomy.Draw(spriteBatch);
+            if (boomerang != null) boomerang.Draw(spriteBatch);
+
         }
 
         public void Update()
         {
             state.Update();
             sprite.Update();
-            if (boomy != null) boomy.Update();
+            if (boomerang != null) boomerang.Update();
+
         }
 
         public EnemyCollider GetCollider()

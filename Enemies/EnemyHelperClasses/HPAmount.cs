@@ -13,6 +13,7 @@ namespace Sprint5
 
         //EnemyLevel# where # refers to number of hits needed to kill the enemy
         public const int EnemyLevel1 = 5, EnemyLevel2 = 10, EnemyLevel3 = 15, EnemyLevel4 = 20;
+        public const int EnemyBoss1 = 40, EnemyBoss2 = 50;
         public const int OneHit = 5, TwoHits = 10, ThreeHits = 15, FourHits = 20;
         public const int Zero = 0;
       

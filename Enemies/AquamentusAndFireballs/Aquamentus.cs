@@ -25,7 +25,10 @@ namespace Sprint5
 
         private int attackCountDown;
         private int ChangeDirectionCountDown;
-        private int aquamentusHP;
+        public int HP { get; private set; } = HPAmount.EnemyBoss1;
+        public BossHealthBar HP_BAR { get; private set; } 
+        private const float barSize = 1.5f;
+
         private static int AttackStrength = HPAmount.Full_Heart;
         private static int RangeAttackStrength = HPAmount.Full_Heart;
 
@@ -43,6 +46,7 @@ namespace Sprint5
         public IEnemyState State { get => state; }
 
         public List<ICollider> Colliders { get => new List<ICollider> { aquamentusCollider }; }
+
         
 
         public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
@@ -50,7 +54,6 @@ namespace Sprint5
             this.link = link;
             aquamentusPos = initialPos;
             aquamentusInfo = xml;
-            aquamentusHP = 40;
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
             state = new AquamentusNormalState(this, aquamentusPos, link);
@@ -58,8 +61,9 @@ namespace Sprint5
             aquamentusSprite = (AquamentusNormalSprite)sprite;
             aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
             speed = moveSpeedPerSec / UpdatePerSec;
-            aquamentusHP = DifficultyMultiplier.Instance.DetermineEnemyHP(aquamentusHP);
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
+            HP_BAR = new BossHealthBar(this,  game, HP);
         }
 
         public void Spawn()
@@ -74,12 +78,12 @@ namespace Sprint5
 
         public void LostHP(int damage)
         {
-            aquamentusHP -= damage;
+            HP -= damage;
         }
 
         public Boolean checkAlive()
         {
-            return aquamentusHP > 0;
+            return HP > 0;
         }
 
         public void Die()
@@ -153,6 +157,8 @@ namespace Sprint5
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -162,6 +168,7 @@ namespace Sprint5
             {
                 fb.Draw(spriteBatch);
             }
+
         }
 
       

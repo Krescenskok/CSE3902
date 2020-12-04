@@ -30,7 +30,7 @@ namespace Sprint5
         private EnemyCollider collider;
         private HandPlayerFinderCollider playerFinder;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; }
 
         private XElement saveData;
 

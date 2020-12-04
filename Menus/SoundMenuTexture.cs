@@ -8,7 +8,7 @@ namespace Sprint5
 {
     public enum selectedSound
     {
-        Song1,
+        Song1  ,
         Song2,
         Song3,
         Song4,
@@ -29,6 +29,14 @@ namespace Sprint5
         private static Vector2 S3 = new Vector2(20, 225);
         private static Vector2 S4 = new Vector2(20, 245);
         private static Vector2 back = new Vector2(20, 265);
+
+        private static Dictionary<selectedSound, string> songName = new Dictionary<selectedSound, string>()
+        {
+            {selectedSound.Song1,"DungeonTheme" },
+            {selectedSound.Song2, "TronTheme" },
+            {selectedSound.Song3, "DoomTheme" },
+            {selectedSound.Song4, "SeptemberTheme" }
+        };
 
         public SoundMenuTexture(Texture2D text)
         {
@@ -98,6 +106,9 @@ namespace Sprint5
         {
             if (currentItem != selectedSound.Return) selectedSong = currentItem;
             else mainScreen.state = MenuState.main;
+
+            if(songName.ContainsKey(currentItem)) Sounds.Instance.ChangeBGM(songName[currentItem]);
+
         }
         public selectedSound CurrentItem { get => currentItem; set => currentItem = value; }
     }

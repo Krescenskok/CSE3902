@@ -23,11 +23,14 @@ namespace Sprint5
 
         private EnemyCollider innerCollider;
         private GelBlockCollider outsideCollider;
-        private int HP = HPAmount.EnemyLevel1;
+        
 
         private Point spriteSize;
         private Rectangle rect;
 
+        public int HP { get; private set; } = HPAmount.EnemyLevel1;
+        public EnemyHealthBar HP_BAR { get; private set; }
+        private const float barSize = 1.5f;
         public Vector2 Location { get => location; }
 
         public IEnemyState State { get => state; }
@@ -58,9 +61,10 @@ namespace Sprint5
 
             spriteSize = gSprite.GetRectangle().Size;
             rect = new Rectangle(location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .3f);
+            innerCollider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "gel");
 
-            innerCollider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .3f), this, HPAmount.HalfHeart, "gel");
-
+            HP_BAR = new EnemyHealthBar(this, rect, game, HP, barSize);
         }
 
         public void SetSprite(ISprite sprite)
@@ -78,6 +82,7 @@ namespace Sprint5
         {
             state.Update();
             sprite.Update();
+            if(HP_BAR != null) HP_BAR.Update();
         }
 
 

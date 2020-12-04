@@ -170,6 +170,7 @@ namespace Sprint5
             }
 
             this.Camera.Update();
+            HPBarDrawer.Update();
 
         }
 
@@ -218,7 +219,7 @@ namespace Sprint5
                     base.Draw(gameTime);
                     RoomEnemies.Instance.DrawTests(_spriteBatch);
 
-                Camera.Instance.Draw(_spriteBatch);
+                    Camera.Instance.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 

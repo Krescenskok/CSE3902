@@ -33,6 +33,8 @@ namespace Sprint5
         private KeyboardState state;
         private KeyboardState prevState;
 
+        private float currentVolume = 1;
+
         public void LoadSounds(Game game)
         {
 
@@ -77,6 +79,16 @@ namespace Sprint5
             return !sound.Equals(BGM) && !sound.Equals(lowHealth);
         }
 
+        public void VolumeUp()
+        {
+            currentVolume = Math.Clamp(currentVolume + .2f, 0,1);
+            if (!Muted) UnMute();
+        }
+        public void VolumeDown()
+        {
+            currentVolume = Math.Clamp(currentVolume - .2f, 0, 1);
+        }
+
         private void ToggleMute()
         {
             if (Muted) UnMute();
@@ -109,7 +121,7 @@ namespace Sprint5
         {
             foreach (SoundEffectInstance instance in soundInstances)
             {
-                instance.Volume = 1;
+                instance.Volume = currentVolume;
             }
             Muted = false;
         }
@@ -200,6 +212,14 @@ namespace Sprint5
                 soundInstances.Remove(instance);
                 loopedSounds.Remove(key);
             }
+        }
+
+        public void ChangeBGM(string name)
+        {
+            BGM.Stop();
+            soundInstances.Remove(BGM);
+            BGM = AddLoop(name);
+            BGM.Play();
         }
 
         #endregion

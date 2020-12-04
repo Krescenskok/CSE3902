@@ -98,6 +98,7 @@ namespace Sprint5
         {
             GridGenerator.Instance.GetGrid(game, 12, 7);
             CollisionHandler.Instance.RoomChange();
+            HPBarDrawer.RemoveAll();
             LoadRoom(game, roomNumber);
             Sounds.Instance.RoomChange(roomNumber);
         }
@@ -115,6 +116,7 @@ namespace Sprint5
         public void DrawTopLayer(SpriteBatch batch)
         {
             topLayer.Draw(batch);
+            HPBarDrawer.Draw(batch);
         }
 
         public void LoadAllRooms(Game game)

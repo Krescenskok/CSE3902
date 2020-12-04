@@ -24,7 +24,10 @@ namespace Sprint5
 
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel1;
+        public int HP { get; private set; } = HPAmount.EnemyLevel1;
+        public EnemyHealthBar HP_BAR { get; private set; }
+        private const float barSize = 1.5f;
+
 
         private Point spriteSize;
         private Rectangle rect;
@@ -56,9 +59,11 @@ namespace Sprint5
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
             spriteSize = kSprite.GetRectangle().Size;
             rect = new Rectangle(location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .6f);
 
             collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Keese");
 
+            HP_BAR = new EnemyHealthBar(this, rect, game, HP, barSize);
         }
         public void SetSprite(ISprite sprite)
         {
@@ -90,6 +95,7 @@ namespace Sprint5
             
             state.Update();
             sprite.Update();
+            
         }
 
   

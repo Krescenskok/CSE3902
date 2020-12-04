@@ -25,7 +25,7 @@ namespace Sprint5
         private StalfosWalkingSprite stalfosSprite;
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; } = HPAmount.EnemyLevel2;
 
         private Point spriteSize;
         private Rectangle rect;
@@ -35,16 +35,22 @@ namespace Sprint5
         public IEnemyState State { get => state; }
         public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
-        
+        public EnemyHealthBar HP_BAR { get; private set; }
+        private const float barSize = 1.5f;
+
+        private Game game;
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
             
             this.location = location;
+            this.game = game;
+
             state = new EnemySpawnState(this, game);
             saveInfo = xml;
             HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
+            
         }
 
         public void Spawn()
@@ -54,7 +60,10 @@ namespace Sprint5
 
             spriteSize = stalfosSprite.GetRectangle().Size;
             rect = new Rectangle(this.location.ToPoint(), spriteSize);
-            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Stalfos");
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .5f);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "Stalfos");
+
+            HP_BAR = new EnemyHealthBar(this, rect,game, HP, barSize);
         }
 
 
@@ -90,6 +99,7 @@ namespace Sprint5
         public void Draw(SpriteBatch spriteBatch)
         {            
             sprite.Draw(spriteBatch, location, 0, Color.White);
+
         }
 
         public void Update()
