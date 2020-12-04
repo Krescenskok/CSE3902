@@ -110,7 +110,6 @@ namespace Sprint5.HUDManagement
 
         public void Reset(LinkPlayer link)
         {
-            storage.MaxHearts = (int) link.FullHealth;
             UpdateHearts(link);
         }
 
