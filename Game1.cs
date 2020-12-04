@@ -45,10 +45,9 @@ namespace Sprint5
         }
         protected override void Initialize()
         {
-            State = new GameState(this);
-            State.Id = IGameStates.Type.MainMenu;
-            State.Difficulty = IDifficulty.Level.Normal;
-            DifficultyMultiplier.Instance.SetDifficulty(this);
+            State = new GameState(this, DifficultyLevel.Normal, StateId.MainMenu);
+
+
             base.Initialize();
         }
         protected override void LoadContent()
@@ -67,16 +66,12 @@ namespace Sprint5
 
             LinkPlayer = new LinkPlayer(this);
 
+            DifficultyMultiplier.Instance.SetDifficulty(this);
 
-            mainScreen = new MainMenu(linkPlayer);
+            mainScreen = new MainMenu(this, LinkPlayer);
             
             MenuCommands.Instance.LoadCommands(this);
             GamePlayCommands.Instance.LoadCommands(this);
-            
-            controllers.Add(new GamePadController(linkPlayer, this, _spriteBatch));
-            controllers.Add(new KeyboardController(linkPlayer, this, _spriteBatch));
-            controllers.Add(new MouseController(this));
-
 
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));
@@ -147,6 +142,6 @@ namespace Sprint5
 
 
         }
-        public void Pause(bool pause) { if (pause != (State.Id == IGameStates.Type.Pause)) { Sounds.Instance.TogglePause(); } State.Id = IGameStates.Type.Pause; }
+        public void Pause(bool pause) { if (pause != (State.Id == StateId.Pause)) { Sounds.Instance.TogglePause(); } State.Id = StateId.Pause; }
     }
 }

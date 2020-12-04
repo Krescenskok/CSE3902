@@ -33,7 +33,7 @@ namespace Sprint5
 
         private void StateControl(Game1 game)
         {
-            if (game.State.Id == IGameStates.Type.Gameplay)
+            if (game.State.Id == StateId.Gameplay)
             {
                 CommandsList = GamePlayCommands.Instance.KeyCommands;
                 MovementKeys = GamePlayCommands.Instance.MovementKeys;
@@ -73,7 +73,7 @@ namespace Sprint5
 
             PrevState = State;
 
-            if (Game.State.Id == IGameStates.Type.GameOver)
+            if (Game.State.Id == StateId.GameOver)
             {
                 if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {

@@ -36,12 +36,12 @@ namespace Sprint5
         {
             if (DoorPause == "NotDoor")
             {
-                if ((game as Game1).State.Id == IGameStates.Type.Pause)
+                if ((game as Game1).State.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = IGameStates.Type.Pause;
+                    (game as Game1).State.Id = StateId.Pause;
                 } else
                 {
-                    (game as Game1).State.Id = IGameStates.Type.Gameplay;
+                    (game as Game1).State.Id = StateId.Gameplay;
                 }
                 this.Game.DoorPause = false;
                 Player.Paused = !Player.Paused;
@@ -50,13 +50,13 @@ namespace Sprint5
             else
             {
                 this.Game.DoorPause = true;
-                if ((game as Game1).State.Id == IGameStates.Type.Pause)
+                if ((game as Game1).State.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = IGameStates.Type.Pause;
+                    (game as Game1).State.Id = StateId.Pause;
                 }
                 else
                 {
-                    (game as Game1).State.Id = IGameStates.Type.Gameplay;
+                    (game as Game1).State.Id = StateId.Gameplay;
                 }
                 Player.Paused = !Player.Paused;
                 Sounds.Instance.TogglePause();

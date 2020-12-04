@@ -33,7 +33,7 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-                (game as Game1).State.Id = IGameStates.Type.Gameplay;
+                (game as Game1).State.Id = StateId.Gameplay;
                 LinkCommand linkReset = new LinkCommand(Player, "R");
                 linkReset.Update(Gametime);
                 RoomSpawner.Instance.Reset();

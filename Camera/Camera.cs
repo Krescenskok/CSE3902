@@ -121,7 +121,7 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.State.Id == IGameStates.Type.Pause; Pause(); }
+                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.State.Id == StateId.Pause; Pause(); }
             }
 
 
@@ -235,19 +235,19 @@ namespace Sprint5
 
                 (game as Game1).DoorPause = true;
             }
-            else if (inventoryOpen && !((game as Game1).State.Id == IGameStates.Type.Pause))
+            else if (inventoryOpen && !((game as Game1).State.Id == StateId.Pause))
 
             {
                 game.DoorPause = true;
             }
 
-            else if (!inventoryOpen && (game as Game1).State.Id == IGameStates.Type.Pause && inventoryStillMoving)
+            else if (!inventoryOpen && (game as Game1).State.Id == StateId.Pause && inventoryStillMoving)
             {
                 (game as Game1).DoorPause = false;
                 game.Pause(wasPaused);
             }
 
-            else if (!inventoryOpen && (game as Game1).State.Id == IGameStates.Type.Pause && inventoryStillMoving)
+            else if (!inventoryOpen && (game as Game1).State.Id == StateId.Pause && inventoryStillMoving)
             {
                 game.DoorPause = false;
                 game.Pause(wasPaused);
@@ -305,8 +305,8 @@ namespace Sprint5
                 screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
-            private void Pause() { game.State.Id = IGameStates.Type.Pause; }
-            private void UnPause() { game.State.Id = IGameStates.Type.Gameplay; }
+            private void Pause() { game.State.Id = StateId.Pause; }
+            private void UnPause() { game.State.Id = StateId.Gameplay; }
 
 
 
