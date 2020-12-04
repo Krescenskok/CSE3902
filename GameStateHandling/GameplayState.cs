@@ -23,7 +23,6 @@ namespace Sprint5.GameStateHandling
         public void Update(Game1 game, GameTime gameTime)
         {
 
-            //System.Diagnostics.Debug.WriteLine("Gameplay Update");
             if (game.ActiveCommand != null)
                 game.ActiveCommand.Update(gameTime);
 

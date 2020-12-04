@@ -11,13 +11,15 @@ namespace Sprint5
     {
 
         private Game1 Game;
-        public IGameStates.Type Id { get; set; }
+        public StateId Id { get; set; }
 
-        public IDifficulty.Level Difficulty { get; set; }
+        public DifficultyLevel Difficulty { get; set; }
 
-        public GameState(Game1 game)
+        public GameState(Game1 game, DifficultyLevel difficulty, StateId id)
         {
             Game = game;
+            Id = id;
+            Difficulty = difficulty;
         }
 
         public void Update(GameTime gameTime)
@@ -26,7 +28,7 @@ namespace Sprint5
             {
                 Game.LinkPlayer.IsDead = true;
                 Game.ActiveCommand = new GameOverCommand(Game.LinkPlayer);
-                Game.State.Id = IGameStates.Type.GameOver;
+                Game.State.Id = StateId.GameOver;
             }
             else
             {
@@ -41,46 +43,54 @@ namespace Sprint5
 
                 }
             }
-
-            if (Id == IGameStates.Type.Gameplay)
+           
+            if (Id == StateId.Gameplay)
             {
                 GameplayState.Instance.Update(Game, gameTime);
             }
-            else if (Id == IGameStates.Type.Pause)
+            else if (Id == StateId.Pause)
             {
                 PauseState.Instance.Update(Game, gameTime);
             }
-            else if (Id == IGameStates.Type.Inventory)
+            else if (Id == StateId.Inventory)
             {
                 InventoryState.Instance.Update(Game, gameTime);
             }
-            else if (Id == IGameStates.Type.GameOver)
+            else if (Id == StateId.GameOver)
             {
                 GameOverState.Instance.Update(Game, gameTime);
             }
-            else if (Id == IGameStates.Type.MainMenu)
+            else if (Id == StateId.MainMenu)
             {
                 MainMenuState.Instance.Update(Game, gameTime);
+            }
+            else if (Id == StateId.Transition)
+            {
+                TransitionState.Instance.Update(Game, gameTime);
             }
         }
 
         public void Draw(SpriteFont font, GameTime gameTime)
         {
-            if (Id == IGameStates.Type.Gameplay)
+            if (Id == StateId.Gameplay)
             {
                 GameplayState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == IGameStates.Type.Pause)
+            } else if (Id == StateId.Pause)
             {
                 PauseState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == IGameStates.Type.Inventory)
+            } else if (Id == StateId.Inventory)
             {
                 InventoryState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == IGameStates.Type.GameOver)
+            } else if (Id == StateId.GameOver)
             {
                 GameOverState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == IGameStates.Type.MainMenu)
+            } else if (Id == StateId.MainMenu)
             {
                 MainMenuState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Transition)
+            {
+                TransitionState.Instance.Draw(font, Game, gameTime);
             }
         }
     }

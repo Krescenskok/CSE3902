@@ -39,15 +39,30 @@ namespace Sprint5
         }
         private void StateControl(Game1 game)
         {
-            if (game.State.Id == IGameStates.Type.Gameplay)
+            if (game.State.Id == StateId.Gameplay)
             {
                 CommandsList = GamePlayCommands.Instance.ButtonCommands;
                 MovementButtons = GamePlayCommands.Instance.MovementButtons;
             }
-            else
+            else if (game.State.Id == StateId.Pause)
+            {
+                CommandsList = PauseCommands.Instance.ButtonCommands;
+                MovementButtons = PauseCommands.Instance.MovementButtons;
+            }
+            else if (game.State.Id == StateId.MainMenu)
             {
                 CommandsList = MenuCommands.Instance.ButtonCommands;
                 MovementButtons = MenuCommands.Instance.MovementButtons;
+            }
+            else if (game.State.Id == StateId.Inventory)
+            {
+                CommandsList = InventoryCommands.Instance.ButtonCommands;
+                MovementButtons = InventoryCommands.Instance.MovementButtons;
+            }
+            else if (game.State.Id == StateId.GameOver)
+            {
+                CommandsList = GamePlayCommands.Instance.ButtonCommands;
+                MovementButtons = GamePlayCommands.Instance.MovementButtons;
             }
         }
 
@@ -84,7 +99,7 @@ namespace Sprint5
                 }
                 PrevState = State;
             }
-            if (Game.State.Id == IGameStates.Type.GameOver)
+            if (Game.State.Id == StateId.GameOver)
             {
                 if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {

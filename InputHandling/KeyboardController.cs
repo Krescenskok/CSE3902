@@ -13,7 +13,6 @@ namespace Sprint5
 {
     public class KeyboardController : IController
     {
-        MainMenuCommand mainCommand;
         private LinkPlayer Player;
         private KeyboardState PrevState;
         private KeyboardState State;
@@ -33,14 +32,30 @@ namespace Sprint5
 
         private void StateControl(Game1 game)
         {
-            if (game.State.Id == IGameStates.Type.Gameplay)
+            if (game.State.Id == StateId.Gameplay)
             {
                 CommandsList = GamePlayCommands.Instance.KeyCommands;
                 MovementKeys = GamePlayCommands.Instance.MovementKeys;
-            } else
+            } 
+             else if (game.State.Id == StateId.Pause)
+            {
+                CommandsList = PauseCommands.Instance.KeyCommands;
+                MovementKeys = PauseCommands.Instance.MovementKeys;
+            }
+            else if (game.State.Id == StateId.MainMenu)
             {
                 CommandsList = MenuCommands.Instance.KeyCommands;
                 MovementKeys = MenuCommands.Instance.MovementKeys;
+            }
+            else if (game.State.Id == StateId.Inventory)
+            {
+                CommandsList = InventoryCommands.Instance.KeyCommands;
+                MovementKeys = InventoryCommands.Instance.MovementKeys;
+            } 
+            else if (game.State.Id == StateId.GameOver)
+            {
+                CommandsList = GamePlayCommands.Instance.KeyCommands;
+                MovementKeys = GamePlayCommands.Instance.MovementKeys;
             }
         }
 
@@ -51,7 +66,6 @@ namespace Sprint5
             ICommand ActiveCommand= null;
 
             State = Keyboard.GetState();
-
             foreach (KeyValuePair<Keys, ICommand> Pair in CommandsList)
             {
                 if (State.IsKeyDown(Pair.Key))
@@ -73,7 +87,7 @@ namespace Sprint5
 
             PrevState = State;
 
-            if (Game.State.Id == IGameStates.Type.GameOver)
+            if (Game.State.Id == StateId.GameOver)
             {
                 if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {

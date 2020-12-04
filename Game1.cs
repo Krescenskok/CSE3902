@@ -45,10 +45,9 @@ namespace Sprint5
         }
         protected override void Initialize()
         {
-            State = new GameState(this);
-            State.Id = IGameStates.Type.MainMenu;
-            State.Difficulty = IDifficulty.Level.Normal;
-            DifficultyMultiplier.Instance.SetDifficulty(this);
+            State = new GameState(this, DifficultyLevel.Normal, StateId.MainMenu);
+
+
             base.Initialize();
         }
         protected override void LoadContent()
@@ -67,12 +66,15 @@ namespace Sprint5
 
             LinkPlayer = new LinkPlayer(this);
 
+            DifficultyMultiplier.Instance.SetDifficulty(this);
 
             mainScreen = new MainMenu(this, LinkPlayer);
             
             MenuCommands.Instance.LoadCommands(this);
             GamePlayCommands.Instance.LoadCommands(this);
-            
+            InventoryCommands.Instance.LoadCommands(this);
+            PauseCommands.Instance.LoadCommands(this);
+
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));
             Controllers.Add(new KeyboardController(this));
@@ -110,8 +112,6 @@ namespace Sprint5
 
             this.State.Update(gameTime);
             this.Camera.Update();
-
-
             base.Update(gameTime);
         }
         void PrepareToDraw()
@@ -128,8 +128,6 @@ namespace Sprint5
         }
         protected override void Draw(GameTime gameTime)
         {
-
-
             this.State.Draw(Font, gameTime);
 
             Spritebatch.Begin();
@@ -137,11 +135,6 @@ namespace Sprint5
             Camera.Instance.Draw(Spritebatch);
 
             Spritebatch.End();
-
-
-
-
         }
-        public void Pause(bool pause) { if (pause != (State.Id == IGameStates.Type.Pause)) { Sounds.Instance.TogglePause(); } State.Id = IGameStates.Type.Pause; }
     }
 }

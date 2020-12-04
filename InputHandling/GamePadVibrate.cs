@@ -52,7 +52,7 @@ namespace Sprint5.GamePadVibration
 
         public void Update(Game1 game)
         {
-            if (game.State.Id == IGameStates.Type.Pause || game.State.Id == IGameStates.Type.GameOver)
+            if (game.State.Id == StateId.Pause || game.State.Id == StateId.GameOver)
             {
                 GamePad.SetVibration(PlayerIndex.One, 0, 0);
                 Vibrating = false;

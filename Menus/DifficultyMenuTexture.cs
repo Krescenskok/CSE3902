@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.DifficultyHandling;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -103,28 +104,29 @@ namespace Sprint5
             {
                 difficulty = currentItem;
                 Menu.Game.State.Difficulty = CurrentToLevel(currentItem);
+                DifficultyMultiplier.Instance.SetDifficulty(Menu.Game);
 
             }
             else mainScreen.State = MenuState.main;
         }
-        private IDifficulty.Level CurrentToLevel(selectedDiff current)
+        private DifficultyLevel CurrentToLevel(selectedDiff current)
         {
-            IDifficulty.Level CurrentLevel = Menu.Game.State.Difficulty;
+            DifficultyLevel CurrentLevel = Menu.Game.State.Difficulty;
             if (current == selectedDiff.Navice)
             {
-                CurrentLevel = IDifficulty.Level.Navice;
+                CurrentLevel = DifficultyLevel.Navice;
             }
             else if (current == selectedDiff.Normal)
             {
-                CurrentLevel = IDifficulty.Level.Normal;
+                CurrentLevel = DifficultyLevel.Normal;
             }
             else if (current == selectedDiff.Tough)
             {
-                CurrentLevel = IDifficulty.Level.Tough;
+                CurrentLevel = DifficultyLevel.Tough;
             }
             else if (current == selectedDiff.Nightmare)
             {
-                CurrentLevel = IDifficulty.Level.LinksNightmare;
+                CurrentLevel = DifficultyLevel.Nightmare;
             }
             return CurrentLevel;
                 

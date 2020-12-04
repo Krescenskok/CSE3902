@@ -10,12 +10,12 @@ namespace Sprint5.DifficultyHandling
     {
         private static readonly DifficultyMultiplier instance = new DifficultyMultiplier();
 
-        private Dictionary<String, int> linkHPValues;
-        private Dictionary<String, int> linkMAXHPValues;
-        private Dictionary<String, int> enemyHPValues;
-        private Dictionary<String, int> enemyDropRate;
-        private Dictionary<String, String> gameOverMessages;
-        private String Difficulty;
+        private Dictionary<DifficultyLevel, int> linkHPValues;
+        private Dictionary<DifficultyLevel, int> linkMAXHPValues;
+        private Dictionary<DifficultyLevel, int> enemyHPValues;
+        private Dictionary<DifficultyLevel, int> enemyDropRate;
+        private Dictionary<DifficultyLevel, String> gameOverMessages;
+        public DifficultyLevel Difficulty { get; set; }
         private LinkPlayer player;
 
         public static DifficultyMultiplier Instance
@@ -28,76 +28,46 @@ namespace Sprint5.DifficultyHandling
 
         private DifficultyMultiplier()
         {
+            linkHPValues = new Dictionary<DifficultyLevel, int>();
+            linkHPValues.Add(DifficultyLevel.Navice, 100);
+            linkHPValues.Add(DifficultyLevel.Normal, 60);
+            linkHPValues.Add(DifficultyLevel.Tough, 40);
+            linkHPValues.Add(DifficultyLevel.Nightmare, 20);
 
-                        //i figure adjusting link's hp and the enemy's removes the need
-            //for adjusting enemy & link damage
-            //Higher Difficulty = enemies die slower, link dies faster
+            linkMAXHPValues = new Dictionary<DifficultyLevel, int>();
+            linkMAXHPValues.Add(DifficultyLevel.Navice, 120);
+            linkMAXHPValues.Add(DifficultyLevel.Normal, 120);
+            linkMAXHPValues.Add(DifficultyLevel.Tough, 80);
+            linkMAXHPValues.Add(DifficultyLevel.Nightmare, 40);
 
-            //these are starting hp
-            linkHPValues = new Dictionary<string, int>();
-            linkHPValues.Add("Navice", 100); //5 hearts 
-            linkHPValues.Add("Normal", 60); //3 hearts
-            linkHPValues.Add("Tough", 40); //2 heart
-            linkHPValues.Add("LinksNightmare", 20); //1 heart
+            enemyHPValues = new Dictionary<DifficultyLevel, int>();
+            enemyHPValues.Add(DifficultyLevel.Navice, 1);
+            enemyHPValues.Add(DifficultyLevel.Normal, 1);
+            enemyHPValues.Add(DifficultyLevel.Tough, 2);
+            enemyHPValues.Add(DifficultyLevel.Nightmare, 4);
 
-            //these are max HP
-            linkMAXHPValues = new Dictionary<string, int>();
-            linkMAXHPValues.Add("Navice", 120); //max 6 hearts
-            linkMAXHPValues.Add("Normal", 120); //6 hearts
-            linkMAXHPValues.Add("Tough", 80); //4 heart
-            linkMAXHPValues.Add("LinksNightmare", 40); //2 heart
+            enemyDropRate = new Dictionary<DifficultyLevel, int>();
+            enemyDropRate.Add(DifficultyLevel.Navice, 5);
+            enemyDropRate.Add(DifficultyLevel.Normal, 5); 
+            enemyDropRate.Add(DifficultyLevel.Tough, 10);
+            enemyDropRate.Add(DifficultyLevel.Nightmare, 20);
 
-            //these are HP MULTIPLIERS, multiplied to default HP
-            enemyHPValues = new Dictionary<string, int>();
-            enemyHPValues.Add("Navice", 1); // 1/2 hp but not in even numbers so math is done elsewhere
-            enemyHPValues.Add("Normal", 1); //default
-            enemyHPValues.Add("Tough", 2); //2x hp
-            enemyHPValues.Add("LinksNightmare", 4); //4x hp
-
-            //these are HP MULTIPLIERS, multiplied to default HP
-            enemyDropRate = new Dictionary<string, int>();
-            enemyDropRate.Add("Navice", 5);
-            enemyDropRate.Add("Normal", 5); 
-            enemyDropRate.Add("Tough", 10); //1/2 drop rate of items
-            enemyDropRate.Add("LinksNightmare", 20); //1/4 drop rate of items
-
-            gameOverMessages = new Dictionary<string, String>();
-            gameOverMessages.Add("Navice", "Game Over"); 
-            gameOverMessages.Add("Normal", "GAME OVER"); 
-            gameOverMessages.Add("Tough", "YOU DIED"); 
-            gameOverMessages.Add("LinksNightmare", "NICE TRY"); 
+            gameOverMessages = new Dictionary<DifficultyLevel, String>();
+            gameOverMessages.Add(DifficultyLevel.Navice, "Game Over"); 
+            gameOverMessages.Add(DifficultyLevel.Normal, "GAME OVER"); 
+            gameOverMessages.Add(DifficultyLevel.Tough, "YOU DIED"); 
+            gameOverMessages.Add(DifficultyLevel.Nightmare, "NICE TRY"); 
 
         }
-
-        //set at game start
         public void SetDifficulty(Game1 game)
         {
             
-            this.Difficulty = DifficultyToString(game.State.Difficulty);
+            this.Difficulty = game.State.Difficulty;
+
+            DetermineLinkHP(this.player);
         }
 
-        public string DifficultyToString(IDifficulty.Level DifficultyLevel)
-        {
-            string DifficultyStr = "";
-
-            if (DifficultyLevel == IDifficulty.Level.Navice)
-            {
-                DifficultyStr = "Navice";
-            } else if (DifficultyLevel == IDifficulty.Level.Normal)
-            {
-                DifficultyStr = "Normal";
-            } else if (DifficultyLevel == IDifficulty.Level.Tough)
-            {
-                DifficultyStr = "Tough";
-            } else if (DifficultyLevel == IDifficulty.Level.LinksNightmare)
-            {
-                DifficultyStr = "LinksNightmare";
-            }
-
-            return DifficultyStr;
-        }
-
-        public string DetermineGameOverMessage()
+        public String DetermineGameOverMessage()
         {
             return gameOverMessages[Difficulty];
         }
@@ -106,36 +76,35 @@ namespace Sprint5.DifficultyHandling
             return enemyDropRate[Difficulty];
         }
 
-        //manually switching between difficulties
         public void RotateDifficulty(String direction)
         {
             if (direction == "Up")
             {
-                if (this.Difficulty == "Navice")
+                if (this.Difficulty == DifficultyLevel.Navice)
                 {
-                    this.Difficulty = "Normal";
+                    this.Difficulty = DifficultyLevel.Normal;
 
-                } else if (this.Difficulty == "Normal")
+                } else if (this.Difficulty == DifficultyLevel.Normal)
                 {
-                    this.Difficulty = "Tough";
-                } else if (this.Difficulty == "Tough")
+                    this.Difficulty = DifficultyLevel.Tough;
+                } else if (this.Difficulty == DifficultyLevel.Tough)
                 {
-                    this.Difficulty = "LinksNightmare";
+                    this.Difficulty = DifficultyLevel.Nightmare;
                 }
             } else
             {
-                if (this.Difficulty == "LinksNightmare")
+                if (this.Difficulty == DifficultyLevel.Nightmare)
                 {
-                    this.Difficulty = "Tough";
+                    this.Difficulty = DifficultyLevel.Tough;
 
                 }
-                else if (this.Difficulty == "Tough")
+                else if (this.Difficulty == DifficultyLevel.Tough)
                 {
-                    this.Difficulty = "Normal";
+                    this.Difficulty = DifficultyLevel.Normal;
                 }
-                else if (this.Difficulty == "Normal")
+                else if (this.Difficulty == DifficultyLevel.Normal)
                 {
-                    this.Difficulty = "Navice";
+                    this.Difficulty = DifficultyLevel.Navice;
                 }
             }
             DetermineLinkHP(this.player);
@@ -148,18 +117,17 @@ namespace Sprint5.DifficultyHandling
 
         public void DetermineLinkHP(LinkPlayer player)
         {
-            //this happens at game init so we will allways have access to player after construction
+           
             this.player = player;
             player.Health = linkHPValues[Difficulty];
             player.FullHealth = linkHPValues[Difficulty];
-            //HUD.Instance.ChangeDifficulty((int)player.Health, (int)player.Health);
             HUD.Instance.UpdateHearts(player);
         }
 
 
         public int DetermineEnemyHP(int hp)
         {
-            if (this.Difficulty == "Navice")
+            if (this.Difficulty == DifficultyLevel.Navice)
             {
                 return (hp - (hp / 2));
             } else

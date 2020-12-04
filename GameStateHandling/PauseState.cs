@@ -30,19 +30,17 @@ namespace Sprint5.GameStateHandling
 
             if (game.ActiveCommand != null)
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
+
             RoomSpawner.Instance.Draw(game.Spritebatch);
             game.LinkPersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
             RoomSpawner.Instance.DrawTopLayer(game.Spritebatch);
             game.ProjectilePersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
   
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
+                        game.Spritebatch.End();
+        
+            PauseScreen.Instance.Draw(game.Spritebatch, game, font);
 
-            if (game.State.Id == IGameStates.Type.Pause && !game.DoorPause)
-            {
-                PauseScreen.Instance.Draw(game.Spritebatch, game, font);
-            }
-            game.Spritebatch.End();
-        }
 
         public void Update(Game1 game, GameTime gameTime)
         {

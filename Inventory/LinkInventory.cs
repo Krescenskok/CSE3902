@@ -114,9 +114,9 @@ namespace Sprint5
             linkItemManagement.UseItem(item);
         }
 
-        public void MoveCursor(bool goingRight)
+        public void MoveCursor(Direction dir)
         {
-            cursorManagement.MoveCursor(goingRight);
+            cursorManagement.MoveCursor(dir);
         }
 
         public void UpdateLinkWeapons(LinkPlayer link)
