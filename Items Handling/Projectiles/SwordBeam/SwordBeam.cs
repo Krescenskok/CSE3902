@@ -43,15 +43,17 @@ namespace Sprint5.Items
             else if (direction == "Left")
             {
                 collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            } 
+            }
             else if (direction == "Right")
             {
                 collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
+
             else if (direction == "Up")
             {
                 collider = new ProjectileCollider((item as UpBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
+            Sounds.Instance.Play("SwordShoot");
 
         }
 

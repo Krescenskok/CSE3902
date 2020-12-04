@@ -24,7 +24,9 @@ namespace Sprint5
         private bool endOfReach;
         private bool endOfReturn;
 
-        private int moveSpeed;
+        private const int attackSpeed = 5;
+        private const int returnSpeed = attackSpeed / 5;
+        private int speed;
 
 
         public BladeTrapAttackState(Vector2 location, Vector2 direction, BladeTrap trap, int attackLength)
@@ -40,7 +42,7 @@ namespace Sprint5
 
             returningToRest = false;
 
-            moveSpeed = 10;
+            speed = attackSpeed;
         }
 
         public void Attack()
@@ -81,14 +83,14 @@ namespace Sprint5
 
             if(!returningToRest && !endOfReach || returningToRest && !endOfReturn)
             {
-                location = Vector2.Add(location, direction * moveSpeed);
+                location = Vector2.Add(location, direction * speed);
                 trap.UpdateLocation(location);
             }
             else if(!returningToRest && endOfReach)
             {
                 direction = Vector2.Negate(direction);
                 returningToRest = true;
-                moveSpeed = 1;
+                speed = returnSpeed;
 
                 
             }else if(returningToRest && endOfReturn)

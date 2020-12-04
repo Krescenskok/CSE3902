@@ -112,7 +112,7 @@ namespace Sprint5.Link
                     itemsPlacedByLink.Add(item);
                 }
 
-                Sounds.Instance.PlaySoundEffect("SwordShoot");
+                
             }
             else
             {

@@ -14,11 +14,11 @@ namespace Sprint5
 
         private Vector2 localPosition;
 
-        
+
 
         private int linkSize;
         private int weaponLength;
-       
+
 
         private LinkPlayer link;
         private Direction currentDirection;
@@ -31,7 +31,14 @@ namespace Sprint5
         private TestCollider testCol;
 
         private int turnOffClock = 0;
-        private const int TIME = 30;
+        private const int TIME = 10; // by 1/60 of second
+
+        private ItemForLink current { get => link.CurrentWeapon; }
+        private const ItemForLink wood = ItemForLink.WoodenSword;
+        private const ItemForLink metal = ItemForLink.Sword;
+        private const ItemForLink magic = ItemForLink.MagicalRod;
+
+        private Dictionary<ItemForLink, int> weaponPower;
 
         public WeaponCollider(int attack, LinkPlayer link)
         {
@@ -55,6 +62,13 @@ namespace Sprint5
                 {Direction.right, new Vector2(1,0) },
                 {Direction.up, new Vector2(0,-1 * posOffset) },
                 {Direction.down, new Vector2(0,1) }
+            };
+
+            weaponPower = new Dictionary<ItemForLink, int>()
+            {
+                {wood, HPAmount.QuarterHeart },
+                {metal, HPAmount.HalfHeart },
+                {magic, HPAmount.ThreeQuarterHeart }
             };
 
             CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
@@ -82,19 +96,24 @@ namespace Sprint5
 
         public void TurnOn(Direction dir)
         {
-            CalculateBounds(dir);
+            bool primary = (current is wood || current is metal || current is magic) && !link.IsSecondAttack;
             
-            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
-            
+            if(turnOffClock == 0 && primary)
+            {
+                CalculateBounds(dir);
+                turnOffClock = TIME;               
+                damageAmount = weaponPower[current];
 
-            turnOffClock = TIME;
+                CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
+                Sounds.Instance.Play("SwordSlash");
+            }
+            
         }
 
+       
         public void TurnOff()
         {
-            
             CollisionHandler.Instance.RemoveCollider(this);
-           
         }
 
         public Rectangle Bounds()
@@ -140,6 +159,8 @@ namespace Sprint5
 
             if (turnOffClock > 1) turnOffClock--;
             else if (turnOffClock == 1) { turnOffClock--; TurnOff(); }
+
+           
         }
     }
 }

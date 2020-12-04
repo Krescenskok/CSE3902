@@ -67,7 +67,7 @@ namespace Sprint5.Items
             }
             else if (col.CompareTag("Player"))
             {
-                ((Sprint5.Items.Boomerang)this.item).Expire();
+                (this.item).Expire();
             }
             else if (col.CompareTag("Wall") || col.CompareTag("Door"))
             {

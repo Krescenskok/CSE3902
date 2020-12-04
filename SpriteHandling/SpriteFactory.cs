@@ -18,8 +18,8 @@ namespace Sprint5
         private Texture2D tealLinkSpriteSheet;
         private Texture2D yellowLinkSpriteSheet;
         private Texture2D pinkLinkSpriteSheet;
+        private Texture2D blackScreen;
         private Texture2D mainMenuTexture;
-
 
 
 
@@ -49,6 +49,7 @@ namespace Sprint5
             linkBlueRingSpriteSheet = content.Load<Texture2D>("LinkSpriteSheetBlueRing");
             itemsSpriteSheet = content.Load<Texture2D>("itemSprites");
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
+            blackScreen = content.Load<Texture2D>("BlackScreen");
             mainMenuTexture = content.Load<Texture2D>("MMbackground");
         }
 
@@ -93,9 +94,17 @@ namespace Sprint5
             return new BlocksSprite(blocksSpriteSheet);
         }
 
+
         public MainMenuTexture createMainMenu(MainMenu menu)
+
+        public BlackScreenSprite CreateBlackScreen()
+        {
+            return new BlackScreenSprite(blackScreen);
+        }
+
         {
             return new MainMenuTexture(menu, mainMenuTexture);
         }
+        }
     }
-}
+

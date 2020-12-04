@@ -97,6 +97,13 @@ namespace Sprint5.Inventory
                     if (pair.Value is true) individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
                 }
             }
+            else
+            {
+                foreach (KeyValuePair<int, Boolean> pair in visitedRoom)
+                {
+                    individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
+                }
+            }
             currentMapLocationSprites[linkRoom].Draw(spriteBatch, mapLocation, 0, Color.White);
         }
 

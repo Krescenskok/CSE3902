@@ -38,12 +38,12 @@ namespace Sprint5.Link
 
             if(linkPlayer.IsAttacking && !previouslyAttacking)
             {
-                //linkPlayer.weaponCollider.TurnOn(linkPlayer.currentDirection);
+                linkPlayer.weaponCollider.TurnOn(linkPlayer.CurrentDirection);
                 previouslyAttacking = true;
             }
             else if(!linkPlayer.IsAttacking && previouslyAttacking)
             {
-                
+
                 previouslyAttacking = false;
             }
 
@@ -69,7 +69,7 @@ namespace Sprint5.Link
 
             if (!linkPlayer.IsAttacking)
             {
-                
+
                         if (Key.Equals("N"))
                         {
                             linkPlayer.IsAttacking = true;

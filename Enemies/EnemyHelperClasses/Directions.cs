@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Sprint5
         private static Direction Down { get => Direction.down; }
         private static Direction None { get => Direction.none; }
 
+        
+
 
 
         private static List<Direction> all = new List<Direction> { Left, Right, Up, Down };
@@ -28,6 +31,7 @@ namespace Sprint5
         {
             if (dir.Equals(pos)) return 1;
             if (dir.Equals(neg)) return -1;
+            
             return 0;
         }
 
@@ -60,6 +64,16 @@ namespace Sprint5
             else if (str == "down" || str == "Down" || str == "bottom" || str == "Bottom") return Down;
 
             return None;
+        }
+
+        public static Vector3 ParseVector(string str)
+        {
+            if (str == "left" || str == "Left") return Vector3.Right;
+            else if (str == "right" || str == "Right") return Vector3.Left;
+            else if (str == "up" || str == "Up" || str == "top" || str == "Top") return Vector3.Up;
+            else if (str == "down" || str == "Down" || str == "bottom" || str == "Bottom") return Vector3.Down;
+
+            return Vector3.Zero;
         }
 
         /// <summary>

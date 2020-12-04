@@ -11,9 +11,11 @@ namespace Sprint5.Link
 
         private double lastTime;
 
+        static int count = 0;
+
         public Movement(LinkPlayer linkPlayer) :base(linkPlayer)
         {
-            
+
         }
 
         public override Vector2 Update(GameTime gameTime, Vector2 location)
@@ -80,7 +82,7 @@ namespace Sprint5.Link
                 {
                     if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
                     {
-                        Sounds.Instance.PlaySoundEffect("SwordSlash");
+
                         if (!link.IsShootingProjectile)
                         {
                             link.IsShootingProjectile = true;
@@ -90,7 +92,7 @@ namespace Sprint5.Link
                     }
                     else if (link.CurrentWeapon == ItemForLink.Sword)
                     {
-                        Sounds.Instance.PlaySoundEffect("SwordSlash");
+                        
                         if (!link.IsShootingProjectile)
                         {
                             link.IsShootingProjectile = true;
@@ -100,7 +102,7 @@ namespace Sprint5.Link
                     }
                     else if (link.CurrentWeapon == ItemForLink.MagicalRod)
                     {
-                        Sounds.Instance.PlaySoundEffect("MagicalRod");
+                        Sounds.Instance.Play("MagicalRod");
                         if (!link.IsShootingProjectile)
                         {
                             link.IsShootingProjectile = true;

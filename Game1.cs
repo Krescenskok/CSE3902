@@ -105,9 +105,10 @@ namespace Sprint5
         }
         protected override void Update(GameTime gameTime)
         {
-            System.Diagnostics.Debug.WriteLine(State.Id);
+
             this.State.Update(gameTime);
             this.Camera.Update();
+
 
             base.Update(gameTime);
         }
@@ -126,12 +127,15 @@ namespace Sprint5
         protected override void Draw(GameTime gameTime)
         {
 
+
             this.State.Draw(Font, gameTime);
 
             Spritebatch.Begin();
             base.Draw(gameTime);
+            Camera.Instance.Draw(SpriteBatch);
 
             Spritebatch.End();
+
 
 
 

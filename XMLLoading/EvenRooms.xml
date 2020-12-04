@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+	<Asset Type="MyDataTypes.LevelObjectData[]">
+
+
+		<!-- Second Room Content-->
+		<Room id ="2">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>1 1</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>5 1</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+
+		<!-- Fourth Room Content-->
+		<Room id="4">
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>0 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 4</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 3</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+		
+		<!-- Fifth Room Content-->
+		<Room id="5">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>0 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>2 5</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 6</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Stalfos</ObjectName>
+				<Location>4 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Key</ObjectName>
+				<Location>1 6</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 9</Location>
+			</Item>
+		
+		</Room>
+		
+		<!-- 8th Room Content-->
+		<Room id ="8">
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>0 2</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>0 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>2 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Gel</ObjectName>
+				<Location>5 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Map</ObjectName>
+				<Location>3 10</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+		
+		<!-- 10th Room Content-->
+		<Room id ="10">
+			<Item>
+				<ObjectType>NPC</ObjectType>
+				<ObjectName>OldMan</ObjectName>
+				<Location>2 5</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>NPC</ObjectType>
+				<ObjectName>Flame</ObjectName>
+				<Location>2 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>NPC</ObjectType>
+				<ObjectName>OldMan</ObjectName>
+				<Location>2 7</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+		
+		<!-- 12th Room Content-->
+		<Room id ="12">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>0 2</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>0 3</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>0 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>0 10</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>3 0</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>4 0</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>4 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>WallMaster</ObjectName>
+				<Location>5 11</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Key</ObjectName>
+				<Location>5 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>3 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 10</Location>
+			</Item>
+		</Room>
+		
+		<!-- 14th Room Content-->
+		<Room id ="14">
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>0 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>0 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>0 9</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>0 8</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>0 7</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>1 9</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>2 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>6 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>6 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>6 9</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>6 8</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>6 7</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>5 9</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 11</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Column</ObjectName>
+				<Location>4 10</Location>				
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Aquamentus</ObjectName>
+				<Location>3 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>HeartContainer</ObjectName>
+				<Location>3 10</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+		
+		<!-- 16th Room Content-->
+		<Room id ="16">
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Goriya</ObjectName>
+				<Location>0 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Goriya</ObjectName>
+				<Location>2 7</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Goriya</ObjectName>
+				<Location>4 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Key</ObjectName>
+				<Location>1 7</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>2 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 1</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 2</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>1 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>2 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 10</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 9</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>4 8</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 3</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 4</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 5</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 6</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 7</Location>
+			</Item>
+			<Item>
+				<ObjectType>Block</ObjectType>
+				<ObjectName>Water</ObjectName>
+				<Location>3 8</Location>
+			</Item>
+		</Room>
+		
+		<!-- 18th Room Content -->
+		<Room>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>2 0</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>4 0</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>3 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Keese</ObjectName>
+				<Location>2 9</Location>
+				<Alive>true</Alive>
+			</Item>		
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Bow</ObjectName>
+				<Location>2 7</Location>
+				<Alive>true</Alive>
+			</Item>
+		</Room>
+	
+		
+	</Asset>
+</XnaContent>

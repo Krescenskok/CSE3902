@@ -82,3 +82,5 @@ bin/Debug/netcoreapp3.1/Content/beamImpact.xnb
 Link/Movement.cs
 Sprites.config
 *.mgcontent
+Content/bin/DesktopGL/Content/File.xnb
+Content/bin/DesktopGL/Content/RoomMapOuter.xnb

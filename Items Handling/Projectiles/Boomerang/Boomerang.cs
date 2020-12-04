@@ -74,7 +74,7 @@ namespace Sprint5.Items
 
         public void Returning()
         {
-            state = new ReturningBoomerangState(this, location, link);
+            state = new ReturningBoomerangState(this, location, link, GetHashCode());
         }
 
         public void Impact()
@@ -84,11 +84,9 @@ namespace Sprint5.Items
 
         public void ReturnedToLink()
         {
-            if (throwing && returning) 
+            if (throwing && returning)
             {
                 returned = true;
-                state.Expire();
-                Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
             }
         }
 
@@ -118,8 +116,16 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            if (returned)
+            if (returning)
+            {
+                ReturnedToLink();
                 state.Expire();
+            }
+
+            if (returned)
+            {
+                state.Expire();
+            }
         }
 
         public void Collect()

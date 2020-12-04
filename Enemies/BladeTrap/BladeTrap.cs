@@ -25,7 +25,7 @@ namespace Sprint5
 
         public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
-        private ISprite sprite;
+        private EnemySprite sprite;
         private BladeTrapSprite bladeSprite;
 
         private EnemyCollider collider;
@@ -79,6 +79,7 @@ namespace Sprint5
         public void Update()
         {
             state.Update();
+            sprite.Update();
         }
 
         public void UpdateLocation(Vector2 location)
@@ -93,7 +94,7 @@ namespace Sprint5
 
         public void SetSprite(ISprite sprite)
         {
-            this.sprite = sprite;
+            this.sprite = (EnemySprite)sprite;
         }
 
 

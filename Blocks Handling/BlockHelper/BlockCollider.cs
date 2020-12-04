@@ -14,7 +14,6 @@ namespace Sprint5.Blocks
 
         public string Name => "Block";
 
-        bool yes = false;
         public Layer layer { get; set; }
 
         public BlockCollider(Rectangle rect, IBlock block)
@@ -23,6 +22,13 @@ namespace Sprint5.Blocks
 
             this.block = block;
 
+            CollisionHandler.Instance.AddCollider(this, Layers.Block);
+
+        }
+
+        public BlockCollider(Vector2 location)
+        {
+            bounds = new Rectangle(location.ToPoint(), GridGenerator.Instance.GetTileSize());
             CollisionHandler.Instance.AddCollider(this, Layers.Block);
         }
 
@@ -43,7 +49,7 @@ namespace Sprint5.Blocks
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") && block.GetMoveable())
+            if (col.CompareTag("Player") && block != null && block.GetMoveable())
             {
                 block.move(collision.From.ToString());
                 col.SendMessage("Special Block", null);
@@ -67,9 +73,8 @@ namespace Sprint5.Blocks
 
         public void Update()
         {
-            bounds = block.getDestination();
+            if(block != null) bounds.Location = block.getDestination().Location;
            
-            
         }
     }
 }
