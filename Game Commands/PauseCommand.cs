@@ -38,11 +38,9 @@ namespace Sprint5
             {
                 if ((game as Game1).State.Id == StateId.Pause)
                 {
-                    System.Diagnostics.Debug.WriteLine("Unpaused");
                     (game as Game1).State.Id = StateId.Gameplay;
                 } else
                 {
-                    System.Diagnostics.Debug.WriteLine("paused");
                     (game as Game1).State.Id = StateId.Pause;
                 }
                 Player.Paused = !Player.Paused;

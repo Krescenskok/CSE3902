@@ -113,7 +113,7 @@ namespace Sprint5
 
             if (HUDOpenCloseFinished())
             {
-                Debug.WriteLine("OpenClose");
+               
 
                 int moveDirection = inventoryOpen ? -1 : 1;
 

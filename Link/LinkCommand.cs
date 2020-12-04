@@ -12,6 +12,7 @@ namespace Sprint5.Link
     {
 
         private LinkPlayer linkPlayer;
+        private IItems item;
         private String Key;
 
         private bool previouslyAttacking;
@@ -113,6 +114,10 @@ namespace Sprint5.Link
                         {
                             linkPlayer.CurrentWeapon = ItemForLink.Shield;
                         }
+                        else if ((Key.Equals("D1")))
+                    {
+                        linkPlayer.UseRing = true;
+                    }
                 }
 
                 linkPlayer.Update(gameTime);

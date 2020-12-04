@@ -101,7 +101,6 @@ namespace Sprint5
             
             foreach (IItems heart in storage.DrawnHeartsBottom)
             {
-                System.Diagnostics.Debug.WriteLine(storage.MaxHearts);
                 heart.Draw(spriteBatch);
             }
         }
