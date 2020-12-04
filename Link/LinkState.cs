@@ -72,7 +72,7 @@ namespace Sprint5.Link
                         col = colors[colorIndex];
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         colorIndex++;
-                        if (colorIndex == colors.Length - 1)
+                        if (colorIndex == colors.Length)
                             colorIndex = 0;
                         link.currentLocation = location;
                     }
@@ -81,7 +81,7 @@ namespace Sprint5.Link
                         col = clockColors[colorIndex];
                         linkSprite.Draw(spriteBatch, location, currentFrame, col);
                         colorIndex++;
-                        if (colorIndex == clockColors.Length - 1)
+                        if (colorIndex == clockColors.Length)
                             colorIndex = 0;
                     }
 

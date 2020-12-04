@@ -9,6 +9,9 @@ namespace Sprint5.GameStateHandling
     public class InventoryState : IGameStates
     {
         private static readonly InventoryState instance = new InventoryState();
+
+        public StateId Id { get; } = StateId.Inventory;
+        public IGameStates Parent { get; set; }
         public static InventoryState Instance
         {
             get

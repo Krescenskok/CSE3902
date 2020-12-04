@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Sprint5.LinkInventory;
 using Sprint5.HUDManagement;
+using Sprint5.Menus;
 
 namespace Sprint5.Inventory
 {
@@ -61,6 +62,7 @@ namespace Sprint5.Inventory
             }
             else if (item is Rupee)
             {
+                StatsScreen.Instance.Rupees++;
                 LinkInventory.Instance.RupeeCount++;
                 Sounds.Instance.Play("GetRupee");
             }
@@ -89,24 +91,29 @@ namespace Sprint5.Inventory
                 link.Clock = true;
                 RoomEnemies.Instance.StunAllEnemies();
                 Sounds.Instance.Play("Fanfare");
+                StatsScreen.Instance.ItemsConsumed++;
             }
             else if (item is BlueRing)
             {
                 link.UseRing = true;
                 LinkInventory.Instance.ShowBlueRing = true;
                 Sounds.Instance.Play("Fanfare");
+                StatsScreen.Instance.ItemsConsumed++;
             }
             else if (item is Fairy)
             {
                 Sounds.Instance.Play("GetHeart");
+                StatsScreen.Instance.ItemsConsumed++;
             }
             else if (item is HeartContainer)
             {
                 Sounds.Instance.Play("KeyAppear");
+                StatsScreen.Instance.ItemsConsumed++;
             }
             else if (item is TriforcePiece)
             {
                 Sounds.Instance.Play("GetItem");
+                StatsScreen.Instance.ItemsConsumed++;
             }
             itemStorage.PreviousItem = item;
         }
@@ -122,6 +129,7 @@ namespace Sprint5.Inventory
             {
                 if (LinkInventory.Instance.PotionCount > 0)
                 {
+                    StatsScreen.Instance.ItemsConsumed++;
                     link.Health = link.FullHealth;
                     HUD.Instance.UpdateHearts(link);
                     LinkInventory.Instance.PotionCount--;
@@ -140,10 +148,12 @@ namespace Sprint5.Inventory
             if (item is Key)
             {
                 LinkInventory.Instance.KeyCount--;
+                StatsScreen.Instance.ItemsConsumed++;
             }
             if (item is BombObject)
             {
                 LinkInventory.Instance.BombCount--;
+                StatsScreen.Instance.ItemsConsumed++;
             }
         }
 

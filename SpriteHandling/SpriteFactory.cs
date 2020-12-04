@@ -21,6 +21,10 @@ namespace Sprint5
         private Texture2D blackScreen;
         private Texture2D mainMenuTexture;
         private Texture2D pauseScreenTexture;
+        private Texture2D winScreenTexture;
+        private Texture2D statsScreenTexture;
+        private Texture2D gameOverScreenTexture;
+        private Texture2D creditsScreenTexture;
 
 
 
@@ -53,10 +57,30 @@ namespace Sprint5
             blackScreen = content.Load<Texture2D>("BlackScreen");
             mainMenuTexture = content.Load<Texture2D>("MMbackground");
             pauseScreenTexture = content.Load<Texture2D>("PauseScreen");
+            winScreenTexture = content.Load<Texture2D>("gameWinScreen");
+            gameOverScreenTexture = content.Load<Texture2D>("gameOverScreen");
+            creditsScreenTexture = content.Load<Texture2D>("CreditsScreen");
+            statsScreenTexture = content.Load<Texture2D>("StatsScreen");
         }
         public PauseSprite CreatePauseSprite()
         {
             return new PauseSprite(pauseScreenTexture);
+        }
+        public GameOverSprite CreateGameOverSprite()
+        {
+            return new GameOverSprite(gameOverScreenTexture);
+        }
+        public StatsSprite CreateStatsSprite()
+        {
+            return new StatsSprite(statsScreenTexture);
+        }
+        public CreditsSprite CreateCreditsSprite()
+        {
+            return new CreditsSprite(creditsScreenTexture);
+        }
+        public WinSprite CreateWinSprite()
+        {
+            return new WinSprite(winScreenTexture);
         }
         public LinkSprite CreateLinkSprite()
         {

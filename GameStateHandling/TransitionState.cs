@@ -9,6 +9,8 @@ namespace Sprint5.GameStateHandling
     public class TransitionState : IGameStates
     {
         private static readonly TransitionState instance = new TransitionState();
+        public StateId Id { get; } = StateId.Transition;
+        public IGameStates Parent { get; set; }
         public static TransitionState Instance
         {
             get

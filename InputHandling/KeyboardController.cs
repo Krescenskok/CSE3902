@@ -36,8 +36,8 @@ namespace Sprint5
             {
                 CommandsList = GamePlayCommands.Instance.KeyCommands;
                 MovementKeys = GamePlayCommands.Instance.MovementKeys;
-            } 
-             else if (game.State.Id == StateId.Pause)
+            }
+            else if (game.State.Id == StateId.Pause)
             {
                 CommandsList = PauseCommands.Instance.KeyCommands;
                 MovementKeys = PauseCommands.Instance.MovementKeys;
@@ -51,11 +51,16 @@ namespace Sprint5
             {
                 CommandsList = InventoryCommands.Instance.KeyCommands;
                 MovementKeys = InventoryCommands.Instance.MovementKeys;
-            } 
-            else if (game.State.Id == StateId.GameOver)
+            }
+            else if (game.State.Id == StateId.Win || game.State.Id == StateId.GameOver)
             {
-                CommandsList = GamePlayCommands.Instance.KeyCommands;
-                MovementKeys = GamePlayCommands.Instance.MovementKeys;
+                CommandsList = WinLoseCommands.Instance.KeyCommands;
+                MovementKeys = WinLoseCommands.Instance.MovementKeys;
+            }
+            else if (game.State.Id == StateId.Stats || game.State.Id == StateId.Credits)
+            {
+                CommandsList = EndMenuCommands.Instance.KeyCommands;
+                MovementKeys = EndMenuCommands.Instance.MovementKeys;
             }
         }
 

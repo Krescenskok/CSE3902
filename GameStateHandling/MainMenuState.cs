@@ -9,6 +9,9 @@ namespace Sprint5.GameStateHandling
     public class MainMenuState : IGameStates
     {
         private static readonly MainMenuState instance = new MainMenuState();
+
+        public StateId Id { get; } = StateId.MainMenu;
+        public IGameStates Parent { get; set; }
         public static MainMenuState Instance
         {
             get

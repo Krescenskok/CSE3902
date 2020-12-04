@@ -26,13 +26,13 @@ namespace Sprint5
 
         private MainMenu Menu;
 
-        private static Vector2 title = new Vector2(225, 10);
-        private static Vector2 start = new Vector2(20, 185);
-        private static Vector2 difficulty = new Vector2(20, 205);
-        private static Vector2 colors = new Vector2(20, 225);
-        private static Vector2 controls = new Vector2(20, 245);
-        private static Vector2 sound = new Vector2(20, 265);
-        private static Vector2 quit = new Vector2(20, 285);
+        private static Vector2 title = new Vector2(150, 10);
+        private static Vector2 start = new Vector2(500, 185);
+        private static Vector2 difficulty = new Vector2(500, 205);
+        private static Vector2 colors = new Vector2(500, 225);
+        private static Vector2 controls = new Vector2(500, 245);
+        private static Vector2 sound = new Vector2(500, 265);
+        private static Vector2 quit = new Vector2(500, 285);
 
         public MainMenuTexture(MainMenu menu, Texture2D text)
         {
@@ -46,25 +46,25 @@ namespace Sprint5
 
             batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White);
 
-            batch.DrawString(font, "Legend of Zelda", title, Color.Silver, 0 ,new Vector2(0,0),size ,new SpriteEffects(),0);
+            batch.DrawString(font, "THE LEGEND OF ZELDA", title, Color.Goldenrod, 0 ,new Vector2(0,0),size ,new SpriteEffects(),0);
 
-            if(currentItem == selectedMain.start) batch.DrawString(font, "Start", start, Color.Black);
-            else batch.DrawString(font, "Start", start, Color.DarkGoldenrod);
+            if(currentItem == selectedMain.start) batch.DrawString(font, "START<", start, Color.White);
+            else batch.DrawString(font, "START", start, Color.Goldenrod);
 
-            if (currentItem == selectedMain.difficulty) batch.DrawString(font, "Difficulty", difficulty, Color.Black);
-            else batch.DrawString(font, "Difficulty", difficulty, Color.DarkGoldenrod);
+            if (currentItem == selectedMain.difficulty) batch.DrawString(font, "DIFFICULTY<", difficulty, Color.White);
+            else batch.DrawString(font, "DIFFICULTY", difficulty, Color.Goldenrod);
 
-            if (currentItem == selectedMain.color) batch.DrawString(font, "Link's Outfits", colors, Color.Black);
-            else batch.DrawString(font, "Link's Outfits", colors, Color.DarkGoldenrod);
+            if (currentItem == selectedMain.color) batch.DrawString(font, "CUSTOMIZE CHARACTER<", colors, Color.White);
+            else batch.DrawString(font, "CUSTOMIZE CHARACTER", colors, Color.Goldenrod);
 
-            if (currentItem == selectedMain.controls) batch.DrawString(font, "Controls", controls, Color.Black);
-            else batch.DrawString(font, "Controls", controls, Color.DarkGoldenrod);
+            if (currentItem == selectedMain.controls) batch.DrawString(font, "CONTROLS<", controls, Color.White);
+            else batch.DrawString(font, "CONTROLS", controls, Color.Goldenrod);
 
-            if (currentItem == selectedMain.sound) batch.DrawString(font, "Sound", sound, Color.Black);
-            else batch.DrawString(font, "Sound", sound, Color.DarkGoldenrod);
+            if (currentItem == selectedMain.sound) batch.DrawString(font, "SOUND<", sound, Color.White);
+            else batch.DrawString(font, "SOUND", sound, Color.Goldenrod);
 
-            if (currentItem == selectedMain.quit) batch.DrawString(font, "Quit", quit, Color.Black);
-            else batch.DrawString(font, "Quit", quit, Color.DarkGoldenrod);
+            if (currentItem == selectedMain.quit) batch.DrawString(font, "QUIT<", quit, Color.White);
+            else batch.DrawString(font, "QUIT", quit, Color.Goldenrod);
 
         }
 

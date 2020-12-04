@@ -17,6 +17,7 @@ using Sprint5.DifficultyHandling;
 using Sprint5.Menus;
 using Sprint5.GamePadVibration;
 using Sprint5.InputHandling;
+using Sprint5.GameStateHandling;
 
 namespace Sprint5
 {
@@ -45,7 +46,7 @@ namespace Sprint5
         }
         protected override void Initialize()
         {
-            State = new GameState(this, DifficultyLevel.Normal, StateId.MainMenu);
+            State = new GameState(this, DifficultyLevel.Normal, MainMenuState.Instance);
 
 
             base.Initialize();
@@ -53,7 +54,7 @@ namespace Sprint5
         protected override void LoadContent()
         {
 
-            Font = Content.Load<SpriteFont>("File");
+            Font = Content.Load<SpriteFont>("8bitFont");
 
             ItemsFactory.Instance.LoadItemsTextures(Content);
 
@@ -74,6 +75,8 @@ namespace Sprint5
             GamePlayCommands.Instance.LoadCommands(this);
             InventoryCommands.Instance.LoadCommands(this);
             PauseCommands.Instance.LoadCommands(this);
+            WinLoseCommands.Instance.LoadCommands(this);
+            EndMenuCommands.Instance.LoadCommands(this);
 
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));

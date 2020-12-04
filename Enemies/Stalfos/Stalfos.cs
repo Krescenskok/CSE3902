@@ -74,6 +74,7 @@ namespace Sprint5
             }
             else 
             {
+                
                 bool stunned = (state as StalfosWalkingState).permaStun;
                 state = new StalfosDamagedState(dir, this, Location,stunned);
             }
