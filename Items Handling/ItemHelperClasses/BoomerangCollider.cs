@@ -63,7 +63,7 @@ namespace Sprint5.Items
             if (col.CompareTag("Enemy"))
             {
                 col.SendMessage("Stun", null);
-                ((Sprint5.Items.Boomerang)this.item).Impact();
+                ((Sprint5.Items.Boomerang)this.item).Impact(col.Bounds());
             }
             else if (col.CompareTag("Player"))
             {

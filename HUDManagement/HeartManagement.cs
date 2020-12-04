@@ -120,7 +120,7 @@ namespace Sprint5.HUDManagement
 
         public void Reset()
         {
-            storage.MaxHearts = THIRD;
+            storage.MaxHearts = DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkMaxHP() / FULL_HEART;
             storage.DrawnHeartsBottom.Clear();
             InitializeHearts();
         }

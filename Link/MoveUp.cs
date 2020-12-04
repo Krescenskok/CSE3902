@@ -7,10 +7,7 @@ namespace Sprint5
 {
     public class MoveUp : Movement
     {
-        private double lastTime;
         int MOVEMENT = -10;
-        int TIME = 100;
-        int PICKUP = 300;
   
         public MoveUp(LinkPlayer link, LinkSprite sprite) : base(link)
         {
@@ -51,13 +48,10 @@ namespace Sprint5
         public override Vector2 HandleSword(GameTime gameTime, Vector2 location)
         {
 
-            int[] FRAMES = { 6, 7, 87, 86, 85, 84 };
-
+            int[] FRAMES = { 6, 7, 67, 66, 65, 64 };
             int[] currentFrames = FRAMES;
 
             SwitchFrames(currentFrames);
-
-            link.state = new Stationary(link, linkSprite);
 
             return location;
 
@@ -86,6 +80,7 @@ namespace Sprint5
 
             SwitchFrames(currentFrames);
 
+            link.state = new Stationary(link, linkSprite);
 
             return location;
 

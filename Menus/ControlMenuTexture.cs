@@ -31,7 +31,6 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch, Game1 game, SpriteFont font)
         {
-
             batch.Draw(texture, new Rectangle(drawBounds, drawBounds, game.Window.ClientBounds.Width, game.Window.ClientBounds.Height), Color.White);
 
             batch.DrawString(font, "Legend of Zelda", title, Color.Silver, 0, new Vector2(0, 0), size, new SpriteEffects(), 0);
@@ -42,21 +41,19 @@ namespace Sprint5
             batch.DrawString(font, "A and Left - Move Left", new Vector2(20, 205), Color.DarkGoldenrod);
             batch.DrawString(font, "S and Down - Move Down", new Vector2(20, 225), Color.DarkGoldenrod);
             batch.DrawString(font, "D and Right - Move Right", new Vector2(20, 245), Color.DarkGoldenrod);
-            batch.DrawString(font, "Z and X - Attack", new Vector2(20, 265), Color.DarkGoldenrod);
-            batch.DrawString(font, "G - Pause", new Vector2(20, 285), Color.DarkGoldenrod);
-            batch.DrawString(font, "Q - Exit Game", new Vector2(20, 305), Color.DarkGoldenrod);
-            batch.DrawString(font, "F - Full Screen ", new Vector2(20, 325), Color.DarkGoldenrod);
-
-
+            batch.DrawString(font, "N and B - Primary Attack and Secondary Attack", new Vector2(20, 265), Color.DarkGoldenrod);
+            batch.DrawString(font, "Space - Inventory", new Vector2(20, 285), Color.DarkGoldenrod);
+            batch.DrawString(font, "U and I - Change between items in inventory", new Vector2(20, 305), Color.DarkGoldenrod);
+            batch.DrawString(font, "G - Pause", new Vector2(20, 325), Color.DarkGoldenrod);
+            batch.DrawString(font, "Q - Exit Game", new Vector2(20, 345), Color.DarkGoldenrod);
+            batch.DrawString(font, "F - Full Screen ", new Vector2(20, 365), Color.DarkGoldenrod);
         }
         public void goUp()
         {
-            //only implement if you're insane
         }
 
         public void goDown()
         {
-            //only implement if you're insane
         }
 
         public void select(MainMenu mainScreen)
