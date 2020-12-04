@@ -35,15 +35,17 @@ namespace Sprint5.GameStateHandling
             game.LinkPersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
             RoomSpawner.Instance.DrawTopLayer(game.Spritebatch);
             game.ProjectilePersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
-  
+
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
-                        game.Spritebatch.End();
-        
+            game.Spritebatch.End();
+
             PauseScreen.Instance.Draw(game.Spritebatch, game, font);
 
-
-        public void Update(Game1 game, GameTime gameTime)
-        {
         }
+            public void Update(Game1 game, GameTime gameTime)
+            {
+
+            }
+        
     }
 }
