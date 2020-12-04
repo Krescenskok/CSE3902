@@ -625,6 +625,7 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>MoveableColumnRight</ObjectName>
+				<Moved>false</Moved>
 				<Location>3 5</Location>
 			</Item>
 			<!-- Column-->
@@ -1382,6 +1383,7 @@
 			<Item>
 				<ObjectType>Block</ObjectType>
 				<ObjectName>MoveableColumnUp</ObjectName>
+				<Moved>false</Moved>
 				<Location>3 4</Location>
 			</Item>
 			<Item>

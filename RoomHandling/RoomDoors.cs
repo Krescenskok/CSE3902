@@ -11,9 +11,6 @@ namespace Sprint5
 {
     public class RoomDoors
     {
-
-        private static readonly RoomDoors instance = new RoomDoors();
-
         private List<Door> doors;
         
         
@@ -29,21 +26,13 @@ namespace Sprint5
         private List<Point> locations;
         private GridGenerator generator;
         
-
-        private Game game;
         private Camera cam = Camera.Instance;
 
         private int curRoom;
 
         public Vector2 LinkStartLocation { get; private set; }
 
-        public static RoomDoors Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static RoomDoors Instance { get; } = new RoomDoors();
 
         private RoomDoors()
         {
@@ -94,7 +83,6 @@ namespace Sprint5
         {
             doors = new List<Door>();
       
-            this.game = game;
             curRoom = int.Parse(room.Attribute("id").Value);
             generator = GridGenerator.Instance;
 

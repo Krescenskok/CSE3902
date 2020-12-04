@@ -133,14 +133,14 @@ namespace Sprint5
         }
         protected override void Draw(GameTime gameTime)
         {
-            this.State.Draw(Font, gameTime);
+            State.Draw(Font, gameTime);
 
+ 
             Spritebatch.Begin();
             base.Draw(gameTime);
-            Camera.Instance.Draw(Spritebatch);
-
 
             Spritebatch.End();
+
 
         }
     }
