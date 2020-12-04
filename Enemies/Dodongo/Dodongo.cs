@@ -15,7 +15,6 @@ namespace Sprint5
         public IEnemyState dodongoState;
         private ISprite dodongoSprite;
         private DodongoMovingSprite dodongoMovingSprite;
-        private int dodongoHP;
         private Vector2 dodongoPos;
         private EnemyCollider dodongoCollider;
         private const int AttackStrength = HPAmount.Full_Heart;
@@ -31,11 +30,12 @@ namespace Sprint5
         public IEnemyState State { get => dodongoState; }
 
         public List<ICollider> Colliders { get => new List<ICollider> { dodongoCollider, faceCollider }; }
+        public int HP { get; private set; }
 
         public Dodongo(Game game, Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
-            dodongoHP = 3;
+            HP = 3;
             direction = "Right";
             dodongoInfo = xml;
             dodongoState = new DodongoMovingState(this, initialPos);
@@ -97,13 +97,13 @@ namespace Sprint5
 
         public void LostHP()
         {
-            dodongoHP--;
+            HP--;
             Sounds.Instance.Play(damagedSoundFile);
         }
 
         public Boolean checkAlive()
         {
-            return dodongoHP >= 0;
+            return HP >= 0;
         }
 
         public void Die()

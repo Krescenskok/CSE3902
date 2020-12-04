@@ -32,7 +32,7 @@ namespace Sprint5
         private Direction currentDirection = Direction.right;
         public Direction direction { get => currentDirection; }
 
-        private int HP = HPAmount.EnemyLevel1;
+        public int HP { get; private set; }
 
         public Vector2 Location { get => location; }
 

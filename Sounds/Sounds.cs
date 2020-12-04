@@ -33,6 +33,10 @@ namespace Sprint5
         private KeyboardState state;
         private KeyboardState prevState;
 
+        private float currentVolume = 1;
+
+        private string selectedSong;
+
         public void LoadSounds(Game game)
         {
 
@@ -42,9 +46,13 @@ namespace Sprint5
             soundInstances = new List<SoundEffectInstance>();
             loopedSounds = new Dictionary<string, SoundEffectInstance>();
 
+            if (lowHealth != null) lowHealth.Stop();
             lowHealth = AddLoop("LowHealth");
 
-            BGM = AddLoop("DungeonTheme");
+
+            if (selectedSong == null) selectedSong = "DungeonTheme";
+            if (BGM != null) BGM.Stop();
+            BGM = AddLoop(selectedSong);
             BGM.Play();
 
             
@@ -75,6 +83,16 @@ namespace Sprint5
         private bool NonPersistentSound(SoundEffectInstance sound)
         {
             return !sound.Equals(BGM) && !sound.Equals(lowHealth);
+        }
+
+        public void VolumeUp()
+        {
+            currentVolume = Math.Clamp(currentVolume + .2f, 0,1);
+            if (!Muted) UnMute();
+        }
+        public void VolumeDown()
+        {
+            currentVolume = Math.Clamp(currentVolume - .2f, 0, 1);
         }
 
         private void ToggleMute()
@@ -109,7 +127,7 @@ namespace Sprint5
         {
             foreach (SoundEffectInstance instance in soundInstances)
             {
-                instance.Volume = 1;
+                instance.Volume = currentVolume;
             }
             Muted = false;
         }
@@ -200,6 +218,15 @@ namespace Sprint5
                 soundInstances.Remove(instance);
                 loopedSounds.Remove(key);
             }
+        }
+
+        public void ChangeBGM(string name)
+        {
+            BGM.Stop();
+            soundInstances.Remove(BGM);
+            BGM = AddLoop(name);
+            BGM.Play();
+            selectedSong = name;
         }
 
         #endregion

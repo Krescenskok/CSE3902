@@ -24,6 +24,9 @@ namespace Sprint5
         private Texture2D bossTexture;
         private Texture2D NPCTexture;
 
+        private Texture2D HPFill;
+        private Texture2D HPBackground;
+
         string enemyTextureName;
         string bossTextureName;
         string NPCTextureName;
@@ -86,6 +89,7 @@ namespace Sprint5
             enemyTextureName = factory.Element("EnemySheetName").Value;
             NPCTextureName = factory.Element("NPCSheetName").Value;
             bossTextureName = factory.Element("BossSheetName").Value;
+
         }
 
         public static int GetRow(string spriteName)
@@ -113,11 +117,22 @@ namespace Sprint5
         public void LoadAllTextures(Game1 game)
         {
             texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
-
-            //****
             NPCTexture = game.Content.Load<Texture2D>("NPCSpriteSheet");
             bossTexture = game.Content.Load<Texture2D>("BossSpriteSheet");
-            //****
+
+            HPFill = game.Content.Load<Texture2D>("HPFill");
+            HPBackground = game.Content.Load<Texture2D>("HPBackground");
+           
+        }
+
+        public Texture2D GetHPFill()
+        {
+            return HPFill;
+        }
+
+        public Texture2D GetHPBackground()
+        {
+            return HPBackground;
         }
 
         public ISprite CreateStalfosWalkingSprite()
