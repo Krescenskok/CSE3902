@@ -17,6 +17,9 @@ Program Controls:
 
 
 Known Bugs:
+- If the sword beam hits the very edges of the door entrance, it may not show the impact animation, but it will expire.
+- Link does not hold the triforce/bow over his head.
+- Link does not pick up boomerang with one hand.
 
 
 
