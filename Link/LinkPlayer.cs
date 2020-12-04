@@ -28,14 +28,7 @@ namespace Sprint5
         private List<IItems> ItemsPlacedByLink = new List<IItems>();
         private bool IsPaused = false;
         public bool Paused { get => IsPaused; set => IsPaused = value; }
-
-        public void RemovePlacedItem(IItems item)
-        {
-            if (itemsPlacedByLink.Contains(item) && item.IsExpired)
-            {
-                itemsPlacedByLink.Remove(item);
-            }
-        }
+        
         public Rectangle Bounds { get => state.Bounds(); }
         public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
         public bool isPaused { get => IsPaused; set => IsPaused = value; }
@@ -51,6 +44,7 @@ namespace Sprint5
             weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
             ShieldCollider = new ShieldCollider(this,HPAmount.Full_Heart);
 
+            IsInvincible = false;
             Counter = min;
             Game = game;
             DifficultyMultiplier.Instance.DetermineLinkHP(this);
@@ -124,6 +118,7 @@ namespace Sprint5
             IsPickingUpItem = false;
             LargeShield = false;
             UseRing = false;
+            IsInvincible = false;
             DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkHP(this);
             Delay = 0;
             Clock = false;

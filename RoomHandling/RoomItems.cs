@@ -152,6 +152,10 @@ namespace Sprint5
                         {
                             roomItems.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), location, item));
                         }
+                        else if (objName.Equals("MagicBook"))
+                        {
+                            roomItems.Add(new MagicBook(ItemsFactory.Instance.CreateMagicBookSprite(), location, item));
+                        }
                     }
                     
 

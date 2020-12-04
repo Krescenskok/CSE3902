@@ -115,6 +115,12 @@ namespace Sprint5.Inventory
                 Sounds.Instance.Play("GetItem");
                 StatsScreen.Instance.ItemsConsumed++;
             }
+            else if (item is MagicBook)
+            {
+                link.IsInvincible = true;
+                Sounds.Instance.Play("Fanfare");
+                StatsScreen.Instance.ItemsConsumed++;
+            }
             itemStorage.PreviousItem = item;
         }
 
