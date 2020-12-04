@@ -31,7 +31,7 @@ namespace Sprint5.Blocks
             collider = new BlockCollider(block.getDestination(location), this);
         }
         
-        public MoveableRight(BlocksSprite block, Vector2 location, Boolean moved)
+        public MoveableRight(BlocksSprite block, Vector2 location, bool moved)
         {
             spriteLocation = location;
             this.block = block;

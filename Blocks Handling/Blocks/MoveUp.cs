@@ -18,18 +18,9 @@ namespace Sprint5.Blocks
         private int shift;
         private BlockCollider collider;
 
-        public MoveableUp(BlocksSprite block, Vector2 location)
-        {
-            spriteLocation = location;
-            this.block = block;
-            moveable = true;
-            shift = 0;
-            currentFrame = 0;
-            drawnFrame = SHEET_LOCATION;
-            collider = new BlockCollider(block.getDestination(location), this);
-        }
+
         
-        public MoveableUp(BlocksSprite block, Vector2 location, Boolean moved)
+        public MoveableUp(BlocksSprite block, Vector2 location, bool moved)
         {
             spriteLocation = location;
             this.block = block;
