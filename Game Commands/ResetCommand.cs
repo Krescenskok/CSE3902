@@ -39,6 +39,8 @@ namespace Sprint5
                 RoomSpawner.Instance.Reset();
                 Sounds.Instance.LoadSounds(game);
                 Camera.Instance.BackToSquareOne();
+                HUD.Instance.Reset();
+                LinkInventory.Instance.Reset();
           
 
 

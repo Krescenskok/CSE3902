@@ -20,6 +20,7 @@ namespace Sprint5
         private Texture2D pinkLinkSpriteSheet;
         private Texture2D blackScreen;
         private Texture2D mainMenuTexture;
+        private Texture2D pauseScreenTexture;
 
 
 
@@ -51,8 +52,12 @@ namespace Sprint5
             blocksSpriteSheet = content.Load<Texture2D>("zelda_tiles_focused");
             blackScreen = content.Load<Texture2D>("BlackScreen");
             mainMenuTexture = content.Load<Texture2D>("MMbackground");
+            pauseScreenTexture = content.Load<Texture2D>("PauseScreen");
         }
-
+        public PauseSprite CreatePauseSprite()
+        {
+            return new PauseSprite(pauseScreenTexture);
+        }
         public LinkSprite CreateLinkSprite()
         {
 

@@ -38,25 +38,25 @@ namespace Sprint5
             {
                 if ((game as Game1).State.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = StateId.Pause;
+                    System.Diagnostics.Debug.WriteLine("Unpaused");
+                    (game as Game1).State.Id = StateId.Gameplay;
                 } else
                 {
-                    (game as Game1).State.Id = StateId.Gameplay;
+                    System.Diagnostics.Debug.WriteLine("paused");
+                    (game as Game1).State.Id = StateId.Pause;
                 }
-                this.Game.DoorPause = false;
                 Player.Paused = !Player.Paused;
                 Sounds.Instance.TogglePause();
             }
             else
             {
-                this.Game.DoorPause = true;
                 if ((game as Game1).State.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = StateId.Pause;
+                    (game as Game1).State.Id = StateId.Gameplay;
                 }
                 else
                 {
-                    (game as Game1).State.Id = StateId.Gameplay;
+                    (game as Game1).State.Id = StateId.Pause;
                 }
                 Player.Paused = !Player.Paused;
                 Sounds.Instance.TogglePause();

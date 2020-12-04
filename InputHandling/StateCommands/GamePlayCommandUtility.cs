@@ -48,8 +48,6 @@ namespace Sprint5.InputHandling
             state.KeyCommands.Add(Keys.R, new ResetCommand(player));
 
             state.KeyCommands.Add(Keys.Space, new ShowInventoryCommand());
-            state.KeyCommands.Add(Keys.I, new ChangeItemCommand(true, player));
-            state.KeyCommands.Add(Keys.U, new ChangeItemCommand(false, player));
             state.KeyCommands.Add(Keys.Enter, new ConsumeItemCommand(player));
             state.KeyCommands.Add(Keys.G, new PauseCommand(game, player, "NotDoor"));
 
@@ -81,9 +79,6 @@ namespace Sprint5.InputHandling
             state.ButtonCommands.Add(Buttons.RightTrigger, new LinkCommand(player, "N"));
             state.ButtonCommands.Add(Buttons.LeftTrigger, new LinkCommand(player, "B"));
 
-            state.ButtonCommands.Add(Buttons.DPadRight, new ChangeItemCommand(true, player));
-            state.ButtonCommands.Add(Buttons.DPadLeft, new ChangeItemCommand(false, player));
-
             state.ButtonCommands.Add(Buttons.X, new ConsumeItemCommand(player));
 
             state.ButtonCommands.Add(Buttons.Start, new ShowInventoryCommand());
@@ -94,9 +89,6 @@ namespace Sprint5.InputHandling
             state.ButtonCommands.Add(Buttons.Back, new PauseCommand(game, player, "NotDoor"));
 
             state.ButtonCommands.Add(Buttons.BigButton, new ResetCommand(player));
-
-            state.ButtonCommands.Add(Buttons.DPadUp, new ChangeDifficultyCommand("Up", game));
-            state.ButtonCommands.Add(Buttons.DPadDown, new ChangeDifficultyCommand("Down", game));
 
             state.MovementButtons.Add(Buttons.LeftThumbstickDown);
             state.MovementButtons.Add(Buttons.LeftThumbstickLeft);

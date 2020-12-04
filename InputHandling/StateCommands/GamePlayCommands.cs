@@ -16,18 +16,10 @@ namespace Sprint5.InputHandling
                 return instance;
             }
         }
-        private IDictionary<Buttons, ICommand> gamePadCommands = new Dictionary<Buttons, ICommand>();
-
-        private IDictionary<Keys, ICommand> KeyboardCommands = new Dictionary<Keys, ICommand>();
-        private List<Buttons> GamePadMovement = new List<Buttons>();
-        private List<Keys> KeyboardMovement = new List<Keys>();
-
-
-
-        public List<Keys> MovementKeys { get => KeyboardMovement; set => KeyboardMovement = value; }
-        public List<Buttons> MovementButtons { get => GamePadMovement; set => GamePadMovement = value; }
-        public IDictionary<Buttons, ICommand> ButtonCommands { get => gamePadCommands; set => gamePadCommands = value; }
-        public IDictionary<Keys, ICommand> KeyCommands { get => KeyboardCommands; set => KeyboardCommands = value; }
+        public List<Keys> MovementKeys { get; set; } = new List<Keys>();
+        public List<Buttons> MovementButtons { get; set; } = new List<Buttons>();
+        public IDictionary<Buttons, ICommand> ButtonCommands { get; set; } = new Dictionary<Buttons, ICommand>();
+        public IDictionary<Keys, ICommand> KeyCommands { get; set; } = new Dictionary<Keys, ICommand>();
 
         private GamePlayCommands()
         {

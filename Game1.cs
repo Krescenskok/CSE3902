@@ -72,6 +72,8 @@ namespace Sprint5
             
             MenuCommands.Instance.LoadCommands(this);
             GamePlayCommands.Instance.LoadCommands(this);
+            InventoryCommands.Instance.LoadCommands(this);
+            PauseCommands.Instance.LoadCommands(this);
 
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));
@@ -110,8 +112,6 @@ namespace Sprint5
 
             this.State.Update(gameTime);
             this.Camera.Update();
-
-
             base.Update(gameTime);
         }
         void PrepareToDraw()
@@ -128,8 +128,6 @@ namespace Sprint5
         }
         protected override void Draw(GameTime gameTime)
         {
-
-
             this.State.Draw(Font, gameTime);
 
             Spritebatch.Begin();
@@ -137,11 +135,6 @@ namespace Sprint5
             Camera.Instance.Draw(Spritebatch);
 
             Spritebatch.End();
-
-
-
-
         }
-        public void Pause(bool pause) { if (pause != (State.Id == StateId.Pause)) { Sounds.Instance.TogglePause(); } State.Id = StateId.Pause; }
     }
 }

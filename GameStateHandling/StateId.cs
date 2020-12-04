@@ -4,5 +4,5 @@ using System.Text;
 
 namespace Sprint5
 {
-    public enum StateId { MainMenu, GameOver, Inventory, Pause, Gameplay }
+    public enum StateId { MainMenu, GameOver, Inventory, Pause, Gameplay, Transition }
 }

@@ -16,9 +16,9 @@ namespace Sprint5.Inventory
         }
         public CursorManagement() { }
 
-        public void MoveCursor(bool goingRight)
+        public void MoveCursor(Direction direction)
         {
-            if (goingRight)
+            if (direction == Direction.right)
             {
                 if (itemStorage.CursorPosition == CURSORMAX - 1)
                 {
@@ -29,7 +29,7 @@ namespace Sprint5.Inventory
                     itemStorage.CursorPosition++;
                 }
             }
-            else
+            else if (direction == Direction.left)
             {
                 if (itemStorage.CursorPosition == 0)
                 {
@@ -40,6 +40,11 @@ namespace Sprint5.Inventory
                     itemStorage.CursorPosition--;
                 }
             }
+            else if (direction == Direction.up || direction == Direction.down)
+            {
+                itemStorage.CursorPosition = ((itemStorage.CursorPosition + 4) % 8);
+            }
+
 
             UpdateSlotItem();
         }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
+using System.Diagnostics;
 
 namespace Sprint5
 {
@@ -60,7 +61,7 @@ namespace Sprint5
 
         private LinkPlayer player;
 
-        private bool wasPaused;
+        private bool IsInventory;
 
 
 
@@ -109,8 +110,10 @@ namespace Sprint5
         //changes target locations for HUD and game viewports. Update will move the actual location
         public void OpenCloseInventory()
         {
+
             if (HUDOpenCloseFinished())
             {
+                Debug.WriteLine("OpenClose");
 
                 int moveDirection = inventoryOpen ? -1 : 1;
 
@@ -121,7 +124,11 @@ namespace Sprint5
                 targetGameView.Location = newGameViewLocation;
 
                 inventoryOpen = moveDirection == 1;
-                if (inventoryOpen) { game.DoorPause = true; wasPaused = game.State.Id == StateId.Pause; Pause(); }
+                if (inventoryOpen) 
+                {
+                    IsInventory = game.State.Id == StateId.Pause; 
+                    StartInventory();
+                } 
             }
 
 
@@ -158,12 +165,12 @@ namespace Sprint5
             fadeColor.A = (byte)((fadeColor.A + fader) % 255);
             fadeFlag = fadeColor.A != 0;
             if (fadeFlag) fader = fadeColor.A == 254 ? -fader : fader;
-            else { MoveToRoom(nextRoom); UnPause(); }
+            else { MoveToRoom(nextRoom); EndTransition(); }
         }
 
 
 
-        public void Transition(int room) { BlackScreenTransition(); nextRoom = room; Pause(); }
+        public void Transition(int room) { BlackScreenTransition(); nextRoom = room; StartTransition(); }
 
 
         public void Scroll(int roomNum, string dir)
@@ -176,7 +183,7 @@ namespace Sprint5
 
             nextRoom = roomNum;
 
-            Pause();
+            StartTransition();
 
 
 
@@ -233,24 +240,11 @@ namespace Sprint5
                 MoveViewports(ref HUDArea, targetHUDLocation, ref HUDView);
                 inventoryStillMoving = true;
 
-                (game as Game1).DoorPause = true;
-            }
-            else if (inventoryOpen && !((game as Game1).State.Id == StateId.Pause))
-
-            {
-                game.DoorPause = true;
             }
 
-            else if (!inventoryOpen && (game as Game1).State.Id == StateId.Pause && inventoryStillMoving)
+            else if (!inventoryOpen && game.State.Id == StateId.Inventory && inventoryStillMoving)
             {
-                (game as Game1).DoorPause = false;
-                game.Pause(wasPaused);
-            }
-
-            else if (!inventoryOpen && (game as Game1).State.Id == StateId.Pause && inventoryStillMoving)
-            {
-                game.DoorPause = false;
-                game.Pause(wasPaused);
+                EndInventory();
 
                 inventoryStillMoving = false;
             }
@@ -282,7 +276,7 @@ namespace Sprint5
                 } else if (loadNextRoom)
                 {
 
-                    UnPause();
+                EndTransition();
                     RoomSpawner.Instance.RoomChange(game, nextRoom);
 
                     currentRoom = nextRoom;
@@ -305,11 +299,13 @@ namespace Sprint5
                 screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
-            private void Pause() { game.State.Id = StateId.Pause; }
-            private void UnPause() { game.State.Id = StateId.Gameplay; }
+            private void StartInventory() { game.State.Id = StateId.Inventory; IsInventory = true; }
+        private void StartTransition() { game.State.Id = StateId.Transition; }
+        private void EndInventory() { game.State.Id = StateId.Gameplay; IsInventory = false; }
+        private void EndTransition() { game.State.Id = StateId.Gameplay; }
+        
 
 
-
-        }
+}
     }
 

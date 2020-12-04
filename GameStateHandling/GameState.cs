@@ -43,7 +43,7 @@ namespace Sprint5
 
                 }
             }
-
+           
             if (Id == StateId.Gameplay)
             {
                 GameplayState.Instance.Update(Game, gameTime);
@@ -64,6 +64,10 @@ namespace Sprint5
             {
                 MainMenuState.Instance.Update(Game, gameTime);
             }
+            else if (Id == StateId.Transition)
+            {
+                TransitionState.Instance.Update(Game, gameTime);
+            }
         }
 
         public void Draw(SpriteFont font, GameTime gameTime)
@@ -83,6 +87,10 @@ namespace Sprint5
             } else if (Id == StateId.MainMenu)
             {
                 MainMenuState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Transition)
+            {
+                TransitionState.Instance.Draw(font, Game, gameTime);
             }
         }
     }

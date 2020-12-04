@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sprint5.InputHandling
 {
-    public class InventoryCommands
+    public class InventoryCommands : IStateCommands
     {
         private static readonly InventoryCommands instance = new InventoryCommands();
         public static InventoryCommands Instance
@@ -15,20 +15,20 @@ namespace Sprint5.InputHandling
                 return instance;
             }
         }
-        private IDictionary<Buttons, ICommand> GamePadCommands = new Dictionary<Buttons, ICommand>();
 
-        private IDictionary<Keys, ICommand> KeyboardCommands = new Dictionary<Keys, ICommand>();
-        private List<Buttons> GamePadMovement = new List<Buttons>();
-        private List<Keys> KeyboardMovement = new List<Keys>();
-
-
-
-        public List<Keys> MovementKeys { get => KeyboardMovement; set => KeyboardMovement = value; }
-        public IDictionary<Buttons, ICommand> ButtonCommands { get => GamePadCommands; set => GamePadCommands = value; }
-        public IDictionary<Keys, ICommand> KeyCommands { get => KeyboardCommands; set => KeyboardCommands = value; }
+        public List<Keys> MovementKeys { get; set; } = new List<Keys>();
+        public List<Buttons> MovementButtons { get; set; } = new List<Buttons>();
+        public IDictionary<Buttons, ICommand> ButtonCommands { get; set; } = new Dictionary<Buttons, ICommand>();
+        public IDictionary<Keys, ICommand> KeyCommands { get; set; } = new Dictionary<Keys, ICommand>();
 
         private InventoryCommands()
         {
+        }
+
+        public void LoadCommands(Game1 game)
+        {
+            InventoryCommandUtility.Instance.PopulateKeyboard(game, game.LinkPlayer, this);
+            InventoryCommandUtility.Instance.PopulateGamePad(game, game.LinkPlayer, this);
 
         }
     }
