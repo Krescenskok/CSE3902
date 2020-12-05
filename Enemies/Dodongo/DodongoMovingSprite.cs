@@ -16,8 +16,8 @@ namespace Sprint5
         private static int[] verticalSpriteSize = { 16, 16 };
         private int[] spriteSize = { 0, 0 };
         private Vector2 sourcePos = new Vector2(0, 60);
-        private const int NumUpdatePerSec = 30;
-        private const int FrameRate = 6;
+        private const int NumUpdatePerSec = 60;
+        private const int FrameRate = 4;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter;
         private int frameIndex = 0;
@@ -25,36 +25,37 @@ namespace Sprint5
         private Point drawSize;
         private string direction;
 
+
         public DodongoMovingSprite(Texture2D texture, string direction)
         {
             this.texture = texture;
             this.direction = direction;
-            if (direction == "Right" || direction == "Left")
+            if (direction.Equals("right") || direction.Equals("left"))
             {
                 spriteSize[0] = horizontalSpriteSize[0];
                 spriteSize[1] = horizontalSpriteSize[1];
                 sourcePos.Y = 60;
-                if (direction == "Right")
+                if (direction.Equals("right"))
                 {
-                    sourcePos.X = 0 * drawSize.X;
+                    sourcePos.X = 0 * spriteSize[0] ;
                 }
                 else
                 {
-                    sourcePos.X = 2 * drawSize.X;
+                    sourcePos.X = 2 * spriteSize[0];
                 }
             }
             else
             {
                 spriteSize[0] = verticalSpriteSize[0];
                 spriteSize[1] = verticalSpriteSize[1];
-                sourcePos.Y = 46;
-                if (direction == "Forward")
+                sourcePos.Y = 44;
+                if (direction.Equals("up"))
                 {
-                    sourcePos.X = 0 * drawSize.X;
+                    sourcePos.X = 2 * spriteSize[0];
                 }
                 else
                 {
-                    sourcePos.X = 2 * drawSize.X;
+                    sourcePos.X = 0 * spriteSize[0];
                 }
             }
             drawSize.X = spriteSize[0] * spriteSizeIndex;

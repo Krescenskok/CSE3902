@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint5
@@ -23,8 +24,6 @@ namespace Sprint5
 
         }
 
-        
-
         public Rectangle Bounds()
         {
             return bounds;
@@ -32,7 +31,7 @@ namespace Sprint5
 
         public bool CompareTag(string tag)
         {
-            return tag == "DodongoFace";
+            return tag.Equals("DodongoFace");
         }
 
         public bool Equals(ICollider col)
@@ -45,9 +44,10 @@ namespace Sprint5
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
-        {
+        {            
             if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
             {
+                Debug.Print("bomb");
                 col.SendMessage("Eaten", 0);
             }
         }
@@ -58,9 +58,9 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Bomb")
+            if (msg.Equals("Bomb"))
             {
-                dodongo.TakeDamage(-5);
+                dodongo.TakeDamage(-1);
             }
             
         }
