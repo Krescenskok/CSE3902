@@ -1,29 +1,18 @@
 Author of the code review: Yuan Hong
-Date of the code review: 11/16/20
-Sprint number: 4
-Name of the .cs file being reviewed: Game.cs (game over section)
-Author of the .cs file being reviewed: Krescens Kok
-Number of minutes taken to complete the review: 5
-Specific comments on what is readable and what is not:
+Date of the code review: 12/2/2020
+Sprite 5
+Name of .cs file being reviewed: InventoryItemManagement.cs
+Author of .cs file being review: Ann Yan
+Time taken to complete review: 15 minutes
+This file’s propose is to manage items in player inventory including pick up and consume items and equip different weapons. Overall, the code is readable; its not difficult to tell propose of each line, like play sound effect, update inventory and data. One possible improvement could be using switch case to replace long if else statement in pickupitem if possible. 
 
-It's very clear what each message printed to the screen is meant to inform the user of. 
-The vector coordinates are magic numbers, so they are not as readable as they could be, however.
-In addition, having a separate line for each message assists in reading the spacing of the messages as they would
-appear in game. The code is concise and clear with no confusingly named variables.
 
 Author of the code review: Yuan Hong
-Date of the code review: 11/16/20
-Sprint number: 4
-Name of the .cs file being reviewed: PauseCommand.cs (game over section)
-Author of the .cs file being reviewed: Krescens Kok
-Number of minutes taken to complete the review: 5
-Specific comments on code quality:
-
-Very clear and obvious what the code is doing, clearly named variables and good whitespace distribution.
-Additionally, there's little uneccessary code or bulk, has a specific, single purpose.
-
-A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change
-
-You could put the changing of the isPause variable within the executeCommand method instead of in the fields. Additionally, there are unecessary methods
-that aren't being used
+Date of the code review: 12/4/2020
+Sprite 5
+Name of .cs file being reviewed: InventoryMap.cs
+Author of .cs file being review: Ann Yan
+Time taken to complete review: 15 minutes
+This file handles the minimap in game; methods and variables in the file are clear. The whole class has a clear structure such that it inutilities, update and draw. 
+Suggestions: first for loop in initializeMap use number 18, It seem need to be replace by LASTROOM. Probably give const FIVE a different name if it shrinks InvetorySize. 
 
