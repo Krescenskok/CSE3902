@@ -63,7 +63,7 @@ Code Analysis on Menu (Done by Andrew and Noah)
 0 errors, 0 warnings
 
 
-Code Analysis on Enemies (Done by JT)
+Code Analysis on Enemies (Done by JT & Yuan)
 0 errors, 0 warnings
 
 - Most warnings are to change fields to readonly, which were suppressed
