@@ -51,6 +51,7 @@ namespace Sprint5.Items
 
         public void Exploded()
         {
+            CollisionHandler.Instance.RemoveCollider(Collider);
             isExploding = true;
             state = new BombExplosionState(this);
             collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
