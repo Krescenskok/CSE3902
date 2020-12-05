@@ -50,17 +50,28 @@ Code Analysis on Items (Done by Ann)
 - Fields are assigned but never used in BombCollider, BoomerangCollider, ItemCollider, BoomerangObject and BombExplosionState. Solved by removing.
 
 
-
-Code Analysis on Difficulty Handling (Done by Andrew)
-0 errors, 0 warnings
-- Collection initialization can be simplified; has to be initialized in this manner though
-
-
-
-Code Analysis on Collisions (Done by Andrew)
+Code Analysis on Enemies (Done by JT)
 0 errors, 0 warnings
 
+- Most warnings are to change fields to readonly, which were suppressed
+- Others said to remove game as an unused parameter or naming conventions in multiple files, solved by removing each instance of unused parameters and renaming fields
 
-
-Code Analysis on Menu (Done by Andrew and Noah)
+Code Analysis on Collisions (Done by JT)
 0 errors, 0 warnings
+
+- All readonly warning suppressed
+
+Code Analysis on Camera (Done by JT)
+0 errors, 0 warnings
+
+- IsInventory field assigned but never used, solved by removing IsInventory
+
+
+Code Analysis on Sound (Done by JT)
+0 errors, 0 warnings
+
+- game field assigned but never used, solved by removing game
+
+
+
+
