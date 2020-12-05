@@ -10,8 +10,8 @@ specifies the state that the game is in when it's actually running, and has ever
 Author of the code review: Krescens Kok
 Date of the code review: 12/4/20
 Sprint number: 5
-Name of the .cs file being reviewed: 
-Author of the .cs file being reviewed
+Name of the .cs file being reviewed: GameState.cs
+Author of the .cs file being reviewed: Andrew Sanchez
 Specific comments on code quality: Good code quality, doesn't have very many lines which helps to identify bugs. This class has high cohesion because everything 
 in the class deals with the state that the game is in, overall (credits, win, inventory, etc..). There were debug statements that should've been taken out. There is
 also enough whitespace, which helps view the code easier.
