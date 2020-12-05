@@ -10,20 +10,14 @@ namespace Sprint5
     {
         private IEnemy enemy;
         private EnemyHPSprite sprite;
-        private Vector2 location;
 
-        private Vector2 offset;
 
         private float currentHP;
         private float maxHP;
 
-        private const float SCREEN_TO_BAR_RATIO = 4f / 5f;
-        private const float BAR_WIDTH_RATIO = 1f / 10f;
-
         Camera cam = Camera.Instance;
         GridGenerator grid = GridGenerator.Instance;
 
-        private float num = 1;
         public BossHealthBar(IEnemy enemy)
         {
             this.enemy = enemy;

@@ -54,7 +54,7 @@ namespace Sprint5
         {
             if(recoverCountDown < 0)
             {
-                if (dodongo.checkAlive())
+                if (dodongo.CheckAlive())
                 {
                     dodongo.dodongoState = new DodongoMovingState(dodongo, dodongoPos);
                     dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDodongoSprite(direction));

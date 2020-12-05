@@ -13,7 +13,6 @@ namespace Sprint5
     class AquamentusNormalSprite : ISprite
     {
         Texture2D texture;
-        Vector2 aquamentusPos;
         private static int[] spriteSize = {24, 31};
         private Vector2 sourcePos;
         private const int NumUpdatePerSec = 60;
@@ -69,10 +68,6 @@ namespace Sprint5
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
-        public void Load(Game game)
-        {
-            //do nothing
-        }
 
         public Rectangle GetRectangle(Vector2 location)
         {

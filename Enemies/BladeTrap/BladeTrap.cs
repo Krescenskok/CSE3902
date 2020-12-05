@@ -18,7 +18,7 @@ namespace Sprint5
         public Vector2 Location { get => location; }
         public int HP { get; private set; }
 
-        private Game game;
+
         
         public IEnemyState state;
         public IEnemyState State { get => state; }
@@ -29,8 +29,6 @@ namespace Sprint5
         private BladeTrapSprite bladeSprite;
 
         private EnemyCollider collider;
-        private TrapCollider playerFinderOne;
-        private TrapCollider playerFinderTwo;
 
         private string direction1, direction2;
 
@@ -39,14 +37,11 @@ namespace Sprint5
             direction1 = dir1;
             direction2 = dir2;
 
-            this.game = game;
             state = new EnemySpawnState(this,game);
 
             this.location = location;
 
             collider = new EnemyCollider();
-            playerFinderOne = new TrapCollider();
-            playerFinderTwo = new TrapCollider();
         }
 
         public void Spawn()
@@ -71,8 +66,9 @@ namespace Sprint5
             if (direction2.Equals("right") || direction2.Equals("left")) attackRange2 = horizontalAttackRange;
             else attackRange2 = verticalAttackRange;
 
-            playerFinderOne = new TrapCollider(objectSize, this, direction1, attackRange1);
-            playerFinderTwo = new TrapCollider(objectSize, this, direction2, attackRange2);
+
+            CollisionHandler.Instance.AddCollider(new TrapCollider(objectSize, this, direction1, attackRange1), Layers.Trigger);
+            CollisionHandler.Instance.AddCollider(new TrapCollider(objectSize, this, direction2, attackRange2), Layers.Trigger);
         }
         
 

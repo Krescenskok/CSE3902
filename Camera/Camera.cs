@@ -64,7 +64,7 @@ namespace Sprint5
 
         private LinkPlayer player;
 
-        private bool IsInventory;
+
 
 
 
@@ -135,7 +135,7 @@ namespace Sprint5
                 inventoryOpen = moveDirection == 1;
                 if (inventoryOpen) 
                 {
-                    IsInventory = game.State.Id == StateId.Pause; 
+
                     StartInventory();
                 } 
             }
@@ -309,9 +309,9 @@ namespace Sprint5
                 screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
-            private void StartInventory() { game.State.Id = StateId.Inventory; IsInventory = true; }
+            private void StartInventory() { game.State.Id = StateId.Inventory; }
             private void StartTransition() { game.State.Id = StateId.Transition; }
-            private void EndInventory() { game.State.Id = StateId.Gameplay; IsInventory = false; }
+            private void EndInventory() { game.State.Id = StateId.Gameplay; }
             private void EndTransition() { game.State.Id = StateId.Gameplay; }
         
 

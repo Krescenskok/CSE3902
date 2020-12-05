@@ -100,11 +100,11 @@ namespace Sprint5
 
         public void RoomChange(Game game, int roomNumber)
         {
-            GridGenerator.Instance.GetGrid(game, 12, 7);
+            GridGenerator.Instance.GetGrid(12, 7);
             CollisionHandler.Instance.RoomChange();
             HPBarDrawer.RemoveAll();
             LoadRoom(game, roomNumber);
-            Sounds.Instance.RoomChange(roomNumber);
+            Sounds.Instance.RoomChange();
         }
 
         public void Draw(SpriteBatch batch)

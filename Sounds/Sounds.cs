@@ -26,7 +26,7 @@ namespace Sprint5
 
         private Dictionary<string, SoundEffectInstance> loopedSounds;
 
-        private Game game;
+
         public bool Muted { get; private set; }
 
 
@@ -40,8 +40,7 @@ namespace Sprint5
         public void LoadSounds(Game game)
         {
 
-            
-            this.game = game;
+
             sounds = SoundContent.LoadContent(game.Content, "Sounds");
             soundInstances = new List<SoundEffectInstance>();
             loopedSounds = new Dictionary<string, SoundEffectInstance>();
@@ -67,7 +66,7 @@ namespace Sprint5
 
         }
 
-        public void RoomChange(int num)
+        public void RoomChange()
         {
             int i = soundInstances.Count, index = 0;
             while (i > 0)

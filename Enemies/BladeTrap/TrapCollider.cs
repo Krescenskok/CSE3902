@@ -69,13 +69,9 @@ namespace Sprint5
                 bounds.Height = attackRange;
             }
 
-            CollisionHandler.Instance.AddCollider(this,Layers.Trigger);
+            
         }
 
-        public TrapCollider()
-        {
-
-        }
 
         public Rectangle Bounds()
         {
