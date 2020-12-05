@@ -1,0 +1,19 @@
+Author of the code review: Krescens Kok
+Date of the code review: 12/4/20
+Sprint number: 5
+Name of the .cs file being reviewed: GamePlayState.cs
+Author of the .cs file being reviewed: Andrew Sanchez
+Number of minutes taken to complete the review: 10
+Specific comments on what is readable and what is not: All of it is readable, the class starts off with creating variables having get/set properties. This class 
+specifies the state that the game is in when it's actually running, and has everything updating. With updating, it also has everything drawing, with the specific layers of the sprites.
+
+Author of the code review: Krescens Kok
+Date of the code review: 12/4/20
+Sprint number: 5
+Name of the .cs file being reviewed: 
+Author of the .cs file being reviewed
+Specific comments on code quality: Good code quality, doesn't have very many lines which helps to identify bugs. This class has high cohesion because everything 
+in the class deals with the state that the game is in, overall (credits, win, inventory, etc..). There were debug statements that should've been taken out. There is
+also enough whitespace, which helps view the code easier.
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change: Make a 
+dictionary of all the state ID's, so that it would be easier to access.
