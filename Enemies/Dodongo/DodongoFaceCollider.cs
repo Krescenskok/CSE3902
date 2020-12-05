@@ -11,14 +11,16 @@ namespace Sprint5
         private Rectangle bounds;
         private IEnemyState dodongo;
         private Dodongo dodongoBase;
+        private string name;
 
-        public string Name { get => "dodongo"; }
+        public string Name { get => name; }
         public Layer layer { get; set; }
 
         public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo, Dodongo dongo)
         {
             bounds = rect;
             this.dodongo = dodongo;
+            this.name = "DodongoFace"
             dodongoBase = dongo;
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
 
@@ -31,7 +33,7 @@ namespace Sprint5
 
         public bool CompareTag(string tag)
         {
-            return tag.Equals("DodongoFace");
+            return tag.Equals(name);
         }
 
         public bool Equals(ICollider col)
@@ -47,7 +49,6 @@ namespace Sprint5
         {            
             if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
             {
-                Debug.Print("bomb");
                 col.SendMessage("Eaten", 0);
             }
         }
