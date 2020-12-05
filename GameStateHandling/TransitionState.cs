@@ -43,6 +43,7 @@ namespace Sprint5.GameStateHandling
             game.ProjectilePersistent.ExecuteCommand(game, gameTime, game.Spritebatch);
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
 
+            Camera.Instance.Draw(game.Spritebatch);
             game.Spritebatch.End();
 
             game.Spritebatch.Begin();

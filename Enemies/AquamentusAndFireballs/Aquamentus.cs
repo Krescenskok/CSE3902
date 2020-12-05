@@ -47,7 +47,7 @@ namespace Sprint5
 
 
 
-        public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
+        public Aquamentus(Vector2 initialPos, XElement xml, LinkPlayer link)
         {
             this.link = link;
             aquamentusPos = initialPos;
@@ -84,7 +84,7 @@ namespace Sprint5
             HP -= damage;
         }
 
-        public Boolean checkAlive()
+        public Boolean CheckAlive()
         {
             return HP > 0;
         }

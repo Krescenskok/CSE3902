@@ -12,14 +12,17 @@ namespace Sprint5.Link
     {
         protected LinkPlayer link;
         protected int currentFrame;
- 
-        
+        private const int THOUSAND = 1000;
+
+
+
         private List<IItems> itemsPlacedByLink = new List<IItems>();
 
         protected LinkSprite linkSprite;
-        Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
-        Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
-
+        readonly Color[] colors = { Color.Red, Color.Pink, Color.DarkRed, Color.DarkRed, Color.MediumVioletRed, Color.IndianRed, Color.OrangeRed, Color.PaleVioletRed };
+        readonly Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
+        readonly Color[] invincibleColors = { Color.Blue, Color.Green, Color.Pink, Color.Yellow, Color.Ivory, Color.Purple, Color.Lavender, Color.LightBlue };
+        
         int colorIndex = 0;
 
         public LinkState(LinkPlayer link)
@@ -61,11 +64,11 @@ namespace Sprint5.Link
                     currentFrame = 12;
                 link.DrawShield = false;
             }
-            if (link.IsDamaged || link.Clock)
+            if (link.IsDamaged || link.Clock || link.IsInvincible)
             {
                 if (link.DamageStartTime == 0)
                     link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
+                else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 2000)
                 {
                     if (link.IsDamaged)
                     {
@@ -74,7 +77,7 @@ namespace Sprint5.Link
                         colorIndex++;
                         if (colorIndex == colors.Length)
                             colorIndex = 0;
-                        link.currentLocation = location;
+                        //link.currentLocation = location;
                     }
                     else if (link.Clock)
                     {
@@ -83,13 +86,25 @@ namespace Sprint5.Link
                         colorIndex++;
                         if (colorIndex == clockColors.Length)
                             colorIndex = 0;
+                        //link.currentLocation = location;
                     }
-
+                    else if (link.IsInvincible)
+                    {
+                        col = invincibleColors[colorIndex];
+                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
+                        colorIndex++;
+                        if (colorIndex == invincibleColors.Length)
+                            colorIndex = 0;
+                        //link.currentLocation = location;
+                    }
+                    link.currentLocation = location;
                 }
+
                 else
                 {
                     link.IsDamaged = false;
                     link.Clock = false;
+                    link.IsInvincible = false;
                 }
 
             }
@@ -129,7 +144,6 @@ namespace Sprint5.Link
 
                     break;
                 }
-
             }
         }
 

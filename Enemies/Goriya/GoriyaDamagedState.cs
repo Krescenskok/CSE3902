@@ -8,13 +8,10 @@ namespace Sprint5
     public class GoriyaDamagedState : IEnemyState
     {
 
-        
+        private Direction currentDirection;
 
-        
-        Direction currentDirection;
-
-        Vector2 moveDirection;
-        Vector2 location;
+        private Vector2 moveDirection;
+        private Vector2 location;
 
         private int moveSpeed;
         private const int normalSpeedMultiplier = 4;

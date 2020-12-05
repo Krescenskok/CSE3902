@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sprint5
@@ -10,20 +11,20 @@ namespace Sprint5
         private Rectangle bounds;
         private IEnemyState dodongo;
         private Dodongo dodongoBase;
+        private string name;
 
-        public string Name { get => "dodongo"; }
+        public string Name { get => name; }
         public Layer layer { get; set; }
 
         public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo, Dodongo dongo)
         {
             bounds = rect;
             this.dodongo = dodongo;
+            this.name = "DodongoFace"
             dodongoBase = dongo;
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
 
         }
-
-        
 
         public Rectangle Bounds()
         {
@@ -32,7 +33,7 @@ namespace Sprint5
 
         public bool CompareTag(string tag)
         {
-            return tag == "DodongoFace";
+            return tag.Equals(name);
         }
 
         public bool Equals(ICollider col)
@@ -45,7 +46,7 @@ namespace Sprint5
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
-        {
+        {            
             if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
             {
                 col.SendMessage("Eaten", 0);
@@ -58,9 +59,9 @@ namespace Sprint5
 
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Bomb")
+            if (msg.Equals("Bomb"))
             {
-                dodongo.TakeDamage(-5);
+                dodongo.TakeDamage(-1);
             }
             
         }

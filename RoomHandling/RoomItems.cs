@@ -73,7 +73,6 @@ namespace Sprint5
 
                         if (objName.Equals("Arrow"))
                         {
-
                             roomItems.Add(new ArrowObject(ItemsFactory.Instance.CreateArrowSprite("Up"), location, item));
                         }
                         else if (objName.Equals("BlueCandle"))
@@ -152,6 +151,10 @@ namespace Sprint5
                         {
                             roomItems.Add(new WoodenSword(ItemsFactory.Instance.CreateWoodenSwordSprite(), location, item));
                         }
+                        else if (objName.Equals("MagicBook"))
+                        {
+                            roomItems.Add(new MagicBook(ItemsFactory.Instance.CreateMagicBookSprite(), location, item));
+                        }
                     }
                     
 
@@ -168,6 +171,7 @@ namespace Sprint5
             else if (itemName.Equals("Fairy")) roomItems.Add(new Fairy(ItemsFactory.Instance.CreateFairySprite(), location));
             else if (itemName.Equals("Clock")) roomItems.Add(new Clock(ItemsFactory.Instance.CreateClockSprite(), location));
             else if (itemName.Equals("HeartContainer")) roomItems.Add(new HeartContainer(ItemsFactory.Instance.CreateHeartContainerSprite(), location));
+            else if (itemName.Equals("MagicBook")) roomItems.Add(new MagicBook(ItemsFactory.Instance.CreateMagicBookSprite(), location));
         }
 
         public void DropRandom(Vector2 location)
@@ -179,6 +183,7 @@ namespace Sprint5
             else if (num == 1) DropItem("Rupee", location);
             else if (num == 2) DropItem("Fairy", location);
             else if (num == 3) DropItem("Clock", location);
+            else if (num == 4) DropItem("MagicBook", location);
         }
         public void DropHeartContainer(Vector2 location)
         {
@@ -211,7 +216,8 @@ namespace Sprint5
 
         public void Destroy(IItems item)
         {
-            roomItems.Remove(item);
+            if (roomItems.Contains(item))
+                roomItems.Remove(item);
             
         }
         

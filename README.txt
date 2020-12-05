@@ -25,7 +25,9 @@ Known Bugs:
 
 Notes:
 - In the inventory, the bow is intended to be drawing over the arrow once obtained, but only the bow should show up in the slot selection. 
-
+- The Magic Book item is used as an invincibility item (it is not the same as the original game implementation). When Link collects it, he will be invincible for a short moment, and if he runs into enemies while invincible, he will damage them. 
+- Please read the Sound Read Me for song credits
+- For command mapping: it is not fully tested yet, but from what we can tell, it is working (please don't change too many of the key mappings/have duplicate key mappings). 
 
 
 Code Analysis on Link (Done by Krescens)
@@ -48,6 +50,42 @@ Code Analysis on Items (Done by Ann)
 0 errors, 13 warnings
 - Colliders on Empty, Full, and Half Heart, as well as BombObject, BoomerangObject will always be null. These objects are HUD interface sprites, and thus shouuld never have colliders (the colliders are simply part of the interface so they cannot be removed).
 - Fields are assigned but never used in BombCollider, BoomerangCollider, ItemCollider, BoomerangObject and BombExplosionState. Solved by removing.
+
+
+Code Analysis on Difficulty Handling (Done by Andrew)
+0 errors, 0 warnings
+- Collection initialization can be simplified; has to be initialized in this manner though
+
+
+Code Analysis on Collisions (Done by Andrew)
+0 errors, 0 warnings
+
+
+Code Analysis on Menu (Done by Andrew and Noah)
+0 errors, 0 warnings
+
+
+Code Analysis on Enemies (Done by JT & Yuan)
+0 errors, 0 warnings
+
+- Most warnings are to change fields to readonly, which were suppressed
+- Others said to remove game as an unused parameter or naming conventions in multiple files, solved by removing each instance of unused parameters and renaming fields
+
+Code Analysis on Collisions (Done by JT)
+0 errors, 0 warnings
+
+- All readonly warning suppressed
+
+Code Analysis on Camera (Done by JT)
+0 errors, 0 warnings
+
+- IsInventory field assigned but never used, solved by removing IsInventory
+
+
+Code Analysis on Sound (Done by JT)
+0 errors, 0 warnings
+
+- game field assigned but never used, solved by removing game
 
 
 

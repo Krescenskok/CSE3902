@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,23 +21,15 @@ namespace Sprint5.Blocks
 
         private bool shifting = false;
 
-        public MoveableRight(BlocksSprite block, Vector2 location)
-        {
-            spriteLocation = location;
-            this.block = block;
-            moveable = true;
-            shift = 0;
-            currentFrame = 0;
-            drawnFrame = SHEET_LOCATION;
-            collider = new BlockCollider(block.getDestination(location), this);
-        }
+        XElement saveFile;
         
-        public MoveableRight(BlocksSprite block, Vector2 location, bool moved)
+        public MoveableRight(BlocksSprite block, Vector2 location, XElement file)
         {
             spriteLocation = location;
             this.block = block;
-            moveable = !moved;
-            if (moved) spriteLocation = new Vector2(spriteLocation.X + this.block.blockDimensionX, spriteLocation.Y);
+            saveFile = file;
+            moveable = file.Element("Moved").Value == "false";
+            if (!moveable) spriteLocation = new Vector2(spriteLocation.X + this.block.blockDimensionX, spriteLocation.Y);
             shift = 0;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
@@ -70,18 +63,15 @@ namespace Sprint5.Blocks
 
         }
 
-        public void setLocation(Vector2 location)
-        {
-            spriteLocation = location;
-        }
 
         public void move(string compare)
         {
             if (moveable && compare.Equals("left"))
             {
                 moveable = false;
+                saveFile.SetElementValue("Moved", "true");
                 shift = this.block.blockDimensionX;
-                RoomBlocks.Instance.movedRight = true;
+               
             }
         }
 

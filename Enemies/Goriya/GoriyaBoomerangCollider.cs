@@ -12,7 +12,7 @@ namespace Sprint5.Enemies
         
         private int damageAmount;
 
-        GoriyaBoomerang boomerang;
+        private GoriyaBoomerang boomerang;
 
         public string Name { get => "Enemy"; }
         public Layer layer { get; set; }

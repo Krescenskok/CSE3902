@@ -13,7 +13,7 @@ namespace Sprint5
     public class GoriyaBoomerangSprite : EnemySprite
     {
 
-        public Texture2D texture { get; set; }
+        private Texture2D texture;
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
         private int rows = spriteSheetSize[0];
         private int columns = spriteSheetSize[1];

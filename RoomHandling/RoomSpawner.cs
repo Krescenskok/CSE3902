@@ -100,11 +100,11 @@ namespace Sprint5
 
         public void RoomChange(Game game, int roomNumber)
         {
-            GridGenerator.Instance.GetGrid(game, 12, 7);
+            GridGenerator.Instance.GetGrid(12, 7);
             CollisionHandler.Instance.RoomChange();
             HPBarDrawer.RemoveAll();
             LoadRoom(game, roomNumber);
-            Sounds.Instance.RoomChange(roomNumber);
+            Sounds.Instance.RoomChange();
         }
 
         public void Draw(SpriteBatch batch)
@@ -128,9 +128,9 @@ namespace Sprint5
         {
             roomSprites = new List<RoomSprite>();
             roomSpritesTopLayer = new List<RoomSprite>();
-            roomSpriteSheet = game.Content.Load<Texture2D>("RoomMapFixed");
+            roomSpriteSheet = game.Content.Load<Texture2D>("RoomMap2");
             dungeonSheet = roomSpriteSheet;
-            dungeonSheetOuter = game.Content.Load<Texture2D>("RoomMapOuter");
+            dungeonSheetOuter = game.Content.Load<Texture2D>("RoomMapOuter2");
             Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
 
             allRooms = new DungeonSprite(dungeonSheet);

@@ -11,7 +11,7 @@ namespace Sprint5
 {
     public class Door: IDoors
     {
-        private Point innerLocation;
+
         private Point outerLocation;
         
         public IDoorCollider innerCollider;
@@ -19,7 +19,7 @@ namespace Sprint5
         private int NextRoom;
         private int CurrentRoom;
         private char Heading;
-        private Game game;
+
         private XElement saveInfo;
         private Point Size;
 
@@ -30,14 +30,13 @@ namespace Sprint5
 
         public bool open;
 
-        public Door(Game game, Point innerLocation, Point size, int nextRoom, char heading, DoorType type, XElement item, Point outerLocation, int currentRoom)
+        public Door(Point innerLocation, Point size, int nextRoom, char heading, DoorType type, XElement item, Point outerLocation, int currentRoom)
         {
-            this.innerLocation = innerLocation;
+
             this.outerLocation = outerLocation;
             NextRoom = nextRoom;
             CurrentRoom = currentRoom;
             Heading = heading;
-            this.game = game;
             Size = size;
             saveInfo = item;
             

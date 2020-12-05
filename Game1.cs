@@ -104,7 +104,7 @@ namespace Sprint5
 
             CollisionHandler.Instance.Initialize();
 
-            GridGenerator.Instance.GetGrid(this, 12, 7);
+            GridGenerator.Instance.GetGrid(12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
             RoomSpawner.Instance.LoadRoom(this, 1);
 
@@ -134,14 +134,14 @@ namespace Sprint5
         }
         protected override void Draw(GameTime gameTime)
         {
-            this.State.Draw(Font, gameTime);
+            State.Draw(Font, gameTime);
 
+ 
             Spritebatch.Begin();
             base.Draw(gameTime);
-            Camera.Instance.Draw(Spritebatch);
-
 
             Spritebatch.End();
+
 
         }
     }
