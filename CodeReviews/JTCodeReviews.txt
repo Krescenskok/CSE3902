@@ -1,27 +1,34 @@
 Author of the code review: JT Thrash
-Date of the code review: 11/16/2020
-Sprint number: 4
-Name of the .cs file being reviewed: HUDMap.cs
-Author of the .cs file being reviewed: Ann Yan
-Number of minutes taken to complete the review: 10
-Specific comments on what is readable and what is not:
+Date of the code review: 12/4/2020
+Sprint number: 5
+Name of the .cs file being reviewed: LinkPlayerParent.cs
+Author of the .cs file being reviewed: Krescens Kok
+Number of minutes taken to complete the review: 10 min
 
-All of the variables use a good naming convention and are sorted by their type. The method names are descriptive,
-and a dictionary is used for the map location sprites, which makes accessing each sprite easy to understand. Some of 
-the logic in the Draw method is hard to understand because it uses a lot of if else and loops without function names.
+Specific comments on what is readable and what is not
+
+All fields are either private or public with get/set. Good naming convention is used, camel case for the private fields and upper case for the public
+get/sets. Almost all the fields use descriptive wording that explains their intent and purpose. Some of them (Counter, DamDir, Delay) do not have a clear
+use without investigating their references. Also, many of the private fields are greyed out, suggesting that the auto property be used in their place.
 
 Author of the code review: JT Thrash
-Date of the code review: 11/16/2020
-Sprint number 4
-Name of the .cs file being reviewed: InventoryMap.cs
-Author of the .cs file being reviewed: Ann Yan
-Specific comments on code quality:
-
-Each method is relatively short. The logic in InitializeMap is split up into short and simple for loops, and
-there is a low use of magic numbers. The use of a Dictionary allows for lower time complexity when drawing each of the individualRoomSprites.
+Date of the code review: 12/4/2020
+Sprint number: 5
+Name of the .cs file being reviewed: ProjectileFactory.cs
+Author of the .cs file being reviewed: Krescens Kok
 
 
-A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change:
+Specific comments on code quality
 
-A hypothetical change would be adding another dungeon. It would be hard to support that change because this code is based on only one map. Another method would need
-to be added for initializing the map for each dungeon, and also make another InventoryMapSprite or allow for it to be constructed with a different texture.
+Class is very neat and organized, each method has at most 30-40 lines. This class is used to return projectiles to links list of projectiles.
+The implementation only depends on link's location, while direction is passed through as a parameter, so there is low cohesion. The branching within each
+method is similar, having 3-4 if-else branches. They make use of an Item sprite factory to construct the projectiles being returned. This shortens the length
+and makes the whole class more readable and easy to debug. 
+
+
+A hypothetical change to make to the game related to file being reviewed and how the current implementation could or could not easily support that change
+
+A hypothetical change to the game would be adding any new types of projectiles. As it is now, a different constant integer is used to displace different projectiles.
+These were figured out through trial and error for each one, so we would undergo the same process for a new projectile. Another change that would not easily be supported
+is adding bouncing to projectiles. Right now they only move in one direction away from link and disappear on impact. Entirely different implementation would be needed
+to keep track of where the collision occurred and where to move next;
