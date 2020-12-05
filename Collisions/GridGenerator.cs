@@ -18,7 +18,7 @@ namespace Sprint5
         private static GridGenerator instance = new GridGenerator();
 
         private List<List<Rectangle>> playAreaGrid;
-        public List<List<Rectangle>> outsideArea { get; private set; }
+        public List<List<Rectangle>> OutsideArea { get; private set; }
        
         private Point tileSize;
 
@@ -52,7 +52,7 @@ namespace Sprint5
             return tileSize;
         }
 
-        public List<List<Rectangle>> GetGrid(Game game, int tileColumns, int tileRows)
+        public List<List<Rectangle>> GetGrid(int tileColumns, int tileRows)
         {
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
@@ -105,7 +105,7 @@ namespace Sprint5
         public void FormOutsideArea()
         {
             Point startPoint = playAreaGrid[0][0].Location - new Point(tileSize.X * 2, tileSize.Y * 2);
-            outsideArea = new List<List<Rectangle>>();
+            OutsideArea = new List<List<Rectangle>>();
 
             int width = tileSize.X;
             int height = tileSize.Y;
@@ -113,13 +113,13 @@ namespace Sprint5
 
             for (int i = 0; i < numRows; i++)
             {
-                outsideArea.Add(new List<Rectangle>());
+                OutsideArea.Add(new List<Rectangle>());
 
                 for (int j = 0; j < numCol; j++)
                 {
                     Point position = new Point(j * width, i * height) + startPoint;
 
-                    outsideArea[i].Add(new Rectangle(position, tileSize));
+                    OutsideArea[i].Add(new Rectangle(position, tileSize));
 
                 }
             }
@@ -185,7 +185,7 @@ namespace Sprint5
 
         public Vector2 GetOutsideLocation(int row, int col)
         {
-            return outsideArea[row][col].Location.ToVector2();
+            return OutsideArea[row][col].Location.ToVector2();
         }
 
         public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)

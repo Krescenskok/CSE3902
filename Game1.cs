@@ -103,7 +103,7 @@ namespace Sprint5
 
             CollisionHandler.Instance.Initialize();
 
-            GridGenerator.Instance.GetGrid(this, 12, 7);
+            GridGenerator.Instance.GetGrid(12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
             RoomSpawner.Instance.LoadRoom(this, 1);
 

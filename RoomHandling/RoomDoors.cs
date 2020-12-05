@@ -115,29 +115,29 @@ namespace Sprint5
 
                     if (objName.Equals("Left"))
                     {
-                        doors.Add(new Door(game, locations[0], doorSizeSide, nextRoom, 'L', thisType, item,locations[4], curRoom));
+                        doors.Add(new Door(locations[0], doorSizeSide, nextRoom, 'L', thisType, item,locations[4], curRoom));
                     }
                     else if (objName.Equals("Right"))
                     {
-                        doors.Add(new Door(game, locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
+                        doors.Add(new Door(locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
                         
                         
                     }
                     else if (objName.Equals("Up"))
                     {
-                        doors.Add(new Door(game, locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
+                        doors.Add(new Door(locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
                     } 
                     else if (objName.Equals("Center"))
                     {
-                        doors.Add(new Door(game, locations[9], doorSizeSide, nextRoom, 'C', thisType, item, locations[9], curRoom));
+                        doors.Add(new Door(locations[9], doorSizeSide, nextRoom, 'C', thisType, item, locations[9], curRoom));
                     }
                     else if (objName.Equals("secret"))
                     {
-                        doors.Add(new Door(game, locations[10], doorSizeMiddle, nextRoom, 'S', thisType, item, locations[6], curRoom));
+                        doors.Add(new Door(locations[10], doorSizeMiddle, nextRoom, 'S', thisType, item, locations[6], curRoom));
                     }
                     else if (objName.Equals("Down"))
                     {
-                        doors.Add(new Door(game, locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
+                        doors.Add(new Door(locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
                     }
 
                     if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
@@ -145,7 +145,7 @@ namespace Sprint5
                 }
             }
 
-            if (curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors[6].open)
+            if (curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors.ContainsKey(6) && lockedDoors[6].open)
             {
                 CloseDoor(6);
             }

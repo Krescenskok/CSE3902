@@ -2317,7 +2317,7 @@
 			<Item>
 				<ObjectType>Enemy</ObjectType>
 				<ObjectName>Aquamentus</ObjectName>
-				<Location>3 8</Location>
+				<Location>2 8</Location>
 				<Alive>true</Alive>
 			</Item>
 		</Room>

@@ -52,7 +52,7 @@ namespace Sprint5
 
         public void Update()
         {
-            if (!aquamentus.checkAlive())
+            if (!aquamentus.CheckAlive())
             {
                 Die();
             }

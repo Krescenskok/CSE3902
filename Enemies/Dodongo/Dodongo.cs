@@ -32,9 +32,11 @@ namespace Sprint5
 
         public IEnemyState State { get => dodongoState; }
 
+        public int HP { get; private set; } = HPAmount.EnemyBoss2;
+
         public List<ICollider> Colliders { get => new List<ICollider> { dodongoCollider, faceCollider }; }
 
-        public Dodongo(Game game, Vector2 initialPos, XElement xml)
+        public Dodongo(Vector2 initialPos, XElement xml)
         {
             dodongoPos = initialPos;
             dodongoHP = 3;
@@ -112,7 +114,7 @@ namespace Sprint5
             Sounds.Instance.Play(damagedSoundFile);
         }
 
-        public Boolean checkAlive()
+        public Boolean CheckAlive()
         {
             return dodongoHP >= 0;
         }

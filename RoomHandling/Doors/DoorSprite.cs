@@ -60,10 +60,5 @@ namespace Sprint5
         }
 
 
-        public void Load(Game game)
-        {
-
-            //do nothing
-        }
     }
 }

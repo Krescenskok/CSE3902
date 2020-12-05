@@ -43,7 +43,7 @@ namespace Sprint5
                 else if (name.Equals("Keese")) return new Keese(game, location, item);
                 else if (name.Equals("Goriya")) return new Goriya(game, location, item);
                 else if (name.Equals("WallMaster")) return new WallMaster(game, location, item);
-                else if (name.Equals("Aquamentus")) return new Aquamentus(game, location, item, game.LinkPlayer);
+                else if (name.Equals("Aquamentus")) return new Aquamentus(location, item, game.LinkPlayer);
                 else if (name.Equals("Trap"))
                 {
                     string dir1 = item.Element("Direction1").Value;
@@ -51,7 +51,7 @@ namespace Sprint5
                     return new BladeTrap(game, location, dir1, dir2);
                 }
                 else if (name.Equals("Rope")) return new Rope(game, location, item);
-                else if (name.Equals("Dodongo")) return new Dodongo(game, location, item);
+                else if (name.Equals("Dodongo")) return new Dodongo(location, item);
             }
             
 
