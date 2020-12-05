@@ -48,7 +48,7 @@ namespace Sprint5
 
             if (difficulty == selectedDiff.Navice)
             {
-                batch.DrawString(font, "selected ->", navice, Color.Black);
+                batch.DrawString(font, "selected ", navice, Color.Black);
                 navice.X = navice.X + 100;
             }
             if (currentItem == selectedDiff.Navice) batch.DrawString(font, "Navice", navice, Color.Black);
@@ -57,7 +57,7 @@ namespace Sprint5
 
             if (difficulty == selectedDiff.Normal)
             {
-                batch.DrawString(font, "selected ->", normal, Color.Black);
+                batch.DrawString(font, "selected ", normal, Color.Black);
                 normal.X = normal.X + 100;
             }
             if (currentItem == selectedDiff.Normal) batch.DrawString(font, "Normal", normal, Color.Black);
@@ -66,7 +66,7 @@ namespace Sprint5
 
             if (difficulty == selectedDiff.Tough)
             {
-                batch.DrawString(font, "selected ->", tough, Color.Black);
+                batch.DrawString(font, "selected ", tough, Color.Black);
                 tough.X = tough.X + 100;
             }
             if (currentItem == selectedDiff.Tough) batch.DrawString(font, "Tough", tough, Color.Black);
@@ -75,7 +75,7 @@ namespace Sprint5
 
             if (difficulty == selectedDiff.Nightmare)
             {
-                batch.DrawString(font, "selected ->", nightmare, Color.Black);
+                batch.DrawString(font, "selected ", nightmare, Color.Black);
                 nightmare.X = nightmare.X + 100;
             }
             if (currentItem == selectedDiff.Nightmare) batch.DrawString(font, "Nightmare", nightmare, Color.Black);

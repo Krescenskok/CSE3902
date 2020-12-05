@@ -60,5 +60,9 @@ namespace Sprint5
 
             game.ActiveCommand = ChangeCommand;
         }
+        public Keys getKey()
+        {
+            return Keys.Zoom;
+        }
     }
 }
