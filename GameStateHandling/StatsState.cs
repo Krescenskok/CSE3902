@@ -29,10 +29,14 @@ namespace Sprint5.GameStateHandling
                 game.ActiveCommand.Update(gameTime);
 
             Sounds.Instance.Update();
+            
         }
         public void Draw(SpriteFont font, Game1 game, GameTime gameTime)
         {
-            StatsScreen.Instance.Draw(game.Spritebatch, game, font, gameTime);
+            if (game.ActiveCommand != null)
+                game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
+
+            StatsScreen.Instance.Draw(game, gameTime);
         }
     }
 }

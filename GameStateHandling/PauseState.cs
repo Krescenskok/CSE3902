@@ -41,13 +41,17 @@ namespace Sprint5.GameStateHandling
             RoomEnemies.Instance.DrawTests(game.Spritebatch);
             game.Spritebatch.End();
 
-            PauseScreen.Instance.Draw(game.Spritebatch, game, font);
+            PauseScreen.Instance.Draw(game, gameTime);
 
         }
             public void Update(Game1 game, GameTime gameTime)
             {
+            if (game.ActiveCommand != null)
+                game.ActiveCommand.Update(gameTime);
 
-            }
+                Sounds.Instance.Update();
+
+        }
         
     }
 }

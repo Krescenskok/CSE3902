@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.Menus;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +31,7 @@ namespace Sprint5.GameStateHandling
             if (game.ActiveCommand != null)
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
 
-            game.mainScreen.Draw(game.Spritebatch, game, font);
+            MainMenuScreen.Instance.Draw(game, gameTime);
 
             game.Spritebatch.End();
         }

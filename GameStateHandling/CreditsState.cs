@@ -34,7 +34,9 @@ namespace Sprint5.GameStateHandling
         }
         public void Draw(SpriteFont font, Game1 game, GameTime gameTime)
         {
-            CreditsScreen.Instance.Draw(game.Spritebatch, game, font, gameTime);
+            if (game.ActiveCommand != null)
+                game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
+            CreditsScreen.Instance.Draw(game, gameTime);
         }
     }
 }

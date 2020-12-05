@@ -103,7 +103,22 @@ namespace Sprint5
                 WinState.Instance.Update(Game, gameTime);
                 Current = WinState.Instance;
             }
-            
+            else if (Id == StateId.Sound)
+            {
+                SoundState.Instance.Update(Game, gameTime);
+                Current = SoundState.Instance;
+            }
+            else if (Id == StateId.Options)
+            {
+                OptionsState.Instance.Update(Game, gameTime);
+                Current = OptionsState.Instance;
+            }
+            else if (Id == StateId.Controls)
+            {
+                ControlsState.Instance.Update(Game, gameTime);
+                Current = ControlsState.Instance;
+            }
+
         }
 
         public void Draw(SpriteFont font, GameTime gameTime)
@@ -139,6 +154,21 @@ namespace Sprint5
             else if (Id == StateId.Win)
             {
                 WinState.Instance.Draw(font, Game, gameTime);
+            }
+            else if (Id == StateId.Sound)
+            {
+                SoundState.Instance.Draw(font, Game, gameTime);
+                Current = SoundState.Instance;
+            }
+            else if (Id == StateId.Options)
+            {
+                OptionsState.Instance.Draw(font, Game, gameTime);
+                Current = OptionsState.Instance;
+            }
+            else if (Id == StateId.Controls)
+            {
+                ControlsState.Instance.Draw(font, Game, gameTime);
+                Current = ControlsState.Instance;
             }
         }
     }
