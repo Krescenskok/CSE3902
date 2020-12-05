@@ -31,6 +31,12 @@
 				<Type>locked</Type>
 				<RoomNum>4</RoomNum>
 			</Item>
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Down</ObjectName>
+				<Type>normal</Type>
+				<RoomNum>19</RoomNum>
+			</Item>
 		
 			
 			<!-- Doors-->
@@ -68,7 +74,12 @@
 			</Item>
 			<Item>
 				<ObjectType>Wall</ObjectType>
-				<ObjectName>Bottom</ObjectName>
+				<ObjectName>BottomRight</ObjectName>
+				<Location>0 0</Location>
+			</Item>
+			<Item>
+				<ObjectType>Wall</ObjectType>
+				<ObjectName>Bottomleft</ObjectName>
 				<Location>0 0</Location>
 			</Item>
 			<!-- Walls-->
@@ -2633,7 +2644,45 @@
 			</Item>
 			
 		</Room>
-		
+
+		<!--Extra Room-->
+		<Room id ="19">
+
+			<!-- Doors-->
+			<Item>
+				<ObjectType>Door</ObjectType>
+				<ObjectName>Up</ObjectName>
+				<Type>normal</Type>
+				<RoomNum>1</RoomNum>
+			</Item>
+			<!-- Doors-->
+
+			<!-- Enemies-->
+			<Item>
+				<ObjectType>Enemy</ObjectType>
+				<ObjectName>Dodongo</ObjectName>
+				<Location>3 8</Location>
+				<Alive>true</Alive>
+			</Item>
+			<!-- Enemies-->
+
+			<!--Items-->
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>BlueRing</ObjectName>
+				<Location>5 5</Location>
+				<Alive>true</Alive>
+			</Item>
+			<Item>
+				<ObjectType>Item</ObjectType>
+				<ObjectName>Boomerang</ObjectName>
+				<Location>2 5</Location>
+				<Alive>true</Alive>
+			</Item>
+			<!--Items-->
+			
+		</Room>
+		<!--Extra Room-->
 		
 	</Asset>
 </XnaContent>

@@ -43,7 +43,7 @@ namespace Sprint5.Items
             this.item = item;
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
-            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 

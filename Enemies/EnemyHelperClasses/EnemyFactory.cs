@@ -51,6 +51,7 @@ namespace Sprint5
                     return new BladeTrap(game, location, dir1, dir2);
                 }
                 else if (name.Equals("Rope")) return new Rope(game, location, item);
+                else if (name.Equals("Dodongo")) return new Dodongo(game, location, item);
             }
             
 
