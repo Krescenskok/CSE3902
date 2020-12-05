@@ -62,8 +62,6 @@ namespace Sprint5.Items
         {
             if (saveInfo != null)
                 saveInfo.SetElementValue("Alive", "false");
-            else
-                state.Expire();
             
         }
 

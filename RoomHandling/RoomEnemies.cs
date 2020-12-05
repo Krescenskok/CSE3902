@@ -63,11 +63,13 @@ namespace Sprint5
         {
             for(int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].Update();
+                if (enemies[i] != null)
+                    enemies[i].Update();
             }
             for (int i = 0; i < deaths.Count; i++)
             {
-                deaths[i].Update();
+                if (deaths[i] != null)
+                    deaths[i].Update();
             }
         }
 
@@ -78,12 +80,14 @@ namespace Sprint5
             
             for (int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].Draw(batch);
+                if (enemies[i] != null)
+                    enemies[i].Draw(batch);
             }
 
             for(int i = 0; i < deaths.Count; i++)
             {
-                deaths[i].Draw(batch);
+                if (deaths[i] != null)
+                    deaths[i].Draw(batch);
             }
         }
 
