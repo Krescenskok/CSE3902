@@ -20,19 +20,9 @@ namespace Sprint5.Items
         private readonly Vector2 swordBeamDimensions = new Vector2(1, 6);
 
         private static ItemsFactory instance = new ItemsFactory();
+        public static ItemsFactory Instance { get => instance; }
 
-        public static ItemsFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
-        public ItemsFactory()
-        {
-
-        }
+        public ItemsFactory() { }
 
         public void LoadItemsTextures(ContentManager content)
         {
@@ -95,42 +85,20 @@ namespace Sprint5.Items
 
         public ISprite CreateWandBeamSprite(string direction)
         {
-            if (direction.Equals("Right"))
-            {
-                return new WandBeamRightSprite(wandBeamSheet);
-            }
-            if (direction.Equals("Left"))
-            {
-                return new WandBeamLeftSprite(wandBeamSheet);
-            }
-            if (direction.Equals("Up"))
-            {
-                return new WandBeamUpSprite(wandBeamSheet);
-            }
-            else
-            {
-                return new WandBeamDownSprite(wandBeamSheet);
-            }
+            if (direction.Equals("Right"))  return new WandBeamRightSprite(wandBeamSheet); 
+            if (direction.Equals("Left"))  return new WandBeamLeftSprite(wandBeamSheet); 
+            if (direction.Equals("Up"))  return new WandBeamUpSprite(wandBeamSheet);  
+            return new WandBeamDownSprite(wandBeamSheet); 
         }
 
         public ISprite CreateArrowSprite(string direction)
         {
-            if (direction.Equals("Right"))
-            {
-                return new ArrowRightSprite(itemsSpriteSheet);
-            }
-            if (direction.Equals("Left"))
-            {
-                return new ArrowLeftSprite(itemsSpriteSheet);
-            }
-            if (direction.Equals("Up"))
-            {
-                return new ArrowUpSprite(itemsSpriteSheet);
-            }
-            else
-            {
-                return new ArrowDownSprite(itemsSpriteSheet);
-            }
+            if (direction.Equals("Right")) return new ArrowRightSprite(itemsSpriteSheet); 
+            if (direction.Equals("Left")) 
+                return new ArrowLeftSprite(itemsSpriteSheet); 
+            if (direction.Equals("Up")) 
+                return new ArrowUpSprite(itemsSpriteSheet); 
+            return new ArrowDownSprite(itemsSpriteSheet); 
         }
 
         public ISprite CreateBlueCandleSprite()

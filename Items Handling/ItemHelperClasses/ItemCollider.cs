@@ -20,11 +20,8 @@ namespace Sprint5.Items
         public ItemCollider(Rectangle rect, IItems item, IItemsState state)
         {
             bounds = rect;
-
             this.item = item;
-
             this.state = item.State;
-
             CollisionHandler.Instance.AddCollider(this, Layers.Item);
         }
 
@@ -36,7 +33,6 @@ namespace Sprint5.Items
         public Rectangle Bounds()
         {
             return bounds;
-            
         }
 
         public bool CompareTag(string tag)
@@ -51,23 +47,14 @@ namespace Sprint5.Items
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
-
             if (col.CompareTag("Player"))
             {
-
                     col.SendMessage("Item", this.item);
-                
             }
-
-
-
-
         }
-        //on impact, damage enemies if projectile, so its just one damage action
+
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-
             if (col.CompareTag("Player"))
             {
                 col.SendMessage("Item", this.item);
@@ -87,16 +74,9 @@ namespace Sprint5.Items
             {
                 this.item.Expire();
                 this.item.State.Expire();
-            }
-            
+            }            
         }
 
-        //can probably be deleted//
-        public void Update(IItems itemObj)
-        {
-            this.state = itemObj.State;
-            bounds.Location = itemObj.Location.ToPoint();
-        }
 
         public void Update()
         {
