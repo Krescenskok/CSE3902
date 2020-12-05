@@ -20,7 +20,7 @@ namespace Sprint5
         {
             bounds = rect;
             this.dodongo = dodongo;
-            this.name = "DodongoFace"
+            this.name = "DodongoFace";
             dodongoBase = dongo;
             CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
 
