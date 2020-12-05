@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Sprint5
 {
@@ -7,5 +8,6 @@ namespace Sprint5
     {
         public void HandleInput(Game1 game);
 
+        public Keys getKey();
     }
 }

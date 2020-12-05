@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Sprint5.InputHandling;
 namespace Sprint5
 {
     public class ControlMenuTexture
@@ -25,7 +25,7 @@ namespace Sprint5
             texture = text;
             end = new Point(260, 320);
             background = SpriteFactory.Instance.CreateBlackScreen();
-            initializeItemList();
+            listOptions = UpdatingControls.Instance.initializeItemList(listOptions);
             Menu = menu;
         }
 
@@ -40,7 +40,6 @@ namespace Sprint5
             {
                 listOptions[i].Draw(batch, font);
             }
-
         }
         public void goUp()
         {
@@ -109,26 +108,44 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
             if (selected == listOptions.Length) mainScreen.State = MenuState.main;
+            else
+            {
+                UpdatingControls.Instance.setWait(this);
+                UpdatingControls.Instance.waitKey(listOptions[listOptions.Length-1].KeyA);
+            }
         }
-
-        public void initializeItemList()
+        public void swappingBindings()
         {
-            listOptions = new ControlStringList[14];
-            listOptions[0] = new ControlStringList(Keys.W, Keys.Up, "Move Up - ", new Vector2(20, 105));
-            listOptions[1] = new ControlStringList(Keys.A, Keys.Left, "Move Left - ", new Vector2(20, 125));
-            listOptions[2] = new ControlStringList(Keys.S, Keys.Down, "Move Down - ", new Vector2(20, 145));
-            listOptions[3] = new ControlStringList(Keys.D, Keys.Right, "Move Right - ", new Vector2(20, 165));
-            listOptions[4] = new ControlStringList(Keys.G, Keys.Zoom, "Pause - ", new Vector2(20, 185));
-            listOptions[5] = new ControlStringList(Keys.Q, Keys.Zoom, "Exit Game - ", new Vector2(20, 205));
-            listOptions[6] = new ControlStringList(Keys.F, Keys.Zoom, "Full Screen - ", new Vector2(20, 225));
-            listOptions[7] = new ControlStringList(Keys.N, Keys.Zoom, "Attack One - ", new Vector2(20, 245));
-            listOptions[8] = new ControlStringList(Keys.B, Keys.Zoom, "Attack Two - ", new Vector2(20, 265));
-            listOptions[9] = new ControlStringList(Keys.M, Keys.Zoom, "Mute - ", new Vector2(20, 285));
-            listOptions[10] = new ControlStringList(Keys.Space, Keys.Zoom, "Inventory - ", new Vector2(20, 305));
-            listOptions[11] = new ControlStringList(Keys.U, Keys.Zoom, "Left Inven. - ", new Vector2(20, 325));
-            listOptions[12] = new ControlStringList(Keys.I, Keys.Zoom, "Right Inven. - ", new Vector2(20, 345));
-            listOptions[13] = new ControlStringList(Keys.Enter, Keys.Zoom, "Select - ", new Vector2(20, 365));
-            listOptions[0].SelectedA = true;
+            Keys currentKey;
+            Keys keyToChange;
+            if (listOptions[selected].SelectedB)
+            {
+                currentKey = listOptions[selected].KeyB;
+                keyToChange = Menu.Game.Controllers[1].getKey();
+                if (ChangeBinding.Instance.SwapKeys(currentKey, keyToChange, GamePlayCommands.Instance))
+                {
+                    for (int i = 0; i < listOptions.Length; i++)
+                    {
+                        if (listOptions[i].KeyA == keyToChange) listOptions[i].KeyA = currentKey;
+                        else if (listOptions[i].KeyB == keyToChange) listOptions[i].KeyB = currentKey;
+                    }
+                }
+                listOptions[selected].KeyB = keyToChange;
+            }
+            else
+            {
+                currentKey = listOptions[selected].KeyA;
+                keyToChange = Menu.Game.Controllers[1].getKey();
+                if (ChangeBinding.Instance.SwapKeys(currentKey, keyToChange, GamePlayCommands.Instance))
+                {
+                    for (int i = 0; i < listOptions.Length; i++)
+                    {
+                        if (listOptions[i].KeyA == keyToChange) listOptions[i].KeyA = currentKey;
+                        else if (listOptions[i].KeyB == keyToChange) listOptions[i].KeyB = currentKey;
+                    }
+                }
+                listOptions[selected].KeyA = keyToChange;
+            }
         }
     }
 }

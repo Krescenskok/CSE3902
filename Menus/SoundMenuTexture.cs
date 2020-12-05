@@ -54,7 +54,7 @@ namespace Sprint5
 
             if (selectedSong == selectedSound.Song1)
             {
-                batch.DrawString(font, "selected ->", S1, Color.Black);
+                batch.DrawString(font, "selected ", S1, Color.Black);
                 S1!.X = S1!.X + 100;
             }
             if (currentItem == selectedSound.Song1) batch.DrawString(font, "Classic Zelda", S1, Color.Black);
@@ -63,7 +63,7 @@ namespace Sprint5
 
             if (selectedSong == selectedSound.Song2)
             {
-                batch.DrawString(font, "selected ->", S2, Color.Black);
+                batch.DrawString(font, "selected ", S2, Color.Black);
                 S2.X = S2.X + 100;
             }
             if (currentItem == selectedSound.Song2) batch.DrawString(font, "Tron: Legacy Theme", S2, Color.Black);
@@ -72,7 +72,7 @@ namespace Sprint5
 
             if (selectedSong == selectedSound.Song3)
             {
-                batch.DrawString(font, "selected ->", S3, Color.Black);
+                batch.DrawString(font, "selected ", S3, Color.Black);
                 S3.X = S3.X + 100;
             }
             if (currentItem == selectedSound.Song3) batch.DrawString(font, "Doom Theme", S3, Color.Black);
@@ -81,7 +81,7 @@ namespace Sprint5
 
             if (selectedSong == selectedSound.Song4)
             {
-                batch.DrawString(font, "selected ->", S4, Color.Black);
+                batch.DrawString(font, "selected ", S4, Color.Black);
                 S4.X = S4.X + 100;
             }
             if (currentItem == selectedSound.Song4) batch.DrawString(font, "September - Earth, Wind, and Fire", S4, Color.Black);

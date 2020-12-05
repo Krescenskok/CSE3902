@@ -77,6 +77,7 @@ namespace Sprint5
             PauseCommands.Instance.LoadCommands(this);
             WinLoseCommands.Instance.LoadCommands(this);
             EndMenuCommands.Instance.LoadCommands(this);
+            WaitingCommand.Instance.LoadCommands(this);
 
             Controllers = new List<IController>();
             Controllers.Add(new GamePadController(this));
