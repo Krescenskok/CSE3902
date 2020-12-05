@@ -27,7 +27,7 @@ namespace Sprint5
             spriteSize.Y = texture.Bounds.Height;
 
             drawSize.X = size.X * 6;
-            drawSize.Y = size.Y * 6;
+            drawSize.Y = size.Y * 7;
         }
 
 
