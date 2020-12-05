@@ -126,6 +126,7 @@ namespace Sprint5
             IsDead = false;
             IsShootingProjectile = false;
             DamDir = Direction.none;
+            IsInvincible = false;
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
