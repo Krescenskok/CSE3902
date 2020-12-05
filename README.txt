@@ -51,4 +51,16 @@ Code Analysis on Items (Done by Ann)
 
 
 
+Code Analysis on Difficulty Handling (Done by Andrew)
+0 errors, 0 warnings
+- Collection initialization can be simplified; has to be initialized in this manner though
 
+
+
+Code Analysis on Collisions (Done by Andrew)
+0 errors, 0 warnings
+
+
+
+Code Analysis on Menu (Done by Andrew and Noah)
+0 errors, 0 warnings
