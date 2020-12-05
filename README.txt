@@ -26,6 +26,7 @@ Known Bugs:
 Notes:
 - In the inventory, the bow is intended to be drawing over the arrow once obtained, but only the bow should show up in the slot selection. 
 - The Magic Book item is used as an invincibility item (it is not the same as the original game implementation). When Link collects it, he will be invincible for a short moment, and if he runs into enemies while invincible, he will damage them. 
+-Please read the Sound Read Me for song credits
 
 
 Code Analysis on Link (Done by Krescens)
