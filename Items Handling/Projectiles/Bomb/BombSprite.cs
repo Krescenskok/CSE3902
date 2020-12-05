@@ -15,6 +15,10 @@ namespace Sprint5.Items
         private Vector2 sheetSize;
         private const int sheetLocation = 36;
 
+        private Rectangle hitbox;
+
+        public Rectangle Hitbox { get => hitbox; }
+
         public BombSprite(Texture2D texture)
         {
             this.texture = texture;
