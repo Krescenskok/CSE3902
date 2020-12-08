@@ -36,7 +36,7 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if ((Input == "E" || Input == "X") && ((game as Game1).State.Id == StateId.Win || (game as Game1).State.Id == StateId.GameOver))
+            if ((Input == "E" || Input == "X") && ((game as Game1).State.Current.Id == StateId.Win || (game as Game1).State.Current.Id == StateId.GameOver))
             {
                 (game as Game1).State.Previous = (game as Game1).State.Current;
                 this.Dest = CreditsState.Instance;
@@ -44,7 +44,7 @@ namespace Sprint5
             }
             else if (Input == "F" || Input == "Y")
             {
-                if ((game as Game1).State.Id == StateId.GameOver || (game as Game1).State.Id == StateId.Win)
+                if ((game as Game1).State.Current.Id == StateId.GameOver || (game as Game1).State.Current.Id == StateId.Win)
                 {
                     this.Dest = StatsState.Instance;
                 }
@@ -55,7 +55,7 @@ namespace Sprint5
                 }
             }
 
-            (game as Game1).State.Swap(Dest);
+            (game as Game1).State.Swap(Dest.Id);
         }
     }
 }

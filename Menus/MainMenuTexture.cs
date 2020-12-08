@@ -83,7 +83,7 @@ namespace Sprint5
         public void select(MainMenu mainScreen)
         {
 
-            if (currentItem == selectedMain.start) mainScreen.Game.State.Id = StateId.Gameplay;
+            if (currentItem == selectedMain.start) mainScreen.Game.State.Swap(StateId.Gameplay);
             else if (currentItem == selectedMain.difficulty) mainScreen.State = MenuState.difficulty;
             else if (currentItem == selectedMain.controls) mainScreen.State = MenuState.controls;
             else if (currentItem == selectedMain.sound) mainScreen.State = MenuState.sound;

@@ -36,25 +36,25 @@ namespace Sprint5
         {
             if (DoorPause == "NotDoor")
             {
-                if ((game as Game1).State.Id == StateId.Pause)
+                if ((game as Game1).State.Current.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = StateId.Gameplay;
+                    (game as Game1).State.Swap(StateId.Gameplay);
                 } else
                 {
-                    (game as Game1).State.Id = StateId.Pause;
+                    (game as Game1).State.Swap(StateId.Pause);
                 }
                 Player.Paused = !Player.Paused;
                 Sounds.Instance.TogglePause();
             }
             else
             {
-                if ((game as Game1).State.Id == StateId.Pause)
+                if ((game as Game1).State.Current.Id == StateId.Pause)
                 {
-                    (game as Game1).State.Id = StateId.Gameplay;
+                    (game as Game1).State.Swap(StateId.Gameplay);
                 }
                 else
                 {
-                    (game as Game1).State.Id = StateId.Pause;
+                    (game as Game1).State.Swap(StateId.Pause);
                 }
                 Player.Paused = !Player.Paused;
                 Sounds.Instance.TogglePause();

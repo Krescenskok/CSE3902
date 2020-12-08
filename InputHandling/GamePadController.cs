@@ -39,32 +39,33 @@ namespace Sprint5
         }
         private void StateControl(Game1 game)
         {
-            if (game.State.Id == StateId.Gameplay)
+ 
+            if (game.State.Current.Id == StateId.Gameplay)
             {
                 CommandsList = GamePlayCommands.Instance.ButtonCommands;
                 MovementButtons = GamePlayCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.Pause)
+            else if (game.State.Current.Id == StateId.Pause)
             {
                 CommandsList = PauseCommands.Instance.ButtonCommands;
                 MovementButtons = PauseCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.MainMenu)
+            else if (game.State.Current.Id == StateId.MainMenu)
             {
                 CommandsList = MenuCommands.Instance.ButtonCommands;
                 MovementButtons = MenuCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.Inventory)
+            else if (game.State.Current.Id == StateId.Inventory)
             {
                 CommandsList = InventoryCommands.Instance.ButtonCommands;
                 MovementButtons = InventoryCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.Win || game.State.Id == StateId.GameOver)
+            else if (game.State.Current.Id == StateId.Win || game.State.Current.Id == StateId.GameOver)
             {
                 CommandsList = WinLoseCommands.Instance.ButtonCommands;
                 MovementButtons = WinLoseCommands.Instance.MovementButtons;
             }
-            else if (game.State.Id == StateId.Stats || game.State.Id == StateId.Credits)
+            else if (game.State.Current.Id == StateId.Stats || game.State.Current.Id == StateId.Credits)
             {
                 CommandsList = EndMenuCommands.Instance.ButtonCommands;
                 MovementButtons = EndMenuCommands.Instance.MovementButtons;
