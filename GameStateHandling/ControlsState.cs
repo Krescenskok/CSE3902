@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Menus;
+using Sprint5.ScreenHandling;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sprint5.GameStateHandling
 {
@@ -12,6 +11,7 @@ namespace Sprint5.GameStateHandling
         private static readonly ControlsState instance = new ControlsState();
         public StateId Id { get; } = StateId.Controls;
         public IGameStates Parent { get; set; }
+        public List<String> Options { get; set; }
         public static ControlsState Instance
         {
             get
@@ -19,9 +19,11 @@ namespace Sprint5.GameStateHandling
                 return instance;
             }
         }
+
+        public IScreen Screen { get; set; }
+
         private ControlsState()
         {
-
         }
         public void Update(Game1 game, GameTime gameTime)
         {
@@ -32,9 +34,11 @@ namespace Sprint5.GameStateHandling
         }
         public void Draw(SpriteFont font, Game1 game, GameTime gameTime)
         {
+            game.Spritebatch.Begin();
             if (game.ActiveCommand != null)
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
-            ControlsScreen.Instance.Draw(game, gameTime);
+            game.Spritebatch.End();
+            Screen.Draw(game, gameTime);
         }
     }
 }

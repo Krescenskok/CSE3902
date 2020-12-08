@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Sprint5.ScreenHandling;
 
 namespace Sprint5.GameStateHandling
 {
@@ -18,6 +16,9 @@ namespace Sprint5.GameStateHandling
                 return instance;
             }
         }
+
+        public IScreen Screen { get; set; }
+
         private TransitionState()
         {
 

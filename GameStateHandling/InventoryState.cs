@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.ScreenHandling;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sprint5.GameStateHandling
 {
@@ -12,6 +12,7 @@ namespace Sprint5.GameStateHandling
 
         public StateId Id { get; } = StateId.Inventory;
         public IGameStates Parent { get; set; }
+        public List<String> Options { get; set; }
         public static InventoryState Instance
         {
             get
@@ -19,6 +20,9 @@ namespace Sprint5.GameStateHandling
                 return instance;
             }
         }
+
+        public IScreen Screen { get; set; }
+
         private InventoryState()
         {
 

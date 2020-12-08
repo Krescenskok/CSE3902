@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Menus;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Sprint5.ScreenHandling;
 
 namespace Sprint5.GameStateHandling
 {
@@ -12,6 +9,9 @@ namespace Sprint5.GameStateHandling
         private static readonly WinState instance = new WinState();
         public StateId Id { get; } = StateId.Win;
         public IGameStates Parent { get; set; }
+
+        public IScreen Screen { get; set; } = new WinScreen();
+
         public static WinState Instance
         {
             get
@@ -29,14 +29,14 @@ namespace Sprint5.GameStateHandling
                 game.ActiveCommand.Update(gameTime);
 
             Sounds.Instance.Update();
-            WinState.Instance.Update(game, gameTime);
         }
         public void Draw(SpriteFont font, Game1 game, GameTime gameTime)
         {
+            game.Spritebatch.Begin();
             if (game.ActiveCommand != null)
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
-
-            WinScreen.Instance.Draw(game, gameTime);
+            game.Spritebatch.End();
+            Screen.Draw(game, gameTime);
         }
     }
 }

@@ -62,26 +62,6 @@ namespace Sprint5
             creditsScreenTexture = content.Load<Texture2D>("CreditsScreen");
             statsScreenTexture = content.Load<Texture2D>("StatsScreen");
         }
-        public PauseSprite CreatePauseSprite()
-        {
-            return new PauseSprite(pauseScreenTexture);
-        }
-        public GameOverSprite CreateGameOverSprite()
-        {
-            return new GameOverSprite(gameOverScreenTexture);
-        }
-        public StatsSprite CreateStatsSprite()
-        {
-            return new StatsSprite(statsScreenTexture);
-        }
-        public CreditsSprite CreateCreditsSprite()
-        {
-            return new CreditsSprite(creditsScreenTexture);
-        }
-        public WinSprite CreateWinSprite()
-        {
-            return new WinSprite(winScreenTexture);
-        }
         public LinkSprite CreateLinkSprite()
         {
 

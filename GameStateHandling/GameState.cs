@@ -24,8 +24,6 @@ namespace Sprint5
             Game = game;
             Id = initialState.Id;
             Current = initialState;
-
-
         }
 
         public void Swap(IGameStates swapTo)
