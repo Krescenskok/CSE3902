@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sprint5
 {
-    class DodongoDamagedSprite : ISprite
+    class DodongoDamagedSprite : EnemySprite
     {
         Texture2D texture;
         private static int[] horizontalSpriteSize = { 32, 16 };
@@ -51,6 +51,11 @@ namespace Sprint5
             }
             drawSize.X = spriteSize[0] * spriteSizeIndex;
             drawSize.Y = spriteSize[1] * spriteSizeIndex;
+        }
+
+        public void Update()
+        {
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)

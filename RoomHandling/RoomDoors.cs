@@ -90,59 +90,52 @@ namespace Sprint5
             if (lockedDoorSprites.Count == 0) LoadSpecialDoors();
             lockedDoors.Clear();
 
-            List<XElement> items = room.Elements("Item").ToList();
-            foreach (XElement item in items)
+            List<XElement> doorItems = room.Elements("Door").ToList();
+            foreach (XElement item in doorItems)
             {
-                XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
+                XElement directionTag = item.Element("Direction");
+                
+                string direction = directionTag.Value;
                 
 
-                string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                
+                XElement roomTag = item.Element("RoomNum");
+                int nextRoom = int.Parse(roomTag.Value);
 
-                if (objType.Equals("Door"))
-                {
+                XElement doorTypeTag = item.Element("Type");
 
-                    XElement roomTag = item.Element("RoomNum");
-                    int nextRoom = int.Parse(roomTag.Value);
-
-                    XElement doorTypeTag = item.Element("Type");
-
-                    DoorType thisType = DoorTypes.Parse(doorTypeTag.Value);
+                DoorType thisType = DoorTypes.Parse(doorTypeTag.Value);
 
                     
 
-                    if (objName.Equals("Left"))
-                    {
-                        doors.Add(new Door(locations[0], doorSizeSide, nextRoom, 'L', thisType, item,locations[4], curRoom));
-                    }
-                    else if (objName.Equals("Right"))
-                    {
-                        doors.Add(new Door(locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
-                        
-                        
-                    }
-                    else if (objName.Equals("Up"))
-                    {
-                        doors.Add(new Door(locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
-                    } 
-                    else if (objName.Equals("Center"))
-                    {
-                        doors.Add(new Door(locations[9], doorSizeSide, nextRoom, 'C', thisType, item, locations[9], curRoom));
-                    }
-                    else if (objName.Equals("secret"))
-                    {
-                        doors.Add(new Door(locations[10], doorSizeMiddle, nextRoom, 'S', thisType, item, locations[6], curRoom));
-                    }
-                    else if (objName.Equals("Down"))
-                    {
-                        doors.Add(new Door(locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
-                    }
-
-                    if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
-
+                if (direction.Equals("Left"))
+                {
+                    doors.Add(new Door(locations[0], doorSizeSide, nextRoom, 'L', thisType, item,locations[4], curRoom));
                 }
+                else if (direction.Equals("Right"))
+                {
+                    doors.Add(new Door(locations[1], doorSizeSide, nextRoom, 'R', thisType, item, locations[5], curRoom));
+                        
+                        
+                }
+                else if (direction.Equals("Up"))
+                {
+                    doors.Add(new Door(locations[2], doorSizeMiddle, nextRoom, 'T', thisType, item, locations[6], curRoom));
+                } 
+                else if (direction.Equals("Center"))
+                {
+                    doors.Add(new Door(locations[9], doorSizeSide, nextRoom, 'C', thisType, item, locations[9], curRoom));
+                }
+                else if (direction.Equals("secret"))
+                {
+                    doors.Add(new Door(locations[10], doorSizeMiddle, nextRoom, 'S', thisType, item, locations[6], curRoom));
+                }
+                else if (direction.Equals("Down"))
+                {
+                    doors.Add(new Door(locations[3], doorSizeMiddle, nextRoom, 'B', thisType, item, locations[7], curRoom));
+                }
+
+                if (!thisType.Equals(DoorType.normal)) lockedDoors[curRoom] = doors[doors.Count - 1];
+
             }
 
             if (curRoom == 6 && !RoomEnemies.Instance.allDead && lockedDoors.ContainsKey(6) && lockedDoors[6].open)
@@ -155,7 +148,6 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch)
         {
-          
             foreach(KeyValuePair<int,DoorSprite> pair in lockedDoorSprites)
             {
                 pair.Value.Draw(batch);

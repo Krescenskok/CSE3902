@@ -15,7 +15,7 @@ namespace Sprint5
     class Aquamentus : IEnemy
     {
         public IEnemyState state;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private LinkPlayer link;
         private Vector2 aquamentusPos;
         private AquamentusNormalSprite aquamentusSprite;
@@ -69,7 +69,7 @@ namespace Sprint5
         {
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
         }
@@ -157,8 +157,8 @@ namespace Sprint5
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
-
-
+            sprite.Update();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

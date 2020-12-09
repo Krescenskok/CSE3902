@@ -22,10 +22,6 @@ namespace Sprint5
     /// </summary>
     public class RoomSpawner
     {
-
-        private static readonly RoomSpawner instance = new RoomSpawner();
-
-        
         Dictionary<int, XElement> roomXMLs;
 
         List<RoomSprite> roomSprites;
@@ -48,13 +44,7 @@ namespace Sprint5
         }
 
 
-        public static RoomSpawner Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static RoomSpawner Instance { get; } = new RoomSpawner();
 
         private RoomSpawner()
         {
@@ -62,6 +52,8 @@ namespace Sprint5
             xml.Attribute("Type").Name.ToString();
             roomXMLs = xml.Elements("Room").ToDictionary(p => Int32.Parse(p.Attribute("id").Value));
 
+
+            
         }
 
         public void Reset()
@@ -74,6 +66,17 @@ namespace Sprint5
             RoomDoors.Instance.Reset();
         }
 
+
+        public void LoadCustomRooms(Game game, string file)
+        {
+            xml = XElement.Load("../../../XMLLoading/" + file + ".xml");
+            roomXMLs = xml.Elements("Room").ToDictionary(p => int.Parse(p.Attribute("id").Value));
+
+            roomSprites = RoomGenerator.RoomSprites(xml);
+            roomSpritesTopLayer = RoomGenerator.RoomSpritesTop(xml);
+        }
+
+        
     
         public void LoadRoom(Game game, int roomNumber)
         {            
@@ -109,18 +112,29 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch)
         {
-            allRooms.Draw(batch);
+            //allRooms.Draw(batch);
+            foreach (RoomSprite sprite in roomSprites)
+            {
+                sprite.Draw(batch);
+            }
+
             RoomDoors.Instance.Draw(batch);
             
             RoomBlocks.Instance.Draw(batch);
             RoomEnemies.Instance.Draw(batch);
             RoomItems.Instance.Draw(batch);
             RoomNPCs.Instance.Draw(batch);
+
+            
         }
 
         public void DrawTopLayer(SpriteBatch batch)
         {
-            topLayer.Draw(batch);
+            //topLayer.Draw(batch);
+            foreach(RoomSprite sprite in roomSpritesTopLayer)
+            {
+                sprite.Draw(batch);
+            }
             HPBarDrawer.Draw(batch);
         }
 
@@ -136,43 +150,7 @@ namespace Sprint5
             allRooms = new DungeonSprite(dungeonSheet);
             topLayer = new DungeonSprite(dungeonSheetOuter);
 
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 1, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 5, 3, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 4, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 1, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 3, 3, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 1, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 0, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 3, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 2, 4, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 4, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 5, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 2, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 0, 1, drawSize));
-            roomSprites.Add(new RoomSprite(roomSpriteSheet, 1, 1, drawSize));
-
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 5, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 5, 1, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 5, 3, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 4, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 3, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 3, 1, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 3, 3, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 2, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 2, 1, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 2, 0, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 2, 3, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 2, 4, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 1, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 1, 4, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 1, 5, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 0, 2, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 0, 1, drawSize));
-            roomSpritesTopLayer.Add(new RoomSprite(dungeonSheetOuter, 1, 1, drawSize));
+            
         }
 
 

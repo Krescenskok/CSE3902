@@ -22,7 +22,7 @@ namespace Sprint5
 
         private Game game;
 
-        private ISprite sprite;
+        private EnemySprite sprite;
         private RopeMoveSprite rp;
         private IEnemyState state;
         private Vector2 location;
@@ -32,7 +32,7 @@ namespace Sprint5
         private Direction currentDirection = Direction.right;
         public Direction direction { get => currentDirection; }
 
-        public int HP { get; private set; }
+        public int HP { get; private set; } = HPAmount.EnemyLevel1;
 
         public Vector2 Location { get => location; }
 
@@ -59,14 +59,16 @@ namespace Sprint5
         {
             state = new RopeMoveState(this, location, game);
             rp = (RopeMoveSprite)sprite;
-            collider = new EnemyCollider(rp.GetRectangle(), this, HPAmount.HalfHeart);
+            Rectangle rect = rp.GetRectangle(); rect.Location = location.ToPoint();
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, 0.5f);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart);
             finderCollider = new RopePlayerFinderCollider(rp.GetRectangle(), this, game);
         }
 
         public void Update()
         {
             state.Update();
-           
+            sprite.Update();
         }
 
         public void UpdateLocation(Vector2 location)
@@ -74,7 +76,7 @@ namespace Sprint5
             this.location = location;
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
             
@@ -82,13 +84,8 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch)
         {
-
             sprite.Draw(batch, location, 0, Color.White);
-
-            
         }
-
-
 
         public void Die()
         {

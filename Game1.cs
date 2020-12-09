@@ -93,6 +93,7 @@ namespace Sprint5
 
             EnemySpriteFactory.Instance.LoadAllTextures(this);
             DoorSpriteFactory.Instance.LoadAllTextures(this);
+            RoomSpriteFactory.instance.LoadTextures(this);
 
             //do not move//
             this.Camera = Camera.Instance;
@@ -104,12 +105,20 @@ namespace Sprint5
 
             CollisionHandler.Instance.Initialize();
 
+
+            MapGenerator.Instance.GenerateMap(10, "newMap");
+
+
             GridGenerator.Instance.GetGrid(12, 7);
             RoomSpawner.Instance.LoadAllRooms(this);
-            RoomSpawner.Instance.LoadRoom(this, 1);
+            
+            RoomSpawner.Instance.LoadCustomRooms(this, "newMap");
+            RoomSpawner.Instance.LoadRoom(this, Camera.Instance.firstRoom);
 
             spritePos = new Vector2(Graphics.GraphicsDevice.Viewport.Width / 2,
             Graphics.GraphicsDevice.Viewport.Height / 2);
+
+           
         }
         protected override void Update(GameTime gameTime)
         {

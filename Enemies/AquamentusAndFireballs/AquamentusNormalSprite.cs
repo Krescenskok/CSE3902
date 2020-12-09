@@ -10,7 +10,7 @@ namespace Sprint5
     /// <summary>
     /// Author: Yuan Hong
     /// </summary>
-    class AquamentusNormalSprite : ISprite
+    class AquamentusNormalSprite : EnemySprite
     {
         Texture2D texture;
         private static int[] spriteSize = {24, 31};
@@ -38,7 +38,7 @@ namespace Sprint5
             attackSpriteCounter = attackSpriteUpdateNum;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        public void Update()
         {
             if (updateCounter == numUpdatePerFrame)
             {
@@ -63,6 +63,11 @@ namespace Sprint5
                 attackSpriteCounter--;
             }
             sourcePos.X = frameIndex * spriteSize[0];
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        {
+           
             Rectangle sourceRectangle = new Rectangle((int)sourcePos.X, (int)sourcePos.Y, spriteSize[0], spriteSize[1]);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

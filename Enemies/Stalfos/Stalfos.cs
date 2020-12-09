@@ -104,9 +104,9 @@ namespace Sprint5
             sprite.Update();
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
-            this.sprite = (EnemySprite)sprite;
+            this.sprite = sprite;
         }
 
         public void Stun()

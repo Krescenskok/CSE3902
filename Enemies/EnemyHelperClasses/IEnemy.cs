@@ -13,7 +13,7 @@ namespace Sprint5
         void Update();
         void Draw(SpriteBatch spriteBatch);
 
-        void SetSprite(ISprite sprite);
+        void SetSprite(EnemySprite sprite);
 
         void Spawn();
 

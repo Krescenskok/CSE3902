@@ -39,6 +39,8 @@ namespace Sprint5
             name = "DoorEntrance";
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
+
+            RoomEnemies.Instance.AddTestCollider(bounds, this);
         }
 
 

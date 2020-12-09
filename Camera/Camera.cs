@@ -31,6 +31,7 @@ namespace Sprint5
         private int nextRoom;
 
         private int currentRoom;
+        public int firstRoom { get; private set; }
 
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
@@ -101,7 +102,7 @@ namespace Sprint5
             targetgameView = playArea;
             targetHUDLocation = HUDArea;
 
-            transform.Translation = new Vector3(-size.X * 2, -size.Y * 5, 0);
+            transform.Translation = new Vector3(-size.X * 2, -size.Y * 3, 0);
 
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
@@ -109,6 +110,15 @@ namespace Sprint5
             currentRoom = 1;
 
             screenFade = SpriteFactory.Instance.CreateBlackScreen();
+        }
+
+        public void ResetTransformLocation(Point loc, int startRoom)
+        {
+            transform.Translation = new Vector3(-playArea.Size.X * loc.X, -playArea.Size.Y * loc.Y,0);
+            Target = transform.Translation;
+            location = new Vector2(transform.M41, transform.M42);
+            currentRoom = startRoom;
+            firstRoom = startRoom;
         }
 
         private Camera()

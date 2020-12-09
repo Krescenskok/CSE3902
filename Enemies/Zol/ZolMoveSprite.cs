@@ -9,7 +9,7 @@ namespace Sprint5.Enemies.Zol
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class ZolMoveSprite : ISprite
+    public class ZolMoveSprite : EnemySprite
     {
         private Texture2D texture;
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
@@ -46,11 +46,8 @@ namespace Sprint5.Enemies.Zol
 
         }
 
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -58,6 +55,12 @@ namespace Sprint5.Enemies.Zol
             }
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
+        }
+
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
+            int width = (int)spriteSize.X;
+            int height = (int)spriteSize.Y;
 
 
             Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
