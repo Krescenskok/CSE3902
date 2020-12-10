@@ -45,8 +45,8 @@ namespace Sprint5
                 if (selectedA) CurrentColor1 = Color.White;
                 if (selectedB) CurrentColor2 = Color.White;
                 batch.DrawString(font, Command, Position, Color.DarkGoldenrod);
-                batch.DrawString(font, KeyA.ToString(), new Vector2(Position.X + 115, Position.Y), CurrentColor1);
-                batch.DrawString(font, " and ", new Vector2(Position.X + 150, Position.Y), Color.DarkGoldenrod);
+                batch.DrawString(font, " |" + KeyA.ToString(), new Vector2(Position.X + 130, Position.Y), CurrentColor1);
+                batch.DrawString(font, "   |", new Vector2(Position.X + 150, Position.Y), Color.DarkGoldenrod);
                 batch.DrawString(font, KeyB.ToString(), new Vector2(Position.X + 190, Position.Y), CurrentColor2);
                 CurrentColor1 = Color.DarkGoldenrod;
                 CurrentColor2 = Color.DarkGoldenrod;
@@ -55,7 +55,7 @@ namespace Sprint5
             {
                 if (selectedA) CurrentColor1 = Color.White;
                 batch.DrawString(font, Command, Position, Color.DarkGoldenrod);
-                batch.DrawString(font, KeyA.ToString(), new Vector2(Position.X + 115, Position.Y), CurrentColor1);
+                batch.DrawString(font, " |" + KeyA.ToString(), new Vector2(Position.X + 130, Position.Y), CurrentColor1);
                 CurrentColor1 = Color.DarkGoldenrod;
             }
         }

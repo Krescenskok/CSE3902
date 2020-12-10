@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Sprint5.ScreenHandling;
+
+using Sprint5.InputHandling;
+
 using System;
 using System.Collections.Generic;
 
@@ -46,6 +49,7 @@ namespace Sprint5.GameStateHandling
             RoomSpawner.Instance.Update();
             game.LinkPersistent.Update(gameTime);
             game.ProjectilePersistent.Update(gameTime);
+            UpdatingControls.Instance.Update();
             CollisionHandler.Instance.Update();
             Sounds.Instance.Update();
             HUD.Instance.UpdateHearts(game.LinkPlayer);

@@ -80,7 +80,7 @@ namespace Sprint5.Inventory
             {
                 linkRoom = LASTROOM - 1;
             }
-            if (!visitedRoom[linkRoom])
+            if (visitedRoom.ContainsKey(linkRoom) && !visitedRoom[linkRoom])
             {
                 visitedRoom[linkRoom] = true;
             }
@@ -104,7 +104,7 @@ namespace Sprint5.Inventory
                     individualRoomSprites[pair.Key].Draw(spriteBatch, mapLocation, 0, Color.White);
                 }
             }
-            currentMapLocationSprites[linkRoom].Draw(spriteBatch, mapLocation, 0, Color.White);
+            if(currentMapLocationSprites.ContainsKey(linkRoom)) currentMapLocationSprites[linkRoom].Draw(spriteBatch, mapLocation, 0, Color.White);
         }
 
         public void Reset()

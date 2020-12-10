@@ -85,7 +85,6 @@ namespace Sprint5
             CollisionHandler.Instance.RemoveCollider(dodongoCollider);
             dodongoMovingSprite = (DodongoMovingSprite)dodongoSprite;
             dodongoCollider = new EnemyCollider(dodongoMovingSprite.GetRectangle(dodongoPos), this, AttackStrength);
-            CollisionHandler.Instance.AddCollider(dodongoCollider, Layers.Enemy);
         }
 
         public void Update()
@@ -133,7 +132,7 @@ namespace Sprint5
             dodongoSprite.Draw(spriteBatch, dodongoPos, 0, Color.White);
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             dodongoSprite = sprite;
         }

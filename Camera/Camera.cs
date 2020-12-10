@@ -31,7 +31,8 @@ namespace Sprint5
 
         private int nextRoom;
 
-        private int currentRoom;
+        private int currentRoom = 1;
+        public int firstRoom { get; private set; } = 1;
 
         private bool loadNextRoom = false;
         private bool wallmasterSetBack = false;
@@ -107,9 +108,19 @@ namespace Sprint5
             Target = transform.Translation;
             location = new Vector2(transform.M41, transform.M42);
 
-            currentRoom = 1;
 
             screenFade = SpriteFactory.Instance.CreateBlackScreen();
+        }
+
+        public void ResetTransformLocation(Point loc, int startRoom)
+        {
+
+            transform.Translation = new Vector3(-playArea.Size.X * loc.X, -playArea.Size.Y * loc.Y,0);
+            Target = transform.Translation;
+            
+            location = new Vector2(transform.M41, transform.M42);
+            currentRoom = startRoom;
+            firstRoom = startRoom;
         }
 
         private Camera()
@@ -167,7 +178,7 @@ namespace Sprint5
             direction = Vector3.Up;
             wallmasterSetBack = true;
             nextRoom = 1;
-            RoomDoors.Instance.OpenDoor(6);
+            RoomDoors.Instance.OpenDoor("3,1,ClosedRight");
         }
 
         public void BlackScreenTransition()
@@ -231,7 +242,7 @@ namespace Sprint5
         {
             int yOffset = dir.Y > 0 ? GridGenerator.Instance.offsetYBottom : GridGenerator.Instance.Offset.Y;
             int xOffset = GridGenerator.Instance.Offset.X;
-            linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset, direction.Y * -yOffset);
+            linkEnterPosition = player.currentLocation + new Vector2(direction.X * -xOffset * 1.5f, direction.Y * -yOffset * 1.5f);
         }
 
         private void Move()
@@ -240,7 +251,7 @@ namespace Sprint5
             Matrix.CreateTranslation(ref newPos, out transform);
         }
 
-
+       
         public void Update()
         {
 
@@ -302,6 +313,7 @@ namespace Sprint5
                     BlackScreenTransition();
                 }
 
+            
             }
 
             public void Draw(SpriteBatch batch)

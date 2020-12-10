@@ -10,6 +10,8 @@ namespace Sprint5
         right,
         up,
         down,
+        top,
+        bottom,
         none
     }
 }

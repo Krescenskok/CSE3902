@@ -135,17 +135,17 @@ namespace Sprint5
             return HPBackground;
         }
 
-        public ISprite CreateStalfosWalkingSprite()
+        public EnemySprite CreateStalfosWalkingSprite()
         {
             return new StalfosWalkingSprite(texture);
         }
 
-        public ISprite CreateKeeseMoveSprite()
+        public EnemySprite CreateKeeseMoveSprite()
         {
             return new KeeseMoveSprite(texture);
         }
 
-        public ISprite CreateGoriyaWalkingSprite(string direction)
+        public EnemySprite CreateGoriyaWalkingSprite(string direction)
         {
             string sheetID = "RedGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
            
@@ -153,7 +153,7 @@ namespace Sprint5
 
         }
 
-        public ISprite CreateGoriyaDamagedSprite(string direction)
+        public EnemySprite CreateGoriyaDamagedSprite(string direction)
         {
             string sheetID = "HurtGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
 
@@ -162,46 +162,46 @@ namespace Sprint5
         }
 
 
-        public ISprite CreateBoomerangSprite()
+        public EnemySprite CreateBoomerangSprite()
         {
             return new GoriyaBoomerangSprite(texture);
         }
 
-        public ISprite CreateGelMoveSprite()
+        public EnemySprite CreateGelMoveSprite()
         {
             return new GelMoveSprite(texture);
         }
 
-        public ISprite CreateWallMasterSprite(string dir)
+        public EnemySprite CreateWallMasterSprite(string dir)
         {
             string str = "";
             if (dir == "top") str = "Top";
             return new WallMasterSprite(texture, str);
         }
 
-        public ISprite CreateWallMasterGrabSprite(string dir)
+        public EnemySprite CreateWallMasterGrabSprite(string dir)
         {
             string str = "";
             if (dir == "top") str = "Top";
             return new WallMasterGrabbingLinkSprite(texture, str);
         }
 
-        public ISprite CreateBladeTrapSprite()
+        public EnemySprite CreateBladeTrapSprite()
         {
             return new BladeTrapSprite(texture);
         }
 
-        public ISprite CreateZolMoveSprite()
+        public EnemySprite CreateZolMoveSprite()
         {
             return new ZolMoveSprite(texture);
         }
 
-        public ISprite CreateRopeMoveSprite(string dir)
+        public EnemySprite CreateRopeMoveSprite(string dir)
         {
             return new RopeMoveSprite(texture, dir);
         }
 
-        public ISprite CreateSpawnSprite()
+        public EnemySprite CreateSpawnSprite()
         {
             return new SpawnSprite(texture);
         }
@@ -211,7 +211,7 @@ namespace Sprint5
             return new EnemyDeathSprite(texture);
         }
 
-        public ISprite CreateStalfosDamagedSprite()
+        public EnemySprite CreateStalfosDamagedSprite()
         {
             return new StalfosDamagedSprite(texture);
         }
@@ -235,12 +235,12 @@ namespace Sprint5
             return new OldManNormalSprite(NPCTexture);
         }
 
-        public ISprite CreateDragonSprite()
+        public EnemySprite CreateDragonSprite()
         {
             return new AquamentusNormalSprite(bossTexture);
         }
         
-        public ISprite CreateDamagedDragonSprite()
+        public EnemySprite CreateDamagedDragonSprite()
         {
             return new AquamentusDamagedSprite(bossTexture);
         }
@@ -251,13 +251,13 @@ namespace Sprint5
         }
 
         
-        public ISprite CreateDodongoSprite(string direction)
+        public EnemySprite CreateDodongoSprite(string direction)
         {
             return new DodongoMovingSprite(bossTexture, direction);
 
         }
 
-        public ISprite CreateDamagedDodongoSprite(string direction)
+        public EnemySprite CreateDamagedDodongoSprite(string direction)
         {
             return new DodongoDamagedSprite(bossTexture, direction);
         }

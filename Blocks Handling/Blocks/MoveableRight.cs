@@ -51,7 +51,7 @@ namespace Sprint5.Blocks
                 spriteLocation = newLocation;
                 shift = 0;
 
-                RoomDoors.Instance.OpenDoor(9);
+                RoomDoors.Instance.OpenDoor("2,1,closedleft");
 
                 shifting = false;
             }

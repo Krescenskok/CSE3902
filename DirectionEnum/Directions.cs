@@ -14,15 +14,15 @@ namespace Sprint5
         private static Direction Right { get => Direction.right; }
         private static Direction Up { get => Direction.up; }
         private static Direction Down { get => Direction.down; }
+
+        private static Direction Top { get => Direction.top; }
+        private static Direction Bottom { get => Direction.bottom; }
         private static Direction None { get => Direction.none; }
 
 
         private static List<Direction> all = new List<Direction> { Left, Right, Up, Down };
         public static List<Direction> Default() { return new List<Direction>(all); }
-        public static List<Direction> LeftUp { get; } =  new List<Direction> { Left, Up };
-        public static List<Direction> RightUp { get; } = new List<Direction> { Right, Up };
-        public static List<Direction> DownRight { get; } = new List<Direction> { Right, Down };
-        public static List<Direction> DownLeft { get; } = new List<Direction> { Left, Down };
+
 
         public static int CheckDirection(Direction dir, Direction pos, Direction neg)
         {
@@ -62,10 +62,12 @@ namespace Sprint5
        
         public static Direction Parse(string str)
         {
-            if (str == "left" || str == "Left") return Left;
-            else if (str == "right" || str == "Right") return Right;
-            else if (str == "up" || str == "Up" || str == "top" || str == "Top") return Up;
-            else if (str == "down" || str == "Down" || str == "bottom" || str == "Bottom") return Down;
+            if (str.Contains("left") || str.Contains("Left")) return Left;
+            else if (str.Contains("right") || str.Contains("Right")) return Right;
+            else if (str.Contains("up") || str.Contains("Up")) return Up;
+            else if (str.Contains("top") || str.Contains("Top")) return Top;
+            else if (str.Contains("bottom") || str.Contains("Bottom")) return Bottom;
+            else if (str.Contains("down") || str.Contains("Down")) return Down;
 
             return None;
         }

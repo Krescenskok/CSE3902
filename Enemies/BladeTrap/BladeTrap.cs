@@ -88,9 +88,9 @@ namespace Sprint5
             sprite.Draw(batch, location, 0, Color.White);
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
-            this.sprite = (EnemySprite)sprite;
+            this.sprite = sprite;
         }
 
 

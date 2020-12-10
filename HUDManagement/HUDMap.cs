@@ -96,7 +96,7 @@ namespace Sprint5.HUDManagement
         {
             linkRoom = RoomSpawner.Instance.CurrentRoom;
             if (linkRoom >= LASTROOM) linkRoom = LASTROOM - 1; 
-            if (!visitedRoom[linkRoom]) visitedRoom[linkRoom] = true; 
+            if (visitedRoom.ContainsKey(linkRoom) && !visitedRoom[linkRoom]) visitedRoom[linkRoom] = true; 
         }
 
         public void Draw(SpriteBatch spriteBatch, int pos)
@@ -118,7 +118,7 @@ namespace Sprint5.HUDManagement
                     }
                 }                
             }
-            currentMapLocationSprites[linkRoom].Draw(spriteBatch, loc, 0, Color.White);
+            if(currentMapLocationSprites.ContainsKey(linkRoom)) currentMapLocationSprites[linkRoom].Draw(spriteBatch, loc, 0, Color.White);
 
             if (HasCompass)
             {

@@ -19,16 +19,29 @@ namespace Sprint5
 
         private bool trigger = false;
 
+        public UnlockedDoorCollider(Door door, Point location, Point size, Direction dir)
+        {
+            bounds.Location = location;
+            bounds.Size = size;
+            entrySide = dir;
+
+            if (dir.Equals(Direction.top)) entrySide = Direction.up;
+            else if (dir.Equals(Direction.bottom)) entrySide = Direction.down;
+            
+            this.door = door;
+
+            CollisionHandler.Instance.AddCollider(this, Layers.Door);
+        }
+
         public UnlockedDoorCollider(Door door, Point location, Point size, char orient)
         {
             bounds.Location = location;
             bounds.Size = size;
 
-            if (orient == 'L') entrySide = Direction.left;
-            else if (orient == 'R' || orient == 'C') entrySide = Direction.right;
-            else if (orient == 'T' || orient == 'S') entrySide = Direction.up;
-            else if (orient == 'B') entrySide = Direction.down;
-            
+            if (orient == 'C') entrySide = Direction.right;
+            else if (orient == 'S') entrySide = Direction.up;
+
+
             this.door = door;
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
@@ -63,7 +76,7 @@ namespace Sprint5
             if (col.CompareTag("Player") && !collision.From.Equals(entrySide))
             {
                 trigger = true;
-
+               
             }
         }
 

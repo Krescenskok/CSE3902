@@ -8,15 +8,17 @@ namespace Sprint5
     class DoorSpriteFactory
     {
 
-        private Texture2D door1;
-        private Texture2D door6;
-        private Texture2D door8;
-        private Texture2D door9;
-        private Texture2D door13;
-        private Texture2D door14;
-        private Texture2D door16;
+        private Texture2D lockedTopDoor;
+        private Texture2D lockedBottomDoor;
+        private Texture2D lockedRightDoor;
+        private Texture2D lockedLeftDoor;
 
-        private Dictionary<int, Texture2D> textures = new Dictionary<int, Texture2D>();
+        private Texture2D closedTopDoor;
+        private Texture2D closedBottomDoor;
+        private Texture2D closedRightDoor;
+        private Texture2D closedLeftDoor;
+
+
 
         public static DoorSpriteFactory Instance { get; } = new DoorSpriteFactory();
 
@@ -29,45 +31,33 @@ namespace Sprint5
         public void LoadAllTextures(Game1 game)
         {
 
-            textures.Add(1,game.Content.Load<Texture2D>("Door1"));
-            textures.Add(6,game.Content.Load<Texture2D>("Door6"));
-            textures.Add(8, game.Content.Load<Texture2D>("Door8"));
-            textures.Add(9, game.Content.Load<Texture2D>("Door9"));
-            textures.Add(13, game.Content.Load<Texture2D>("Door13"));
-            textures.Add(14, game.Content.Load<Texture2D>("Door14"));
-            textures.Add(16, game.Content.Load<Texture2D>("Door16"));
+            lockedTopDoor = game.Content.Load<Texture2D>("Procedural/LockedTop");
+            lockedBottomDoor = game.Content.Load<Texture2D>("Procedural/LockedBottom");
+            lockedRightDoor = game.Content.Load<Texture2D>("Procedural/LockedRight");
+            lockedLeftDoor = game.Content.Load<Texture2D>("Procedural/LockedLeft");
+
+            closedTopDoor = game.Content.Load<Texture2D>("Procedural/ClosedTop");
+            closedBottomDoor = game.Content.Load<Texture2D>("Procedural/ClosedBottom");
+            closedRightDoor = game.Content.Load<Texture2D>("Procedural/ClosedRight");
+            closedLeftDoor = game.Content.Load<Texture2D>("Procedural/ClosedLeft");
+
 
         }
 
-        public DoorSprite CreateDoor(int num)
+        StringComparison cmp = StringComparison.OrdinalIgnoreCase;
+        public DoorSprite CreateDoor(int row, int col, string type)
         {
-            return new DoorSprite(textures[num]);
-        }
+            
+            if (type.Equals("LockedTop",cmp)) return new DoorSprite(lockedTopDoor, row, col);
+            else if (type.Equals("LockedBottom", cmp)) return new DoorSprite(lockedBottomDoor, row, col);
+            else if (type.Equals("LockedRight", cmp)) return new DoorSprite(lockedRightDoor, row, col);
+            else if (type.Equals("LockedLeft", cmp)) return new DoorSprite(lockedLeftDoor, row, col);
+            else if (type.Equals("ClosedTop", cmp) || type.Equals("OpenTop",cmp)) return new DoorSprite(closedTopDoor, row, col);
+            else if (type.Equals("ClosedBottom", cmp) || type.Equals("OpenBottom", cmp)) return new DoorSprite(closedBottomDoor, row, col);
+            else if (type.Equals("ClosedLeft", cmp) || type.Equals("OpenLeft", cmp)) return new DoorSprite(closedLeftDoor, row, col);
+            else if (type.Equals("ClosedRight", cmp) || type.Equals("OpenRight", cmp)) return new DoorSprite(closedRightDoor, row, col);
 
-        public ISprite CreateDoor6()
-        {
-            return new DoorSprite(door6);
-        }
-        public ISprite CreateDoor8()
-        {
-            return new DoorSprite(door8);
-        }
-        public ISprite CreateDoor9()
-        {
-            return new DoorSprite(door9);
-        }
-        public ISprite CreateDoor13()
-        {
-            return new DoorSprite(door13);
-
-        }
-        public ISprite CreateDoor14()
-        {
-            return new DoorSprite(door14);
-        }
-        public ISprite CreateDoor16()
-        {
-            return new DoorSprite(door16);
+            return null;
         }
 
 
