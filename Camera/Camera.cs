@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
 using System.Diagnostics;
+using Sprint5.GameStateHandling;
 
 namespace Sprint5
 {
@@ -262,7 +263,7 @@ namespace Sprint5
 
             }
 
-            else if (!inventoryOpen && game.State.Id == StateId.Inventory && inventoryStillMoving)
+            else if (!inventoryOpen && game.State.Current.Id == StateId.Inventory && inventoryStillMoving)
             {
                 EndInventory();
 
@@ -321,10 +322,10 @@ namespace Sprint5
                 screenFade.Draw(batch, Vector2.Zero, 0, fadeColor);
             }
 
-            private void StartInventory() { game.State.Id = StateId.Inventory; }
-            private void StartTransition() { game.State.Id = StateId.Transition; }
-            private void EndInventory() { game.State.Id = StateId.Gameplay; }
-            private void EndTransition() { game.State.Id = StateId.Gameplay; }
+            private void StartInventory() { game.State.Swap(StateId.Inventory);}
+            private void StartTransition() { game.State.Swap(StateId.Transition); }
+            private void EndInventory() { game.State.Swap(StateId.Gameplay); }
+            private void EndTransition() { game.State.Swap(StateId.Gameplay); }
         
 
 

@@ -11,28 +11,26 @@ namespace Sprint5
     {
 
         private Game1 Game;
-        public StateId Id { get; set; }
-
         public DifficultyLevel Difficulty { get; set; }
-
         public IGameStates Current { get; set; }
-
         public IGameStates  Previous { get; set; }
 
         public GameState(Game1 game, DifficultyLevel difficulty, IGameStates initialState)
         {
             Game = game;
-            Id = initialState.Id;
             Current = initialState;
-
-
+            Previous = initialState;
         }
 
-        public void Swap(IGameStates swapTo)
+        public void Swap(StateId newState)
         {
             System.Diagnostics.Debug.WriteLine(this.Current.Id);
-            this.Current = swapTo;
-            Id = swapTo.Id;
+            Previous = Current;
+            IGameStates NewState = IDToState.Instance.State(newState);
+
+
+            this.Current = NewState;
+
             System.Diagnostics.Debug.WriteLine(this.Current.Id);
         }
 
@@ -42,7 +40,7 @@ namespace Sprint5
             if (Game.LinkPlayer.Health == 0 && !(Game.LinkPlayer.IsDead))
             {
                 Game.LinkPlayer.IsDead = true;
-                Game.State.Id = StateId.GameOver;
+                Swap(StateId.GameOver);
             }
             
             
@@ -56,90 +54,12 @@ namespace Sprint5
                     }
 
                 }
-            
-           
-            if (Id == StateId.Gameplay)
-            {
-                GameplayState.Instance.Update(Game, gameTime);
-                Current = GameplayState.Instance;
-            }
-            else if (Id == StateId.Pause)
-            {
-                PauseState.Instance.Update(Game, gameTime);
-                Current = PauseState.Instance;
-            }
-            else if (Id == StateId.Inventory)
-            {
-                InventoryState.Instance.Update(Game, gameTime);
-                Current = InventoryState.Instance;
-            }
-            else if (Id == StateId.GameOver)
-            {
-                GameOverState.Instance.Update(Game, gameTime);
-                Current = GameOverState.Instance;
-            }
-            else if (Id == StateId.MainMenu)
-            {
-                MainMenuState.Instance.Update(Game, gameTime);
-                Current = MainMenuState.Instance;
-            }
-            else if (Id == StateId.Transition)
-            {
-                TransitionState.Instance.Update(Game, gameTime);
-                Current = TransitionState.Instance;
-            }
-            else if (Id == StateId.Credits)
-            {
-                CreditsState.Instance.Update(Game, gameTime);
-                Current = CreditsState.Instance;
-            }
-            else if (Id == StateId.Stats)
-            {
-                StatsState.Instance.Update(Game, gameTime);
-                Current = StatsState.Instance;
-            }
-            else if (Id == StateId.Win)
-            {
-                WinState.Instance.Update(Game, gameTime);
-                Current = WinState.Instance;
-            }
-            
+            Current.Update(Game, gameTime);
         }
 
         public void Draw(SpriteFont font, GameTime gameTime)
         {
-            if (Id == StateId.Gameplay)
-            {
-                GameplayState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == StateId.Pause)
-            {
-                PauseState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == StateId.Inventory)
-            {
-                InventoryState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == StateId.GameOver)
-            {
-                GameOverState.Instance.Draw(font, Game, gameTime);
-            } else if (Id == StateId.MainMenu)
-            {
-                MainMenuState.Instance.Draw(font, Game, gameTime);
-            }
-            else if (Id == StateId.Transition)
-            {
-                TransitionState.Instance.Draw(font, Game, gameTime);
-            }
-            else if (Id == StateId.Credits)
-            {
-                CreditsState.Instance.Draw(font, Game, gameTime);
-            }
-            else if (Id == StateId.Stats)
-            {
-                StatsState.Instance.Draw(font, Game, gameTime);
-            }
-            else if (Id == StateId.Win)
-            {
-                WinState.Instance.Draw(font, Game, gameTime);
-            }
+            Current.Draw(font, Game, gameTime);
         }
     }
 }

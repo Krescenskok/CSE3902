@@ -34,33 +34,33 @@ namespace Sprint5
 
         private void StateControl(Game1 game)
         {
-            if (game.State.Id == StateId.Gameplay)
+            if (game.State.Current.Id == StateId.Gameplay)
             {
                 CommandsList = GamePlayCommands.Instance.KeyCommands;
                 MovementKeys = GamePlayCommands.Instance.MovementKeys;
             }
-            else if (game.State.Id == StateId.Pause)
+            else if (game.State.Current.Id == StateId.Pause)
             {
                 CommandsList = PauseCommands.Instance.KeyCommands;
                 MovementKeys = PauseCommands.Instance.MovementKeys;
             }
-            else if (game.State.Id == StateId.MainMenu)
+            else if (game.State.Current.Id == StateId.MainMenu)
             {
                 if (UpdatingControls.Instance.waiting) CommandsList = WaitingCommand.Instance.KeyCommands;
                 else CommandsList = MenuCommands.Instance.KeyCommands;
                 MovementKeys = MenuCommands.Instance.MovementKeys;
             }
-            else if (game.State.Id == StateId.Inventory)
+            else if (game.State.Current.Id == StateId.Inventory)
             {
                 CommandsList = InventoryCommands.Instance.KeyCommands;
                 MovementKeys = InventoryCommands.Instance.MovementKeys;
             }
-            else if (game.State.Id == StateId.Win || game.State.Id == StateId.GameOver)
+            else if (game.State.Current.Id == StateId.Win || game.State.Current.Id == StateId.GameOver)
             {
                 CommandsList = WinLoseCommands.Instance.KeyCommands;
                 MovementKeys = WinLoseCommands.Instance.MovementKeys;
             }
-            else if (game.State.Id == StateId.Stats || game.State.Id == StateId.Credits)
+            else if (game.State.Current.Id == StateId.Stats || game.State.Current.Id == StateId.Credits)
             {
                 CommandsList = EndMenuCommands.Instance.KeyCommands;
                 MovementKeys = EndMenuCommands.Instance.MovementKeys;
@@ -96,7 +96,7 @@ namespace Sprint5
 
             PrevState = State;
 
-            if (Game.State.Id == StateId.GameOver)
+            if (Game.State.Current.Id == StateId.GameOver)
             {
                 if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {

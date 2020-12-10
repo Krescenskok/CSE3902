@@ -33,7 +33,7 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            (game as Game1).State.Id = StateId.GameOver;
+            (game as Game1).State.Swap(StateId.GameOver);
         }
     }
 }

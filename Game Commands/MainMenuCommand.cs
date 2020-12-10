@@ -8,12 +8,12 @@ namespace Sprint5
     public class MainMenuCommand : ICommand
     {
 
-        private MainMenu MainScreen;
+        private IScreen Screen;
 
         private string Action;
-        public MainMenuCommand(MainMenu menu, string action)
+        public MainMenuCommand(IScreen screen, string action)
         {
-            this.MainScreen = menu;
+            this.Screen = screen;
             this.Action = action;
         }
 
@@ -30,17 +30,17 @@ namespace Sprint5
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            if (Action == "Up")
+            if (Action == "Left" || Action == "Right" || Action == "Down" || Action == "Up")
             {
-                MainScreen.goUp();
+                Screen.Navigate(Action);
             }
-            else if (Action == "Down")
+            else if (Action == "Back")
             {
-                MainScreen.goDown();
+                Screen.Back();
             }
             else if (Action == "Enter")
             {
-                MainScreen.select();
+                Screen.Select();
             }
         }
 

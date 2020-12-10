@@ -14,7 +14,7 @@ using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using Sprint5.DifficultyHandling;
-using Sprint5.Menus;
+
 using Sprint5.GamePadVibration;
 using Sprint5.InputHandling;
 using Sprint5.GameStateHandling;
@@ -61,6 +61,7 @@ namespace Sprint5
             Sounds.Instance.LoadSounds(this);
 
             SpriteFactory.Instance.LoadAllTextures(Content);
+            ScreenFactory.Instance.CreateAllScreens(Content);
 
             Spritebatch = new SpriteBatch(GraphicsDevice);
 

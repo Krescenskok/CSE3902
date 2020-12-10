@@ -1,17 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint5.Menus;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Sprint5.ScreenHandling;
 
 namespace Sprint5.GameStateHandling
 {
     public class StatsState : IGameStates
     {
         private static readonly StatsState instance = new StatsState();
-        public StateId Id { get; } = StateId.Stats;
+        public StateId Id { get; } = StateId.Win;
         public IGameStates Parent { get; set; }
+
+        public IScreen Screen { get; set; } = new WinScreen();
+
         public static StatsState Instance
         {
             get
@@ -32,7 +32,11 @@ namespace Sprint5.GameStateHandling
         }
         public void Draw(SpriteFont font, Game1 game, GameTime gameTime)
         {
-            StatsScreen.Instance.Draw(game.Spritebatch, game, font, gameTime);
+            game.Spritebatch.Begin();
+            if (game.ActiveCommand != null)
+                game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
+            game.Spritebatch.End();
+            Screen.Draw(game, gameTime);
         }
     }
 }
