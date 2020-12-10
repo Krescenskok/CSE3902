@@ -56,6 +56,7 @@ namespace Sprint5
             Sprites.Add(new MenuOption(StateId.Stats, ScreenName.BackB));
 
             DrawList.Add(Background);
+            ToggleOption(Options[0]);
         }
 
         public void Draw(Game1 game, GameTime gameTime)
