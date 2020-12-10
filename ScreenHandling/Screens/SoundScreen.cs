@@ -130,7 +130,7 @@ namespace Sprint5.ScreenHandling
                         Sounds.Instance.VolumeDown();
                     } else if (SongOrVolume == "Song")
                     {
-                        Sounds.Instance.ChangeBGM()
+                        Sounds.Instance.ChangeBGM("song");
                     }
                     ToggleOption(Options[SelectedIndex]);
                     SelectedIndex++;

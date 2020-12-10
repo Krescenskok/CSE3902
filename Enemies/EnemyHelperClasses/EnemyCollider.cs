@@ -120,7 +120,7 @@ namespace Sprint5
 
                 enemy.TakeDamage(dir, (int)value);
 
-                Sounds.Instance.Play("EnemyHit");
+                Sounds.Instance.Play("CODHitMarker");
 
 
             }
