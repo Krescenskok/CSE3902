@@ -11,7 +11,7 @@ namespace Sprint5
 
         public string name;
         public Rectangle bounds;
-        public char orientation;
+
         public Door door;
 
         public string Name { get => name; }
@@ -19,26 +19,19 @@ namespace Sprint5
 
         
 
-        public DoorEntranceCollider(Door door, Point location, Point size, char orient, string name)
+
+
+        public DoorEntranceCollider(Door door, Point location, Point size)
         {
             bounds.Location = location;
             bounds.Size = size;
-            orientation = orient;
-            this.door = door;
-            this.name = name;
 
-            CollisionHandler.Instance.AddCollider(this, Layers.Door);
-        }
-
-        public DoorEntranceCollider(Door door, Point location, Point size, char orient)
-        {
-            bounds.Location = location;
-            bounds.Size = size;
-            orientation = orient;
             this.door = door;
             name = "DoorEntrance";
 
             CollisionHandler.Instance.AddCollider(this, Layers.Door);
+
+            RoomEnemies.Instance.AddTestCollider(bounds, this);
         }
 
 

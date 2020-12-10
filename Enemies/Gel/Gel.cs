@@ -66,9 +66,9 @@ namespace Sprint5
             HPBarDrawer.AddBar( new EnemyHealthBar(this, rect,barSize));
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
-            this.sprite = (EnemySprite)sprite;
+            this.sprite = sprite;
         }
 
         public void UpdateLocation(Vector2 location)

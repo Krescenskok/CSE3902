@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Sprint5
 {
-    class AquamentusDamagedSprite : ISprite
+    class AquamentusDamagedSprite : EnemySprite
     {
         Texture2D texture;
         Vector2 aquamentusPos;
@@ -33,7 +33,7 @@ namespace Sprint5
             //do nothing;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        public void Update()
         {
             if (updateCounter == numUpdatePerFrame)
             {
@@ -52,6 +52,11 @@ namespace Sprint5
             {
                 updateCounter++;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
+        {
+          
             Rectangle sourceRectangle = new Rectangle((int)sourcePos.X, (int)sourcePos.Y, spriteSize[0], spriteSize[1]);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);

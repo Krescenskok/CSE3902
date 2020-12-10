@@ -55,75 +55,68 @@ namespace Sprint5
 
             if (locations.Count == 0) CalculateWallDrawLocations();
 
-            List<XElement> items = room.Elements("Item").ToList();
+            List<XElement> items = room.Elements("Wall").ToList();
             foreach (XElement item in items)
             {
-                XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
-                
-                string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                
+                XAttribute typeTag = item.Attribute("Type");
 
-                
+                string objName = typeTag.Value;
+  
+                Point camOffset = cam.Location.ToPoint();
 
-                if (objType.Equals("Wall"))
+                if (objName.Equals("Left"))
                 {
-                    Point camOffset = cam.Location.ToPoint();
-
-                    if (objName.Equals("Left"))
-                    {
-                        walls.Add(new WallCollider(locations[0] - camOffset, sideWallSize));
-                    }
-                    else if (objName.Equals("Right"))
-                    {
-                        walls.Add(new WallCollider(locations[2] - camOffset, sideWallSize));
-                    }
-                    else if (objName.Equals("Top"))
-                    {
-                        walls.Add(new WallCollider(locations[0] - camOffset, middleWallSize));
-                    }
-                    else if (objName.Equals("Bottom"))
-                    {
-                        walls.Add(new WallCollider(locations[5] - camOffset, middleWallSize));
-                    }
-                    else if (objName.Equals("LeftTop"))
-                    {
-                        walls.Add(new WallCollider(locations[0] - camOffset, sideWallHalfSize));
-                    }
-                    else if (objName.Equals("LeftBottom"))
-                    {
-                        walls.Add(new WallCollider(locations[6] - camOffset, sideWallHalfSize));
-                    }
-                    else if (objName.Equals("TopLeft"))
-                    {
-                        walls.Add(new WallCollider(locations[0] - camOffset, middleWallHalf));
-                    }
-                    else if (objName.Equals("TopRight"))
-                    {
-                        walls.Add(new WallCollider(locations[1] - camOffset, middleWallHalf));
-                    }
-                    else if (objName.Equals("RightTop"))
-                    {
-                        walls.Add(new WallCollider(locations[2] - camOffset, sideWallHalfSize));
-                    }
-                    else if (objName.Equals("RightBottom"))
-                    {
-                        walls.Add(new WallCollider(locations[3] - camOffset, sideWallHalfSize));
-
-                    }else if(objName.Equals("BottomLeft"))
-                    {
-                        walls.Add(new WallCollider(locations[5] - camOffset, middleWallHalf));
-                    }
-                    else if (objName.Equals("BottomRight"))
-                    {
-                        walls.Add(new WallCollider(locations[4] - camOffset, middleWallHalf));
-                    }
-
-
-
-
+                    walls.Add(new WallCollider(locations[0] - camOffset, sideWallSize));
                 }
+                else if (objName.Equals("Right"))
+                {
+                    walls.Add(new WallCollider(locations[2] - camOffset, sideWallSize));
+                }
+                else if (objName.Equals("Top"))
+                {
+                    walls.Add(new WallCollider(locations[0] - camOffset, middleWallSize));
+                }
+                else if (objName.Equals("Bottom"))
+                {
+                    walls.Add(new WallCollider(locations[5] - camOffset, middleWallSize));
+                }
+                else if (objName.Equals("LeftTop"))
+                {
+                    walls.Add(new WallCollider(locations[0] - camOffset, sideWallHalfSize));
+                }
+                else if (objName.Equals("LeftBottom"))
+                {
+                    walls.Add(new WallCollider(locations[6] - camOffset, sideWallHalfSize));
+                }
+                else if (objName.Equals("TopLeft"))
+                {
+                    walls.Add(new WallCollider(locations[0] - camOffset, middleWallHalf));
+                }
+                else if (objName.Equals("TopRight"))
+                {
+                    walls.Add(new WallCollider(locations[1] - camOffset, middleWallHalf));
+                }
+                else if (objName.Equals("RightTop"))
+                {
+                    walls.Add(new WallCollider(locations[2] - camOffset, sideWallHalfSize));
+                }
+                else if (objName.Equals("RightBottom"))
+                {
+                    walls.Add(new WallCollider(locations[3] - camOffset, sideWallHalfSize));
+
+                }else if(objName.Equals("BottomLeft"))
+                {
+                    walls.Add(new WallCollider(locations[5] - camOffset, middleWallHalf));
+                }
+                else if (objName.Equals("BottomRight"))
+                {
+                    walls.Add(new WallCollider(locations[4] - camOffset, middleWallHalf));
+                }
+
+
+
+
+                
             }
 
         }

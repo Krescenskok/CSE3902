@@ -59,7 +59,7 @@ namespace Sprint5.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false"); find me
         }
 
         public void Drink()

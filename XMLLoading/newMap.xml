@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <LockedDoor Drawn="false" Type="opentop" Row="3" Col="0" Trap="true" />
+  <Room id="0" row="3" col="0">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="opentop" Room="4" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="3" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="opentop" Row="3" Col="1" Trap="true" />
+  <Room id="1" row="3" col="1">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="2" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Door Type="opentop" Room="5" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="2" row="3" col="2">
+    <Door Type="normalleft" Room="1" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="6" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="3" row="3" col="3">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="7" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="4" row="2" col="0">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="8" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="0" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="2" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="2" Col="1" Trap="true" />
+  <Room id="5" row="2" col="1">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="6" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="1" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openleft" Row="2" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="opentop" Row="2" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="2" Col="2" Trap="true" />
+  <Room id="6" row="2" col="2">
+    <Door Type="openleft" Room="5" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="opentop" Room="10" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="openbottom" Room="2" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="7" row="2" col="3">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="11" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="3" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="1" Col="0" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="1" Col="0" Trap="true" />
+  <Room id="8" row="1" col="0">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="9" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="4" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="9" row="1" col="1">
+    <Door Type="normalleft" Room="8" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="13" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="10" row="1" col="2">
+    <Wall Type="Left" />
+    <Door Type="normalright" Room="11" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Door Type="normaltop" Room="14" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="6" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="11" row="1" col="3">
+    <Door Type="normalleft" Room="10" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Wall Type="Top" />
+    <Door Type="normalbottom" Room="7" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="12" row="0" col="0">
+    <Wall Type="Left" />
+    <Door Type="normalright" Room="13" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openleft" Row="0" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openright" Row="0" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="0" Col="1" Trap="true" />
+  <Room id="13" row="0" col="1">
+    <Door Type="openleft" Room="12" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Door Type="openright" Room="14" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="9" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openleft" Row="0" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openright" Row="0" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="0" Col="2" Trap="true" />
+  <Room id="14" row="0" col="2">
+    <Door Type="openleft" Room="13" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Door Type="openright" Room="15" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="10" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="15" row="0" col="3">
+    <Door Type="normalleft" Room="14" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Wall Type="Top" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+</Root>

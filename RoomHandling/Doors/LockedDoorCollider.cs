@@ -10,18 +10,16 @@ namespace Sprint5
 
         public string name;
         public Rectangle bounds;
-        public char orientation;
         public Door door;
         
         public string Name { get => "LockedDoor"; }
         public Layer layer { get; set; }
 
 
-        public LockedDoorCollider(Door door, Point location, Point size, char orient)
+        public LockedDoorCollider(Door door, Point location, Point size)
         {
             bounds.Location = location;
             bounds.Size = size;
-            orientation = orient;
             this.door = door;
             
 

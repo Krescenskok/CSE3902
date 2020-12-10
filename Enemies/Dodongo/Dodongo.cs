@@ -132,7 +132,7 @@ namespace Sprint5
             dodongoSprite.Draw(spriteBatch, dodongoPos, 0, Color.White);
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             dodongoSprite = sprite;
         }

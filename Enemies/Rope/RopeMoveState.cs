@@ -68,10 +68,10 @@ namespace Sprint5
         {
             
 
-            currentDirection = RandomDirection(possibleDirections);
+            currentDirection = Directions.RandomDirection(possibleDirections);
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection,right,left);
+            moveDirection.Y = Directions.CheckDirection(currentDirection, down, up);
+            moveDirection.X = Directions.CheckDirection(currentDirection,right,left);
 
 
 
@@ -100,14 +100,6 @@ namespace Sprint5
             attackClock = 0;
         }
 
-
-
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
 
         public void Update()
         {
