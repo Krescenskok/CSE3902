@@ -40,8 +40,7 @@ namespace Sprint5
                 {
                     CurrentRoomNum--;
                 }
-                ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
-                //Camera.Instance.ScrollDown(2); //for testing, can remove
+                //ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
             }
             else if (CurrentState.RightButton == ButtonState.Pressed && PrevState.RightButton != CurrentState.RightButton)
             {
@@ -53,12 +52,16 @@ namespace Sprint5
                 {
                     CurrentRoomNum++;
                 }
-                ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
-                //Camera.Instance.ScrollUp(3); //for testing, can remove
+                //ChangeCommand = new ChangeRoomCommand(CurrentRoomNum);
+
             }
             PrevState = CurrentState;
 
             game.ActiveCommand = ChangeCommand;
+        }
+        public Keys getKey()
+        {
+            return Keys.Zoom;
         }
     }
 }

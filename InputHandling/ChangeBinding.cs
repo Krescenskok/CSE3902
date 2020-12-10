@@ -9,6 +9,7 @@ namespace Sprint5
     public class ChangeBinding
     {
         private static readonly ChangeBinding instance = new ChangeBinding();
+        private bool hasKey;
         public static ChangeBinding Instance
         {
             get
@@ -21,18 +22,20 @@ namespace Sprint5
 
         }
 
-        public void SwapKeys(Keys KeyOld, Keys KeyNew, IStateCommands state)
+        public bool SwapKeys(Keys KeyOld, Keys KeyNew, IStateCommands state)
         {
             if (state.KeyCommands.ContainsKey(KeyNew))
             {
-                ICommand newPreviousCommand = state.KeyCommands[KeyNew];
-                ICommand oldPreviousCommand = state.KeyCommands[KeyOld];
-                state.KeyCommands.Remove(KeyNew);
-                state.KeyCommands.Remove(KeyOld);
-                state.KeyCommands.Add(KeyOld, newPreviousCommand);
-                state.KeyCommands.Add(KeyNew, oldPreviousCommand);
+                hasKey = true;
+                    ICommand newPreviousCommand = state.KeyCommands[KeyNew];
+                    ICommand oldPreviousCommand = state.KeyCommands[KeyOld];
+                    state.KeyCommands.Remove(KeyNew);
+                    state.KeyCommands.Remove(KeyOld);
+                    state.KeyCommands.Add(KeyOld, newPreviousCommand);
+                    state.KeyCommands.Add(KeyNew, oldPreviousCommand);
             } else
             {
+                hasKey = false;
                 ICommand oldPreviousCommand = state.KeyCommands[KeyOld];
                 state.KeyCommands.Remove(KeyOld);
                 state.KeyCommands.Add(KeyNew, oldPreviousCommand);
@@ -49,6 +52,7 @@ namespace Sprint5
                 state.MovementKeys.Remove(KeyOld);
                 state.MovementKeys.Add(KeyNew);
             }
+            return hasKey;
         }
 
         public void SwapButtons(Buttons ButtonOld, Buttons ButtonNew, IStateCommands state)
@@ -61,6 +65,7 @@ namespace Sprint5
                 state.ButtonCommands.Remove(ButtonOld);
                 state.ButtonCommands.Add(ButtonOld, newPreviousCommand);
                 state.ButtonCommands.Add(ButtonNew, oldPreviousCommand);
+                
             }
             else
             {

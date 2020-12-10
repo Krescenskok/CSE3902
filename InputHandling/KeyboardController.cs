@@ -20,6 +20,8 @@ namespace Sprint5
 
         private IDictionary<Keys, ICommand> CommandsList = new Dictionary<Keys, ICommand>();
         private List<Keys> MovementKeys = new List<Keys>();
+        private Keys currentKey;
+        private Keys returnKey = Keys.Zoom;
 
         public KeyboardController(Game1 game)
         {
@@ -44,7 +46,8 @@ namespace Sprint5
             }
             else if (game.State.Current.Id == StateId.MainMenu)
             {
-                CommandsList = MenuCommands.Instance.KeyCommands;
+                if (UpdatingControls.Instance.waiting) CommandsList = WaitingCommand.Instance.KeyCommands;
+                else CommandsList = MenuCommands.Instance.KeyCommands;
                 MovementKeys = MenuCommands.Instance.MovementKeys;
             }
             else if (game.State.Current.Id == StateId.Inventory)
@@ -67,8 +70,8 @@ namespace Sprint5
         public void HandleInput(Game1 game)
         {
             StateControl(game);
-            
-            ICommand ActiveCommand= null;
+
+            ICommand ActiveCommand = null;
 
             State = Keyboard.GetState();
             foreach (KeyValuePair<Keys, ICommand> Pair in CommandsList)
@@ -86,6 +89,7 @@ namespace Sprint5
                     if (State.IsKeyDown(Pair.Key) != PrevState.IsKeyDown(Pair.Key))
                     {
                         ActiveCommand = Pair.Value;
+                        currentKey = Pair.Key;
                     }
                 }
             }
@@ -97,9 +101,22 @@ namespace Sprint5
                 if (!(ActiveCommand is ResetCommand) && !(ActiveCommand is QuitCommand))
                 {
                     ActiveCommand = null;
-                }  
+                }
             }
-            game.ActiveCommand = ActiveCommand;
+            if (UpdatingControls.Instance.waiting && UpdatingControls.Instance.wait != currentKey)
+            {
+                UpdatingControls.Instance.waiting = false;
+                returnKey = currentKey;
+            }
+            else
+            {
+                game.ActiveCommand = ActiveCommand;
+            }
+        }
+
+        public Keys getKey()
+        {
+            return returnKey;
         }
     }
 }

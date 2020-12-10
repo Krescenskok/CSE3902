@@ -39,7 +39,6 @@ namespace Sprint5.ScreenHandling
 
             Options.Add(new MenuOption(StateId.Options, ScreenName.BackSelect));
 
-            Sprites.Add(new MenuOption(StateId.Sound, ScreenName.SoundSelectNone));
             Options.Add(new MenuOption(StateId.Sound, ScreenName.SoundTrackSelect));
 
             Options.Add(new MenuOption(StateId.Sound, ScreenName.VolumeSelect));
@@ -49,15 +48,6 @@ namespace Sprint5.ScreenHandling
             Volume.Add(new MenuOption(StateId.Sound, ScreenName.Volume60));
             Volume.Add(new MenuOption(StateId.Sound, ScreenName.Volume80));
             Volume.Add(new MenuOption(StateId.Sound, ScreenName.Volume100));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.ZeldaRemix));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.ZeldaOriginal));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.Tron));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.ImOnaBoat));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.iCarly));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.HoldingOut));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.Fireflies));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.Doom));
-            Songs.Add(new MenuOption(StateId.Sound, ScreenName.Allstar));
 
             Sprites.Add(new MenuOption(StateId.Sound, ScreenName.SelectLeft));
             Sprites.Add(new MenuOption(StateId.Sound, ScreenName.SelectRight));
@@ -67,6 +57,7 @@ namespace Sprint5.ScreenHandling
             Sprites.Add(new MenuOption(StateId.Sound, ScreenName.BackB));
 
             DrawList.Add(Background);
+            ToggleOption(Options[0]);
         }
 
         public void Draw(Game1 game, GameTime gameTime)
@@ -86,6 +77,7 @@ namespace Sprint5.ScreenHandling
                 game.Spritebatch.Draw(currentSprite.Texture, new Rectangle(drawBounds, drawBounds, game.Camera.EntireArea.Width, game.Camera.EntireArea.Height), Color.White);
             }
 
+
             game.Spritebatch.End();
         }
 
@@ -99,6 +91,11 @@ namespace Sprint5.ScreenHandling
             {
                 DrawList.Add(option);
             }
+        }
+        public void ClearDrawList()
+        {
+            DrawList.Clear();
+            DrawList.Add(Background);
         }
 
         public void Navigate(string action)
@@ -127,23 +124,55 @@ namespace Sprint5.ScreenHandling
                 {
                     if (SongOrVolume == "Volume")
                     {
-                        Sounds.Instance.VolumeDown();
+                        if (SongIndex > 0)
+                        {
+                            ToggleOption(Volume[VolumeIndex]);
+                            VolumeIndex--;
+                            ToggleOption(Volume[VolumeIndex]);
+                            Sounds.Instance.VolumeDown();
+                        }
                     } else if (SongOrVolume == "Song")
                     {
-                        Sounds.Instance.ChangeBGM("song");
+
+                        ToggleOption(Songs[SongIndex]);
+                        SongIndex--;
+                        if (SongIndex < 0)
+                        {
+                            SongIndex = Songs.Count - 1;
+                        }
+                        ToggleOption(Sprites[0]);
+                        ToggleOption(Songs[SongIndex]);
+                        Sounds.Instance.ChangeBGM(SongFile[Songs[SongIndex].Name]);
+
                     }
-                    ToggleOption(Options[SelectedIndex]);
-                    SelectedIndex++;
-                    ToggleOption(Options[SelectedIndex]);
                 }
             }
             else if (action == "Right")
             {
                 if (SelectedIndex != (Options.Count - 1))
                 {
-                    ToggleOption(Options[SelectedIndex]);
-                    SelectedIndex++;
-                    ToggleOption(Options[SelectedIndex]);
+                    if (SongOrVolume == "Volume")
+                    {
+                        if (SongIndex <= (Songs.Count - 1))
+                        {
+                            ToggleOption(Volume[VolumeIndex]);
+                            VolumeIndex++;
+                            ToggleOption(Volume[VolumeIndex]);
+                            Sounds.Instance.VolumeUp();
+                        }
+                    }
+                    else if (SongOrVolume == "Song")
+                    {
+                        ToggleOption(Songs[SongIndex]);
+                        SongIndex++;
+                        if (SongIndex > (Songs.Count - 1))
+                        {
+                            SongIndex = 0;
+                        }
+                        ToggleOption(Sprites[1]);
+                        ToggleOption(Songs[SongIndex]);
+                        Sounds.Instance.ChangeBGM(SongFile[Songs[SongIndex].Name]);
+                    }
                 }
             }
         }
@@ -163,16 +192,18 @@ namespace Sprint5.ScreenHandling
             }
             else if (currentName == ScreenName.VolumeSelect)
             {
+                ClearDrawList();
                 SongOrVolume = "Volume";
+                ToggleOption(Volume[5]);
             }
             else if (currentName == ScreenName.SoundTrackSelect)
             {
+                ClearDrawList();
                 SongOrVolume = "Song";
+                ToggleOption(Songs[0]);
+                ToggleOption(Sprites[2]);
             }
-            else
-            {
-                Game.State.Swap(Game.State.Previous.Id);
-            }
+
         }
 
     }

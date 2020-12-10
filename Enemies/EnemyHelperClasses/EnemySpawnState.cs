@@ -15,7 +15,7 @@ namespace Sprint5
         {
           
             this.enemy = enemy;
-            ISprite newSprite = EnemySpriteFactory.Instance.CreateSpawnSprite();
+            EnemySprite newSprite = EnemySpriteFactory.Instance.CreateSpawnSprite();
             this.enemy.SetSprite(newSprite);
 
             sprite = (SpawnSprite)newSprite;

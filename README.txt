@@ -21,11 +21,17 @@ Known Bugs:
 - If the sword beam hits the very edges of the door entrance, it may not show the impact animation, but it will expire.
 - Link does not hold the triforce/bow over his head (but he will hold his hands up).
 - Link does not pick up boomerang with one hand.
+- When you change keys in controls, you cannot change to an already preexisting key -> for now, please just treat this as a coontrols list to minimize errors.
+- Dodongo (in the bonus room) walks through walls
+- Boomernag (in bonus room) respawns needlessly every time you enter the room
 
 
 Notes:
+- There is a bonus room below the very first room in the game (the room you spawn in -> go through the bottom door)
 - In the inventory, the bow is intended to be drawing over the arrow once obtained, but only the bow should show up in the slot selection. 
 - The Magic Book item is used as an invincibility item (it is not the same as the original game implementation). When Link collects it, he will be invincible for a short moment, and if he runs into enemies while invincible, he will damage them. 
+- Please read the Sound Read Me for song credits
+- For command mapping: it is not fully tested yet, but from what we can tell, it is working (please don't change too many of the key mappings/have duplicate key mappings). 
 
 
 Code Analysis on Link (Done by Krescens)
@@ -63,7 +69,7 @@ Code Analysis on Menu (Done by Andrew and Noah)
 0 errors, 0 warnings
 
 
-Code Analysis on Enemies (Done by JT)
+Code Analysis on Enemies (Done by JT & Yuan)
 0 errors, 0 warnings
 
 - Most warnings are to change fields to readonly, which were suppressed

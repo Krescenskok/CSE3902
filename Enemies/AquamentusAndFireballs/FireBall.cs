@@ -47,7 +47,7 @@ namespace Sprint5
         }
 
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             //wont use
         }

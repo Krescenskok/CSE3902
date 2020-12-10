@@ -29,7 +29,7 @@ namespace Sprint5
             this.master = master;
             this.game = game;
 
-            ISprite sprite = EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(dir);
+            EnemySprite sprite = EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(dir);
             master.SetSprite(sprite);
 
             this.targetSpace = targetSpace;

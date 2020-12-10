@@ -56,9 +56,9 @@ namespace Sprint5
            //does not play spawn animation
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
-            this.sprite = (EnemySprite) sprite;
+            this.sprite = sprite;
         }
 
 
