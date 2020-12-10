@@ -19,12 +19,15 @@ namespace Sprint5
         {
             Game = game;
             Current = initialState;
+            Previous = initialState;
         }
 
         public void Swap(StateId newState)
         {
             System.Diagnostics.Debug.WriteLine(this.Current.Id);
+            Previous = Current;
             IGameStates NewState = IDToState.Instance.State(newState);
+
 
             this.Current = NewState;
 

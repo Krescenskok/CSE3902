@@ -14,18 +14,18 @@ namespace Sprint5.ScreenHandling
         private int drawBounds = 0;
         public ScreenName Background { get; set; }
 
-        public List<ScreenName> Options { get; set; }
+        public List<MenuOption> Options { get; set; }
         public List<ScreenName> DrawList { get; set; }
 
         public CreditsScreen()
         {
-            Options = new List<ScreenName>();
+            Options = new List<MenuOption>();
             DrawList = new List<ScreenName>();
             Background = ScreenName.CreditsBG;
 
-            Options.Add(ScreenName.BackSelect);
-            Options.Add(ScreenName.BackEsc);
-            Options.Add(ScreenName.BackB);
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.BackSelect));
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.BackEsc));
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.BackB));
 
             DrawList.Add(Background);
         }

@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint5.Menus
+namespace Sprint5
 {
     public class MenuOption
     {
         public StateId Id { get; set; }
 
-        public ScreenName name { get; set; }
+        public ScreenName Name { get; set; }
 
 
         public MenuOption(StateId id, ScreenName name)

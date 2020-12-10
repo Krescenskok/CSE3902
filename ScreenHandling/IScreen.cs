@@ -9,10 +9,18 @@ namespace Sprint5
     {
         public void Draw(Game1 game, GameTime gameTime);
 
-        public ScreenName Background { get; set; }
+        public MenuOption Background { get; set; }
 
-        public List<ScreenName> Options { get; set; }
 
-        public List<ScreenName> DrawList { get; set; }
+        public List<MenuOption> Options { get; set; }
+
+        public List<MenuOption> Sprites { get; set; }
+
+        public void Navigate(string action);
+
+        public void Back();
+
+        public void Select();
+
     }
 }

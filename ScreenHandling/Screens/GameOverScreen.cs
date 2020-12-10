@@ -14,24 +14,21 @@ namespace Sprint5.ScreenHandling
         private int drawBounds = 0;
     public ScreenName Background{ get; set; }
 
-    public List<ScreenName> Options { get; set; }
+    public List<MenuOption> Options { get; set; }
     public List<ScreenName> DrawList { get; set; }
 
     public GameOverScreen()
         {
-            Options = new List<ScreenName>();
+            Options = new List<MenuOption>();
             DrawList = new List<ScreenName>();
             Background = ScreenName.LoseBG;
 
-            Options.Add(ScreenName.WinCredits);
-            Options.Add(ScreenName.WinCreditsSelect);
-            Options.Add(ScreenName.WinMainMenu);
-            Options.Add(ScreenName.WinMainMenuSelect);
-            Options.Add(ScreenName.WinStats);
-            Options.Add(ScreenName.WinStatsSelect);
-            Options.Add(ScreenName.BackSelect);
-            Options.Add(ScreenName.BackEsc);
-            Options.Add(ScreenName.BackB);
+            Options.Add(new MenuOption(StateId.Credits, ScreenName.WinCreditsSelect));
+            Options.Add(new MenuOption(StateId.MainMenu, ScreenName.WinMainMenuSelect));
+            Options.Add(new MenuOption(StateId.Stats, ScreenName.WinStatsSelect));
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.QuitSelect));
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.BackEsc));
+            Options.Add(new MenuOption(StateId.GameOver, ScreenName.BackB));
 
             DrawList.Add(Background);
         }

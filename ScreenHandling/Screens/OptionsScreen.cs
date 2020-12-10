@@ -14,23 +14,23 @@ namespace Sprint5.ScreenHandling
         private int drawBounds = 0;
         public ScreenName Background { get; set; }
 
-        public List<ScreenName> Options { get; set; }
+        public List<MenuOption> Options { get; set; }
         public List<ScreenName> DrawList { get; set; }
 
         public OptionsScreen()
         {
-            Options = new List<ScreenName>();
+            Options = new List<MenuOption>();
             DrawList = new List<ScreenName>();
             Background = ScreenName.OptionsBG;
 
-            Options.Add(ScreenName.BackSelect);
+            Options.Add(new MenuOption(StateId.Options, ScreenName.BackSelect));
 
-            Options.Add(ScreenName.OptionsControlSelect);
-            Options.Add(ScreenName.OptionsFullScreenSelect);
-            Options.Add(ScreenName.OptionsKeyBindingsSelect);
-            Options.Add(ScreenName.OptionsSoundSelect);
-            Options.Add(ScreenName.BackEsc);
-            Options.Add(ScreenName.BackB);
+            Options.Add(new MenuOption(StateId.Controls, ScreenName.OptionsControlSelect));
+            Options.Add(new MenuOption(StateId.Options, ScreenName.OptionsFullScreenSelect));
+            Options.Add(new MenuOption(StateId.KeyBinding, ScreenName.OptionsKeyBindingsSelect));
+            Options.Add(new MenuOption(StateId.Sound, ScreenName.OptionsSoundSelect));
+            Options.Add(new MenuOption(StateId.Options, ScreenName.BackEsc));
+            Options.Add(new MenuOption(StateId.Options, ScreenName.BackB));
 
             DrawList.Add(Background);
         }

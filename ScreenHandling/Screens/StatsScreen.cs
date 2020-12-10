@@ -33,27 +33,34 @@ namespace Sprint5
                 return instance;
             }
         }
-        public ScreenName Background { get; set; }
+        public MenuOption Background { get; set; }
 
-        public List<ScreenName> Options { get; set; }
-        public List<ScreenName> DrawList { get; set; }
+        public List<MenuOption> Options { get; set; }
+        public List<MenuOption> Sprites { get; set; }
+        public List<MenuOption> DrawList { get; set; }
+
+        private Game1 Game;
+
+        private int SelectedIndex = 0;
 
         public StatsScreen()
         {
-            Options = new List<ScreenName>();
-            DrawList = new List<ScreenName>();
-            Background = ScreenName.StatsBG;
+            Options = new List<MenuOption>();
+            DrawList = new List<MenuOption>();
 
-            Options.Add(ScreenName.BackSelect);
-            Options.Add(ScreenName.BackEsc);
-            Options.Add(ScreenName.BackB);
+            Background = new MenuOption(StateId.Stats, ScreenName.StatsBG);
+
+            Options.Add(new MenuOption(StateId.Stats, ScreenName.BackSelect));
+
+            Sprites.Add(new MenuOption(StateId.Stats, ScreenName.BackEsc));
+            Sprites.Add(new MenuOption(StateId.Stats, ScreenName.BackB));
 
             DrawList.Add(Background);
         }
 
         public void Draw(Game1 game, GameTime gameTime)
         {
-
+            Game = game;
             if (game.ActiveCommand != null)
                 game.ActiveCommand.ExecuteCommand(game, gameTime, game.Spritebatch);
 
@@ -62,9 +69,9 @@ namespace Sprint5
             game.GraphicsDevice.Viewport = game.Camera.EntireView;
             GenerateStats(gameTime);
 
-            foreach (ScreenName screen in DrawList)
+            foreach (MenuOption option in DrawList)
             {
-                ScreenSprite currentSprite = ScreenSpriteMap.Instance.GetSprite(screen);
+                ScreenSprite currentSprite = ScreenSpriteMap.Instance.GetSprite(option.Name);
 
                 game.Spritebatch.Draw(currentSprite.Texture, new Rectangle(drawBounds, drawBounds, game.Camera.EntireArea.Width, game.Camera.EntireArea.Height), Color.White);
             }
@@ -77,7 +84,7 @@ namespace Sprint5
             game.Spritebatch.End();
         }
 
-        public void ToggleOption(ScreenName option)
+        public void ToggleOption(MenuOption option)
         {
             if (DrawList.Contains(option))
             {
@@ -108,6 +115,20 @@ namespace Sprint5
 
 
 
+        }
+
+        public void Navigate(string action)
+        {
+        }
+
+        public void Back()
+        {
+            Game.State.Swap(Game.State.Previous.Id);
+        }
+
+        public void Select()
+        {
+            Game.State.Swap(Game.State.Previous.Id);
         }
 
     }

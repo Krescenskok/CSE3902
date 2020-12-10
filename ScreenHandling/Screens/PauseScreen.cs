@@ -14,22 +14,22 @@ namespace Sprint5.ScreenHandling
         private int drawBounds = 0;
         public ScreenName Background { get; set; }
 
-        public List<ScreenName> Options { get; set; }
+        public List<MenuOption> Options { get; set; }
         public List<ScreenName> DrawList { get; set; }
 
         public PauseScreen()
         {
-            Options = new List<ScreenName>();
+            Options = new List<MenuOption>();
             DrawList = new List<ScreenName>();
             Background = ScreenName.PauseBG;
 
-            Options.Add(ScreenName.BackSelect);
+            Options.Add(new MenuOption(StateId.Gameplay, ScreenName.BackSelect));
 
-            Options.Add(ScreenName.PauseResumeSelect);
-            Options.Add(ScreenName.PauseOptionsSelect);
-            Options.Add(ScreenName.PauseMainMenuSelect);
-            Options.Add(ScreenName.BackEsc);
-            Options.Add(ScreenName.BackB);
+            Options.Add(new MenuOption(StateId.Gameplay, ScreenName.PauseResumeSelect));
+            Options.Add(new MenuOption(StateId.Options, ScreenName.PauseOptionsSelect));
+            Options.Add(new MenuOption(StateId.MainMenu, ScreenName.PauseMainMenuSelect));
+            Options.Add(new MenuOption(StateId.Pause, ScreenName.BackEsc));
+            Options.Add(new MenuOption(StateId.Pause, ScreenName.BackB));
 
             DrawList.Add(Background);
         }
