@@ -26,7 +26,7 @@ namespace Sprint5
         }
 
         private Random random = new Random();
-        private Point startingRoom;
+        private Point startRoomLocation;
 
         private List<List<int>> binaryGrid = new List<List<int>>();
         private Dictionary<string,Room> roomList = new Dictionary<string,Room>();
@@ -34,12 +34,12 @@ namespace Sprint5
         private Dictionary<int, List<string>> Sets = new Dictionary<int, List<string>>();
         private Dictionary<int, bool> SetGoesForward = new Dictionary<int, bool>();
 
-        private RoomWriter newWriter;
+        private CustomXMLWriter newWriter;
 
         public void GenerateMap(int size, string fileName)
         {
 
-            newWriter = new RoomWriter(fileName);
+            newWriter = new CustomXMLWriter(fileName);
 
             for (int i = 0; i < size; i++)
             {
@@ -67,7 +67,7 @@ namespace Sprint5
 
                 for(int j = 0; j < size; j++)
                 {
-                    if(j < size -1 && Random(size) )
+                    if(j < size -1 && (Random(size) || i == size - 1) )
                     {
                         AddRightSpaceToSet(i, j, binaryGrid[i][j], binaryGrid[i][j + 1]);
                     }
@@ -85,24 +85,33 @@ namespace Sprint5
                     }
                 }
 
+                //add one row to room generator
                 if(i < size - 1)
-                    RoomGenerator.GenerateRooms(newWriter, new List<List<int>> { binaryGrid[i], binaryGrid[i + 1] },i);
+                    RoomGenerator.GenerateRooms(new List<List<int>> { binaryGrid[i], binaryGrid[i + 1] },i);
                 else
-                    RoomGenerator.GenerateRooms(newWriter, new List<List<int>> { binaryGrid[i]}, i);
+                    RoomGenerator.GenerateRooms(new List<List<int>> { binaryGrid[i]}, i);
             }
 
+            //write rooms to xml
             RoomGenerator.FinishGeneration(newWriter);
 
             Random rand = new Random();
-            startingRoom = new Point(rand.Next(0,size), size - 1);
-            Camera.Instance.ResetTransformLocation(startingRoom, startingRoom.X);
+            int startRow = 0;
+            startRoomLocation = new Point(rand.Next(0,size), size - startRow - 1);
+            int startRoom = startRow * size + startRoomLocation.X;
+            Camera.Instance.ResetTransformLocation(startRoomLocation, startRoom);
+
+
+            //RoomWriter writer = new RoomWriter("FinalLevelOne", "wall");
+            //writer.Fix("Room");
+            //writer.Save();
         }
 
         
 
         private bool Random(int odds)
         {
-            return random.Next(0, 3) == 0;
+            return random.Next(0, odds) == 0;
         }
 
 

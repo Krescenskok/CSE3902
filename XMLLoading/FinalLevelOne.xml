@@ -1,72 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset Type="MyDataTypes.LevelObjectData[]">
-    <!-- Walls-->
+    <!--Locked Doors-->
+    <LockedDoor Drawn="true" Room="1" Type="lockedtop" Row="5" Col="2" Trap ="false"></LockedDoor>
+    <LockedDoor Drawn="false" Room="6" Type="openright" Row="3" Col="1" Trap ="true"></LockedDoor>
+	  <LockedDoor Drawn="false" Room="6" Type="opentop" Row="3" Col="1" Trap ="true"></LockedDoor>
+    <LockedDoor Drawn="true" Room="8" Type="lockedright" Row="2" Col="2" Trap ="false"></LockedDoor>
+    <LockedDoor Drawn="true" Room="9" Type="closedleft" Row="2" Col="1" Trap ="false"></LockedDoor>
+	  <LockedDoor Drawn="true" Room="12" Type="lockedtop" Row="2" Col="4" Trap ="false"></LockedDoor>
+    <LockedDoor Drawn="true" Room="13" Type="lockedtop" Row="1" Col="2" Trap ="false"></LockedDoor>
+    <LockedDoor Drawn="true" Room="14" Type="closedright" Row="1" Col="4" Trap ="false"></LockedDoor>
+    <LockedDoor Drawn="true" Room="16" Type="lockedleft" Row="0" Col="2" Trap ="false"></LockedDoor>
+    <!--Locked Doors-->
     <!-- First Room Content-->
-    <Room id="1">
+    <Room id="1" row="5" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>2</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>3</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Up</Direction>
-        <Type>locked</Type>
-        <RoomNum>4</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>19</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="2" />
+      <Door Type="normalright" Room="3" />
+      <Door Type="lockedtop" Room="4" />
+      <Door Type="normalbottom" Room="19" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottomleft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="BottomRight" />
+      <Wall Type="BottomLeft" />
       <!-- Walls-->
       <!-- Statue Blocks Left Side-->
       <Item>
@@ -132,40 +94,16 @@
       </Item>
     </Room>
     <!-- Third Room Content-->
-    <Room id="3">
+    <Room id="3" row="5" col="3">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>1</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="1" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="Right" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Columns Left Side-->
       <Item>
@@ -262,50 +200,18 @@
       </Item>
     </Room>
     <!-- Sixth Room Content-->
-    <Room id="6">
+    <Room id="6" row="3" col="1">
       <!-- Doors-->
-      <Door>
-        <Direction>Right</Direction>
-        <Type>special_open</Type>
-        <RoomNum>5</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Up</Direction>
-        <Type>normal</Type>
-        <RoomNum>9</RoomNum>
-      </Door>
+      <Door Type="openright" Room="5" />
+      <Door Type="opentop" Room="9" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Columns Middle-->
       <Item>
@@ -378,40 +284,16 @@
     </Room>
     <!-- Sixth Room Content-->
     <!-- Seventh Room Content-->
-    <Room id="7">
+    <Room id="7" row="3" col="3">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>5</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="5" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="Right" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Columns-->
       <Item>
@@ -493,60 +375,20 @@
     </Room>
     <!-- Seventh Room Content-->
     <!-- Ninth Room Content-->
-    <Room id="9">
+    <Room id="9" row="2" col="1">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>special_closed</Type>
-        <RoomNum>10</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>8</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>6</RoomNum>
-      </Door>
+      <Door Type="closedleft" Room="10" />
+      <Door Type="normalright" Room="8" />
+      <Door Type="normalbottom" Room="6" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <!-- Column-->
       <Item>
@@ -579,50 +421,18 @@
     </Room>
     <!-- Ninth Room Content-->
     <!-- Eleventh Room Content-->
-    <Room id="11">
+    <Room id="11" row="2" col="3">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>8</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>12</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="8" />
+      <Door Type="normalright" Room="12" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Columns-->
       <Item>
@@ -669,50 +479,18 @@
     </Room>
     <!-- Eleventh Room Content-->
     <!-- Thirteenth Room Content-->
-    <Room id="13">
+    <Room id="13" row="1" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Up</Direction>
-        <Type>locked</Type>
-        <RoomNum>16</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>8</RoomNum>
-      </Door>
+      <Door Type="lockedtop" Room="16" />
+      <Door Type="normalbottom" Room="8" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="Right" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <!-- Water -->
       <Item>
@@ -969,40 +747,16 @@
     </Room>
     <!-- Thirteenth Room Content-->
     <!-- Fifteenth Room Content-->
-    <Room id="15">
+    <Room id="15" row="1" col="5">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>14</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="14" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="Right" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Columns-->
       <Item>
@@ -1159,45 +913,17 @@
     </Room>
     <!-- Fifteenth Room Content-->
     <!-- Seventeenth Room Content-->
-    <Room id="17">
+    <Room id="17" row="0" col="1">
       <!-- Doors-->
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>16</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Center</Direction>
-        <Type>normal</Type>
-        <RoomNum>18</RoomNum>
-      </Door>
+      <Door Type="normalright" Room="16" />
+      <Door Type="normalcenter" Room="18" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <!-- Trap -->
       <Item>
@@ -1294,40 +1020,16 @@
     </Room>
     <!-- Seventeenth Room Content-->
     <!-- Second Room Content-->
-    <Room id="2">
+    <Room id="2" row="5" col="1">
       <!-- Doors-->
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>1</RoomNum>
-      </Door>
+      <Door Type="normalright" Room="1" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <Item>
         <ObjectType>Enemy</ObjectType>
@@ -1349,50 +1051,18 @@
       </Item>
     </Room>
     <!-- Fourth Room Content-->
-    <Room id="4">
+    <Room id="4" row="4" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Up</Direction>
-        <Type>normal</Type>
-        <RoomNum>5</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>1</RoomNum>
-      </Door>
+      <Door Type="normaltop" Room="5" />
+      <Door Type="normalbottom" Room="1" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="Right" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <Item>
         <ObjectType>Block</ObjectType>
@@ -1444,60 +1114,20 @@
       </Item>
     </Room>
     <!-- Fifth Room Content-->
-    <Room id="5">
+    <Room id="5" row="3" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>6</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>7</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>4</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="6" />
+      <Door Type="normalright" Room="7" />
+      <Door Type="normalbottom" Room="4" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <Item>
         <ObjectType>Enemy</ObjectType>
@@ -1557,60 +1187,20 @@
       </Item>
     </Room>
     <!-- 8th Room Content-->
-    <Room id="8">
+    <Room id="8" row="2" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>9</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Right</Direction>
-        <Type>locked</Type>
-        <RoomNum>11</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Up</Direction>
-        <Type>normal</Type>
-        <RoomNum>13</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="9" />
+      <Door Type="lockedright" Room="11" />
+      <Door Type="normaltop" Room="13" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <Item>
         <ObjectType>Block</ObjectType>
@@ -1700,40 +1290,16 @@
       </Item>
     </Room>
     <!-- 10th Room Content-->
-    <Room id="10">
+    <Room id="10" row="2" col="0">
       <!-- Doors-->
-      <Door>
-        <Direction>Right</Direction>
-        <Type>normal</Type>
-        <RoomNum>9</RoomNum>
-      </Door>
+      <Door Type="normalright" Room="9" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <Item>
         <ObjectType>NPC</ObjectType>
@@ -1761,50 +1327,18 @@
       </Item>
     </Room>
     <!-- 12th Room Content-->
-    <Room id="12">
+    <Room id="12" row="2" col="4">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>normal</Type>
-        <RoomNum>11</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Up</Direction>
-        <Type>locked</Type>
-        <RoomNum>14</RoomNum>
-      </Door>
+      <Door Type="normalleft" Room="11" />
+      <Door Type="lockedtop" Room="14" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="Right" />
+      <Wall Type="Bottom" />
       <!-- Walls-->
       <Item>
         <ObjectType>Enemy</ObjectType>
@@ -1952,50 +1486,18 @@
       </Item>
     </Room>
     <!-- 14th Room Content-->
-    <Room id="14">
+    <Room id="14" row="1" col="4">
       <!-- Doors-->
-      <Door>
-        <Direction>Right</Direction>
-        <Type>special_closed</Type>
-        <RoomNum>15</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>12</RoomNum>
-      </Door>
+      <Door Type="closedright" Room="15" />
+      <Door Type="normalbottom" Room="12" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>RightBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="Top" />
+      <Wall Type="RightTop" />
+      <Wall Type="RightBottom" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <Item>
         <ObjectType>Block</ObjectType>
@@ -2105,50 +1607,18 @@
       </Item>
     </Room>
     <!-- 16th Room Content-->
-    <Room id="16">
+    <Room id="16" row="0" col="2">
       <!-- Doors-->
-      <Door>
-        <Direction>Left</Direction>
-        <Type>locked</Type>
-        <RoomNum>17</RoomNum>
-      </Door>
-      <Door>
-        <Direction>Down</Direction>
-        <Type>normal</Type>
-        <RoomNum>13</RoomNum>
-      </Door>
+      <Door Type="lockedleft" Room="17" />
+      <Door Type="normalbottom" Room="13" />
       <!-- Doors-->
       <!-- Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftTop</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>LeftBottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Top</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>BottomRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="LeftTop" />
+      <Wall Type="LeftBottom" />
+      <Wall Type="Top" />
+      <Wall Type="Right" />
+      <Wall Type="BottomLeft" />
+      <Wall Type="BottomRight" />
       <!-- Walls-->
       <Item>
         <ObjectType>Enemy</ObjectType>
@@ -2298,13 +1768,9 @@
       <!-- Water-->
     </Room>
     <!-- 18th Room Content -->
-    <Room id="18">
+    <Room id="18" row="1" col="1">
       <!-- Doors-->
-      <Door>
-        <Direction>secret</Direction>
-        <Type>normal</Type>
-        <RoomNum>17</RoomNum>
-      </Door>
+      <Door Type="normalsecret" Room="17" />
       <!-- Doors-->
       <Item>
         <ObjectType>Enemy</ObjectType>
@@ -2414,11 +1880,7 @@
     <!--Extra Room-->
     <Room id="19">
       <!-- Doors-->
-      <Door>
-        <Direction>Up</Direction>
-        <Type>normal</Type>
-        <RoomNum>1</RoomNum>
-      </Door>
+      <Door Type="normaltop" Room="1" />
       <!-- Doors-->
       <!-- Enemies-->
       <Item>
@@ -2467,31 +1929,11 @@
       </Item>
       <!--Items-->
       <!--Walls-->
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Left</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopLeft</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>TopRight</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Right</ObjectName>
-        <Location>0 0</Location>
-      </Item>
-      <Item>
-        <ObjectType>Wall</ObjectType>
-        <ObjectName>Bottom</ObjectName>
-        <Location>0 0</Location>
-      </Item>
+      <Wall Type="Left" />
+      <Wall Type="TopLeft" />
+      <Wall Type="TopRight" />
+      <Wall Type="Right" />
+      <Wall Type="Bottom" />
       <!--Walls-->
     </Room>
     <!--Extra Room-->

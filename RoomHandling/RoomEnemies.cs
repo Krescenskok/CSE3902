@@ -51,6 +51,7 @@ namespace Sprint5
                 string objType = typeTag.Value;
 
                 if (objType.Equals("Enemy")) enemies.Add(EnemyFactory.Instance.CreateEnemy(game as Game1, item));
+                enemies.RemoveAll(item => item == null);
             }
 
             

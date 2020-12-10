@@ -10,21 +10,13 @@ namespace Sprint5
 {
     public static class RoomGenerator
     {
-        private struct Room
-        {
-            public bool hasRightDoor { get; set; }
-            public bool hasLeftDoor { get; set; }
-            public bool hasTopDoor { get; set; }
-            public bool hasBottomDoor;
-
-            public Point location;
-        }
+     
 
         private static List<List<Room>> rooms = new List<List<Room>>();
 
         private static int size;
 
-        public static void GenerateRooms(RoomWriter document, List<List<int>> inputRows, int bottomRowNum)
+        public static void GenerateRooms(List<List<int>> inputRows, int bottomRowNum)
         {
             size = inputRows[0].Count;
 
@@ -78,14 +70,17 @@ namespace Sprint5
         }
 
 
-        public static void FinishGeneration(RoomWriter document)
+        public static void FinishGeneration(CustomXMLWriter document)
         {
             int index = 0;
             for(int i = 0; i < size; i++)
             {
                 for(int j = 0; j < size; j++)
                 {
-                    document.AddRoom(index++, rooms[i][j].hasLeftDoor, rooms[i][j].hasRightDoor, rooms[i][j].hasTopDoor, rooms[i][j].hasBottomDoor, size, rooms[i][j].location);
+                    Random rand = new Random(); int num = rand.Next(0, size / 2);
+
+                    if(num == 0) document.AddTrapRoom(index++, rooms[i][j], size, rooms[i][j].location);
+                    else document.AddRoom(index++,rooms[i][j], size, rooms[i][j].location);
                 }
                 
             }
@@ -112,11 +107,11 @@ namespace Sprint5
                 int num = 0;
                 foreach(XElement door in doors)
                 {
-                    string direction = door.Element("Direction").Value;
-                    if (direction.Equals("Left")) RoomSpriteFactory.instance.AddLeftDoor(ref newRoom);
-                    else if(direction.Equals("Right")) RoomSpriteFactory.instance.AddRightDoor(ref newRoom);
-                    else if (direction.Equals("Up")) RoomSpriteFactory.instance.AddTopDoor(ref newRoom);
-                    else if (direction.Equals("Down")) RoomSpriteFactory.instance.AddBottomDoor(ref newRoom);
+                    string type = door.Attribute("Type").Value;
+                    if (type.Contains("left")) RoomSpriteFactory.instance.AddLeftDoor(ref newRoom);
+                    else if(type.Contains("right")) RoomSpriteFactory.instance.AddRightDoor(ref newRoom);
+                    else if (type.Contains("top")) RoomSpriteFactory.instance.AddTopDoor(ref newRoom);
+                    else if (type.Contains("bottom")) RoomSpriteFactory.instance.AddBottomDoor(ref newRoom);
 
                     num++;
                 }
@@ -143,11 +138,11 @@ namespace Sprint5
 
                 foreach (XElement door in doors)
                 {
-                    string direction = door.Element("Direction").Value;
-                    if (direction.Equals("Left")) RoomSpriteFactory.instance.AddLeftDoorTop(ref newRoom);
-                    else if (direction.Equals("Right")) RoomSpriteFactory.instance.AddRightDoorTop(ref newRoom);
-                    else if (direction.Equals("Up")) RoomSpriteFactory.instance.AddTopDoorTop(ref newRoom);
-                    else if (direction.Equals("Down")) RoomSpriteFactory.instance.AddBottomDoorTop(ref newRoom);
+                    string type = door.Attribute("Type").Value;
+                    if (type.Contains("left")) RoomSpriteFactory.instance.AddLeftDoorTop(ref newRoom);
+                    else if (type.Contains("right")) RoomSpriteFactory.instance.AddRightDoorTop(ref newRoom);
+                    else if (type.Contains("top")) RoomSpriteFactory.instance.AddTopDoorTop(ref newRoom);
+                    else if (type.Contains("bottom")) RoomSpriteFactory.instance.AddBottomDoorTop(ref newRoom);
 
                 }
 

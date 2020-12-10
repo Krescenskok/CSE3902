@@ -16,21 +16,22 @@ namespace Sprint5
         private Point spriteSize;
         private Point drawSize;
 
+        int row, col;
 
 
-
-        public DoorSprite(Texture2D texture)
+        public DoorSprite(Texture2D texture, int row, int col)
         {
 
             this.texture = texture;
+            this.row = row;
+            this.col = col;
 
-            Point size = Camera.Instance.playArea.Size;
 
             spriteSize.X = texture.Bounds.Width;
             spriteSize.Y = texture.Bounds.Height;
 
-            drawSize.X = size.X * 6;
-            drawSize.Y = size.Y * 6;
+
+            drawSize = Camera.Instance.playArea.Size;
         }
 
 
@@ -51,7 +52,7 @@ namespace Sprint5
             if(shouldDraw)
             {
                 Rectangle sourceRectangle = new Rectangle(0, 0, spriteSize.X, spriteSize.Y);
-                Rectangle destinationRectangle = new Rectangle(0, 0, drawSize.X, drawSize.Y);
+                Rectangle destinationRectangle = new Rectangle(drawSize.X * col, drawSize.Y * row, drawSize.X, drawSize.Y);
 
                 batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
             }

@@ -95,7 +95,7 @@ namespace Sprint5
             CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
             RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
-            RoomDoors.Instance.OpenDoor(14);
+            RoomDoors.Instance.OpenDoor("1,4,closedright");
 
             while(fireBallList.Count > 0)
             {

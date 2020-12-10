@@ -63,6 +63,8 @@ namespace Sprint5
             rect = HitboxAdjuster.Instance.AdjustHitbox(rect, 0.5f);
             collider = new EnemyCollider(rect, this, HPAmount.HalfHeart);
             finderCollider = new RopePlayerFinderCollider(rp.GetRectangle(), this, game);
+
+            HPBarDrawer.AddBar(new EnemyHealthBar(this,rect,1.5f));
         }
 
         public void Update()
@@ -103,8 +105,8 @@ namespace Sprint5
 
         public void TakeDamage(Direction dir, int amount)
         {
-            HP -= amount;
-            if (HP <= 0) Die();
+            HP = Math.Max(HP - amount, HPAmount.Zero);
+            if (HP <= HPAmount.Zero) Die();
         }
 
         public void ObstacleCollision(Collision collision)

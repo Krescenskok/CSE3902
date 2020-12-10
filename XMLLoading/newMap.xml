@@ -1,1847 +1,661 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <Room id="0" row="9" col="0">
+  <LockedDoor Drawn="false" Type="opentop" Row="3" Col="0" Trap="true" />
+  <Room id="0" row="3" col="0">
     <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>1</RoomNum>
-    </Door>
+    <Wall Type="Right" />
+    <Door Type="opentop" Room="4" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="3" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="opentop" Row="3" Col="1" Trap="true" />
+  <Room id="1" row="3" col="1">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="2" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Door Type="opentop" Room="5" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="2" row="3" col="2">
+    <Door Type="normalleft" Room="1" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="6" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="3" row="3" col="3">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="7" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="4" row="2" col="0">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="8" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="0" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="2" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="2" Col="1" Trap="true" />
+  <Room id="5" row="2" col="1">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="6" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="1" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openleft" Row="2" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="opentop" Row="2" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="2" Col="2" Trap="true" />
+  <Room id="6" row="2" col="2">
+    <Door Type="openleft" Room="5" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="opentop" Room="10" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="openbottom" Room="2" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="7" row="2" col="3">
+    <Wall Type="Left" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="11" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="3" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <LockedDoor Drawn="false" Type="openright" Row="1" Col="0" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="1" Col="0" Trap="true" />
+  <Room id="8" row="1" col="0">
+    <Wall Type="Left" />
+    <Door Type="openright" Room="9" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Wall Type="Top" />
+    <Door Type="openbottom" Room="4" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="9" row="1" col="1">
+    <Door Type="normalleft" Room="8" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Door Type="normaltop" Room="13" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="10" row="1" col="2">
+    <Wall Type="Left" />
+    <Door Type="normalright" Room="11" />
+    <Wall Type="RightTop" />
+    <Wall Type="RightBottom" />
+    <Door Type="normaltop" Room="14" />
+    <Wall Type="TopLeft" />
+    <Wall Type="TopRight" />
+    <Door Type="normalbottom" Room="6" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Stalfos</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="11" row="1" col="3">
+    <Door Type="normalleft" Room="10" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Wall Type="Right" />
+    <Wall Type="Top" />
+    <Door Type="normalbottom" Room="7" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 1</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 3</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+  </Room>
+  <Room id="12" row="0" col="0">
+    <Wall Type="Left" />
+    <Door Type="normalright" Room="13" />
     <Wall Type="RightTop" />
     <Wall Type="RightBottom" />
     <Wall Type="Top" />
     <Wall Type="Bottom" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 1</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="1" row="9" col="1">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>0</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>2</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>11</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
     <Item>
       <ObjectType>Enemy</ObjectType>
       <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
+      <Location>4 3</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="2" row="9" col="2">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>1</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
+      <ObjectName>Goriya</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>
   </Room>
-  <Room id="3" row="9" col="3">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>4</RoomNum>
-    </Door>
+  <LockedDoor Drawn="false" Type="openleft" Row="0" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openright" Row="0" Col="1" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="0" Col="1" Trap="true" />
+  <Room id="13" row="0" col="1">
+    <Door Type="openleft" Room="12" />
+    <Wall Type="LeftTop" />
+    <Wall Type="LeftBottom" />
+    <Door Type="openright" Room="14" />
     <Wall Type="RightTop" />
     <Wall Type="RightBottom" />
     <Wall Type="Top" />
-    <Wall Type="Bottom" />
+    <Door Type="openbottom" Room="9" />
+    <Wall Type="BottomLeft" />
+    <Wall Type="BottomRight" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Goriya</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>
   </Room>
-  <Room id="4" row="9" col="4">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>3</RoomNum>
-    </Door>
+  <LockedDoor Drawn="false" Type="openleft" Row="0" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openright" Row="0" Col="2" Trap="true" />
+  <LockedDoor Drawn="false" Type="openbottom" Row="0" Col="2" Trap="true" />
+  <Room id="14" row="0" col="2">
+    <Door Type="openleft" Room="13" />
     <Wall Type="LeftTop" />
     <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>5</RoomNum>
-    </Door>
+    <Door Type="openright" Room="15" />
     <Wall Type="RightTop" />
     <Wall Type="RightBottom" />
     <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="5" row="9" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>4</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>15</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="6" row="9" col="6">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>16</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="7" row="9" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>17</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="8" row="9" col="8">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>18</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="9" row="9" col="9">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>19</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="10" row="8" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>20</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="11" row="8" col="1">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>21</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>1</RoomNum>
-    </Door>
+    <Door Type="openbottom" Room="10" />
     <Wall Type="BottomLeft" />
     <Wall Type="BottomRight" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
+      <ObjectName>Goriya</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="12" row="8" col="2">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>22</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
     <Item>
       <ObjectType>Enemy</ObjectType>
       <ObjectName>Stalfos</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="13" row="8" col="3">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>23</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
+      <ObjectName>Keese</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Gel</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 4</Location>
+      <Alive>true</Alive>
+    </Item>
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>
   </Room>
-  <Room id="14" row="8" col="4">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>24</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="15" row="8" col="5">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>25</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>5</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="16" row="8" col="6">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>17</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>6</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="17" row="8" col="7">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>16</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>27</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>7</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="18" row="8" col="8">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>28</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>8</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="19" row="8" col="9">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>29</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>9</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="20" row="7" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>30</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>10</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="21" row="7" col="1">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>22</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>11</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="22" row="7" col="2">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>21</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>23</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>32</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>12</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="23" row="7" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>22</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>33</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>13</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="24" row="7" col="4">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>34</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>14</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="25" row="7" col="5">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>35</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>15</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="26" row="7" col="6">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>27</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>36</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="27" row="7" col="7">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>26</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>37</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>17</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="28" row="7" col="8">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>29</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>18</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="29" row="7" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>28</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>39</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>19</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="30" row="6" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>40</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>20</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="31" row="6" col="1">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>41</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="32" row="6" col="2">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>33</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>42</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>22</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="33" row="6" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>32</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>43</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>23</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="34" row="6" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>35</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>24</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="35" row="6" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>34</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>36</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>45</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>25</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="36" row="6" col="6">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>35</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>26</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="37" row="6" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>47</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>27</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="38" row="6" col="8">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>39</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="39" row="6" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>38</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>49</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>29</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="40" row="5" col="0">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>41</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>30</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="41" row="5" col="1">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>40</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>51</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>31</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="42" row="5" col="2">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>43</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>52</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>32</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="43" row="5" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>42</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>53</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>33</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="44" row="5" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>45</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="45" row="5" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>44</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>55</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>35</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="46" row="5" col="6">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>56</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="47" row="5" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>57</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>37</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="48" row="5" col="8">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>58</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="49" row="5" col="9">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>59</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>39</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="50" row="4" col="0">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>51</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="51" row="4" col="1">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>50</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>61</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>41</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="52" row="4" col="2">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>53</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>62</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>42</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="53" row="4" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>52</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>63</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>43</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="54" row="4" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>55</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="55" row="4" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>54</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>65</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>45</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="56" row="4" col="6">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>66</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>46</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="57" row="4" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>67</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>47</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="58" row="4" col="8">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>68</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>48</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="59" row="4" col="9">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>69</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>49</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="60" row="3" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>70</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="61" row="3" col="1">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>71</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>51</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="62" row="3" col="2">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>63</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>52</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="63" row="3" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>62</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>73</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>53</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="64" row="3" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>65</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>74</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="65" row="3" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>64</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>66</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>55</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="66" row="3" col="6">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>65</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>56</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="67" row="3" col="7">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>68</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>77</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>57</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="68" row="3" col="8">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>67</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>69</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>58</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="69" row="3" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>68</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>59</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="70" row="2" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>80</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>60</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="71" row="2" col="1">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>72</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>61</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="72" row="2" col="2">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>71</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>82</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="73" row="2" col="3">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>83</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>63</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="74" row="2" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>75</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>84</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>64</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="75" row="2" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>74</RoomNum>
-    </Door>
+  <Room id="15" row="0" col="3">
+    <Door Type="normalleft" Room="14" />
     <Wall Type="LeftTop" />
     <Wall Type="LeftBottom" />
     <Wall Type="Right" />
@@ -1850,540 +664,24 @@
     <Item>
       <ObjectType>Enemy</ObjectType>
       <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
+      <Location>4 1</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="76" row="2" col="6">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>86</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
+    <Item>
+      <ObjectType>Enemy</ObjectType>
+      <ObjectName>Rope</ObjectName>
+      <Location>4 2</Location>
+      <Alive>true</Alive>
+    </Item>
     <Item>
       <ObjectType>Enemy</ObjectType>
       <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
+      <Location>4 3</Location>
       <Alive>true</Alive>
     </Item>
-  </Room>
-  <Room id="77" row="2" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>87</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>67</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
     <Item>
       <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="78" row="2" col="8">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>79</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="79" row="2" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>78</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>89</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="80" row="1" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>90</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>70</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="81" row="1" col="1">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>91</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="82" row="1" col="2">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>92</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>72</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="83" row="1" col="3">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>93</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>73</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="84" row="1" col="4">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>94</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>74</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="85" row="1" col="5">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>95</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="86" row="1" col="6">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>96</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>76</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="87" row="1" col="7">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>97</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>77</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="88" row="1" col="8">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>89</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="89" row="1" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>88</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Door>
-      <Direction>Up</Direction>
-      <Type>normal</Type>
-      <RoomNum>99</RoomNum>
-    </Door>
-    <Wall Type="TopLeft" />
-    <Wall Type="TopRight" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>79</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="90" row="0" col="0">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>80</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="91" row="0" col="1">
-    <Wall Type="Left" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>81</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="92" row="0" col="2">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>93</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>82</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="93" row="0" col="3">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>92</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>83</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="94" row="0" col="4">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>95</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>84</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="95" row="0" col="5">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>94</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>85</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="96" row="0" col="6">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>97</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>86</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="97" row="0" col="7">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>96</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>87</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="98" row="0" col="8">
-    <Wall Type="Left" />
-    <Door>
-      <Direction>Right</Direction>
-      <Type>normal</Type>
-      <RoomNum>99</RoomNum>
-    </Door>
-    <Wall Type="RightTop" />
-    <Wall Type="RightBottom" />
-    <Wall Type="Top" />
-    <Wall Type="Bottom" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
-      <Location>4 4</Location>
-      <Alive>true</Alive>
-    </Item>
-  </Room>
-  <Room id="99" row="0" col="9">
-    <Door>
-      <Direction>Left</Direction>
-      <Type>normal</Type>
-      <RoomNum>98</RoomNum>
-    </Door>
-    <Wall Type="LeftTop" />
-    <Wall Type="LeftBottom" />
-    <Wall Type="Right" />
-    <Wall Type="Top" />
-    <Door>
-      <Direction>Down</Direction>
-      <Type>normal</Type>
-      <RoomNum>89</RoomNum>
-    </Door>
-    <Wall Type="BottomLeft" />
-    <Wall Type="BottomRight" />
-    <Item>
-      <ObjectType>Enemy</ObjectType>
-      <ObjectName>Stalfos</ObjectName>
+      <ObjectName>Gel</ObjectName>
       <Location>4 4</Location>
       <Alive>true</Alive>
     </Item>

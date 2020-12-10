@@ -37,6 +37,9 @@ namespace Sprint5
         XElement xml;
 
         int currentRoom = 1;
+
+        private bool playingCustomMap = false;
+
         public int CurrentRoom
         {
             get { return currentRoom; }
@@ -67,13 +70,15 @@ namespace Sprint5
         }
 
 
-        public void LoadCustomRooms(Game game, string file)
+        public void SwitchToCustomXML(string fileName)
         {
-            xml = XElement.Load("../../../XMLLoading/" + file + ".xml");
+            xml = XElement.Load("../../../XMLLoading/" + fileName + ".xml");
             roomXMLs = xml.Elements("Room").ToDictionary(p => int.Parse(p.Attribute("id").Value));
 
             roomSprites = RoomGenerator.RoomSprites(xml);
             roomSpritesTopLayer = RoomGenerator.RoomSpritesTop(xml);
+
+            playingCustomMap = true;
         }
 
         
@@ -112,11 +117,8 @@ namespace Sprint5
 
         public void Draw(SpriteBatch batch)
         {
-            //allRooms.Draw(batch);
-            foreach (RoomSprite sprite in roomSprites)
-            {
-                sprite.Draw(batch);
-            }
+            if(!playingCustomMap) allRooms.Draw(batch);
+            else foreach (RoomSprite sprite in roomSprites) sprite.Draw(batch);
 
             RoomDoors.Instance.Draw(batch);
             
@@ -130,27 +132,23 @@ namespace Sprint5
 
         public void DrawTopLayer(SpriteBatch batch)
         {
-            //topLayer.Draw(batch);
-            foreach(RoomSprite sprite in roomSpritesTopLayer)
-            {
-                sprite.Draw(batch);
-            }
+            if(!playingCustomMap) topLayer.Draw(batch);
+            else foreach(RoomSprite sprite in roomSpritesTopLayer) sprite.Draw(batch);
+
             HPBarDrawer.Draw(batch);
         }
 
-        public void LoadAllRooms(Game game)
+        public void LoadSprites(Game game)
         {
             roomSprites = new List<RoomSprite>();
             roomSpritesTopLayer = new List<RoomSprite>();
             roomSpriteSheet = game.Content.Load<Texture2D>("RoomMap2");
             dungeonSheet = roomSpriteSheet;
             dungeonSheetOuter = game.Content.Load<Texture2D>("RoomMapOuter2");
-            Point drawSize = new Point(game.Window.ClientBounds.Width, game.Window.ClientBounds.Height);
 
             allRooms = new DungeonSprite(dungeonSheet);
             topLayer = new DungeonSprite(dungeonSheetOuter);
-
-            
+ 
         }
 
 
