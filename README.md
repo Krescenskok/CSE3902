@@ -1,6 +1,4 @@
-# CSE3902
-2D Game Design Project
-
+# CSE3902 2D Game Design Project
 Implemented in C# with Visual Studio and Monogame
 
 Creators: Ann Yan, Andrew Sanchez, JT Thrash, Krescens Kok, and Noah Fabec
