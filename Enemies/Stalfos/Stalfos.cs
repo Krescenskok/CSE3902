@@ -1,13 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies;
+using Sprint5.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// <author>JT Thrash</author>
@@ -16,84 +17,101 @@ namespace Sprint4
     public class Stalfos : IEnemy
     {
 
-        XElement saveInfo;
+        private XElement saveInfo;
         public IEnemyState state;
 
-        private Vector2 location;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private StalfosWalkingSprite stalfosSprite;
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; } = HPAmount.EnemyLevel2;
+        private const float barSize = 1.5f;
 
-        public Vector2 Location { get => location; }
+        private Point spriteSize;
+        private Rectangle rect;
+
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+
 
         public Stalfos(Game game, Vector2 location, XElement xml)
         {
-            
-            this.location = location;
+            Location = location;
+
             state = new EnemySpawnState(this, game);
-            collider = new EnemyCollider();
-
             saveInfo = xml;
-
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
         }
 
         public void Spawn()
         {
-            state = new StalfosWalkingState(this, location);
+            state = new StalfosWalkingState(this, Location);
             stalfosSprite = (StalfosWalkingSprite)sprite;
-            collider = new EnemyCollider(stalfosSprite.GetRectangle(), state, HPAmount.HalfHeart, "Stalfos");
+
+            spriteSize = stalfosSprite.GetRectangle().Size;
+            rect = new Rectangle(Location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .5f);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "Stalfos");
+
+            HPBarDrawer.AddBar(new EnemyHealthBar(this, rect, barSize));
         }
 
 
         public void Die()
         {
-            RoomEnemies.Instance.Destroy(this, location);
+            RoomEnemies.Instance.Destroy(this, Location);
             saveInfo.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
-
-        
-        /// <returns>true when stalfos HP is > 0</returns>
-        public bool SubtractHP(int amount)
+        public void TakeDamage(Direction dir, int amount)
         {
-            HP -= amount;
+            if(state is StalfosWalkingState)
+            {
 
-            
-            if (HP <= 0) { Die(); }
+                HP = Math.Max(HP - amount, 0);
 
-            return HP > 0;
+                if (HP == HPAmount.Zero)
+                {
+                    Die();
+                }
+                else
+                {
+                    bool stunned = (state as StalfosWalkingState).permaStun;
+                    state = new StalfosDamagedState(dir, this, Location, stunned);
+                }
+
+            }
+
+        }
+
+        public void ObstacleCollision(Collision col)
+        {
+            state.MoveAwayFromCollision(col);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {            
-            sprite.Draw(spriteBatch, location, 0, Color.White);
+            sprite.Draw(spriteBatch, Location, 0, Color.White);
+
         }
 
         public void Update()
         {
             state.Update();
-            collider.Update(this);
+            sprite.Update();
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
-
             this.sprite = sprite;
-
         }
 
-        public void UpdateLocation(Vector2 location)
+        public void Stun()
         {
-            this.location = location;
-        }
-
-        public EnemyCollider GetCollider()
-        {
-            return collider;
+            state.Stun(false);
         }
     }
 }

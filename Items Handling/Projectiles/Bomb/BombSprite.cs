@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4;
+using Sprint5;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BombSprite : ISprite
     {
@@ -14,6 +14,10 @@ namespace Sprint4.Items
         private Rectangle destinationRectangle;
         private Vector2 sheetSize;
         private const int sheetLocation = 36;
+
+        private Rectangle hitbox;
+
+        public Rectangle Hitbox { get => hitbox; }
 
         public BombSprite(Texture2D texture)
         {

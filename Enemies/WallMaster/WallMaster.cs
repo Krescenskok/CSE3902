@@ -6,8 +6,9 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -15,34 +16,37 @@ namespace Sprint4
     /// </summary>
     public class WallMaster : IEnemy
     {
-        private Vector2 location;
+   
 
-        public Vector2 Location { get => location; }
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider,playerFinder }; }
 
         public IEnemyState state;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private WallMasterSprite masterSprite;
 
         private EnemyCollider collider;
         private HandPlayerFinderCollider playerFinder;
 
-        private int HP = HPAmount.EnemyLevel2;
+        public int HP { get; private set; } = HPAmount.EnemyLevel2;
 
         private XElement saveData;
 
         public WallMaster(Game game, Vector2 location, XElement xml)
         {
-            this.location = location;
+           Location = location;
 
             state = new WallMasterMoveState(location, game, this);
             masterSprite = (WallMasterSprite)sprite;
-            collider = new EnemyCollider(masterSprite.GetRectangle(), state, HPAmount.HalfHeart, "WallMaster");
+            Rectangle rect = new Rectangle(Location.ToPoint(), masterSprite.GetRectangle().Size);
+            collider = new EnemyCollider(rect, this, HPAmount.HalfHeart, "WallMaster");
+            CollisionHandler.Instance.RemoveCollider(collider); //starts in wall shouldn't collide
+
             WallMasterMoveState masterState = (WallMasterMoveState)state;
             playerFinder = new HandPlayerFinderCollider(masterState.TrackingArea(), this, game);
-            
-
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
             saveData = xml;
         }
@@ -52,41 +56,51 @@ namespace Sprint4
            //does not play spawn animation
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
         }
-        public void UpdateLocation(Vector2 location)
-        {
-            this.location = location;
-        }
+
 
         public void Draw(SpriteBatch batch)
         {
-            sprite.Draw(batch, location, 0 , Color.White);
+            sprite.Draw(batch, Location, 0 , Color.White);
+        }
+
+        internal void Attack()
+        {
+            state.Attack();
         }
 
         public void Update()
         {
             state.Update();
-            collider.Update(this);
-        }
-
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
+            sprite.Update();
         }
      
         public void Die()
         {
             RoomEnemies.Instance.Destroy(this, Location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
-        public EnemyCollider GetCollider()
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return collider;
+            HP = Math.Max(HP - amount, HPAmount.Zero);
+            if (HP <= HPAmount.Zero) Die();
         }
+
+        public void ObstacleCollision(Collision collision)
+        {
+           //does not have obstacles
+        }
+
+        public void Stun()
+        {
+            state.Stun(false);
+        }
+
     }
 }

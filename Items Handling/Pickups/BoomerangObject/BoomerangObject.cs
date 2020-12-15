@@ -4,9 +4,9 @@ using System.Text;
 using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BoomerangObject : IItems
     {
@@ -16,10 +16,12 @@ namespace Sprint4.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-        private bool throwing;
-        private bool returning;
-        private LinkPlayer link;
-        private string direction;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -33,10 +35,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
-            throwing = true;
-
-            returning = false;
-            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
         }
         public BoomerangObject(ISprite item, Vector2 location, XElement xml)
         {
@@ -44,9 +43,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new BoomerangObjectState(this, location);
-            throwing = true;
-            returning = false;
-            collider = new ItemCollider((item as BoomerangObjectSprite).Hitbox, this, this.state);
+            collider = new ItemCollider((item as BoomerangSprite).Hitbox, this, this.state);
             saveInfo = xml;
         }
 
@@ -62,7 +59,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false");
+            state.Expire();
         }
 
         public void Collect()

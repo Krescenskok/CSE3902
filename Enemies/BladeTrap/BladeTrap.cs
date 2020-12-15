@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -16,18 +16,19 @@ namespace Sprint4
 
         private Vector2 location;
         public Vector2 Location { get => location; }
+        public int HP { get; private set; }
 
-        
-        private Game game;
+
         
         public IEnemyState state;
         public IEnemyState State { get => state; }
-        private ISprite sprite;
+
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
+
+        private EnemySprite sprite;
         private BladeTrapSprite bladeSprite;
 
         private EnemyCollider collider;
-        private TrapCollider playerFinderOne;
-        private TrapCollider playerFinderTwo;
 
         private string direction1, direction2;
 
@@ -36,25 +37,21 @@ namespace Sprint4
             direction1 = dir1;
             direction2 = dir2;
 
-            this.game = game;
             state = new EnemySpawnState(this,game);
 
             this.location = location;
 
             collider = new EnemyCollider();
-            playerFinderOne = new TrapCollider();
-            playerFinderTwo = new TrapCollider();
         }
 
         public void Spawn()
         {
             state = new BladeTrapRestState(location,this);
-            BladeTrapRestState initialState = (BladeTrapRestState)state;
+            
             bladeSprite = (BladeTrapSprite)sprite;
             Rectangle objectSize = bladeSprite.GetRectangle();
             objectSize.Location = location.ToPoint();
-
-            collider = new EnemyCollider(objectSize, state, HPAmount.HalfHeart, "Trap");
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(objectSize, .6f), this, HPAmount.HalfHeart, "Trap");
 
 
             int horizontalAttackRange = GridGenerator.Instance.GetGridWidth();
@@ -69,17 +66,16 @@ namespace Sprint4
             if (direction2.Equals("right") || direction2.Equals("left")) attackRange2 = horizontalAttackRange;
             else attackRange2 = verticalAttackRange;
 
-            playerFinderOne = new TrapCollider(objectSize, initialState, direction1, attackRange1);
-            playerFinderTwo = new TrapCollider(objectSize, initialState, direction2, attackRange2);
+
+            CollisionHandler.Instance.AddCollider(new TrapCollider(objectSize, this, direction1, attackRange1), Layers.Trigger);
+            CollisionHandler.Instance.AddCollider(new TrapCollider(objectSize, this, direction2, attackRange2), Layers.Trigger);
         }
         
 
         public void Update()
         {
             state.Update();
-            collider.Update(this);
-            playerFinderOne.Update(this);
-            playerFinderTwo.Update(this);
+            sprite.Update();
         }
 
         public void UpdateLocation(Vector2 location)
@@ -92,7 +88,7 @@ namespace Sprint4
             sprite.Draw(batch, location, 0, Color.White);
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
         }
@@ -103,6 +99,24 @@ namespace Sprint4
             return collider;
         }
 
-       
+        public void TakeDamage(Direction dir, int amount)
+        {
+            //cannot be damaged
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            //cannot be stunned
+        }
+
+        public void Attack()
+        {
+          
+        }
     }
 }

@@ -5,17 +5,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Linq;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Fairy : IItems
     {
         private Vector2 location;
         private XElement saveInfo;
-        private ItemCollider collider;
+        private HealthCollider collider;
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
         public ICollider Collider { get => collider; }
 
         public Vector2 Location { get => location; }
@@ -28,7 +33,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new FairyState(this, location);
-            collider = new ItemCollider((item as FairySprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as FairySprite).Hitbox, this, this.state, "Fairy");
         }
 
         public Fairy(ISprite item, Vector2 location, XElement xml)
@@ -37,7 +42,7 @@ namespace Sprint4.Items
             this.item = item;
             drawnFrame = 0;
             state = new FairyState(this, location);
-            collider = new ItemCollider((item as FairySprite).Hitbox, this, this.state);
+            collider = new HealthCollider((item as FairySprite).Hitbox, this, this.state, "Fairy");
             saveInfo = xml;
         }
 
@@ -62,7 +67,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            if (saveInfo != null)
+                saveInfo.SetElementValue("Alive", "false");
         }
 
         public void Draw(SpriteBatch spriteBatch)

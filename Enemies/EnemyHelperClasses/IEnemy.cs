@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     public interface IEnemy : IMoveable
     {
@@ -12,17 +13,26 @@ namespace Sprint4
         void Update();
         void Draw(SpriteBatch spriteBatch);
 
-        void SetSprite(ISprite sprite);
+        void SetSprite(EnemySprite sprite);
 
         void Spawn();
 
-        EnemyCollider GetCollider();
 
-        Vector2 Location { get; }
+        
+        void TakeDamage(Direction dir, int amount);
+        void ObstacleCollision(Collision collision);
+
+        void Stun();
+
+       
+        List<ICollider> Colliders { get; }
+        
+
+        new Vector2 Location { get; }
 
         IEnemyState State { get; }
 
-        
-        
+        int HP { get; }
+
     }
 }

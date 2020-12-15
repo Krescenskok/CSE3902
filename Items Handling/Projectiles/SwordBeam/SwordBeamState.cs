@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class SwordBeamState : IItemsState
     {
@@ -15,7 +15,8 @@ namespace Sprint4
         private float speed;
         private int runTime;
         private int frame;
-        private const int maxTime = 50;
+        private const int maxTime = 400; //failsafe
+        private const int frameUpdate = 5;
 
         public SwordBeamState(SwordBeam item, Vector2 location, string direction)
         {
@@ -48,14 +49,13 @@ namespace Sprint4
             item.UpdateLocation(location);
             runTime++;
 
-            if (runTime % 5 == 0)
+            if (runTime % frameUpdate == 0)
             {
                 frame++;
                 item.UpdateFrame(frame % 2);
             }
 
-            //for testing only
-            if (runTime > 100)
+            if (runTime > maxTime)
             {
                 item.Expire();
             }
@@ -71,9 +71,7 @@ namespace Sprint4
 
         public void Collected()
         {
-            //enemy gets damaged
-            item.SwordImpact();
-           
+
         }
     }
 }

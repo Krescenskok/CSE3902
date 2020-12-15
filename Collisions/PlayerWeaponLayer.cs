@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class PlayerWeaponLayer : Layer
     {
+        public bool AttachedToPlayer => false;
         public bool CollidesWith(ICollider other)
         {
             return other.layer is EnemyLayer

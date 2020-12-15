@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class GoriyaBoomerangSprite : ISprite
+    public class GoriyaBoomerangSprite : EnemySprite
     {
 
-        public Texture2D texture { get; set; }
+        private Texture2D texture;
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
         private int rows = spriteSheetSize[0];
         private int columns = spriteSheetSize[1];
@@ -51,9 +51,8 @@ namespace Sprint4
             trueFrameCount = totalAnimatedFrames * (maxFrameRate / frameRate);
         }
 
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -62,7 +61,11 @@ namespace Sprint4
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
 
             currentAnimatedFrame += startColumn;
+        }
 
+
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X , drawSize.Y );
 

@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BluePotion : IItems
     {
@@ -16,6 +16,12 @@ namespace Sprint4.Items
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -53,7 +59,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false"); find me
         }
 
         public void Drink()

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Sprint5": {
+      "commandName": "Project",
+      "sqlDebugging": false
+    }
+  }
+}

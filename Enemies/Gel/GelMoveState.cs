@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     ///Moves gel either up or down to another tile and stops
@@ -18,20 +18,20 @@ namespace Sprint4
         
 
         private Rectangle currentSpace, targetSpaceOnGrid, nextSpaceOnGrid,lastSpaceOnGrid;
-        private List<Rectangle> pathSpaces;
-        
+        private List<Rectangle> pathSpaces = new List<Rectangle>();
+        private Rectangle path = new Rectangle();
         
         private const int tileColumns = 12;
         private const int tileRows = 7;
         private List<List<Rectangle>> gridTiles;
         private Point tileSize;
         private int currentRow, currentCol;
-       
 
-        private enum Direction { left, right, up, down };
-        List<Direction> possibleDirections;
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        Direction currentDirection;
+
+        private Direction left = Direction.left,right = Direction.right, up = Direction.up, down = Direction.down;
+        private List<Direction> possibleDirections;
+        
+        private Direction currentDirection;
         private Vector2 moveDirection;
 
         private bool stoppedMoving;
@@ -43,7 +43,8 @@ namespace Sprint4
         private float savedSpeed = moveSpeed;
         private const int stunTime = 120;
         private int stunClock = 0;
-        Random RandomNumber;
+        private Random RandomNumber;
+        private bool permaStun = false;
 
         public GelMoveState(Gel gel, Vector2 location, Game game)
         {
@@ -64,15 +65,15 @@ namespace Sprint4
             this.location = currentSpace.Location.ToVector2();
             gelly.UpdateLocation(this.location);
 
-            currentCol = currentSpace.X / tileSize.X;
-            currentRow = currentSpace.Y / tileSize.Y;
+            currentCol = GridGenerator.Instance.GetColumn(currentSpace.X);
+            currentRow = GridGenerator.Instance.GetRow(currentSpace.Y);
 
             stoppedMoving = true;
             RandomNumber = new Random();
 
             coolDownClock = coolDownTimes[RandomNumber.Next(0, coolDownTimes.Length)];
 
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
         }
 
         public void Update()
@@ -80,32 +81,17 @@ namespace Sprint4
 
             if (DoneBeingStunned()) speed = savedSpeed;
 
-            if (stoppedMoving && DoneWithCoolDown())
-            {
-                ResetCoolDownClock();
-                ChangeDirection();
-                stoppedMoving = false;
-
-            }
-            else if (Arrived())
-            {
-                stoppedMoving = true;
-                coolDownClock = Math.Max(0, coolDownClock - 1);
-               
-            }
-            else
-            {
-                MoveOneUnit();
+            if (stoppedMoving && DoneWithCoolDown()) { ResetCoolDownClock(); ChangeDirection();}
+            else if (Arrived()) { stoppedMoving = true; coolDownClock = Math.Max(0, coolDownClock - 1); }
+            else MoveOneUnit();
                 
-            }
-
             //update location on grid
-            currentCol = currentSpace.X / currentSpace.Width;
-            currentRow = currentSpace.Y / currentSpace.Height;
+            currentCol = GridGenerator.Instance.GetColumn(currentSpace.X);
+            currentRow = GridGenerator.Instance.GetRow(currentSpace.Y);
 
 
             //Update last space visited and next space to visit on grid
-            
+
             if (currentSpace.Intersects(nextSpaceOnGrid))
             {
                 lastSpaceOnGrid = nextSpaceOnGrid;
@@ -117,23 +103,19 @@ namespace Sprint4
         //Changes direction if block or wall is in the way and gel have finished moving to its next space
         public void CheckIfBlockingPath(ICollider col, Collision collision)
         {
-
-            possibleDirections.Remove((Direction)collision.From());
+            possibleDirections.Remove(collision.From);
             if (!possibleDirections.Contains(currentDirection) && LiesOnPath(col.Bounds()) && lastSpaceOnGrid == currentSpace)
             {
-
                 ChangeDirection();
-
-                
             }
-
+            possibleDirections = Directions.Default();
         }
 
         //choose new tile on current row or column and change movedirection
         public void ChangeDirection()
         {
-            bool leftRightOpen = possibleDirections.Contains(left) || possibleDirections.Contains(right);
-            bool upDownOpen = possibleDirections.Contains(up) || possibleDirections.Contains(down);
+            bool leftRightOpen = possibleDirections.Contains(left) && currentCol > 0 || possibleDirections.Contains(right) && currentCol < tileColumns - 1;
+            bool upDownOpen = possibleDirections.Contains(up) && currentRow > 0 || possibleDirections.Contains(down) && currentRow < tileRows - 1;
 
             bool moveWithinRow = (RandomNumber.Next(0, 2) == 0 && leftRightOpen) || !upDownOpen;
             bool moveWithinColumn = !moveWithinRow;
@@ -150,6 +132,7 @@ namespace Sprint4
             }
             else //block or wall is blocking path
             {
+                
                 int rowMin = MinBound(up, currentRow), colMin = MinBound(left, currentCol);
                 int rowMax = MaxBound(down, currentRow, tileRows), colMax = MaxBound(right, currentCol, tileColumns);
 
@@ -171,6 +154,7 @@ namespace Sprint4
 
             //get list of spaces between current space and destination
             pathSpaces = GridGenerator.Instance.GetStraightPath(currentSpace, targetSpaceOnGrid);
+            path = GridGenerator.Instance.PathCollider(pathSpaces);
             nextSpaceOnGrid = pathSpaces[1];
             currentSpace = pathSpaces[0];
             
@@ -228,6 +212,7 @@ namespace Sprint4
         {            
             coolDownClock = coolDownTimes[RandomNumber.Next(0,coolDownTimes.Length)];
             coolDownTime = coolDownClock;
+            stoppedMoving = false;
         }
 
         public bool DoneWithCoolDown()
@@ -240,25 +225,14 @@ namespace Sprint4
 
         public bool LiesOnPath(Rectangle other)
         {
-
-            for (int i = pathSpaces.IndexOf(lastSpaceOnGrid); i < pathSpaces.Count;i++)
-            {
-                if(pathSpaces[i].Intersects(other) || pathSpaces[i].Contains(other))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return path.Intersects(other) || path.Contains(other);
         }
         public void FreeToMove()
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
+            possibleDirections = Directions.Default();
         }
 
-        public void TakeDamage(int amount)
-        {
-            gelly.TakeDamage(amount);
-        }
+        
 
         #region //unused methods
         public void Attack()
@@ -275,14 +249,18 @@ namespace Sprint4
         {
             //do nothing
         }
+        public void TakeDamage(int amount)
+        {
+            //
+        }
         #endregion
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
-            stunClock = stunTime;
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
             if (speed > 0) savedSpeed = speed;
 
-           
+            permaStun = permanent ? true : permaStun;
         }
 
         public bool DoneBeingStunned()

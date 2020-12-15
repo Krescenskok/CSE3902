@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4;
+using Sprint5;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class BoomerangCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
-        private int damageAmount;
         public string name;
 
         public string Name { get => name; }
@@ -26,7 +25,7 @@ namespace Sprint4
 
             this.state = state;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this,Layers.PlayerWeapon);
 
         }
 
@@ -59,21 +58,45 @@ namespace Sprint4
         //on impact, damage enemies if projectile, so its just one damage action
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-       
-                if (col.CompareTag("Enemy")) col.SendMessage("Stun", null);
-            
+
+            if (col.CompareTag("Enemy"))
+            {
+                col.SendMessage("Stun", null);
+                ((Sprint5.Items.Boomerang)this.item).Impact(col.Bounds());
+            }
+            else if (col.CompareTag("Player"))
+            {
+                (this.item).Expire();
+            }
+            else if (col.CompareTag("Wall") || col.CompareTag("Door"))
+            {
+                ((Sprint5.Items.Boomerang)this.item).Returning();
+            }
+
+
         }
+
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
 
         public void SendMessage(string msg, object value)
         {
             
         }
 
-
+        //this can probably be deleted//
         public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

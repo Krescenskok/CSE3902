@@ -4,83 +4,102 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint4.Items;
-using Sprint4.Link;
-using Sprint4.Blocks;
+using Sprint5.Items;
+using Sprint5.Link;
+using Sprint5.Blocks;
+using Sprint5.InputHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class KeyboardController : IController
     {
-        LinkPlayer player;
+        private LinkPlayer Player;
+        private KeyboardState PrevState;
+        private KeyboardState State;
+        private Game1 Game;
 
+        private IDictionary<Keys, ICommand> CommandsList = new Dictionary<Keys, ICommand>();
+        private List<Keys> MovementKeys = new List<Keys>();
+        private Keys currentKey;
+        private Keys returnKey = Keys.Zoom;
 
-
-        //LinkItems item;
-
-        IDictionary<Keys, ICommand> commandsList = new Dictionary<Keys, ICommand>();
-
-        public KeyboardController(LinkPlayer linkPlayer, Game1 game, SpriteBatch spriteBatch)
+        public KeyboardController(Game1 game)
         {
-            this.player = linkPlayer;
+            this.Player = game.LinkPlayer;
+            this.Game = game;
 
-            var state = Keyboard.GetState();
-            commandsList.Add(Keys.Q, new QuitCommand());
-            commandsList.Add(Keys.A, new LinkCommand(player, "A"));
-            commandsList.Add(Keys.Left, new LinkCommand(player, "Left"));
-            commandsList.Add(Keys.D, new LinkCommand(player, "D"));
-            commandsList.Add(Keys.Right, new LinkCommand(player, "Right"));
-            commandsList.Add(Keys.W, new LinkCommand(player, "W"));
-            commandsList.Add(Keys.Up, new LinkCommand(player, "Up"));
-            commandsList.Add(Keys.S, new LinkCommand(player, "S"));
-            commandsList.Add(Keys.Down, new LinkCommand(player, "Down"));
-            commandsList.Add(Keys.N, new LinkCommand(player, "N"));
-            commandsList.Add(Keys.Z, new LinkCommand(player, "Z"));
-            commandsList.Add(Keys.E, new LinkCommand(player, "E"));
-            commandsList.Add(Keys.D0, new LinkCommand(player, "D0"));
-            commandsList.Add(Keys.NumPad0, new LinkCommand(player, "NumPad0"));
-            commandsList.Add(Keys.D1, new LinkCommand(player, "D1"));
-            commandsList.Add(Keys.NumPad1, new LinkCommand(player, "NumPad1"));
-            commandsList.Add(Keys.D2, new LinkCommand(player, "D2"));
-            commandsList.Add(Keys.NumPad2, new LinkCommand(player, "NumPad2"));
-            commandsList.Add(Keys.D3, new LinkCommand(player, "D3"));
-            commandsList.Add(Keys.NumPad3, new LinkCommand(player, "NumPad3"));
-            commandsList.Add(Keys.D4, new LinkCommand(player, "D4"));
-            commandsList.Add(Keys.NumPad4, new LinkCommand(player, "NumPad4"));
-            commandsList.Add(Keys.D5, new LinkCommand(player, "D5"));
-            commandsList.Add(Keys.NumPad5, new LinkCommand(player, "NumPad5"));
-            commandsList.Add(Keys.D6, new LinkCommand(player, "D6"));
-            commandsList.Add(Keys.NumPad6, new LinkCommand(player, "NumPad6"));
-            commandsList.Add(Keys.D7, new LinkCommand(player, "D7"));
-            commandsList.Add(Keys.NumPad7, new LinkCommand(player, "NumPad7"));
-            commandsList.Add(Keys.D8, new LinkCommand(player, "D8"));
-            commandsList.Add(Keys.NumPad8, new LinkCommand(player, "NumPad8"));
-            commandsList.Add(Keys.R, new ResetCommand(player));
-       
+            State = Keyboard.GetState();
+            PrevState = Keyboard.GetState();
+        }
 
+        private void StateControl(Game1 game)
+        {
+            if (game.State.Current.Id == StateId.Gameplay)
+            {
+                CommandsList = GamePlayCommands.Instance.KeyCommands;
+                MovementKeys = GamePlayCommands.Instance.MovementKeys;
+            }
+            else if (game.State.Current.Id == StateId.Inventory)
+            {
+                CommandsList = InventoryCommands.Instance.KeyCommands;
+                MovementKeys = InventoryCommands.Instance.MovementKeys;
+            }
+            else if (game.State.Current.Id == StateId.Transition)
+            {
+                CommandsList = new Dictionary<Keys, ICommand>();
+                MovementKeys = new List<Keys>();
+            } else
+            {
+                CommandsList = MenuCommands.Instance.KeyCommands;
+                MovementKeys = MenuCommands.Instance.MovementKeys;
+            }
 
         }
 
-        public ICommand HandleInput(Game1 game)
+        public void HandleInput(Game1 game)
         {
+            StateControl(game);
 
-            ICommand activeCommand= null;
+            ICommand ActiveCommand = null;
 
-
-            var kstate = Keyboard.GetState();
-            foreach (KeyValuePair<Keys, ICommand> kvp in commandsList)
+            State = Keyboard.GetState();
+            foreach (KeyValuePair<Keys, ICommand> Pair in CommandsList)
             {
-                if (kstate.IsKeyDown(kvp.Key))
+                if (State.IsKeyDown(Pair.Key))
                 {
+                    foreach (Keys k in MovementKeys)
+                    {
+                        if (State.IsKeyDown(k))
+                        {
+                            ActiveCommand = Pair.Value;
+                        }
 
-                        activeCommand = kvp.Value;
-                    
-
+                    }
+                    if (State.IsKeyDown(Pair.Key) != PrevState.IsKeyDown(Pair.Key))
+                    {
+                        ActiveCommand = Pair.Value;
+                        currentKey = Pair.Key;
+                    }
                 }
             }
 
+            PrevState = State;
 
-            return activeCommand;
+
+            if (UpdatingControls.Instance.waiting && UpdatingControls.Instance.wait != currentKey)
+            {
+                UpdatingControls.Instance.waiting = false;
+                returnKey = currentKey;
+            }
+            else
+            {
+                game.ActiveCommand = ActiveCommand;
+            }
+        }
+
+        public Keys getKey()
+        {
+            return returnKey;
         }
     }
 }

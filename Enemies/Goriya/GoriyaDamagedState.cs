@@ -3,18 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class GoriyaDamagedState : IEnemyState
     {
 
-        private enum Direction { left , right , up , down  };
+        private Direction currentDirection;
 
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        Direction currentDirection;
-
-        Vector2 moveDirection;
-        Vector2 location;
+        private Vector2 moveDirection;
+        private Vector2 location;
 
         private int moveSpeed;
         private const int normalSpeedMultiplier = 4;
@@ -23,31 +20,54 @@ namespace Sprint4
 
 
         private Goriya goriya;
-
-        public GoriyaDamagedState(string dir, Goriya goriya, Vector2 location, int moveSpeed)
+        private bool stunned;
+        public GoriyaDamagedState(Direction dir, Goriya goriya, Vector2 location, int moveSpeed, bool stunned)
         {
-            if (dir.Equals(left.ToString())) currentDirection = right;
-            if (dir.Equals(right.ToString())) currentDirection = left;
-            if (dir.Equals(up.ToString())) currentDirection = down;
-            if (dir.Equals(down.ToString())) currentDirection = up;
+            currentDirection = dir;
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+            moveDirection.Y = Directions.CalculateY(currentDirection);
+            moveDirection.X = Directions.CalculateX(currentDirection);
 
             this.goriya = goriya;
             this.location = location;
             this.moveSpeed = moveSpeed * normalSpeedMultiplier;
 
-            goriya.Collider().ChangeState(this);
-            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir));
+            
+            goriya.SetSprite(EnemySpriteFactory.Instance.CreateGoriyaDamagedSprite(dir.ToString()));
+            this.stunned = stunned;
         }
 
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
+
+        public void MoveAwayFromCollision(Collision collision)
         {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
+            moveSpeed = collision.From.Equals(currentDirection) ? 0 : moveSpeed;
         }
+
+
+        public void Update()
+        {
+            MoveOneUnit();
+            damagedTime++;
+
+            if (damagedTime >= totalDamagedTime)
+            {
+                goriya.state = new GoriyaMoveState(goriya, location);
+                if (stunned) goriya.state.Stun(true);
+            }
+        }
+
+        public void MoveOneUnit()
+        {
+            location.X += moveDirection.X * moveSpeed;
+            location.Y += moveDirection.Y * moveSpeed;
+            goriya.Location = location;
+        }
+
+        public void Stun(bool permanent)
+        {
+            if (permanent) stunned = true;
+        }
+
         public void Attack()
         {
             //do nothing
@@ -64,36 +84,7 @@ namespace Sprint4
             //do nothing
         }
 
-        public void MoveAwayFromCollision(Collision collision)
-        {
-            Direction collisionDirection = (Direction)collision.From();
-            if (collisionDirection.Equals(currentDirection))
-            {
-                moveSpeed = 0;
-            }
-        }
-
         public void TakeDamage(int amount)
-        {
-            //do nothing
-        }
-
-        public void Update()
-        {
-            MoveOneUnit();
-            damagedTime++;
-
-            if (damagedTime >= totalDamagedTime) goriya.state = new GoriyaMoveState(goriya, location);
-        }
-
-        public void MoveOneUnit()
-        {
-            location.X += moveDirection.X * moveSpeed;
-            location.Y += moveDirection.Y * moveSpeed;
-            goriya.UpdateLocation(location);
-        }
-
-        public void Stun()
         {
             //do nothing
         }

@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
-    public class RopeMoveSprite : ISprite
+    public class RopeMoveSprite : EnemySprite
     {
 
         private Texture2D texture;
@@ -60,9 +60,8 @@ namespace Sprint4
            return new Rectangle(new Point(), new Point(drawSize.X, drawSize.Y));
         }
 
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -70,7 +69,10 @@ namespace Sprint4
             }
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
+        }
 
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
 
             Rectangle sourceRectangle = new Rectangle(width * currentAnimatedFrame, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);

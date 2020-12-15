@@ -1,28 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Blocks
+namespace Sprint5.Blocks
 {
     public class MoveableRight : IBlock
     {
         private Vector2 spriteLocation;
         private Vector2 newLocation;
         private BlocksSprite block;
-        private int SHEET_LOCATION = 0;
+        private int SHEET_LOCATION = 1;
         private int currentFrame;
         private Boolean moveable;
         private int drawnFrame;
         private int shift;
         private BlockCollider collider;
 
-        public MoveableRight(BlocksSprite block, Vector2 location)
+        private bool shifting = false;
+
+        XElement saveFile;
+        
+        public MoveableRight(BlocksSprite block, Vector2 location, XElement file)
         {
             spriteLocation = location;
             this.block = block;
-            moveable = true;
+            saveFile = file;
+            moveable = file.Element("Moved").Value == "false";
+            if (!moveable) spriteLocation = new Vector2(spriteLocation.X + this.block.blockDimensionX, spriteLocation.Y);
             shift = 0;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
@@ -32,17 +39,21 @@ namespace Sprint4.Blocks
         public void Update()
         {
             if (shift > 0) {
-                if (shift >= 5) {
-                    newLocation = new Vector2(spriteLocation.X + 5, spriteLocation.Y);
-                    spriteLocation = newLocation;
-                    shift -= 5;
-                }
-                else
-                {
-                    newLocation = new Vector2(spriteLocation.X + shift, spriteLocation.Y);
-                    spriteLocation = newLocation;
-                    shift = 0;
-                }
+                shifting = true;
+                
+                newLocation = new Vector2(spriteLocation.X + 5, spriteLocation.Y);
+                spriteLocation = newLocation;
+                shift -= 5;
+                
+            }else if (shifting)
+            {
+                newLocation = new Vector2(spriteLocation.X + shift, spriteLocation.Y);
+                spriteLocation = newLocation;
+                shift = 0;
+
+                RoomDoors.Instance.OpenDoor("2,1,closedleft");
+
+                shifting = false;
             }
         }
 
@@ -52,17 +63,15 @@ namespace Sprint4.Blocks
 
         }
 
-        public void setLocation(Vector2 location)
-        {
-            spriteLocation = location;
-        }
 
         public void move(string compare)
         {
             if (moveable && compare.Equals("left"))
             {
                 moveable = false;
+                saveFile.SetElementValue("Moved", "true");
                 shift = this.block.blockDimensionX;
+               
             }
         }
 

@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Blocks
+namespace Sprint5.Blocks
 {
     public class MoveableUp : IBlock
     {
         private Vector2 spriteLocation;
         private Vector2 newLocation;
         private BlocksSprite block;
-        private int SHEET_LOCATION = 0;
+        private int SHEET_LOCATION = 1;
         private int currentFrame;
         private Boolean moveable;
         private int drawnFrame;
         private int shift;
         private BlockCollider collider;
 
-        public MoveableUp(BlocksSprite block, Vector2 location)
+        XElement saveFile;
+        
+        public MoveableUp(BlocksSprite block, Vector2 location, XElement file)
         {
             spriteLocation = location;
             this.block = block;
-            moveable = true;
+            saveFile = file;
+            moveable = file.Element("Moved").Value == "false";
+            if (!moveable) spriteLocation = new Vector2(spriteLocation.X, spriteLocation.Y - this.block.blockDimensionY);
             shift = 0;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
@@ -62,14 +67,11 @@ namespace Sprint4.Blocks
             if (moveable && compare.Equals("down"))
             {
                 moveable = false;
-                shift = this.block.blockDimensionX;
+                saveFile.SetElementValue("Moved", "true");
+                shift = block.blockDimensionY;
             }
         }
 
-        public Vector2 GetLocation()
-        {
-            return spriteLocation;
-        }
 
         public Boolean GetMoveable()
         {
@@ -78,7 +80,7 @@ namespace Sprint4.Blocks
 
         public Rectangle getDestination()
         {
-            return this.block.getDestination();
+            return block.getDestination();
         }
 
         public Boolean getMoveable()

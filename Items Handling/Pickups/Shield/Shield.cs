@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Shield : IItems
     {
@@ -14,6 +14,12 @@ namespace Sprint4.Items
         private ISprite item;
         private IItemsState state;
         private XElement saveInfo;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         private int drawnFrame;
 

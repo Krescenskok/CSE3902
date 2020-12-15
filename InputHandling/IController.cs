@@ -1,11 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
-namespace Sprint4
+namespace Sprint5
 {
-    interface IController
+    public interface IController
     {
-        public ICommand HandleInput(Game1 game);
+        public void HandleInput(Game1 game);
 
+        public Keys getKey();
     }
 }

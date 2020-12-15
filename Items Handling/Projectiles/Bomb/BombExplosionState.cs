@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BombExplosionState : IItemsState
     {
         private Bomb item;
-        private Vector2 position;
         private int runTime;
         private const int maxTime = 240;
         private int frame = 0;
@@ -38,14 +37,14 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            item.Expire();
+            item.IsExpired = true;
 
-            //remove item from room
+            item.Expire();
         }
 
         public void Collected()
         {
-            //add to inventory
+
             Expire();
         }
     }

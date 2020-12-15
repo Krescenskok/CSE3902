@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
-    public class WallMasterSprite : ISprite
+    public class WallMasterSprite : EnemySprite
     {
 
         private Texture2D texture;
@@ -44,11 +44,10 @@ namespace Sprint4
 
             row = EnemySpriteFactory.GetRow("WallMaster" + dir);
             startColumn = EnemySpriteFactory.GetColumn("WallMaster" + dir);
-    }
+        }
 
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -56,7 +55,10 @@ namespace Sprint4
             }
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
+        }
 
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
 
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, drawSize.X, drawSize.Y);

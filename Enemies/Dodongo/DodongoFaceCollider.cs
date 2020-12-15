@@ -1,27 +1,30 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4.Enemies.Dodongo
+namespace Sprint5
 {
     class DodongoFaceCollider : ICollider
     {
         private Rectangle bounds;
         private IEnemyState dodongo;
+        private Dodongo dodongoBase;
+        private string name;
 
-        public string Name { get => "dodongo"; }
+        public string Name { get => name; }
         public Layer layer { get; set; }
 
-        public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo)
+        public DodongoFaceCollider(Rectangle rect, IEnemyState dodongo, Dodongo dongo)
         {
             bounds = rect;
             this.dodongo = dodongo;
-            CollisionHandler.Instance.AddCollider(this);
+            this.name = "DodongoFace";
+            dodongoBase = dongo;
+            CollisionHandler.Instance.AddCollider(this, Layers.Enemy);
 
         }
-
-        
 
         public Rectangle Bounds()
         {
@@ -30,7 +33,7 @@ namespace Sprint4.Enemies.Dodongo
 
         public bool CompareTag(string tag)
         {
-            return tag == "DodongoFace";
+            return tag.Equals(name);
         }
 
         public bool Equals(ICollider col)
@@ -43,18 +46,22 @@ namespace Sprint4.Enemies.Dodongo
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
-        {
+        {            
             if(col.CompareTag("Bomb") || col.CompareTag("bomb"))
             {
                 col.SendMessage("Eaten", 0);
             }
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
         public void SendMessage(string msg, object value)
         {
-            if (msg == "Bomb")
+            if (msg.Equals("Bomb"))
             {
-                dodongo.TakeDamage(-5);
+                dodongo.TakeDamage(-1);
             }
             
         }
@@ -62,6 +69,11 @@ namespace Sprint4.Enemies.Dodongo
         public void Update(Point point)
         {
             bounds.Location = point;
+        }
+
+        public void Update()
+        {
+            bounds.Location = dodongoBase.UpdateFacePos();
         }
     }
 }

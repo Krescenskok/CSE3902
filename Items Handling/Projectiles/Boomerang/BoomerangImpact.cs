@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BoomerangImpact : IItems
     {
-        public Vector2 location
+        private const int ADJUSTX = 10;
+        private const int ADJUSTY = 5;
+        private Vector2 linkLocation;
+        private Vector2 location;
+
+
+        private bool isExpired = false;
+        public bool IsExpired
         {
-            get { return location; }
-            set { location = value; }
+            get { return isExpired; }
+            set { isExpired = value; }
         }
 
         public Vector2 Location => throw new NotImplementedException();
@@ -24,17 +31,20 @@ namespace Sprint4.Items
         private ISprite item;
         private int drawnFrame;
         private IItemsState state;
-        private bool throwing;
-        private bool returning;
-        private LinkPlayer link;
-        private string direction;
-        public bool isExpired = false;
-        public BoomerangImpact(ISprite item, Vector2 location)
+
+        public BoomerangImpact(ISprite item, Vector2 location, Rectangle rectangle)
         {
             this.location = location;
+            AdjustLocation(rectangle);
             this.item = item;
             drawnFrame = 0;
-            state = new BoomerangImpactState(this, location);
+            state = new BoomerangImpactState(this, this.location);
+        }
+
+        private void AdjustLocation(Rectangle rectangle)
+        {
+            location.X = rectangle.Location.X + ADJUSTX;
+            location.Y = rectangle.Location.Y + ADJUSTY;
         }
 
         public void UpdateSprite(ISprite sprite)
@@ -45,12 +55,12 @@ namespace Sprint4.Items
         public void Update()
         {
             state.Update();
-            isExpired = ((BoomerangImpactState) state).isExpired;
         }
 
         public void Expire()
         {
-
+            IsExpired = true;
+            state.Expire();
         }
 
         public void Collect()

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class WallMasterGrabbingLinkState : IEnemyState
     {
@@ -19,9 +19,6 @@ namespace Sprint4
         private const int normalMovingSpeed = 1;
         private int moveSpeed = normalMovingSpeed;
 
-
-
-
         public Vector2 Location { get => location; }
 
         private Game game;
@@ -32,43 +29,18 @@ namespace Sprint4
             this.master = master;
             this.game = game;
 
-            ISprite sprite = EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(dir);
+            EnemySprite sprite = EnemySpriteFactory.Instance.CreateWallMasterGrabSprite(dir);
+            master.SetSprite(sprite);
 
             this.targetSpace = targetSpace;
-
-
-
-            this.location = currentSpace.Location.ToVector2();
-            this.master.UpdateLocation(this.location);
-
         }
 
-        public void Die()
-        {
-            //does not die
-        }
-
-        public void Attack()
-        {
-            //do nothing
-        }
+    
 
         public void Update()
         {
-
-            if (Arrived(currentSpace, targetSpace))
-            {
-
-
-                RoomSpawner.Instance.RoomChange(game, 1);
-
-            }
-            else
-            {
-
-                MoveOneUnit();
-            }
-
+            if (Arrived(currentSpace, targetSpace)) Camera.Instance.BackToSquareOne();
+            else MoveOneUnit();
         }
 
 
@@ -76,7 +48,7 @@ namespace Sprint4
         {
             location = MoveToward(location, targetSpace.Location.ToVector2());
             currentSpace.Location = location.ToPoint();
-            master.UpdateLocation(location);
+            master.Location = location;
 
         }
 
@@ -92,9 +64,7 @@ namespace Sprint4
 
         private bool Arrived(Rectangle position, Rectangle target)
         {
-            float dist = Vector2.Distance(position.Center.ToVector2(), target.Center.ToVector2());
-
-
+            float dist = Vector2.Distance(position.Location.ToVector2(), target.Location.ToVector2());
             return dist <= 1;
         }
 
@@ -105,7 +75,7 @@ namespace Sprint4
            //do nothing
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             //do nothing
 
@@ -117,6 +87,16 @@ namespace Sprint4
         }
 
         public void MoveAwayFromCollision(Collision collision)
+        {
+            //do nothing
+        }
+
+        public void Die()
+        {
+            //does not die
+        }
+
+        public void Attack()
         {
             //do nothing
         }

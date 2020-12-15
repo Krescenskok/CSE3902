@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Linq;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Map : IItems
     {
@@ -15,6 +15,12 @@ namespace Sprint4.Items
         private IItemsState state;
         private XElement saveInfo;
         private ItemCollider collider;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 

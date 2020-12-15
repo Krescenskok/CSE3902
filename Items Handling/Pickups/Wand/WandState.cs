@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class WandState : IItemsState
     {
@@ -23,6 +23,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             RoomItems.Instance.Destroy(item);
 
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());

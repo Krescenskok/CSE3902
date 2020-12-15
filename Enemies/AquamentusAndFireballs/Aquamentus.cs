@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -14,7 +15,7 @@ namespace Sprint4
     class Aquamentus : IEnemy
     {
         public IEnemyState state;
-        private ISprite sprite;
+        private EnemySprite sprite;
         private LinkPlayer link;
         private Vector2 aquamentusPos;
         private AquamentusNormalSprite aquamentusSprite;
@@ -24,12 +25,16 @@ namespace Sprint4
 
         private int attackCountDown;
         private int ChangeDirectionCountDown;
-        private int aquamentusHP;
-        private static int AttackStrength = HPAmount.OneHeart;
-        private static int RangeAttackStrength = HPAmount.OneHeart;
-        private static int UpdatePerSec = 30;
-        private float attackPerSec = 1;
-        private float directionChangPerSec = (float)0.2;
+        public int HP { get; private set; } = HPAmount.EnemyBoss1;
+     
+
+        private static int AttackStrength = HPAmount.Full_Heart;
+        private static int RangeAttackStrength = HPAmount.Full_Heart;
+
+        private static int UpdatePerSec = 120;
+        private float attackPerSec = (float)0.5;
+
+        private float directionChangPerSec = (float)0.4;
         private float moveSpeedPerSec = 15;
         private float speed;
         private int directionIndex = -1;
@@ -38,46 +43,64 @@ namespace Sprint4
 
         public IEnemyState State { get => state; }
 
-        public Aquamentus(Game game, Vector2 initialPos, XElement xml, LinkPlayer link)
+        public List<ICollider> Colliders { get => new List<ICollider> { aquamentusCollider }; }
+
+
+
+        public Aquamentus(Vector2 initialPos, XElement xml, LinkPlayer link)
         {
             this.link = link;
             aquamentusPos = initialPos;
             aquamentusInfo = xml;
-            aquamentusHP = 40;
             attackCountDown = (int)(UpdatePerSec / attackPerSec);
             ChangeDirectionCountDown = (int)(UpdatePerSec / directionChangPerSec);
-            state = new AquamentusNormalState(this, aquamentusPos, link);
-            fireBallList = new List<FireBall>(); //added by JT
-            aquamentusSprite = (AquamentusNormalSprite)sprite;
-            aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), state, AttackStrength);
             speed = moveSpeedPerSec / UpdatePerSec;
+            state = new AquamentusNormalState(this, aquamentusPos, link, directionIndex, speed);
+            fireBallList = new List<FireBall>();
+            aquamentusSprite = (AquamentusNormalSprite)sprite;
+            aquamentusCollider = new EnemyCollider(aquamentusSprite.GetRectangle(aquamentusPos), this, AttackStrength);
+            
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
+
+            HPBarDrawer.AddBar(new BossHealthBar(this));
         }
 
         public void Spawn()
-        {    
+        {
         }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
         }
 
+        public void UpdatePos(Vector2 pos)
+        {
+            aquamentusPos = pos;
+        }
 
         public void LostHP(int damage)
         {
-            aquamentusHP -= damage;
+            HP -= damage;
         }
 
-        public Boolean checkAlive()
+        public Boolean CheckAlive()
         {
-            return aquamentusHP > 0;
+            return HP > 0;
         }
 
         public void Die()
         {
-            CollisionHandler.Instance.RemoveCollider(GetCollider());
-            RoomEnemies.Instance.Destroy(this);
+            RoomItems.Instance.DropHeartContainer(Location);
+            CollisionHandler.Instance.RemoveCollider(aquamentusCollider);
+            RoomEnemies.Instance.Destroy(this,Location);
             aquamentusInfo.SetElementValue("Alive", "false");
+            RoomDoors.Instance.OpenDoor("1,4,closedright");
+
+            while(fireBallList.Count > 0)
+            {
+                fireBallList[fireBallList.Count-1].State.Die();
+            }
         }
 
         public Boolean TryAttack()
@@ -110,7 +133,7 @@ namespace Sprint4
 
         public void SpawnFireBall(Vector2 spawnPos, Vector2 targetPos)
         {
-            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength));
+            fireBallList.Add(new FireBall(this, spawnPos, targetPos, RangeAttackStrength, link));
         }
 
         public void RemoveFireBall(FireBall fb)
@@ -127,13 +150,15 @@ namespace Sprint4
             if (TryAttack())
             {
                 state.Attack();
+                aquamentusSprite.AttackSprite();
+                Sounds.Instance.Play("AquamentusRoar");
             }
-            aquamentusPos.X += directionIndex * speed;
             state.Update();
-            aquamentusCollider.Update(this);
             foreach (FireBall fb in fireBallList){
                 fb.Update();
             }
+            sprite.Update();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -143,11 +168,23 @@ namespace Sprint4
             {
                 fb.Draw(spriteBatch);
             }
+
         }
 
-        public EnemyCollider GetCollider()
+        public void TakeDamage(Direction dir, int amount)
         {
-            return aquamentusCollider;
+            state.TakeDamage(amount);
         }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            //do nothing
+        }
+
+        public void Stun()
+        {
+           //not affected
+        }
+
     }
 }

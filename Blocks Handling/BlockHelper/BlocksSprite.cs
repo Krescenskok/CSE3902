@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4;
+using Sprint5;
 
-namespace Sprint4.Blocks
+namespace Sprint5.Blocks
 
 {
     public class BlocksSprite : ISprite
@@ -12,9 +12,10 @@ namespace Sprint4.Blocks
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
         private int columns = 4;
+        private int offset = 2;
         private int rows = 3;
         public int blockDimensionX;
-        private int blockDimensionY;
+        public int blockDimensionY;
 
         public BlocksSprite(Texture2D texture)
         {
@@ -28,18 +29,16 @@ namespace Sprint4.Blocks
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int currentFrame, Color color)
         {
-            Rectangle sourceRectangle;
-            Rectangle destinationRectangle;
 
 
 
-        int width = texture.Width / columns;
+            int width = texture.Width / columns;
             int height = texture.Height / rows;
             int row = (int)((float)currentFrame / (float)columns);
             int column = currentFrame % columns;
 
             sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            destinationRectangle = new Rectangle((int)location.X, (int)location.Y, blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)location.X, (int)location.Y+offset, blockDimensionX, blockDimensionY);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
@@ -49,14 +48,14 @@ namespace Sprint4.Blocks
         public void Draw(SpriteBatch spriteBatch, Vector2 spriteLocation, int drawnFrame)
         {
             int width = texture.Width / columns;
-            int drawnWidth = AdjustWidth(width, drawnFrame);
+          
 
             int height = texture.Height / rows;
             int row = (int)((float)drawnFrame / (float)columns);
             int column = drawnFrame % columns;
 
-            sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)spriteLocation.X - width / 2, (int)spriteLocation.Y - height / 2, blockDimensionX, blockDimensionY);
+            sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            destinationRectangle = new Rectangle((int)spriteLocation.X , (int)spriteLocation.Y+offset , blockDimensionX, blockDimensionY);
 
             
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
@@ -76,7 +75,7 @@ namespace Sprint4.Blocks
             Vector2 spriteOrigin = new Vector2(0, 0);
 
             sourceRectangle = new Rectangle(width * column, height * row, drawnWidth, height);
-            destinationRectangle = new Rectangle((int)location.X - width / 2, (int)location.Y - height / 2, blockDimensionX, blockDimensionY);
+            destinationRectangle = new Rectangle((int)location.X , (int)location.Y , blockDimensionX, blockDimensionY);
 
             spriteBatch.Begin();
             spriteBatch.Draw(texture, location, sourceRectangle, Color.White, angle, spriteOrigin, 1.0f, SpriteEffects.None, 1);

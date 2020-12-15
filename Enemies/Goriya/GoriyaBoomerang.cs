@@ -1,18 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies;
+using Sprint5.Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class GoriyaBoomerang
     {
-        GoriyaBoomerangSprite sprite;
+        private GoriyaBoomerangSprite sprite;
         private Vector2 location;
         private Vector2 direction;
         private string directionStr;
+
+        public Point Location { get => location.ToPoint(); }
         
 
         private int timeSinceThrown;
@@ -22,6 +24,8 @@ namespace Sprint4
         private bool finished;
 
         private GoriyaBoomerangCollider collider;
+
+        
         public GoriyaBoomerang(Vector2 location, string direction, int goriyaSpeed)
         {
             this.location = location;
@@ -34,10 +38,12 @@ namespace Sprint4
             directionStr = direction;
            
             sprite = (GoriyaBoomerangSprite)EnemySpriteFactory.Instance.CreateBoomerangSprite();
-            collider = new GoriyaBoomerangCollider(this,sprite.GetRectangle(), HPAmount.OneHeart);
+            collider = new GoriyaBoomerangCollider(this,sprite.GetRectangle(), HPAmount.Full_Heart);
 
             timeSinceThrown = 0;
             returning = false;
+
+            Sounds.Instance.AddLoopedSound("ArrowBoomerang", GetHashCode().ToString());
         }
 
         public void Update()
@@ -68,12 +74,19 @@ namespace Sprint4
             }
             else if (boomerangDone)
             {
-                finished = true;
+                Die();
                 
             }
 
+            sprite.Update();
+           
+        }
 
-            collider.Update(location.ToPoint());
+        public void Die()
+        {
+            CollisionHandler.Instance.RemoveCollider(collider);
+            Sounds.Instance.StopLoopedSound(GetHashCode().ToString());
+            finished = true;
         }
 
         public void Draw(SpriteBatch batch)
@@ -88,7 +101,12 @@ namespace Sprint4
 
         public void BounceOff(Collision collision)
         {
-            if(collision.From().ToString().Equals(directionStr))
+            if(collision.From.ToString().Equals(directionStr))
+                returning = true;
+        }
+        public void BounceOff(Direction dir)
+        {
+            if (dir.ToString().Equals(directionStr))
                 returning = true;
         }
     }

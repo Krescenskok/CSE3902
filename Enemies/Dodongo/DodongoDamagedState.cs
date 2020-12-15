@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     class DodongoDamagedState : IEnemyState
     {
@@ -40,9 +40,9 @@ namespace Sprint4
             //wont move in DamagedState
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
-            //wont be stuned
+           //not stunned
         }
 
         public void TakeDamage(int amount)
@@ -54,7 +54,7 @@ namespace Sprint4
         {
             if(recoverCountDown < 0)
             {
-                if (dodongo.checkAlive())
+                if (dodongo.CheckAlive())
                 {
                     dodongo.dodongoState = new DodongoMovingState(dodongo, dodongoPos);
                     dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDodongoSprite(direction));

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class BoomerangObjectState : IItemsState
     {
@@ -24,13 +24,15 @@ namespace Sprint4.Items
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             RoomItems.Instance.Destroy(item);
 
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
 
             CollisionHandler.Instance.RemoveCollider(item.Collider);
 
-            item.Expire();
+            
         }
 
         public void Collected()

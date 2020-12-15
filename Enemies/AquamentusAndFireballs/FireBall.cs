@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint5.Enemies.EnemyHelperClasses;
+using Sprint5.EnemyAndNPC.AquamentusAndFireballs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -16,18 +17,23 @@ namespace Sprint4
         private FireBallSprite fireBallSprite;
         private FireBallState fireBallState;
         private Vector2 fireBallPos;
-        private EnemyCollider fireBallCollider;
+        private LinkPlayer link;
+        private FireballCollider fireBallCollider;
 
         public Vector2 Location { get => fireBallPos; }
 
         public IEnemyState State { get => fireBallState; }
 
-        public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength)
+        public List<ICollider> Colliders { get => new List<ICollider> { fireBallCollider }; }
+        public int HP { get; private set; }
+
+        public FireBall(Aquamentus aquamentus, Vector2 initialPos, Vector2 targetPos, int attackStrength, LinkPlayer link)
         {
             fireBallState = new FireBallState(this,aquamentus, initialPos, targetPos);
             sprite = EnemySpriteFactory.Instance.CreateFireBall();
             fireBallSprite = (FireBallSprite)sprite;
-            fireBallCollider = new EnemyCollider(fireBallSprite.GetRectangle(initialPos),fireBallState,attackStrength, "fireball");
+            this.link = link;
+            fireBallCollider = new FireballCollider(fireBallSprite.GetRectangle(initialPos),this,attackStrength, "fireball", this.link);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -40,12 +46,8 @@ namespace Sprint4
             fireBallPos = newPos;
         }
 
-        public EnemyCollider GetCollider()
-        {
-            return fireBallCollider;
-        }
 
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             //wont use
         }
@@ -63,7 +65,23 @@ namespace Sprint4
         public void Update()
         {
             fireBallState.Update();
-            fireBallCollider.Update(this);
+           
+        }
+
+
+        public void ObstacleCollision(Collision collision)
+        {
+            State.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            //not affected
+        }
+
+        public void TakeDamage(Direction dir, int amount)
+        {
+            //do nothing
         }
     }
 }

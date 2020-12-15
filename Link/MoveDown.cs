@@ -1,162 +1,111 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.Link;
 
-namespace Sprint4.Link
+namespace Sprint5
 {
-    public class MoveDown: Movement
+    public class MoveDown : Movement
     {
 
-        private double lastTime;
         int MOVEMENT = 10;
 
-
-        public MoveDown(LinkPlayer link) : base(link)
+        public MoveDown(LinkPlayer link, LinkSprite sprite) : base(link)
         {
-
+            linkSprite = sprite;
         }
-
-
         public override Vector2 HandleShield(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
-            {
-                if(!link.isWalkingInPlace)
-                {
-                    location.Y += MOVEMENT;
-                }
-                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-                if (currentFrame == 0)
-                {
-                    currentFrame = 1;
-                }
-                else
-                    currentFrame = 0;
-                if (location.Y >= 445)
-                    location.Y = 445;
+            if (link.PossibleDirections.Contains(Direction.down))
+            {
+                location.Y += MOVEMENT;
             }
+
+
+            if (link.LargeShield)
+                currentFrame = currentFrame == 10 ? 11 : 10;
+            else
+                currentFrame = currentFrame == 0 ? 1 : 0;
+
             link.IsAttacking = false;
             link.IsStopped = true;
 
             return location;
+   
         }
 
         public override Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
-            {
-                lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
-                switch (currentFrame)
-                {
-                    case 0:
-                    case 1: currentFrame = 23; break;
-                    case 23: currentFrame = 22; break;
-                    case 22: currentFrame = 21; break;
-                    case 21: currentFrame = 20; break;
-                    case 20: currentFrame = 1;
-                    link.IsAttacking = false;
-                    link.IsStopped = true;
-                    break;
-                }
-            }
+            int[] LARGE_SHIELD_FRAMES = { 10, 11, 37, 36, 21, 20 };
+            int[] FRAMES = { 0, 1, 23, 22, 21, 20 };
+
+            int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
+
+            SwitchFrames(currentFrames);
+
 
             return location;
+
         }
 
         public override Vector2 HandleSword(GameTime gameTime, Vector2 location)
         {
-            if ( gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
-            {
-                lastTime =  gameTime.TotalGameTime.TotalMilliseconds;
 
-                switch (currentFrame)
-                {
-                    case 0:
-                    case 1: currentFrame = 45; break;
-                    case 45: currentFrame = 44; break;
-                    case 44: currentFrame = 43; break;
-                    case 43: currentFrame = 42; break;
-                    case 42: currentFrame = 1;
-                        link.IsAttacking = false;
-                        link.IsStopped = true;
-                        break;
-                }
-            }
+            int[] LARGE_SHIELD_FRAMES = { 10, 11, 39, 38, 43, 42 };
+            int[] FRAMES = { 0, 1, 45, 44, 43, 42 };
+
+            int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
+
+            SwitchFrames(currentFrames);
 
             return location;
+           
         }
-
-        
         public override Vector2 HandleMagicalRod(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 100)
-            {
-                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
+            int[] LARGE_SHIELD_FRAMES = { 10, 11, 91, 90, 75, 74 };
+            int[] FRAMES = { 0, 1, 77, 76, 75, 74 };
 
-                switch (currentFrame)
-                {
-                    case 0:
-                    case 1: currentFrame = 77; break;
-                    case 77: currentFrame = 76; break;
-                    case 76: currentFrame = 75; break;
-                    case 75: currentFrame = 74; break;
-                    case 74:
-                        currentFrame = 1;
-                        link.IsAttacking = false;
-                        link.IsStopped = true;
-                        break;
-                }
-            }
+            int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
+
+            SwitchFrames(currentFrames);
+
 
             return location;
+
         }
 
         public override Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
-            {
-                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-                switch (currentFrame)
-                {
-                    case 0:
-                    case 1: currentFrame = 8; break;
-                    case 8: currentFrame = 9; break;
-                    case 9:
-                        currentFrame = 0;
-                        link.IsStopped = true;
-                        link.IsPickingUpItem = false;
-                        break;
-                }
-            }
+            int[] LARGE_SHIELD_FRAMES = { 10, 11, 8, 9 };
+            int[] FRAMES = { 0, 1, 8, 9 };
+
+            int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
+
+            SwitchFrames(currentFrames);
+
+            link.state = new Stationary(link, linkSprite);
 
             return location;
         }
 
         public override Vector2 HandleArrowBow(GameTime gameTime, Vector2 location)
         {
-            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime > 300)
-            {
-                lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-                switch (currentFrame)
-                {
-                    case 0:
-                    case 1: currentFrame = 16; break;
-                    case 16:
-                        currentFrame = 0;
-                        link.IsAttacking = false;
-                        link.IsStopped = true;
-                        break;
-                }
-            }
+            int[] LARGE_SHIELD_FRAMES = { 10, 11, 16 };
+            int[] FRAMES = { 0, 1, 16 };
+
+            int[] currentFrames = link.LargeShield ? LARGE_SHIELD_FRAMES : FRAMES;
+
+            SwitchFrames(currentFrames);
+
 
             return location;
         }
 
-
-
     }
+
 }

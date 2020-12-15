@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Bomb : IItems
     {
@@ -13,14 +13,13 @@ namespace Sprint4.Items
         private ISprite item;
         private IItemsState state;
         private int drawnFrame;
-        private bool isExpired = false;
         private bool isExploding = false;
-        public bool expired
+        private bool isExpired = false;
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
-
 
         public Vector2 Location { get => location; }
 
@@ -34,8 +33,10 @@ namespace Sprint4.Items
         {
             this.location = location;
             this.item = item;
+            collider = new BombCollider((item as BombSprite).Hitbox, this, this.state);
             drawnFrame = 0;
             state = new BombState(this, location);
+            Sounds.Instance.Play("BombDrop");
         }
 
         public void UpdateFrame(int frame)
@@ -50,10 +51,13 @@ namespace Sprint4.Items
 
         public void Exploded()
         {
+            CollisionHandler.Instance.RemoveCollider(Collider);
             isExploding = true;
             state = new BombExplosionState(this);
             collider = new BombCollider((item as ExplosionSprite).Hitbox, this, this.state);
             Update();
+
+            Sounds.Instance.Play("BombExplode");
         }
 
         public void Update()
@@ -68,7 +72,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            isExpired = true; 
+            IsExpired = true; 
 
             CollisionHandler.Instance.RemoveCollider(collider);
 

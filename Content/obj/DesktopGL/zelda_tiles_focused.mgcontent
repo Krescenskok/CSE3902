@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/zelda_tiles_focused.png</SourceFile>
-  <SourceTime>2020-09-30T20:34:42-04:00</SourceTime>
-  <DestFile>C:/Users/andre/Downloads/Sprint2ItemsAndLink/Sprint2ItemsAndLink/Sprint2/Content/bin/DesktopGL/zelda_tiles_focused.xnb</DestFile>
-  <DestTime>2020-10-01T21:51:20.7323497-04:00</DestTime>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/zelda_tiles_focused.png</SourceFile>
+  <SourceTime>2020-12-14T12:46:12-05:00</SourceTime>
+  <DestFile>C:/Users/andre/Documents/GitHub/CSE3902/Content/bin/DesktopGL/zelda_tiles_focused.xnb</DestFile>
+  <DestTime>2020-12-15T14:25:10.3377181-05:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <ImporterTime>2020-08-10T16:17:54-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T16:17:54-04:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

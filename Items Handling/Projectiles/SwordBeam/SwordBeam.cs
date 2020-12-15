@@ -4,27 +4,24 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Sprint5.Items;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class SwordBeam : IItems
     {
         private Vector2 location;
         private ProjectileCollider collider;
         private bool isExpired = false;
-        public bool expired
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }
         }
         private ISprite item;
-        private string direction;
         private int drawnFrame;
         private IItemsState state;
-
-        private float xPos;
-        private float yPos;
-        private float initialY;
+        private string direction;
 
         public Vector2 Location { get => location; }
 
@@ -35,28 +32,28 @@ namespace Sprint4
         public SwordBeam(ISprite item, Vector2 location, string direction)
         {
             this.location = location;
-            xPos = location.X;
-            yPos = location.Y;
-            initialY = yPos;
             this.item = item;
-            state = new SwordBeamState(this, location, direction);
             this.direction = direction;
+            state = new SwordBeamState(this, location, direction);
 
             if (direction == "Down")
             {
                 collider = new ProjectileCollider((item as DownBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
+            else if (direction == "Left")
+            {
+                collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            }
+            else if (direction == "Right")
+            {
+                collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
+            }
+
             else if (direction == "Up")
             {
                 collider = new ProjectileCollider((item as UpBeamSprite).Hitbox, this, this.state, "SwordBeam");
             }
-            else if (direction == "Left")
-            {
-                collider = new ProjectileCollider((item as LeftBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            } else if (direction == "Right")
-            {
-                collider = new ProjectileCollider((item as RightBeamSprite).Hitbox, this, this.state, "SwordBeam");
-            }
+            Sounds.Instance.Play("SwordShoot");
 
         }
 
@@ -83,7 +80,7 @@ namespace Sprint4
 
         public void SwordImpact()
         {
-            state = new BeamImpactState(this);
+            state = new BeamImpactState(this, direction);
             Update();
         }
 

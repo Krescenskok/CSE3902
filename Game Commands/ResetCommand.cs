@@ -1,18 +1,20 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
- using Sprint4.Blocks;
-using Sprint4.Items;
-using Sprint4.EnemyAndNPC;
+using Sprint5.Link;
+ using Sprint5.Blocks;
+using Sprint5.Items;
+using Sprint5.EnemyAndNPC;
 using System.Diagnostics;
 
-namespace Sprint4
+namespace Sprint5
 {
 
     public class ResetCommand : ICommand
     {
-        LinkPlayer Player;
+        private LinkPlayer Player;
+
+
         public  ResetCommand(LinkPlayer player)
         {
             this.Player = player;
@@ -30,13 +32,17 @@ namespace Sprint4
         }
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
-
         {
-            LinkCommand linkReset = new LinkCommand(Player, "R");
-            Debug.WriteLine("resetting");
-            linkReset.Update(Gametime);
+                (game as Game1).State.Swap(StateId.Gameplay);
+                LinkCommand linkReset = new LinkCommand(Player, "R");
+                linkReset.Update(Gametime);
+                RoomSpawner.Instance.Reset();
+                            Camera.Instance.BackToSquareOne();
+            LinkInventory.Instance.Reset();
+            HUD.Instance.Reset(Player);
+            Sounds.Instance.LoadSounds(game);
 
-            RoomSpawner.Instance.Reset();
+
 
         }
     }

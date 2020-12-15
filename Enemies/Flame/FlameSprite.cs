@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -14,8 +14,8 @@ namespace Sprint4
         private Texture2D texture;
         private static int[] SpriteSize = { 16, 16 };
         private Vector2 sourcePos;
-        private const int NumUpdatePerSec = 30;
-        private const int FrameRate = 5;
+        private const int NumUpdatePerSec = 60;
+        private const int FrameRate = 4;
         private int numUpdatePerFrame = NumUpdatePerSec / FrameRate;
         private int updateCounter;
         private int frameIndex = 0;

@@ -1,16 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 
-namespace Sprint4
+
+namespace Sprint5
 {
 
     /// <summary>
@@ -19,34 +14,33 @@ namespace Sprint4
     /// </summary>
     public class RoomEnemies
     {
-
-        private static readonly RoomEnemies instance = new RoomEnemies();
-
         private List<IEnemy> enemies;
         private List<EnemyDeath> deaths;
 
         private List<TestCollider> testObjects;
+        private TestCollider linkTestCollider;
 
-   
+        private Game game;
 
-        public static RoomEnemies Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+
+        public bool allDead;
+
+        public static RoomEnemies Instance { get; } = new RoomEnemies();
 
         private RoomEnemies()
         {
+           
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
             deaths = new List<EnemyDeath>();
+            
         }
 
     
         public void LoadRoom(Game game, XElement room)
         {
+
+            this.game = game;
             enemies = new List<IEnemy>();
             testObjects = new List<TestCollider>();
 
@@ -54,134 +48,64 @@ namespace Sprint4
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
-                XElement locTag = item.Element("Location");
-                XElement aliveTag = item.Element("Alive");
-
                 string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                string objLoc = locTag.Value;
 
-                bool alive = aliveTag == null || aliveTag.Value.Equals("true");
-
-                if (objType.Equals("Enemy") && alive)
-                {
-                    int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
-                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
-
-
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
-
-                    if (objName.Equals("Rope"))
-                    {
-                        enemies.Add(new Rope(game, location, item));
-
-
-                    }
-                    else if (objName.Equals("Stalfos"))
-                    {
-                        enemies.Add(new Stalfos(game, location, item));
-                    }
-                    else if (objName.Equals("Goriya"))
-                    {
-                        enemies.Add(new Goriya(game, location,item));
-                    }
-                    else if (objName.Equals("Keese"))
-                    {
-                        enemies.Add(new Keese(game, location,item));
-                    }else if (objName.Equals("Gel"))
-                    {
-                        enemies.Add(new Gel(game, location, item));
-                    }
-                    else if (objName.Equals("Dodongo"))
-                    {
-                        enemies.Add(new Dodongo(game,location,item));
-
-                    }else if (objName.Equals("Trap"))
-                    {
-                        string dir1 = item.Element("Direction1").Value;
-                        string dir2 = item.Element("Direction2").Value;
-                        enemies.Add(new BladeTrap(game, location, dir1, dir2));
-                    }else if (objName.Equals("WallMaster"))
-                    {
-                        enemies.Add(new WallMaster(game, location, item));
-                    }
-                    //more if-else for other enemies
-
-
-                   
-
-                  
-                }
+                if (objType.Equals("Enemy")) enemies.Add(EnemyFactory.Instance.CreateEnemy(game as Game1, item));
+                enemies.RemoveAll(item => item == null);
             }
 
+            
+            allDead = enemies.Count == 0;
+            
         }
-
-           
-
-
-
-
-
-
-        public void AddTestCollider(Rectangle rect, Game game)
-        {
-            testObjects.Add(new TestCollider(rect, game));
-        }
-
-
 
 
         public void Update()
         {
-           
-            
             for(int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].Update();
+                if (enemies[i] != null)
+                    enemies[i].Update();
             }
             for (int i = 0; i < deaths.Count; i++)
             {
-                deaths[i].Update();
+                if (deaths[i] != null)
+                    deaths[i].Update();
             }
-
-            
         }
 
        
 
         public void Draw(SpriteBatch batch)
         {
-            foreach (TestCollider col in testObjects)
-            {
-                col.Draw(batch);
-            }
+            
             for (int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].Draw(batch);
+                if (enemies[i] != null)
+                    enemies[i].Draw(batch);
             }
-
-           
 
             for(int i = 0; i < deaths.Count; i++)
             {
-                deaths[i].Draw(batch);
+                if (deaths[i] != null)
+                    deaths[i].Draw(batch);
             }
         }
 
+     
+
         public void Destroy(IEnemy enemy, Vector2 location)
         {
+            StatsScreen.Instance.KillCount++;
             deaths.Add(new EnemyDeath(location));
             enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
+            CollisionHandler.Instance.RemoveCollider(enemy.Colliders);
+            Sounds.Instance.Play("EnemyDie");
+
+            allDead = enemies.Count == 0;
         }
 
-        public void Destroy(IEnemy enemy)
-        {
-            enemies.Remove(enemy);
-            CollisionHandler.Instance.RemoveCollider(enemy.GetCollider());
-        }
-        
+
 
         public void Destroy(EnemyDeath death)
         {
@@ -193,11 +117,47 @@ namespace Sprint4
         {
             for(int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].State.Stun();
+                enemies[i].State.Stun(true);
             }
         }
 
 
+        #region for testing colliders
+        public void RemoveTest(TestCollider col)
+        {
+            testObjects.Remove(col);
+            CollisionHandler.Instance.RemoveCollider(col);
+        }
+
+        public void DrawTests(SpriteBatch batch)
+        {
+            foreach (TestCollider col in testObjects)
+            {
+
+                col.Draw(batch);
+            }
+            if (linkTestCollider != null) linkTestCollider.Draw(batch);
+        }
+
+        public void AddTestCollider(Rectangle rect, EnemyCollider enemyCol)
+        {
+            testObjects.Add(new TestCollider(rect, game, enemyCol));
+
+        }
+
+        public void AddTestCollider(PlayerCollider player, Game game)
+        {
+            linkTestCollider = new TestCollider(game, player);
+        }
+
+        public TestCollider AddTestCollider(Rectangle rect, ICollider col)
+        {
+            TestCollider t = new TestCollider(game, rect, col);
+            testObjects.Add(t);
+            return t;
+        }
+
+        #endregion
     }
 }
     

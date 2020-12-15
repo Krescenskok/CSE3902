@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class NPCCollider : ICollider
     {
@@ -12,7 +12,7 @@ namespace Sprint4
         public NPCCollider(Rectangle rectangle)
         {
             bounds = rectangle;
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.NPC);
         }
 
         public string Name { get => "NPC"; }
@@ -41,12 +41,20 @@ namespace Sprint4
         {
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
         public void SendMessage(string msg, object value)
         {
         }
         public void Update(Point point)
         {
             bounds.Location = point;
+        }
+        public void Update()
+        {
+
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class CandleFireState : IItemsState
     {
@@ -16,6 +16,7 @@ namespace Sprint4.Items
         {
             this.item = item;
             this.position = initPos;
+            Sounds.Instance.Play("UseCandle");
         }
 
         public void Update()
@@ -29,7 +30,8 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            item.expired = true;
+            item.IsExpired = true;
+
             CollisionHandler.Instance.RemoveCollider(item.Collider);
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());
         }

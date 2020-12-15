@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public interface IEnemyState
     {
@@ -16,7 +16,7 @@ namespace Sprint4
 
         public void Update();
 
-        public void Stun();
+        public void Stun(bool permanent);
 
     }
 }

@@ -1,19 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4;
-using Sprint4.Items;
+using Sprint5;
+using Sprint5.Items;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class BombCollider : ICollider
     {
         private Rectangle bounds;
         private IItemsState state;
         private IItems item;
-        private int damageAmount;
         public string name;
 
         public string Name { get => name; }
@@ -27,7 +26,7 @@ namespace Sprint4
 
             this.state = state;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.PlayerWeapon);
 
         }
 
@@ -76,6 +75,11 @@ namespace Sprint4
 
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
+
         public void SendMessage(string msg, object value)
         {
             if (msg == "Eaten" && !(this.item as Bomb).Exploding) {
@@ -85,10 +89,17 @@ namespace Sprint4
         }
 
 
+        //this can probably be deleted//
         public void Update(IItems itemObj, IItemsState itemState)
         {
             this.state = itemObj.State;
             bounds.Location = itemObj.Location.ToPoint();
+        }
+
+        public void Update()
+        {
+            state = item.State;
+            bounds.Location = item.Location.ToPoint();
         }
     }
 }

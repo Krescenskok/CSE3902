@@ -1,230 +1,187 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
+using Sprint5;
+using Sprint5.Link;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4.Link
+namespace Sprint5
 {
-    public enum ItemForLink
+    public class LinkPlayer : LinkPlayerParent
     {
-        Shield,
-        WoodenSword,
-        Sword,
-        MagicalRod,
-        ArrowBow,
-        BlueRing,
-        Boomerang,
-        BlueCandle,
-        Bomb,
-        Clock
-    }
+        private const float HEALTH = 60;
+        private const int NUM_OF_RUPEE = 0;
 
+        public PlayerCollider collider { get; set; }
+        public WeaponCollider weaponCollider { get; set; }
+        public ShieldCollider ShieldCollider { get; set; }
 
-    public class LinkPlayer
-    {
-        public ILinkState state;
+        private float fullHealth = HEALTH;
+        private const int max = 50;
+        private const int increment = 5;
+        private const int min = 0;
 
-        bool loc = false;
-        public Vector2 currentLocation;
-        private bool isAttacking = false;
-        private bool isDamaged = false;
-        private double damageStartTime;
-        private float health = 60;
-        public bool isWalkingInPlace = false;
-        private bool isPickingUpItem = false;
-        private int numOfRupee = 0;
-        private bool useRing = false;
-        private int fullHealth = 60;
-        private int delay = 2;
-        private bool clock = false;
-        public List<IItems> itemsPickedUp;
+        private Game1 Game;
 
-        private PlayerCollider collider;
+        private List<IItems> ItemsPlacedByLink = new List<IItems>();
+        private bool IsPaused = false;
+        
+        public Rectangle Bounds { get => state.Bounds(); }
+        public List<IItems> itemsPlacedByLink { get => ItemsPlacedByLink; set => ItemsPlacedByLink = value; }
+        public bool isPaused { get => IsPaused; set => IsPaused = value; }
+        public List<Direction> PossibleDirections { get; set; } = Directions.Default();
 
-        public List<IItems> itemsPlacedByLink = new List<IItems>();
-        public void RemovePlacedItem(IItems item)
+        public LinkPlayer(Game1 game)
         {
-            if (itemsPlacedByLink.Contains(item))
-            {
-                itemsPlacedByLink.Remove(item);
-            }
-            
+            sprite = SpriteFactory.Instance.CreateLinkSprite();
+            hitbox = sprite.hitbox;
+            state = new Stationary(this, sprite);
+
+            collider = new PlayerCollider(this, HitboxAdjuster.Instance.AdjustHitbox(hitbox, .9f));
+            weaponCollider = new WeaponCollider(HPAmount.OneHit, this);
+            ShieldCollider = new ShieldCollider(this,HPAmount.Full_Heart);
+
+            IsInvincible = false;
+            Counter = min;
+            Game = game;
+            DifficultyMultiplier.Instance.DetermineLinkHP(this);
         }
 
-
-        string direction = "Down";
-        public string LinkDirection
-        {
-            get { return direction; }
-            set { direction = value; }
-        }
-
-        public Rectangle Bounds
-        {
-            get
-            {
-
-                Rectangle t = new Rectangle((int)CurrentLocation.X, (int)CurrentLocation.Y, 32, 32);
-                return t;
-            }
-        }
-
-        public float Health
-        {
-            get { return health; }
-            set { health = value; if (health <= 0) health = 0; }
-        }
-
-        public Boolean LocationInitialized
-        {
-            get { return loc; }
-            set { loc = value; }
-        }
-
-        public double DamageStartTime
-        {
-            get { return damageStartTime; }
-            set { damageStartTime = value; }
-        }
-
-        public bool IsDamaged
-        {
-            get { return isDamaged; }
-            set
-            {
-                isDamaged = value;
-                if (value == false)
-                {
-                    DamageStartTime = 0;
-                }
-            }
-        }
-
-        public bool IsAttacking
-        {
-            get { return isAttacking; }
-            set { isAttacking = value; }
-        }
-
-
-        private bool isStopped = false;
-
-
-        public bool IsStopped
-        {
-            get { return isStopped; }
-            set { isStopped = value; }
-        }
-
-
-        private ItemForLink currentWeapon = ItemForLink.WoodenSword;
-
-
-        public ItemForLink CurrentWeapon
-        {
-            get { return currentWeapon; }
-            set { currentWeapon = value; }
-
-        }
-
-        public bool IsWalkingInPlace
-        {
-            get { return isWalkingInPlace; }
-            set { isWalkingInPlace = value; }
-        }
-
-        public Vector2 CurrentLocation { get => currentLocation; set => currentLocation = value; }
-
-        public bool IsPickingUpItem { get => isPickingUpItem; set => isPickingUpItem = value; }
-
-        public int NumOfRupee { get => numOfRupee; set => numOfRupee = value; }
-
-        public bool UseRing { get => useRing; set => useRing = value; }
-
-        public int FullHealth { get => fullHealth; set => fullHealth = value; }
-
-        public int Delay { get => delay; set => delay = value; }
-        public bool Clock { get => clock; set => clock = value; }
-
-        public LinkPlayer()
-        {
-
-            state = new Stationary(this);
-            collider = new PlayerCollider(this);
-
-        }
         public void Update(GameTime gameTime)
         {
+            if (sprite != null)
+            {
+                hitbox = sprite.hitbox;
+                int sizeX = hitbox.Size.X;
+                int sizeY = hitbox.Size.Y;
+                CurrentLocation = state.Update(gameTime, CurrentLocation);
+                hitbox = new Rectangle(CurrentLocation.ToPoint(), new Point(sizeX, sizeY));
 
-            CurrentLocation = state.Update(gameTime, CurrentLocation);
-            delay--;
+                PossibleDirections = Directions.Default();
+                Direction newDir = Directions.Parse(LinkDirection);
+                if (newDir.Equals(CurrentDirection)) ShieldCollider.ChangeDirection(newDir);
+                CurrentDirection = newDir;
 
+                if (DamDir != Direction.none) push(DamDir);
+                Delay--;
+
+                PossibleDirections = Directions.Default();
+            }
         }
-
+        public void HandleObstacle(Collision col)
+        {
+            PossibleDirections.Remove(col.From);
+        }
         public void MovingLeft()
         {
             if (!(state is MoveLeft))
-                state = new MoveLeft(this);
+                state = new MoveLeft(this, sprite);
             LinkDirection = "Left";
         }
-
         public void MovingRight()
         {
             if (!(state is MoveRight))
-                state = new MoveRight(this);
+                state = new MoveRight(this, sprite);
             LinkDirection = "Right";
         }
-
         public void MovingUp()
         {
             if (!(state is MoveUp))
-                state = new MoveUp(this);
+                state = new MoveUp(this, sprite);
             LinkDirection = "Up";
         }
-
         public void MovingDown()
         {
             if (!(state is MoveDown))
-                state = new MoveDown(this);
+                state = new MoveDown(this, sprite);
             LinkDirection = "Down";
         }
 
         public void Stationary()
         {
-            state = new Stationary(this);
+            state = new Stationary(this, sprite);
         }
 
         public void Reset()
         {
-            state = new Stationary(this);
-            Health = 100;
-
+            state = new Stationary(this, sprite);
+            CurrentWeapon = ItemForLink.WoodenSword;
+            SecondaryWeapon = ItemForLink.ArrowBow;
             LocationInitialized = false;
             IsAttacking = false;
             IsDamaged = false;
             IsStopped = false;
             IsWalkingInPlace = false;
             IsPickingUpItem = false;
-
-
+            LargeShield = false;
+            UseRing = false;
+            IsInvincible = false;
+            DifficultyHandling.DifficultyMultiplier.Instance.DetermineLinkHP(this);
+            Delay = 0;
+            Clock = false;
+            DrawShield = true;
+            IsDead = false;
+            IsShootingProjectile = false;
+            DamDir = Direction.none;
+            IsInvincible = false;
         }
 
         public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
         {
 
-            if (loc == false)
+            if (LocationInitialized == false)
             {
-                loc = true;
-                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+                LocationInitialized = true;
+                CurrentLocation = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2) - Camera.Instance.Location;
             }
 
             state.Draw(spriteBatch, gameTime, CurrentLocation);
         }
 
+        public void EnterSecretRoom() {
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 3,0) - Camera.Instance.Location;
+            state = new MoveDown(this, sprite);
+        }
+
+        public void LeaveSecretRoom() {
+            currentLocation = new Vector2(GridGenerator.Instance.GetTileSize().X * 8, GridGenerator.Instance.GetTileSize().Y *5 ) - Camera.Instance.Location;
+            state = new MoveLeft(this, sprite);
+        }
+
+        public void knockback(Direction collideDir)
+            { Counter = max; }
+        
+
+        public void stopKnockback()
+            { Counter = min; }
 
 
+        public void push(Direction direction)
+        {
+            if (Counter != max) {
+                switch (direction)
+                {
+                    case Direction.right:
+                        currentLocation.X += increment;
+                        break;
+                    case Direction.left:
+                        currentLocation.X -= increment;
+                        break;
+                    case Direction.up:
+                        currentLocation.Y -= increment;
+                        break;
+                    case Direction.down:
+                        currentLocation.Y += increment;
+                        break;
+                }
+            }
 
+            Counter -= increment;
 
+            if (Counter <= min)
+                this.stopKnockback();
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     //this is the full heart for link's lives, not the collectable object
     public class FullHeart : IItems
@@ -14,6 +14,12 @@ namespace Sprint4.Items
         private int drawnFrame;
         private IItemsState state;
         private ItemCollider collider;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 

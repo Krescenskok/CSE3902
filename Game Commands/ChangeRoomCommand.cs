@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class ChangeRoomCommand : ICommand
     {
@@ -27,7 +27,9 @@ namespace Sprint4
 
         public void ExecuteCommand(Game game, GameTime Gametime, SpriteBatch spriteBatch)
         {
-            RoomSpawner.Instance.RoomChange(game, roomNumber);
+            Camera.Instance.MoveToRoom(roomNumber);
+           
+           
         }
     }
 }

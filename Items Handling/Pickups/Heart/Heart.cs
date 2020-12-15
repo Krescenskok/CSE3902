@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml.Linq;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     //this is the heart that link can collect to replenish hearts
     public class Heart : IItems
@@ -19,6 +19,12 @@ namespace Sprint4.Items
         private Vector2 location;
 
         private IItemsState state;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -62,7 +68,9 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false");
+            state.Expire();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

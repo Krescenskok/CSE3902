@@ -1,16 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Enemies;
-using Sprint4.Enemies.Zol;
-using Sprint4.EnemyAndNPC.AquamentusAndFireballs;
-using Sprint4.EnemyAndNPC.Merchant;
-using Sprint4.EnemyAndNPC.OldMan;
+using Sprint5.Enemies;
+using Sprint5.Enemies.Zol;
+using Sprint5.EnemyAndNPC.AquamentusAndFireballs;
+using Sprint5.EnemyAndNPC.Merchant;
+using Sprint5.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// <para>Factory for generating Enemy and NPC sprites</para>
@@ -19,12 +21,20 @@ namespace Sprint4
     public class EnemySpriteFactory
     {
         private Texture2D texture;
-
-        
-        private Texture2D bossTextrue;
+        private Texture2D bossTexture;
         private Texture2D NPCTexture;
+
+        private Texture2D HPFill;
+        private Texture2D HPBackground;
+
+        string enemyTextureName;
+        string bossTextureName;
+        string NPCTextureName;
         
         private static int[] sheetSize = { 15, 8 };
+
+
+      
 
         private static Dictionary<string, Vector2> coordinateMappings = new Dictionary<string, Vector2>
         {
@@ -58,7 +68,29 @@ namespace Sprint4
             {"FireBall", new Vector2 (0, 32) }
         };
 
-      
+        public void Load(XElement factory)
+        {
+            List<XElement> coordinates = factory.Elements("Position").ToList();
+            foreach(XElement coordinate in coordinates)
+            {
+                string callName = coordinate.Element("Name").Value;
+                string xValue = coordinate.Element("XValue").Value;
+                string yValue = coordinate.Element("YValue").Value;
+                int x = int.Parse(xValue), y = int.Parse(yValue);
+                coordinateMappings.Add(callName, new Vector2(x, y));
+            }
+
+            XElement spriteSheetSize = factory.Element("SheetSize");
+            int width = int.Parse(spriteSheetSize.Element("Width").Value);
+            int height = int.Parse(spriteSheetSize.Element("Height").Value);
+
+            sheetSize = new int[2] { height, width };
+
+            enemyTextureName = factory.Element("EnemySheetName").Value;
+            NPCTextureName = factory.Element("NPCSheetName").Value;
+            bossTextureName = factory.Element("BossSheetName").Value;
+
+        }
 
         public static int GetRow(string spriteName)
         {
@@ -85,24 +117,35 @@ namespace Sprint4
         public void LoadAllTextures(Game1 game)
         {
             texture = game.Content.Load<Texture2D>("EnemySpriteSheet");
-
-            //****
             NPCTexture = game.Content.Load<Texture2D>("NPCSpriteSheet");
-            bossTextrue = game.Content.Load<Texture2D>("BossSpriteSheet");
-            //****
+            bossTexture = game.Content.Load<Texture2D>("BossSpriteSheet");
+
+            HPFill = game.Content.Load<Texture2D>("HPFill");
+            HPBackground = game.Content.Load<Texture2D>("HPBackground");
+           
         }
 
-        public ISprite CreateStalfosWalkingSprite()
+        public Texture2D GetHPFill()
+        {
+            return HPFill;
+        }
+
+        public Texture2D GetHPBackground()
+        {
+            return HPBackground;
+        }
+
+        public EnemySprite CreateStalfosWalkingSprite()
         {
             return new StalfosWalkingSprite(texture);
         }
 
-        public ISprite CreateKeeseMoveSprite()
+        public EnemySprite CreateKeeseMoveSprite()
         {
             return new KeeseMoveSprite(texture);
         }
 
-        public ISprite CreateGoriyaWalkingSprite(string direction)
+        public EnemySprite CreateGoriyaWalkingSprite(string direction)
         {
             string sheetID = "RedGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
            
@@ -110,7 +153,7 @@ namespace Sprint4
 
         }
 
-        public ISprite CreateGoriyaDamagedSprite(string direction)
+        public EnemySprite CreateGoriyaDamagedSprite(string direction)
         {
             string sheetID = "HurtGoriya" + char.ToUpper(direction[0]) + direction.Substring(1);
 
@@ -119,46 +162,46 @@ namespace Sprint4
         }
 
 
-        public ISprite CreateBoomerangSprite()
+        public EnemySprite CreateBoomerangSprite()
         {
             return new GoriyaBoomerangSprite(texture);
         }
 
-        public ISprite CreateGelMoveSprite()
+        public EnemySprite CreateGelMoveSprite()
         {
             return new GelMoveSprite(texture);
         }
 
-        public ISprite CreateWallMasterSprite(string dir)
+        public EnemySprite CreateWallMasterSprite(string dir)
         {
             string str = "";
             if (dir == "top") str = "Top";
             return new WallMasterSprite(texture, str);
         }
 
-        public ISprite CreateWallMasterGrabSprite(string dir)
+        public EnemySprite CreateWallMasterGrabSprite(string dir)
         {
             string str = "";
             if (dir == "top") str = "Top";
             return new WallMasterGrabbingLinkSprite(texture, str);
         }
 
-        public ISprite CreateBladeTrapSprite()
+        public EnemySprite CreateBladeTrapSprite()
         {
             return new BladeTrapSprite(texture);
         }
 
-        public ISprite CreateZolMoveSprite()
+        public EnemySprite CreateZolMoveSprite()
         {
             return new ZolMoveSprite(texture);
         }
 
-        public ISprite CreateRopeMoveSprite(string dir)
+        public EnemySprite CreateRopeMoveSprite(string dir)
         {
             return new RopeMoveSprite(texture, dir);
         }
 
-        public ISprite CreateSpawnSprite()
+        public EnemySprite CreateSpawnSprite()
         {
             return new SpawnSprite(texture);
         }
@@ -168,7 +211,7 @@ namespace Sprint4
             return new EnemyDeathSprite(texture);
         }
 
-        public ISprite CreateStalfosDamagedSprite()
+        public EnemySprite CreateStalfosDamagedSprite()
         {
             return new StalfosDamagedSprite(texture);
         }
@@ -192,31 +235,31 @@ namespace Sprint4
             return new OldManNormalSprite(NPCTexture);
         }
 
-        public ISprite CreateDragonSprite()
+        public EnemySprite CreateDragonSprite()
         {
-            return new AquamentusNormalSprite(bossTextrue);
+            return new AquamentusNormalSprite(bossTexture);
         }
         
-        public ISprite CreateDamagedDragonSprite()
+        public EnemySprite CreateDamagedDragonSprite()
         {
-            return new AquamentusDamagedSprite(bossTextrue);
+            return new AquamentusDamagedSprite(bossTexture);
         }
 
         public ISprite CreateFireBall()
         {
-            return new FireBallSprite(bossTextrue);
+            return new FireBallSprite(bossTexture);
         }
 
         
-        public ISprite CreateDodongoSprite(string direction)
+        public EnemySprite CreateDodongoSprite(string direction)
         {
-            return new DodongoMovingSprite(bossTextrue, direction);
+            return new DodongoMovingSprite(bossTexture, direction);
 
         }
 
-        public ISprite CreateDamagedDodongoSprite(string direction)
+        public EnemySprite CreateDamagedDodongoSprite(string direction)
         {
-            return new DodongoDamagedSprite(bossTextrue, direction);
+            return new DodongoDamagedSprite(bossTexture, direction);
         }
     }
 }

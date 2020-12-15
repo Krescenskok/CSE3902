@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Blocks
+namespace Sprint5.Blocks
 {
     public class Stairs : IBlock
     {
@@ -23,7 +23,6 @@ namespace Sprint4.Blocks
             moveable = false;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
-            collider = new BlockCollider(block.getDestination(location), this);
         }
 
         public void Update()

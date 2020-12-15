@@ -2,10 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Items;
-using Sprint4Final.Items_Handling.ItemHelperClasses;
+using Sprint5.Items;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class ItemsFactory
     {
@@ -21,19 +20,9 @@ namespace Sprint4
         private readonly Vector2 swordBeamDimensions = new Vector2(1, 6);
 
         private static ItemsFactory instance = new ItemsFactory();
+        public static ItemsFactory Instance { get => instance; }
 
-        public static ItemsFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
-        public ItemsFactory()
-        {
-
-        }
+        public ItemsFactory() { }
 
         public void LoadItemsTextures(ContentManager content)
         {
@@ -96,42 +85,20 @@ namespace Sprint4
 
         public ISprite CreateWandBeamSprite(string direction)
         {
-            if (direction.Equals("Right"))
-            {
-                return new WandBeamRightSprite(wandBeamSheet);
-            }
-            if (direction.Equals("Left"))
-            {
-                return new WandBeamLeftSprite(wandBeamSheet);
-            }
-            if (direction.Equals("Up"))
-            {
-                return new WandBeamUpSprite(wandBeamSheet);
-            }
-            else
-            {
-                return new WandBeamDownSprite(wandBeamSheet);
-            }
+            if (direction.Equals("Right"))  return new WandBeamRightSprite(wandBeamSheet); 
+            if (direction.Equals("Left"))  return new WandBeamLeftSprite(wandBeamSheet); 
+            if (direction.Equals("Up"))  return new WandBeamUpSprite(wandBeamSheet);  
+            return new WandBeamDownSprite(wandBeamSheet); 
         }
 
         public ISprite CreateArrowSprite(string direction)
         {
-            if (direction.Equals("Right"))
-            {
-                return new ArrowRightSprite(itemsSpriteSheet);
-            }
-            if (direction.Equals("Left"))
-            {
-                return new ArrowLeftSprite(itemsSpriteSheet);
-            }
-            if (direction.Equals("Up"))
-            {
-                return new ArrowUpSprite(itemsSpriteSheet);
-            }
-            else
-            {
-                return new ArrowDownSprite(itemsSpriteSheet);
-            }
+            if (direction.Equals("Right")) return new ArrowRightSprite(itemsSpriteSheet); 
+            if (direction.Equals("Left")) 
+                return new ArrowLeftSprite(itemsSpriteSheet); 
+            if (direction.Equals("Up")) 
+                return new ArrowUpSprite(itemsSpriteSheet); 
+            return new ArrowDownSprite(itemsSpriteSheet); 
         }
 
         public ISprite CreateBlueCandleSprite()
@@ -176,6 +143,10 @@ namespace Sprint4
         public ISprite CreateEmptyHeartSprite()
         {
             return new EmptyHeartSprite(itemsSpriteSheet);
+        }
+        public ISprite CreateFullHeartSprite()
+        {
+            return new FullHeartSprite(itemsSpriteSheet);
         }
 
         public ISprite CreateFairySprite()
@@ -257,6 +228,11 @@ namespace Sprint4
         public ISprite CreateWoodenSwordSprite()
         {
             return new WoodenSwordSprite(itemsSpriteSheet);
+        }
+
+        public ISprite CreateMagicBookSprite()
+        {
+            return new MagicBookSprite(itemsSpriteSheet);
         }
 
     }

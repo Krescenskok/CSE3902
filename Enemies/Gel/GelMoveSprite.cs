@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class GelMoveSprite : ISprite
+    public class GelMoveSprite : EnemySprite
     {
 
         private Texture2D texture;
@@ -30,10 +30,12 @@ namespace Sprint4
 
         private Point spriteSize;
         private Point drawSize;
-        private Point centerOffset;
+        public Point centerOffset;
+        public Vector2 centerLocation;
 
         public GelMoveSprite(Texture2D texture)
         {
+            centerLocation = new Vector2();
 
             currentAnimatedFrame = 0;
             currentFrame = 0;
@@ -52,13 +54,8 @@ namespace Sprint4
         }
 
 
-
-
-        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        public void Update()
         {
-            int width = (int)spriteSize.X;
-            int height = (int)spriteSize.Y;
-
             currentFrame++;
             if (currentFrame == trueFrameCount)
             {
@@ -67,8 +64,15 @@ namespace Sprint4
             currentAnimatedFrame = currentFrame / (maxFrameRate / frameRate);
             currentAnimatedFrame += startColumn;
 
-            Vector2 centerLocation = location + centerOffset.ToVector2();
+            
+        }
 
+        public void Draw(SpriteBatch batch, Vector2 location, int curFrame, Color color)
+        {
+
+
+
+            centerLocation = location + centerOffset.ToVector2();
             Rectangle sourceRectangle = new Rectangle(spriteSize.X * currentAnimatedFrame, spriteSize.Y * row, spriteSize.X, spriteSize.Y);
             Rectangle destinationRectangle = new Rectangle((int)centerLocation.X, (int)centerLocation.Y, drawSize.X, drawSize.Y);
 
@@ -90,12 +94,6 @@ namespace Sprint4
             return rect;
         }
 
-        public Point OuterColliderLocation(Vector2 location)
-        {
-            Point leftCorner = location.ToPoint();
-            leftCorner.X -= 5;
-            leftCorner.Y -= 5;
-            return leftCorner;
-        }
+        
     }
 }

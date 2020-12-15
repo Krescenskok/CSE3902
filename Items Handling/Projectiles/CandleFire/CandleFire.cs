@@ -4,14 +4,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class CandleFire : IItems
     {
         private Vector2 location;
         private ProjectileCollider collider;
         private bool isExpired = false;
-        public bool expired
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }

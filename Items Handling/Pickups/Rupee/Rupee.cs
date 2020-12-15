@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Rupee : IItems
     {
@@ -17,6 +17,12 @@ namespace Sprint4.Items
         private int drawnFrame;
         private IItemsState state;
         private XElement saveInfo;
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public ICollider Collider { get => collider; }
 
@@ -59,7 +65,10 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            saveInfo.SetElementValue("Alive", "false");
+            //saveInfo.SetElementValue("Alive", "false");
+            state.Expire();
+            LinkInventory.Instance.RupeeCount++;
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

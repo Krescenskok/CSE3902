@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -35,12 +35,11 @@ namespace Sprint4
             attackLength = length;
 
         }
-
-        #region //unused methods
         public void Attack()
         {
-            trap.state = new BladeTrapAttackState(location,target,trap,attackLength);
+            trap.state = new BladeTrapAttackState(location, target, trap, attackLength);
         }
+        #region //unused methods
 
         public void ChangeDirection()
         {
@@ -67,7 +66,7 @@ namespace Sprint4
            //cannot be damaged
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             //can't be stunned
         }

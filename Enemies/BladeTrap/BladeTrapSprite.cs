@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
-    public class BladeTrapSprite : ISprite
+    public class BladeTrapSprite : EnemySprite
     {
         private Texture2D texture;
         private static int[] spriteSheetSize = EnemySpriteFactory.SheetSize();
@@ -40,13 +40,14 @@ namespace Sprint4
 
             batch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 
-
+            
         }
 
-        public void Load(Game game)
+        public void Update()
         {
-            //do nothing
+
         }
+
 
         public Rectangle GetRectangle()
         {

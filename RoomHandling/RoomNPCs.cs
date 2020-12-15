@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint4.EnemyAndNPC.Merchant;
-using Sprint4.EnemyAndNPC.OldMan;
+using Sprint5.EnemyAndNPC.Merchant;
+using Sprint5.EnemyAndNPC.OldMan;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Sprint4
+namespace Sprint5
 {
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace Sprint4
         private static readonly RoomNPCs instance = new RoomNPCs();
 
         private List<INPC> NPCs;
-        
+        private Camera cam = Camera.Instance;
 
        
 
@@ -55,38 +55,42 @@ namespace Sprint4
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
-                XElement locTag = item.Element("Location");
-                XElement aliveTag = item.Element("Alive");
 
                 string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                string objLoc = locTag.Value;
 
-                bool alive = aliveTag == null || aliveTag.Value.Equals("true");
-
-                if (objType.Equals("NPC") && alive)
+                if (objType.Equals("NPC"))
                 {
-                    int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
-                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
+                    XElement nameTag = item.Element("ObjectName");
+                    XElement locTag = item.Element("Location");
+                    XElement aliveTag = item.Element("Alive");
+                    string objName = nameTag.Value;
+                    string objLoc = locTag.Value;
+                    bool alive = aliveTag == null || aliveTag.Value.Equals("true");
 
-
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
-
-                    if (objName.Equals("Flame"))
+                    if (objType.Equals("NPC") && alive)
                     {
-                        NPCs.Add(new Flame(location));
-                    }
-                    else if (objName.Equals("OldMan"))
-                    {
-                        NPCs.Add(new OldMan(location));
-                    }
-                    else if (objName.Equals("Merchant"))
-                    {
-                        NPCs.Add(new Merchant(location));
-                    }
+                        int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
+                        int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
+
+                        Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+
+                        if (objName.Equals("Flame"))
+                        {
+                            NPCs.Add(new Flame(location));
+                        }
+                        else if (objName.Equals("OldMan"))
+                        {
+                            NPCs.Add(new OldMan(location));
+                        }
+                        else if (objName.Equals("Merchant"))
+                        {
+                            NPCs.Add(new Merchant(location));
+                        }
+
+                    }
                 }
+
             }
 
         }

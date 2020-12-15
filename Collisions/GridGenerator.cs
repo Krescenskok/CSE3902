@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Generates list of list of rectangles for objects that move uniformly on a grid
@@ -17,11 +17,21 @@ namespace Sprint4
 
         private static GridGenerator instance = new GridGenerator();
 
-        private List<List<Rectangle>> savedGrid;
+        private List<List<Rectangle>> playAreaGrid;
+        public List<List<Rectangle>> OutsideArea { get; private set; }
+       
         private Point tileSize;
 
-        private Point topLeftOffset;
-        
+        private Point wallOffset;
+        public Point Offset { get => wallOffset; }
+
+        public int offsetYBottom;
+
+
+        private const float OFFSET_MULT_X = 1f / 8f;
+        private const float OFFSET_MULT_Y = 9f / 48f;
+        private const float OFFSET_MULT_Y_BOTTOM = 17f / 120f;
+
         public static GridGenerator Instance
         {
             get
@@ -33,7 +43,7 @@ namespace Sprint4
 
         private GridGenerator()
         {
-            savedGrid = new List<List<Rectangle>>();
+            playAreaGrid = new List<List<Rectangle>>();
             tileSize = new Point();
         }
 
@@ -42,31 +52,31 @@ namespace Sprint4
             return tileSize;
         }
 
-        public List<List<Rectangle>> GetGrid(Game game, int tileColumns, int tileRows)
+        public List<List<Rectangle>> GetGrid(int tileColumns, int tileRows)
         {
             List<List<Rectangle>> gridTiles = new List<List<Rectangle>>();
 
 
-            int screenWidth = game.Window.ClientBounds.Width;
-            int screenHeight = game.Window.ClientBounds.Height;
 
-            int roomSpriteGridOffsetY = 34;
-            int roomSpriteGridOffsetX = 33;
-            int roomSpriteGridWidth = 190;
-            int roomSpriteGridHeight = 110;
-            int roomSpriteWidth = 256;
-            int roomSpriteHeight = 176;
+            float screenWidth = Camera.Instance.playArea.Width;
+            float screenHeight = Camera.Instance.playArea.Height;
 
+            //pixel values measured in paint
+            
 
-            topLeftOffset = new Point(roomSpriteGridOffsetX * screenWidth / roomSpriteGridWidth, roomSpriteGridOffsetY * screenHeight / roomSpriteGridHeight);
+            int offsetX = (int) (screenWidth * OFFSET_MULT_X);
+            int offsetY = (int)(screenHeight * OFFSET_MULT_Y);
+            offsetYBottom = (int)(screenHeight * OFFSET_MULT_Y_BOTTOM);
+            wallOffset = new Point(offsetX, offsetY);
 
+            int playAreaWidth = (int)screenWidth - offsetX * 2;
+            int playAreaHeight = (int)screenHeight - offsetY - offsetYBottom;
 
-            int playAreaWidth = roomSpriteGridWidth * screenWidth / roomSpriteWidth;
-            int playAreaHeight = roomSpriteGridHeight * screenHeight / roomSpriteHeight;
 
             int tileWidth = playAreaWidth / tileColumns;
             int tileHeight = playAreaHeight / tileRows;
             Point tileSize = new Point(tileWidth, tileHeight);
+            
             this.tileSize = tileSize;
 
             
@@ -77,56 +87,57 @@ namespace Sprint4
 
                 for (int j = 0; j < tileColumns; j++)
                 {
-                   Point position = new Point(j * tileWidth, i * tileHeight) + topLeftOffset;
+                   Point position = new Point(j * tileWidth, i * tileHeight) + wallOffset - Camera.Instance.Location.ToPoint();
 
                     gridTiles[i].Add(new Rectangle(position, tileSize));
 
                 }
             }
 
-            savedGrid = gridTiles;
+            playAreaGrid = gridTiles;
+            FormOutsideArea();
 
-
-
+     
             return gridTiles;
         }
 
 
-
-        public List<Rectangle> CollisionGrid(Game game, int rows, int col)
+        public void FormOutsideArea()
         {
-            List<Rectangle> grid = new List<Rectangle>();
+            Point startPoint = playAreaGrid[0][0].Location - new Point(tileSize.X * 2, tileSize.Y * 2);
+            OutsideArea = new List<List<Rectangle>>();
 
-            int cellSizeX = game.Window.ClientBounds.Width / col;
-            int cellSizeY = game.Window.ClientBounds.Height / rows;
+            int width = tileSize.X;
+            int height = tileSize.Y;
+            int numRows = 11, numCol = 16;
 
-            Point cellSize = new Point(cellSizeX, cellSizeY);
-
-            for(int i = 0; i < rows; i++)
+            for (int i = 0; i < numRows; i++)
             {
-                for(int j = 0; j < col; j++)
+                OutsideArea.Add(new List<Rectangle>());
+
+                for (int j = 0; j < numCol; j++)
                 {
-                    grid.Add(new Rectangle(new Point(j * cellSizeX, i * cellSizeY), cellSize));
+                    Point position = new Point(j * width, i * height) + startPoint;
+
+                    OutsideArea[i].Add(new Rectangle(position, tileSize));
+
                 }
             }
-
-
-            return grid;
         }
 
         public List<List<Rectangle>> GetGrid()
         {
-            return savedGrid;
+            return playAreaGrid;
         }
 
         public int GetGridWidth()
         {
-            return savedGrid[0].Count * tileSize.X;
+            return playAreaGrid[0].Count * tileSize.X;
         }
 
         public int GetGridHeight()
         {
-            return savedGrid.Count * tileSize.Y;
+            return playAreaGrid.Count * tileSize.Y;
         }
 
         /// <summary>
@@ -143,17 +154,17 @@ namespace Sprint4
             Rectangle foundLocation = new Rectangle(position, tileSize);
 
 
-            for (int i = 0; i < savedGrid.Count; i++)
+            for (int i = 0; i < playAreaGrid.Count; i++)
             {
                 
 
-                for (int j = 0; j < savedGrid[0].Count; j++)
+                for (int j = 0; j < playAreaGrid[0].Count; j++)
                 {
 
 
-                    if (savedGrid[i][j].Contains(foundLocation.X, foundLocation.Y))
+                    if (playAreaGrid[i][j].Contains(foundLocation.X, foundLocation.Y))
                     {
-                        foundLocation = savedGrid[i][j];
+                        foundLocation = playAreaGrid[i][j];
                         
                         
                     }
@@ -163,25 +174,31 @@ namespace Sprint4
 
 
             return foundLocation;
-        }
+        }                               
 
 
         public Vector2 GetLocation(int row, int col)
         {
-            Vector2 result = new Vector2();
+            if (row > playAreaGrid.Count-1 || col > playAreaGrid[0].Count-1) return Vector2.Zero;
+            return playAreaGrid[row][col].Location.ToVector2();
+        }
 
-            result.X = col * tileSize.X;
-            result.Y = row * tileSize.Y;
-
-            result = Vector2.Add(result, topLeftOffset.ToVector2());
-
-            return result;
+        public Vector2 GetOutsideLocation(int row, int col)
+        {
+            return OutsideArea[row][col].Location.ToVector2();
         }
 
         public List<Rectangle> GetStraightPath(Rectangle start, Rectangle end)
         {
-            
-            bool vertical = start.X == end.X;
+            int camOffsetX = (int)Camera.Instance.Location.X;
+            int camOffsetY = (int)Camera.Instance.Location.Y;
+
+            int startX = start.X - wallOffset.X + camOffsetX;
+            int startY = start.Y - wallOffset.Y + camOffsetY;
+            int endX = end.X - wallOffset.X + camOffsetX;
+            int endY = end.Y - wallOffset.Y + camOffsetY;
+
+            bool vertical = startX == endX;
             
 
             List<Rectangle> path = new List<Rectangle>();
@@ -190,38 +207,59 @@ namespace Sprint4
 
             if (vertical)
             {
-                int increment = start.Y < end.Y ? 1 : -1;
-                int col = start.X / tileSize.X;
-                int startRow = start.Y / tileSize.Y;
-                int endRow = end.Y / tileSize.Y;
+                int increment = startY < endY ? 1 : -1;
+                int col = startX / tileSize.X;
+                int startRow = startY / tileSize.Y;
+                int endRow = endY / tileSize.Y;
+
                 
-                for(int k = startRow; k != endRow + increment; k += increment)
+
+                for (int k = startRow; k != endRow + increment; k += increment)
                 {
-                    path.Add(savedGrid[k][col]);
+                    path.Add(playAreaGrid[k][col]);
+
                     
                 }
             }
             else
             {
-                int increment = start.X < end.X ? 1 : -1;
-                int startCol = start.X / tileSize.X;
-                int row = start.Y / tileSize.Y;
-                int endCol = end.X / tileSize.X;
+                int increment = startX < endX ? 1 : -1;
+                int startCol = startX / tileSize.X;
+                int row = startY / tileSize.Y;
+                int endCol = endX / tileSize.X;
+
                 
+
                 for (int k = startCol; k != endCol + increment; k += increment)
                 {
-                    path.Add(savedGrid[row][k]);
-                   
+                    path.Add(playAreaGrid[row][k]);
+                    
                 }
             }
-            //Debug.WriteLine("");
-            //foreach (Rectangle rect in path)
-            //{
-            //    Debug.Write(rect.Location + " ");
-            //}
-
+           
             return path;
 
+        }
+
+        public Rectangle PathCollider(List<Rectangle> rects)
+        {
+            Rectangle rect = new Rectangle();
+            if(rects.Count > 0) rect = rects[0];
+            for(int i = 1; i < rects.Count; i++)
+            {
+                rect = Rectangle.Union(rect, rects[i]);
+            }
+            return rect;
+        }
+
+        public int GetColumn(int xPosition)
+        {
+            return (xPosition - wallOffset.X + (int)Camera.Instance.Location.X) / tileSize.X;
+        }
+
+        public int GetRow(int yPosition)
+        {
+            return (yPosition - wallOffset.Y + (int)Camera.Instance.Location.Y) / tileSize.Y;
         }
     }
 }

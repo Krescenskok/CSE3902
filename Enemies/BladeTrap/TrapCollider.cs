@@ -5,25 +5,27 @@ using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class TrapCollider : ICollider
     {
 
         private Vector2 attackDirection;
         private int attackLength;
+        private BladeTrap trap;
         private IEnemyState trapState;
         private Rectangle bounds;
 
         public string Name { get => "trap"; }
         public Layer layer { get; set; }
 
-        public TrapCollider(Rectangle trapRect, IEnemyState state, string attackDirection, int attackRange)
+        public TrapCollider(Rectangle trapRect, BladeTrap trap, string attackDirection, int attackRange)
         {
             bounds = new Rectangle();
 
             
-            trapState = state;
+            trapState = trap.state;
+            this.trap = trap;
 
             attackLength = attackRange / 2;
 
@@ -67,13 +69,9 @@ namespace Sprint4
                 bounds.Height = attackRange;
             }
 
-            CollisionHandler.Instance.AddCollider(this);
+            
         }
 
-        public TrapCollider()
-        {
-
-        }
 
         public Rectangle Bounds()
         {
@@ -92,7 +90,7 @@ namespace Sprint4
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Enemy") && !col.Name.Equals("Trap"))
+            if (col.CompareTag("Player"))
             {
                 BladeTrapRestState restingState = trapState as BladeTrapRestState;
                 if (trapState is BladeTrapRestState)
@@ -110,7 +108,7 @@ namespace Sprint4
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Enemy") && !col.Name.Equals("Trap"))
+            if (col.CompareTag("Player"))
             {
                 BladeTrapRestState restingState = trapState as BladeTrapRestState;
                 if (trapState is BladeTrapRestState)
@@ -127,14 +125,19 @@ namespace Sprint4
             
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
+
         public void SendMessage(string msg, object value)
         {
            //does not recieve messages
         }
 
-        public void Update(BladeTrap trap)
+        public void Update()
         {
-            this.trapState = trap.State;
+            trapState = trap.state;
         }
+
     }
 }

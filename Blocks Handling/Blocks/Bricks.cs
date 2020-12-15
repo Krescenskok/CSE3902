@@ -4,12 +4,12 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Blocks
+namespace Sprint5.Blocks
 {
     public class Bricks : IBlock
     {
         private Vector2 spriteLocation;
-        private BlocksSprite block;
+       
         private Boolean moveable;
         private int SHEET_LOCATION = 8;
         private int currentFrame;
@@ -19,12 +19,27 @@ namespace Sprint4.Blocks
         public Bricks(BlocksSprite block, Vector2 location)
         {
             spriteLocation = location;
-            this.block = block;
+            
             moveable = false;
             currentFrame = 0;
             drawnFrame = SHEET_LOCATION;
+
             collider = new BlockCollider(block.getDestination(location), this);
         }
+        public Bricks(BlocksSprite block, Vector2 location, string orientation, int length)
+        {
+            spriteLocation = location;
+            moveable = false;
+            currentFrame = 0;
+            drawnFrame = SHEET_LOCATION;
+            Rectangle hitbox = block.getDestination(location);
+            Point tileSize = GridGenerator.Instance.GetTileSize();
+            int size = orientation == "Vertical" ? tileSize.Y : tileSize.X;
+            if (orientation == "Vertical") hitbox.Height = size * length;
+            else hitbox.Width = size * length;
+            collider = new BlockCollider(hitbox, this);
+        }
+        
 
         public void Update()
         {
@@ -38,7 +53,7 @@ namespace Sprint4.Blocks
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            block.Draw(spriteBatch, spriteLocation, drawnFrame);
+           
 
         }
 
@@ -59,7 +74,7 @@ namespace Sprint4.Blocks
 
         public Rectangle getDestination()
         {
-            return this.block.getDestination();
+            return new Rectangle(spriteLocation.ToPoint(),new Point());
         }
         public Boolean getMoveable()
         {
@@ -68,7 +83,7 @@ namespace Sprint4.Blocks
 
         public BlocksSprite getBlockSprite()
         {
-            return block;
+            return null;
         }
     }
 }

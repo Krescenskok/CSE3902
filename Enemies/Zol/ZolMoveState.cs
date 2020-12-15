@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -41,7 +41,7 @@ namespace Sprint4
             this.zol.SetSprite(EnemySpriteFactory.Instance.CreateZolMoveSprite());
 
             //create grid of rectangles zol can move between
-            gridTiles = GridGenerator.Instance.GetGrid(game, tileColumns, tileRows);
+            gridTiles = GridGenerator.Instance.GetGrid(tileColumns, tileRows);
             gridLocation = GridGenerator.Instance.GetGridLocation(location);
 
             this.location = gridLocation.Location.ToVector2();
@@ -149,7 +149,7 @@ namespace Sprint4
             throw new NotImplementedException();
         }
 
-        public void Stun()
+        public void Stun(bool b)
         {
             throw new NotImplementedException();
         }

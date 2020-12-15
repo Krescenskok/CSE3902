@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Bow : IItems
     {
@@ -16,6 +16,12 @@ namespace Sprint4.Items
         private IItemsState state;
         private int drawnFrame;
 
+        private bool isExpired = false;
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
         public ICollider Collider { get => collider; }
 
         public Vector2 Location { get => location; }

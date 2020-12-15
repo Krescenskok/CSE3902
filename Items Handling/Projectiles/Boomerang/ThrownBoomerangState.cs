@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class ThrownBoomerangState : IItemsState
     {
@@ -59,6 +59,7 @@ namespace Sprint4.Items
                 frame++;
             }
             item.UpdateFrame(frame % 4);
+
         }
 
         public void AdjustPosition()
@@ -89,8 +90,7 @@ namespace Sprint4.Items
 
         public void Collected()
         {
-            //if enemy hits it, then enemy takes damage
-            item.Impact();
+
         }
     }
 }

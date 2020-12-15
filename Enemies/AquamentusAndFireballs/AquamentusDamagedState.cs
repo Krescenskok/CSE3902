@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -16,13 +16,17 @@ namespace Sprint4
         private Vector2 aquamentusPos;
         private LinkPlayer link;
         private int attackPosYValueAdjust = 6;
-        private int recoverCountDown = 20;
+        private int recoverCountDown = 120;
+        private int directionIndex;
+        private float speed;
 
-        public AquamentusDamagedState(Aquamentus aquamentus, Vector2 initalPos, LinkPlayer link)
+        public AquamentusDamagedState(Aquamentus aquamentus, Vector2 initalPos, LinkPlayer link, int directionIndex, float speed)
         {
             this.link = link;
             this.aquamentus = aquamentus;
             aquamentusPos = initalPos;
+            this.directionIndex = directionIndex;
+            this.speed = speed;
             aquamentus.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDragonSprite());
         }
 
@@ -48,16 +52,14 @@ namespace Sprint4
 
         public void Update()
         {
+            if (!aquamentus.CheckAlive())
+            {
+                Die();
+            }
+
             if(recoverCountDown < 0)
             {
-                if (aquamentus.checkAlive())
-                {
-                    aquamentus.state = new AquamentusNormalState(aquamentus, aquamentusPos, link);
-                }
-                else
-                {
-                    Die();
-                }
+               aquamentus.state = new AquamentusNormalState(aquamentus, aquamentusPos, link, directionIndex, speed);
             }
             else
             {
@@ -72,12 +74,17 @@ namespace Sprint4
 
         public void ChangeDirection()
         {
-            //wont use
+            directionIndex *= -1;
         }
 
         public void Stun()
         {
-            //stun implement
+            //not affected
+        }
+
+        public void Stun(bool permanent)
+        {
+            //not affected
         }
     }
 }

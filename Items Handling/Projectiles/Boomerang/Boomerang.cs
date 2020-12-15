@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint4.Link;
+using Sprint5.Link;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class Boomerang : IItems
     {
@@ -17,9 +17,17 @@ namespace Sprint4.Items
         private IItemsState state;
         private bool throwing;
         private bool returning;
-        private LinkPlayer link;
         private string direction;
+        private LinkPlayer link;
         private List<IItems> impactList = new List<IItems>();
+        private bool isExpired = false;
+
+        
+        public bool IsExpired
+        {
+            get { return isExpired; }
+            set { isExpired = value; }
+        }
 
         public Vector2 Location { get => location; }
 
@@ -39,6 +47,8 @@ namespace Sprint4.Items
             returning = false;
 
             collider = new BoomerangCollider((item as BoomerangSprite).Hitbox, this, this.state);
+
+            Sounds.Instance.AddLoopedSound("ArrowBoomerang", GetHashCode().ToString());
         }
 
         public void UpdateLocation(Vector2 location)
@@ -64,49 +74,58 @@ namespace Sprint4.Items
 
         public void Returning()
         {
-            state = new ReturningBoomerangState(this, location, link);
+            state = new ReturningBoomerangState(this, location, link, GetHashCode());
         }
 
-        public void Impact()
+        public void Impact(Rectangle rectangle)
         {
-            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location));
+            impactList.Add(new BoomerangImpact(ItemsFactory.Instance.CreateProjectileImpactSprite(), this.location, rectangle));
         }
 
         public void ReturnedToLink()
         {
-            if (throwing && returning) 
+            if (throwing && returning)
             {
                 returned = true;
-                state.Expire();
             }
         }
 
         public void Update()
         {
-
             if (throwing)
             {
                 state.Update();
             }
 
-            if (impactList.Count > 0)
+            foreach (IItems hit in impactList)
             {
-                foreach (IItems hit in impactList)
-                {
-                    hit.Update();
-
-                    if (((BoomerangImpact) hit).isExpired)
-                    {
-                        impactList.Remove(hit);
-                    }
-                }
+                hit.Update();
             }
+
+            int i;
+            for (i=0; i<impactList.Count; i++)
+            {
+                if (impactList[i].IsExpired)
+                    {
+                        impactList.RemoveAt(i);
+                    }
+            }
+
             collider.Update(this, this.state);
         }
 
         public void Expire()
         {
+            if (returning)
+            {
+                ReturnedToLink();
+                state.Expire();
+            }
 
+            if (returned)
+            {
+                state.Expire();
+            }
         }
 
         public void Collect()
@@ -117,6 +136,10 @@ namespace Sprint4.Items
         public void Draw(SpriteBatch spriteBatch)
         {
             item.Draw(spriteBatch, location, drawnFrame, Color.White);
+            foreach (IItems hit in impactList)
+            {
+                hit.Draw(spriteBatch);
+            }
         }
     }
 }

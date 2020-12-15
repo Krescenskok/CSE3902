@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: Yuan Hong
@@ -17,7 +17,7 @@ namespace Sprint4
         private Vector2 dodongoPos;
         private string direction = "Right";
         private float speedPerSec = 25;
-        private float updatePerSec = 30;
+        private float updatePerSec = 60;
         private float speed;
         public DodongoMovingState(Dodongo dodongo, Vector2 initialPos)
         {
@@ -36,7 +36,8 @@ namespace Sprint4
         {
             Random rand = new Random();
             Boolean findNewDirection = false;
-            string[] directionArray = { "ForWard", "Backward", "Left", "Right" };
+            string[] directionArray = { "up", "down", "left", "right" };
+            
             int directionIndex = rand.Next(0, 4);
             while (!findNewDirection)
             {
@@ -56,15 +57,27 @@ namespace Sprint4
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            if(collision.From().ToString() == "right" && direction == "Left")
+            if(collision.From.ToString().Equals(direction) )
             {
-                dodongoPos.X -= 3;
-                dodongo.UpdatePos(dodongoPos);
+                if(direction.Equals("up"))
+                { 
+                    direction = "down"; 
+                }
+                else if(direction.Equals("down")) 
+                {
+                    direction = "up"; 
+                }
+                else if(direction.Equals( "left"))
+                { 
+                    direction = "right"; 
+                }
+                else if(direction.Equals("right")){ 
+                    direction = "left"; 
+                }
+                dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDodongoSprite(direction));
+                dodongo.UpdateDirection(direction);
             }
-            else
-            {
-                ChangeDirection();
-            }
+                
         }
 
         public void Die()
@@ -75,19 +88,19 @@ namespace Sprint4
 
         public void Update()
         {
-            if (direction.Equals("ForWard"))
+            if (direction.Equals("up"))
             {
                 dodongoPos.Y -= speed;
             }
-            else if (direction.Equals("BackWard"))
+            else if (direction.Equals("down"))
             {
                 dodongoPos.Y += speed;
             }
-            else if (direction.Equals("Left"))
+            else if (direction.Equals("left"))
             {
                 dodongoPos.X -= speed;
             }
-            else if (direction.Equals("Right"))
+            else if (direction.Equals("right"))
             {
                 dodongoPos.X += speed;
             }
@@ -98,13 +111,13 @@ namespace Sprint4
         {
             if (amount == -1)
             {
-                dodongo.LostHP();
                 dodongo.dodongoState = new DodongoDamagedState(dodongo, dodongoPos);
                 dodongo.SetSprite(EnemySpriteFactory.Instance.CreateDamagedDodongoSprite(direction));
+                dodongo.LostHP();
             }
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             //wont get stuned
         }

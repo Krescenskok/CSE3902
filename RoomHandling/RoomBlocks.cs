@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using Sprint4.Blocks;
-using Sprint4.Link;
+using Sprint5.Blocks;
+using Sprint5.Link;
 
-namespace Sprint4
+namespace Sprint5
 {
 
     /// <summary>
@@ -26,7 +26,8 @@ namespace Sprint4
 
         private List<IBlock> roomBlocks;
 
-       
+        private Camera cam = Camera.Instance;
+
 
         public static RoomBlocks Instance
         {
@@ -39,6 +40,7 @@ namespace Sprint4
         private RoomBlocks()
         {
             roomBlocks = new List<IBlock>();
+
            
         }
         public void LoadRoom(Game game, XElement room)
@@ -49,45 +51,84 @@ namespace Sprint4
             foreach (XElement item in items)
             {
                 XElement typeTag = item.Element("ObjectType");
-                XElement nameTag = item.Element("ObjectName");
-                XElement locTag = item.Element("Location");
-                XElement aliveTag = item.Element("Alive");
-
                 string objType = typeTag.Value;
-                string objName = nameTag.Value;
-                string objLoc = locTag.Value;
 
-                bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+                
 
-                if (objType.Equals("Block") && alive)
+                if (objType.Equals("Block"))
                 {
-                    int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
-                    int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
 
-                    Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+                    XElement nameTag = item.Element("ObjectName");
+                    XElement locTag = item.Element("Location");
+                    XElement aliveTag = item.Element("Alive");
 
-                    if (objName.Equals("BirdLeft"))
-                    {
-                        roomBlocks.Add(new BirdLeft(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
-                    }
-                    else if (objName.Equals("BirdRight"))
-                    {
-                       roomBlocks.Add(new BirdRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite,location));
-                    }
-                    else if (objName.Equals("Water"))
+
+                    string objName = nameTag.Value;
+                    string objLoc = locTag.Value;
+
+                    bool alive = aliveTag == null || aliveTag.Value.Equals("true");
+
+
+                    if (alive)
                     {
 
-                        roomBlocks.Add(new DarkerBlueTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
-                    }else if (objName.Equals("Column"))
-                    {
-                        roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
-                    }else if (objName.Equals("MoveableColumnRight"))
-                    {
-                        roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
-                    }else if (objName.Equals("MoveableColumnUp"))
-                    {
-                        roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        int row = int.Parse(objLoc.Substring(0, objLoc.IndexOf(" ")));
+                        int column = int.Parse(objLoc.Substring(objLoc.IndexOf(" ")));
+
+                        Vector2 location = GridGenerator.Instance.GetLocation(row, column);
+
+                        int width = GridGenerator.Instance.GetTileSize().X;
+                        int height = GridGenerator.Instance.GetTileSize().Y;
+
+                        if (objName.Equals("BirdLeft"))
+                        {
+                            roomBlocks.Add(new BirdLeft(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("BirdRight"))
+                        {
+                            roomBlocks.Add(new BirdRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("Water"))
+                        {
+                            roomBlocks.Add(new WaterTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("Stairs"))
+                        {
+                            roomBlocks.Add(new Stairs(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("Column"))
+                        {
+                            roomBlocks.Add(new Column(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("Brick"))
+                        {
+                            location = GridGenerator.Instance.GetOutsideLocation(row, column);
+                            
+                            roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }else if (objName.Equals("BrickLong"))
+                        {
+                            location = GridGenerator.Instance.GetOutsideLocation(row, column);
+                            string orientation = item.Element("Orientation").Value;
+                            int length = int.Parse(item.Element("Length").Value);
+                            roomBlocks.Add(new Bricks(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location,orientation,length));
+                        }
+                        else if (objName.Equals("BlackTile"))
+                        {
+                            roomBlocks.Add(new BlackTile(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location));
+                        }
+                        else if (objName.Equals("MoveableColumnRight"))
+                        {
+                            roomBlocks.Add(new MoveableRight(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, item));
+                        }
+                        else if (objName.Equals("MoveableColumnUp"))
+                        {
+                            roomBlocks.Add(new MoveableUp(SpriteFactory.Instance.CreateBlocksSprite() as BlocksSprite, location, item));
+                        }else if (objName.Equals("Plain"))
+                        {
+                            new BlockCollider(location);
+                        }
                     }
+                    
                 }
             }
 

@@ -1,184 +1,136 @@
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Link
+namespace Sprint5.Link
 {
-    public abstract class Movement : ILinkState
+    public abstract class Movement : LinkState
     {
-        protected LinkPlayer link;
-   
 
-    protected ISprite linkSprite;
-        Color[] colors = { Color.Yellow, Color.Pink, Color.Green, Color.Gold, Color.Blue, Color.IndianRed, Color.Indigo, Color.Ivory };
-        Color[] clockColors = { Color.Blue, Color.White, Color.BlueViolet, Color.LightBlue, Color.Aquamarine, Color.Aqua };
-        protected int currentFrame;
+        private double lastTime;
 
-        int i = 0;
-
-        private List<IItems> itemsPlacedByLink = new List<IItems>();
-
-        public Movement(LinkPlayer link)
+        public Movement(LinkPlayer linkPlayer) :base(linkPlayer)
         {
-            this.link = link;
-            link.isWalkingInPlace = false;
-            itemsPlacedByLink = link.itemsPlacedByLink;
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, Vector2 location)
-        {
-            Color col;
-            if (linkSprite == null)
-                linkSprite = SpriteFactory.Instance.CreateLinkSprite();
-
-
-            if (link.IsDamaged || link.Clock)
-            {
-
-                if (link.DamageStartTime == 0)
-                    link.DamageStartTime = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - link.DamageStartTime < 1000)
-                {
-                    if(link.IsDamaged)
-                    {
-                        col = colors[i];
-                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
-                        i++;
-                        if (i == colors.Length - 1)
-                        {
-                            i = 0;
-                        }
-
-                    }
-                    else if (link.Clock)
-                    {
-                        col = clockColors[i];
-                        linkSprite.Draw(spriteBatch, location, currentFrame, col);
-                        i++;
-                        if (i == clockColors.Length - 1)
-                        {
-                            i = 0;
-                        }
-
-                    }
-                  
-
-                   
-                }
-                else
-                {
-                    link.IsDamaged = false;
-                    link.Clock = false;
-  
-                }
-
-            }
-            else
-            {
-                if (link.UseRing)
-                {
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.MediumAquamarine);
-                }
-           
-                else
-                {
-                    linkSprite.Draw(spriteBatch, location, currentFrame, Color.White);
-                }
-            }
-
-            foreach (IItems projectile in link.itemsPlacedByLink)
-            {
-                projectile.Draw(spriteBatch);
-            }
 
         }
 
-        public virtual Vector2 Update(GameTime gameTime, Vector2 location)
+        public override Vector2 Update(GameTime gameTime, Vector2 location)
         {
-            foreach (IItems projectile in link.itemsPlacedByLink)
-            {
-                projectile.Update();
-            }
+            ProjectilesCommand.Instance.Update(gameTime);
+
+            if (gameTime.TotalGameTime.TotalMilliseconds - lastTime < 100)
+                return location;
+
+            lastTime = gameTime.TotalGameTime.TotalMilliseconds;
 
             if (link.IsStopped)
-            {
-                if (location.X <= 0)
-                    location.X = 0;
-                else if (location.X >= 780)
-                        location.X = 780;
-                else if (location.Y <= 0)
-                    location.Y = 0;
-                else if (location.Y >= 445)
-                    location.Y = 445;
-
                 return location;
-            }
-
             if (link.IsAttacking)
             {
+                if (link.IsSecondAttack)
+                {
+                    if (link.SecondaryWeapon == ItemForLink.Boomerang)
+                    {
+                        if (LinkInventory.Instance.HasBoomerang)
+                        {
+                            if (!link.IsShootingProjectile)
+                            {
+                                link.IsShootingProjectile = true;
+                                ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
+                            }
+                        }
+                        return HandleArrowBow(gameTime, location);
+                    }
+                    else if (link.SecondaryWeapon == ItemForLink.BlueCandle)
+                    {
+                        if (!link.IsShootingProjectile)
+                        {
+                            link.IsShootingProjectile = true;
+                            ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
+                        }
+                        return HandleArrowBow(gameTime, location);
+                    }
+                    else if (link.SecondaryWeapon == ItemForLink.Bomb)
+                    {
+                        if (!link.IsShootingProjectile)
+                        {
+                            link.IsShootingProjectile = true;
+                            ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
+                        }
+                        return HandleShield(gameTime, location);
+                    }
+                    else if (link.SecondaryWeapon == ItemForLink.ArrowBow)
+                    {
+                        if (LinkInventory.Instance.HasBow)
+                        {
+                            if (!link.IsShootingProjectile)
+                            {
+                                link.IsShootingProjectile = true;
+                                ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
+                            }
+                            return HandleArrowBow(gameTime, location);
+                        }
+                        return HandleShield(gameTime, location);
+                    }
 
-                if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
-                {
-                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
-                    return HandleWoodenSword(gameTime, location);
                 }
-                else if (link.CurrentWeapon == ItemForLink.Sword)
+                else
                 {
-                    ProjectilesCommand.Instance.SwordBeam(link.LinkDirection);
-                    return HandleSword(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.MagicalRod)
-                {
-                    ProjectilesCommand.Instance.WandBeam(link.LinkDirection);
-                    return HandleMagicalRod(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.ArrowBow)
-                {
-                    ProjectilesCommand.Instance.ArrowBow(link.LinkDirection);
-                    return HandleArrowBow(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.BlueRing)
-                {
-                    link.UseRing = true;
-                    return HandleArrowBow(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.Boomerang)
-                {
-                    ProjectilesCommand.Instance.BoomerangThrow(link.LinkDirection);
-                    //animation to throw is same as bow
-                    return HandleArrowBow(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.BlueCandle)
-                {
-                    ProjectilesCommand.Instance.CandleBurn(link.LinkDirection);
-                    //animation to throw is same as bow
-                    return HandleArrowBow(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.Bomb)
-                {
-                    ProjectilesCommand.Instance.SpawnBomb(link.LinkDirection);
-                    //animation to throw is same as bow
-                    return HandleArrowBow(gameTime, location);
-                }
-                else if (link.CurrentWeapon == ItemForLink.Clock)
-                {
-                    link.Clock = true;
-                    RoomEnemies.Instance.StunAllEnemies();
-                    return HandleArrowBow(gameTime, location);
+                    if (link.CurrentWeapon == ItemForLink.WoodenSword || link.CurrentWeapon == ItemForLink.Shield)
+                    {
 
+                        if (!link.IsShootingProjectile)
+                        {
+                            link.IsShootingProjectile = true;
+                            delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
+                        }
+                        return HandleWoodenSword(gameTime, location);
+                    }
+                    else if (link.CurrentWeapon == ItemForLink.Sword)
+                    {
+                        
+                        if (!link.IsShootingProjectile)
+                        {
+                            link.IsShootingProjectile = true;
+                            delayExecute(250, (sender, e) => ProjectilesCommand.Instance.SwordBeam(link.LinkDirection));
+                        }
+                        return HandleSword(gameTime, location);
+                    }
+                    else if (link.CurrentWeapon == ItemForLink.MagicalRod)
+                    {
+                        Sounds.Instance.Play("MagicalRod");
+                        if (!link.IsShootingProjectile)
+                        {
+                            link.IsShootingProjectile = true;
+                            delayExecute(300, (sender, e) => ProjectilesCommand.Instance.WandBeam(link.LinkDirection));
+                        }
+                        return HandleMagicalRod(gameTime, location);
+                    }
+                    else if (link.CurrentWeapon == ItemForLink.BlueRing)
+                    {
+                        link.UseRing = true;
+                        return HandleArrowBow(gameTime, location);
+                    }
+                    else if (link.CurrentWeapon == ItemForLink.Clock)
+                    {
+                        link.Clock = true;
+                        RoomEnemies.Instance.StunAllEnemies();
+                        return HandleArrowBow(gameTime, location);
+                    }
+                    else if (link.LargeShield)
+                    {
+                        return HandleShield(gameTime, location);
+                    }
                 }
 
             }
-            if(link.IsPickingUpItem)
-            {
+            if (link.IsPickingUpItem)
                 return HandlePickUpItem(gameTime, location);
-            }
 
             return HandleShield(gameTime, location);
         }
-
-        
 
         public abstract Vector2 HandleWoodenSword(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleSword(GameTime gameTime, Vector2 location);
@@ -187,12 +139,5 @@ namespace Sprint4.Link
         public abstract Vector2 HandlePickUpItem(GameTime gameTime, Vector2 location);
         public abstract Vector2 HandleArrowBow(GameTime gameTime, Vector2 location);
 
-
-
-        public void Draw(Game game, SpriteBatch spriteBatch, GameTime gameTime)
-        {
-        }
-
-        
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class HandPlayerFinderCollider : ICollider
     {
@@ -21,14 +21,11 @@ namespace Sprint4
         {
 
             master = wallMaster;
-            
             bounds = masterRect;
-
-            
 
             state = (WallMasterMoveState)wallMaster.State;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.Trigger);
         }
 
 
@@ -46,25 +43,27 @@ namespace Sprint4
 
         public bool Equals(ICollider col)
         {
-            return col == this;
+            return this == col;
         }
 
         public void HandleCollision(ICollider col, Collision collision)
         {
-
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.LockOnToPlayerPosition(collision);
-
+            if (col.CompareTag("Player") ) state.LockOnToPlayerPosition(collision);
         }
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
-            if (col.CompareTag("Player") || col.Name.Equals("gel")) state.LockOnToPlayerPosition(collision);
-
+            if (col.CompareTag("Player")) state.LockOnToPlayerPosition(collision);
         }
 
+        public void HandleCollisionExit(ICollider col, Collision collision)
+        {
+        }
         public void SendMessage(string msg, object value)
         {
-            //does not handle messages
+        }
+        public void Update()
+        {
         }
     }
 }

@@ -5,39 +5,42 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.Linq;
+using Sprint5.DifficultyHandling;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
     /// </summary>
     public class Keese : IEnemy
     {
-        private Vector2 location;
-
+        private XElement saveData;
         public IEnemyState state;
-        private ISprite sprite;
-
-        private Game game;
-        
+        private EnemySprite sprite;
 
         private EnemyCollider collider;
 
-        private int HP = HPAmount.EnemyLevel1;
+        public int HP { get; private set; } = HPAmount.EnemyLevel1;
+        private const float barSize = 1.5f;
 
-        public Vector2 Location { get => location; }
+
+        private Point spriteSize;
+        private Rectangle rect;
+
+        public Vector2 Location { get; set; }
 
         public IEnemyState State { get => state; }
+        public List<ICollider> Colliders { get => new List<ICollider> { collider }; }
 
-        private XElement saveData;
+        
 
         public Keese(Game game, Vector2 location, XElement xml)
         {
-            this.game = game;
-            this.location = location;
+            Location = location;
             state = new EnemySpawnState(this, game);
 
             collider = new EnemyCollider();
+            HP = DifficultyMultiplier.Instance.DetermineEnemyHP(HP);
 
             saveData = xml;
         }
@@ -45,50 +48,65 @@ namespace Sprint4
         public void Spawn()
         {
             
-            state = new KeeseMoveState(this, location);
+            state = new KeeseMoveState(this, Location);
             KeeseMoveSprite kSprite = (KeeseMoveSprite)sprite;
-            collider = new EnemyCollider(kSprite.GetRectangle(), state,HPAmount.HalfHeart,"Keese");
+            spriteSize = kSprite.GetRectangle().Size;
+            rect = new Rectangle(Location.ToPoint(), spriteSize);
+            rect = HitboxAdjuster.Instance.AdjustHitbox(rect, .6f);
 
-            Debug.Write(kSprite.GetRectangle().Width + ", " + kSprite.GetRectangle().Height);
+            collider = new EnemyCollider(HitboxAdjuster.Instance.AdjustHitbox(rect, .5f), this, HPAmount.HalfHeart, "Keese");
+
+            HPBarDrawer.AddBar(new EnemyHealthBar(this, rect, barSize));
         }
-        public void SetSprite(ISprite sprite)
+        public void SetSprite(EnemySprite sprite)
         {
             this.sprite = sprite;
         }
 
         public void UpdateLocation(Vector2 location)
         {
-            this.location = location;
+            Location = location;
         }
      
 
         public void Die()
         {
-            RoomEnemies.Instance.Destroy(this, location);
+            RoomEnemies.Instance.Destroy(this, Location);
             saveData.SetElementValue("Alive", "false");
+            RoomItems.Instance.DropRandom(collider.Center);
         }
 
-        public void TakeDamage(int amount)
-        {
-            HP -= amount;
-            if (HP <= 0) Die();
-        }
+    
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, location, 0, Color.White);
+            sprite.Draw(spriteBatch, Location, 0, Color.White);
         }
 
         public void Update()
         {
             
             state.Update();
-            collider.Update(this);
+            sprite.Update();
+            
         }
 
-        public EnemyCollider GetCollider()
+  
+
+        public void TakeDamage(Direction dir, int amount)
         {
-            return collider;
+            HP = Math.Max(HP - amount, HPAmount.Zero);
+            if (HP <= HPAmount.Zero) Die();
+        }
+
+        public void ObstacleCollision(Collision collision)
+        {
+            state.MoveAwayFromCollision(collision);
+        }
+
+        public void Stun()
+        {
+            Die();
         }
     }
 }

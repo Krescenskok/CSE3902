@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4.Enemies
+namespace Sprint5.Enemies
 {
     public class GoriyaBoomerangCollider : ICollider
     {
@@ -12,7 +12,7 @@ namespace Sprint4.Enemies
         
         private int damageAmount;
 
-        GoriyaBoomerang boomerang;
+        private GoriyaBoomerang boomerang;
 
         public string Name { get => "Enemy"; }
         public Layer layer { get; set; }
@@ -25,7 +25,7 @@ namespace Sprint4.Enemies
 
             damageAmount = strength;
 
-            CollisionHandler.Instance.AddCollider(this);
+            CollisionHandler.Instance.AddCollider(this, Layers.EnemyProjectile);
         }
 
        
@@ -52,27 +52,39 @@ namespace Sprint4.Enemies
 
         public void HandleCollisionEnter(ICollider col, Collision collision)
         {
+            string direction = collision.From.ToString();
+            direction = char.ToUpper(direction[0]) + direction.Substring(1);
+
             if (col.CompareTag("Player"))
             {
-                col.SendMessage("PlayerTakeDamage", damageAmount);
-            }
+                    col.SendMessage("TakeDamage" + direction, damageAmount);
+                }
             else if (col.CompareTag("Block") || col.CompareTag("Wall") || col.CompareTag("block") || col.CompareTag("wall") || col.CompareTag("PlayerWeapon"))
             {
                 boomerang.BounceOff(collision);
 
+            }else if (col.CompareTag("Shield"))
+            {
+                boomerang.BounceOff(collision);
+                col.SendMessage("TakeDamage" + direction, damageAmount);
             }
 
 
         }
 
-        public void SendMessage(string msg, object value)
+        public void HandleCollisionExit(ICollider col, Collision collision)
         {
-           //nothing
         }
 
-        public void Update(Point point)
+
+        public void SendMessage(string msg, object value)
         {
-            bounds.Location = point;
+            if (msg == "Bounce") boomerang.BounceOff((Direction)value);
+        }
+
+        public void Update()
+        {
+            bounds.Location = boomerang.Location;
         }
     }
 }

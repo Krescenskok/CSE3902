@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public interface IItems
     {
         void Update();
+
+        void Expire();
 
         void Draw(SpriteBatch spriteBatch);
 
@@ -17,5 +19,7 @@ namespace Sprint4
         IItemsState State { get; }
 
         ICollider Collider { get; }
+
+        bool IsExpired { get; set; }
     }
 }

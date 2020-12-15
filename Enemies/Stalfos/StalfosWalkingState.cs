@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -17,20 +17,19 @@ namespace Sprint4
         private Vector2 location;
         private Vector2 moveDirection;
 
-        
 
-        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
-        List<Direction> possibleDirections;
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        Direction currentDirection;
-        
+        private List<Direction> possibleDirections;
+        private Direction currentDirection;
 
-        Random RandomNumber;
+
+        private float randomness = 0.1f;
 
         private const int normalMoveSpeed = 1;
         private int currentMoveSpeed = normalMoveSpeed;
         private const int stunTime = 120;
         private int stunClock = 0;
+
+        public bool permaStun { get; private set; } = false;
 
         public StalfosWalkingState(Stalfos stalfos, Vector2 location)
         {
@@ -39,12 +38,10 @@ namespace Sprint4
 
             stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosWalkingSprite());
 
-            currentDirection = right;
+            currentDirection = Direction.right;
+            possibleDirections = Directions.Default();
             moveDirection.X = 1;
             moveDirection.Y = 0;
-
-            RandomNumber = new Random();
-            possibleDirections = new List<Direction> { left, right, up, down };
         }
 
         
@@ -52,44 +49,17 @@ namespace Sprint4
         public void ChangeDirection()
         {
 
+            currentDirection = Directions.RandomDirection(possibleDirections);
+            moveDirection.Y = Directions.CheckDirection(currentDirection, Direction.down, Direction.up);
+            moveDirection.X = Directions.CheckDirection(currentDirection, Direction.right, Direction.left);
 
-            currentDirection = RandomDirection(possibleDirections);
-
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
-
-
-
-            possibleDirections = new List<Direction> { left, right, up, down };
-
-
-        }
-
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
-        {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
-        }
-
- 
-
-        private Direction RandomDirection(List<Direction> directions)
-        {
-            int rand = RandomNumber.Next(0, directions.Count);
-            return directions[rand];
+            possibleDirections = Directions.Default(); 
         }
 
         public void MoveAwayFromCollision(Collision collision)
         {
-            possibleDirections = new List<Direction> { left, right, up, down };
-
-            if (collision.Left()) possibleDirections.Remove(Direction.left);
-            if (collision.Right()) possibleDirections.Remove(Direction.right);
-            if (collision.Up()) possibleDirections.Remove(Direction.up);
-            if (collision.Down()) possibleDirections.Remove(Direction.down);
-
-            
+            possibleDirections = Directions.Default();
+            possibleDirections.Remove(collision.From);
 
             if (!possibleDirections.Contains(currentDirection)) ChangeDirection();
         }
@@ -98,7 +68,8 @@ namespace Sprint4
 
         public void Update()
         {
-            if (RandomNumber.Next(0, 100) == 0) ChangeDirection();
+            
+            if (Directions.Chance(randomness)) ChangeDirection();
             MoveOneUnit();
 
             if (stunClock > 0) stunClock--;
@@ -110,29 +81,17 @@ namespace Sprint4
         {
             location.X += moveDirection.X * currentMoveSpeed;
             location.Y +=  moveDirection.Y * currentMoveSpeed;
-            skeleton.UpdateLocation(location);
+            skeleton.Location = location;
         }
 
-        public void Stun()
+        public void Stun(bool permanent)
         {
             currentMoveSpeed = 0;
-            stunClock = stunTime;
-           
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
+            permaStun = permanent ? true : permaStun;
         }
 
 
-        public void TakeDamage(int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(currentDirection.ToString(), skeleton, location);
-        }
-
-        public void TakeDamage(string dir, int amount)
-        {
-            bool stillAlive = skeleton.SubtractHP(amount);
-            if (stillAlive) skeleton.state = new StalfosDamagedState(dir, skeleton, location);
-            
-        }
 
         #region //unused methods
         public void Attack()
@@ -143,6 +102,11 @@ namespace Sprint4
         public void Die()
         {
             //change to dying state
+        }
+
+        public void TakeDamage(int amount)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

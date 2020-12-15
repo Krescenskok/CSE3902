@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     /// <summary>
     /// Author: JT Thrash
@@ -41,6 +41,7 @@ namespace Sprint4
 
         private const int stunTime = 120;
         private int stunClock = 0;
+        private bool permaStun = false;
 
         Random RandomNumber;
 
@@ -53,7 +54,7 @@ namespace Sprint4
         private Dictionary<Wall, List<Rectangle>> insideMap;
 
         private bool inWall = true;
-
+        private bool colliderOn;
 
         private Vector2 playerPosition;
         private Rectangle playerSpace;
@@ -103,7 +104,7 @@ namespace Sprint4
             //top wall
             for (int i = 0; i < tileColumns; i++)
             {
-                position = new Point(gridTiles[0][i].X, gridTiles[0][i].Y - tileSize.Y);
+                position = new Point(gridTiles[0][i].X, gridTiles[0][i].Y - tileSize.Y * 2);
 
                 
                 wallRect = new Rectangle(position, tileSize);
@@ -117,7 +118,7 @@ namespace Sprint4
             //right wall
             for (int i = 0; i < tileRows; i++)
             {
-                position = new Point(gridTiles[i][tileColumns - 1].X + tileSize.X, gridTiles[i][tileColumns - 1].Y);
+                position = new Point(gridTiles[i][tileColumns - 1].X + tileSize.X * 2, gridTiles[i][tileColumns - 1].Y);
                 wallRect = new Rectangle(position, tileSize);
                 insideRect = gridTiles[i][tileColumns - 1];
                 RightOffset(spriteSize, ref wallRect, ref insideRect);
@@ -128,7 +129,7 @@ namespace Sprint4
             //bottom wall
             for (int i = 0; i < tileColumns; i++)
             {
-                position = new Point(gridTiles[tileRows - 1][i].X, gridTiles[tileRows - 1][i].Y + tileSize.Y);
+                position = new Point(gridTiles[tileRows - 1][i].X, gridTiles[tileRows - 1][i].Y + tileSize.Y * 2);
                 wallRect = new Rectangle(position, tileSize);
                 
                 insideRect = gridTiles[tileRows - 1][i];
@@ -142,7 +143,7 @@ namespace Sprint4
             //left wall
             for (int i = 0; i < tileRows; i++)
             {
-                position = new Point(gridTiles[i][0].X - tileSize.X, gridTiles[i][0].Y);
+                position = new Point(gridTiles[i][0].X - tileSize.X * 2, gridTiles[i][0].Y);
                 wallRect = new Rectangle(position, tileSize);
                 insideRect = gridTiles[i][0];
                 LeftOffset(spriteSize, ref wallRect, ref insideRect);
@@ -175,14 +176,11 @@ namespace Sprint4
             
 
             this.location = currentSpace.Location.ToVector2();
-            this.master.UpdateLocation(this.location);
+            this.master.Location = location;
             
         }
 
-        public void TakeDamage()
-        {
-            //take damage
-        }
+        
 
         public void ChangeDirection()
         {
@@ -191,33 +189,32 @@ namespace Sprint4
 
         }
 
-        public float CompareTwoNums(float num1, float num2)
-        {
-            if (num1 < num2) return -1;
-            if (num1 > num2) return 1;
-            return 0;
-        }
-
-        public void Die()
-        {
-            //die
-        }
+        
 
         public void Attack()
         {
-            targetSpace = NearestSpace(location, outsideArea);
-            master.state = new WallMasterGrabbingLinkState(location, master, targetSpace, currentWall.ToString(), game);
+            if (!inWall)
+            {
+                targetSpace = NearestSpace(location, outsideArea);
+                master.state = new WallMasterGrabbingLinkState(location, master, targetSpace, currentWall.ToString(), game);
+            }
+            
         }
 
         public void Update()
         {
-            
+          
+
             if (Arrived(currentSpace,targetSpace)) {
 
                 inWall = !insideArea.Contains(targetSpace);
                 if (inWall) ChangeDirection();
                 if (!inWall && playerSpace == targetSpace) { Hide(); attacking = false; }
-                
+
+                if (!inWall && !colliderOn)
+                {
+                    ToggleCollider(true);
+                }
 
             } else {
                 
@@ -230,6 +227,15 @@ namespace Sprint4
             if (attacking) MoveToPlayer();
         }
 
+        private void ToggleCollider(bool on) {
+            if (on)
+                CollisionHandler.Instance.AddCollider(master.Colliders[0], Layers.Enemy);
+            else
+                CollisionHandler.Instance.RemoveCollider(master.Colliders[0]);
+
+            colliderOn = on;
+        }
+
         public void Hide()
         {
             Rectangle current = NearestSpace(currentSpace.Location.ToVector2(), insideArea);
@@ -240,7 +246,7 @@ namespace Sprint4
         {
             location = MoveToward(location, targetSpace.Location.ToVector2());
             currentSpace.Location = location.ToPoint();
-            master.UpdateLocation(location);
+            master.Location = location;
             
         }
 
@@ -257,8 +263,6 @@ namespace Sprint4
         private bool Arrived(Rectangle position, Rectangle target)
         {
             float dist = Vector2.Distance(position.Center.ToVector2(), target.Center.ToVector2());
-            
-            
             return dist <= 1;
         }
 
@@ -279,7 +283,6 @@ namespace Sprint4
                 playerPosition = col.Location;
                 List<Rectangle> insideWall = insideMap[currentWall];
 
-                Rectangle playerPos = NearestSpace(playerPosition, insideWall);
                 playerSpace = NearestSpace(playerPosition, insideWall);
 
                 attacking = true;
@@ -331,14 +334,6 @@ namespace Sprint4
             else return CombineRectangles(bottomInside);
         }
 
-        public Rectangle OutsideArea()
-        {
-            if (currentWall == right) return CombineRectangles(rightWall);
-            else if (currentWall == left) return CombineRectangles(leftWall);
-            else if (currentWall == top) return CombineRectangles(topWall);
-            else return CombineRectangles(bottomWall);
-        }
-
 
         public void LeftOffset(Rectangle rect, ref Rectangle wall, ref Rectangle inside)
         {
@@ -386,16 +381,27 @@ namespace Sprint4
             inside.Location = newLoc.ToPoint();
         }
 
-        public void TakeDamage(int amount)
-        {
-            master.TakeDamage(amount);
-        }
-
-        public void Stun()
+        public void Stun(bool permanent)
         {
             moveSpeed = 0;
-            stunClock = stunTime;
+            stunClock = permanent || permaStun ? int.MaxValue : stunTime;
+            permaStun = permaStun ? true : permaStun;
+        }
+
+        public void TakeDamage(int amount)
+        {
+            
+        }
+
+        public void TakeDamage()
+        {
 
         }
+
+        public void Die()
+        {
+
+        }
+
     }
 }

@@ -4,14 +4,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint4.Items
+namespace Sprint5.Items
 {
     public class WandBeam : IItems
     {
         private Vector2 location;
         private ProjectileCollider collider;
         private bool isExpired = false;
-        public bool expired
+        public bool IsExpired
         {
             get { return isExpired; }
             set { isExpired = value; }
@@ -20,7 +20,6 @@ namespace Sprint4.Items
 
         private int drawnFrame;
         private IItemsState state;
-        private string direction;
 
         public Vector2 Location { get => location; }
 
@@ -31,7 +30,6 @@ namespace Sprint4.Items
         public WandBeam(ISprite itemSprite, Vector2 location, string direction)
         {
             this.location = location;
-            this.direction = direction;
             this.itemSprite = itemSprite;
             drawnFrame = 0;
             state = new WandBeamState(this, location, direction);
@@ -78,7 +76,7 @@ namespace Sprint4.Items
 
         public void Expire()
         {
-            expired = true;
+            IsExpired = true;
             state.Expire();
         }
 

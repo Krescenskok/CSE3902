@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5.Items
 {
     public class ArrowState : IItemsState
     {
@@ -21,6 +21,8 @@ namespace Sprint4
 
         public void Expire()
         {
+            item.IsExpired = true;
+
             RoomItems.Instance.Destroy(item);
 
             item.UpdateSprite(ItemsFactory.Instance.EraseSprite());

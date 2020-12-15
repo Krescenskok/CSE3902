@@ -3,48 +3,67 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sprint4
+namespace Sprint5
 {
     public class StalfosDamagedState : IEnemyState
     {
 
-        private enum Direction { left = -1, right = 1, up = -2, down = 2 };
-        
-        Direction left = Direction.left, right = Direction.right, up = Direction.up, down = Direction.down;
-        Direction currentDirection;
-
-        Vector2 moveDirection;
-        Vector2 location;
-
-        private float moveSpeed = 4;
-        
-        
+        private Direction currentDirection;
+        private Vector2 moveDirection;
+        private Vector2 location;
 
         private Stalfos stalfos;
 
-        public StalfosDamagedState(string dir, Stalfos stalfos, Vector2 location)
-        {
-            string direction = dir.ToLower();
-            if (direction.Equals(right.ToString())) currentDirection = right;
-            if (direction.Equals(left.ToString())) currentDirection = left;
-            if (direction.Equals(down.ToString())) currentDirection = down;
-            if (direction.Equals(up.ToString())) currentDirection = up;
+        private bool stunned;
+        private float moveSpeed = 4;
 
-            moveDirection.Y = CheckDirection(currentDirection, down, up);
-            moveDirection.X = CheckDirection(currentDirection, right, left);
+        public StalfosDamagedState(Direction dir, Stalfos stalfos, Vector2 location, bool stunned)
+        {
+            currentDirection = dir;
+
+            moveDirection.Y = Directions.CalculateY(currentDirection);
+            moveDirection.X = Directions.CalculateX(currentDirection);
 
             this.stalfos = stalfos;
             this.location = location;
 
             this.stalfos.SetSprite(EnemySpriteFactory.Instance.CreateStalfosDamagedSprite());
+            this.stunned = stunned;
         }
 
-        private int CheckDirection(Direction dir, Direction pos, Direction neg)
+
+        public void MoveAwayFromCollision(Collision collision)
         {
-            if (dir.Equals(pos)) return 1;
-            if (dir.Equals(neg)) return -1;
-            return 0;
+            if (collision.From.Equals(currentDirection)) BackToNormal();
         }
+
+
+        public void Update()
+        {
+            MoveOneUnit();
+            if (moveSpeed <= 0) BackToNormal();
+        }
+
+        private void BackToNormal()
+        {
+            stalfos.state = new StalfosWalkingState(stalfos, location);
+            if (stunned) stalfos.state.Stun(true);
+        }
+
+        public void MoveOneUnit()
+        {
+            location.X += moveDirection.X * moveSpeed;
+            location.Y += moveDirection.Y * moveSpeed;
+            moveSpeed -= 0.1f;
+            stalfos.Location = location;
+        }
+
+        public void Stun(bool permanent)
+        {
+            if (permanent) stunned = true;
+        }
+
+
         public void Attack()
         {
             //do nothing
@@ -53,7 +72,7 @@ namespace Sprint4
         public void ChangeDirection()
         {
             //do nothing
-            
+
         }
 
         public void Die()
@@ -61,36 +80,9 @@ namespace Sprint4
             //do nothing
         }
 
-        public void MoveAwayFromCollision(Collision collision)
-        {
-            //do nothing
-        }
-
         public void TakeDamage(int amount)
         {
             //do nothing
-        }
-
-        public void Update()
-        {
-            MoveOneUnit();
-            moveSpeed -= 0.1f;
-            
-            if (moveSpeed <= 0) stalfos.state = new StalfosWalkingState(stalfos, location);
-
-
-        }
-
-        public void MoveOneUnit()
-        {
-            location.X += moveDirection.X * moveSpeed;
-            location.Y += moveDirection.Y * moveSpeed;
-            stalfos.UpdateLocation(location);
-        }
-
-        public void Stun()
-        {
-           //can't be stunned while taking damage
         }
     }
 }
